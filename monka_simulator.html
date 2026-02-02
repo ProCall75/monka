@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Monka Simulator – Vulnérabilité Sociale & Relationnelle</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            border-radius: 1rem;
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            opacity: 0.9;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .panel-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .panel-title .icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Questionnaire */
+        .question-card {
+            background: var(--bg);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .question-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .question-card.critical {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .question-card.scoring {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .question-card.trigger {
+            border-left: 4px solid var(--warning);
+        }
+        
+        .question-id {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .question-id.critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        .question-id.scoring {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+        }
+        
+        .question-id.trigger {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .question-label {
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        
+        .option:hover {
+            background: var(--bg-hover);
+        }
+        
+        .option.selected {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .option.critical-selected {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--danger);
+        }
+        
+        .option input {
+            display: none;
+        }
+        
+        .option .radio {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .option.selected .radio {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+        
+        .option.critical-selected .radio {
+            border-color: var(--danger);
+            background: var(--danger);
+        }
+        
+        .option .radio::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .option.selected .radio::after,
+        .option.critical-selected .radio::after {
+            opacity: 1;
+        }
+        
+        .option-score {
+            margin-left: auto;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            background: var(--bg);
+        }
+        
+        /* Results Panel */
+        .result-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-section h4 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        
+        .score-display {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--bg);
+            border-radius: 0.75rem;
+        }
+        
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border: 4px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .score-circle.green {
+            border-color: var(--success);
+            color: var(--success);
+        }
+        
+        .score-circle.orange {
+            border-color: var(--warning);
+            color: var(--warning);
+        }
+        
+        .score-circle.red {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        
+        .score-details {
+            flex: 1;
+        }
+        
+        .score-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .score-interpretation {
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+        
+        .priority-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .priority-badge.level-1 {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        .priority-badge.level-2 {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .priority-badge.level-3 {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .micro-parcours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .micro-parcours {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .micro-parcours.activated {
+            border-left-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .mp-code {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .ccc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .ccc-item {
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .ccc-item.activated {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid var(--danger);
+        }
+        
+        .ccc-status {
+            font-size: 1.25rem;
+        }
+        
+        /* Recommendations Panel */
+        .reco-card {
+            background: var(--bg);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .reco-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .reco-question-id {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--primary);
+        }
+        
+        .reco-actor {
+            margin-left: auto;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 0.25rem;
+            color: var(--primary);
+        }
+        
+        .reco-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .micro-tasks {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .micro-task {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.825rem;
+            color: var(--text-muted);
+        }
+        
+        .micro-task::before {
+            content: '→';
+            color: var(--success);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+        
+        .tab:hover {
+            background: var(--bg-hover);
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Action buttons */
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        
+        .btn-outline:hover {
+            background: var(--bg-hover);
+        }
+        
+        /* Scrollable panels */
+        .scrollable {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .scrollable::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollable::-webkit-scrollbar-track {
+            background: var(--bg);
+            border-radius: 3px;
+        }
+        
+        .scrollable::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+        
+        /* Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 Monka Simulator</h1>
+            <p>Test interactif – Vulnérabilité "Sociale & Relationnelle"</p>
+        </header>
+        
+        <div class="grid">
+            <!-- LEFT: Questionnaire -->
+            <div class="panel">
+                <div class="panel-title">
+                    <span class="icon">📋</span>
+                    <span>Questionnaire Aidant</span>
+                </div>
+                <div class="scrollable" id="questionnaire">
+                    <!-- Questions will be injected here -->
+                </div>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="resetAll()">🔄 Réinitialiser</button>
+                </div>
+            </div>
+            
+            <!-- RIGHT: Results -->
+            <div class="panel">
+                <div class="panel-title">
+                    <span class="icon">⚙️</span>
+                    <span>Moteur Monka (Vue interne)</span>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('scoring')">📊 Scoring</div>
+                    <div class="tab" onclick="switchTab('engine')">🔧 Moteur</div>
+                    <div class="tab" onclick="switchTab('recos')">💡 Recommandations</div>
+                </div>
+                
+                <div class="scrollable">
+                    <!-- Scoring Tab -->
+                    <div class="tab-content active" id="tab-scoring">
+                        <div class="result-section">
+                            <h4>Score Vulnérabilité</h4>
+                            <div class="score-display">
+                                <div class="score-circle green" id="score-circle">
+                                    <span id="score-value">0</span>
+                                </div>
+                                <div class="score-details">
+                                    <div class="score-label">Score brut: <span id="score-raw">0</span>/16</div>
+                                    <div class="score-interpretation" id="score-interpretation">Situation sociale globalement préservée</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-section">
+                            <h4>Priorité calculée</h4>
+                            <div id="priority-display">
+                                <div class="priority-badge level-3">
+                                    <span>⏱️</span>
+                                    <span>Niveau 3 – Planifié (>1 mois)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-section">
+                            <h4>Détail scoring par question</h4>
+                            <div id="scoring-details">
+                                <!-- Injected -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Engine Tab -->
+                    <div class="tab-content" id="tab-engine">
+                        <div class="result-section">
+                            <h4>Questions Critiques Directes</h4>
+                            <div id="critical-list">
+                                <div class="empty-state">
+                                    <div class="icon">✅</div>
+                                    <p>Aucune alerte critique</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-section">
+                            <h4>Conditions Critiques Composites (CCC)</h4>
+                            <div class="ccc-list" id="ccc-list">
+                                <!-- Injected -->
+                            </div>
+                        </div>
+                        
+                        <div class="result-section">
+                            <h4>Micro-parcours activés</h4>
+                            <div class="micro-parcours-list" id="mp-list">
+                                <!-- Injected -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommendations Tab -->
+                    <div class="tab-content" id="tab-recos">
+                        <div id="reco-list">
+                            <div class="empty-state">
+                                <div class="icon">💡</div>
+                                <p>Répondez aux questions pour voir les recommandations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Data
+        const questions = [
+            {
+                id: 'E1',
+                label: 'Comment décririez-vous la répartition de l\'aide au sein de votre entourage ?',
+                type: 'scoring',
+                options: [
+                    { text: 'Répartition équilibrée et satisfaisante', score: 0, critical: false },
+                    { text: 'Je fais la plus grande partie mais c\'est acceptable', score: 1, critical: false },
+                    { text: 'Je fais presque tout / je suis totalement seul·e', score: 2, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Proposer un temps d\'échange pour identifier des relais potentiels', actor: 'IDEC', tasks: ['Lister les personnes mobilisables', 'Explorer les freins à une meilleure répartition'] },
+                    2: { reco: 'Identifier et mobiliser des ressources d\'aide complémentaires', actor: 'IDEC / Assistante sociale', tasks: ['Évaluer les aides disponibles', 'Proposer un accompagnement pour solliciter de l\'aide', 'Orienter vers des groupes d\'entraide'] }
+                }
+            },
+            {
+                id: 'E2',
+                label: 'En cas de coup dur, avez-vous des personnes sur qui compter pour vous aider ?',
+                type: 'critical',
+                options: [
+                    { text: 'Oui, plusieurs personnes', score: 0, critical: false },
+                    { text: 'Oui, une personne', score: 1, critical: false },
+                    { text: 'Très peu de personnes / personne', score: 2, critical: true }
+                ],
+                recommendations: {
+                    1: { reco: 'Renforcer le réseau de soutien existant', actor: 'IDEC', tasks: ['Identifier d\'autres personnes mobilisables', 'Informer sur les solutions de répit'] },
+                    2: { reco: 'Mettre en place un accompagnement renforcé et identifier des solutions de soutien', actor: 'IDEC / Assistante sociale', tasks: ['Évaluer l\'urgence de l\'isolement', 'Proposer un contact régulier avec un professionnel', 'Orienter vers des dispositifs d\'aide aux aidants', 'Envisager un accueil temporaire'] }
+                }
+            },
+            {
+                id: 'E4',
+                label: 'Comment a évolué votre relation avec votre proche depuis que vous l\'aidez ?',
+                type: 'scoring',
+                options: [
+                    { text: 'Relation renforcée ou globalement similaire', score: 0, critical: false },
+                    { text: 'Relation plus tendue / plus compliquée', score: 1, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Proposer un espace d\'écoute pour aborder les difficultés relationnelles', actor: 'IDEC / Psychologue', tasks: ['Échanger sur les sources de tension', 'Proposer un accompagnement psychologique', 'Informer sur les groupes de parole'] }
+                }
+            },
+            {
+                id: 'E5',
+                label: 'Existe-t-il des tensions ou des désaccords au sein de la famille concernant la prise en charge de votre proche ?',
+                type: 'scoring',
+                options: [
+                    { text: 'Non', score: 0, critical: false },
+                    { text: 'Parfois', score: 1, critical: false },
+                    { text: 'Oui', score: 2, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Échanger sur les sources de désaccord', actor: 'IDEC', tasks: ['Identifier les points de tension récurrents'] },
+                    2: { reco: 'Se rapprocher du référent, envisager une médiation familiale', actor: 'IDEC / Médecin / Médiateur', tasks: ['Proposer un entretien de médiation', 'Orienter vers des dispositifs de médiation'] }
+                }
+            },
+            {
+                id: 'E6',
+                label: 'Votre proche accepte-t-il l\'aide de personnes extérieures (aide à domicile, infirmier, structure, etc.) ?',
+                type: 'critical',
+                options: [
+                    { text: 'Oui, facilement', score: 0, critical: false },
+                    { text: 'Oui, mais avec des réticences', score: 0, critical: false },
+                    { text: 'Non, refuse la plupart du temps', score: 0, critical: true },
+                    { text: 'Je ne sais pas / pas encore essayé', score: 0, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Échanger sur les réticences exprimées', actor: 'IDEC', tasks: ['Comprendre les freins à l\'acceptation'] },
+                    2: { reco: 'Accompagnement renforcé pour lever les blocages', actor: 'IDEC / Médecin', tasks: ['Proposer un échange avec le proche', 'Explorer les causes du refus', 'Proposer une approche progressive'] },
+                    3: { reco: 'Informer sur les types d\'aides existantes', actor: 'IDEC', tasks: ['Proposer une première mise en relation'] }
+                }
+            },
+            {
+                id: 'N4',
+                label: 'Êtes-vous le seul membre de la famille à vous occuper de votre proche ?',
+                type: 'trigger',
+                options: [
+                    { text: 'Non', score: 0, critical: false, trigger: null },
+                    { text: 'Oui', score: 0, critical: false, trigger: 'R2' }
+                ],
+                recommendations: {
+                    1: { reco: 'Identifier des relais possibles et sécuriser l\'aidant principal', actor: 'IDEC', tasks: ['Évaluer les possibilités de mobilisation', 'Proposer des solutions de répit', 'Orienter vers des associations'] }
+                }
+            },
+            {
+                id: 'N20',
+                label: 'Votre proche a-t-il des difficultés à maintenir des relations sociales ?',
+                type: 'scoring',
+                options: [
+                    { text: 'Non', score: 0, critical: false },
+                    { text: 'Parfois', score: 1, critical: false },
+                    { text: 'Oui', score: 2, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Surveiller l\'évolution', actor: 'IDEC', tasks: ['Identifier les situations problématiques'] },
+                    2: { reco: 'Évaluer les besoins de stimulation sociale', actor: 'IDEC / Ergothérapeute', tasks: ['Proposer des activités adaptées', 'Évaluer l\'intérêt d\'un accueil de jour'] }
+                }
+            },
+            {
+                id: 'O27',
+                label: 'La situation de votre proche a-t-elle des répercussions sur votre vie familiale ?',
+                type: 'scoring',
+                options: [
+                    { text: 'Pas du tout', score: 0, critical: false },
+                    { text: 'Un peu', score: 1, critical: false },
+                    { text: 'Oui', score: 2, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Surveiller l\'évolution et proposer un échange si besoin', actor: 'IDEC', tasks: ['Rester attentif aux signaux de dégradation'] },
+                    2: { reco: 'Mettre en place un accompagnement pour préserver l\'équilibre familial', actor: 'IDEC / Psychologue', tasks: ['Identifier les domaines impactés', 'Proposer un soutien psychologique', 'Orienter vers des solutions de répit'] }
+                }
+            },
+            {
+                id: 'O28',
+                label: 'La situation de votre proche a-t-elle des répercussions sur votre vie sociale, vos loisirs ou votre travail ?',
+                type: 'scoring',
+                options: [
+                    { text: 'Pas du tout', score: 0, critical: false },
+                    { text: 'Un peu', score: 1, critical: false },
+                    { text: 'Oui', score: 2, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Surveiller et proposer un échange', actor: 'IDEC', tasks: ['Identifier les activités impactées'] },
+                    2: { reco: 'Mettre en place un accompagnement renforcé', actor: 'IDEC / Assistante sociale', tasks: ['Évaluer l\'impact professionnel', 'Informer sur les droits des aidants', 'Proposer des solutions d\'aménagement'] }
+                }
+            },
+            {
+                id: 'O30',
+                label: 'Avez-vous le sentiment de ne plus reconnaître votre proche ?',
+                type: 'scoring',
+                options: [
+                    { text: 'Pas du tout', score: 0, critical: false },
+                    { text: 'Un peu', score: 1, critical: false },
+                    { text: 'Oui', score: 2, critical: false }
+                ],
+                recommendations: {
+                    1: { reco: 'Proposer un espace d\'écoute', actor: 'IDEC', tasks: ['Échanger sur les changements observés'] },
+                    2: { reco: 'Accompagnement psychologique recommandé', actor: 'IDEC / Psychologue', tasks: ['Proposer un soutien psychologique', 'Informer sur la maladie', 'Orienter vers des groupes de parole'] }
+                }
+            }
+        ];
+        
+        const cccRules = [
+            { code: 'R1_CC_01', questions: ['O27', 'O28'], logic: 'O27=2 ET O28=2', mp: 'R1', label: 'Retentissement vie privée + sociale' },
+            { code: 'R2_CC_01', questions: ['N4', 'E2'], logic: 'N4=1 ET E2=2', mp: 'R2', label: 'Aidant seul sans soutien' },
+            { code: 'R2_CC_02', questions: ['E1', 'E2'], logic: 'E1=2 ET E2=2', mp: 'R2', label: 'Charge exclusive sans filet' },
+            { code: 'R3_CC_01', questions: ['N20', 'O48'], logic: 'N20=2 ET O48≤1', mp: 'R3', label: 'Isolement social du proche' },
+            { code: 'R4_CC_01', questions: ['O30', 'E4'], logic: 'O30=2 ET E4=1', mp: 'R4', label: 'Dégradation du lien' },
+            { code: 'R4_CC_02', questions: ['E5', 'E1'], logic: 'E5=2 ET E1=2', mp: 'R4', label: 'Conflits + charge déséquilibrée' }
+        ];
+        
+        const microParcours = [
+            { code: 'R1', name: 'Impact vie personnelle / sociale / pro' },
+            { code: 'R2', name: 'Soutien de l\'entourage' },
+            { code: 'R3', name: 'Isolement social du proche' },
+            { code: 'R4', name: 'Relation aidant/aidé & dynamique familiale' }
+        ];
+        
+        let answers = {};
+        
+        // Initialize
+        function init() {
+            renderQuestions();
+            renderCCC();
+            renderMicroParcours();
+            updateResults();
+        }
+        
+        function renderQuestions() {
+            const container = document.getElementById('questionnaire');
+            container.innerHTML = questions.map((q, idx) => `
+                <div class="question-card ${q.type}">
+                    <span class="question-id ${q.type}">${q.id} – ${q.type === 'critical' ? '⚠️ Critique' : q.type === 'scoring' ? '📊 Scorante' : '🔀 Trigger'}</span>
+                    <div class="question-label">${q.label}</div>
+                    <div class="options">
+                        ${q.options.map((opt, optIdx) => `
+                            <label class="option" id="opt-${q.id}-${optIdx}" onclick="selectOption('${q.id}', ${optIdx})">
+                                <div class="radio"></div>
+                                <span>${opt.text}</span>
+                                ${opt.score > 0 ? `<span class="option-score">+${opt.score}</span>` : ''}
+                                ${opt.critical ? '<span class="option-score" style="background: rgba(239,68,68,0.2); color: #ef4444;">🔴 Critique</span>' : ''}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function selectOption(questionId, optionIndex) {
+            const question = questions.find(q => q.id === questionId);
+            const option = question.options[optionIndex];
+            
+            answers[questionId] = { optionIndex, score: option.score, critical: option.critical, trigger: option.trigger };
+            
+            // Update UI
+            question.options.forEach((_, idx) => {
+                const el = document.getElementById(`opt-${questionId}-${idx}`);
+                el.classList.remove('selected', 'critical-selected');
+            });
+            
+            const selectedEl = document.getElementById(`opt-${questionId}-${optionIndex}`);
+            selectedEl.classList.add(option.critical ? 'critical-selected' : 'selected');
+            
+            updateResults();
+        }
+        
+        function updateResults() {
+            // Calculate score
+            let rawScore = 0;
+            const scoringQuestions = ['E1', 'E2', 'E4', 'E5', 'N20', 'O27', 'O28', 'O30'];
+            scoringQuestions.forEach(qId => {
+                if (answers[qId]) {
+                    rawScore += answers[qId].score;
+                }
+            });
+            
+            const normalizedScore = Math.round((rawScore / 16) * 20 * 10) / 10;
+            
+            // Update score display
+            document.getElementById('score-raw').textContent = rawScore;
+            document.getElementById('score-value').textContent = normalizedScore;
+            
+            const circle = document.getElementById('score-circle');
+            circle.classList.remove('green', 'orange', 'red');
+            
+            let interpretation = '';
+            if (normalizedScore <= 6) {
+                circle.classList.add('green');
+                interpretation = '🟢 Situation sociale globalement préservée';
+            } else if (normalizedScore <= 13) {
+                circle.classList.add('orange');
+                interpretation = '🟠 Fragilisation sociale et relationnelle';
+            } else {
+                circle.classList.add('red');
+                interpretation = '🔴 Isolement ou rupture relationnelle probable';
+            }
+            document.getElementById('score-interpretation').textContent = interpretation;
+            
+            // Check critical direct
+            let hasCritical = false;
+            let criticalMessages = [];
+            Object.entries(answers).forEach(([qId, ans]) => {
+                if (ans.critical) {
+                    hasCritical = true;
+                    const q = questions.find(q => q.id === qId);
+                    criticalMessages.push(`${qId}: ${q.options[ans.optionIndex].text}`);
+                }
+            });
+            
+            // Check CCC
+            let activatedCCC = [];
+            cccRules.forEach(ccc => {
+                let activated = false;
+                if (ccc.code === 'R1_CC_01' && answers['O27']?.score === 2 && answers['O28']?.score === 2) activated = true;
+                if (ccc.code === 'R2_CC_01' && answers['N4']?.optionIndex === 1 && answers['E2']?.score === 2) activated = true;
+                if (ccc.code === 'R2_CC_02' && answers['E1']?.score === 2 && answers['E2']?.score === 2) activated = true;
+                if (ccc.code === 'R4_CC_01' && answers['O30']?.score === 2 && answers['E4']?.score === 1) activated = true;
+                if (ccc.code === 'R4_CC_02' && answers['E5']?.score === 2 && answers['E1']?.score === 2) activated = true;
+                
+                if (activated) activatedCCC.push(ccc);
+            });
+            
+            // Determine priority
+            let priority = 3;
+            let priorityLabel = 'Niveau 3 – Planifié (>1 mois)';
+            let priorityClass = 'level-3';
+            let priorityIcon = '⏱️';
+            
+            if (hasCritical) {
+                priority = 1;
+                priorityLabel = 'Niveau 1 – URGENT (≤ 7 jours)';
+                priorityClass = 'level-1';
+                priorityIcon = '🚨';
+            } else if (activatedCCC.length > 0) {
+                priority = 2;
+                priorityLabel = 'Niveau 2 – Prioritaire (≤ 7 jours)';
+                priorityClass = 'level-2';
+                priorityIcon = '⚡';
+            }
+            
+            document.getElementById('priority-display').innerHTML = `
+                <div class="priority-badge ${priorityClass}">
+                    <span>${priorityIcon}</span>
+                    <span>${priorityLabel}</span>
+                </div>
+            `;
+            
+            // Critical list
+            if (hasCritical) {
+                document.getElementById('critical-list').innerHTML = criticalMessages.map(msg => `
+                    <div class="ccc-item activated">
+                        <span class="ccc-status">🚨</span>
+                        <span>${msg}</span>
+                    </div>
+                `).join('');
+            } else {
+                document.getElementById('critical-list').innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">✅</div>
+                        <p>Aucune alerte critique</p>
+                    </div>
+                `;
+            }
+            
+            // Update CCC display
+            document.querySelectorAll('.ccc-item').forEach(el => el.classList.remove('activated'));
+            activatedCCC.forEach(ccc => {
+                const el = document.getElementById(`ccc-${ccc.code}`);
+                if (el) el.classList.add('activated');
+            });
+            
+            // Update micro-parcours
+            let activatedMP = new Set();
+            if (hasCritical) {
+                if (answers['E2']?.critical) activatedMP.add('R2');
+                if (answers['E6']?.critical) activatedMP.add('R4');
+            }
+            activatedCCC.forEach(ccc => activatedMP.add(ccc.mp));
+            Object.entries(answers).forEach(([qId, ans]) => {
+                if (ans.trigger) activatedMP.add(ans.trigger);
+            });
+            
+            document.querySelectorAll('.micro-parcours').forEach(el => el.classList.remove('activated'));
+            activatedMP.forEach(mp => {
+                const el = document.getElementById(`mp-${mp}`);
+                if (el) el.classList.add('activated');
+            });
+            
+            // Update recommendations
+            updateRecommendations();
+            
+            // Update scoring details
+            updateScoringDetails(scoringQuestions);
+        }
+        
+        function updateScoringDetails(scoringQuestions) {
+            const container = document.getElementById('scoring-details');
+            container.innerHTML = scoringQuestions.map(qId => {
+                const q = questions.find(q => q.id === qId);
+                const ans = answers[qId];
+                const score = ans ? ans.score : '-';
+                const maxScore = qId === 'E4' ? 1 : 2;
+                return `
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: var(--bg); border-radius: 0.25rem; margin-bottom: 0.25rem; font-size: 0.875rem;">
+                        <span>${qId}</span>
+                        <span style="color: ${ans ? 'var(--primary)' : 'var(--text-muted)'};">${score} / ${maxScore}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function updateRecommendations() {
+            const container = document.getElementById('reco-list');
+            let recos = [];
+            
+            Object.entries(answers).forEach(([qId, ans]) => {
+                const q = questions.find(q => q.id === qId);
+                if (q.recommendations && q.recommendations[ans.optionIndex]) {
+                    const r = q.recommendations[ans.optionIndex];
+                    recos.push({ qId, ...r });
+                }
+            });
+            
+            if (recos.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">💡</div>
+                        <p>Répondez aux questions pour voir les recommandations</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = recos.map(r => `
+                    <div class="reco-card">
+                        <div class="reco-header">
+                            <span class="reco-question-id">${r.qId}</span>
+                            <span class="reco-actor">${r.actor}</span>
+                        </div>
+                        <div class="reco-text">${r.reco}</div>
+                        <div class="micro-tasks">
+                            ${r.tasks.map(t => `<div class="micro-task">${t}</div>`).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function renderCCC() {
+            const container = document.getElementById('ccc-list');
+            container.innerHTML = cccRules.map(ccc => `
+                <div class="ccc-item" id="ccc-${ccc.code}">
+                    <span class="ccc-status">⬜</span>
+                    <span><strong>${ccc.code}</strong>: ${ccc.label}</span>
+                </div>
+            `).join('');
+        }
+        
+        function renderMicroParcours() {
+            const container = document.getElementById('mp-list');
+            container.innerHTML = microParcours.map(mp => `
+                <div class="micro-parcours" id="mp-${mp.code}">
+                    <span class="mp-code">${mp.code}</span>
+                    <span>${mp.name}</span>
+                </div>
+            `).join('');
+        }
+        
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+        }
+        
+        function resetAll() {
+            answers = {};
+            document.querySelectorAll('.option').forEach(el => {
+                el.classList.remove('selected', 'critical-selected');
+            });
+            updateResults();
+        }
+        
+        // Start
+        init();
+    </script>
+</body>
+</html>
