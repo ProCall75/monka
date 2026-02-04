@@ -1,0 +1,294 @@
+{
+  "vulnerability": "V4",
+  "name": "Parcours Médical du Proche",
+  "questions": [
+    {
+      "id": "N17",
+      "text": "Quel est son type de handicap ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix multiples / Conditionnel N3 réponse 2",
+      "options": "Handicap cognitif | Handicap psychique | Handicap visuel | Handicap auditif | Handicap intellectuel | Handicap moteur | Traumatisme cranien | Autisme ou autres troubles envahissant du développement | Troubles majeurs du comportement | Maladie invalidante",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.1 – Compréhension du diagnostic et de la maladie"
+    },
+    {
+      "id": "N41",
+      "text": "Bénéficie-t-elle d'une reconnaissance officielle d'une maladie chronique (Affection Longue Durée) auprès de l'Assurance Maladie ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.1 – Compréhension du diagnostic et de la maladie"
+    },
+    {
+      "id": "E34",
+      "text": "Comprenez-vous bien la maladie, l’état de santé et les besoins médicaux de votre proche ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Partiellement | Pas du tout",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.1 – Compréhension du diagnostic et de la maladie"
+    },
+    {
+      "id": "E35",
+      "text": "Avez-vous l’impression que le diagnostic de votre proche est clair et bien établi aujourd’hui ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui, le diagnostic est clair | On m’a évoqué plusieurs hypothèses, mais rien de vraiment tranché | Non, personne ne nous a vraiment donné de diagnostic | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.1 – Compréhension du diagnostic et de la maladie"
+    },
+    {
+      "id": "E36",
+      "text": "Depuis le début des problèmes de santé de votre proche, avez-vous le sentiment d’avoir consulté beaucoup de professionnels ou fait beaucoup d’examens sans que la situation soit vraiment clarifiée ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non, pas particulièrement | Oui, un peu | Oui, beaucoup (impression de tourn­er en rond)",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.1 – Compréhension du diagnostic et de la maladie"
+    },
+    {
+      "id": "E37",
+      "text": "Avez-vous déjà reçu des avis médicaux contradictoires sur la situation de votre proche (diagnostic ou traitement) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non | Oui, parfois | Oui, souvent",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.1 – Compréhension du diagnostic et de la maladie"
+    },
+    {
+      "id": "E38",
+      "text": "Si votre proche est passé ou va passer de services ‘enfant’ à des services ‘adulte’ (pédopsychiatrie → psychiatrie adulte, pédiatrie → médecine adulte…), ce passage a-t-il été préparé et organisé ?",
+      "type": "Obligatoire / Choix Unique / conditonnel N3 réponse 2,3,4 et 5 ET conditionnel O1 réponse 1",
+      "options": "Oui, bien préparé | Un peu, mais cela reste flou | Non, pas du tout | Pas concerné",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.1 – Compréhension du diagnostic et de la maladie"
+    },
+    {
+      "id": "O17",
+      "text": "A-t-elle un médecin traitant ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "O18",
+      "text": "- A-t-elle d'autres médecins spécialistes qui la suivent actuellement ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "O19",
+      "text": "Lesquels ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples /Conditionnel O18(1)",
+      "options": "Cardiologue | Oncologue | Neurologue | Pneumologue | Ophtalmologue | Psychiatre | Chirurgien-Dentiste | Gastro-entérologue | Endocrinologue / Diabetologue | ORL | Gynecologue | Nephrologue | Gériatre | Dermatologue | Autre",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "O20",
+      "text": "La personne aidée a-t-elle déjà réalisé des rendez-vous médicaux cette année ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "O21",
+      "text": "Lesquels ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples/ Conditionnel O21(1)",
+      "options": "Bilan de santé général (prise de sang…) | Audition | Vue | Contrôle dentaire | Suivi cardiovasculaire | Ostéodensitométrie | Vaccination | Examen gynécologique | Suivi dermatologique | Suivi psychologique | Dépistage des cancers",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "E39",
+      "text": "Le premier professionnel de santé (médecin, infirmier, spécialiste) est-il situé à moins de 15 minutes du domicile de votre proche ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "O24",
+      "text": "Éprouvez-vous des difficultés à prendre rendez-vous chez des spécialistes autour de son domicile ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Pas du tout | Un peu | Oui",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "E40",
+      "text": "Quelles sont les principales difficultés pour accéder aux soins dont votre proche aurait besoin ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Délais pour obtenir un rendez-vous | Peu ou pas de médecins disponibles à proximité | Difficultés de transport / mobilité | Difficultés à utiliser les outils de prise de rendez-vous en ligne | Organisation avec mon travail / ma vie personnelle | Coût des soins | Autre | Je ne rencontre pas de difficultés particulières",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "E41",
+      "text": "Votre proche a-t-il déjà participé à un programme d’éducation thérapeutique (ETP) lié à sa maladie (diabète, insuffisance cardiaque, BPCO, etc.) ?",
+      "type": "Obligatoire / Choix Unique / conditonnel N3 réponse 1 ou 3",
+      "options": "Oui | Non, on ne nous en a jamais parlé | Non, mais on nous l’a proposé | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.2 – Accès aux soins et aux professionnels de santé"
+    },
+    {
+      "id": "E42",
+      "text": "Parmi les rendez-vous médicaux réalisés ce mois-ci, combien étaient non prévus à l’avance hors hospitalisation (urgence, consultation imprévue, médecin sans rendez-vous) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": " Aucun | 1 seul | 2 | 3 | 4 | 5 | 6 ",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.3 – Urgences, hospitalisations et suivi médical"
+    },
+    {
+      "id": "E43",
+      "text": "Au cours des 12 derniers mois, y a-t-il eu des périodes de plusieurs mois sans aucun suivi médical pour le problème principal de votre proche ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non | Oui, une période de 3 à 6 mois | Oui, plusieurs périodes ou plus de 6 mois | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.3 – Urgences, hospitalisations et suivi médical"
+    },
+    {
+      "id": "E44",
+      "text": "Votre proche a-t-il déjà bénéficié d’une consultation ou d’un bilan de synthèse pour faire le point sur l’ensemble de ses maladies (consultation longue, consultation de coordination, centre spécialisé…) ?",
+      "type": "Obligatoire / Choix Unique/ Conditionnel N3 réponse 1 ou 3",
+      "options": "Oui, récemment | Oui, mais il y a plus d’un an | Non, jamais | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.3 – Urgences, hospitalisations et suivi médical"
+    },
+    {
+      "id": "E45",
+      "text": "Votre proche est-il suivi dans un service ou une consultation spécialisée en addictologie ?",
+      "type": "Obligatoire / Choix Unique / conditionnel N3 réponse 5",
+      "options": "Oui, de façon régulière | Oui, mais il/elle n’y va plus | Non | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.3 – Urgences, hospitalisations et suivi médical"
+    },
+    {
+      "id": "E46",
+      "text": "Après la dernière hospitalisation de votre proche, un suivi médical a-t-il été organisé (rendez-vous programmés, coordination avec le médecin traitant, etc.) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui, clairement organisé | Partiellement | Non, nous avons dû tout organiser seuls | Il n’a pas été hospitalisé récemment",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.3 – Urgences, hospitalisations et suivi médical"
+    },
+    {
+      "id": "E47",
+      "text": "Quand l’état de santé de votre proche se dégrade brusquement (crise, aggravation), avez-vous un plan clair sur ce qu’il faut faire ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui, on sait quoi faire et qui appeler | On a quelques repères, mais ce n’est pas très clair | Non, on improvise systématiquement / on va souvent aux urgences",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.3 – Urgences, hospitalisations et suivi médical"
+    },
+    {
+      "id": "E48",
+      "text": "Actuellement, votre proche est-il suivi pour ses troubles psychiques dans l’un des cadres suivants ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Unique / Conditionnel N3 réponse 4",
+      "options": "Médecin généraliste | Psychiatre en libéral | Centre médico-psychologique (CMP / CMPP) | Hôpital de jour / centre de crise | Psychologue | Aucun suivi actuellement",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.4 – Addictions, troubles psychiques et suivi spécialisé"
+    },
+    {
+      "id": "E49",
+      "text": "Dans le suivi de l’addiction, quels types de professionnels sont impliqués ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Unique / Conditionnel N3 réponse 5",
+      "options": "Médecin (généraliste ou addictologue) | Psychiatre / psychologue | Travailleur social / éducateur spécialisé | Infirmier (CSAPA, hôpital, ville) | Association de patients / groupe de parole | Aucun suivi structuré",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.4 – Addictions, troubles psychiques et suivi spécialisé"
+    },
+    {
+      "id": "E50",
+      "text": "Votre proche est-il actuellement suivi pour ses troubles psychiques (psychiatre, psychologue, centre spécialisé) et suit-il son traitement si prescrit ?",
+      "type": "Obligatoire / Choix Unique / Conditionnel N3 réponse 4",
+      "options": "Oui, suivi régulier et traitement bien pris | Oui, mais suivi ou traitement irrégulier | Non, pas de suivi / pas de traitement | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.4 – Addictions, troubles psychiques et suivi spécialisé"
+    },
+    {
+      "id": "E51",
+      "text": "Votre proche est-il prêt à être aidé pour son addiction (parler à un professionnel, envisager un suivi, un sevrage…) ?",
+      "type": "Obligatoire / Choix Unique/ Conditionnel N3 réponse 5",
+      "options": "Oui | Peut-être / selon les conditions | Non | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.4 – Addictions, troubles psychiques et suivi spécialisé"
+    },
+    {
+      "id": "O59",
+      "text": "Quels sont les professionnels, ou services qui interviennent déjà au domicile de la personne aidée ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples",
+      "options": "Service à domicile (SAD) / auxiliaire de vie | Service à domicile (SAD) / aide ménagère | Service de soins infirmiers à domicile (SSIAD) | Infirmier libéral | Masseur-kinésithérapeute | Aide physique adaptée (APA) | Télé-assistance | Portage des repas | Educateur spécialisé | Pédicure-podologue | Ergothérapeute | Aucun | Autre",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.5 – Coordination des soins et personne de référence"
+    },
+    {
+      "id": "E52",
+      "text": "Aujourd’hui, avez-vous une personne de référence qui coordonne les soins de votre proche (médecin traitant, infirmier·e, service hospitalier, structure de coordination…) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui, clairement identifiée | Oui, mais je ne suis pas sûr·e de son rôle | Non, personne ne coordonne vraiment | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.5 – Coordination des soins et personne de référence"
+    },
+    {
+      "id": "E53",
+      "text": "Pour vous, qui est aujourd’hui le professionnel ‘référent’ pour la santé de votre proche (celui à qui vous pensez en premier quand ça ne va pas) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Médecin traitant | Spécialiste hospitalier | Spécialiste libéral | Aucune personne vraiment référente | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.5 – Coordination des soins et personne de référence"
+    },
+    {
+      "id": "E54",
+      "text": "Comment décririez-vous l’organisation des soins de votre proche ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Plutôt simple et bien organisée | Gérable mais parfois compliquée | Souvent très compliquée | Je la trouve ingérable",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.5 – Coordination des soins et personne de référence"
+    },
+    {
+      "id": "E55",
+      "text": "Avez-vous le sentiment qu’une meilleure coordination entre les professionnels améliorerait beaucoup la situation de votre proche ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non, pas vraiment | Oui, un peu | Oui, énormément",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.5 – Coordination des soins et personne de référence"
+    },
+    {
+      "id": "E56",
+      "text": "Qu’est-ce qui vous inquiète le plus pour la santé de votre proche dans les prochains mois ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Les chutes | La mémoire, le comportement | L’alimentation / le poids | Les allers-retours aux urgences | Le risque qu’il/elle ne puisse plus rester à domicile | Autre | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.6 – Autres éléments sur le parcours de soins"
+    },
+    {
+      "id": "E57",
+      "text": "Avez-vous l’impression qu’il existe un ‘plan de route’ clair pour la suite des soins de votre proche (prochains rendez-vous, objectifs, professionnels impliqués) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui, c’est clair | Partiellement | Non, on avance au jour le jour",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.6 – Autres éléments sur le parcours de soins"
+    },
+    {
+      "id": "E58",
+      "text": "Votre proche a-t-il bénéficié d’une évaluation spécialisée liée à l’âge (consultation mémoire, bilan gériatrique, bilan de chutes, etc.) ?",
+      "type": "Obligatoire / Choix Multiples / conditionnel N3 reponse 1 ou 3",
+      "options": "Oui, consultation mémoire | Oui, consultation gériatrique / bilan gériatrique | Oui, bilan de chutes | Oui, autre évaluation spécialisée | Non, aucune",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.6– Autres éléments sur le parcours de soins"
+    },
+    {
+      "id": "E59",
+      "text": "Votre enfant a-t-il été orienté vers une équipe ou une structure spécialisée dans les troubles du neurodéveloppement (TND) ?",
+      "type": "Obligatoire / Choix Unique/ Conditionnel N3 réponse 2 ou 4 et O1 réponse 1",
+      "options": "Oui, et une évaluation est en cours / réalisée | Oui, mais nous sommes en attente depuis longtemps | Non, personne ne nous en a parlé | Je ne sais pas",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.6– Autres éléments sur le parcours de soins"
+    },
+    {
+      "id": "E60",
+      "text": "Pour l’évaluation de votre enfant, quels professionnels sont déjà intervenus ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples / Conditionnel N3 réponse 2 ou 4 et O1 réponse 1",
+      "options": "Pédiatre / généraliste | Neuropédiatre | Pédopsychiatre | Psychologue | Orthophoniste | Psychomotricien / ergothérapeute | CAMSP / CMPP / autre centre spécialisé | Aucun de ces professionnels",
+      "bloc": "Bloc 6 – Parcours de soins de votre proche",
+      "sous_bloc": "6.6– Autres éléments sur le parcours de soins"
+    }
+  ]
+}

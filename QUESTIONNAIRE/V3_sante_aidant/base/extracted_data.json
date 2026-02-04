@@ -1,0 +1,222 @@
+{
+  "vulnerability": "V3",
+  "name": "Santé de l'Aidant",
+  "questions": [
+    {
+      "id": "O29",
+      "text": "Vous occuper de la personne aidée a-t-il un retentissement sur vote santé (physique et/ou psychique) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Pas du tout | Un peu | Oui",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Charge & retentissement santé"
+    },
+    {
+      "id": "O33",
+      "text": "Ressentez-vous une charge en vous occupant de cette personne ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Pas du tout | Un peu | Oui",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Charge & retentissement santé"
+    },
+    {
+      "id": "O49",
+      "text": "Depuis combien de temps l'aidez-vous ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Moins de 6 mois | Entre 6 mois et 2 ans | Depuis plus de 2 ans",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Temps d’aide (durée / temps consacré)"
+    },
+    {
+      "id": "O50",
+      "text": "Combien de temps lui consacrez-vous ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Je n’ai malheureusement pas le temps | Entre 1h et 5h par semaine | Entre 6h et 10h par semaine | Plus de 10h par semaine",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Temps d’aide (durée / temps consacré)"
+    },
+    {
+      "id": "E7",
+      "text": "À quel point vous sentez-vous épuisé·e par votre rôle d’aidant actuellement",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Pas du tout fatigué·e | Un peu fatigué·e | Très fatigué·e | Épuisé·e / au bord de craquer",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Charge & retentissement santé"
+    },
+    {
+      "id": "E8",
+      "text": "Avez-vous le sentiment d’être seul(e) émotionnellement face à votre rôle d’aidant ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Jamais | parfois | souvent | tout le temps",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Charge & retentissement santé"
+    },
+    {
+      "id": "E9",
+      "text": "Parvenez-vous à avoir du temps pour vous au cours d’une semaine habituelle ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Temps pour soi & moral"
+    },
+    {
+      "id": "E10",
+      "text": "Sur le plan moral (stress, inquiétude), où vous situez-vous en ce moment ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Ça va globalement | e suis parfois tendu·e ou inquiet·ète | Je suis souvent tendu·e ou inquiet·ète | Je me sens débordé·e / au bord de craquer",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Temps pour soi & moral"
+    },
+    {
+      "id": "E11",
+      "text": "Si rien ne change, pensez-vous pouvoir continuer à vous occuper de votre proche dans les 6 prochains mois ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui, sans difficulté particulière | Oui, mais ce sera difficile | Je ne suis pas sûr·e | Non, je risque de ne plus y arriver",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Besoin d’aide & capacité à continuer"
+    },
+    {
+      "id": "E12",
+      "text": "Êtes-vous inquiet·ète à l’idée que votre proche puisse se faire du mal (parole, geste, négligence grave de sa santé) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non | Parfois, selon les périodes | Oui, souvent",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Inquiétudes / sécurité"
+    },
+    {
+      "id": "E13",
+      "text": "Êtes-vous inquiet·ète à l’idée que votre proche puisse mettre d’autres personnes en danger (comportements agressifs, imprévisibles, conduite à risques…) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non | Parfois | Oui",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Inquiétudes / sécurité"
+    },
+    {
+      "id": "O32",
+      "text": "Souhaitez-vous être davantage aidé(e) pour vous en occuper ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Pas du tout | Un peu | Oui",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Besoin d’aide & capacité à continuer"
+    },
+    {
+      "id": "N8",
+      "text": "Votre rôle d'aidant vous a-t-il conduit à être en arrêt de travail (maladie) lors des 12 derniers mois ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non | J'ai dû m'arrêter moins de 5 jours | J'ai dû m'arrêter entre 5 jours et 1 mois | J'ai dû m'arrêter entre 1 mois et 3 mois | J'ai dû m'arrêter entre 3 mois et 6 mois | J'ai dû m'arrêter plus de 6 mois",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Impact sur travail"
+    },
+    {
+      "id": "E14",
+      "text": "Et au cours des 30 derniers jours?",
+      "type": "Obligatoire / Choix Unique / Conditionnel N8 (tout sauf réponse 1)",
+      "options": "Moins de 3 jours / Entre 4 et 7 jours / Plus de 7 jours",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Impact sur travail"
+    },
+    {
+      "id": "O37",
+      "text": "Avez-vous un médecin traitant ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Suivi médical & accès aux soins"
+    },
+    {
+      "id": "O38",
+      "text": "Avez-vous d'autres médecins spécialistes qui vous suivent actuellement  ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Suivi médical & accès aux soins"
+    },
+    {
+      "id": "O39",
+      "text": "Lesquels ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Unique / Conditionnel O38 (1)",
+      "options": "Cardiologue | Oncologue | Neurologue | Pneumologue | Ophtalmologue | Psychiatre | Chirurgien-Dentiste | Gastro-entérologue | Endocrinologue / Diabetologue | ORL | Gynecologue | Nephrologue | Gériatre | Dermatologue | Autre",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Suivi médical & accès aux soins"
+    },
+    {
+      "id": "O40",
+      "text": "Avez-vous déjà réalisé des rendez-vous médicaux cette année ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Suivi médical & accès aux soins"
+    },
+    {
+      "id": "O41",
+      "text": "Lesquels ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples/ Conditionnel O40(1)",
+      "options": "Bilan de santé général (prise de sang…) | Audition | Vue | Contrôle dentaire | Suivi cardiovasculaire | Ostéodensitométrie | Vaccination | Examen gynécologique | Suivi dermatologique | Suivi psychologique | Dépistage des cancers",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Suivi médical & accès aux soins"
+    },
+    {
+      "id": "E15",
+      "text": "Rencontrez-vous des difficultés à obtenir des rendez-vous médicaux pour vous-même ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Pas du tout | Un peu | Oui",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Suivi médical & accès aux soins"
+    },
+    {
+      "id": "E16",
+      "text": "Depuis que vous êtes aidant, vos propres rendez-vous médicaux…",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Je les gère normalement / J’ai du mal à les prendre ou à les garder / Je les reporte ou les annule souvent / Je ne sais pas / je préfère ne pas répondre",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Suivi médical & accès aux soins"
+    },
+    {
+      "id": "O42",
+      "text": "Êtes-vous concerné ou avez-vous été concerné par une ou plusieurs de ces maladies : (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples",
+      "options": "Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, troubles du déficit de l'attention avec ou sans hyperactivité TDAH…) | Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...) | Dermatologique (dermatite atopique, psoriasis, acné…) | Respiratoire (asthme, maladie pulmonaire obstructive chronique…) | Génito-urinaire (infections urinaires à répétition, hypertrophie bénigne de la prostate, endométriose…) | Endocrinienne (hyper ou hypo thyroidie, obésité sévère…) | Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…) | Métabolique (diabète, cholesterol…) | Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…) | Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…) | Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…) | Maladies génétiques (muchovicidose, trisomie…) | Troubles visuels sévères (DMLA, cécité…) | Troubles auditifs sévères | Je ne sais pas",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Santé : maladies / antécédents"
+    },
+    {
+      "id": "O43",
+      "text": "Combien de médicaments différents prenez-vous chaque jour ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "1 à 3 médicaments | 4 à 6 médicaments | 7 médicaments et plus | Je ne prends pas de traitement actuellement",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "Santé : médicaments"
+    },
+    {
+      "id": "O44",
+      "text": "Selon vous et par rapport à une personne du même âge, diriez-vous que votre santé est :",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Meilleure | Identique | Moins bonne",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "État de santé & hygiène de vie"
+    },
+    {
+      "id": "E17",
+      "text": "Pratiquez-vous une activité physique régulière (au moins 30 minutes, 3 fois par semaine) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "État de santé & hygiène de vie"
+    },
+    {
+      "id": "E18",
+      "text": "Globalement, comment évalueriez-vous la qualité de votre sommeil ces dernières semaines ? (sachant que l'idéal est de dormir minimum 6h par nuit)",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Bonne | Correcte | Mauvaise (je dors mal ou pas assez) | Très mauvaise (je me réveille épuisé.e)",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "État de santé & hygiène de vie"
+    },
+    {
+      "id": "E19",
+      "text": "Quels sont aujourd’hui vos principaux soucis de santé ?",
+      "type": "Obligatoire / Choix Multiples",
+      "options": "Fatigue | Sommeil | Douleurs | Moral (anxiété, idées noires, découragement) | Alimentation / poids | Problèmes de tension, de cœur, de diabète | Autre problème de santé | Aucun en particulier",
+      "bloc": "Bloc 4 – Votre santé physique et psychologique",
+      "sous_bloc": "État de santé & hygiène de vie"
+    }
+  ]
+}

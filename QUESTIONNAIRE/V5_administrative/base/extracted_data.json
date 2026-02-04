@@ -1,0 +1,150 @@
+{
+  "vulnerability": "V5",
+  "name": "Administrative",
+  "questions": [
+    {
+      "id": "O45",
+      "text": "Quelle couverture de santé avez-vous ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Régime général (ou spécial) et Mutuelle | Régime général (ou spécial) | CMU",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Couverture santé (aidant)"
+    },
+    {
+      "id": "O23",
+      "text": "Quelle couverture de santé protège la personne aidée ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Régime général (ou spécial) et Mutuelle | Régime général (ou spécial) | CMU",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Couverture santé (proche)"
+    },
+    {
+      "id": "N6",
+      "text": "Une mesure de protection a-t-elle été mise en place ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non | Habilitation familiale | Tutelle | Curatelle simple | Curatelle renforcée | Sauvegarde de justice | Mandat de protection future",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Protection juridique & anticipations"
+    },
+    {
+      "id": "E61",
+      "text": "otre proche a-t-il déjà rédigé des directives anticipées concernant ses souhaits de soins en cas de situation grave ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non | Je ne sais pas",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Protection juridique & anticipations"
+    },
+    {
+      "id": "N42",
+      "text": "Bénéficie-t-elle déjà d'une aide pour obtenir des prestations sociales en lien avec une ALD (ex: AAH, invalidité) ?",
+      "type": "Obligatoire / Choix Unique / Conditionnel N41(1)",
+      "options": "Oui | Non | Je ne sais pas",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Droits & aides (bénéfices)"
+    },
+    {
+      "id": "N29",
+      "text": "De quels droits/ aides bénéficiez-vous actuellement? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix multiple",
+      "options": "Allocation personnalisée d'autonomie (APA) | Aide personnalisée au logement (APL) | MaPrimeAdapt' (ANAH) | Allocation aux adultes handicapés (AAH) | Prestation de compensation du handicap (PCH) | Reconnaissance de la qualité de travailleur handicapé (RQTH) | Orientation vers un établissement ou service médico-social adapté | Carte mobilité inclusion (invalidité, priorité, stationnement) | Complément de ressources (en complément de l'AAH) | Orientation professionnelle (milieu ordinaire ou protégé) | Allocation d'éducation de l'enfant handicapé (AEEH) | la prestation de compensation du handicap (PCH) | Orientation vers des établissements ou services médico-sociaux adaptés (IME, SESSAD, …) | Mise en place d'un projet personnalisé de scolarisation (PPS) | Attribution d'une auxiliaire de vie scolaire (AVS) ou d'un accompagnant des élèves en situation de handicap (AESH) | Aménagement de la scolarité et des examens (tiers temps, matériel adapté,…) | Orientation vers des dispositifs spécifiques comme les ULIS (Unités Localisées pour l'Inclusion Scolaire) | Affiliation gratuite à l'assurance vieillesse des parents au foyer (AVPF) | Orientation vers un service d'accompagnement (SAVS, SAMSAH) | Aides pour l'aménagement du logement ou du véhicule | Aménagements pour les études supérieures | Aucun | Je ne sais pas",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Droits & aides (bénéfices)"
+    },
+    {
+      "id": "E62",
+      "text": "Pour quels droits/ aides avez-vous effectuer une demande qui est actuellement en cours ? (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix multiple",
+      "options": "Allocation personnalisée d'autonomie (APA) | Aide personnalisée au logement (APL) | MaPrimeAdapt' (ANAH) | Allocation aux adultes handicapés (AAH) | Prestation de compensation du handicap (PCH) | Reconnaissance de la qualité de travailleur handicapé (RQTH) | Orientation vers un établissement ou service médico-social adapté | Carte mobilité inclusion (invalidité, priorité, stationnement) | Complément de ressources (en complément de l'AAH) | Orientation professionnelle (milieu ordinaire ou protégé) | Allocation d'éducation de l'enfant handicapé (AEEH) | la prestation de compensation du handicap (PCH) | Orientation vers des établissements ou services médico-sociaux adaptés (IME, SESSAD, …) | Mise en place d'un projet personnalisé de scolarisation (PPS) | Attribution d'une auxiliaire de vie scolaire (AVS) ou d'un accompagnant des élèves en situation de handicap (AESH) | Aménagement de la scolarité et des examens (tiers temps, matériel adapté,…) | Orientation vers des dispositifs spécifiques comme les ULIS (Unités Localisées pour l'Inclusion Scolaire) | Affiliation gratuite à l'assurance vieillesse des parents au foyer (AVPF) | Orientation vers un service d'accompagnement (SAVS, SAMSAH) | Aides pour l'aménagement du logement ou du véhicule | Aménagements pour les études supérieures | Aucun | Je ne sais pas",
+      "bloc": null,
+      "sous_bloc": null
+    },
+    {
+      "id": "N43",
+      "text": "Dans votre rôle d'aidant avez-vous déjà bénéficié des services des accompagnements administratifs suivants ?  (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples",
+      "options": "Assistante sociale | Maison départementale des Personnes Handicapées (MDPH) | Maison de l'autonomie (MDA) | Centres communaux d'action sociale (CCAS) | Mutuelles et assurances complémentaires | Associations de patients | Plateformes d'accompagnement et de répit | Service social de l'assurance maladie | Espace Autonomie Sénior (EAS) | Aucun",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Accompagnement & recours aux dispositifs"
+    },
+    {
+      "id": "N5",
+      "text": "Avez-vous  déjà eu recours aux aides suivantes ?   (plusieurs réponses possibles)",
+      "type": "Obligatoire / Choix Multiples",
+      "options": "Solutions de répit | Formations dédiées aux aidants | Accompagnement psychologique | Aucune | Autre",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Accompagnement & recours aux dispositifs"
+    },
+    {
+      "id": "O61",
+      "text": "Pensez-vous avoir les moyens financiers suffisants pour faire face à cette situation ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui | Non",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Situation financière"
+    },
+    {
+      "id": "E63",
+      "text": "Quelles démarches vous préoccupent le plus en ce moment pour votre proche ?",
+      "type": "Obligatoire / Choix multiple",
+      "options": "Dossier de dépendance (ex. APA, PCH…) | Dossier MDPH / handicap | Démarches de retraite / pension | Aides au logement / adaptation du domicile | Aides financières ponctuelles | Renouvellement de droits (ALD, mutuelle, CMU, etc.) | Autre | Aucune en particulier",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Démarches prioritaires / préoccupations"
+    },
+    {
+      "id": "E64",
+      "text": "Votre enfant peut-il fréquenter une école ou une structure adaptée (crèche, IME, ULIS, etc.) de façon régulière ?",
+      "type": "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1",
+      "options": "Oui, sans difficulté particulière | Oui, mais avec des aménagements ou accompagnement (AESH, AVS, éducateur…) | Très difficile, il manque souvent / la structure n’est pas adaptée | Non, il ne fréquente pas d’école ou de structure adaptée",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Inclusion (école, structure, activité)"
+    },
+    {
+      "id": "E65",
+      "text": "Votre enfant a-t-il besoin d’un accompagnant spécialisé (AESH, AVS, éducateur, autre) pour l’école, les soins ou certaines activités ?",
+      "type": "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1",
+      "options": "Non | Oui, déjà en place | Oui, besoin identifié mais pas encore en place",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Inclusion (école, structure, activité)"
+    },
+    {
+      "id": "E66",
+      "text": "Les démarches administratives liées à votre proche vous paraissent-elles complexes ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Pas du tout | Un peu | Oui",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Charge administrative & complexité"
+    },
+    {
+      "id": "E67",
+      "text": "Actuellement, votre proche a-t-il une activité (travail, ESAT, atelier protégé, bénévolat, accueil de jour…) adaptée à son état de santé ?",
+      "type": "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 (tout sauf réponse 1 ou 3 ou 4)",
+      "options": "Oui, activité adaptée | Oui, mais elle devient difficile à tenir | Non, il est sans activité mais cela ne pose pas de problème particulier | Non, et cela crée des difficultés (isolement, repli, perte de repères)",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Inclusion (école, structure, activité)"
+    },
+    {
+      "id": "E68",
+      "text": "Combien de temps consacrez-vous chaque mois aux démarches administratives pour votre proche ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Moins de 1h | Entre 1h et 5h | Plus de 5h",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Charge administrative & complexité"
+    },
+    {
+      "id": "E69",
+      "text": "Vous sentez-vous à l’aise avec les démarches administratives en ligne (assurance maladie, MDPH, impôts, retraite, etc.) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Oui, tout à fait | Oui, mais cela me prend beaucoup de temps | Non, je suis souvent perdu·e | Je n’ai pas facilement accès à un ordinateur / internet",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Charge administrative & complexité"
+    },
+    {
+      "id": "E70",
+      "text": "Vous arrive-t-il de devoir gérer des démarches administratives dans l’urgence (dates limites dépassées, risque de suspension d’une aide, etc.) ?",
+      "type": "Obligatoire / Choix Unique",
+      "options": "Non, jamais | Parfois | Souvent, je suis toujours en retard | Je ne sais pas",
+      "bloc": "Bloc 7 – Droits, démarches, administratif & finances",
+      "sous_bloc": "Charge administrative & complexité"
+    }
+  ]
+}

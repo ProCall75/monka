@@ -1,0 +1,265 @@
+{
+  "files_analyzed": [
+    "Tableau SOPHIE CAT + Reco-Nouveau questionnaire par Vulnérabilité(1).xlsx",
+    "Questionnaire_Etienne_1258.xlsx",
+    "microparcours_aidant.xlsx",
+    "Questionnaire_Etienne_1258-1_suivi_mensuel.xlsx"
+  ],
+  "vulnerabilities": {
+    "V1": [
+      {
+        "sheet": "Social et Relationnel",
+        "rows": 113,
+        "headers": [
+          "Col_1",
+          "Social et Relationnel",
+          "Col_3",
+          "Col_4",
+          "Col_5",
+          "Col_6",
+          "Col_7",
+          "Col_8",
+          "Col_9",
+          "Col_10",
+          "Col_11",
+          "Col_12",
+          "Col_13",
+          "Col_14"
+        ]
+      },
+      {
+        "sheet": "social et relationnel",
+        "rows": 15,
+        "headers": [
+          "Col_1",
+          "Col_2",
+          "Ordre global",
+          "BlocID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "ID",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ]
+      }
+    ],
+    "V3": [
+      {
+        "sheet": "Santé physique et psychologique",
+        "rows": 191,
+        "headers": [
+          "Santé physique et psychologique",
+          "Col_2",
+          "Col_3",
+          "Col_4",
+          "Col_5",
+          "Col_6",
+          "Col_7",
+          "Col_8",
+          "Col_9",
+          "Col_10",
+          "Col_11",
+          "Col_12",
+          "Col_13",
+          "Col_14",
+          "Col_15",
+          "Col_16",
+          "Col_17",
+          "Col_18",
+          "Col_19"
+        ]
+      },
+      {
+        "sheet": "santé physique et psychologique",
+        "rows": 27,
+        "headers": [
+          "Col_1",
+          "Col_2",
+          "Ordre global",
+          "BlocID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "ID",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ]
+      },
+      {
+        "sheet": "Micro-parcours (Aidant)",
+        "rows": 24,
+        "headers": [
+          "Code",
+          "Micro-parcours",
+          "Objectif",
+          "Ce que vous allez comprendre"
+        ]
+      }
+    ],
+    "V2": [
+      {
+        "sheet": "Fragilité du proche",
+        "rows": 198,
+        "headers": [
+          "Fragilité du proche",
+          "Col_2",
+          "Col_3",
+          "Col_4",
+          "Col_5",
+          "Col_6",
+          "Col_7",
+          "Col_8",
+          "Col_9",
+          "Col_10",
+          "Col_11",
+          "Col_12",
+          "Col_13",
+          "Col_14",
+          "Col_15",
+          "Col_16",
+          "Col_17",
+          "Col_18",
+          "Col_19"
+        ]
+      },
+      {
+        "sheet": "Parcours médical du proche",
+        "rows": 197,
+        "headers": [
+          "Parcours médical du proche",
+          "Col_2",
+          "Col_3",
+          "Col_4",
+          "Col_5",
+          "Col_6",
+          "Col_7",
+          "Col_8",
+          "Col_9",
+          "Col_10",
+          "Col_11",
+          "Col_12",
+          "Col_13",
+          "Col_14"
+        ]
+      },
+      {
+        "sheet": "fragilité du proche",
+        "rows": 57,
+        "headers": [
+          "Col_1",
+          "Col_2",
+          "Ordre global",
+          "BlocID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "ID",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ]
+      },
+      {
+        "sheet": "parcours médical du proche",
+        "rows": 36,
+        "headers": [
+          "Col_1",
+          "Col_2",
+          "Ordre global",
+          "BlocID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "ID",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ]
+      }
+    ],
+    "V4": [
+      {
+        "sheet": "Parcours médical du proche",
+        "rows": 197,
+        "headers": [
+          "Parcours médical du proche",
+          "Col_2",
+          "Col_3",
+          "Col_4",
+          "Col_5",
+          "Col_6",
+          "Col_7",
+          "Col_8",
+          "Col_9",
+          "Col_10",
+          "Col_11",
+          "Col_12",
+          "Col_13",
+          "Col_14"
+        ]
+      },
+      {
+        "sheet": "parcours médical du proche",
+        "rows": 36,
+        "headers": [
+          "Col_1",
+          "Col_2",
+          "Ordre global",
+          "BlocID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "ID",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ]
+      },
+      {
+        "sheet": "Micro-parcours (Aidant)",
+        "rows": 24,
+        "headers": [
+          "Code",
+          "Micro-parcours",
+          "Objectif",
+          "Ce que vous allez comprendre"
+        ]
+      },
+      {
+        "sheet": "Questions par micro-parcours",
+        "rows": 163,
+        "headers": [
+          "Micro-parcours",
+          "ID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse",
+          "Vulnérabilité"
+        ]
+      },
+      {
+        "sheet": "Triggers par micro-parcours",
+        "rows": 152,
+        "headers": [
+          "Micro-parcours",
+          "Trigger ID",
+          "Trigger – Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ]
+      }
+    ]
+  },
+  "raw_files": [
+    "Tableau SOPHIE CAT + Reco-Nouveau questionnaire par Vulnérabilité(1)_raw.json",
+    "Questionnaire_Etienne_1258_raw.json",
+    "microparcours_aidant_raw.json",
+    "Questionnaire_Etienne_1258-1_suivi_mensuel_raw.json"
+  ]
+}

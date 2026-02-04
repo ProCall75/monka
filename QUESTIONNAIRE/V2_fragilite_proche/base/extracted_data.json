@@ -1,0 +1,354 @@
+{
+  "O2": {
+    "id": "O2",
+    "text": "Où vit la personne aidée aujourd’hui ?",
+    "options": [
+      {
+        "text": "1-À son domicile",
+        "scoring": "1",
+        "recommendation": "Faites vous aider"
+      },
+      {
+        "text": "2-À mon domicile",
+        "scoring": "3",
+        "recommendation": "Faites vous aider"
+      },
+      {
+        "text": "3-En établissement",
+        "scoring": "4",
+        "recommendation": ""
+      }
+    ]
+  },
+  "N31": {
+    "id": "N31",
+    "text": "La personne aidée bénéficie-t-elle d'une prise en charge en établissement spécialisé ?",
+    "options": [
+      {
+        "text": "1-Aucune prise en charge",
+        "scoring": "3",
+        "recommendation": ""
+      },
+      {
+        "text": "2-Etablissements pour enfants et adolescents (IME,ITEP, IEM, EEAP)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "3-Services d'accompagnement (SAVS, SAMSAH)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "4-Centres de rééducation fonctionnelle",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "5-Etablissements pour personnes avec un handicap sensoriel (Institut pour déficients visuels, auditifs)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "6-Etablissements pour adultes (FAM, MAS, foyer de vie, foyer d'hébergement)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "7-Etablissements et services d'aide par le travail (ESAT)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "8-Centres de rééducation fonctionnelle",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "9-Etablissements pour personnes avec un handicap sensoriel (Institut pour déficients visuels, auditifs)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "10-Unités pour personnes handicapées vieillisantes",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "11-EHPAD",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "12-Résidence Services ou Autonomie,",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "13-Unité de soins longue durée (USLD)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "14-Centre de Ressouces Territoriaux (CRT)",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "15-Accueil de jour ou hopital de jour",
+        "scoring": "1",
+        "recommendation": ""
+      }
+    ]
+  },
+  "N10": {
+    "id": "N10",
+    "text": "Quelle est la nature de l’aide que vous apportez ? (plusieurs réponses possibles)",
+    "options": [
+      {
+        "text": "1-Tâches de la vie quotidienne (ménage, repas, habillage...)",
+        "scoring": "1",
+        "recommendation": "Demandez une aide pour les actes de la vie quotidienne."
+      },
+      {
+        "text": "2-Gestion administrative et budgétaire",
+        "scoring": "1",
+        "recommendation": "Contacter une assistante sociale afin de faire le point sur les aides auxquelles vous ou vos proches pouvez éventuellement être éligibles."
+      },
+      {
+        "text": "3-Soutien moral, présence ou compagnie sur le lieu de vie",
+        "scoring": "1",
+        "recommendation": "Demandez une aide pour les actes de la vie quotidienne."
+      },
+      {
+        "text": "3-Soutien moral, présence ou compagnie sur le lieu de vie",
+        "scoring": "1",
+        "recommendation": "Envisager un soutien psychologique"
+      },
+      {
+        "text": "4-Accompagnement à des rendez-vous",
+        "scoring": "1",
+        "recommendation": "Demandez une aide lors des déplacements à des rendez-vous médicaux."
+      },
+      {
+        "text": "5-Autre",
+        "scoring": "0",
+        "recommendation": ""
+      }
+    ]
+  },
+  "N9": {
+    "id": "N9",
+    "text": "La personne aidée rencontre-t-elle des problèmes pour gérer son budget ou ses affaires administratives ?",
+    "options": [
+      {
+        "text": "1-Non",
+        "scoring": "0",
+        "recommendation": ""
+      },
+      {
+        "text": "2-Elle se fait aider",
+        "scoring": "2",
+        "recommendation": "Contacter une assistante sociale afin de faire le point sur les aides auxquelles il pourrait être éligibles."
+      },
+      {
+        "text": "3-Oui",
+        "scoring": "3",
+        "recommendation": "Contacter une assistante sociale afin de faire le point sur les aides auxquelles il pourrait être éligibles."
+      }
+    ]
+  },
+  "N21": {
+    "id": "N21",
+    "text": "Rencontre-t-elle des problèmes financiers ?",
+    "options": [
+      {
+        "text": "1-Non",
+        "scoring": "0",
+        "recommendation": ""
+      },
+      {
+        "text": "2-Parfois",
+        "scoring": "1",
+        "recommendation": ""
+      },
+      {
+        "text": "3-Oui",
+        "scoring": "3",
+        "recommendation": "Contacter le médecin traitant pour remplir le dossier de demande d'aide"
+      }
+    ]
+  },
+  "N23": {
+    "id": "N23",
+    "text": "La personne aidée a-t-elle des difficultés à maintenir une activité professionnelle, occupationnelle ou scolaire ?",
+    "options": [
+      {
+        "text": "1-Non",
+        "scoring": "0",
+        "recommendation": ""
+      },
+      {
+        "text": "2-Parfois",
+        "scoring": "2",
+        "recommendation": "Demandez un suivi régulier."
+      },
+      {
+        "text": "3-Oui",
+        "scoring": "3",
+        "recommendation": "Envisager une consultation avec un psychiatre"
+      }
+    ]
+  },
+  "N27": {
+    "id": "N27",
+    "text": "Estimez-vous que la personne aidée est socialement isolée (peu ou pas de contacts avec des amis, la famille ou la communauté) ?",
+    "options": [
+      {
+        "text": "1-Pas du tout",
+        "scoring": "0",
+        "recommendation": ""
+      },
+      {
+        "text": "2-Un peu",
+        "scoring": "1",
+        "recommendation": "Inscrivez votre proche dans des associations, des groupes de parole ou des thérapies de groupe pour faciliter les intéractions sociales."
+      },
+      {
+        "text": "3-Beaucoup",
+        "scoring": "3",
+        "recommendation": "Demandez un suivi rapproché avec des intervenants sociaux et médicaux. Organisez des visites régulières."
+      },
+      {
+        "text": "4-Totalement",
+        "scoring": "4",
+        "recommendation": "Proposez à votre proche un suivi contre l'isolement social."
+      }
+    ]
+  },
+  "O7": {
+    "id": "O7",
+    "text": "Avez-vous constaté des changements dans la manière dont elle se nourrit ?",
+    "options": [
+      {
+        "text": "1-Non",
+        "scoring": "0",
+        "recommendation": "Mettez en place un suivi régulier selon les préconisations du chirurgien-dentiste."
+      },
+      {
+        "text": "2-Oui",
+        "scoring": "1",
+        "recommendation": "Discutez des causes de la perte d'appétit et demandez la prescription d'un bilan de dénutrition."
+      },
+      {
+        "text": "3-Oui, et elle est dénutrit",
+        "scoring": "3",
+        "recommendation": "Demandez la vérification de l'état bucco-dentaire."
+      }
+    ]
+  },
+  "E20": {
+    "id": "E20",
+    "text": "En pensant aux 6 à 12 prochains mois, quel serait selon vous le lieu de vie idéal pour votre proche",
+    "options": [
+      {
+        "text": "1-À son domicile actuel",
+        "scoring": "0",
+        "recommendation": "Sécuriser et renforcer le maintien à domicile."
+      },
+      {
+        "text": "2-À mon domicile",
+        "scoring": "0",
+        "recommendation": "Évaluer la faisabilité et l’impact sur l’aidant."
+      },
+      {
+        "text": "3-En établissement (EHPAD, résidence, foyer…)",
+        "scoring": "0",
+        "recommendation": "Anticiper et préparer une éventuelle orientation en établissement."
+      },
+      {
+        "text": "4- ne sais pas / nous n’en avons pas parlé",
+        "scoring": "0",
+        "recommendation": "Favoriser la réflexion et l’anticipation du projet de vie."
+      }
+    ]
+  },
+  "E21": {
+    "id": "E21",
+    "text": "Pensez-vous qu’il sera possible de maintenir cette situation de vie sans changement majeur dans les prochains mois ?",
+    "options": [
+      {
+        "text": "1-Oui, probablement",
+        "scoring": "0",
+        "recommendation": "Maintenir l’organisation actuelle tout en restant attentif à l’évolution de la situation."
+      },
+      {
+        "text": "2-Oui, mais cela risque d’être difficile",
+        "scoring": "0",
+        "recommendation": "Anticiper les fragilités et renforcer l’accompagnement pour éviter une rupture."
+      },
+      {
+        "text": "3-En établissement (EHPAD, résidence, foyer…)",
+        "scoring": "0",
+        "recommendation": "Anticiper et préparer une transition vers une autre solution d’hébergement."
+      },
+      {
+        "text": "4-Je ne sais pas",
+        "scoring": "0",
+        "recommendation": "Favoriser la réflexion et l’anticipation du projet de vie."
+      }
+    ]
+  },
+  "E22": {
+    "id": "E22",
+    "text": "Globalement, combien d’heures d’aide humaine (aide à domicile, infirmier·e, etc.) votre proche reçoit-il par semaine ?",
+    "options": [
+      {
+        "text": "1-Moins de 5 heures",
+        "scoring": "0",
+        "recommendation": "Vérifier l’adéquation du volume d’aide avec les besoins actuels."
+      },
+      {
+        "text": "2-Entre 5 et 14 heures",
+        "scoring": "0",
+        "recommendation": "Maintenir l’organisation actuelle tout en restant attentif à l’évolution des besoins."
+      },
+      {
+        "text": "3- 15 à 30 heures",
+        "scoring": "0",
+        "recommendation": "S’assurer de la bonne coordination des intervenants."
+      },
+      {
+        "text": "4-Plus de 30 heures",
+        "scoring": "0",
+        "recommendation": "Situation de dépendance importante nécessitant une vigilance renforcée."
+      },
+      {
+        "text": "5-Je ne sais pas",
+        "scoring": "0",
+        "recommendation": "Clarifier la situation et objectiver le volume réel d’aide."
+      }
+    ]
+  },
+  "O8": {
+    "id": "O8",
+    "text": "Au quotidien a-t-elle besoin d'une aide humaine pour se déplacer en dehors de son domicile ?",
+    "options": [
+      {
+        "text": "1-Non, elle est indépendante",
+        "scoring": "0",
+        "recommendation": ""
+      },
+      {
+        "text": "2-Oui, de temps en temps",
+        "scoring": "2",
+        "recommendation": "Demandez la prescription d'un bilan de la marche chez un kinésithérapeute et/ou un bilan chez un ergothérapeute."
+      },
+      {
+        "text": "3-Oui, tout le temps",
+        "scoring": "3",
+        "recommendation": "Demandez la prescription d'un bilan d'ergothérapie et/ou prise en charge par un kinésithérapeute afin de maintenir l'autonomie restante."
+      }
+    ]
+  }
+}

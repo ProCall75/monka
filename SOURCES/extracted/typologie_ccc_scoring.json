@@ -1,0 +1,2304 @@
+{
+  "vulnerabilites": [
+    "Typologie des questions par vulnérabilité, les CCC et le scoring",
+    "VULNÉRABILITÉ SOCIALE ET RELATIONNELLE",
+    "« La vulnérabilité Sociale & relationnelle repose sur un ensemble de questions déclenchantes permettant l’activation ciblée de micro-parcours, de questions critiques directes traduisant une gravité intrinsèque, et de conditions critiques composites révélant des situations de rupture relationnelle par accumulation. Cette vulnérabilité ne repose pas sur une urgence médicale immédiate mais sur l’identification précoce de déséquilibres susceptibles d’entraîner une rupture de la dyade aidant-aidé. »",
+    "VULNÉRABILITÉ ADMINISTRATIVE",
+    "VULNÉRABILITÉ SANTÉ PHYSIQUE ET PSYCHOLOGIQUE DE L’AIDANT",
+    "Vulnérabilité Fragilité du proche",
+    "Vulnérabilité Parcours du proche"
+  ],
+  "tables": [
+    {
+      "index": 0,
+      "headers": [
+        "ID",
+        "Question (résumé)",
+        "Rôle legacy",
+        "Justification"
+      ],
+      "rows": [
+        [
+          "O47",
+          "Distance domicile aidant / aidé",
+          "Descriptive (modulatrice)",
+          "Contexte logistique"
+        ],
+        [
+          "O48",
+          "Fréquence des visites",
+          "Descriptive (modulatrice)",
+          "Intensité de présence"
+        ],
+        [
+          "N4",
+          "Aidant seul ou non dans la famille",
+          "Descriptive (modulatrice)",
+          "Structure du réseau"
+        ],
+        [
+          "E1",
+          "Répartition de l’aide dans l’entourage",
+          "Scorante",
+          "Charge relationnelle"
+        ],
+        [
+          "E2",
+          "Soutien mobilisable en cas de coup dur",
+          "Scorante",
+          "Solidité du soutien"
+        ],
+        [
+          "E3",
+          "Autres personnes à charge",
+          "Descriptive (modulatrice)",
+          "Charge globale"
+        ],
+        [
+          "N20",
+          "Difficultés du proche à maintenir des relations",
+          "Scorante",
+          "Isolement social du proche"
+        ],
+        [
+          "O27",
+          "Difficultés dans la vie familiale",
+          "Scorante",
+          "Retentissement familial"
+        ],
+        [
+          "O28",
+          "Difficultés sociales / loisirs / travail",
+          "Scorante",
+          "Retentissement social"
+        ],
+        [
+          "N7",
+          "Aménagement de l’activité professionnelle",
+          "Descriptive (modulatrice)",
+          "Conséquence organisationnelle"
+        ],
+        [
+          "O30",
+          "Sentiment de ne plus reconnaître le proche",
+          "Scorante",
+          "Altération du lien"
+        ],
+        [
+          "E4",
+          "Évolution de la relation aidant–aidé",
+          "Scorante",
+          "Dynamique relationnelle"
+        ],
+        [
+          "O31",
+          "Peur pour l’avenir du proche",
+          "Descriptive (modulatrice)",
+          "Inquiétude projetée"
+        ],
+        [
+          "E5",
+          "Tensions / désaccords familiaux",
+          "Scorante",
+          "Conflits familiaux"
+        ],
+        [
+          "E6",
+          "Acceptation de l’aide extérieure",
+          "Critique directe",
+          "Coopération / blocage"
+        ]
+      ],
+      "row_count": 15
+    },
+    {
+      "index": 1,
+      "headers": [
+        "ID",
+        "Question",
+        "Réponses déclenchantes explicites",
+        "Micro-parcours concernés",
+        "Sens"
+      ],
+      "rows": [
+        [
+          "N7",
+          "Aménagement de l’activité professionnelle",
+          "« Aménagement des horaires » / « Congés »",
+          "R1",
+          "Déséquilibre vie pro ↔ rôle d’aidant"
+        ],
+        [
+          "O48",
+          "Fréquence des visites",
+          "« 1 fois par mois ou moins »",
+          "R3",
+          "Faible présence auprès du proche"
+        ],
+        [
+          "N4",
+          "Aidant seul dans la famille",
+          "« Oui »",
+          "R2",
+          "Absence de relais familial"
+        ],
+        [
+          "E6",
+          "Acceptation de l’aide extérieure",
+          "« Refuse la plupart du temps »",
+          "R4",
+          "Blocage organisationnel"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 2,
+      "headers": [
+        "ID",
+        "Question",
+        "Réponses critiques explicites",
+        "Effet legacy",
+        "Sens clinique"
+      ],
+      "rows": [
+        [
+          "E6",
+          "Acceptation de l’aide extérieure",
+          "« Refuse la plupart du temps »",
+          "Priorité niveau 1",
+          "Refus d’aide compromettant toute sécurisation"
+        ],
+        [
+          "E2",
+          "Soutien mobilisable en cas de coup dur",
+          "« Personne »",
+          "Priorité niveau 1",
+          "Isolement relationnel sévère de l’aidant"
+        ]
+      ],
+      "row_count": 2
+    },
+    {
+      "index": 3,
+      "headers": [
+        "Micro-parcours",
+        "Condition CR",
+        "Questions impliquées",
+        "Logique (réponses déclenchantes explicites)",
+        "Sens clinique"
+      ],
+      "rows": [
+        [
+          "R1 – Impact sur la vie personnelle / sociale / pro",
+          "R1_CC_01",
+          "O27 + O28",
+          "O27 = “Oui” ET O28 = “Oui”",
+          "Retentissement massif du rôle d’aidant sur la vie privée et sociale → risque de déséquilibre global"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle / sociale / pro",
+          "R1_CC_02",
+          "N7 + O27",
+          "N7 = aménagement horaires ou congés ET O27 = “Oui”",
+          "Ajustement professionnel déjà engagé avec impact familial → fragilisation structurelle"
+        ],
+        [
+          "R2 – Soutien de l’entourage",
+          "R2_CC_01",
+          "N4 + E2",
+          "N4 = “Oui” ET E2 = “Très peu / personne”",
+          "Aidant seul sans soutien mobilisable → risque d’isolement de l’aidant"
+        ],
+        [
+          "R2 – Soutien de l’entourage",
+          "R2_CC_02",
+          "E1 + E2",
+          "E1 = “Je fais presque tout / seul·e” ET E2 = “Très peu / personne”",
+          "Charge quasi exclusive sans filet de sécurité"
+        ],
+        [
+          "R3 – Isolement social du proche",
+          "R3_CC_01",
+          "N20 + O48",
+          "N20 = “Oui” ET O48 ≤ 1 fois / mois",
+          "Isolement social du proche confirmé par faible présence relationnelle"
+        ],
+        [
+          "R4 – Relation aidant / aidé & dynamique familiale",
+          "R4_CC_01",
+          "O30 + E4",
+          "O30 = “Oui” ET E4 = “Plus tendue / compliquée”",
+          "Dégradation du lien aidant-aidé avec perte de reconnaissance"
+        ],
+        [
+          "R4 – Relation aidant / aidé & dynamique familiale",
+          "R4_CC_02",
+          "E5 + E1",
+          "E5 = “Oui” ET E1 = “Je fais presque tout / seul·e”",
+          "Conflits familiaux associés à une charge déséquilibrée"
+        ],
+        [
+          "R4 – Relation aidant / aidé & acceptation de l’aide",
+          "R4_CC_03",
+          "E6 + O31",
+          "E6 = “Refuse la plupart du temps” ET O31 = “Oui”",
+          "Refus d’aide externe avec anxiété projetée forte → risque de blocage de la prise en charge"
+        ]
+      ],
+      "row_count": 8
+    },
+    {
+      "index": 4,
+      "headers": [
+        "Question",
+        "Réponse",
+        "Score"
+      ],
+      "rows": [
+        [
+          "O27",
+          "Pas du tout",
+          "0"
+        ],
+        [
+          "",
+          "Un peu",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "O28",
+          "Pas du tout",
+          "0"
+        ],
+        [
+          "",
+          "Un peu",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E1",
+          "Répartition équilibrée et satisfaisante",
+          "0"
+        ],
+        [
+          "",
+          "Je fais la plus grande partie mais cela reste acceptable",
+          "1"
+        ],
+        [
+          "",
+          "Je fais presque tout / je suis totalement seul·e",
+          "2"
+        ],
+        [
+          "E2",
+          "Oui, plusieurs personnes",
+          "0"
+        ],
+        [
+          "",
+          "Oui, une personne",
+          "1"
+        ],
+        [
+          "",
+          "Très peu de personnes / personne",
+          "2"
+        ],
+        [
+          "N20",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "O30",
+          "Pas du tout",
+          "0"
+        ],
+        [
+          "",
+          "Un peu",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E4",
+          "Relation renforcée ou globalement similaire",
+          "0"
+        ],
+        [
+          "",
+          "Relation plus tendue / plus compliquée / difficile à dire",
+          "1"
+        ],
+        [
+          "E5",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ]
+      ],
+      "row_count": 23
+    },
+    {
+      "index": 5,
+      "headers": [
+        "Score sur 20",
+        "Couleur",
+        "Lecture"
+      ],
+      "rows": [
+        [
+          "0 – 6",
+          "🟢 Vert",
+          "Situation sociale globalement préservée"
+        ],
+        [
+          "7 – 13",
+          "🟠 Orange",
+          "Fragilisation sociale et relationnelle"
+        ],
+        [
+          "14 – 20",
+          "🔴 Rouge",
+          "Isolement ou rupture relationnelle probable"
+        ]
+      ],
+      "row_count": 3
+    },
+    {
+      "index": 6,
+      "headers": [
+        "ID",
+        "Question",
+        "Type de question",
+        "Justification"
+      ],
+      "rows": [
+        [
+          "E66",
+          "Complexité des démarches",
+          "Scorante",
+          "Charge administrative vécue"
+        ],
+        [
+          "E69",
+          "Aisance démarches en ligne",
+          "Scorante",
+          "Difficulté fonctionnelle"
+        ],
+        [
+          "E70",
+          "Démarches en urgence",
+          "Scorante",
+          "Désorganisation administrative"
+        ],
+        [
+          "E63",
+          "Démarches préoccupantes",
+          "Descriptive (modulatrice)",
+          "Oriente l’action"
+        ],
+        [
+          "O45",
+          "Couverture santé aidant",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "O23",
+          "Couverture santé proche",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "N6",
+          "Protection juridique",
+          "Descriptive",
+          "Cadre légal"
+        ],
+        [
+          "E61",
+          "Directives anticipées",
+          "Descriptive",
+          "Anticipation"
+        ],
+        [
+          "N42",
+          "Aide ALD",
+          "Descriptive",
+          "Droit ouvert"
+        ],
+        [
+          "N29",
+          "Droits perçus",
+          "Descriptive",
+          "Droit ouvert"
+        ],
+        [
+          "E62",
+          "Droits en cours",
+          "Descriptive",
+          "Process"
+        ],
+        [
+          "N43",
+          "Accompagnement administratif",
+          "Descriptive",
+          "Ressource"
+        ],
+        [
+          "N5",
+          "Aides aidants",
+          "Descriptive",
+          "Ressource"
+        ],
+        [
+          "O61",
+          "Moyens financiers",
+          "Descriptive (modulatrice)",
+          "Fragilité connexe"
+        ],
+        [
+          "E64",
+          "Inclusion structure",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "E65",
+          "Besoin AESH / AVS",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "E67",
+          "Activité adaptée",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "E68",
+          "Temps démarches",
+          "Descriptive (modulatrice)",
+          "Charge indirecte"
+        ]
+      ],
+      "row_count": 18
+    },
+    {
+      "index": 7,
+      "headers": [
+        "ID",
+        "Question",
+        "Réponse déclenchante",
+        "Micro-parcours"
+      ],
+      "rows": [
+        [
+          "E68",
+          "Temps consacré aux démarches",
+          "≥ 1h / mois",
+          "A1 – Saturation administrative"
+        ],
+        [
+          "E62",
+          "Droits / aides demandés",
+          "Aucun / Je ne sais pas",
+          "A2 – Droits non activés"
+        ],
+        [
+          "O53",
+          "Évaluation dépendance AGGIR",
+          "Non / Je ne sais pas",
+          "A2 – Droits non activés"
+        ],
+        [
+          "E61",
+          "Directives anticipées",
+          "Non / Je ne sais pas",
+          "A3 – Projection juridique"
+        ],
+        [
+          "E21",
+          "Maintien situation de vie",
+          "Non / incertain",
+          "A1 / A3"
+        ]
+      ],
+      "row_count": 5
+    },
+    {
+      "index": 8,
+      "headers": [
+        "ID",
+        "Question",
+        "Réponse critique",
+        "Sens"
+      ],
+      "rows": [
+        [
+          "E68",
+          "Temps administratif mensuel",
+          "> 5h / mois",
+          "Charge administrative incompatible avec la durée"
+        ],
+        [
+          "E62",
+          "Aides en cours",
+          "Aucun droit engagé alors que besoin exprimé",
+          "Risque de rupture financière / sociale"
+        ],
+        [
+          "E61",
+          "Directives anticipées",
+          "Refus total + situation instable",
+          "Risque décisionnel majeur en crise"
+        ]
+      ],
+      "row_count": 3
+    },
+    {
+      "index": 9,
+      "headers": [
+        "Micro-parcours",
+        "Condition CR",
+        "Questions impliquées",
+        "Logique (réponses exactes déclenchantes)",
+        "Sens clinique"
+      ],
+      "rows": [
+        [
+          "A1 – Saturation administrative",
+          "A1_CC_01",
+          "E68 + E21",
+          "E68 = « Plus de 5h par mois » ET E21 = « Non, un changement sera nécessaire » OU « Je ne sais pas »",
+          "Charge administrative excessive avec incapacité perçue à maintenir la situation"
+        ],
+        [
+          "A2 – Rupture de droits",
+          "A2_CC_01",
+          "E62 + O53",
+          "E62 = « Aucun » OU « Je ne sais pas » ET O53 = « Non » OU « Je ne sais pas »",
+          "Absence de droits ouverts malgré un besoin potentiel"
+        ],
+        [
+          "A3 – Absence d’anticipation",
+          "A3_CC_01",
+          "E61 + E21",
+          "E61 = « Non » OU « Je ne sais pas » ET E21 = « Non, un changement sera nécessaire » OU « Je ne sais pas »",
+          "Décisions futures à risque en cas de dégradation ou de crise"
+        ]
+      ],
+      "row_count": 3
+    },
+    {
+      "index": 10,
+      "headers": [
+        "Question",
+        "Réponse",
+        "Score"
+      ],
+      "rows": [
+        [
+          "E66",
+          "Pas du tout",
+          "0"
+        ],
+        [
+          "",
+          "Un peu",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E69",
+          "Oui, tout à fait",
+          "0"
+        ],
+        [
+          "",
+          "Oui, mais lent / chronophage",
+          "1"
+        ],
+        [
+          "",
+          "Non, souvent perdu·e",
+          "2"
+        ],
+        [
+          "",
+          "Pas d’accès numérique",
+          "2"
+        ],
+        [
+          "E70",
+          "Non, jamais",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Souvent / toujours en retard",
+          "2"
+        ],
+        [
+          "",
+          "Je ne sais pas",
+          "1"
+        ]
+      ],
+      "row_count": 11
+    },
+    {
+      "index": 11,
+      "headers": [
+        "Score sur 20",
+        "Couleur",
+        "Lecture"
+      ],
+      "rows": [
+        [
+          "0 – 6",
+          "🟢 Vert",
+          "Gestion administrative maîtrisée"
+        ],
+        [
+          "7 – 13",
+          "🟠 Orange",
+          "Charge administrative significative"
+        ],
+        [
+          "14 – 20",
+          "🔴 Rouge",
+          "Surcharge / décrochage administratif"
+        ]
+      ],
+      "row_count": 3
+    },
+    {
+      "index": 12,
+      "headers": [
+        "ID",
+        "Question",
+        "Type de question",
+        "Justification"
+      ],
+      "rows": [
+        [
+          "O29",
+          "Retentissement santé",
+          "Scorante",
+          "Impact direct"
+        ],
+        [
+          "O33",
+          "Charge ressentie",
+          "Scorante",
+          "Charge subjective"
+        ],
+        [
+          "E7",
+          "Épuisement",
+          "Scorante",
+          "Indicateur clé"
+        ],
+        [
+          "E8",
+          "Solitude émotionnelle",
+          "Scorante",
+          "Fragilité psychique"
+        ],
+        [
+          "E9",
+          "Temps pour soi",
+          "Scorante",
+          "Déséquilibre"
+        ],
+        [
+          "E10",
+          "Stress / moral",
+          "Scorante",
+          "Charge psychologique"
+        ],
+        [
+          "E11",
+          "Capacité à continuer",
+          "Scorante",
+          "Risque de rupture"
+        ],
+        [
+          "O44",
+          "Santé perçue",
+          "Scorante",
+          "Auto-évaluation"
+        ],
+        [
+          "E18",
+          "Sommeil",
+          "Scorante",
+          "Marqueur clinique"
+        ],
+        [
+          "E12",
+          "Risque pour le proche",
+          "Critique directe (SCR)",
+          "Sécurité"
+        ],
+        [
+          "E13",
+          "Risque pour autrui",
+          "Critique directe (SCR)",
+          "Sécurité"
+        ],
+        [
+          "O32",
+          "Besoin d’aide",
+          "Déclenchante",
+          "Ouvre micro-parcours"
+        ],
+        [
+          "E15",
+          "Difficulté RDV",
+          "Descriptive (modulatrice)",
+          "Fragilité connexe"
+        ],
+        [
+          "E16",
+          "Report soins",
+          "Descriptive (modulatrice)",
+          "Fragilité connexe"
+        ],
+        [
+          "N8",
+          "Arrêt de travail",
+          "Descriptive",
+          "Retentissement"
+        ],
+        [
+          "E14",
+          "Durée arrêt",
+          "Descriptive",
+          "Quantification"
+        ],
+        [
+          "O50",
+          "Temps consacré",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "O37–O41",
+          "Suivi médical",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "O42",
+          "Antécédents",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "O43",
+          "Médicaments",
+          "Descriptive",
+          "Contexte"
+        ],
+        [
+          "E17",
+          "Activité physique",
+          "Descriptive",
+          "Hygiène de vie"
+        ],
+        [
+          "E19",
+          "Soucis de santé",
+          "Descriptive",
+          "Signal global"
+        ],
+        [
+          "E20",
+          "Projection proche",
+          "Descriptive",
+          "Projection"
+        ]
+      ],
+      "row_count": 23
+    },
+    {
+      "index": 13,
+      "headers": [
+        "ID",
+        "Question",
+        "Réponses déclenchantes",
+        "Effet"
+      ],
+      "rows": [
+        [
+          "O49",
+          "Depuis combien de temps l’aidez-vous ?",
+          "Depuis plus de 2 ans",
+          "Exposition prolongée → renforce la vigilance épuisement"
+        ],
+        [
+          "N8",
+          "Arrêt de travail lié au rôle d’aidant",
+          "Toute réponse ≠ Non",
+          "Fragilisation professionnelle"
+        ],
+        [
+          "E14",
+          "Jours d’arrêt sur les 30 derniers jours",
+          "Entre 4 et 7 jours / Plus de 7 jours",
+          "Signal de désorganisation récente"
+        ],
+        [
+          "O32",
+          "Souhaitez-vous être davantage aidé·e ?",
+          "Oui",
+          "Demande explicite de soutien"
+        ],
+        [
+          "E9",
+          "Temps pour soi",
+          "Non",
+          "Dégradation de l’équilibre personnel"
+        ]
+      ],
+      "row_count": 5
+    },
+    {
+      "index": 14,
+      "headers": [
+        "Micro-parcours",
+        "Condition CR",
+        "Questions impliquées",
+        "Logique (réponses exactes déclenchantes)",
+        "Sens clinique"
+      ],
+      "rows": [
+        [
+          "S1 – Épuisement",
+          "S1_CC_01",
+          "E7 + E11",
+          "E7 = « Très fatigué·e » OU « Épuisé·e / au bord de craquer » ET E11 = « Non, je risque de ne plus y arriver » OU « Je ne suis pas sûr·e »",
+          "Risque de rupture imminente du rôle d’aidant"
+        ],
+        [
+          "S2 – Isolement émotionnel",
+          "S2_CC_01",
+          "E8 + E9",
+          "E8 = « Souvent » OU « Tout le temps » ET E9 = « Non »",
+          "Isolement affectif avec absence de récupération"
+        ],
+        [
+          "S3 – Dégradation santé perçue",
+          "S3_CC_01",
+          "O44 + E18",
+          "O44 = « Moins bonne » ET E18 = « Mauvaise » OU « Très mauvaise »",
+          "Dégradation physique objectivée par le vécu"
+        ]
+      ],
+      "row_count": 3
+    },
+    {
+      "index": 15,
+      "headers": [
+        "S4 – Renoncement aux soins",
+        "S4_CC_01",
+        "E15 + E16",
+        "E15 = « Oui » OU « Un peu » ET E16 = « Je les reporte ou les annule souvent »",
+        "Renoncement actif aux soins de l’aidant"
+      ],
+      "rows": [],
+      "row_count": 0
+    },
+    {
+      "index": 16,
+      "headers": [
+        "Question",
+        "Réponse",
+        "Score"
+      ],
+      "rows": [
+        [
+          "O29",
+          "Pas du tout",
+          "0"
+        ],
+        [
+          "",
+          "Un peu",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "O33",
+          "Pas du tout",
+          "0"
+        ],
+        [
+          "",
+          "Un peu",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E7",
+          "Pas du tout fatigué·e",
+          "0"
+        ],
+        [
+          "",
+          "Un peu",
+          "1"
+        ],
+        [
+          "",
+          "Très fatigué·e / Épuisé·e",
+          "2"
+        ],
+        [
+          "E8",
+          "Jamais",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Souvent / tout le temps",
+          "2"
+        ],
+        [
+          "E9",
+          "Oui",
+          "0"
+        ],
+        [
+          "",
+          "Non",
+          "2"
+        ],
+        [
+          "E10",
+          "Ça va",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Souvent / débordé·e",
+          "2"
+        ],
+        [
+          "E11",
+          "Oui sans difficulté",
+          "0"
+        ],
+        [
+          "",
+          "Difficile / incertain",
+          "1"
+        ],
+        [
+          "",
+          "Non",
+          "2"
+        ],
+        [
+          "O44",
+          "Meilleure",
+          "0"
+        ],
+        [
+          "",
+          "Identique",
+          "1"
+        ],
+        [
+          "",
+          "Moins bonne",
+          "2"
+        ],
+        [
+          "E18",
+          "Bonne",
+          "0"
+        ],
+        [
+          "",
+          "Correcte",
+          "1"
+        ],
+        [
+          "",
+          "Mauvaise / très mauvaise",
+          "2"
+        ]
+      ],
+      "row_count": 26
+    },
+    {
+      "index": 17,
+      "headers": [
+        "Score sur 20",
+        "Couleur",
+        "Lecture"
+      ],
+      "rows": [
+        [
+          "0–6",
+          "🟢",
+          "Santé globalement préservée"
+        ],
+        [
+          "7–13",
+          "🟠",
+          "Fatigue et fragilisation"
+        ],
+        [
+          "14–20",
+          "🔴",
+          "Épuisement / risque de rupture"
+        ]
+      ],
+      "row_count": 3
+    },
+    {
+      "index": 18,
+      "headers": [
+        "ID",
+        "Question (résumé)",
+        "Rôle"
+      ],
+      "rows": [
+        [
+          "O7",
+          "Changements alimentaires",
+          "Scorante"
+        ],
+        [
+          "O13",
+          "Détérioration cognitive",
+          "Scorante"
+        ],
+        [
+          "N24",
+          "Troubles mémoire / concentration",
+          "Scorante"
+        ],
+        [
+          "E25",
+          "Confusion jour / nuit",
+          "Scorante"
+        ],
+        [
+          "E26",
+          "Désorientation spatiale",
+          "Scorante"
+        ],
+        [
+          "O4",
+          "Humeur actuelle",
+          "Scorante"
+        ],
+        [
+          "N11",
+          "Douleurs chroniques",
+          "Scorante"
+        ],
+        [
+          "N12",
+          "Fatigue / manque d’énergie",
+          "Scorante"
+        ],
+        [
+          "N13",
+          "Troubles du sommeil",
+          "Scorante"
+        ],
+        [
+          "N34",
+          "Difficultés alimentaires",
+          "Scorante"
+        ],
+        [
+          "O26",
+          "Diminution de la taille",
+          "Scorante"
+        ],
+        [
+          "E32",
+          "Difficulté lever / se lever",
+          "Scorante"
+        ],
+        [
+          "E33",
+          "Difficulté objets simples",
+          "Scorante"
+        ],
+        [
+          "O6",
+          "Chutes récentes",
+          "Scorante"
+        ]
+      ],
+      "row_count": 14
+    },
+    {
+      "index": 19,
+      "headers": [
+        "ID",
+        "Question (résumé)",
+        "Rôle"
+      ],
+      "rows": [
+        [
+          "E27",
+          "Comportements dangereux",
+          "Critique directe"
+        ],
+        [
+          "N22",
+          "Comportements à risque",
+          "Critique directe"
+        ],
+        [
+          "N25",
+          "Idées suicidaires",
+          "Critique directe"
+        ],
+        [
+          "N38",
+          "Perte de contrôle addiction",
+          "Critique directe"
+        ],
+        [
+          "N39",
+          "Problèmes de santé liés addiction",
+          "Critique directe"
+        ]
+      ],
+      "row_count": 5
+    },
+    {
+      "index": 20,
+      "headers": [
+        "ID",
+        "Question (résumé)",
+        "Rôle"
+      ],
+      "rows": [
+        [
+          "E21",
+          "Maintien possible sans changement",
+          "Déclenchante"
+        ],
+        [
+          "E24",
+          "Besoin présence la nuit",
+          "Déclenchante"
+        ],
+        [
+          "E23",
+          "Temps possible seul",
+          "Déclenchante"
+        ],
+        [
+          "O51",
+          "Projet adaptation lieu de vie",
+          "Déclenchante"
+        ],
+        [
+          "E28",
+          "Hospitalisations récentes",
+          "Déclenchante"
+        ]
+      ],
+      "row_count": 5
+    },
+    {
+      "index": 21,
+      "headers": [
+        "ID",
+        "Question (résumé)",
+        "Rôle"
+      ],
+      "rows": [
+        [
+          "O2",
+          "Lieu de vie",
+          "Descriptive"
+        ],
+        [
+          "N31",
+          "Établissement spécialisé",
+          "Descriptive"
+        ],
+        [
+          "N10",
+          "Nature de l’aide",
+          "Descriptive"
+        ],
+        [
+          "N9",
+          "Gestion budget",
+          "Descriptive"
+        ],
+        [
+          "N21",
+          "Problèmes financiers",
+          "Descriptive"
+        ],
+        [
+          "N23",
+          "Activité pro / scolaire",
+          "Descriptive"
+        ],
+        [
+          "N27",
+          "Isolement social",
+          "Descriptive"
+        ],
+        [
+          "E20",
+          "Lieu de vie souhaité",
+          "Descriptive"
+        ],
+        [
+          "E22",
+          "Heures d’aide humaine",
+          "Descriptive"
+        ],
+        [
+          "O8",
+          "Aide déplacements extérieurs",
+          "Descriptive"
+        ],
+        [
+          "O9",
+          "Aide déplacements intérieurs",
+          "Descriptive"
+        ],
+        [
+          "O5",
+          "Santé comparée",
+          "Descriptive"
+        ],
+        [
+          "N44",
+          "Changement de poids",
+          "Descriptive"
+        ],
+        [
+          "O3",
+          "Nombre médicaments",
+          "Descriptive"
+        ],
+        [
+          "O15",
+          "Consommations",
+          "Descriptive"
+        ],
+        [
+          "O22",
+          "Vue / audition",
+          "Descriptive"
+        ],
+        [
+          "O53",
+          "AGGIR évalué",
+          "Descriptive"
+        ],
+        [
+          "O54",
+          "Niveau AGGIR",
+          "Descriptive"
+        ],
+        [
+          "N16",
+          "Origine handicap",
+          "Descriptive"
+        ],
+        [
+          "N30",
+          "Taux incapacité",
+          "Descriptive"
+        ],
+        [
+          "N37",
+          "Type addiction",
+          "Descriptive"
+        ],
+        [
+          "N40",
+          "Tentative sevrage",
+          "Descriptive"
+        ],
+        [
+          "E29",
+          "Hospit. programmées",
+          "Descriptive"
+        ],
+        [
+          "E30",
+          "Urgences",
+          "Descriptive"
+        ],
+        [
+          "E31",
+          "Durée hospit.",
+          "Descriptive"
+        ],
+        [
+          "N18",
+          "Autonomie AVQ",
+          "Descriptive"
+        ],
+        [
+          "O12",
+          "Se nourrir seul",
+          "Descriptive"
+        ],
+        [
+          "O11",
+          "Incontinence",
+          "Descriptive"
+        ],
+        [
+          "N32",
+          "Aides techniques",
+          "Descriptive"
+        ],
+        [
+          "N14",
+          "Observance traitement",
+          "Descriptive"
+        ],
+        [
+          "O16",
+          "Pathologies connues",
+          "Descriptive"
+        ],
+        [
+          "N36",
+          "Organisation journées",
+          "Descriptive"
+        ]
+      ],
+      "row_count": 32
+    },
+    {
+      "index": 22,
+      "headers": [
+        "Micro-parcours",
+        "Condition CR",
+        "Questions impliquées",
+        "Logique (réponses déclenchantes exactes)",
+        "Sens clinique"
+      ],
+      "rows": [
+        [
+          "F1 – Vie quotidienne, budget et entourage",
+          "CCC_F1_01",
+          "E21 + (N21 | N9)",
+          "E21 = “Non, un changement sera nécessaire” ET ( N21 = Oui OU N9 = Oui )",
+          "Situation de vie actuelle non tenable associée à des fragilités financières ou de gestion"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "CCC_F2_01",
+          "E23, E24, O8, O9",
+          "Au moins 2 conditions vraies parmi : • E23 = “Pas plus d’1 heure” ou “Ne peut pas rester seul” • E24 = Présence nécessaire la nuit • O8 = Oui, tout le temps • O9 = Oui, tout le temps",
+          "Dépendance fonctionnelle élevée nécessitant une réorganisation urgente"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques",
+          "CCC_F3_01",
+          "O13 + (E25 | E26)",
+          "O13 = “Diminution notable” ou “Altération totale” ET ( E25 = Oui OU E26 = Oui )",
+          "Désorganisation cognitive installée avec retentissement fonctionnel"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général",
+          "CCC_F4_01",
+          "N11, N12, N13, N34, O4",
+          "Au moins 2 conditions vraies parmi : • N11 = Oui • N12 = Oui • N13 = Oui • N34 = Oui • O4 = Déprimée",
+          "Dégradation somato-psychique globale par accumulation de fragilités"
+        ],
+        [
+          "F5 – Dépendance, handicap et épisodes aigus",
+          "CCC_F5_01",
+          "E28 + O53",
+          "E28 ≥ 2 hospitalisations ET O53 = Non",
+          "Instabilité médico-sociale avec épisodes aigus sans cadre clair de dépendance"
+        ]
+      ],
+      "row_count": 5
+    },
+    {
+      "index": 23,
+      "headers": [
+        "Question",
+        "Réponse",
+        "Score"
+      ],
+      "rows": [
+        [
+          "O7",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Oui",
+          "1"
+        ],
+        [
+          "",
+          "Oui et dénutrition",
+          "2"
+        ],
+        [
+          "O13",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Diminution de certaines fonctions",
+          "1"
+        ],
+        [
+          "",
+          "Fonctions totalement altérées",
+          "2"
+        ],
+        [
+          "N24",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E25",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E26",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "O4",
+          "Humeur normale",
+          "0"
+        ],
+        [
+          "",
+          "Parfois anxieuse ou triste",
+          "1"
+        ],
+        [
+          "",
+          "Déprimée",
+          "2"
+        ],
+        [
+          "N11",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Occasionnellement",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "N12",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "N13",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "N34",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "O26",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E32",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "E33",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui",
+          "2"
+        ],
+        [
+          "O6",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Oui, sans gravité",
+          "1"
+        ],
+        [
+          "",
+          "Oui avec complication / plusieurs chutes",
+          "2"
+        ]
+      ],
+      "row_count": 41
+    },
+    {
+      "index": 24,
+      "headers": [
+        "Score sur 20",
+        "Couleur",
+        "Lecture"
+      ],
+      "rows": [
+        [
+          "0 – 6",
+          "🟢 Vert",
+          "Fragilité faible, autonomie globalement préservée"
+        ],
+        [
+          "7 – 13",
+          "🟠 Orange",
+          "Fragilisation installée, vigilance nécessaire"
+        ],
+        [
+          "14 – 20",
+          "🔴 Rouge",
+          "Fragilité élevée, dépendance ou risques significatifs"
+        ]
+      ],
+      "row_count": 3
+    },
+    {
+      "index": 25,
+      "headers": [
+        "ID",
+        "Question (résumé)",
+        "Type de question",
+        "Justification legacy"
+      ],
+      "rows": [
+        [
+          "N17",
+          "Type de handicap",
+          "Descriptive",
+          "Contexte clinique"
+        ],
+        [
+          "N41",
+          "ALD reconnue",
+          "Descriptive",
+          "Statut administratif médical"
+        ],
+        [
+          "E34",
+          "Compréhension de la maladie",
+          "Scorante",
+          "Lisibilité du parcours"
+        ],
+        [
+          "E35",
+          "Diagnostic clair",
+          "Scorante",
+          "Stabilité diagnostique"
+        ],
+        [
+          "E36",
+          "Examens nombreux sans clarification",
+          "Déclenchante",
+          "Errance diagnostique"
+        ],
+        [
+          "E37",
+          "Avis médicaux contradictoires",
+          "Déclenchante",
+          "Désorganisation médicale"
+        ],
+        [
+          "E38",
+          "Transition enfant/adulte",
+          "Descriptive (modulatrice)",
+          "Situation spécifique"
+        ],
+        [
+          "O17",
+          "Médecin traitant",
+          "Descriptive",
+          "Structure de base"
+        ],
+        [
+          "O18",
+          "Spécialistes suivis",
+          "Descriptive",
+          "Organisation"
+        ],
+        [
+          "O19",
+          "Types de spécialistes",
+          "Descriptive",
+          "Détail"
+        ],
+        [
+          "O20",
+          "RDV médicaux cette année",
+          "Descriptive",
+          "Continuité factuelle"
+        ],
+        [
+          "O21",
+          "Types de RDV",
+          "Descriptive",
+          "Détail"
+        ],
+        [
+          "E39",
+          "Proximité pro santé",
+          "Descriptive (modulatrice)",
+          "Accessibilité"
+        ],
+        [
+          "O24",
+          "Difficulté à prendre RDV",
+          "Scorante",
+          "Accès aux soins"
+        ],
+        [
+          "E40",
+          "Raisons difficultés accès",
+          "Descriptive",
+          "Explication"
+        ],
+        [
+          "E41",
+          "Programme ETP",
+          "Descriptive",
+          "Ressource éducative"
+        ],
+        [
+          "E42",
+          "RDV non programmés récents",
+          "Déclenchante",
+          "Instabilité aiguë"
+        ],
+        [
+          "E43",
+          "Ruptures longues de suivi",
+          "Scorante",
+          "Discontinuité"
+        ],
+        [
+          "E44",
+          "Bilan de synthèse global",
+          "Déclenchante",
+          "Absence de pilotage"
+        ],
+        [
+          "E45",
+          "Suivi addictologie",
+          "Déclenchante",
+          "Risque spécialisé"
+        ],
+        [
+          "E46",
+          "Suivi post-hospitalisation",
+          "Déclenchante",
+          "Rupture post-aigu"
+        ],
+        [
+          "E47",
+          "Plan en cas d aggravation",
+          "Déclenchante",
+          "Sécurité médicale"
+        ],
+        [
+          "E48",
+          "Suivi troubles psychiques",
+          "Descriptive",
+          "Organisation psy"
+        ],
+        [
+          "E49",
+          "Acteurs addiction",
+          "Descriptive",
+          "Détail"
+        ],
+        [
+          "E50",
+          "Observance traitement psy",
+          "Déclenchante",
+          "Risque thérapeutique"
+        ],
+        [
+          "E51",
+          "Volonté aide addiction",
+          "Descriptive",
+          "Motivation"
+        ],
+        [
+          "O59",
+          "Intervenants à domicile",
+          "Descriptive",
+          "Ressources"
+        ],
+        [
+          "E52",
+          "Coordinateur identifié",
+          "Déclenchante",
+          "Gouvernance du parcours"
+        ],
+        [
+          "E53",
+          "Référent santé",
+          "Descriptive",
+          "Point d appui"
+        ],
+        [
+          "E54",
+          "Organisation globale soins",
+          "Scorante",
+          "Lisibilité globale"
+        ],
+        [
+          "E55",
+          "Besoin coordination",
+          "Descriptive",
+          "Perception"
+        ],
+        [
+          "E56",
+          "Inquiétude principale",
+          "Descriptive",
+          "Expression subjective"
+        ],
+        [
+          "E57",
+          "Plan de route clair",
+          "Scorante",
+          "Pilotage"
+        ],
+        [
+          "E58",
+          "Évaluations spécialisées",
+          "Descriptive",
+          "Ressources"
+        ],
+        [
+          "E59",
+          "Orientation TND",
+          "Descriptive",
+          "Parcours enfant"
+        ],
+        [
+          "E60",
+          "Professionnels intervenus",
+          "Descriptive",
+          "Détail"
+        ]
+      ],
+      "row_count": 36
+    },
+    {
+      "index": 26,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M1 – Compréhension du diagnostic"
+        ],
+        [
+          "Questions impliquées",
+          "E36 + E37"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "E36 = “Oui, beaucoup” ET E37 = “Oui, souvent”"
+        ],
+        [
+          "Sens clinique",
+          "Parcours de soins sans diagnostic stabilisé, perte de repères médicaux, risque de retards de prise en charge adaptés"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 27,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M1 – Compréhension du diagnostic"
+        ],
+        [
+          "Questions impliquées",
+          "E38 + E36"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "E38 = “Non, pas du tout” ET E36 = “Oui, un peu” ou “Oui, beaucoup”"
+        ],
+        [
+          "Sens clinique",
+          "Passage enfant/adulte mal préparé associé à une errance médicale en cours"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 28,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M2 – Accès aux soins"
+        ],
+        [
+          "Questions impliquées",
+          "O24 + E40"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "O24 = “Oui” ET E40 ≠ “Je ne rencontre pas de difficultés particulières”"
+        ],
+        [
+          "Sens clinique",
+          "Difficultés concrètes et persistantes d’accès aux soins nécessaires"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 29,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M2 – Accès / M3 – Urgences"
+        ],
+        [
+          "Questions impliquées",
+          "E42 + E43"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "E42 ≥ “2” ET E43 = “Oui, plusieurs périodes ou plus de 6 mois”"
+        ],
+        [
+          "Sens clinique",
+          "Alternance de crises non anticipées et de ruptures prolongées de suivi"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 30,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M3 – Continuité des soins"
+        ],
+        [
+          "Questions impliquées",
+          "E44 + E52"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "E44 = “Non, jamais” ET E52 = “Non, personne ne coordonne vraiment”"
+        ],
+        [
+          "Sens clinique",
+          "Aucun cadre médical structurant ni référent identifié"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 31,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M3 / M6 – Urgences"
+        ],
+        [
+          "Questions impliquées",
+          "E47 + E46"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "E47 = “Non, on improvise” ET E46 = “Non, nous avons dû tout organiser seuls”"
+        ],
+        [
+          "Sens clinique",
+          "Absence de plan de réponse médicale en situation critique"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 32,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M3 / M6 – Troubles psy & addictions"
+        ],
+        [
+          "Questions impliquées",
+          "E50 + E51"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "E50 = “Non, pas de suivi / pas de traitement” ET E51 = “Non”"
+        ],
+        [
+          "Sens clinique",
+          "Troubles psychiques ou addictifs sans prise en charge ni adhésion"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 33,
+      "headers": [
+        "Élément",
+        "Contenu"
+      ],
+      "rows": [
+        [
+          "Micro-parcours",
+          "M5 – Coordination"
+        ],
+        [
+          "Questions impliquées",
+          "E54 + E57"
+        ],
+        [
+          "Logique (réponses déclenchantes)",
+          "E54 = “Souvent très compliquée” ou “Ingérable” ET E57 = “Non, on avance au jour le jour”"
+        ],
+        [
+          "Sens clinique",
+          "Parcours médical non lisible, non piloté, à risque de rupture"
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "index": 34,
+      "headers": [
+        "Question",
+        "Réponse",
+        "Score"
+      ],
+      "rows": [
+        [
+          "E36",
+          "Non, pas particulièrement",
+          "0"
+        ],
+        [
+          "",
+          "Oui, un peu",
+          "1"
+        ],
+        [
+          "",
+          "Oui, beaucoup",
+          "2"
+        ],
+        [
+          "E37",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Oui, parfois",
+          "1"
+        ],
+        [
+          "",
+          "Oui, souvent",
+          "2"
+        ],
+        [
+          "E43",
+          "Non",
+          "0"
+        ],
+        [
+          "",
+          "Oui, une période de 3 à 6 mois",
+          "1"
+        ],
+        [
+          "",
+          "Oui, plusieurs périodes ou > 6 mois",
+          "2"
+        ],
+        [
+          "E47",
+          "Oui, on sait quoi faire",
+          "0"
+        ],
+        [
+          "",
+          "Quelques repères",
+          "1"
+        ],
+        [
+          "",
+          "Non, on improvise / urgences",
+          "2"
+        ],
+        [
+          "E54",
+          "Plutôt simple et bien organisée",
+          "0"
+        ],
+        [
+          "",
+          "Gérable mais parfois compliquée",
+          "1"
+        ],
+        [
+          "",
+          "Très compliquée / ingérable",
+          "2"
+        ],
+        [
+          "E57",
+          "Oui, c’est clair",
+          "0"
+        ],
+        [
+          "",
+          "Partiellement",
+          "1"
+        ],
+        [
+          "",
+          "Non, on avance au jour le jour",
+          "2"
+        ]
+      ],
+      "row_count": 18
+    },
+    {
+      "index": 35,
+      "headers": [
+        "Score sur 20",
+        "Couleur",
+        "Lecture"
+      ],
+      "rows": [
+        [
+          "0 – 6",
+          "🟢 Vert",
+          "Parcours médical globalement structuré"
+        ],
+        [
+          "7 – 13",
+          "🟠 Orange",
+          "Parcours fragile ou partiellement désorganisé"
+        ],
+        [
+          "14 – 20",
+          "🔴 Rouge",
+          "Parcours instable à risque élevé de rupture"
+        ]
+      ],
+      "row_count": 3
+    }
+  ]
+}
