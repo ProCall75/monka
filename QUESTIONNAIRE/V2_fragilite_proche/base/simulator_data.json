@@ -1,0 +1,1273 @@
+{
+    "metadata": {
+        "vulnerability": "V2",
+        "name": "Fragilité du Proche",
+        "fullName": "Fragilité du Proche Aidé",
+        "description": "Évaluation de la fragilité, de l'autonomie et des besoins du proche aidé",
+        "totalQuestions": 57,
+        "totalRecommendations": 110,
+        "totalMicroTaches": 82,
+        "scoreMax": 21,
+        "color": "#f59e0b",
+        "icon": "👴"
+    },
+    "scoring_config": {
+        "formula": "(scoreBrut / 21) * 20",
+        "maxBrut": 21,
+        "thresholds": {
+            "green": {
+                "min": 0,
+                "max": 6,
+                "label": "Fragilité modérée",
+                "color": "#22c55e"
+            },
+            "orange": {
+                "min": 7,
+                "max": 13,
+                "label": "Fragilité marquée",
+                "color": "#f59e0b"
+            },
+            "red": {
+                "min": 14,
+                "max": 20,
+                "label": "Fragilité sévère",
+                "color": "#ef4444"
+            }
+        }
+    },
+    "questions": [
+        {
+            "id": "O2",
+            "text": "Où vit la personne aidée aujourd'hui ?",
+            "type": "descriptive",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F1",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "À son domicile",
+                    "score": 1,
+                    "recommendation": "Faites vous aider",
+                    "actor": "IDEC",
+                    "action": "IDEC oriente et accompagne la mise en place des aides matérielles et humaines"
+                },
+                {
+                    "value": 2,
+                    "text": "À mon domicile",
+                    "score": 3,
+                    "recommendation": "Faites vous aider",
+                    "actor": "IDEC",
+                    "action": "IDEC oriente et accompagne la mise en place des aides matérielles et humaines"
+                },
+                {
+                    "value": 3,
+                    "text": "En établissement",
+                    "score": 4,
+                    "recommendation": "",
+                    "actor": "N/A",
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "id": "N31",
+            "text": "La personne aidée bénéficie-t-elle d'une prise en charge en établissement spécialisé ?",
+            "type": "descriptive",
+            "isCritical": false,
+            "isScoring": false,
+            "microParcours": "F5",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Aucune prise en charge",
+                    "score": 3
+                },
+                {
+                    "value": 2,
+                    "text": "IME, ITEP, IEM, EEAP",
+                    "score": 1
+                },
+                {
+                    "value": 3,
+                    "text": "Services d'accompagnement (SAVS, SAMSAH)",
+                    "score": 1
+                },
+                {
+                    "value": 4,
+                    "text": "Centres de rééducation fonctionnelle",
+                    "score": 1
+                },
+                {
+                    "value": 5,
+                    "text": "Institut pour déficients visuels, auditifs",
+                    "score": 1
+                },
+                {
+                    "value": 6,
+                    "text": "FAM, MAS, foyer de vie, foyer d'hébergement",
+                    "score": 1
+                },
+                {
+                    "value": 7,
+                    "text": "ESAT",
+                    "score": 1
+                },
+                {
+                    "value": 8,
+                    "text": "EHPAD",
+                    "score": 1
+                },
+                {
+                    "value": 9,
+                    "text": "Résidence Services ou Autonomie",
+                    "score": 1
+                },
+                {
+                    "value": 10,
+                    "text": "USLD",
+                    "score": 1
+                },
+                {
+                    "value": 11,
+                    "text": "Centre de Ressources Territoriaux (CRT)",
+                    "score": 1
+                },
+                {
+                    "value": 12,
+                    "text": "Accueil de jour ou hôpital de jour",
+                    "score": 1
+                }
+            ]
+        },
+        {
+            "id": "N10",
+            "text": "Quelle est la nature de l'aide que vous apportez ? (plusieurs réponses possibles)",
+            "type": "descriptive",
+            "isCritical": false,
+            "isScoring": false,
+            "isMultiple": true,
+            "microParcours": "F1",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Tâches de la vie quotidienne (ménage, repas, habillage...)",
+                    "score": 1,
+                    "recommendation": "Demandez une aide pour les actes de la vie quotidienne",
+                    "actor": "SAD",
+                    "action": "Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD"
+                },
+                {
+                    "value": 2,
+                    "text": "Gestion administrative et budgétaire",
+                    "score": 1,
+                    "recommendation": "Contacter une assistante sociale",
+                    "actor": "Assistante sociale",
+                    "action": "Rappeler à l'aidant de contacter l'AS"
+                },
+                {
+                    "value": 3,
+                    "text": "Soutien moral, présence ou compagnie sur le lieu de vie",
+                    "score": 1,
+                    "recommendation": "Envisager un soutien psychologique",
+                    "actor": "Psychologue",
+                    "action": "Prendre RDV avec un Psychologue du territoire"
+                },
+                {
+                    "value": 4,
+                    "text": "Accompagnement à des rendez-vous",
+                    "score": 1,
+                    "recommendation": "Demandez une aide lors des déplacements à des rendez-vous médicaux",
+                    "actor": "SAD",
+                    "action": "Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD"
+                },
+                {
+                    "value": 5,
+                    "text": "Autre",
+                    "score": 0
+                }
+            ]
+        },
+        {
+            "id": "N9",
+            "text": "La personne aidée rencontre-t-elle des problèmes pour gérer son budget ou ses affaires administratives ?",
+            "type": "scoring",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F1",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Non",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Elle se fait aider",
+                    "score": 2,
+                    "recommendation": "Contacter une assistante sociale",
+                    "actor": "Assistante sociale",
+                    "action": "Rappeler à l'aidant de contacter l'AS"
+                },
+                {
+                    "value": 3,
+                    "text": "Oui",
+                    "score": 3,
+                    "recommendation": "Contacter une assistante sociale",
+                    "actor": "Assistante sociale",
+                    "action": "Rappeler à l'aidant de contacter l'AS",
+                    "triggersCCC": "CCC_F1_01"
+                }
+            ]
+        },
+        {
+            "id": "N21",
+            "text": "Rencontre-t-elle des problèmes financiers ?",
+            "type": "scoring",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F1",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Non",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Parfois",
+                    "score": 1,
+                    "recommendation": "",
+                    "actor": "Assistante sociale",
+                    "action": "Contacter une assistance sociale pour demander les aides"
+                },
+                {
+                    "value": 3,
+                    "text": "Oui",
+                    "score": 3,
+                    "recommendation": "Contacter le médecin traitant pour remplir le dossier de demande d'aide",
+                    "actor": "Médecin traitant",
+                    "action": "IDEC prend RDV avec le MT pour compléter un dossier de demande d'aide financière",
+                    "triggersCCC": "CCC_F1_01"
+                }
+            ]
+        },
+        {
+            "id": "N23",
+            "text": "La personne aidée a-t-elle des difficultés à maintenir une activité professionnelle, occupationnelle ou scolaire ?",
+            "type": "scoring",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F1",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Non",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Parfois",
+                    "score": 2,
+                    "recommendation": "Demandez un suivi régulier"
+                },
+                {
+                    "value": 3,
+                    "text": "Oui",
+                    "score": 3,
+                    "recommendation": "Envisager une consultation avec un psychiatre",
+                    "actor": "Psychiatre",
+                    "action": "Prendre RDV avec un Psychiatre du territoire pour un suivi"
+                }
+            ]
+        },
+        {
+            "id": "N27",
+            "text": "Estimez-vous que la personne aidée est socialement isolée ?",
+            "type": "scoring",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F1",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Pas du tout",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Un peu",
+                    "score": 1,
+                    "recommendation": "Inscrivez votre proche dans des associations, des groupes de parole",
+                    "actor": "Associations",
+                    "action": "Contacter une association par téléphone ou mail"
+                },
+                {
+                    "value": 3,
+                    "text": "Beaucoup",
+                    "score": 3,
+                    "recommendation": "Demandez un suivi rapproché avec des intervenants sociaux et médicaux",
+                    "actor": "Associations",
+                    "action": "Contacter une association par téléphone ou mail"
+                },
+                {
+                    "value": 4,
+                    "text": "Totalement",
+                    "score": 4,
+                    "recommendation": "Proposez à votre proche un suivi contre l'isolement social",
+                    "actor": "Psychologue",
+                    "action": "Prendre RDV avec un Psychologue conventionné"
+                }
+            ]
+        },
+        {
+            "id": "O7",
+            "text": "Avez-vous constaté des changements dans la manière dont elle se nourrit ?",
+            "type": "scoring",
+            "isCritical": true,
+            "isScoring": true,
+            "microParcours": "F4",
+            "criticalResponse": 3,
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Non",
+                    "score": 0,
+                    "recommendation": "Mettez en place un suivi régulier selon les préconisations du chirurgien-dentiste",
+                    "actor": "Chirurgien-dentiste",
+                    "action": "Contacter un chirurgien-dentiste pour suivi"
+                },
+                {
+                    "value": 2,
+                    "text": "Oui",
+                    "score": 1,
+                    "recommendation": "Discutez des causes de la perte d'appétit et demandez la prescription d'un bilan de dénutrition",
+                    "actor": "Médecin traitant",
+                    "action": "Contacter le médecin traitant pour bilan de dénutrition"
+                },
+                {
+                    "value": 3,
+                    "text": "Oui, et elle est dénutrit",
+                    "score": 3,
+                    "recommendation": "Demandez la vérification de l'état bucco-dentaire",
+                    "actor": "Chirurgien-dentiste",
+                    "action": "Contacter un chirurgien-dentiste pour suivi",
+                    "triggersPriority1": true,
+                    "triggersCCC": "CCC_F3_01"
+                }
+            ]
+        },
+        {
+            "id": "E20",
+            "text": "En pensant aux 6 à 12 prochains mois, quel serait selon vous le lieu de vie idéal pour votre proche ?",
+            "type": "descriptive",
+            "isCritical": false,
+            "isScoring": false,
+            "microParcours": "F1",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "À son domicile actuel",
+                    "score": 0,
+                    "recommendation": "Sécuriser et renforcer le maintien à domicile",
+                    "actor": "IDEC/SAD",
+                    "action": "Évaluer les besoins actuels et à venir au domicile"
+                },
+                {
+                    "value": 2,
+                    "text": "À mon domicile",
+                    "score": 0,
+                    "recommendation": "Évaluer la faisabilité et l'impact sur l'aidant",
+                    "actor": "IDEC",
+                    "action": "Échanger sur les contraintes matérielles et humaines"
+                },
+                {
+                    "value": 3,
+                    "text": "En établissement (EHPAD, résidence, foyer…)",
+                    "score": 0,
+                    "recommendation": "Anticiper et préparer une éventuelle orientation en établissement",
+                    "actor": "IDEC",
+                    "action": "Informer sur les types d'établissements et critères d'admission"
+                },
+                {
+                    "value": 4,
+                    "text": "Je ne sais pas / nous n'en avons pas parlé",
+                    "score": 0,
+                    "recommendation": "Favoriser la réflexion et l'anticipation du projet de vie",
+                    "action": "Proposer un temps d'échange sur les souhaits et craintes"
+                }
+            ]
+        },
+        {
+            "id": "E21",
+            "text": "Pensez-vous qu'il sera possible de maintenir cette situation de vie sans changement majeur dans les prochains mois ?",
+            "type": "critical",
+            "isCritical": true,
+            "isScoring": false,
+            "microParcours": "F1",
+            "criticalResponse": 3,
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Oui, probablement",
+                    "score": 0,
+                    "recommendation": "Maintenir l'organisation actuelle tout en restant attentif à l'évolution",
+                    "actor": "IDEC",
+                    "action": "Confirmer les éléments qui permettent le maintien"
+                },
+                {
+                    "value": 2,
+                    "text": "Oui, mais cela risque d'être difficile",
+                    "score": 0,
+                    "recommendation": "Anticiper les fragilités et renforcer l'accompagnement",
+                    "actor": "IDEC/SAD",
+                    "action": "Identifier les facteurs de fragilité"
+                },
+                {
+                    "value": 3,
+                    "text": "Non, un changement sera nécessaire",
+                    "score": 0,
+                    "recommendation": "Anticiper et préparer une transition vers une autre solution d'hébergement",
+                    "actor": "IDEC/Service social",
+                    "action": "Informer sur les options d'hébergement adaptées",
+                    "triggersPriority1": true,
+                    "triggersCCC": "CCC_F1_01"
+                },
+                {
+                    "value": 4,
+                    "text": "Je ne sais pas",
+                    "score": 0,
+                    "recommendation": "Favoriser la réflexion et l'anticipation du projet de vie",
+                    "action": "Proposer un temps d'échange pour clarifier les perspectives"
+                }
+            ]
+        },
+        {
+            "id": "E22",
+            "text": "Globalement, combien d'heures d'aide humaine reçoit-il par semaine ?",
+            "type": "descriptive",
+            "isCritical": false,
+            "isScoring": false,
+            "microParcours": "F2",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Moins de 5 heures",
+                    "score": 0,
+                    "recommendation": "Vérifier l'adéquation du volume d'aide avec les besoins actuels",
+                    "actor": "IDEC",
+                    "action": "Évaluer si le faible volume d'aide est suffisant"
+                },
+                {
+                    "value": 2,
+                    "text": "Entre 5 et 14 heures",
+                    "score": 0,
+                    "recommendation": "Maintenir l'organisation actuelle",
+                    "actor": "IDEC",
+                    "action": "Vérifier la cohérence entre aides reçues et niveau d'autonomie"
+                },
+                {
+                    "value": 3,
+                    "text": "15 à 30 heures",
+                    "score": 0,
+                    "recommendation": "S'assurer de la bonne coordination des intervenants",
+                    "actor": "IDEC",
+                    "action": "Évaluer la charge restante pour l'aidant"
+                },
+                {
+                    "value": 4,
+                    "text": "Plus de 30 heures",
+                    "score": 0,
+                    "recommendation": "Situation de dépendance importante nécessitant une vigilance renforcée",
+                    "actor": "IDEC",
+                    "action": "Évaluer la soutenabilité du maintien à domicile"
+                },
+                {
+                    "value": 5,
+                    "text": "Je ne sais pas",
+                    "score": 0,
+                    "recommendation": "Clarifier la situation",
+                    "actor": "IDEC",
+                    "action": "Faire le point sur les interventions existantes"
+                }
+            ]
+        },
+        {
+            "id": "O8",
+            "text": "Au quotidien a-t-elle besoin d'une aide humaine pour se déplacer en dehors de son domicile ?",
+            "type": "scoring",
+            "isCritical": true,
+            "isScoring": true,
+            "microParcours": "F2",
+            "criticalResponse": 3,
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Non, elle est indépendante",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Oui, de temps en temps",
+                    "score": 2,
+                    "recommendation": "Demandez la prescription d'un bilan de la marche chez un kinésithérapeute",
+                    "actor": "Médecin traitant",
+                    "action": "Demander la prescription d'un bilan de kiné et bilan d'ergothérapie"
+                },
+                {
+                    "value": 3,
+                    "text": "Oui, tout le temps",
+                    "score": 3,
+                    "recommendation": "Demandez la prescription d'un bilan d'ergothérapie pour maintenir l'autonomie restante",
+                    "actor": "Médecin traitant",
+                    "action": "Demander la prescription d'un bilan de kiné et bilan d'ergothérapie",
+                    "triggersCCC": "CCC_F2_01"
+                }
+            ]
+        },
+        {
+            "id": "E23",
+            "text": "Combien de temps votre proche peut-il rester seul à son domicile sans risque ?",
+            "type": "scoring",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F2",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Il peut rester seul sans difficulté",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Quelques heures, mais pas une journée entière",
+                    "score": 1,
+                    "recommendation": "Sécuriser les périodes d'absence prolongée",
+                    "actor": "IDEC/SAD",
+                    "action": "Identifier les moments à risque"
+                },
+                {
+                    "value": 3,
+                    "text": "Pas plus d'1 heure",
+                    "score": 2,
+                    "recommendation": "Situation de vulnérabilité nécessitant une vigilance renforcée",
+                    "actor": "IDEC/SAD",
+                    "action": "Évaluer les risques liés à l'isolement"
+                },
+                {
+                    "value": 4,
+                    "text": "Il ne peut pas rester seul",
+                    "score": 3,
+                    "recommendation": "Situation à risque nécessitant une sécurisation immédiate",
+                    "actor": "IDEC/Aidant",
+                    "action": "Proposer un placement en EHPAD",
+                    "triggersCCC": "CCC_F2_01"
+                }
+            ]
+        },
+        {
+            "id": "E24",
+            "text": "La nuit, votre proche a-t-il besoin que quelqu'un soit présent ou reste vigilant ?",
+            "type": "scoring",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F2",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Non, il est autonome la nuit",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Parfois, en fonction de son état",
+                    "score": 1,
+                    "recommendation": "Sécuriser les périodes nocturnes à risque",
+                    "actor": "IDEC/Aidant",
+                    "action": "Identifier les situations déclenchantes"
+                },
+                {
+                    "value": 3,
+                    "text": "Oui, il a souvent besoin d'aide ou de surveillance",
+                    "score": 2,
+                    "recommendation": "Mettre en place un accompagnement nocturne renforcé",
+                    "action": "Proposer un renforcement des aides ou une organisation adaptée"
+                },
+                {
+                    "value": 4,
+                    "text": "Oui, une présence est nécessaire en permanence",
+                    "score": 3,
+                    "recommendation": "Situation de dépendance élevée nécessitant une sécurisation immédiate",
+                    "action": "Proposer un placement en EHPAD",
+                    "triggersCCC": "CCC_F2_01"
+                }
+            ]
+        },
+        {
+            "id": "E28",
+            "text": "Combien de fois votre proche a-t-il été hospitalisé ces 12 derniers mois ?",
+            "type": "scoring",
+            "isCritical": false,
+            "isScoring": true,
+            "microParcours": "F5",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Aucune",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "1 fois",
+                    "score": 1,
+                    "recommendation": "Surveiller et prévenir",
+                    "actor": "IDEC",
+                    "action": "Analyser la cause de l'hospitalisation"
+                },
+                {
+                    "value": 3,
+                    "text": "2 fois ou plus",
+                    "score": 2,
+                    "recommendation": "Déclencher une évaluation gérontologique",
+                    "actor": "Médecin/Gériatre",
+                    "action": "Demander une évaluation AGGIR + Analyser les causes",
+                    "triggersCCC": "CCC_F5_01"
+                }
+            ]
+        },
+        {
+            "id": "O53",
+            "text": "La dépendance de la personne aidée a-t-elle été évaluée par les services sociaux (grille AGGIR) ?",
+            "type": "descriptive",
+            "isCritical": false,
+            "isScoring": false,
+            "microParcours": "F5",
+            "options": [
+                {
+                    "value": 1,
+                    "text": "Oui",
+                    "score": 0
+                },
+                {
+                    "value": 2,
+                    "text": "Non",
+                    "score": 0,
+                    "recommendation": "Demandez le financement de la perte d'autonomie via l'APA",
+                    "actor": "Conseil départemental",
+                    "action": "Variable selon les départements (demande papier ou numérique)",
+                    "triggersCCC": "CCC_F5_01"
+                },
+                {
+                    "value": 3,
+                    "text": "Je ne sais pas",
+                    "score": 0
+                }
+            ]
+        }
+    ],
+    "micro_parcours": [
+        {
+            "id": "F1",
+            "name": "Vie quotidienne, budget et entourage du proche",
+            "objective": "Comprendre le quotidien du proche (lieu de vie, entourage, budget) pour adapter l'organisation et les priorités",
+            "color": "#8b5cf6",
+            "triggersCount": 8,
+            "questionsCount": 10,
+            "triggerQuestions": [
+                "N3",
+                "O64",
+                "O14",
+                "O1",
+                "O63",
+                "N26",
+                "E71",
+                "E72"
+            ],
+            "questions": [
+                "N10",
+                "N21",
+                "N23",
+                "N27",
+                "N9",
+                "O2",
+                "E20",
+                "E21",
+                "E22",
+                "N31"
+            ]
+        },
+        {
+            "id": "F2",
+            "name": "Autonomie, aide humaine et présence nécessaire",
+            "objective": "Évaluer le niveau d'aide nécessaire (présence, aide humaine, surveillance) et ajuster l'organisation",
+            "color": "#3b82f6",
+            "triggersCount": 7,
+            "questionsCount": 5,
+            "triggerQuestions": [
+                "N3",
+                "O64",
+                "O1",
+                "O63",
+                "N26",
+                "E71",
+                "E72"
+            ],
+            "questions": [
+                "O8",
+                "O9",
+                "E30",
+                "E31",
+                "E32"
+            ]
+        },
+        {
+            "id": "F3",
+            "name": "Mémoire, comportement et risques pour soi ou les autres",
+            "objective": "Repérer les troubles cognitifs/comportementaux et réduire les risques (errance, désinhibition, agressivité)",
+            "color": "#f59e0b",
+            "triggersCount": 6,
+            "questionsCount": 8,
+            "triggerQuestions": [
+                "N3",
+                "O14",
+                "O1",
+                "N26",
+                "E71",
+                "E72"
+            ],
+            "questions": [
+                "N19",
+                "N22",
+                "N24",
+                "N25",
+                "O13",
+                "E33",
+                "E26",
+                "E27"
+            ]
+        },
+        {
+            "id": "F4",
+            "name": "Douleur, fatigue, sommeil et état général du proche",
+            "objective": "Comprendre l'état général du proche (douleur, fatigue, sommeil) pour ajuster les soins et le quotidien",
+            "color": "#ef4444",
+            "triggersCount": 5,
+            "questionsCount": 11,
+            "triggerQuestions": [
+                "N3",
+                "O1",
+                "N26",
+                "E71",
+                "E72"
+            ],
+            "questions": [
+                "N11",
+                "N12",
+                "N13",
+                "N34",
+                "N44",
+                "O15",
+                "O7",
+                "O26",
+                "O22",
+                "O3",
+                "O4"
+            ]
+        },
+        {
+            "id": "F5",
+            "name": "Dépendance, handicap, addictions et épisodes aigus",
+            "objective": "Qualifier la situation (dépendance/handicap/addictions/épisodes aigus) pour orienter vers les bons dispositifs",
+            "color": "#6366f1",
+            "triggersCount": 5,
+            "questionsCount": 10,
+            "triggerQuestions": [
+                "N3",
+                "O1",
+                "N26",
+                "E71",
+                "E72"
+            ],
+            "questions": [
+                "N31",
+                "N16",
+                "N30",
+                "N37",
+                "N38",
+                "N39",
+                "O53",
+                "O54",
+                "E28",
+                "N40"
+            ]
+        },
+        {
+            "id": "F6",
+            "name": "Autonomie fonctionnelle, chutes et aides techniques",
+            "objective": "Réduire le risque de chutes et améliorer l'autonomie via des aides techniques et des aménagements",
+            "color": "#14b8a6",
+            "triggersCount": 7,
+            "questionsCount": 11,
+            "triggerQuestions": [
+                "N3",
+                "O64",
+                "O1",
+                "O63",
+                "N26",
+                "E71",
+                "E72"
+            ],
+            "questions": [
+                "E27",
+                "N14",
+                "N18",
+                "N32",
+                "N36",
+                "O11",
+                "O8",
+                "O9",
+                "E23",
+                "E24",
+                "E32"
+            ]
+        }
+    ],
+    "ccc_rules": [
+        {
+            "id": "CCC_F1_01",
+            "name": "Hébergement à risque",
+            "microParcours": "F1",
+            "priority": 2,
+            "temporality": "≤ 7 jours",
+            "condition": {
+                "logic": "AND",
+                "rules": [
+                    {
+                        "question": "E21",
+                        "operator": "equals",
+                        "value": 3
+                    },
+                    {
+                        "logic": "OR",
+                        "rules": [
+                            {
+                                "question": "N21",
+                                "operator": "equals",
+                                "value": 3
+                            },
+                            {
+                                "question": "N9",
+                                "operator": "equals",
+                                "value": 3
+                            }
+                        ]
+                    }
+                ]
+            },
+            "clinicalReasoning": "Le maintien à domicile est compromis à terme ET soit une mesure de protection juridique est envisagée, soit un hébergement alternatif est déjà prévu. C'est un signal d'alerte majeur : la situation actuelle est instable et une transition doit être préparée.",
+            "recommendation": "Anticiper la transition hébergement avec un accompagnement pluridisciplinaire pour préparer le proche et l'aidant à ce changement majeur.",
+            "actors": [
+                "IDEC",
+                "Assistante sociale",
+                "Gériatre/Neurologue",
+                "Psychologue"
+            ],
+            "microTaches": [
+                {
+                    "text": "Organiser une réunion de concertation sous 7 jours avec l'aidant",
+                    "type": "SEC"
+                },
+                {
+                    "text": "Réaliser une évaluation AGGIR/GIR si pas encore faite",
+                    "type": "MED"
+                },
+                {
+                    "text": "Informer sur les différents types d'hébergement",
+                    "type": "INFO"
+                },
+                {
+                    "text": "Préparer un dossier d'admission anticipé",
+                    "type": "STRUC"
+                },
+                {
+                    "text": "Accompagner psychologiquement l'aidant sur la culpabilité",
+                    "type": "SEC"
+                },
+                {
+                    "text": "Si protection juridique nécessaire : orienter vers tribunal",
+                    "type": "ORGA"
+                }
+            ]
+        },
+        {
+            "id": "CCC_F2_01",
+            "name": "Autonomie fortement dégradée",
+            "microParcours": "F2",
+            "priority": 2,
+            "temporality": "≤ 7 jours",
+            "condition": {
+                "logic": "COUNT_GTE",
+                "minimum": 2,
+                "rules": [
+                    {
+                        "question": "E23",
+                        "operator": "equals",
+                        "value": 4
+                    },
+                    {
+                        "question": "E24",
+                        "operator": "equals",
+                        "value": 4
+                    },
+                    {
+                        "question": "O8",
+                        "operator": "equals",
+                        "value": 3
+                    },
+                    {
+                        "question": "O9",
+                        "operator": "equals",
+                        "value": 3
+                    }
+                ]
+            },
+            "clinicalReasoning": "Le proche cumule plusieurs dépendances majeures sur les actes essentiels de la vie quotidienne. Ce n'est pas une fragilité isolée, c'est un effondrement de l'autonomie globale. L'aidant ne peut pas compenser seul.",
+            "recommendation": "Mise en place urgente d'un plan d'aide coordonné couvrant tous les domaines de dépendance avec renforcement des aides professionnelles.",
+            "actors": [
+                "IDEC",
+                "Aide à domicile/SAD",
+                "Ergothérapeute",
+                "Assistante sociale"
+            ],
+            "microTaches": [
+                {
+                    "text": "Réaliser un bilan exhaustif des besoins",
+                    "type": "ORGA"
+                },
+                {
+                    "text": "Mettre en place ou renforcer l'intervention SAD",
+                    "type": "SEC"
+                },
+                {
+                    "text": "Activer le portage de repas si préparation impossible",
+                    "type": "SEC"
+                },
+                {
+                    "text": "Évaluer la nécessité d'une curatelle ou tutelle",
+                    "type": "STRUC"
+                },
+                {
+                    "text": "Proposer un accompagnement aux déplacements (transport adapté, VSL)",
+                    "type": "SEC"
+                },
+                {
+                    "text": "Organiser un suivi mensuel pour réévaluer l'adéquation des aides",
+                    "type": "ORGA"
+                }
+            ]
+        },
+        {
+            "id": "CCC_F3_01",
+            "name": "Nutrition à risque",
+            "microParcours": "F4",
+            "priority": 2,
+            "temporality": "≤ 7 jours",
+            "condition": {
+                "logic": "AND",
+                "rules": [
+                    {
+                        "question": "O7",
+                        "operator": "equals",
+                        "value": 3
+                    },
+                    {
+                        "logic": "OR",
+                        "rules": [
+                            {
+                                "question": "E25",
+                                "operator": "gte",
+                                "value": 2
+                            },
+                            {
+                                "question": "E26",
+                                "operator": "gte",
+                                "value": 2
+                            }
+                        ]
+                    }
+                ]
+            },
+            "clinicalReasoning": "L'appétit du proche est altéré ET il y a des difficultés de préparation ou de prise des repas. C'est un risque de dénutrition avéré qui peut entraîner chutes, infections, perte cognitive accélérée, hospitalisations.",
+            "recommendation": "Déclenchement d'un protocole de prévention de la dénutrition avec bilan médical et mise en place d'aides alimentaires adaptées.",
+            "actors": [
+                "Médecin traitant",
+                "Diététicien",
+                "IDEC",
+                "Aide à domicile"
+            ],
+            "microTaches": [
+                {
+                    "text": "Contacter le médecin traitant pour prescription d'un bilan nutritionnel",
+                    "type": "MED"
+                },
+                {
+                    "text": "Organiser une visite diététicien pour adaptation des repas",
+                    "type": "MED"
+                },
+                {
+                    "text": "Mettre en place le portage de repas adapté",
+                    "type": "SEC"
+                },
+                {
+                    "text": "Prescrire des compléments nutritionnels oraux (CNO) si dénutrition confirmée",
+                    "type": "MED"
+                },
+                {
+                    "text": "Former l'aidant aux signes de dénutrition",
+                    "type": "INFO"
+                },
+                {
+                    "text": "Organiser un suivi poids mensuel avec alertes automatiques",
+                    "type": "ORGA"
+                }
+            ]
+        },
+        {
+            "id": "CCC_F4_01",
+            "name": "Hygiène et soins critiques",
+            "microParcours": "F4",
+            "priority": 2,
+            "temporality": "≤ 7 jours",
+            "condition": {
+                "logic": "COUNT_GTE",
+                "minimum": 2,
+                "rules": [
+                    {
+                        "question": "N11",
+                        "operator": "equals",
+                        "value": 3
+                    },
+                    {
+                        "question": "N12",
+                        "operator": "equals",
+                        "value": 3
+                    },
+                    {
+                        "question": "N13",
+                        "operator": "equals",
+                        "value": 3
+                    },
+                    {
+                        "question": "N34",
+                        "operator": "equals",
+                        "value": 3
+                    },
+                    {
+                        "question": "O4",
+                        "operator": "gte",
+                        "value": 2
+                    }
+                ]
+            },
+            "clinicalReasoning": "Le proche nécessite une aide sur plusieurs actes essentiels d'hygiène (toilette, habillage, continence, soins). C'est un niveau de dépendance élevé qui expose l'aidant à une charge physique et émotionnelle intense.",
+            "recommendation": "Renforcement des aides professionnelles pour les soins d'hygiène avec préservation de la dignité du proche et décharge de l'aidant.",
+            "actors": [
+                "IDEC",
+                "IDEL",
+                "Aide-soignant",
+                "Ergothérapeute"
+            ],
+            "microTaches": [
+                {
+                    "text": "Évaluer le niveau d'intervention SAD actuel et proposer un renforcement",
+                    "type": "ORGA"
+                },
+                {
+                    "text": "Prescrire le passage IDEL pour les soins d'hygiène complexes",
+                    "type": "MED"
+                },
+                {
+                    "text": "Évaluer la nécessité de protections urinaires adaptées",
+                    "type": "MED"
+                },
+                {
+                    "text": "Organiser une visite dentaire si état bucco-dentaire altéré",
+                    "type": "MED"
+                },
+                {
+                    "text": "Former l'aidant aux techniques de manutention",
+                    "type": "INFO"
+                },
+                {
+                    "text": "Proposer des solutions d'hébergement temporaire pour permettre du répit",
+                    "type": "STRUC"
+                }
+            ]
+        },
+        {
+            "id": "CCC_F5_01",
+            "name": "Hospitalisations récurrentes",
+            "microParcours": "F5",
+            "priority": 2,
+            "temporality": "≤ 7 jours",
+            "condition": {
+                "logic": "AND",
+                "rules": [
+                    {
+                        "question": "E28",
+                        "operator": "gte",
+                        "value": 3
+                    },
+                    {
+                        "question": "O53",
+                        "operator": "equals",
+                        "value": 2
+                    }
+                ]
+            },
+            "clinicalReasoning": "Le proche a été hospitalisé au moins 2 fois en 12 mois ET il n'a pas eu d'évaluation AGGIR formelle de sa dépendance. Cela signifie que la prise en charge à domicile n'est pas objectivée.",
+            "recommendation": "Déclenchement d'une évaluation gérontologique complète pour objectiver la dépendance et structurer un plan d'aide préventif.",
+            "actors": [
+                "Médecin traitant",
+                "Équipe APA/Département",
+                "IDEC",
+                "Gériatre"
+            ],
+            "microTaches": [
+                {
+                    "text": "Contacter le médecin traitant pour demander une évaluation AGGIR",
+                    "type": "MED"
+                },
+                {
+                    "text": "Préparer le dossier APA si pas encore fait",
+                    "type": "ORGA"
+                },
+                {
+                    "text": "Analyser les causes des hospitalisations pour identifier les facteurs évitables",
+                    "type": "ORGA"
+                },
+                {
+                    "text": "Mettre en place des mesures préventives ciblées (téléassistance, passages IDE, repas)",
+                    "type": "SEC"
+                },
+                {
+                    "text": "Organiser une consultation gériatrique pour bilan global si > 75 ans",
+                    "type": "MED"
+                },
+                {
+                    "text": "Créer un plan de crise personnalisé : qui appeler, quoi faire avant d'aller aux urgences",
+                    "type": "SEC"
+                }
+            ]
+        }
+    ],
+    "micro_taches_stats": {
+        "total": 82,
+        "distribution": {
+            "STRUC": {
+                "count": 5,
+                "percentage": 6.1,
+                "contributive": true,
+                "label": "Structuration du parcours"
+            },
+            "SEC": {
+                "count": 29,
+                "percentage": 35.4,
+                "contributive": true,
+                "label": "Sécurisation de l'aidant/aidé"
+            },
+            "MED": {
+                "count": 24,
+                "percentage": 29.3,
+                "contributive": true,
+                "label": "Actions médicales"
+            },
+            "INFO": {
+                "count": 6,
+                "percentage": 7.3,
+                "contributive": false,
+                "label": "Information et orientation"
+            },
+            "ORGA": {
+                "count": 18,
+                "percentage": 22.0,
+                "contributive": false,
+                "label": "Organisation et coordination"
+            }
+        },
+        "contributiveTotal": 58,
+        "contributivePercentage": 70.7
+    },
+    "test_personas": [
+        {
+            "id": "persona_A",
+            "name": "Madeleine",
+            "age": 84,
+            "description": "Critique directe → Priorité Niveau 1",
+            "answers": {
+                "O2": 2,
+                "E21": 3,
+                "N21": 3,
+                "E23": 4,
+                "E24": 4,
+                "E28": 3,
+                "O53": 2
+            },
+            "expectedScore": 8.6,
+            "expectedPriority": 1,
+            "expectedMicroParcours": [
+                "F1",
+                "F2",
+                "F5"
+            ],
+            "expectedCCC": [
+                "CCC_F1_01",
+                "CCC_F2_01",
+                "CCC_F5_01"
+            ]
+        },
+        {
+            "id": "persona_B",
+            "name": "Henri",
+            "age": 78,
+            "description": "CCC activée → Priorité Niveau 2",
+            "answers": {
+                "O2": 1,
+                "E21": 2,
+                "N11": 3,
+                "N12": 3,
+                "N13": 3,
+                "O13": 2,
+                "E25": 3
+            },
+            "expectedScore": 2.9,
+            "expectedPriority": 2,
+            "expectedMicroParcours": [
+                "F3",
+                "F4"
+            ],
+            "expectedCCC": [
+                "CCC_F3_01",
+                "CCC_F4_01"
+            ]
+        },
+        {
+            "id": "persona_C",
+            "name": "Simone",
+            "age": 72,
+            "description": "Score modéré → Niveau 3",
+            "answers": {
+                "O2": 1,
+                "E21": 1,
+                "E23": 2,
+                "E24": 1,
+                "N23": 2,
+                "E28": 1
+            },
+            "expectedScore": 2.9,
+            "expectedPriority": 3,
+            "expectedMicroParcours": [],
+            "expectedCCC": []
+        }
+    ]
+}

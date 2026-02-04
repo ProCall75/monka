@@ -10,7 +10,7 @@
 
 | Indicateur | Valeur | Source |
 |------------|--------|--------|
-| **Questions** | 13 | ✅ Simulateur HTML |
+| **Questions** | 15 | ✅ Excel + Simulateur HTML |
 | **Recommandations par question** | ~20 | ✅ Simulateur HTML |
 | **Actions IDEC par question** | ~30 | ✅ Simulateur HTML |
 | **Micro-parcours** | 4 (R1-R4) | ✅ Excel |

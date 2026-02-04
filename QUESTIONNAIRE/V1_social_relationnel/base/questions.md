@@ -10,10 +10,11 @@
 
 | Métrique | Valeur |
 |----------|--------|
-| **Questions totales** | 13 |
+| **Questions totales** | 15 |
 | **Questions critiques** | 2 |
 | **Questions scorantes** | 8 |
-| **Questions déclenchantes** | 6 |
+| **Questions déclenchantes** | 7 |
+| **Questions descriptives** | 3 |
 
 ---
 
@@ -199,6 +200,22 @@
 | Oui | — | — |
 
 **Type** : Descriptive (modulatrice)
+
+---
+
+### O47 - Distance du domicile
+
+**Libellé** : À combien de temps habitez-vous du domicile de la personne aidée ?
+
+| Option | Score | Déclenchant |
+|--------|-------|-------------|
+| Moins de 30 min | — | — |
+| Entre 30 min et 1h30 | — | — |
+| Plus de 1h30 | — | ✅ R3 |
+
+**Type** : Déclenchante
+
+> ⚠️ Source : Excel (manquait dans Simulateur HTML)
 
 ---
 

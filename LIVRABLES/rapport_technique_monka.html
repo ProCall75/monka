@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Technique Monka — Moteur Clinique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #fff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #6366f1;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #4f46e5;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+        }
+
+        .header-meta {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .info {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .example {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .tech {
+            background: #ede9fe;
+            border-left: 4px solid #8b5cf6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        ul {
+            margin: 0.5rem 0 1rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.25rem;
+        }
+
+        .file-name {
+            font-family: monospace;
+            font-size: 0.9em;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .legend {
+            font-size: 0.8em;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        @media print {
+            body {
+                padding: 20px;
+                font-size: 11pt;
+            }
+
+            h2 {
+                page-break-before: auto;
+            }
+
+            pre {
+                white-space: pre-wrap;
+                font-size: 9pt;
+            }
+
+            table {
+                font-size: 9pt;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📊 Rapport Technique Monka — Moteur Clinique</h1>
+    <div class="header-meta">
+        <strong>Destinataires</strong> : Équipe technique Monka<br>
+        <strong>Date</strong> : 04 février 2026<br>
+        <strong>Objet</strong> : Fonctionnement du moteur et pistes d'intégration
+    </div>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #e5e7eb;">
+
+    <h2>1. Introduction</h2>
+    <p>Ce document décrit le fonctionnement du moteur clinique Monka basé sur les règles définies dans vos documents
+        Legacy.</p>
+
+    <h3>Objet du livrable</h3>
+    <table>
+        <tr>
+            <th>Composant</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Moteur de règles</strong></td>
+            <td>Logique de scoring, déclenchement, priorités</td>
+        </tr>
+        <tr>
+            <td><strong>Structure de données</strong></td>
+            <td>Questions typées, recommandations, micro-tâches</td>
+        </tr>
+        <tr>
+            <td><strong>Prototype HTML</strong></td>
+            <td>Démonstration fonctionnelle du moteur</td>
+        </tr>
+    </table>
+
+    <div class="warning">
+        ⚠️ Les données mappées sont issues des sources Legacy et Excel. Leur véracité clinique reste à valider par votre
+        équipe médicale.
+    </div>
+
+    <h2>2. Sources Documentaires — Legacy (14 fichiers)</h2>
+
+    <h3>2.1 Documents Haute Priorité (règles métier)</h3>
+
+    <table>
+        <tr>
+            <th>Fichier exact</th>
+            <th>Contenu</th>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy scoring 310127.docx</span></td>
+            <td>Règles de scoring, questions scorantes, formules de normalisation sur 20</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy questionnaire 290127.docx</span></td>
+            <td>Typologie des questions : scorante / déclenchante / critique / descriptive</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy Priorisation 300127.docx</span></td>
+            <td>3 niveaux de gravité avec délais d'action (7j / 15j / 1mois+)</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy typologie des micro taches 030226.docx</span></td>
+            <td>5 types : INFO, ORGA, STRUC, SEC, MED — règle R-MT-ASR-01</td>
+        </tr>
+    </table>
+
+    <h3>2.2 Documents Référentiels</h3>
+
+    <table>
+        <tr>
+            <th>Fichier exact</th>
+            <th>Contenu</th>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy ASR Referent op. 030226.docx</span></td>
+            <td>24 ASR (1 par micro-parcours), signatures d'état</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy Micro parcours 030226.docx</span></td>
+            <td>24 micro-parcours (R1-R4, F1-F6, S1-S4, M1-M6, A1-A4)</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy moteur applicatif et sécurité médicale 020326.docx</span></td>
+            <td>22 règles de sécurité médicale, alertes</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy Arborescence Globale 030226.docx</span></td>
+            <td>Architecture des 5 vulnérabilités</td>
+        </tr>
+    </table>
+
+    <h3>2.3 Documents Complémentaires</h3>
+    <table>
+        <tr>
+            <th>Fichier</th>
+            <th>Contenu</th>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy suivi longitudinal 030226.docx</span></td>
+            <td>Suivi dans le temps, reconfirmation ASR</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy grammaire de progression 190126.docx</span></td>
+            <td>Transitions entre états</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy CR Médecin 030226.docx</span></td>
+            <td>Comptes-rendus médecins</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy referentiel phrase CR MT 030226.docx</span></td>
+            <td>Phrases types CR</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">Legacy Fondateur 030226pages.docx</span></td>
+            <td>Vision fondatrice</td>
+        </tr>
+        <tr>
+            <td><span class="file-name">CR MT Projection moteur 030226.docx</span></td>
+            <td>Projection technique</td>
+        </tr>
+    </table>
+
+    <h2>3. Architecture Technique du Moteur</h2>
+
+    <div class="tech">
+        <strong>🛠️ Précision importante :</strong> Le fichier HTML fourni est une <strong>interface de
+            visualisation</strong> permettant de tester et comprendre le moteur. L'aspect visuel (couleurs, boutons,
+        mise en page) n'est pas le sujet — c'est un habillage pour rendre l'algorithme tangible.<br><br>
+        <strong>Le cœur du livrable est le moteur JavaScript</strong> qui contient toute la logique métier : scoring,
+        évaluation des CCC, activation des micro-parcours, calcul des priorités. Ce moteur peut être extrait et
+        réutilisé indépendamment de l'interface visuelle.
+    </div>
+
+    <h3>3.1 Structure des données</h3>
+
+    <p>Le moteur manipule 5 entités principales :</p>
+    <p><strong>Exemple de volumes (V1) :</strong> ~35 questions, ~6 règles CCC, 4 micro-parcours, 4 ASR, ~40
+        micro-tâches.</p>
+
+    <h3>3.2 Fonctionnement du moteur</h3>
+    <pre>
+┌─────────────────────────────────────────────────────────────┐
+│              LOGIQUE DU MOTEUR (étape par étape)            │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│   L'utilisateur répond à une question                       │
+│                │                                             │
+│                ▼                                             │
+│   ┌─────────────────────────────────────┐                   │
+│   │  1. Le moteur enregistre la réponse │                   │
+│   └─────────────────────────────────────┘                   │
+│                │                                             │
+│                ▼                                             │
+│   ┌─────────────────────────────────────┐                   │
+│   │  2. Calcul du score                 │                   │
+│   │     → Additionne les points         │                   │
+│   │     → Ramène sur 20                 │                   │
+│   └─────────────────────────────────────┘                   │
+│                │                                             │
+│                ▼                                             │
+│   ┌─────────────────────────────────────┐                   │
+│   │  3. Vérifie les combinaisons (CCC)  │                   │
+│   │     → Si plusieurs réponses à       │                   │
+│   │       risque ensemble → alerte      │                   │
+│   └─────────────────────────────────────┘                   │
+│                │                                             │
+│                ▼                                             │
+│   ┌─────────────────────────────────────┐                   │
+│   │  4. Active les parcours concernés   │                   │
+│   │     → Selon la réponse directe      │                   │
+│   │     → Ou via une combinaison (CCC)  │                   │
+│   └─────────────────────────────────────┘                   │
+│                │                                             │
+│                ▼                                             │
+│   ┌─────────────────────────────────────┐                   │
+│   │  5. Détermine l'urgence             │                   │
+│   │     → Niveau 1 = critique (≤7j)     │                   │
+│   │     → Niveau 2 = important (≤15j)   │                   │
+│   │     → Niveau 3 = planifié (>1 mois) │                   │
+│   └─────────────────────────────────────┘                   │
+│                │                                             │
+│                ▼                                             │
+│   Résultat : Score, Urgence, Parcours, Recommandations      │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+</pre>
+
+    <h3>3.3 Algorithme de scoring</h3>
+
+    <p>Le calcul du score se fait en 2 temps :</p>
+    <ol>
+        <li><strong>Score brut</strong> = somme des points des réponses aux questions scorantes</li>
+        <li><strong>Score normalisé</strong> = (score brut / score max théorique) × 20</li>
+    </ol>
+
+    <p>La couleur d'interprétation est déterminée par seuils :</p>
+    <table>
+        <tr>
+            <th>Score /20</th>
+            <th>Couleur</th>
+            <th>Interprétation</th>
+        </tr>
+        <tr>
+            <td>0 – 6</td>
+            <td style="background:#d1fae5;">🟢 Vert</td>
+            <td>Situation préservée</td>
+        </tr>
+        <tr>
+            <td>7 – 12</td>
+            <td style="background:#fef3c7;">🟠 Orange</td>
+            <td>Vigilance requise</td>
+        </tr>
+        <tr>
+            <td>13 – 20</td>
+            <td style="background:#fee2e2;">🔴 Rouge</td>
+            <td>Vulnérabilité élevée</td>
+        </tr>
+    </table>
+
+    <h2>4. Fonctionnement du Moteur</h2>
+
+    <h3>4.1 Typologie des questions</h3>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Effet moteur</th>
+        </tr>
+        <tr>
+            <td><strong>Scorante</strong></td>
+            <td>Incrémente le score de vulnérabilité</td>
+        </tr>
+        <tr>
+            <td><strong>Déclenchante (trigger)</strong></td>
+            <td>Active un micro-parcours spécifique si option sélectionnée</td>
+        </tr>
+        <tr>
+            <td><strong>Critique</strong></td>
+            <td>Force priorité niveau 1 (≤7 jours) si option critique sélectionnée</td>
+        </tr>
+        <tr>
+            <td><strong>Descriptive</strong></td>
+            <td>Contexte uniquement, pas d'effet algorithmique</td>
+        </tr>
+    </table>
+
+    <h3>4.2 Conditions Critiques Composites (CCC)</h3>
+    <p>Les CCC sont des règles booléennes combinant plusieurs réponses. Quand la condition est remplie, le moteur :</p>
+    <ul>
+        <li>Active le micro-parcours associé</li>
+        <li>Passe la priorité en niveau 2 minimum</li>
+        <li>Déclenche les recommandations spécifiques à cette CCC</li>
+    </ul>
+
+    <div class="example">
+        <strong>Exemple :</strong> CCC R2_CC_01<br>
+        <strong>Condition :</strong> "Aidant seul" (N4=Oui) <strong>ET</strong> "Personne pour aider" (E2=Personne)<br>
+        <strong>Effet :</strong> → Active MP R2 + Priorité 2
+    </div>
+
+    <h2>5. Micro-Parcours</h2>
+
+    <table>
+        <tr>
+            <th>V</th>
+            <th>Préfixe</th>
+            <th>Parcours</th>
+            <th>Thème</th>
+        </tr>
+        <tr>
+            <td>V1</td>
+            <td>R</td>
+            <td>R1, R2, R3, R4</td>
+            <td>Social & Relationnel</td>
+        </tr>
+        <tr>
+            <td>V2</td>
+            <td>F</td>
+            <td>F1 → F6</td>
+            <td>Fragilité du Proche</td>
+        </tr>
+        <tr>
+            <td>V3</td>
+            <td>S</td>
+            <td>S1, S2, S3, S4</td>
+            <td>Santé de l'Aidant</td>
+        </tr>
+        <tr>
+            <td>V4</td>
+            <td>M</td>
+            <td>M1 → M6</td>
+            <td>Parcours Médical</td>
+        </tr>
+        <tr>
+            <td>V5</td>
+            <td>A</td>
+            <td>A1, A2, A3, A4</td>
+            <td>Administratif</td>
+        </tr>
+    </table>
+
+    <h2>6. Micro-Tâches</h2>
+
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Contribue ASR</th>
+        </tr>
+        <tr>
+            <td><strong>INFO</strong></td>
+            <td>Information, explication</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><strong>ORGA</strong></td>
+            <td>Organisation, planification</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><strong>STRUC</strong></td>
+            <td>Mise en place structurante</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td><strong>SEC</strong></td>
+            <td>Sécurisation</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td><strong>MED</strong></td>
+            <td>Prescription médicale</td>
+            <td>✅</td>
+        </tr>
+    </table>
+
+    <div class="info">
+        📌 <strong>Règle R-MT-ASR-01</strong> : Aucune micro-tâche ne valide directement une ASR. Les tâches sont des
+        moyens, l'ASR est un état du monde observé.
+    </div>
+
+    <h2>7. ASR — Actions Structurantes de Référence</h2>
+
+    <div class="info">
+        📌 <strong>Règle R-ASR-01</strong> : 1 Micro-Parcours = 1 ASR unique
+    </div>
+
+    <p>Chaque ASR représente un état cible validé par des "signatures d'état" (déclarations factuelles). Une seule
+        signature suffit.</p>
+
+    <table>
+        <tr>
+            <th>État</th>
+            <th>Signification</th>
+        </tr>
+        <tr>
+            <td><strong>❌ Non atteinte</strong></td>
+            <td>Aucune signature valide</td>
+        </tr>
+        <tr>
+            <td><strong>✔ Atteinte</strong></td>
+            <td>≥ 1 signature détectée</td>
+        </tr>
+        <tr>
+            <td><strong>⚠ Non confirmée</strong></td>
+            <td>Atteinte mais non reconfirmée au suivi</td>
+        </tr>
+    </table>
+
+    <h2>8. Priorisation</h2>
+    <table>
+        <tr>
+            <th>Niveau</th>
+            <th>Déclencheur</th>
+            <th>Délai</th>
+        </tr>
+        <tr>
+            <td><strong>1</strong></td>
+            <td>Question critique directe</td>
+            <td>≤ 7 jours</td>
+        </tr>
+        <tr>
+            <td><strong>2</strong></td>
+            <td>CCC activée</td>
+            <td>≤ 15 jours</td>
+        </tr>
+        <tr>
+            <td><strong>3</strong></td>
+            <td>Score seul</td>
+            <td>&gt; 1 mois</td>
+        </tr>
+    </table>
+
+    <h2>9. Options d'Intégration</h2>
+
+    <h3>Option A — Intégration via iframe ou WebView</h3>
+    <p class="legend">(= embarquer le HTML directement dans votre application)</p>
+
+    <table>
+        <tr>
+            <th>Aspect</th>
+            <th>Détail</th>
+        </tr>
+        <tr>
+            <td><strong>Principe</strong></td>
+            <td>Intégrer le fichier HTML dans une iframe (web) ou WebView (mobile). Le moteur tourne tel quel côté
+                client.</td>
+        </tr>
+        <tr>
+            <td><strong>Avantages</strong></td>
+            <td>Aucun développement, déploiement immédiat, isolation complète</td>
+        </tr>
+        <tr>
+            <td><strong>Limites</strong></td>
+            <td>Pas d'accès aux données depuis votre backend, styling séparé</td>
+        </tr>
+    </table>
+
+    <h3>Option B — Extraction en module JavaScript</h3>
+    <p class="legend">(= extraire le moteur pour l'importer dans votre codebase JS/TS)</p>
+
+    <table>
+        <tr>
+            <th>Aspect</th>
+            <th>Détail</th>
+        </tr>
+        <tr>
+            <td><strong>Principe</strong></td>
+            <td>Refactorer le moteur en module ES6 exportable. Vos développeurs importent les fonctions (calculateScore,
+                evaluateCCC, etc.) dans votre app React/Vue/Node.</td>
+        </tr>
+        <tr>
+            <td><strong>Avantages</strong></td>
+            <td>Intégration native, accès aux données, styling unifié</td>
+        </tr>
+        <tr>
+            <td><strong>Limites</strong></td>
+            <td>Nécessite intervention de vos devs pour l'adaptation</td>
+        </tr>
+    </table>
+
+    <h3>Option C — Import des données vers votre base</h3>
+    <p class="legend">(= importer les structures de données, recoder le moteur dans votre stack)</p>
+
+    <table>
+        <tr>
+            <th>Aspect</th>
+            <th>Détail</th>
+        </tr>
+        <tr>
+            <td><strong>Principe</strong></td>
+            <td>Exporter les données (questions, CCC, ASR) en JSON ou SQL. Votre équipe réimplémente la logique moteur
+                dans votre langage (Python, Go, Java...).</td>
+        </tr>
+        <tr>
+            <td><strong>Avantages</strong></td>
+            <td>Contrôle total, intégration profonde avec votre architecture</td>
+        </tr>
+        <tr>
+            <td><strong>Limites</strong></td>
+            <td>Développement significatif, risque de divergence avec nos règles</td>
+        </tr>
+    </table>
+
+    <h3>Synthèse comparative</h3>
+    <table>
+        <tr>
+            <th>Critère</th>
+            <th>Option A</th>
+            <th>Option B</th>
+            <th>Option C</th>
+        </tr>
+        <tr>
+            <td>Contrôle</td>
+            <td>Faible</td>
+            <td>Moyen</td>
+            <td>Total</td>
+        </tr>
+        <tr>
+            <td>Maintenabilité</td>
+            <td>Dépend de nous</td>
+            <td>Partagée</td>
+            <td>Votre équipe</td>
+        </tr>
+        <tr>
+            <td>Cas d'usage</td>
+            <td>POC, démo, test</td>
+            <td>Prod web/mobile</td>
+            <td>Prod avec custom</td>
+        </tr>
+    </table>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #e5e7eb;">
+    <p style="text-align: center; color: #64748b; font-size: 0.9rem;">
+        📄 Rapport Technique Monka — 04/02/2026
+    </p>
+
+</body>
+
+</html>

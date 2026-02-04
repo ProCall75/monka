@@ -1019,6 +1019,26 @@
                 <span>🔗 6 CCC</span>
                 <span>🔴 2 critiques</span>
             </div>
+            <!-- Progress & Counters (for V2+ dynamic loading) -->
+            <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; margin-top: 0.75rem; font-size: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span>📊</span>
+                    <span id="progress-text">0/10</span>
+                    <div style="width: 80px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden;">
+                        <div id="progress-fill" style="height: 100%; width: 0%; background: #22c55e; transition: width 0.3s;"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                    <span>🔗</span>
+                    <span id="ccc-count">0</span>
+                    <span style="opacity: 0.7;">CCC</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                    <span>🔴</span>
+                    <span id="critical-count">0</span>
+                    <span style="opacity: 0.7;">critiques</span>
+                </div>
+            </div>
         </header>
 
         <div class="grid">
@@ -1176,13 +1196,15 @@
                                 style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1rem;">
                                 <div
                                     style="background: var(--bg); padding: 1rem; border-radius: 0.5rem; text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: 600; color: #10b981;">14</div>
+                                    <div id="stat-contributive"
+                                        style="font-size: 1.5rem; font-weight: 600; color: #10b981;">0</div>
                                     <div style="font-size: 0.75rem; color: var(--text-muted);">STRUC + SEC</div>
                                     <div style="font-size: 0.7rem; margin-top: 0.25rem;">✅ Contributives ASR</div>
                                 </div>
                                 <div
                                     style="background: var(--bg); padding: 1rem; border-radius: 0.5rem; text-align: center;">
-                                    <div style="font-size: 1.5rem; font-weight: 600; color: #ef4444;">27</div>
+                                    <div id="stat-non-contributive"
+                                        style="font-size: 1.5rem; font-weight: 600; color: #ef4444;">0</div>
                                     <div style="font-size: 0.75rem; color: var(--text-muted);">INFO + ORGA</div>
                                     <div style="font-size: 0.7rem; margin-top: 0.25rem;">❌ Non-contributives</div>
                                 </div>
@@ -1196,47 +1218,52 @@
                                     <span class="mt-badge mt-struc">STRUC</span>
                                     <div
                                         style="flex: 1; background: var(--bg); height: 6px; border-radius: 3px; overflow: hidden;">
-                                        <div style="width: 10%; height: 100%; background: #8b5cf6;"></div>
+                                        <div id="bar-struc" style="width: 0%; height: 100%; background: #8b5cf6;"></div>
                                     </div>
-                                    <span style="font-size: 0.75rem; color: var(--text-muted);">4 (10%)</span>
+                                    <span id="label-struc" style="font-size: 0.75rem; color: var(--text-muted);">0
+                                        (0%)</span>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                                     <span class="mt-badge mt-sec">SEC</span>
                                     <div
                                         style="flex: 1; background: var(--bg); height: 6px; border-radius: 3px; overflow: hidden;">
-                                        <div style="width: 25%; height: 100%; background: #10b981;"></div>
+                                        <div id="bar-sec" style="width: 0%; height: 100%; background: #10b981;"></div>
                                     </div>
-                                    <span style="font-size: 0.75rem; color: var(--text-muted);">10 (25%)</span>
+                                    <span id="label-sec" style="font-size: 0.75rem; color: var(--text-muted);">0
+                                        (0%)</span>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                                     <span class="mt-badge mt-info">INFO</span>
                                     <div
                                         style="flex: 1; background: var(--bg); height: 6px; border-radius: 3px; overflow: hidden;">
-                                        <div style="width: 30%; height: 100%; background: #06b6d4;"></div>
+                                        <div id="bar-info" style="width: 0%; height: 100%; background: #06b6d4;"></div>
                                     </div>
-                                    <span style="font-size: 0.75rem; color: var(--text-muted);">12 (30%)</span>
+                                    <span id="label-info" style="font-size: 0.75rem; color: var(--text-muted);">0
+                                        (0%)</span>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                                     <span class="mt-badge mt-orga">ORGA</span>
                                     <div
                                         style="flex: 1; background: var(--bg); height: 6px; border-radius: 3px; overflow: hidden;">
-                                        <div style="width: 37.5%; height: 100%; background: #f59e0b;"></div>
+                                        <div id="bar-orga" style="width: 0%; height: 100%; background: #f59e0b;"></div>
                                     </div>
-                                    <span style="font-size: 0.75rem; color: var(--text-muted);">15 (37.5%)</span>
+                                    <span id="label-orga" style="font-size: 0.75rem; color: var(--text-muted);">0
+                                        (0%)</span>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                                     <span class="mt-badge mt-med">MED</span>
                                     <div
                                         style="flex: 1; background: var(--bg); height: 6px; border-radius: 3px; overflow: hidden;">
-                                        <div style="width: 0%; height: 100%; background: #ef4444;"></div>
+                                        <div id="bar-med" style="width: 0%; height: 100%; background: #ef4444;"></div>
                                     </div>
-                                    <span style="font-size: 0.75rem; color: var(--text-muted);">0 (0%)</span>
+                                    <span id="label-med" style="font-size: 0.75rem; color: var(--text-muted);">0
+                                        (0%)</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="result-section">
-                            <h4>Toutes les Micro-Tâches (41)</h4>
+                            <h4 id="microtask-total">Toutes les Micro-Tâches (0)</h4>
                             <div id="microtask-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
                                 <!-- Populated by JavaScript -->
                             </div>
@@ -1712,6 +1739,39 @@
 
         let answers = {};
 
+        // ================================================================
+        // DYNAMIC VULNERABILITY DATA
+        // ================================================================
+        // Store V1 data as reference (always available)
+        const V1_DATA = {
+            questions: questions,
+            cccRules: cccRules,
+            microParcours: microParcours,
+            cccRecommendations: cccRecommendations,
+            personas: personas
+        };
+
+        // Current active vulnerability data (starts with V1)
+        let currentData = {
+            questions: questions,
+            cccRules: cccRules,
+            microParcours: microParcours,
+            cccRecommendations: cccRecommendations,
+            personas: personas,
+            scoringConfig: {
+                formula: "(scoreBrut / 16) * 20",
+                maxBrut: 16,
+                thresholds: {
+                    green: { max: 6 },
+                    orange: { max: 13 },
+                    red: { max: 20 }
+                }
+            }
+        };
+
+        // Cache for loaded vulnerability data
+        const vulnDataCache = { V1: V1_DATA };
+
         // Micro-Task Type Mapping (based on micro_taches_typologie.md)
         const microTaskTypes = {
             // E1 - Répartition de l'aide
@@ -1878,36 +1938,30 @@
             const contributive = counts.STRUC + counts.SEC + counts.MED;
             const nonContributive = counts.INFO + counts.ORGA;
 
-            // Update contributive count
-            const contribEl = document.querySelector('#tab-microtasks .result-section:first-child div > div:first-child > div:first-child');
+            // Update summary stats using IDs
+            const contribEl = document.getElementById('stat-contributive');
             if (contribEl) contribEl.textContent = contributive;
 
-            // Update non-contributive count
-            const nonContribEl = document.querySelector('#tab-microtasks .result-section:first-child div > div:last-child > div:first-child');
+            const nonContribEl = document.getElementById('stat-non-contributive');
             if (nonContribEl) nonContribEl.textContent = nonContributive;
 
-            // Update distribution bars
-            if (total > 0) {
-                const updateBar = (type, index) => {
-                    const bars = document.querySelectorAll('#tab-microtasks .result-section:nth-child(2) > div > div');
-                    if (bars[index]) {
-                        const pct = (counts[type] / total * 100).toFixed(1);
-                        const bar = bars[index].querySelector('div > div');
-                        const label = bars[index].querySelector('span:last-child');
-                        if (bar) bar.style.width = pct + '%';
-                        if (label) label.textContent = `${counts[type]} (${pct}%)`;
-                    }
-                };
+            // Update distribution bars using IDs
+            const updateBar = (type) => {
+                const pct = total > 0 ? (counts[type] / total * 100).toFixed(1) : 0;
+                const bar = document.getElementById(`bar-${type.toLowerCase()}`);
+                const label = document.getElementById(`label-${type.toLowerCase()}`);
+                if (bar) bar.style.width = pct + '%';
+                if (label) label.textContent = `${counts[type]} (${pct}%)`;
+            };
 
-                updateBar('STRUC', 0);
-                updateBar('SEC', 1);
-                updateBar('INFO', 2);
-                updateBar('ORGA', 3);
-                updateBar('MED', 4);
-            }
+            updateBar('STRUC');
+            updateBar('SEC');
+            updateBar('INFO');
+            updateBar('ORGA');
+            updateBar('MED');
 
             // Update list title
-            const titleEl = document.querySelector('#tab-microtasks .result-section:last-child h4');
+            const titleEl = document.getElementById('microtask-total');
             if (titleEl) titleEl.textContent = `Toutes les Micro-Tâches (${total})`;
         }
 
@@ -2580,43 +2634,428 @@
         let currentVuln = 'V1';
 
         function selectVuln(vulnCode) {
-            if (vulnCode !== 'V1') {
-                // Pour V2-V5, afficher un message car les données ne sont pas encore intégrées
-                const vuln = VULN_DATA[vulnCode];
-                document.getElementById('header-title').innerHTML = `🧪 ${vuln.icon} ${vuln.name}`;
-                document.getElementById('header-subtitle').textContent = `${vulnCode} – En cours de développement`;
-                document.getElementById('main-header').style.background = `linear-gradient(135deg, ${vuln.color} 0%, ${adjustColor(vuln.color, 30)} 100%)`;
-                document.getElementById('vuln-stats').innerHTML = `
-                    <span>📋 ${vuln.questions} questions</span>
-                    <span>🔗 ${vuln.cccs} CCC</span>
-                    <span>🔴 ${vuln.criticals.length} critiques</span>
-                `;
-                document.getElementById('questionnaire').innerHTML = `
-                    <div class="empty-state" style="padding: 3rem;">
-                        <div class="icon" style="font-size: 4rem;">${vuln.icon}</div>
-                        <h3 style="margin: 1rem 0 0.5rem;">${vuln.name}</h3>
-                        <p style="color: var(--text-muted);">Les données pour ${vulnCode} sont en cours d'intégration.</p>
-                        <p style="color: var(--text-muted); font-size: 0.875rem;">Le simulateur complet utilisera les données de <code>vulnerabilities_data.json</code>.</p>
-                    </div>
-                `;
-            } else {
-                // V1 - Réactiver les données existantes
-                document.getElementById('header-title').innerHTML = `🧪 Monka Simulator`;
-                document.getElementById('header-subtitle').textContent = `Test interactif – Vulnérabilité "Sociale & Relationnelle"`;
-                document.getElementById('main-header').style.background = `linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)`;
-                document.getElementById('vuln-stats').innerHTML = `
-                    <span>📋 10 questions</span>
-                    <span>🔗 6 CCC</span>
-                    <span>🔴 2 critiques</span>
-                `;
+            currentVuln = vulnCode;
+            updateVulnButtons();
+
+            if (vulnCode === 'V1') {
+                // V1 - Use existing in-memory data
+                currentData = { ...V1_DATA };
+                answers = {};
+                updateVulnUI(vulnCode, {
+                    name: "Social & Relationnel",
+                    icon: "👥",
+                    color: "#6366f1",
+                    questions: V1_DATA.questions.length,
+                    cccs: V1_DATA.cccRules.length,
+                    criticals: V1_DATA.questions.filter(q => q.type === 'critical').length
+                });
                 renderQuestions();
                 renderCCC();
                 renderMicroParcours();
+                renderPersonas();
                 updateResults();
+                return;
             }
 
-            currentVuln = vulnCode;
-            updateVulnButtons();
+            if (vulnCode === 'V2') {
+                // V2 - Load from simulator_data.json
+                loadV2Data();
+                return;
+            }
+
+            // V3-V5: Placeholder until data files are created
+            const vuln = VULN_DATA[vulnCode];
+            updateVulnUI(vulnCode, vuln);
+            document.getElementById('questionnaire').innerHTML = `
+                <div class="empty-state" style="padding: 3rem;">
+                    <div class="icon" style="font-size: 4rem;">${vuln.icon}</div>
+                    <h3 style="margin: 1rem 0 0.5rem;">${vuln.name}</h3>
+                    <p style="color: var(--text-muted);">Les données pour ${vulnCode} sont en cours d'intégration.</p>
+                    <p style="color: var(--text-muted); font-size: 0.875rem;">Créez <code>simulator_data.json</code> dans le dossier correspondant.</p>
+                </div>
+            `;
+        }
+
+        function updateVulnUI(vulnCode, vuln) {
+            document.getElementById('header-title').innerHTML = `🧪 ${vuln.icon} ${vuln.name}`;
+            document.getElementById('header-subtitle').textContent = `Test interactif – Vulnérabilité "${vuln.name}"`;
+            document.getElementById('main-header').style.background = `linear-gradient(135deg, ${vuln.color} 0%, ${adjustColor(vuln.color, 30)} 100%)`;
+            document.getElementById('vuln-stats').innerHTML = `
+                <span>📋 ${vuln.questions} questions</span>
+                <span>🔗 ${vuln.cccs || 0} CCC</span>
+                <span>🔴 ${vuln.criticals || 0} critiques</span>
+            `;
+        }
+
+        async function loadV2Data() {
+            const vuln = VULN_DATA['V2'];
+
+            // Check cache first
+            if (vulnDataCache['V2']) {
+                currentData = vulnDataCache['V2'];
+                answers = {};
+                updateVulnUI('V2', {
+                    ...vuln,
+                    questions: currentData.questions.length,
+                    cccs: currentData.cccRules ? currentData.cccRules.length : 0,
+                    criticals: currentData.questions.filter(q => q.isCritical).length
+                });
+                renderV2Questions();
+                renderV2CCC();
+                renderV2MicroParcours();
+                renderV2Personas();
+                updateV2Results();
+                return;
+            }
+
+            // Show loading state
+            document.getElementById('questionnaire').innerHTML = `
+                <div class="empty-state" style="padding: 3rem;">
+                    <div class="icon" style="font-size: 4rem;">⏳</div>
+                    <h3 style="margin: 1rem 0 0.5rem;">Chargement...</h3>
+                    <p style="color: var(--text-muted);">Chargement des données V2 Fragilité du Proche</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch('../QUESTIONNAIRE/V2_fragilite_proche/base/simulator_data.json');
+                if (!response.ok) throw new Error('File not found');
+
+                const data = await response.json();
+
+                // Transform data to match V1 structure
+                currentData = {
+                    questions: data.questions || [],
+                    cccRules: (data.ccc_rules || []).map(ccc => ({
+                        code: ccc.id,
+                        name: ccc.name,
+                        mp: ccc.microParcours,
+                        condition: ccc.condition,
+                        priority: ccc.priority,
+                        temporality: ccc.temporality,
+                        clinicalReasoning: ccc.clinicalReasoning,
+                        recommendation: ccc.recommendation,
+                        actors: ccc.actors,
+                        microTaches: ccc.microTaches
+                    })),
+                    microParcours: (data.micro_parcours || []).map(mp => ({
+                        code: mp.id,
+                        name: mp.name,
+                        objective: mp.objective,
+                        color: mp.color,
+                        questions: mp.questions,
+                        triggersCount: mp.triggersCount || 0
+                    })),
+                    microTachesStats: data.micro_taches_stats || {},
+                    personas: (data.test_personas || []).map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        emoji: '🧪',
+                        situation: p.description,
+                        answers: p.answers,
+                        expectedPriority: p.expectedPriority === 1 ? '🚨 Urgent' :
+                            p.expectedPriority === 2 ? '⚡ Prioritaire' : '⏱️ Planifié',
+                        expectedCCC: p.expectedCCC ? p.expectedCCC.length : 0
+                    })),
+                    scoringConfig: data.scoring_config || {
+                        formula: "(scoreBrut / 21) * 20",
+                        maxBrut: 21
+                    },
+                    metadata: data.metadata || {}
+                };
+
+                // Cache the data
+                vulnDataCache['V2'] = currentData;
+                answers = {};
+
+                // Update UI
+                updateVulnUI('V2', {
+                    ...vuln,
+                    name: currentData.metadata.name || vuln.name,
+                    questions: currentData.questions.length,
+                    cccs: currentData.cccRules.length,
+                    criticals: currentData.questions.filter(q => q.isCritical).length
+                });
+
+                renderV2Questions();
+                renderV2CCC();
+                renderV2MicroParcours();
+                renderV2Personas();
+                updateV2Results();
+
+            } catch (error) {
+                console.error('Error loading V2 data:', error);
+                document.getElementById('questionnaire').innerHTML = `
+                    <div class="empty-state" style="padding: 3rem;">
+                        <div class="icon" style="font-size: 4rem;">❌</div>
+                        <h3 style="margin: 1rem 0 0.5rem;">Erreur de chargement</h3>
+                        <p style="color: var(--text-muted);">Impossible de charger les données V2.</p>
+                        <p style="color: var(--danger); font-size: 0.875rem;">${error.message}</p>
+                        <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem;">
+                            Vérifiez que <code>simulator_data.json</code> existe dans<br>
+                            <code>QUESTIONNAIRE/V2_fragilite_proche/base/</code>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // ================================================================
+        // V2-SPECIFIC RENDER FUNCTIONS
+        // ================================================================
+
+        function renderV2Questions() {
+            const container = document.getElementById('questionnaire');
+            container.innerHTML = currentData.questions.map((q, idx) => {
+                const typeClass = q.isCritical ? 'critical' : (q.isScoring ? 'scoring' : 'trigger');
+                const typeLabel = q.isCritical ? '⚠️ Critique' : (q.isScoring ? '📊 Scorante' : '🔀 Trigger');
+
+                return `
+                <div class="question-card ${typeClass}">
+                    <span class="question-id ${typeClass}">${q.id} – ${typeLabel}</span>
+                    <div class="question-label">${q.text}</div>
+                    <div class="options">
+                        ${q.options.map((opt, optIdx) => `
+                            <label class="option" id="opt-${q.id}-${optIdx}" onclick="selectV2Option('${q.id}', ${optIdx})">
+                                <div class="radio"></div>
+                                <span>${opt.text}</span>
+                                ${opt.score > 0 ? `<span class="option-score">+${opt.score}</span>` : ''}
+                                ${opt.triggersPriority1 ? '<span class="option-score" style="background: rgba(239,68,68,0.2); color: #ef4444;">🔴 Critique</span>' : ''}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function selectV2Option(questionId, optionIndex) {
+            const question = currentData.questions.find(q => q.id === questionId);
+            const option = question.options[optionIndex];
+
+            answers[questionId] = {
+                optionIndex,
+                value: option.value,
+                score: option.score || 0,
+                critical: option.triggersPriority1 || false,
+                triggersCCC: option.triggersCCC || null
+            };
+
+            // Update UI
+            question.options.forEach((_, idx) => {
+                const el = document.getElementById(`opt-${questionId}-${idx}`);
+                if (el) el.classList.remove('selected', 'critical-selected');
+            });
+
+            const selectedEl = document.getElementById(`opt-${questionId}-${optionIndex}`);
+            if (selectedEl) selectedEl.classList.add(option.triggersPriority1 ? 'critical-selected' : 'selected');
+
+            updateV2Results();
+        }
+
+        function updateV2Results() {
+            // Calculate score for V2
+            let rawScore = 0;
+            currentData.questions.forEach(q => {
+                if (q.isScoring && answers[q.id]) {
+                    rawScore += answers[q.id].score || 0;
+                }
+            });
+
+            const maxBrut = currentData.scoringConfig?.maxBrut || 21;
+            const normalizedScore = Math.round((rawScore / maxBrut) * 20 * 10) / 10;
+
+            // Update score display
+            document.getElementById('score-raw').textContent = rawScore;
+            document.getElementById('score-value').textContent = normalizedScore;
+
+            const circle = document.getElementById('score-circle');
+            circle.classList.remove('green', 'orange', 'red');
+            if (normalizedScore <= 6) {
+                circle.classList.add('green');
+            } else if (normalizedScore <= 13) {
+                circle.classList.add('orange');
+            } else {
+                circle.classList.add('red');
+            }
+
+            // Count CCCs triggered
+            let triggeredCCC = 0;
+            currentData.cccRules.forEach(ccc => {
+                if (evaluateV2CCCCondition(ccc.condition)) {
+                    triggeredCCC++;
+                }
+            });
+            document.getElementById('ccc-count').textContent = triggeredCCC;
+
+            // Count criticals
+            let criticals = 0;
+            currentData.questions.forEach(q => {
+                if (answers[q.id] && answers[q.id].critical) {
+                    criticals++;
+                }
+            });
+            document.getElementById('critical-count').textContent = criticals;
+
+            // Progress
+            const answered = Object.keys(answers).length;
+            const total = currentData.questions.length;
+            document.getElementById('progress-text').textContent = `${answered}/${total}`;
+            document.getElementById('progress-fill').style.width = `${(answered / total) * 100}%`;
+
+            // Micro-tasks
+            updateV2MicroTaskStats();
+        }
+
+        function evaluateV2CCCCondition(condition) {
+            if (!condition || !condition.rules) return false;
+
+            const evaluateRule = (rule) => {
+                if (rule.logic) {
+                    // Nested logic
+                    if (rule.logic === 'AND') {
+                        return rule.rules.every(r => evaluateRule(r));
+                    } else if (rule.logic === 'OR') {
+                        return rule.rules.some(r => evaluateRule(r));
+                    } else if (rule.logic === 'COUNT_GTE') {
+                        const count = rule.rules.filter(r => evaluateRule(r)).length;
+                        return count >= (rule.minimum || 1);
+                    }
+                }
+
+                // Simple rule
+                const answer = answers[rule.question];
+                if (!answer) return false;
+
+                const value = answer.value;
+                switch (rule.operator) {
+                    case 'equals': return value === rule.value;
+                    case 'gte': return value >= rule.value;
+                    case 'lte': return value <= rule.value;
+                    default: return false;
+                }
+            };
+
+            return evaluateRule(condition);
+        }
+
+        function updateV2MicroTaskStats() {
+            const stats = currentData.microTachesStats;
+            if (!stats || !stats.distribution) return;
+
+            const total = stats.total || 0;
+            const dist = stats.distribution;
+
+            // Update summary stats
+            const contributive = (dist.STRUC?.count || 0) + (dist.SEC?.count || 0) + (dist.MED?.count || 0);
+            const nonContributive = (dist.INFO?.count || 0) + (dist.ORGA?.count || 0);
+
+            const contribEl = document.getElementById('stat-contributive');
+            if (contribEl) contribEl.textContent = contributive;
+
+            const nonContribEl = document.getElementById('stat-non-contributive');
+            if (nonContribEl) nonContribEl.textContent = nonContributive;
+
+            // Update distribution bars
+            ['STRUC', 'SEC', 'MED', 'INFO', 'ORGA'].forEach(type => {
+                const typeData = dist[type] || { count: 0, percentage: 0 };
+                const bar = document.getElementById(`bar-${type.toLowerCase()}`);
+                const label = document.getElementById(`label-${type.toLowerCase()}`);
+                if (bar) bar.style.width = `${typeData.percentage}%`;
+                if (label) label.textContent = `${typeData.count} (${typeData.percentage}%)`;
+            });
+        }
+
+        function renderV2CCC() {
+            const container = document.getElementById('ccc-list');
+            if (!container) return;
+
+            container.innerHTML = currentData.cccRules.map(ccc => `
+                <div class="ccc-item" style="background: var(--bg); border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem; border-left: 3px solid ${ccc.priority === 1 ? '#ef4444' : '#f59e0b'};">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600; color: var(--primary);">${ccc.code}</span>
+                        <span style="font-size: 0.75rem; padding: 2px 8px; background: ${ccc.priority === 1 ? 'rgba(239,68,68,0.2)' : 'rgba(245,158,11,0.2)'}; color: ${ccc.priority === 1 ? '#ef4444' : '#f59e0b'}; border-radius: 4px;">
+                            P${ccc.priority} – ${ccc.temporality}
+                        </span>
+                    </div>
+                    <div style="font-weight: 500; margin-bottom: 0.5rem;">${ccc.name}</div>
+                    <div style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 0.5rem;">${ccc.clinicalReasoning || ''}</div>
+                    ${ccc.microTaches ? `
+                        <div style="font-size: 0.75rem; margin-top: 0.5rem;">
+                            <strong>Micro-tâches:</strong>
+                            <ul style="margin: 0.25rem 0 0 1rem; padding: 0;">
+                                ${ccc.microTaches.slice(0, 3).map(mt => `<li>${mt.text} <span style="color: var(--primary);">(${mt.type})</span></li>`).join('')}
+                                ${ccc.microTaches.length > 3 ? `<li style="color: var(--text-muted);">... +${ccc.microTaches.length - 3} autres</li>` : ''}
+                            </ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderV2MicroParcours() {
+            const container = document.getElementById('microparcours-list');
+            if (!container) return;
+
+            container.innerHTML = currentData.microParcours.map(mp => `
+                <div style="background: var(--bg); border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 0.5rem; border-left: 3px solid ${mp.color};">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: ${mp.color};">${mp.code}</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">${mp.questions?.length || 0} Q</span>
+                    </div>
+                    <div style="font-size: 0.875rem; margin-top: 0.25rem;">${mp.name}</div>
+                    ${mp.objective ? `<div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">${mp.objective}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderV2Personas() {
+            const container = document.getElementById('persona-grid');
+            if (!container || !currentData.personas) return;
+
+            container.innerHTML = currentData.personas.map(p => `
+                <div class="persona-card" onclick="applyV2Persona('${p.id}')" 
+                     style="padding: 0.75rem; border-radius: 0.5rem; background: var(--bg); cursor: pointer; text-align: center; border: 2px solid transparent; transition: all 0.2s;">
+                    <div style="font-size: 1.5rem;">${p.emoji}</div>
+                    <div style="font-size: 0.75rem; margin-top: 0.25rem;">${p.name}</div>
+                </div>
+            `).join('');
+        }
+
+        function applyV2Persona(personaId) {
+            const persona = currentData.personas.find(p => p.id === personaId);
+            if (!persona) return;
+
+            // Reset all answers
+            answers = {};
+            document.querySelectorAll('.option').forEach(el => {
+                el.classList.remove('selected', 'critical-selected');
+            });
+
+            // Apply persona answers
+            Object.entries(persona.answers).forEach(([qId, optValue]) => {
+                const question = currentData.questions.find(q => q.id === qId);
+                if (!question) return;
+
+                const optIndex = question.options.findIndex(o => o.value === optValue);
+                if (optIndex >= 0) {
+                    selectV2Option(qId, optIndex);
+                }
+            });
+
+            // Show persona info
+            const infoEl = document.getElementById('persona-info');
+            if (infoEl) {
+                infoEl.style.display = 'block';
+                infoEl.innerHTML = `
+                    <strong>${persona.emoji} ${persona.name}</strong>
+                    <p style="margin: 0.5rem 0 0; color: var(--text-muted);">${persona.situation}</p>
+                    <div style="margin-top: 0.5rem; display: flex; gap: 1rem; font-size: 0.75rem;">
+                        <span>Priorité attendue: ${persona.expectedPriority}</span>
+                        <span>CCC attendus: ${persona.expectedCCC}</span>
+                    </div>
+                `;
+            }
         }
 
         function updateVulnButtons() {
