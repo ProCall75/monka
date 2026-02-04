@@ -1046,6 +1046,7 @@
                         </div>
                         <div class="tabs" style="gap: 0.5rem;">
                             <div class="tab" onclick="switchTab('recos')">💡 Recommandations</div>
+                            <div class="tab" onclick="switchTab('asr')">🎯 Mes objectifs (ASR)</div>
                         </div>
                     </div>
 
@@ -1135,6 +1136,23 @@
                                 <p>Répondez aux questions pour voir les recommandations</p>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- ASR Tab (External View) -->
+                    <div class="tab-content" id="tab-asr">
+                        <div style="margin-bottom: 1.5rem;">
+                            <div
+                                style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 12px; padding: 1rem 1.25rem;">
+                                <h3 style="margin: 0 0 0.5rem 0; font-size: 1rem; color: white;">🎯 Vos objectifs de
+                                    sécurisation</h3>
+                                <p
+                                    style="margin: 0; font-size: 0.8rem; color: rgba(255,255,255,0.9); line-height: 1.5;">
+                                    Ces objectifs représentent les changements concrets à atteindre. Chaque objectif est
+                                    validé lorsqu'un changement réel est observé.
+                                </p>
+                            </div>
+                        </div>
+                        <div id="asr-list"></div>
                     </div>
 
                     <!-- Micro-Tâches Tab -->
@@ -1562,6 +1580,36 @@
             { code: 'R3', name: 'Isolement social du proche' },
             { code: 'R4', name: 'Relation aidant/aidé & dynamique familiale' }
         ];
+
+        // ASR Data - Mirror of micro-parcours for external view
+        const asrData = {
+            R1: {
+                code: 'R1', label: "L'aidant dispose d'une marge réelle lui permettant de tenir dans la durée.", signatures: [
+                    { id: 'R1-S1', label: 'Une contrainte majeure a été levée ou réduite' },
+                    { id: 'R1-S2', label: 'Un temps de répit régulier est effectif' }
+                ]
+            },
+            R2: {
+                code: 'R2', label: "Un relais humain mobilisable est effectivement en place.", signatures: [
+                    { id: 'R2-S1', label: 'Au moins une personne-relais identifiée comme relais avec disponibilité définie' },
+                    { id: 'R2-S2', label: 'Intervention active d\'un professionnel ou service mobilisable' }
+                ]
+            },
+            R3: {
+                code: 'R3', label: "Le proche bénéficie de contacts sociaux extérieurs réguliers.", signatures: [
+                    { id: 'R3-S1', label: 'Participation à une activité collective au moins 1x/semaine' },
+                    { id: 'R3-S2', label: 'Contact régulier avec au moins une personne extérieure au foyer' }
+                ]
+            },
+            R4: {
+                code: 'R4', label: "L'aidé peut être apporté sans opposition majeure bloquante.", signatures: [
+                    { id: 'R4-S1', label: 'Acceptation de l\'aide par le proche sans conflit récurrent' },
+                    { id: 'R4-S2', label: 'Communication fonctionnelle établie entre aidant et aidé' }
+                ]
+            }
+        };
+
+        const asrStates = { R1: 'not_reached', R2: 'not_reached', R3: 'not_reached', R4: 'not_reached' };
 
         const cccRecommendations = {
             'R1_CC_01': {
@@ -2063,6 +2111,9 @@
             // Update recommendations
             updateRecommendations();
 
+            // Update ASR display (mirror of micro-parcours)
+            updateASR(activatedMP);
+
             // Update scoring details
             updateScoringDetails(scoringQuestions);
 
@@ -2418,6 +2469,84 @@
                     <span>${mp.name}</span>
                 </div>
                 `).join('');
+        }
+
+        // ASR Display Function (External View - Mirror of activated micro-parcours)
+        function updateASR(activatedMP) {
+            const container = document.getElementById('asr-list');
+            const allASRs = Object.values(asrData);
+
+            const getStateDisplay = (state) => {
+                switch (state) {
+                    case 'reached': return { icon: '✔', text: 'Atteint', bg: '#10b981' };
+                    case 'pending': return { icon: '⚠', text: 'En cours', bg: '#f59e0b' };
+                    default: return { icon: '❌', text: 'Non atteint', bg: '#6b7280' };
+                }
+            };
+
+            container.innerHTML = allASRs.map(asr => {
+                const isActivated = activatedMP && activatedMP.has(asr.code);
+                const state = getStateDisplay(asrStates[asr.code] || 'not_reached');
+
+                return `
+                    <div class="asr-card" style="
+                        background: var(--bg);
+                        border: 2px solid ${isActivated ? '#10b981' : 'var(--border)'};
+                        border-radius: 12px;
+                        padding: 1.25rem;
+                        margin-bottom: 1rem;
+                        opacity: ${isActivated ? '1' : '0.5'};
+                        transition: all 0.3s ease;
+                        position: relative;
+                    ">
+                        <div style="
+                            position: absolute; top: 0; right: 0;
+                            padding: 0.375rem 1rem;
+                            font-size: 0.7rem; font-weight: 700;
+                            background: ${isActivated ? state.bg : '#374151'};
+                            color: white;
+                            border-bottom-left-radius: 8px;
+                        ">
+                            ${isActivated ? state.icon + ' ' + state.text : '⬜ Non concerné'}
+                        </div>
+
+                        <div style="
+                            display: inline-flex; align-items: center; gap: 0.5rem;
+                            padding: 0.25rem 0.75rem;
+                            background: ${isActivated ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'linear-gradient(135deg, #4b5563 0%, #374151 100%)'};
+                            color: white; border-radius: 20px;
+                            font-size: 0.75rem; font-weight: 700;
+                            margin-bottom: 0.75rem;
+                        ">
+                            ${isActivated ? '🎯' : '○'} ASR ${asr.code}
+                        </div>
+
+                        <h4 style="
+                            margin: 0 0 1rem 0; font-size: 1rem; font-weight: 600;
+                            color: ${isActivated ? 'var(--text)' : 'var(--text-muted)'};
+                            line-height: 1.5;
+                        ">
+                            "${asr.label}"
+                        </h4>
+
+                        ${isActivated ? `
+                            <div style="background: var(--bg-card); border-radius: 8px; padding: 0.875rem;">
+                                <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;">
+                                    📋 Comment valider cet objectif ?
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    ${asr.signatures.map(sig => `
+                                        <div style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: var(--text);">
+                                            <span style="color: #10b981;">→</span>
+                                            <span>${sig.label}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
         }
 
         function switchTab(tabId) {
