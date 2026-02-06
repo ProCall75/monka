@@ -2,7 +2,10 @@
 
 > **Source** : `SOURCES/legacy/Legacy suivi longitudinal 030226.docx` + `SOURCES/excel/Questionnaire de suivi validé.xlsx`  
 > **Contenu** : Questions de suivi mensuel + indicateurs longitudinaux  
-> **Usage** : Suivi dans le temps de l'évolution de la situation
+> **Usage** : Suivi dans le temps de l'évolution de la situation  
+> **Scope** : ⚠️ PAR VULNÉRABILITÉ (chaque V a ses questions de suivi spécifiques)
+
+Le suivi mensuel est organisé par bloc/vulnérabilité dans le questionnaire source, donc chaque dossier V{X} doit avoir son propre `suivi.md`.
 
 ---
 
