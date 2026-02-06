@@ -1,0 +1,3228 @@
+{
+  "sheets": {
+    "Micro-parcours (Aidant)": {
+      "rows": [
+        [
+          "Code",
+          "Micro-parcours",
+          "Objectif",
+          "Ce que vous allez comprendre"
+        ],
+        [
+          "A1",
+          "A1 – Couverture santé et protections juridiques",
+          "Sécuriser la couverture santé du proche et clarifier les protections juridiques utiles selon la situation.",
+          "Quels dispositifs existent (assurance maladie/complémentaire, protection juridique, mesure de protection) et quand les activer."
+        ],
+        [
+          "A2",
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "Identifier les droits et aides mobilisables (financières, humaines, médico-sociales) et organiser les demandes.",
+          "Quels droits sont pertinents selon la situation (aides à domicile, prestations, dispositifs locaux) et comment structurer un dossier."
+        ],
+        [
+          "A3",
+          "A3 – Charge et complexité des démarches administratives",
+          "Réduire la charge mentale liée aux démarches et éviter les urgences administratives (retards, ruptures de droits).",
+          "Pourquoi l’administratif devient lourd, comment s’organiser (agenda, classement, rappels) et quelles solutions d’appui existent."
+        ],
+        [
+          "A4",
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "Clarifier la situation d’inclusion (école, structure, travail/ESAT) et les impacts sur le budget du foyer.",
+          "Quels sont les repères d’orientation (structure, accompagnement, activité) et comment relier cela aux besoins d’aide et aux ressources."
+        ],
+        [
+          "F1",
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "Comprendre le quotidien du proche (lieu de vie, entourage, budget) pour adapter l’organisation et les priorités.",
+          "Quels éléments du quotidien influencent le risque de rupture (isolement, manque d’aide, difficultés financières)."
+        ],
+        [
+          "F2",
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "Évaluer le niveau d’aide nécessaire (présence, aide humaine, surveillance) et ajuster l’organisation.",
+          "Quels signaux indiquent un besoin d’aide accrue et comment dimensionner l’aide humaine."
+        ],
+        [
+          "F3",
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "Repérer les troubles cognitifs/comportementaux et réduire les risques (errance, désinhibition, agressivité).",
+          "Quels comportements doivent alerter et comment sécuriser l’environnement et la relation."
+        ],
+        [
+          "F4",
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "Comprendre l’état général du proche (douleur, fatigue, sommeil) pour ajuster les soins et le quotidien.",
+          "Comment ces symptômes impactent l’autonomie et quand consulter."
+        ],
+        [
+          "F5",
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "Qualifier la situation (dépendance/handicap/addictions/épisodes aigus) pour orienter vers les bons dispositifs.",
+          "Quels parcours existent selon la problématique et quels signaux nécessitent un appui renforcé."
+        ],
+        [
+          "F6",
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "Réduire le risque de chutes et améliorer l’autonomie via des aides techniques et des aménagements.",
+          "Quels facteurs augmentent le risque de chute et comment choisir une aide technique utile."
+        ],
+        [
+          "M1",
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "Clarifier le diagnostic, la maladie et ses impacts pour mieux décider et expliquer au proche.",
+          "Ce qu’implique le diagnostic, les étapes, les informations à demander et à conserver."
+        ],
+        [
+          "M2",
+          "M2 – Accès aux soins et aux professionnels",
+          "Faciliter l’accès aux soins (RDV, spécialistes, paramédicaux) et lever les freins pratiques.",
+          "Comment identifier le bon professionnel, optimiser les RDV et gérer les contraintes (transport, délais)."
+        ],
+        [
+          "M3",
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "Mieux gérer les épisodes aigus (urgences/hospitalisations) et sécuriser le retour à domicile.",
+          "Quoi préparer avant/après une hospitalisation et comment éviter les ruptures de soins."
+        ],
+        [
+          "M4",
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "Orienter vers un suivi adapté en cas de troubles psychiques ou d’addictions.",
+          "Les repères de prise en charge et les acteurs du suivi (psy, addicto, équipes)."
+        ],
+        [
+          "M5",
+          "M5 – Coordination des soins et personne de référence",
+          "Mettre en place une coordination simple (qui fait quoi, quand, avec quels contacts).",
+          "Pourquoi une personne de référence aide à éviter les doublons et les oublis."
+        ],
+        [
+          "M6",
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "Transformer vos inquiétudes en plan de soins clair (évaluations, priorités, suivi).",
+          "Comment prioriser (chutes, mémoire, alimentation, sécurité) et quelles évaluations demander."
+        ],
+        [
+          "R1",
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "Mesurer l’impact de l’aidance sur votre vie (temps, travail, couple, finances) et ajuster.",
+          "Les leviers de conciliation (organisation, droits, soutien, communication)."
+        ],
+        [
+          "R2",
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "Renforcer le soutien autour de vous et améliorer la répartition de l’aide.",
+          "Comment mobiliser l’entourage sans conflit et comment demander un relais."
+        ],
+        [
+          "R3",
+          "R3 – Isolement social de la personne aidée",
+          "Limiter l’isolement du proche et maintenir un lien social adapté.",
+          "Pourquoi le lien social est un facteur de santé et quelles solutions sont possibles."
+        ],
+        [
+          "R4",
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "Améliorer la relation et faciliter l’acceptation de l’aide (professionnelle ou familiale).",
+          "Les mécanismes fréquents de refus et des stratégies de communication."
+        ],
+        [
+          "S1",
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "Repérer la surcharge et prévenir l’épuisement.",
+          "Les signes d’alerte (fatigue, irritabilité, isolement) et les solutions de répit."
+        ],
+        [
+          "S2",
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "Réduire les risques graves (chutes, fugue, danger domestique, crise).",
+          "Quels signaux doivent faire agir rapidement et comment préparer un plan."
+        ],
+        [
+          "S3",
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "Protéger votre santé et éviter de renoncer à vos soins.",
+          "Pourquoi votre santé conditionne la prise en charge du proche."
+        ],
+        [
+          "S4",
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "Améliorer votre récupération (sommeil, activité) pour tenir dans la durée.",
+          "Les micro-actions qui ont le plus d’impact sur l’énergie et le stress."
+        ]
+      ],
+      "row_count": 25,
+      "headers": [
+        "Code",
+        "Micro-parcours",
+        "Objectif",
+        "Ce que vous allez comprendre"
+      ]
+    },
+    "Questions par micro-parcours": {
+      "rows": [
+        [
+          "Micro-parcours",
+          "ID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse",
+          "Vulnérabilité"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "E23",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.2 – Autonomie, aide humaine et présence nécessaire",
+          "Fragilité du proche",
+          "Combien de temps votre proche peut-il rester seul à son domicile sans risque particulier, selon vous ?",
+          "Obligatoire / Choix Unique",
+          "Il peut rester seul sans difficulté | Quelques heures, mais pas une journée entière | Pas plus d’1 heure | Il ne peut pas rester seul",
+          "Fragilité du proche"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "O45",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Couverture santé (aidant)",
+          "Administrative ",
+          "Quelle couverture de santé avez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Régime général (ou spécial) et Mutuelle | Régime général (ou spécial) | CMU",
+          "Administrative"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "O23",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Couverture santé (proche)",
+          "Administrative ",
+          "Quelle couverture de santé protège la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Régime général (ou spécial) et Mutuelle | Régime général (ou spécial) | CMU",
+          "Administrative"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "N6",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Protection juridique & anticipations",
+          "Administrative ",
+          "Une mesure de protection a-t-elle été mise en place ?",
+          "Obligatoire / Choix Unique",
+          "Non | Habilitation familiale | Tutelle | Curatelle simple | Curatelle renforcée | Sauvegarde de justice | Mandat de protection future",
+          "Administrative"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "N43",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Accompagnement & recours aux dispositifs",
+          "Administrative ",
+          "Dans votre rôle d'aidant avez-vous déjà bénéficié des services des accompagnements administratifs suivants ?  (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Assistante sociale | Maison départementale des Personnes Handicapées (MDPH) | Maison de l'autonomie (MDA) | Centres communaux d'action sociale (CCAS) | Mutuelles et assurances complémentaires | Associations de patients | Plateformes d'accompagnement et de répit | Service social de l'assurance maladie | Espace Autonomie Sénior (EAS) | Aucun",
+          "Administrative"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "N5",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Accompagnement & recours aux dispositifs",
+          "Administrative ",
+          "Avez-vous  déjà eu recours aux aides suivantes ?   (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Solutions de répit | Formations dédiées aux aidants | Accompagnement psychologique | Aucune | Autre",
+          "Administrative"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "N29",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Droits & aides (bénéfices)",
+          "Administrative ",
+          "De quels droits/ aides bénéficiez-vous actuellement? (plusieurs réponses possibles)",
+          "Obligatoire / Choix multiple",
+          "Allocation personnalisée d'autonomie (APA) | Aide personnalisée au logement (APL) | MaPrimeAdapt' (ANAH) | Allocation aux adultes handicapés (AAH) | Prestation de compensation du handicap (PCH) | Reconnaissance de la qualité de travailleur handicapé (RQTH) | Orientation vers un établissement ou service médico-social adapté | Carte mobilité inclusion (invalidité, priorité, stationnement) | Complément de ressources (en complément de l'AAH) | Orientation professionnelle (milieu ordinaire ou protégé) | Allocation d'éducation de l'enfant handicapé (AEEH) | la prestation de compensation du handicap (PCH) | Orientation vers des établissements ou services médico-sociaux adaptés (IME, SESSAD, …) | Mise en place d'un projet personnalisé de scolarisation (PPS) | Attribution d'une auxiliaire de vie scolaire (AVS) ou d'un accompagnant des élèves en situation de handicap (AESH) | Aménagement de la scolarité et des examens (tiers temps, matériel adapté,…) | Orientation vers des dispositifs spécifiques comme les ULIS (Unités Localisées pour l'Inclusion Scolaire) | Affiliation gratuite à l'assurance vieillesse des parents au foyer (AVPF) | Orientation vers un service d'accompagnement (SAVS, SAMSAH) | Aides pour l'aménagement du logement ou du véhicule | Aménagements pour les études supérieures | Aucun | Je ne sais pas",
+          "Administrative"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "N42",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Droits & aides (bénéfices)",
+          "Administrative ",
+          "Bénéficie-t-elle déjà d'une aide pour obtenir des prestations sociales en lien avec une ALD (ex: AAH, invalidité) ?",
+          "Obligatoire / Choix Unique / Conditionnel N41(1)",
+          "Oui | Non | Je ne sais pas",
+          "Administrative"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "E63",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Démarches prioritaires / préoccupations",
+          "Administrative ",
+          "Quelles démarches vous préoccupent le plus en ce moment pour votre proche ?",
+          "Obligatoire / Choix multiple",
+          "Dossier de dépendance (ex. APA, PCH…) | Dossier MDPH / handicap | Démarches de retraite / pension | Aides au logement / adaptation du domicile | Aides financières ponctuelles | Renouvellement de droits (ALD, mutuelle, CMU, etc.) | Autre | Aucune en particulier",
+          "Administrative"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E21",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Pensez-vous qu’il sera possible de maintenir cette situation de vie sans changement majeur dans les prochains mois ?",
+          "Obligatoire / Choix Unique",
+          "Oui, probablement | Oui, mais cela risque d’être difficile | Non, un changement sera nécessaire | Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E22",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.2 – Autonomie, aide humaine et présence nécessaire",
+          "Fragilité du proche",
+          "Globalement, combien d’heures d’aide humaine (aide à domicile, infirmier·e, etc.) votre proche reçoit-il par semaine ?",
+          "Obligatoire / Choix Unique",
+          "Moins de 5 heures | Entre 5 et 14 heures | 15 à 30 heures | Plus de 30 heures | Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E25",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "La personne aidée confond-elle parfois le jour et la nuit (ex : sommeil inversé, éveils nocturnes prolongés, endormissement en journée) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E26",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "La personne aidée se perd-elle ou semble-t-elle désorientée dans des lieux familiers (domicile, quartier, couloirs, commerces habituels) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E27",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "A-t-elle des comportements potentiellement dangereux (laisser le gaz ouvert, porte non fermée, objets allumés, errance, actes risqués) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E66",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Charge administrative & complexité",
+          "Administrative ",
+          "Les démarches administratives liées à votre proche vous paraissent-elles complexes ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "Administrative"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E69",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Charge administrative & complexité",
+          "Administrative ",
+          "Vous sentez-vous à l’aise avec les démarches administratives en ligne (assurance maladie, MDPH, impôts, retraite, etc.) ?",
+          "Obligatoire / Choix Unique",
+          "Oui, tout à fait | Oui, mais cela me prend beaucoup de temps | Non, je suis souvent perdu·e | Je n’ai pas facilement accès à un ordinateur / internet",
+          "Administrative"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E70",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Charge administrative & complexité",
+          "Administrative ",
+          "Vous arrive-t-il de devoir gérer des démarches administratives dans l’urgence (dates limites dépassées, risque de suspension d’une aide, etc.) ?",
+          "Obligatoire / Choix Unique",
+          "Non, jamais | Parfois | Souvent, je suis toujours en retard | Je ne sais pas",
+          "Administrative"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E63",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Démarches prioritaires / préoccupations",
+          "Administrative ",
+          "Quelles démarches vous préoccupent le plus en ce moment pour votre proche ?",
+          "Obligatoire / Choix multiple",
+          "Dossier de dépendance (ex. APA, PCH…) | Dossier MDPH / handicap | Démarches de retraite / pension | Aides au logement / adaptation du domicile | Aides financières ponctuelles | Renouvellement de droits (ALD, mutuelle, CMU, etc.) | Autre | Aucune en particulier",
+          "Administrative"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "N9",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "La personne aidée rencontre-t-elle des problèmes pour gérer son budget ou ses affaires administratives ?",
+          "Obligatoire / Choix Unique",
+          "Non | Elle se fait aider | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E24",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.2 – Autonomie, aide humaine et présence nécessaire",
+          "Fragilité du proche",
+          "La nuit, votre proche a-t-il besoin que quelqu’un soit présent ou reste vigilant pour lui ?",
+          "Obligatoire / Choix Unique",
+          "Non, il est autonome la nuit | Parfois, en fonction de son état | Oui, il a souvent besoin d’aide ou de surveillance | Oui, une présence est nécessaire en permanence",
+          "Fragilité du proche"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E25",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "La personne aidée confond-elle parfois le jour et la nuit (ex : sommeil inversé, éveils nocturnes prolongés, endormissement en journée) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E26",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "La personne aidée se perd-elle ou semble-t-elle désorientée dans des lieux familiers (domicile, quartier, couloirs, commerces habituels) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E64",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Inclusion (école, structure, activité)",
+          "Administrative ",
+          "Votre enfant peut-il fréquenter une école ou une structure adaptée (crèche, IME, ULIS, etc.) de façon régulière ?",
+          "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1",
+          "Oui, sans difficulté particulière | Oui, mais avec des aménagements ou accompagnement (AESH, AVS, éducateur…) | Très difficile, il manque souvent / la structure n’est pas adaptée | Non, il ne fréquente pas d’école ou de structure adaptée",
+          "Administrative"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E65",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Inclusion (école, structure, activité)",
+          "Administrative ",
+          "Votre enfant a-t-il besoin d’un accompagnant spécialisé (AESH, AVS, éducateur, autre) pour l’école, les soins ou certaines activités ?",
+          "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1",
+          "Non | Oui, déjà en place | Oui, besoin identifié mais pas encore en place",
+          "Administrative"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E67",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Inclusion (école, structure, activité)",
+          "Administrative ",
+          "Actuellement, votre proche a-t-il une activité (travail, ESAT, atelier protégé, bénévolat, accueil de jour…) adaptée à son état de santé ?",
+          "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 (tout sauf réponse 1 ou 3 ou 4)",
+          "Oui, activité adaptée | Oui, mais elle devient difficile à tenir | Non, il est sans activité mais cela ne pose pas de problème particulier | Non, et cela crée des difficultés (isolement, repli, perte de repères)",
+          "Administrative"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "O61",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Situation financière",
+          "Administrative ",
+          "Pensez-vous avoir les moyens financiers suffisants pour faire face à cette situation ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Administrative"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "N10",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Quelle est la nature de l’aide que vous apportez ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Tâches de la vie quotidienne (ménage, repas, habillage...) | Gestion administrative et budgétaire | Soutien moral, présence ou compagnie sur le lieu de vie | Accompagnement à des rendez-vous | Autre",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "N21",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Rencontre-t-elle des problèmes financiers ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "N23",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "La personne aidée a-t-elle des difficultés à maintenir une activité professionnelle, occupationnelle ou scolaire ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "N27",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Estimez-vous que la personne aidée est socialement isolée (peu ou pas de contacts avec des amis, la famille ou la communauté) ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | un peu | beaucoup | totalement",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "N9",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "La personne aidée rencontre-t-elle des problèmes pour gérer son budget ou ses affaires administratives ?",
+          "Obligatoire / Choix Unique",
+          "Non | Elle se fait aider | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "O2",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Où vit la personne aidée aujourd’hui ?",
+          "Obligatoire / Choix Unique",
+          "À son domicile | À mon domicile | En établissement",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "O7",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Avez-vous constaté des changements dans la manière dont elle se nourrit ?",
+          "Obligatoire / Choix Unique",
+          "Non | Oui | Oui et elle est dénutrie",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "E28",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Au cours des 3 derniers mois, combien de fois votre proche a-t-il été hospitalisé (au moins une nuit ou admission) ?",
+          "Obligatoire / Choix Unique",
+          "Aucune / 1 fois / 2 fois / 3 fois / 4 fois ou plus / Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "E29",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Parmi ces hospitalisations, combien étaient programmées (prévue à l’avance) ?",
+          "Obligatoire / Choix Unique / conditionnel EXX (tout sauf 1 ou 6)",
+          "0 / 1 / 2 / 3 / 4 ou plus / Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "E68",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Charge administrative & complexité",
+          "Administrative ",
+          "Combien de temps consacrez-vous chaque mois aux démarches administratives pour votre proche ?",
+          "Obligatoire / Choix Unique",
+          "Moins de 1h | Entre 1h et 5h | Plus de 5h",
+          "Administrative"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "O8",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.2 – Autonomie, aide humaine et présence nécessaire",
+          "Fragilité du proche",
+          "Au quotidien a-t-elle besoin d'une aide humaine pour se déplacer en dehors de son domicile ?",
+          "Obligatoire / Choix Unique / conditionnel N3 (1 ou 3)",
+          "Non, elle est indépendante | Oui, de temps en temps | Oui, tout le temps",
+          "Fragilité du proche"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "O9",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.2 – Autonomie, aide humaine et présence nécessaire",
+          "Fragilité du proche",
+          "Au quotidien a-t-elle besoin d'une aide humaine pour se déplacer à l'interieur de son domicile ?",
+          "Obligatoire / Choix Unique / conditionnel N3 (1 ou 2 ou 3)",
+          "Non, elle est indépendante | Oui, de temps en temps | Oui, tout le temps",
+          "Fragilité du proche"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "E30",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Parmi les hospitalisations non programmées, combien ont commencé par un passage aux urgences ?",
+          "Obligatoire / Choix Unique / conditionnel EXX (1 ou6)",
+          "0 / 1 / 2 / 3 / 4 ou plus / Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "E31",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Quelle a été la durée de la dernière hospitalisation (la plus récente) ?",
+          "Obligatoire / Choix Unique / condtionnel EXX1 (tout sauf 1 ou 6)",
+          "Moins d’une journée / 1 à 3 jours / 4 à 7 jours / Plus de 7 jours / Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "E32",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "A-t-elle des difficultés à se lever d’un lit, s’asseoir ou se lever d’un fauteuil sans aide ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "N19",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "Ressentez-vous souvent des changements d'humeur ou de comportement chez elle ?",
+          "Obligatoire / Choix Unique",
+          "Jamais | Parfois | Souvent",
+          "Fragilité du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "N22",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "A-t-elle des comportements à risque (automutilation, comportements dangereux) ?",
+          "Obligatoire / Choix Unique",
+          "Jamais | Parfois | Souvent",
+          "Fragilité du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "N24",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "La personne aidée at-telle des troubles de la mémoire ou de la concentration ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "N25",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "Exprime-t-elle des idées suicidaires ?",
+          "Obligatoire / Choix Unique",
+          "Jamais | Parfois | Souvent",
+          "Fragilité du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "O13",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "Selon vous, y-a-t-il une détérioration notable dans ses fonctions cognitives ?",
+          "Obligatoire / Choix Unique",
+          "Non | Oui, diminution de certaines fonctions | Oui, elles sont totalement altérées",
+          "Fragilité du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "E33",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "A-t-elle des difficultés à utiliser le téléphone ou des appareils simples (télécommande, micro-ondes, sonnette) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "E34",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Comprenez-vous bien la maladie, l’état de santé et les besoins médicaux de votre proche ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Partiellement | Pas du tout",
+          "Parcours médical du proche"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "E35",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Avez-vous l’impression que le diagnostic de votre proche est clair et bien établi aujourd’hui ?",
+          "Obligatoire / Choix Unique",
+          "Oui, le diagnostic est clair | On m’a évoqué plusieurs hypothèses, mais rien de vraiment tranché | Non, personne ne nous a vraiment donné de diagnostic | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "N11",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "La personne aidée est-elle sujette à des douleurs chroniques liées à son état de santé ?",
+          "Obligatoire / Choix Unique",
+          "Non | Occasionnellement | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "N12",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "Ressentez-vous souvent de la fatigue ou un manque d'énergie chez la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "N13",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "La personne aidée a-t-elle des troubles du sommeil ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "N34",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "A-t-elle des difficultés à s'alimenter correctement (sous-alimentation, suralimentation) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "N44",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "Avez-vous constaté un changement de poids ?",
+          "Obligatoire / Choix Unique / conditionnel N3 (réponse 1,2,",
+          "Non | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "O15",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "La personne aidée consomme-t-elle de manière habituelle :  (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multipples",
+          "Alcool (plus de 3 verres par jour) | Tabac | Aucun des deux",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "O22",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "Quels ont été les principaux constats suite aux derniers examens de vue et d'audition ?",
+          "Obligatoire / Choix multiples",
+          "Correct | Correct avec le port de lunettes ou de lentilles | Correct avec appareillage auditif | Mauvais malgré le port de lunettes ou de lentilles | Mauvais malgré l'appareillage auditif | Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "O26",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "Avez-vous constaté une diminution de sa taille habituelle ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "O3",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "Combien de médicaments différents prend-elle chaque jour ?",
+          "Obligatoire / Choix Unique",
+          "Elle ne prend pas de traitement actuellement | 1 à 3 médicaments | 4 à 6 médicaments | 7 médicament et plus",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "O4",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "Selon vous, en ce moment, diriez-vous de la personne aidée qu'elle est :",
+          "Obligatoire / Choix Unique",
+          "D'humeur normale | Parfois anxieuxe ou triste | Déprimée",
+          "Fragilité du proche"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "O5",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.4 – Douleur, fatigue, sommeil et état général du proche",
+          "Fragilité du proche",
+          "Selon vous et par rapport à une personne du même âge, diriez-vous que la personne aidée est :",
+          "Obligatoire / Choix Unique",
+          "En meilleure santé | Santé équivalente | En moins bonne santé",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N31",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "La personne aidée bénéficie-t-elle d'une prise en charge en établissement spécialisé ?",
+          "Obligatoire / Choix Unique",
+          "Aucune prise en charge | Etablissements pour enfants et adolescents (IME,ITEP, IEM, EEAP) | Services d'accompagnement (SAVS, SAMSAH) | Centres de rééducation fonctionnelle | Etablissements pour personnes avec un handicap sensoriel (Institut pour déficients visuels, auditifs) | Etablissements pour adultes (FAM, MAS, foyer de vie, foyer d'hébergement) | Etablissements et services d'aide par le travail (ESAT) | Centres de rééducation fonctionnelle | Etablissements pour personnes avec un handicap sensoriel (Institut pour déficients visuels, auditifs) | Unités pour personnes handicapées vieillisantes | EHPAD | Résidence Services ou Autonomie, | Unité de soins longue durée (USLD) | Centre de Ressouces Territoriaux (CRT) | Accueil de jour ou hopital de jour",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N16",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Quelle est l'origine du handicap de la personne aidée ?",
+          "Obligatoire / Choix Unique Conditionnel N3 réponse 2",
+          "Situation de handicap depuis la naissance | Situation de handicap suite à une maladie | Situation de handicap suite à un accident",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N30",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Quel est le taux d'incapacité reconnu ?",
+          "Obligatoire / Choix Unique Conditionnel N3 réponse 2",
+          "Inférieur à 50% | Compris entre 50% et 79% | Supérieur ou égal à 80% | Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N37",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Quel type d'addiction la personne aidée présente-t-elle ?  (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples / conditionnel N3 (5)",
+          "Alcool | Tabac | Produits stupéfiants | Médicaments | Jeux d'argent | Jeux vidéo | Autre",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N38",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "La personne aidée a-t-elle des difficultés à contrôler sa consommation ou son comportement addictif ?",
+          "Obligatoire / Choix Unique / conditionnel N3 (5)",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N39",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Observez-vous, chez la personne aidée, des problèmes de santé physique liés à l'addiction ?",
+          "Obligatoire / Choix Unique / conditionnel N3 (5)",
+          "Non | Je ne sais pas | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N40",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "La personne aidée a-t-elle déjà tenté de se sevrer ou de suivre un traitement pour son addiction ?",
+          "Obligatoire / Choix Unique / conditionnel N3 (5)",
+          "Non | Je ne sais pas | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "O53",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "La dépendance de la personne aidée a-t-elle été évaluée par les services sociaux ? (grille AGGIR)",
+          "Obligatoire / Choix Unique",
+          "Oui | Non | Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "O54",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus",
+          "Fragilité du proche",
+          "Quel est son niveau de dépendance selon cette grille AGGIR ?",
+          "Obligatoire / Choix Unique / Contionnel O53(1)",
+          "Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "E38",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Si votre proche est passé ou va passer de services ‘enfant’ à des services ‘adulte’ (pédopsychiatrie → psychiatrie adulte, pédiatrie → médecine adulte…), ce passage a-t-il été préparé et organisé ?",
+          "Obligatoire / Choix Unique / conditonnel N3 réponse 2,3,4 et 5 ET conditionnel O1 réponse 1",
+          "Oui, bien préparé | Un peu, mais cela reste flou | Non, pas du tout | Pas concerné",
+          "Parcours médical du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "E27",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.3 – Mémoire, comportement et risques pour soi ou pour les autres",
+          "Fragilité du proche",
+          "A-t-elle des comportements potentiellement dangereux (laisser le gaz ouvert, porte non fermée, objets allumés, errance, actes risqués) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "N14",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "La personne aidée éprouve-t-elle des difficultés à suivre son traitement médical ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "N18",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "La personne aidée peut-elle réaliser seule ses activités de la vie quotidienne (toilette, habillage, préparations des repas) ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non elle a besoin d'aide",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "N32",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "Y-a-t-il des aides techniques en place ?  (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Aucune | Aides à la mobilité (fauteuil roulant, prothèse, canne,…) | Aides à la communication (synthèse vocale, tablette, amplificateur de voix,…) | Aides aux soins personnels (lève-personne, siège de douche, barres d'appui, lit médicalisé) | Aides sensorielles (appareil auditif, lunettes adaptées, système de guidage pour malvoyants) | Aides à l'aménagement du domicile (rampes d'accès, monte escalier, portes élargies) | Aides technologiques (commande à distance, domotique, ordinateur adapté) | Aides à l'apprentissage et à la cognition (logiciels spécialisés, agendas électroniques)",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "N36",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "A-t-elle besoin d'aide pour organiser et planifier ses journées ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O11",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "Est-elle incontinente ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O12",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "Peut-elle se nourrir par elle-même ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Parfois | Non",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O16",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "La personne aidée est-elle ou a-t-elle été concernée par : (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, Troubles du déficit de l'attention avec ou sans hyperactivité TDAH…) | Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...) | Dermatologique (dermatite atopique, psoriasis, acné…) | Respiratoire (asthme, maladie pulmonaire obstructive chronique…) | Génito-urinaire (infections urinaires à répétition, hypertrophie benigne de la prostate, endométriose…) | Endocrinienne (hyper ou hypo thyroidie, obésité sévère…) | Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…) | Métabolique (diabète, cholesterol…) | Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…) | Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…) | Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…) | Maladie génétique (muchovicidose, trisomie…) | Troubles visuels sévères (DMLA, cécité…) | Troubles auditifs sévères | Aucun | Je ne sais pas",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O51",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "Songez-vous à adapter son lieu de vie son quotidien?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O6",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "A-t-elle malheureusement chuté dans les 6 derniers mois ?",
+          "Obligatoire / Choix Unique / conditionnel N3 (1 ou 2 ou 3)",
+          "Non | Oui, mais sans gravité | Oui avec complication, ou, Oui plusieurs fois",
+          "Fragilité du proche"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "E36",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Depuis le début des problèmes de santé de votre proche, avez-vous le sentiment d’avoir consulté beaucoup de professionnels ou fait beaucoup d’examens sans que la situation soit vraiment clarifiée ?",
+          "Obligatoire / Choix Unique",
+          "Non, pas particulièrement | Oui, un peu | Oui, beaucoup (impression de tourn­er en rond)",
+          "Parcours médical du proche"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "E36",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Depuis le début des problèmes de santé de votre proche, avez-vous le sentiment d’avoir consulté beaucoup de professionnels ou fait beaucoup d’examens sans que la situation soit vraiment clarifiée ?",
+          "Obligatoire / Choix Unique",
+          "Non, pas particulièrement | Oui, un peu | Oui, beaucoup (impression de tourn­er en rond)",
+          "Parcours médical du proche"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "E37",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Avez-vous déjà reçu des avis médicaux contradictoires sur la situation de votre proche (diagnostic ou traitement) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Oui, parfois | Oui, souvent",
+          "Parcours médical du proche"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "E38",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Si votre proche est passé ou va passer de services ‘enfant’ à des services ‘adulte’ (pédopsychiatrie → psychiatrie adulte, pédiatrie → médecine adulte…), ce passage a-t-il été préparé et organisé ?",
+          "Obligatoire / Choix Unique / conditonnel N3 réponse 2,3,4 et 5 ET conditionnel O1 réponse 1",
+          "Oui, bien préparé | Un peu, mais cela reste flou | Non, pas du tout | Pas concerné",
+          "Parcours médical du proche"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "N17",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Quel est son type de handicap ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix multiples / Conditionnel N3 réponse 2",
+          "Handicap cognitif | Handicap psychique | Handicap visuel | Handicap auditif | Handicap intellectuel | Handicap moteur | Traumatisme cranien | Autisme ou autres troubles envahissant du développement | Troubles majeurs du comportement | Maladie invalidante",
+          "Parcours médical du proche"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "N41",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.1 – Compréhension du diagnostic et de la maladie",
+          "Parcours médical du proche ",
+          "Bénéficie-t-elle d'une reconnaissance officielle d'une maladie chronique (Affection Longue Durée) auprès de l'Assurance Maladie ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "E39",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "Le premier professionnel de santé (médecin, infirmier, spécialiste) est-il situé à moins de 15 minutes du domicile de votre proche ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Parcours médical du proche"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "E40",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "Quelles sont les principales difficultés pour accéder aux soins dont votre proche aurait besoin ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Unique",
+          "Délais pour obtenir un rendez-vous | Peu ou pas de médecins disponibles à proximité | Difficultés de transport / mobilité | Difficultés à utiliser les outils de prise de rendez-vous en ligne | Organisation avec mon travail / ma vie personnelle | Coût des soins | Autre | Je ne rencontre pas de difficultés particulières",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "E41",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "Votre proche a-t-il déjà participé à un programme d’éducation thérapeutique (ETP) lié à sa maladie (diabète, insuffisance cardiaque, BPCO, etc.) ?",
+          "Obligatoire / Choix Unique / conditonnel N3 réponse 1 ou 3",
+          "Oui | Non, on ne nous en a jamais parlé | Non, mais on nous l’a proposé | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O17",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "A-t-elle un médecin traitant ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O18",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "- A-t-elle d'autres médecins spécialistes qui la suivent actuellement ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O19",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "Lesquels ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples /Conditionnel O18(1)",
+          "Cardiologue | Oncologue | Neurologue | Pneumologue | Ophtalmologue | Psychiatre | Chirurgien-Dentiste | Gastro-entérologue | Endocrinologue / Diabetologue | ORL | Gynecologue | Nephrologue | Gériatre | Dermatologue | Autre",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O20",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "La personne aidée a-t-elle déjà réalisé des rendez-vous médicaux cette année ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O21",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "Lesquels ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples/ Conditionnel O21(1)",
+          "Bilan de santé général (prise de sang…) | Audition | Vue | Contrôle dentaire | Suivi cardiovasculaire | Ostéodensitométrie | Vaccination | Examen gynécologique | Suivi dermatologique | Suivi psychologique | Dépistage des cancers",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O24",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.2 – Accès aux soins et aux professionnels de santé",
+          "Parcours médical du proche ",
+          "Éprouvez-vous des difficultés à prendre rendez-vous chez des spécialistes autour de son domicile ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "E42",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.3 – Urgences, hospitalisations et suivi médical",
+          "Parcours médical du proche ",
+          "Parmi les rendez-vous médicaux réalisés ce mois-ci, combien étaient non prévus à l’avance hors hospitalisation (urgence, consultation imprévue, médecin sans rendez-vous) ?",
+          "Obligatoire / Choix Unique",
+          " Aucun | 1 seul | 2 | 3 | 4 | 5 | 6 ",
+          "Parcours médical du proche"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "E43",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.3 – Urgences, hospitalisations et suivi médical",
+          "Parcours médical du proche ",
+          "Au cours des 12 derniers mois, y a-t-il eu des périodes de plusieurs mois sans aucun suivi médical pour le problème principal de votre proche ?",
+          "Obligatoire / Choix Unique",
+          "Non | Oui, une période de 3 à 6 mois | Oui, plusieurs périodes ou plus de 6 mois | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "N14",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.x – Autres éléments sur les fragilités du proche",
+          "Fragilité du proche",
+          "La personne aidée éprouve-t-elle des difficultés à suivre son traitement médical ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Fragilité du proche"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E44",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.3 – Urgences, hospitalisations et suivi médical",
+          "Parcours médical du proche ",
+          "Votre proche a-t-il déjà bénéficié d’une consultation ou d’un bilan de synthèse pour faire le point sur l’ensemble de ses maladies (consultation longue, consultation de coordination, centre spécialisé…) ?",
+          "Obligatoire / Choix Unique/ Conditionnel N3 réponse 1 ou 3",
+          "Oui, récemment | Oui, mais il y a plus d’un an | Non, jamais | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E50",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.4 – Addictions, troubles psychiques et suivi spécialisé",
+          "Parcours médical du proche ",
+          "Votre proche est-il actuellement suivi pour ses troubles psychiques (psychiatre, psychologue, centre spécialisé) et suit-il son traitement si prescrit ?",
+          "Obligatoire / Choix Unique / Conditionnel N3 réponse 4",
+          "Oui, suivi régulier et traitement bien pris | Oui, mais suivi ou traitement irrégulier | Non, pas de suivi / pas de traitement | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E51",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.4 – Addictions, troubles psychiques et suivi spécialisé",
+          "Parcours médical du proche ",
+          "Votre proche est-il prêt à être aidé pour son addiction (parler à un professionnel, envisager un suivi, un sevrage…) ?",
+          "Obligatoire / Choix Unique/ Conditionnel N3 réponse 5",
+          "Oui | Peut-être / selon les conditions | Non | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E52",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.5 – Coordination des soins et personne de référence",
+          "Parcours médical du proche ",
+          "Aujourd’hui, avez-vous une personne de référence qui coordonne les soins de votre proche (médecin traitant, infirmier·e, service hospitalier, structure de coordination…) ?",
+          "Obligatoire / Choix Unique",
+          "Oui, clairement identifiée | Oui, mais je ne suis pas sûr·e de son rôle | Non, personne ne coordonne vraiment | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E53",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.5 – Coordination des soins et personne de référence",
+          "Parcours médical du proche ",
+          "Pour vous, qui est aujourd’hui le professionnel ‘référent’ pour la santé de votre proche (celui à qui vous pensez en premier quand ça ne va pas) ?",
+          "Obligatoire / Choix Unique",
+          "Médecin traitant | Spécialiste hospitalier | Spécialiste libéral | Aucune personne vraiment référente | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E60",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.6– Autres éléments sur le parcours de soins",
+          "Parcours médical du proche ",
+          "Pour l’évaluation de votre enfant, quels professionnels sont déjà intervenus ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples / Conditionnel N3 réponse 2 ou 4 et O1 réponse 1",
+          "Pédiatre / généraliste | Neuropédiatre | Pédopsychiatre | Psychologue | Orthophoniste | Psychomotricien / ergothérapeute | CAMSP / CMPP / autre centre spécialisé | Aucun de ces professionnels",
+          "Parcours médical du proche"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "E57",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.6 – Autres éléments sur le parcours de soins",
+          "Parcours médical du proche ",
+          "Avez-vous l’impression qu’il existe un ‘plan de route’ clair pour la suite des soins de votre proche (prochains rendez-vous, objectifs, professionnels impliqués) ?",
+          "Obligatoire / Choix Unique",
+          "Oui, c’est clair | Partiellement | Non, on avance au jour le jour",
+          "Parcours médical du proche"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "E58",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.6– Autres éléments sur le parcours de soins",
+          "Parcours médical du proche ",
+          "Votre proche a-t-il bénéficié d’une évaluation spécialisée liée à l’âge (consultation mémoire, bilan gériatrique, bilan de chutes, etc.) ?",
+          "Obligatoire / Choix Multiples / conditionnel N3 reponse 1 ou 3",
+          "Oui, consultation mémoire | Oui, consultation gériatrique / bilan gériatrique | Oui, bilan de chutes | Oui, autre évaluation spécialisée | Non, aucune",
+          "Parcours médical du proche"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "E61",
+          "Bloc 7 – Droits, démarches, administratif & finances",
+          "Protection juridique & anticipations",
+          "Administrative ",
+          "otre proche a-t-il déjà rédigé des directives anticipées concernant ses souhaits de soins en cas de situation grave ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non | Je ne sais pas",
+          "Administrative"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "E62",
+          "",
+          "",
+          "Administrative ",
+          "Pour quels droits/ aides avez-vous effectuer une demande qui est actuellement en cours ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix multiple",
+          "Allocation personnalisée d'autonomie (APA) | Aide personnalisée au logement (APL) | MaPrimeAdapt' (ANAH) | Allocation aux adultes handicapés (AAH) | Prestation de compensation du handicap (PCH) | Reconnaissance de la qualité de travailleur handicapé (RQTH) | Orientation vers un établissement ou service médico-social adapté | Carte mobilité inclusion (invalidité, priorité, stationnement) | Complément de ressources (en complément de l'AAH) | Orientation professionnelle (milieu ordinaire ou protégé) | Allocation d'éducation de l'enfant handicapé (AEEH) | la prestation de compensation du handicap (PCH) | Orientation vers des établissements ou services médico-sociaux adaptés (IME, SESSAD, …) | Mise en place d'un projet personnalisé de scolarisation (PPS) | Attribution d'une auxiliaire de vie scolaire (AVS) ou d'un accompagnant des élèves en situation de handicap (AESH) | Aménagement de la scolarité et des examens (tiers temps, matériel adapté,…) | Orientation vers des dispositifs spécifiques comme les ULIS (Unités Localisées pour l'Inclusion Scolaire) | Affiliation gratuite à l'assurance vieillesse des parents au foyer (AVPF) | Orientation vers un service d'accompagnement (SAVS, SAMSAH) | Aides pour l'aménagement du logement ou du véhicule | Aménagements pour les études supérieures | Aucun | Je ne sais pas",
+          "Administrative"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "E54",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.5 – Coordination des soins et personne de référence",
+          "Parcours médical du proche ",
+          "Comment décririez-vous l’organisation des soins de votre proche ?",
+          "Obligatoire / Choix Unique",
+          "Plutôt simple et bien organisée | Gérable mais parfois compliquée | Souvent très compliquée | Je la trouve ingérable",
+          "Parcours médical du proche"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "E55",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.5 – Coordination des soins et personne de référence",
+          "Parcours médical du proche ",
+          "Avez-vous le sentiment qu’une meilleure coordination entre les professionnels améliorerait beaucoup la situation de votre proche ?",
+          "Obligatoire / Choix Unique",
+          "Non, pas vraiment | Oui, un peu | Oui, énormément",
+          "Parcours médical du proche"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "O59",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.5 – Coordination des soins et personne de référence",
+          "Parcours médical du proche ",
+          "Quels sont les professionnels, ou services qui interviennent déjà au domicile de la personne aidée ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Service à domicile (SAD) / auxiliaire de vie | Service à domicile (SAD) / aide ménagère | Service de soins infirmiers à domicile (SSIAD) | Infirmier libéral | Masseur-kinésithérapeute | Aide physique adaptée (APA) | Télé-assistance | Portage des repas | Educateur spécialisé | Pédicure-podologue | Ergothérapeute | Aucun | Autre",
+          "Parcours médical du proche"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "E59",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.6– Autres éléments sur le parcours de soins",
+          "Parcours médical du proche ",
+          "Votre enfant a-t-il été orienté vers une équipe ou une structure spécialisée dans les troubles du neurodéveloppement (TND) ?",
+          "Obligatoire / Choix Unique/ Conditionnel N3 réponse 2 ou 4 et O1 réponse 1",
+          "Oui, et une évaluation est en cours / réalisée | Oui, mais nous sommes en attente depuis longtemps | Non, personne ne nous en a parlé | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E45",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.3 – Urgences, hospitalisations et suivi médical",
+          "Parcours médical du proche ",
+          "Votre proche est-il suivi dans un service ou une consultation spécialisée en addictologie ?",
+          "Obligatoire / Choix Unique / conditionnel N3 réponse 5",
+          "Oui, de façon régulière | Oui, mais il/elle n’y va plus | Non | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E46",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.3 – Urgences, hospitalisations et suivi médical",
+          "Parcours médical du proche ",
+          "Après la dernière hospitalisation de votre proche, un suivi médical a-t-il été organisé (rendez-vous programmés, coordination avec le médecin traitant, etc.) ?",
+          "Obligatoire / Choix Unique",
+          "Oui, clairement organisé | Partiellement | Non, nous avons dû tout organiser seuls | Il n’a pas été hospitalisé récemment",
+          "Parcours médical du proche"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E47",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.3 – Urgences, hospitalisations et suivi médical",
+          "Parcours médical du proche ",
+          "Quand l’état de santé de votre proche se dégrade brusquement (crise, aggravation), avez-vous un plan clair sur ce qu’il faut faire ?",
+          "Obligatoire / Choix Unique",
+          "Oui, on sait quoi faire et qui appeler | On a quelques repères, mais ce n’est pas très clair | Non, on improvise systématiquement / on va souvent aux urgences",
+          "Parcours médical du proche"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E48",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.4 – Addictions, troubles psychiques et suivi spécialisé",
+          "Parcours médical du proche ",
+          "Actuellement, votre proche est-il suivi pour ses troubles psychiques dans l’un des cadres suivants ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Unique / Conditionnel N3 réponse 4",
+          "Médecin généraliste | Psychiatre en libéral | Centre médico-psychologique (CMP / CMPP) | Hôpital de jour / centre de crise | Psychologue | Aucun suivi actuellement",
+          "Parcours médical du proche"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E49",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.4 – Addictions, troubles psychiques et suivi spécialisé",
+          "Parcours médical du proche ",
+          "Dans le suivi de l’addiction, quels types de professionnels sont impliqués ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Unique / Conditionnel N3 réponse 5",
+          "Médecin (généraliste ou addictologue) | Psychiatre / psychologue | Travailleur social / éducateur spécialisé | Infirmier (CSAPA, hôpital, ville) | Association de patients / groupe de parole | Aucun suivi structuré",
+          "Parcours médical du proche"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E56",
+          "Bloc 6 – Parcours de soins de votre proche",
+          "6.6 – Autres éléments sur le parcours de soins",
+          "Parcours médical du proche ",
+          "Qu’est-ce qui vous inquiète le plus pour la santé de votre proche dans les prochains mois ?",
+          "Obligatoire / Choix Unique",
+          "Les chutes | La mémoire, le comportement | L’alimentation / le poids | Les allers-retours aux urgences | Le risque qu’il/elle ne puisse plus rester à domicile | Autre | Je ne sais pas",
+          "Parcours médical du proche"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "N7",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Impact sur vie familiale / sociale / professionnelle",
+          "social et relationnel",
+          "Avez-vous dû aménager votre activité professionnelle pour faire face à votre rôle d'aidant ?  (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Non | Oui j'ai dû aménager mes horaires | Oui j'ai dû prendre des jours de congé",
+          "social et relationnel"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "O27",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Impact sur vie familiale / sociale / professionnelle",
+          "social et relationnel",
+          "Vous occuper de la personne aidée entraine-t-il des difficultés dans votre vie familiale ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "social et relationnel"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "O28",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Impact sur vie familiale / sociale / professionnelle",
+          "social et relationnel",
+          "Vous occuper de la personne aidée entraîne-t-il des difficultés dans vos relations avec vos amis, dans vos loisirs ou dans votre travail ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "social et relationnel"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "O47",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Proximité & fréquence de contact",
+          "social et relationnel",
+          "À combien de temps habitez-vous du domicile de la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Moins de 30 min | Entre 30 min et 1h30 | Plus de 1h30",
+          "social et relationnel"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "O48",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Proximité & fréquence de contact",
+          "social et relationnel",
+          "Quelle est la fréquence de vos visites ?",
+          "Obligatoire / Choix Unique",
+          "Tous les jours | Au moins 1 fois par semaine | Au moins 1 fois par mois | Au moins 1 fois tous les 3 mois | Au moins 1 fois tous les 6 mois | Au moins 1 fois par an | Autre",
+          "social et relationnel"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "N8",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Impact sur travail",
+          "Santé physique et psychologique",
+          "Votre rôle d'aidant vous a-t-il conduit à être en arrêt de travail (maladie) lors des 12 derniers mois ?",
+          "Obligatoire / Choix Unique",
+          "Non | J'ai dû m'arrêter moins de 5 jours | J'ai dû m'arrêter entre 5 jours et 1 mois | J'ai dû m'arrêter entre 1 mois et 3 mois | J'ai dû m'arrêter entre 3 mois et 6 mois | J'ai dû m'arrêter plus de 6 mois",
+          "Santé physique et psychologique"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "E1",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Réseau d’aide & entourage",
+          "social et relationnel",
+          "Comment se passe la répartition de l’aide dans votre entourage (famille, proches) ?",
+          "Obligatoire / Choix Unique",
+          "Plutôt équilibrée et satisfaisante | Je fais la plus grande partie mais cela reste acceptable | Je fais presque tout et cela crée des tensions ou un sentiment d’injustice | Je suis totalement seul·e",
+          "social et relationnel"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "E2",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Réseau d’aide & entourage",
+          "social et relationnel",
+          "En cas de coup dur, avez-vous autour de vous des personnes sur qui vous pouvez vraiment compter (famille, amis, voisins…) ?",
+          "Obligatoire / Choix Unique",
+          "Oui, plusieurs personnes | Oui, une personne | Très peu / presque personne | Personne",
+          "social et relationnel"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "E6",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Réseau d’aide & entourage",
+          "social et relationnel",
+          "Votre proche accepte-t-il l’aide de personnes extérieures (aide à domicile, infirmier, structure, etc.) ?",
+          "Obligatoire / Choix Unique",
+          "Oui, facilement | Oui, mais avec des réticences | Non, il/elle refuse la plupart du temps | Je ne sais pas / nous n’avons pas encore essayé",
+          "social et relationnel"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "N4",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Réseau d’aide & entourage",
+          "social et relationnel",
+          "Au sein de votre famille, êtes vous seul(e) à vous occuper de la personne aidée?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "social et relationnel"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "E7",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Charge & retentissement santé",
+          "Santé physique et psychologique",
+          "À quel point vous sentez-vous épuisé·e par votre rôle d’aidant actuellement",
+          "Obligatoire / Choix Unique",
+          "Pas du tout fatigué·e | Un peu fatigué·e | Très fatigué·e | Épuisé·e / au bord de craquer",
+          "Santé physique et psychologique"
+        ],
+        [
+          "R3 – Isolement social de la personne aidée",
+          "N20",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Vie sociale de la personne aidée",
+          "social et relationnel",
+          "A-t-elle  des difficultés à maintenir des relations sociales stables ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "social et relationnel"
+        ],
+        [
+          "R3 – Isolement social de la personne aidée",
+          "N27",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Estimez-vous que la personne aidée est socialement isolée (peu ou pas de contacts avec des amis, la famille ou la communauté) ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | un peu | beaucoup | totalement",
+          "Fragilité du proche"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "E4",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Relation aidant‑aidé & dynamique familiale",
+          "social et relationnel",
+          "Depuis que vous aidez votre proche, comment a évolué votre relation avec lui/elle ?",
+          "Obligatoire / Choix Unique",
+          "Plutôt renforcée / plus proche | Globalement similaire | Plus tendue / plus compliquée | Difficile à dire",
+          "social et relationnel"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "E5",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Relation aidant‑aidé & dynamique familiale",
+          "social et relationnel",
+          "Existe-t-il des tensions ou des désaccords au sein de la famille concernant la prise en charge de votre proche ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "social et relationnel"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "O30",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Relation aidant‑aidé & dynamique familiale",
+          "social et relationnel",
+          "Avez-vous le sentiment de ne plus reconnaître la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "social et relationnel"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "O31",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Relation aidant‑aidé & dynamique familiale",
+          "social et relationnel",
+          "Avez-vous peur pour l'avenir de la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "social et relationnel"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "E3",
+          "Bloc 3 – Votre quotidien d’aidant et vos relations",
+          "Réseau d’aide & entourage",
+          "social et relationnel",
+          "Quelles sont les autres personnes à charge autour de vous que vous devez aider?",
+          "Obligatoire / Choix Multiples",
+          "Aucun / Enfant(s) mineurs / autre(s) proche(s) dépendant(s)",
+          "social et relationnel"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "E11",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Besoin d’aide & capacité à continuer",
+          "Santé physique et psychologique",
+          "Si rien ne change, pensez-vous pouvoir continuer à vous occuper de votre proche dans les 6 prochains mois ?",
+          "Obligatoire / Choix Unique",
+          "Oui, sans difficulté particulière | Oui, mais ce sera difficile | Je ne suis pas sûr·e | Non, je risque de ne plus y arriver",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O32",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Besoin d’aide & capacité à continuer",
+          "Santé physique et psychologique",
+          "Souhaitez-vous être davantage aidé(e) pour vous en occuper ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "E8",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Charge & retentissement santé",
+          "Santé physique et psychologique",
+          "Avez-vous le sentiment d’être seul(e) émotionnellement face à votre rôle d’aidant ?",
+          "Obligatoire / Choix Unique",
+          "Jamais | parfois | souvent | tout le temps",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O29",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Charge & retentissement santé",
+          "Santé physique et psychologique",
+          "Vous occuper de la personne aidée a-t-il un retentissement sur vote santé (physique et/ou psychique) ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O33",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Charge & retentissement santé",
+          "Santé physique et psychologique",
+          "Ressentez-vous une charge en vous occupant de cette personne ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "E14",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Impact sur travail",
+          "Santé physique et psychologique",
+          "Et au cours des 30 derniers jours?",
+          "Obligatoire / Choix Unique / Conditionnel N8 (tout sauf réponse 1)",
+          "Moins de 3 jours / Entre 4 et 7 jours / Plus de 7 jours",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "N8",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Impact sur travail",
+          "Santé physique et psychologique",
+          "Votre rôle d'aidant vous a-t-il conduit à être en arrêt de travail (maladie) lors des 12 derniers mois ?",
+          "Obligatoire / Choix Unique",
+          "Non | J'ai dû m'arrêter moins de 5 jours | J'ai dû m'arrêter entre 5 jours et 1 mois | J'ai dû m'arrêter entre 1 mois et 3 mois | J'ai dû m'arrêter entre 3 mois et 6 mois | J'ai dû m'arrêter plus de 6 mois",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "E12",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Inquiétudes / sécurité",
+          "Santé physique et psychologique",
+          "Êtes-vous inquiet·ète à l’idée que votre proche puisse se faire du mal (parole, geste, négligence grave de sa santé) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois, selon les périodes | Oui, souvent",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "E13",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Inquiétudes / sécurité",
+          "Santé physique et psychologique",
+          "Êtes-vous inquiet·ète à l’idée que votre proche puisse mettre d’autres personnes en danger (comportements agressifs, imprévisibles, conduite à risques…) ?",
+          "Obligatoire / Choix Unique",
+          "Non | Parfois | Oui",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O49",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Temps d’aide (durée / temps consacré)",
+          "Santé physique et psychologique",
+          "Depuis combien de temps l'aidez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Moins de 6 mois | Entre 6 mois et 2 ans | Depuis plus de 2 ans",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O50",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Temps d’aide (durée / temps consacré)",
+          "Santé physique et psychologique",
+          "Combien de temps lui consacrez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Je n’ai malheureusement pas le temps | Entre 1h et 5h par semaine | Entre 6h et 10h par semaine | Plus de 10h par semaine",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "E10",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Temps pour soi & moral",
+          "Santé physique et psychologique",
+          "Sur le plan moral (stress, inquiétude), où vous situez-vous en ce moment ?",
+          "Obligatoire / Choix Unique",
+          "Ça va globalement | e suis parfois tendu·e ou inquiet·ète | Je suis souvent tendu·e ou inquiet·ète | Je me sens débordé·e / au bord de craquer",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "E9",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Temps pour soi & moral",
+          "Santé physique et psychologique",
+          "Parvenez-vous à avoir du temps pour vous au cours d’une semaine habituelle ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O42",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Santé : maladies / antécédents",
+          "Santé physique et psychologique",
+          "Êtes-vous concerné ou avez-vous été concerné par une ou plusieurs de ces maladies : (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples",
+          "Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, troubles du déficit de l'attention avec ou sans hyperactivité TDAH…) | Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...) | Dermatologique (dermatite atopique, psoriasis, acné…) | Respiratoire (asthme, maladie pulmonaire obstructive chronique…) | Génito-urinaire (infections urinaires à répétition, hypertrophie bénigne de la prostate, endométriose…) | Endocrinienne (hyper ou hypo thyroidie, obésité sévère…) | Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…) | Métabolique (diabète, cholesterol…) | Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…) | Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…) | Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…) | Maladies génétiques (muchovicidose, trisomie…) | Troubles visuels sévères (DMLA, cécité…) | Troubles auditifs sévères | Je ne sais pas",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O43",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Santé : médicaments",
+          "Santé physique et psychologique",
+          "Combien de médicaments différents prenez-vous chaque jour ?",
+          "Obligatoire / Choix Unique",
+          "1 à 3 médicaments | 4 à 6 médicaments | 7 médicaments et plus | Je ne prends pas de traitement actuellement",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "E15",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Suivi médical & accès aux soins",
+          "Santé physique et psychologique",
+          "Rencontrez-vous des difficultés à obtenir des rendez-vous médicaux pour vous-même ?",
+          "Obligatoire / Choix Unique",
+          "Pas du tout | Un peu | Oui",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "E16",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Suivi médical & accès aux soins",
+          "Santé physique et psychologique",
+          "Depuis que vous êtes aidant, vos propres rendez-vous médicaux…",
+          "Obligatoire / Choix Unique",
+          "Je les gère normalement / J’ai du mal à les prendre ou à les garder / Je les reporte ou les annule souvent / Je ne sais pas / je préfère ne pas répondre",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O37",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Suivi médical & accès aux soins",
+          "Santé physique et psychologique",
+          "Avez-vous un médecin traitant ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O38",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Suivi médical & accès aux soins",
+          "Santé physique et psychologique",
+          "Avez-vous d'autres médecins spécialistes qui vous suivent actuellement  ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O39",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Suivi médical & accès aux soins",
+          "Santé physique et psychologique",
+          "Lesquels ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Unique / Conditionnel O38 (1)",
+          "Cardiologue | Oncologue | Neurologue | Pneumologue | Ophtalmologue | Psychiatre | Chirurgien-Dentiste | Gastro-entérologue | Endocrinologue / Diabetologue | ORL | Gynecologue | Nephrologue | Gériatre | Dermatologue | Autre",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O40",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Suivi médical & accès aux soins",
+          "Santé physique et psychologique",
+          "Avez-vous déjà réalisé des rendez-vous médicaux cette année ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O41",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "Suivi médical & accès aux soins",
+          "Santé physique et psychologique",
+          "Lesquels ? (plusieurs réponses possibles)",
+          "Obligatoire / Choix Multiples/ Conditionnel O40(1)",
+          "Bilan de santé général (prise de sang…) | Audition | Vue | Contrôle dentaire | Suivi cardiovasculaire | Ostéodensitométrie | Vaccination | Examen gynécologique | Suivi dermatologique | Suivi psychologique | Dépistage des cancers",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "E17",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "État de santé & hygiène de vie",
+          "Santé physique et psychologique",
+          "Pratiquez-vous une activité physique régulière (au moins 30 minutes, 3 fois par semaine) ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Non",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O44",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "État de santé & hygiène de vie",
+          "Santé physique et psychologique",
+          "Selon vous et par rapport à une personne du même âge, diriez-vous que votre santé est :",
+          "Obligatoire / Choix Unique",
+          "Meilleure | Identique | Moins bonne",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "E20",
+          "Bloc 5 – Vie quotidienne et fragilités de votre proche",
+          "5.1 – Vie quotidienne, budget et entourage du proche",
+          "Fragilité du proche",
+          "Si vous pensez aux 6–12 prochains mois, où souhaiteriez-vous idéalement que vive votre proche ?",
+          "Obligatoire / Choix Unique",
+          "À son domicile actuel | À mon domicile | En établissement (EHPAD, résidence, foyer…) | Je ne sais pas / nous n’en avons pas parlé",
+          "Fragilité du proche"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "E18",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "État de santé & hygiène de vie",
+          "Santé physique et psychologique",
+          "Globalement, comment évalueriez-vous la qualité de votre sommeil ces dernières semaines ? (sachant que l'idéal est de dormir minimum 6h par nuit)",
+          "Obligatoire / Choix Unique",
+          "Bonne | Correcte | Mauvaise (je dors mal ou pas assez) | Très mauvaise (je me réveille épuisé.e)",
+          "Santé physique et psychologique"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "E19",
+          "Bloc 4 – Votre santé physique et psychologique",
+          "État de santé & hygiène de vie",
+          "Santé physique et psychologique",
+          "Quels sont aujourd’hui vos principaux soucis de santé ?",
+          "Obligatoire / Choix Multiples",
+          "Fatigue | Sommeil | Douleurs | Moral (anxiété, idées noires, découragement) | Alimentation / poids | Problèmes de tension, de cœur, de diabète | Autre problème de santé | Aucun en particulier",
+          "Santé physique et psychologique"
+        ]
+      ],
+      "row_count": 164,
+      "headers": [
+        "Micro-parcours",
+        "ID",
+        "Bloc",
+        "Sous-bloc",
+        "Onglet d'origine",
+        "Texte de la question",
+        "Type de réponse",
+        "Valeurs de réponse",
+        "Vulnérabilité"
+      ]
+    },
+    "Triggers par micro-parcours": {
+      "rows": [
+        [
+          "Micro-parcours",
+          "Trigger ID",
+          "Trigger – Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "O14",
+          "Quel est le sexe biologique de la personne aidée ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à son sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "A1 – Couverture santé et protections juridiques",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "A2 – Droits ouverts, aides et accompagnement administratif",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "A3 – Charge et complexité des démarches administratives",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "A4 – Situation scolaire/professionnelle du proche et budget",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "O14",
+          "Quel est le sexe biologique de la personne aidée ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à son sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "F1 – Vie quotidienne, budget et entourage du proche",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "F2 – Autonomie, aide humaine et présence nécessaire",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "O14",
+          "Quel est le sexe biologique de la personne aidée ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à son sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "F3 – Mémoire, comportement et risques pour soi ou les autres",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "F4 – Douleur, fatigue, sommeil et état général du proche",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "F5 – Dépendance, handicap, addictions et épisodes aigus",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "F6 – Autonomie fonctionnelle, chutes et aides techniques",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "O14",
+          "Quel est le sexe biologique de la personne aidée ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à son sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "M1 – Compréhension du diagnostic et de la maladie",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "M2 – Accès aux soins et aux professionnels",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "M3 – Urgences, hospitalisations et continuité des soins",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "M4 – Troubles psychiques, addictions et suivi spécialisé",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "M5 – Coordination des soins et personne de référence",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "M6 – Plan de soins, évaluations spécialisées et inquiétudes",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "O46",
+          "Quel est votre lien de parenté avec la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Un de mes parents | Un de mes grand-parents | Mon conjoint ou ma conjointe | Mon frère ou ma sœur | Un de mes enfants | Autre"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "R1 – Impact sur la vie personnelle et professionnelle",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "O46",
+          "Quel est votre lien de parenté avec la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Un de mes parents | Un de mes grand-parents | Mon conjoint ou ma conjointe | Mon frère ou ma sœur | Un de mes enfants | Autre"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "R2 – Soutien de l’entourage et partage de l’aide",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "R3 – Isolement social de la personne aidée",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "R3 – Isolement social de la personne aidée",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "R3 – Isolement social de la personne aidée",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "R3 – Isolement social de la personne aidée",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "R3 – Isolement social de la personne aidée",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "O46",
+          "Quel est votre lien de parenté avec la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Un de mes parents | Un de mes grand-parents | Mon conjoint ou ma conjointe | Mon frère ou ma sœur | Un de mes enfants | Autre"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "O14",
+          "Quel est le sexe biologique de la personne aidée ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à son sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "R4 – Relation aidant / proche et acceptation de l’aide",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O35",
+          "Quel est votre sexe biologique ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à votre sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O36",
+          "Quel est votre âge ?",
+          "Obligatoire / Choix Unique",
+          "Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O46",
+          "Quel est votre lien de parenté avec la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Un de mes parents | Un de mes grand-parents | Mon conjoint ou ma conjointe | Mon frère ou ma sœur | Un de mes enfants | Autre"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "S1 – Charge, fatigue et risque d’épuisement de l’aidant",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "O46",
+          "Quel est votre lien de parenté avec la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Un de mes parents | Un de mes grand-parents | Mon conjoint ou ma conjointe | Mon frère ou ma sœur | Un de mes enfants | Autre"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "S2 – Inquiétudes pour la sécurité (risques graves)",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O35",
+          "Quel est votre sexe biologique ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à votre sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "O36",
+          "Quel est votre âge ?",
+          "Obligatoire / Choix Unique",
+          "Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "S3 – Santé physique de l’aidant et renoncement aux soins",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "O35",
+          "Quel est votre sexe biologique ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à votre sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "O36",
+          "Quel est votre âge ?",
+          "Obligatoire / Choix Unique",
+          "Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "S4 – Hygiène de vie de l’aidant (activité et sommeil)",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ]
+      ],
+      "row_count": 153,
+      "headers": [
+        "Micro-parcours",
+        "Trigger ID",
+        "Trigger – Texte de la question",
+        "Type de réponse",
+        "Valeurs de réponse"
+      ]
+    },
+    "Triggers (liste)": {
+      "rows": [
+        [
+          "Ordre global",
+          "BlocID",
+          "Bloc",
+          "Sous-bloc",
+          "Onglet d'origine",
+          "Trigger ID",
+          "Texte de la question",
+          "Type de réponse",
+          "Valeurs de réponse"
+        ],
+        [
+          "1",
+          "1",
+          "Bloc 1 – Vous, l’aidant",
+          "",
+          "Trigger",
+          "N3",
+          "Quelle proposition correspond le mieux à votre situation d'aidant (une seule réponse possible) :",
+          "Obligatoire / Choix Unique",
+          "J'aide une personne en perte d'autonomie liée principalement au vieillessement | J'aide une personne ayant une ou plusieurs maladies chroniques | J'aide une personne en situation de handicap | J'aide une personne souffrant de troubles psychiques | J'aide une personne souffrant d'addictions sévères"
+        ],
+        [
+          "2",
+          "1",
+          "Bloc 1 – Vous, l’aidant",
+          "",
+          "Trigger",
+          "O35",
+          "Quel est votre sexe biologique ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à votre sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "3",
+          "1",
+          "Bloc 1 – Vous, l’aidant",
+          "",
+          "Trigger",
+          "O36",
+          "Quel est votre âge ?",
+          "Obligatoire / Choix Unique",
+          "Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "4",
+          "1",
+          "Bloc 1 – Vous, l’aidant",
+          "",
+          "Trigger",
+          "N1",
+          "Quelle activité exercez-vous ?",
+          "Obligatoire / Choix Unique",
+          "Étudiant | Salarié | Fonctionnaire | Indépendant, TNS | Retraité | Sans emploi"
+        ],
+        [
+          "5",
+          "1",
+          "Bloc 1 – Vous, l’aidant",
+          "",
+          "Trigger",
+          "O64",
+          "Quel est le code postal de votre lieu de résidence ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Saisie code postal 5 chiffres"
+        ],
+        [
+          "6",
+          "1",
+          "Bloc 1 – Vous, l’aidant",
+          "",
+          "Trigger",
+          "O46",
+          "Quel est votre lien de parenté avec la personne aidée ?",
+          "Obligatoire / Choix Unique",
+          "Un de mes parents | Un de mes grand-parents | Mon conjoint ou ma conjointe | Mon frère ou ma sœur | Un de mes enfants | Autre"
+        ],
+        [
+          "7",
+          "2",
+          "Bloc 2 – Votre proche",
+          "",
+          "Trigger",
+          "O14",
+          "Quel est le sexe biologique de la personne aidée ?  Cette précision est utilisée pour vous communiquer des informations médicales spécifiques à son sexe biologique",
+          "Obligatoire / Choix Unique",
+          "Homme | Femme"
+        ],
+        [
+          "8",
+          "2",
+          "Bloc 2 – Votre proche",
+          "",
+          "Trigger",
+          "O1",
+          "Quel est l'âge de la personne aidée ? (Sachez que la majorité numérique est atteinte dès 15 ans. Le consentement est alors requis pour le traitement des données personnelles).",
+          "Obligatoire / Choix Unique",
+          "Moins de 18 ans | Entre 18 et 25 ans | Entre 26 et 59 ans | Entre 60 et 75 ans | Plus de 75 ans"
+        ],
+        [
+          "9",
+          "2",
+          "Bloc 2 – Votre proche",
+          "",
+          "Trigger",
+          "O63",
+          "Quel est le code postal du domicile de la personne aidée ? Cette question nous permettra de vous donner des conseils personnalisés (saisissez un code postal à 5 chiffres)",
+          "Obligatoire / 5 chiffres",
+          "Code postal 5chiifres"
+        ],
+        [
+          "162",
+          "8",
+          "Bloc 8 – Vos priorités et accompagnement",
+          "",
+          "Trigger",
+          "N26",
+          "Selon vous quels sont les besoins complémentaires nécessaires à la bonne prise en charge de votre proche ?",
+          "Obligatoire / Choix Multipples",
+          "Accessibilité et adaptation des soins | Suivi médical spécialisé | Suivi psychiatrique | Prévention et dépistage (examens préventifs adaptés, soins dentaires adaptés) | Gestion administrative médical (coordination des intervenants, renouvellement des ordonnances,…) | Rééducation fonctionnelle (kiné, ergo, psychomoticité) | Soins de communication et cognitifs (orthophonie, orthopsie) | Soins de confort et d'hygiène( soins infirmiers à domicile, pédicurie-podologie) | Accompagnement psychologique et thérapies alternatives (psychologie, art-thérapie, musicothérapie,…) | Appareillage et adaptation (orthoprothésie, audioprothésie, équipements paramédicaux adaptés) | Accompagnement et aides techniques (aide à la communication, accompagnement aux RDV, aides techniques, transport adapté, …) | Gestion administrative (constitution de dossiers, aides financières, accès aux services médico-sociaux) | Aucun"
+        ],
+        [
+          "163",
+          "8",
+          "Bloc 8 – Vos priorités et accompagnement",
+          "",
+          "Trigger",
+          "E71",
+          "Aujourd’hui, quelle est votre priorité principale ?",
+          "Obligatoire / Choix Unique",
+          "Tenir physiquement et moralement dans mon rôle d’aidant | Sécuriser au mieux mon proche à domicile | Mettre à plat les démarches administratives et financières | Mieux concilier mon travail et mon rôle d’aidant | Je ne sais pas, j’ai besoin de faire le point"
+        ],
+        [
+          "164",
+          "8",
+          "Bloc 8 – Vos priorités et accompagnement",
+          "",
+          "Trigger",
+          "E72",
+          "Seriez-vous d’accord pour qu’une infirmière coordinatrice Monka vous contacte si votre situation le nécessite ?",
+          "Obligatoire / Choix Unique",
+          "Oui | Oui, mais plutôt par messagerie dans l’app | Non, pas pour l’instant"
+        ]
+      ],
+      "row_count": 13,
+      "headers": [
+        "Ordre global",
+        "BlocID",
+        "Bloc",
+        "Sous-bloc",
+        "Onglet d'origine",
+        "Trigger ID",
+        "Texte de la question",
+        "Type de réponse",
+        "Valeurs de réponse"
+      ]
+    }
+  },
+  "sheet_count": 4
+}

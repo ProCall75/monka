@@ -1,0 +1,113 @@
+{
+  "extraction_date": "2026-02-06T17:27:33.681505",
+  "legacy_files": [
+    {
+      "filename": "CR MT Projection moteur 030226.docx",
+      "hash": "6b4d3443ec78555eeb97686eb19cfbc6",
+      "status": "OK"
+    },
+    {
+      "filename": "Exemple CR MT.docx",
+      "hash": "ba8867f4f1ea16530d9eaa48a06143c6",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy ASR 020226.docx",
+      "hash": "39db223e8f7dde50507b3e5f9abb4889",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy ASR Referent op. 030226.docx",
+      "hash": "a7cb0282f5bd3360f5a8fed5e937abc9",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy Arborescence Globale 060226.docx",
+      "hash": "76fc904871f68528edd4b4a330880347",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy CR Médecin 030226.docx",
+      "hash": "f534ba64130510ef4b5b499835847e7b",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy Fondateur 060226pages.docx",
+      "hash": "cd6b227ee61dfeb5c74c70492e0ff5f6",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy Micro parcours 060226.docx",
+      "hash": "48170e5b5aced91504c73382a6134702",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy Priorisation 060226.docx",
+      "hash": "0cc21000207ac0bb14b3ff8e009d5e9f",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy grammaire de progression 190126.docx",
+      "hash": "0be9faed783caf0144f7e6618ae9db7a",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy moteur applicatif et sécurité médicale 020326.docx",
+      "hash": "bd623a1e0fc2b0eb6dd2b43ef08f5695",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy questionnaire 060226.docx",
+      "hash": "88c3ee72a37ee5e2ee7307646c112882",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy referentiel phrase CR MT 030226.docx",
+      "hash": "911ff7ab652c2b7635042143796324dc",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy scoring 060226.docx",
+      "hash": "b526d0ad857be997d0cc37df90a5bb45",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy suivi longitudinal 030226.docx",
+      "hash": "cf58c0c16fe565a6cf5d53e366bf2113",
+      "status": "OK"
+    },
+    {
+      "filename": "Legacy typologie des micro taches 030226.docx",
+      "hash": "d701010006b1583c350b41b02b643d35",
+      "status": "OK"
+    },
+    {
+      "filename": "Typologie,CCC et scoring.docx",
+      "hash": "4d2a43b93f215465d87cf47c0416d117",
+      "status": "OK"
+    }
+  ],
+  "excel_files": [
+    {
+      "filename": "Questionnaire de suivi valideě.xlsx",
+      "hash": "1efd3f67fabcb07e303c2fd306172dc8",
+      "status": "OK"
+    },
+    {
+      "filename": "Questionnaire valideě .xlsx",
+      "hash": "cb86ed48b1cfc415060c6c6db2488e18",
+      "status": "OK"
+    },
+    {
+      "filename": "Tableau SOPHIE CAT + Reco-Nouveau ques tionnaire par Vulnérabilité(1) (7).xlsx",
+      "hash": "5d3a831b2e7d966e892a311b89253a88",
+      "status": "OK"
+    },
+    {
+      "filename": "microparcours_aidant.xlsx",
+      "hash": "d9916657ca98f6501a343c2f5fc6204d",
+      "status": "OK"
+    }
+  ],
+  "status": "OK"
+}

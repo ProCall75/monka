@@ -179,8 +179,8 @@
         ]
       ]
     ],
-    "paragraphs_count": 47,
-    "tables_count": 5
+    "paragraph_count": 47,
+    "table_count": 5
   },
   "Exemple CR MT.docx": {
     "paragraphs": [
@@ -318,8 +318,153 @@
         ]
       ]
     ],
-    "paragraphs_count": 17,
-    "tables_count": 4
+    "paragraph_count": 17,
+    "table_count": 4
+  },
+  "Legacy ASR 020226.docx": {
+    "paragraphs": [
+      "LEGACY ACTIONS STRUCTURANTES DE RÉFÉRENCE (ASR)",
+      "Principes généraux (cadre conceptuel et éthique)",
+      "Le présent document définit les principes fondateurs des Actions Structurantes de Référence (ASR) au sein du dispositif Monka.",
+      "Il précise :",
+      "la nature des ASR,",
+      "leur rôle clinique, éthique et méthodologique,",
+      "leur place dans la chaîne de structuration des situations d’aidance,",
+      "les limites strictes de leur usage.",
+      "Ce legacy a une vocation conceptuelle et structurante.\nIl établit le cadre de sens, les invariants éthiques et les règles de principe qui guident la conception du système Monka.",
+      "Il ne constitue pas un référentiel d’exécution.\nIl ne décrit ni règles moteur détaillées, ni implémentation applicative, ni conditions logiques opérationnelles.",
+      "Les modalités concrètes de validation, de maintien et de perte des ASR, ainsi que leur traduction dans l’application et le moteur, sont définies dans un document distinct :\n« Legacy ASR — Référentiel opérationnel et signatures d’état ».",
+      "En cas de divergence apparente entre une interprétation issue du présent document et les règles définies dans le référentiel opérationnel, le référentiel opérationnel fait foi pour l’exécution, le présent document conservant sa valeur de cadre conceptuel et éthique de référence.",
+      "1. Raison d’être du Legacy ASR",
+      "Le présent legacy définit le rôle, la structure, les règles d’activation et de maintien des Actions Structurantes de Référence (ASR) dans le dispositif Monka.",
+      "Les ASR ont pour objectif exclusif de :",
+      "qualifier l’impact réel des actions menées par l’aidant,",
+      "déterminer l’état de sécurisation d’un micro-parcours,",
+      "permettre une lecture honnête, réversible et non quantitative de la situation,",
+      "alimenter un indice de sécurisation de la dyade, lisible par l’aidant.",
+      "Les ASR ne constituent ni :",
+      "des recommandations,",
+      "des tâches,",
+      "des objectifs de complétude,",
+      "ni un score chiffré.",
+      "2. Définition formelle d’une ASR",
+      "Une Action Structurante de Référence (ASR) est un événement ou un état observable traduisant un changement réel et structurant de la capacité d’agir de la dyade aidant–aidé face à un risque identifié.",
+      "Une ASR :",
+      "décrit un état du monde, non une intention,",
+      "est rattachée à un micro-parcours unique,",
+      "représente le minimum structurant permettant de considérer que le risque ciblé est temporairement contenu.",
+      "3. Règle d’unicité",
+      "R-ASR-01 — Unicité par micro-parcours",
+      "Chaque micro-parcours Monka possède une et une seule ASR de référence.",
+      "Il n’existe aucune hiérarchie ou sélection dynamique entre plusieurs ASR possibles.",
+      "Sans ASR unique, le micro-parcours est invalide.",
+      "4. ASR et micro-tâches",
+      "R-ASR-02 — Séparation stricte",
+      "Une ASR n’est jamais la somme ou la complétion des micro-tâches.",
+      "Les micro-tâches sont des moyens, l’ASR est un changement d’état.",
+      "R-ASR-03 — Types de micro-tâches éligibles",
+      "Une ASR peut être atteinte uniquement via une micro-tâche de type :",
+      "STRUC",
+      "SEC",
+      "MED (le cas échéant)",
+      "Les micro-tâches INFO et ORGA :",
+      "ne peuvent jamais, seules ou cumulées,",
+      "déclencher ou valider une ASR.",
+      "5. Signatures d’état",
+      "R-ASR-04 — Validation par signature d’état",
+      "Une ASR n’est jamais validée sur la simple déclaration d’une action.",
+      "Une ASR est validée lorsque le moteur détecte au moins une signature d’état compatible avec l’état cible du micro-parcours.",
+      "Une signature d’état est :",
+      "déclarative mais structurée,",
+      "non subjective,",
+      "indépendante d’un ressenti ou d’une appréciation personnelle,",
+      "non exhaustive.",
+      "6. Signatures alternatives",
+      "R-ASR-05 — Pluralité contrôlée",
+      "Chaque ASR est associée à au moins deux signatures d’état alternatives.",
+      "Une seule signature valide suffit à considérer l’ASR atteinte.",
+      "Les signatures décrivent des chemins possibles, jamais obligatoires.",
+      "Le système reconnaît un résultat, pas un scénario.",
+      "7. États possibles d’une ASR",
+      "R-ASR-06 — États officiels",
+      "Une ASR peut prendre exactement trois états :",
+      "⚠ L’état non confirmée exprime une incertitude, jamais une perte automatique.",
+      "8. Validation sans IDEC",
+      "R-ASR-07 — Autonomie du dispositif",
+      "Le dispositif Monka doit pouvoir fonctionner sans accompagnement IDEC.",
+      "Les ASR sont validables automatiquement par le moteur,",
+      "à partir des déclarations structurées de l’aidant dans l’application,",
+      "sans validation humaine obligatoire.",
+      "Une intervention IDEC reste possible mais non requise.",
+      "9. Questionnaire et ASR",
+      "R-ASR-08 — Indépendance du questionnaire",
+      "Le questionnaire (initial ou de suivi) :",
+      "active ou réactive des vulnérabilités,",
+      "déclenche des micro-parcours,",
+      "ne valide jamais une ASR.",
+      "L’absence de signal au questionnaire ne vaut jamais confirmation d’une ASR.",
+      "10. Confirmation dans le temps",
+      "R-ASR-09 — Demande douce de confirmation",
+      "Lorsqu’une ASR atteinte n’est ni reconfirmée ni infirmée dans le temps :",
+      "elle passe à l’état ⚠ non confirmée,",
+      "sans impact immédiat sur l’indice de sécurisation,",
+      "et déclenche une demande douce de confirmation dans l’app.",
+      "Caractéristiques de la demande :",
+      "contextuelle (liée à une ASR précise),",
+      "non urgente,",
+      "non culpabilisante,",
+      "réponse simple et binaire ou prudente.",
+      "11. Perte d’ASR",
+      "R-ASR-10 — Perte explicite uniquement",
+      "Une ASR est considérée comme perdue (❌) uniquement si :",
+      "une réponse explicite négative est fournie,",
+      "ou une signature d’état invalide formellement l’état cible,",
+      "ou une déclaration de modification négative est faite lors d’un suivi.",
+      "La perte d’ASR entraîne automatiquement :",
+      "la réactivation du micro-parcours concerné,",
+      "la mise à jour de l’indice de sécurisation.",
+      "12. ASR et sécurisation de la dyade",
+      "R-ASR-11 — Rôle dans l’indice de sécurisation",
+      "Les ASR constituent l’unique base de calcul de l’indice de sécurisation de la dyade.",
+      "Cet indice :",
+      "n’est pas chiffré,",
+      "n’est pas cumulatif,",
+      "reflète un état global (non sécurisée / sécurisation active / sécurisée temporairement),",
+      "est réversible par design.",
+      "13. Gouvernance et stabilité",
+      "R-ASR-12 — Clause de stabilité",
+      "Toute modification :",
+      "de la définition d’une ASR,",
+      "de ses signatures,",
+      "de ses règles d’état,",
+      "implique obligatoirement :",
+      "documentation formelle,",
+      "analyse d’impact sur micro-parcours et priorisation,",
+      "versionnage explicite.",
+      "Une ASR mal définie invalide le moteur de sécurisation."
+    ],
+    "tables": [
+      [
+        [
+          "État",
+          "Signification"
+        ],
+        [
+          "❌ Non atteinte",
+          "aucune signature valide détectée"
+        ],
+        [
+          "✔ Atteinte",
+          "au moins une signature valide détectée"
+        ],
+        [
+          "⚠ Non confirmée",
+          "atteinte précédemment mais non reconfirmée dans le temps"
+        ]
+      ]
+    ],
+    "paragraph_count": 119,
+    "table_count": 1
   },
   "Legacy ASR Referent op. 030226.docx": {
     "paragraphs": [
@@ -529,10 +674,10 @@
         ]
       ]
     ],
-    "paragraphs_count": 185,
-    "tables_count": 1
+    "paragraph_count": 185,
+    "table_count": 1
   },
-  "Legacy Arborescence Globale 030226.docx": {
+  "Legacy Arborescence Globale 060226.docx": {
     "paragraphs": [
       "LEGACY MONKA",
       "ARBORESCENCE GLOBALE",
@@ -605,6 +750,10 @@
       "orientent la temporalité et l’attention,",
       "prévalent toujours sur les scores.",
       "La typologie fait foi. Jamais la réponse brute.",
+      "Un signal de gravité peut être produit :",
+      "soit par une question critique directe ;",
+      "soit par une condition critique composite.",
+      "L’existence de questions scorantes portant sur la même dimension ne constitue jamais un signal de gravité en tant que tel.",
       "5. Niveau 3 — Vulnérabilités",
       "Les signaux scorants sont agrégés dans cinq vulnérabilités transversales et invariantes :",
       "Fragilité du proche aidé",
@@ -686,14 +835,14 @@
       "les règles internes du moteur.",
       "11. Lecture synthétique en cascade (référence officielle)",
       "Questionnaire",
-      "└─ Question (ID, rôle)",
-      "└─ Signal typé",
-      "└─ Vulnérabilité",
-      "└─ Micro-parcours",
-      "└─ Priorisation",
-      "└─ ASR",
-      "└─ Suivi longitudinal",
-      "└─ Compte Rendu Médecin",
+      " └─ Question (ID, rôle)",
+      "     └─ Signal typé",
+      "         └─ Vulnérabilité",
+      "             └─ Micro-parcours",
+      "                 └─ Priorisation",
+      "                     └─ ASR",
+      "                         └─ Suivi longitudinal",
+      "                             └─ Compte Rendu Médecin",
       "Clause finale de stabilité",
       "Le présent legacy constitue le référentiel maître d’arborescence Monka.",
       "Toute modification de l’un des niveaux implique obligatoirement :",
@@ -704,8 +853,8 @@
       "Une arborescence ambiguë invalide le moteur."
     ],
     "tables": [],
-    "paragraphs_count": 168,
-    "tables_count": 0
+    "paragraph_count": 172,
+    "table_count": 0
   },
   "Legacy CR Médecin 030226.docx": {
     "paragraphs": [
@@ -860,10 +1009,10 @@
       "Le CR est un artefact de restitution stable.\nToute modification non versionnée invalide sa valeur de référence."
     ],
     "tables": [],
-    "paragraphs_count": 149,
-    "tables_count": 0
+    "paragraph_count": 149,
+    "table_count": 0
   },
-  "Legacy Fondateur 030226pages.docx": {
+  "Legacy Fondateur 060226pages.docx": {
     "paragraphs": [
       "LEGACY FONDATEUR MONKA",
       "Vision · Périmètre · Principes structurants",
@@ -919,6 +1068,10 @@
       "Prioriser\nvia des micro-parcours actionnables dans le temps",
       "Le rôle de Monka n’est jamais de « dire quoi faire »,\nmais de rendre possible une action humaine éclairée.",
       "Lorsque la situation le nécessite, cette structuration peut donner lieu à une synthèse destinée aux professionnels, conçue comme un outil de coordination et de lecture clinique, sans valeur diagnostique ni prescriptive.",
+      "Monka distingue explicitement :",
+      "la mesure progressive des fragilités (scoring) ;",
+      "l’identification de seuils de rupture (criticité directe).",
+      "Ces deux lectures peuvent coexister sur une même dimension sans jamais se confondre.",
       "6. Vulnérabilités et fragilités — cœur du modèle",
       "Monka distingue explicitement :",
       "les vulnérabilités de l’aidant\n(ce qui fragilise sa capacité à tenir dans la durée)",
@@ -949,10 +1102,10 @@
       "Monka ne remplace pas le soin.\nMonka ne remplace pas l’humain.\nMonka empêche que des situations complexes deviennent ingérables faute de cadre."
     ],
     "tables": [],
-    "paragraphs_count": 82,
-    "tables_count": 0
+    "paragraph_count": 86,
+    "table_count": 0
   },
-  "Legacy Micro parcours 030226.docx": {
+  "Legacy Micro parcours 060226.docx": {
     "paragraphs": [
       "LEGACY MONKA",
       "MICRO-PARCOURS",
@@ -998,6 +1151,11 @@
       "signal fort de risque ou de rupture,",
       "rendent le micro-parcours prioritaire niveau 1,",
       "prévalent sur toute autre règle.",
+      "Lorsqu’un micro-parcours comporte à la fois :",
+      "une ou plusieurs questions scorantes ;",
+      "et une question critique directe portant sur une même dimension,",
+      "la question critique directe constitue l’unique fondement de la priorisation.",
+      "Les questions scorantes associées conservent un rôle de mesure et de contextualisation, sans effet sur le niveau de priorité.",
       "5.3 Conditions critiques composites",
       "règles logiques (pas des questions),",
       "combinent plusieurs signaux non critiques,",
@@ -1028,7 +1186,7 @@
       "d. Temporalité indicative",
       "≤ 7 jours",
       "≤ 1 mois",
-      "1 mois",
+      "1 mois\n",
       "La temporalité oriente, elle n’ordonne pas.",
       "Rôle applicatif des micro-tâches",
       "Les micro-tâches constituent des unités d’affichage et d’exécution applicative.",
@@ -1124,7 +1282,7 @@
       "versionnage,",
       "mise à jour des legacy dépendants.",
       "Un micro-parcours mal défini invalide le système.",
-      "ANNEXE 1",
+      "ANNEXE 1 ",
       "RÉFÉRENTIEL OFFICIEL DES MICRO-PARCOURS MONKA",
       "Statut de l’annexe",
       "La présente annexe constitue le référentiel officiel, exhaustif et fermé des micro-parcours Monka.",
@@ -1290,10 +1448,10 @@
         ]
       ]
     ],
-    "paragraphs_count": 247,
-    "tables_count": 3
+    "paragraph_count": 252,
+    "table_count": 3
   },
-  "Legacy Priorisation 300127.docx": {
+  "Legacy Priorisation 060226.docx": {
     "paragraphs": [
       "LEGACY PRIORISATION MONKA",
       "1. Objet du Legacy Priorisation",
@@ -1349,6 +1507,10 @@
       "reste visible et activable sans priorité immédiate.",
       "Règle absolue de prévalence",
       "Une question critique directe prévaut toujours sur une condition critique composite, quel que soit le score ou le contexte.",
+      "Lorsqu’une question critique directe et une question scorante portent sur une même dimension, la question critique directe prévaut toujours, indépendamment :",
+      "du score de vulnérabilité ;",
+      "du nombre de signaux scorants associés.",
+      "Le score ne module jamais une gravité intrinsèque.",
       "4. Questions triggers et rôle dans le moteur",
       "4.1 Définition",
       "Les questions triggers sont des questions destinées à :",
@@ -1384,7 +1546,7 @@
       "Les scores sont utilisés pour répartir les micro-parcours non critiques dans le temps :",
       "≤ 7 jours : uniquement gravité niveau 1 ou 2",
       "≤ 1 mois : score élevé sans gravité critique",
-      "1 mois : score modéré ou faible",
+      "1 mois : score modéré ou faible\n",
       "6. Priorisation intra-vulnérabilité",
       "À l’intérieur d’une même vulnérabilité, les micro-parcours sont organisés selon la hiérarchie suivante :",
       "Sécurité → Continuité → Soutenabilité",
@@ -1536,8 +1698,8 @@
         ]
       ]
     ],
-    "paragraphs_count": 204,
-    "tables_count": 2
+    "paragraph_count": 208,
+    "table_count": 2
   },
   "Legacy grammaire de progression 190126.docx": {
     "paragraphs": [
@@ -1671,8 +1833,8 @@
         ]
       ]
     ],
-    "paragraphs_count": 101,
-    "tables_count": 1
+    "paragraph_count": 101,
+    "table_count": 1
   },
   "Legacy moteur applicatif et sécurité médicale 020326.docx": {
     "paragraphs": [
@@ -1874,12 +2036,12 @@
         ]
       ]
     ],
-    "paragraphs_count": 177,
-    "tables_count": 1
+    "paragraph_count": 177,
+    "table_count": 1
   },
-  "Legacy questionnaire 290127.docx": {
+  "Legacy questionnaire 060226.docx": {
     "paragraphs": [
-      "LEGACY QUESTIONNAIRE MONKA",
+      "LEGACY QUESTIONNAIRE MONKA ",
       "Référentiel officiel de conception, classification et gouvernance",
       "(adossé au questionnaire “Questionnaire par vulnérabilité VF1225 EetB.xlsx”)",
       "1. Rôle du questionnaire Monka",
@@ -2065,6 +2227,15 @@
       "elles ne deviennent en aucun cas des questions déclenchantes ou critiques ;",
       "elles ne produisent aucun effet décisionnel isolé.",
       "Une condition critique composite constitue une règle logique externe, distincte des rôles des questions qui la composent.",
+      "Distinction entre mesure scorante et signal critique",
+      "Les questions scorantes ont pour rôle exclusif de mesurer une intensité ou une accumulation de fragilité sur une vulnérabilité donnée.",
+      "Une même dimension fonctionnelle ou clinique peut également être couverte par une question critique directe distincte, visant à capter un seuil de rupture ou de danger immédiat.",
+      "Dans ce cas :",
+      "la question scorante et la question critique directe sont deux questions différentes ;",
+      "elles possèdent des identifiants distincts ;",
+      "elles peuvent coexister dans un même micro-parcours ;",
+      "elles ne sont ni substituables ni fusionnables.",
+      "Une question scorante ne devient jamais une question critique directe, m",
       "4.3 Questions déclenchantes (micro-parcours)",
       "Rôle",
       "Les questions déclenchantes ont pour seule fonction d’activer un micro-parcours identifié dans le référentiel officiel Monka.",
@@ -2087,6 +2258,12 @@
       "rendent le micro-parcours associé prioritaire de niveau 1 en cas de réponse positive ;",
       "prévalent sur toute autre règle, score ou condition critique composite.",
       "En dehors des questions critiques directes explicitement définies dans le référentiel, aucune question ne peut, à elle seule, déclencher une priorité ou une alerte.",
+      "Lien sémantique avec les questions scorantes",
+      "Une question critique directe peut porter sur la même dimension qu’une question scorante, sans que cela ne constitue une redondance.",
+      "La question critique directe capte un seuil absolu de rupture ou de risque, indépendamment :",
+      "du score de vulnérabilité ;",
+      "de l’intensité mesurée par les questions scorantes associées.",
+      "La présence d’une question critique directe rend toute interprétation du score secondaire pour la priorisation.",
       "4.5 Questions de suivi longitudinal",
       "Rôle",
       "Les questions de suivi longitudinal ont pour fonction de :",
@@ -2121,6 +2298,11 @@
       "une analyse d’impact sur les micro-parcours concernés ;",
       "une mise à jour du présent legacy ;",
       "un versionnage explicite.",
+      "Liste officielle des questions triggers du questionnaire Monka",
+      "Les questions triggers du questionnaire Monka sont explicitement identifiées et figées.\nElles constituent un sous-ensemble fermé de questions dont le rôle exclusif est de qualifier le contexte structurel, situationnel ou temporel de l’aidance, sans jamais décrire un état de fragilité, de vulnérabilité ou de risque.",
+      "Les questions triggers officiellement reconnues dans le questionnaire Monka sont les suivantes :\nN3, O35, O36, N1, O64, O46, O14, O1, O63, O49, N26, E71, E72, O2, N31.",
+      "Ces questions :\n– décrivent exclusivement des facteurs (profil, situation, durée, cadre, priorités, contexte) ;\n– ne décrivent jamais un état physique, psychologique, social ou clinique ;\n– ne participent à aucun scoring ;\n– ne déclenchent aucune priorisation, directe ou indirecte ;\n– ne peuvent jamais être requalifiées en questions scorantes, déclenchantes ou critiques directes ;\n– peuvent uniquement être utilisées pour orienter, filtrer ou contextualiser l’activation et le contenu des micro-parcours.",
+      "La liste des questions triggers est fermée et normative.\nToute création, suppression ou modification d’une question trigger implique obligatoirement :\n– une analyse d’impact sur les micro-parcours concernés ;\n– une mise à jour explicite du présent legacy ;\n– un versionnage formel du référentiel.",
       "5. Règle d’or — UNE QUESTION = UN RÔLE",
       "Aucune question du questionnaire Monka :",
       "n’est à la fois scorante et déclenchante,",
@@ -2131,22 +2313,22 @@
       "respecter strictement cette règle,",
       "être tracée,",
       "entraîner la mise à jour des legacy associés.",
+      "Clarification sur les dimensions partagées",
+      "La règle « UNE QUESTION = UN RÔLE » n’interdit pas qu’une même dimension de vulnérabilité soit explorée par plusieurs questions.",
+      "Elle interdit exclusivement le cumul de rôles au sein d’une même question.",
+      "Toute tentative de faire porter à une question scorante un rôle de question critique directe, ou inversement, constitue une violation du modèle Monka.",
       "6. Conditions critiques composites",
       "6.1 Définition",
       "Les conditions critiques composites ne sont pas des questions du questionnaire.",
       "Elles correspondent à des règles logiques explicites, définies à la conception, permettant d’identifier une situation critique par accumulation de signaux non critiques pris isolément, au sein d’un micro-parcours unique.",
       "Une condition critique composite peut conduire à la priorisation d’un micro-parcours, sans jamais constituer un diagnostic ni une prescription.",
       "6.2 Règles de construction",
-      "Les conditions critiques composites obéissent aux règles strictes suivantes :",
-      "elles sont toujours rattachées à un micro-parcours identifié ;",
-      "elles sont construites exclusivement à partir de :",
-      "questions déclenchantes,",
-      "questions scorantes,",
-      "et/ou questions descriptives,\ntoutes appartenant au même micro-parcours ;",
-      "elles n’intègrent jamais de questions critiques directes ;",
-      "elles sont évaluées uniquement en l’absence de signal critique direct positif ;",
-      "elles ne peuvent générer qu’une seule alerte par micro-parcours.",
-      "Aucune condition critique composite ne peut être transversale à plusieurs micro-parcours.",
+      "Les conditions critiques composites sont construites exclusivement à partir de :",
+      "questions scorantes ;",
+      "questions déclenchantes ;",
+      "questions descriptives ;",
+      "toutes rattachées au même micro-parcours.",
+      "Les questions critiques directes sont formellement exclues de toute condition critique composite, leur rôle étant déjà suffisant pour établir une priorité absolue.",
       "6.3 Principe de cumul",
       "Aucune réponse isolée ne peut déclencher une condition critique composite.",
       "La criticité résulte exclusivement du cumul de plusieurs réponses convergentes, selon une logique déterministe définie dans le référentiel officiel des conditions critiques composites.",
@@ -2212,8 +2394,8 @@
       "Le questionnaire Monka constitue l’implémentation opérationnelle des principes décrits dans ce legacy."
     ],
     "tables": [],
-    "paragraphs_count": 331,
-    "tables_count": 0
+    "paragraph_count": 351,
+    "table_count": 0
   },
   "Legacy referentiel phrase CR MT 030226.docx": {
     "paragraphs": [
@@ -2310,13 +2492,13 @@
         ]
       ]
     ],
-    "paragraphs_count": 56,
-    "tables_count": 1
+    "paragraph_count": 56,
+    "table_count": 1
   },
-  "Legacy scoring 310127.docx": {
+  "Legacy scoring 060226.docx": {
     "paragraphs": [
       "LEGACY MONKA — SCORING",
-      "Référentiel méthodologique",
+      "Référentiel méthodologique ",
       "1. Objet et finalité du scoring",
       "Le scoring Monka vise à mesurer l’intensité des vulnérabilités vécues dans une situation d’aidance, à partir des réponses au questionnaire.",
       "Le scoring permet :",
@@ -2373,6 +2555,9 @@
       "ne devient jamais trigger ;",
       "ne change jamais de rôle selon le contexte, la vulnérabilité ou l’usage applicatif.",
       "Ce principe d’unicité est absolu et ne souffre aucune exception.",
+      "Le principe d’unicité du rôle d’une question n’interdit pas l’existence, dans le questionnaire, de questions critiques directes portant sur des dimensions également mesurées par le scoring.",
+      "Le scoring mesure une intensité.\nLa criticité directe capte un seuil.",
+      "Ces deux mécanismes sont indépendants, non comparables et non substituables.",
       "2.5 Égalité de poids entre les questions scorantes",
       "Toutes les questions scorantes d’une même vulnérabilité ont un poids strictement identique.",
       "Il n’existe :",
@@ -2427,7 +2612,7 @@
       "Codage des réponses aux questions scorantes selon la table associée.",
       "Calcul d’un score brut.",
       "Normalisation sur 20 selon la formule :",
-      "Score de vulnérabilité = (Score brut / Score brut maximal) × 20",
+      "                   Score de vulnérabilité = (Score brut / Score brut maximal) × 20",
       "5. Détail des vulnérabilités et périmètres de scoring",
       "5.1Vulnérabilité Sociale & Relationnelle",
       "5.1.1Objet de la vulnérabilité",
@@ -2697,7 +2882,7 @@
       "Ces pondérations sont structurelles, indépendantes des profils individuels, et figées dans le Legacy.",
       "6.4 Méthode de calcul du score global pondéré",
       "Le score global de vulnérabilité est calculé selon la formule suivante :",
-      "Score Global=∑(Score vulnérabilité ×Poids vulnérabilité)",
+      "                         Score Global=∑(Score vulnérabilité ×Poids vulnérabilité)",
       "où :",
       "chaque score de vulnérabilité est compris entre 0 et 20 ;",
       "chaque poids est exprimé en proportion (ex. 30 % = 0,30).",
@@ -3529,8 +3714,8 @@
         ]
       ]
     ],
-    "paragraphs_count": 414,
-    "tables_count": 11
+    "paragraph_count": 417,
+    "table_count": 11
   },
   "Legacy suivi longitudinal 030226.docx": {
     "paragraphs": [
@@ -3728,8 +3913,8 @@
         ]
       ]
     ],
-    "paragraphs_count": 169,
-    "tables_count": 1
+    "paragraph_count": 169,
+    "table_count": 1
   },
   "Legacy typologie des micro taches 030226.docx": {
     "paragraphs": [
@@ -3758,7 +3943,7 @@
       "ni type implicite,",
       "ni type “autre”,",
       "ni typage dynamique.",
-      "Toute micro-tâche mal typée est moteur-invalide.",
+      " Toute micro-tâche mal typée est moteur-invalide.",
       "3. Typologie officielle des micro-tâches (référentiel fermé)",
       "3.1 Micro-tâche Informationnelle — INFO",
       "Définition\nMicro-tâche visant exclusivement à :",
@@ -3846,17 +4031,18 @@
       "Monka ne progresse pas parce que l’aidant fait des choses.\nMonka progresse uniquement lorsque le monde a réellement changé."
     ],
     "tables": [],
-    "paragraphs_count": 111,
-    "tables_count": 0
+    "paragraph_count": 111,
+    "table_count": 0
   },
   "Typologie,CCC et scoring.docx": {
     "paragraphs": [
       "Typologie des questions par vulnérabilité, les CCC et le scoring",
+      "ATTENTION : Ne pas tenir compte des CCC (en cours de restructuration)",
       "VULNÉRABILITÉ SOCIALE ET RELATIONNELLE",
       "Tableau de typologie des questions",
       "Questions déclenchantes",
       "Questions critiques directes",
-      "Conditions Critiques Composites (CCC) au niveau des micro parcours",
+      "Conditions Critiques Composites (CCC) au niveau des micro parcours ",
       "Scoring",
       "Calcul du score",
       "Nombre de questions scorantes : 8",
@@ -3899,7 +4085,6 @@
       "Questions DÉCLENCHANTES (micro-parcours)",
       "Ouvrent un micro-parcours sans juger du niveau global",
       "Questions DESCRIPTIVES / MODULATRICES",
-      "Conditions Critiques Composites (CCC)",
       "Scoring",
       "Calcul du score",
       "Nombre de questions scorantes : 14",
@@ -4747,12 +4932,6 @@
           "Effet"
         ],
         [
-          "O49",
-          "Depuis combien de temps l’aidez-vous ?",
-          "Depuis plus de 2 ans",
-          "Exposition prolongée → renforce la vigilance épuisement"
-        ],
-        [
           "N8",
           "Arrêt de travail lié au rôle d’aidant",
           "Toute réponse ≠ Non",
@@ -5123,16 +5302,6 @@
           "Rôle"
         ],
         [
-          "O2",
-          "Lieu de vie",
-          "Descriptive"
-        ],
-        [
-          "N31",
-          "Établissement spécialisé",
-          "Descriptive"
-        ],
-        [
           "N10",
           "Nature de l’aide",
           "Descriptive"
@@ -5281,50 +5450,6 @@
           "N36",
           "Organisation journées",
           "Descriptive"
-        ]
-      ],
-      [
-        [
-          "Micro-parcours",
-          "Condition CR",
-          "Questions impliquées",
-          "Logique (réponses déclenchantes exactes)",
-          "Sens clinique"
-        ],
-        [
-          "F1 – Vie quotidienne, budget et entourage",
-          "CCC_F1_01",
-          "E21 + (N21 | N9)",
-          "E21 = “Non, un changement sera nécessaire” ET ( N21 = Oui OU N9 = Oui )",
-          "Situation de vie actuelle non tenable associée à des fragilités financières ou de gestion"
-        ],
-        [
-          "F2 – Autonomie, aide humaine et présence nécessaire",
-          "CCC_F2_01",
-          "E23, E24, O8, O9",
-          "Au moins 2 conditions vraies parmi : • E23 = “Pas plus d’1 heure” ou “Ne peut pas rester seul” • E24 = Présence nécessaire la nuit • O8 = Oui, tout le temps • O9 = Oui, tout le temps",
-          "Dépendance fonctionnelle élevée nécessitant une réorganisation urgente"
-        ],
-        [
-          "F3 – Mémoire, comportement et risques",
-          "CCC_F3_01",
-          "O13 + (E25 | E26)",
-          "O13 = “Diminution notable” ou “Altération totale” ET ( E25 = Oui OU E26 = Oui )",
-          "Désorganisation cognitive installée avec retentissement fonctionnel"
-        ],
-        [
-          "F4 – Douleur, fatigue, sommeil et état général",
-          "CCC_F4_01",
-          "N11, N12, N13, N34, O4",
-          "Au moins 2 conditions vraies parmi : • N11 = Oui • N12 = Oui • N13 = Oui • N34 = Oui • O4 = Déprimée",
-          "Dégradation somato-psychique globale par accumulation de fragilités"
-        ],
-        [
-          "F5 – Dépendance, handicap et épisodes aigus",
-          "CCC_F5_01",
-          "E28 + O53",
-          "E28 ≥ 2 hospitalisations ET O53 = Non",
-          "Instabilité médico-sociale avec épisodes aigus sans cadre clair de dépendance"
         ]
       ],
       [
@@ -6081,7 +6206,7 @@
         ]
       ]
     ],
-    "paragraphs_count": 79,
-    "tables_count": 36
+    "paragraph_count": 79,
+    "table_count": 35
   }
 }

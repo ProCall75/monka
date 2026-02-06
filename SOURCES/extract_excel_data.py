@@ -14,7 +14,7 @@ OUTPUT_DIR = "/Users/antonin/monka/SOURCES/extracted"
 
 # Fichiers Excel à scanner
 EXCEL_FILES = [
-    "Tableau SOPHIE CAT + Reco-Nouveau questionnaire par Vulnérabilité(1).xlsx",
+    "Tableau SOPHIE CAT + Reco-Nouveau ques tionnaire par Vulnérabilité(1) (7).xlsx",
     "Questionnaire_Etienne_1258.xlsx",
     "microparcours_aidant.xlsx",
     "Questionnaire_Etienne_1258-1_suivi_mensuel.xlsx"
