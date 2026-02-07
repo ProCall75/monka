@@ -324,6 +324,188 @@ total_questions: 27
 
 ---
 
+
+
+### Questions additionnelles (complément source)
+
+---
+
+### Suivi médical & accès aux soins
+
+---
+
+#### O37 — Avez-vous un médecin traitant
+
+**Libellé** : Avez-vous un médecin traitant ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Non |
+
+---
+
+#### O38 — Avez-vous d'autres médecins spécialistes qui vous suivent...
+
+**Libellé** : Avez-vous d'autres médecins spécialistes qui vous suivent actuellement  ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Non |
+
+---
+
+#### O39 — Lesquels
+
+**Libellé** : Lesquels ? (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Unique / Conditionnel O38 (1)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Cardiologue |
+| 2 | Oncologue |
+| 3 | Neurologue |
+| 4 | Pneumologue |
+| 5 | Ophtalmologue |
+| 6 | Psychiatre |
+| 7 | Chirurgien-Dentiste |
+| 8 | Gastro-entérologue |
+| 9 | Endocrinologue / Diabetologue |
+| 10 | ORL |
+| 11 | Gynecologue |
+| 12 | Nephrologue |
+| 13 | Gériatre |
+| 14 | Dermatologue |
+| 15 | Autre |
+
+---
+
+#### O40 — Avez-vous déjà réalisé des rendez-vous médicaux cette année
+
+**Libellé** : Avez-vous déjà réalisé des rendez-vous médicaux cette année ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Non |
+
+---
+
+#### O41 — Lesquels
+
+**Libellé** : Lesquels ? (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multiples/ Conditionnel O40(1)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Bilan de santé général (prise de sang…) |
+| 2 | Audition |
+| 3 | Vue |
+| 4 | Contrôle dentaire |
+| 5 | Suivi cardiovasculaire |
+| 6 | Ostéodensitométrie |
+| 7 | Vaccination |
+| 8 | Examen gynécologique |
+| 9 | Suivi dermatologique |
+| 10 | Suivi psychologique |
+| 11 | Dépistage des cancers |
+
+---
+
+### Santé : maladies / antécédents
+
+---
+
+#### O42 — Êtes-vous concerné ou avez-vous été concerné par une ou p...
+
+**Libellé** : Êtes-vous concerné ou avez-vous été concerné par une ou plusieurs de ces maladies : (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multiples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, troubles du déficit de l'attention avec ou sans hyperactivité TDAH…) |
+| 2 | Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...) |
+| 3 | Dermatologique (dermatite atopique, psoriasis, acné…) |
+| 4 | Respiratoire (asthme, maladie pulmonaire obstructive chronique…) |
+| 5 | Génito-urinaire (infections urinaires à répétition, hypertrophie bénigne de la prostate, endométriose…) |
+| 6 | Endocrinienne (hyper ou hypo thyroidie, obésité sévère…) |
+| 7 | Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…) |
+| 8 | Métabolique (diabète, cholesterol…) |
+| 9 | Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…) |
+| 10 | Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…) |
+| 11 | Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…) |
+| 12 | Maladies génétiques (muchovicidose, trisomie…) |
+| 13 | Troubles visuels sévères (DMLA, cécité…) |
+| 14 | Troubles auditifs sévères |
+| 15 | Je ne sais pas |
+
+---
+
+### Santé : médicaments
+
+---
+
+#### O43 — Combien de médicaments différents prenez-vous chaque jour
+
+**Libellé** : Combien de médicaments différents prenez-vous chaque jour ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | 1 à 3 médicaments |
+| 2 | 4 à 6 médicaments |
+| 3 | 7 médicaments et plus |
+| 4 | Je ne prends pas de traitement actuellement |
+
+---
+
+### État de santé & hygiène de vie
+
+---
+
+#### E17 — Pratiquez-vous une activité physique régulière (au moins ...
+
+**Libellé** : Pratiquez-vous une activité physique régulière (au moins 30 minutes, 3 fois par semaine) ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Non |
+
+---
+
+#### E19 — Quels sont aujourd’hui vos principaux soucis de santé
+
+**Libellé** : Quels sont aujourd’hui vos principaux soucis de santé ?
+
+**Type** : Obligatoire / Choix Multiples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Fatigue |
+| 2 | Sommeil |
+| 3 | Douleurs |
+| 4 | Moral (anxiété, idées noires, découragement) |
+| 5 | Alimentation / poids |
+| 6 | Problèmes de tension, de cœur, de diabète |
+| 7 | Autre problème de santé |
+| 8 | Aucun en particulier |
+
+---
+
 ## ⚠️ Règles Legacy
 
 1. **Critiques directes** : E12, E13 → Priorité niveau 1 (sécurité)

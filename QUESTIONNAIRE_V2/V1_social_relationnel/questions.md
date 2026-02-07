@@ -79,12 +79,12 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Plutôt équilibrée et satisfaisante |
-| 2 | Je fais la plus grande partie mais cela reste acceptable |
-| 3 | Je fais presque tout et cela crée des tensions ou un sentiment d'injustice |
-| 4 | Je suis totalement seul·e |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Plutôt équilibrée et satisfaisante | 0 |
+| 2 | Je fais la plus grande partie mais cela reste acceptable | 1 |
+| 3 | Je fais presque tout et cela crée des tensions ou un sentiment d'injustice | 2 |
+| 4 | Je suis totalement seul·e | 2 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Réseau d'aide & entourage
@@ -97,12 +97,12 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Oui, plusieurs personnes |
-| 2 | Oui, une personne |
-| 3 | Très peu / presque personne |
-| 4 | Personne |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Oui, plusieurs personnes | 0 |
+| 2 | Oui, une personne | 1 |
+| 3 | Très peu / presque personne | 2 |
+| 4 | Personne | 0 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Réseau d'aide & entourage
@@ -132,11 +132,11 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Non |
-| 2 | Parfois |
-| 3 | Oui |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Non | 0 |
+| 2 | Parfois | 1 |
+| 3 | Oui | 2 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Vie sociale de la personne aidée
@@ -149,11 +149,11 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Pas du tout |
-| 2 | Un peu |
-| 3 | Oui |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Pas du tout | 0 |
+| 2 | Un peu | 1 |
+| 3 | Oui | 2 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Impact sur vie familiale / sociale / professionnelle
@@ -166,11 +166,11 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Pas du tout |
-| 2 | Un peu |
-| 3 | Oui |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Pas du tout | 0 |
+| 2 | Un peu | 1 |
+| 3 | Oui | 2 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Impact sur vie familiale / sociale / professionnelle
@@ -200,11 +200,11 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Pas du tout |
-| 2 | Un peu |
-| 3 | Oui |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Pas du tout | 0 |
+| 2 | Un peu | 1 |
+| 3 | Oui | 2 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Relation aidant‑aidé & dynamique familiale
@@ -217,12 +217,12 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Plutôt renforcée / plus proche |
-| 2 | Globalement similaire |
-| 3 | Plus tendue / plus compliquée |
-| 4 | Difficile à dire |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Plutôt renforcée / plus proche | 0 |
+| 2 | Globalement similaire | 1 |
+| 3 | Plus tendue / plus compliquée | 1 |
+| 4 | Difficile à dire | 1 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Relation aidant‑aidé & dynamique familiale
@@ -252,11 +252,11 @@ total_questions: 15
 
 **Type** : Obligatoire / Choix Unique
 
-| Code | Libellé |
-|------|---------|
-| 1 | Non |
-| 2 | Parfois |
-| 3 | Oui |
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Non | 0 |
+| 2 | Parfois | 1 |
+| 3 | Oui | 2 |
 
 **Bloc** : Bloc 3 – Votre quotidien d'aidant et vos relations  
 **Sous-bloc** : Relation aidant‑aidé & dynamique familiale

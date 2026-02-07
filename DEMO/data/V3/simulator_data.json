@@ -1,0 +1,2682 @@
+{
+  "metadata": {
+    "vulnerability": "V3",
+    "name": "Santé de l'Aidant",
+    "version": "2.1",
+    "generated_at": "2026-02-07T11:21:48.421412",
+    "sources": {
+      "questions": "questions.md",
+      "scoring": "scoring.md",
+      "declencheurs": "declencheurs.md",
+      "recommendations": "recommendations.md",
+      "ccc": "ccc.md",
+      "asr": "asr.md"
+    }
+  },
+  "questions": [
+    {
+      "id": "O29",
+      "label": "Vous occuper de la personne aidée a-t-il un retentissement sur votre santé (physique et/ou psychique) ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Pas du tout",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Un peu",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Oui",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O33",
+      "label": "Ressentez-vous une charge en vous occupant de cette personne ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Pas du tout",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Un peu",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Oui",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E7",
+      "label": "Comment vous sentez-vous en général ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Pas du tout fatigué·e",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Un peu fatigué·e",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Très fatigué·e",
+          "score": 2
+        },
+        {
+          "code": "4",
+          "label": "Épuisé·e / au bord de craquer",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_s1"
+      ]
+    },
+    {
+      "id": "E8",
+      "label": "Vous sentez-vous seul·e face à votre rôle d'aidant ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Jamais",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Parfois",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Souvent",
+          "score": 2
+        },
+        {
+          "code": "4",
+          "label": "Tout le temps",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_s2"
+      ]
+    },
+    {
+      "id": "E9",
+      "label": "Avez-vous suffisamment de temps pour vous ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante",
+        "ccc_s2"
+      ]
+    },
+    {
+      "id": "E10",
+      "label": "Comment décririez-vous votre niveau de stress ou votre moral ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Ça va",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Parfois stressé·e ou triste",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Souvent stressé·e",
+          "score": 2
+        },
+        {
+          "code": "4",
+          "label": "Débordé·e / découragé·e",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E11",
+      "label": "Pensez-vous pouvoir continuer à aider cette personne dans les mois à venir ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui, sans difficulté",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui, mais c'est difficile",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Je ne suis pas sûr·e",
+          "score": 2
+        },
+        {
+          "code": "4",
+          "label": "Non, je risque de ne plus y arriver",
+          "score": 2,
+          "critical": true
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_s1"
+      ]
+    },
+    {
+      "id": "O44",
+      "label": "Par rapport à l'an dernier, votre santé est-elle ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Meilleure",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Identique",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Moins bonne",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_s3"
+      ]
+    },
+    {
+      "id": "E18",
+      "label": "Comment décririez-vous la qualité de votre sommeil ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Bonne",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Correcte",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Mauvaise",
+          "score": 2
+        },
+        {
+          "code": "4",
+          "label": "Très mauvaise",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_s3"
+      ]
+    },
+    {
+      "id": "E15",
+      "label": "Avez-vous des difficultés à prendre des RDV médicaux pour vous-même ?",
+      "type": "declenchante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Un peu",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Oui",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante",
+        "ccc_s4"
+      ]
+    },
+    {
+      "id": "E16",
+      "label": "Pour vous-même, avez-vous tendance à reporter ou annuler vos soins ?",
+      "type": "declenchante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non, je les maintiens",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Je les reporte parfois",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Je les reporte ou les annule souvent",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante",
+        "ccc_s4"
+      ]
+    },
+    {
+      "id": "E12",
+      "label": "Avez-vous déjà eu des gestes ou des paroles que vous regrettez envers la personne aidée ?",
+      "type": "critique",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui",
+          "score": 0,
+          "critical": true
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "critique_directe"
+      ]
+    },
+    {
+      "id": "E13",
+      "label": "Avez-vous eu des gestes ou paroles que vous regrettez envers d'autres personnes (famille, collègues...) ?",
+      "type": "critique",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui",
+          "score": 0,
+          "critical": true
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "critique_directe"
+      ]
+    },
+    {
+      "id": "O49",
+      "label": "Depuis combien de temps aidez-vous cette personne ?",
+      "type": "declenchante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Moins de 6 mois",
+          "score": 1
+        },
+        {
+          "code": "2",
+          "label": "Entre 6 mois et 2 ans",
+          "score": 2
+        },
+        {
+          "code": "3",
+          "label": "Depuis plus de 2 ans",
+          "score": 3
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante"
+      ]
+    },
+    {
+      "id": "O50",
+      "label": "Combien de temps lui consacrez-vous par semaine ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Moins de 5h",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Entre 5h et 10h",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Plus de 10h",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O32",
+      "label": "Souhaitez-vous être davantage aidé·e ?",
+      "type": "declenchante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante"
+      ]
+    },
+    {
+      "id": "N8",
+      "label": "Avez-vous eu un arrêt de travail lié à votre rôle d'aidant ?",
+      "type": "declenchante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante"
+      ]
+    },
+    {
+      "id": "E14",
+      "label": "Combien de jours d'arrêt sur les 30 derniers jours ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Moins de 4 jours",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Entre 4 et 7 jours",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Plus de 7 jours",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O37",
+      "label": "Avez-vous un médecin traitant ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O38",
+      "label": "Avez-vous d'autres médecins spécialistes qui vous suivent actuellement  ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O39",
+      "label": "Lesquels ? (plusieurs réponses possibles)",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Cardiologue",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oncologue",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Neurologue",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Pneumologue",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "Ophtalmologue",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "Psychiatre",
+          "score": 0
+        },
+        {
+          "code": "7",
+          "label": "Chirurgien-Dentiste",
+          "score": 0
+        },
+        {
+          "code": "8",
+          "label": "Gastro-entérologue",
+          "score": 0
+        },
+        {
+          "code": "9",
+          "label": "Endocrinologue / Diabetologue",
+          "score": 0
+        },
+        {
+          "code": "10",
+          "label": "ORL",
+          "score": 0
+        },
+        {
+          "code": "11",
+          "label": "Gynecologue",
+          "score": 0
+        },
+        {
+          "code": "12",
+          "label": "Nephrologue",
+          "score": 0
+        },
+        {
+          "code": "13",
+          "label": "Gériatre",
+          "score": 0
+        },
+        {
+          "code": "14",
+          "label": "Dermatologue",
+          "score": 0
+        },
+        {
+          "code": "15",
+          "label": "Autre",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O40",
+      "label": "Avez-vous déjà réalisé des rendez-vous médicaux cette année ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O41",
+      "label": "Lesquels ? (plusieurs réponses possibles)",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Bilan de santé général (prise de sang…)",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Audition",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Vue",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Contrôle dentaire",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "Suivi cardiovasculaire",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "Ostéodensitométrie",
+          "score": 0
+        },
+        {
+          "code": "7",
+          "label": "Vaccination",
+          "score": 0
+        },
+        {
+          "code": "8",
+          "label": "Examen gynécologique",
+          "score": 0
+        },
+        {
+          "code": "9",
+          "label": "Suivi dermatologique",
+          "score": 0
+        },
+        {
+          "code": "10",
+          "label": "Suivi psychologique",
+          "score": 0
+        },
+        {
+          "code": "11",
+          "label": "Dépistage des cancers",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O42",
+      "label": "Êtes-vous concerné ou avez-vous été concerné par une ou plusieurs de ces maladies : (plusieurs réponses possibles)",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, troubles du déficit de l'attention avec ou sans hyperactivité TDAH…)",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...)",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Dermatologique (dermatite atopique, psoriasis, acné…)",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Respiratoire (asthme, maladie pulmonaire obstructive chronique…)",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "Génito-urinaire (infections urinaires à répétition, hypertrophie bénigne de la prostate, endométriose…)",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "Endocrinienne (hyper ou hypo thyroidie, obésité sévère…)",
+          "score": 0
+        },
+        {
+          "code": "7",
+          "label": "Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…)",
+          "score": 0
+        },
+        {
+          "code": "8",
+          "label": "Métabolique (diabète, cholesterol…)",
+          "score": 0
+        },
+        {
+          "code": "9",
+          "label": "Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…)",
+          "score": 0
+        },
+        {
+          "code": "10",
+          "label": "Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…)",
+          "score": 0
+        },
+        {
+          "code": "11",
+          "label": "Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…)",
+          "score": 0
+        },
+        {
+          "code": "12",
+          "label": "Maladies génétiques (muchovicidose, trisomie…)",
+          "score": 0
+        },
+        {
+          "code": "13",
+          "label": "Troubles visuels sévères (DMLA, cécité…)",
+          "score": 0
+        },
+        {
+          "code": "14",
+          "label": "Troubles auditifs sévères",
+          "score": 0
+        },
+        {
+          "code": "15",
+          "label": "Je ne sais pas",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O43",
+      "label": "Combien de médicaments différents prenez-vous chaque jour ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "1 à 3 médicaments",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "4 à 6 médicaments",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "7 médicaments et plus",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Je ne prends pas de traitement actuellement",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E17",
+      "label": "Pratiquez-vous une activité physique régulière (au moins 30 minutes, 3 fois par semaine) ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E19",
+      "label": "Quels sont aujourd’hui vos principaux soucis de santé ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Fatigue",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Sommeil",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Douleurs",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Moral (anxiété, idées noires, découragement)",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "Alimentation / poids",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "Problèmes de tension, de cœur, de diabète",
+          "score": 0
+        },
+        {
+          "code": "7",
+          "label": "Autre problème de santé",
+          "score": 0
+        },
+        {
+          "code": "8",
+          "label": "Aucun en particulier",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    }
+  ],
+  "scoring": {
+    "questions": {
+      "E7": [
+        {
+          "response": "Pas du tout fatigué·e",
+          "score": 0
+        }
+      ],
+      "E8": [
+        {
+          "response": "Jamais",
+          "score": 0
+        }
+      ],
+      "E9": [
+        {
+          "response": "Oui",
+          "score": 0
+        }
+      ],
+      "E10": [
+        {
+          "response": "Ça va globalement",
+          "score": 0
+        }
+      ],
+      "E11": [
+        {
+          "response": "Oui, sans difficulté",
+          "score": 0
+        }
+      ],
+      "E18": [
+        {
+          "response": "Bonne",
+          "score": 0
+        }
+      ],
+      "O6": [
+        {
+          "response": "Non",
+          "score": 0
+        }
+      ],
+      "O29": [
+        {
+          "response": "Pas du tout",
+          "score": 0
+        }
+      ],
+      "O33": [
+        {
+          "response": "Pas du tout",
+          "score": 0
+        }
+      ],
+      "O44": [
+        {
+          "response": "Meilleure",
+          "score": 0
+        }
+      ]
+    },
+    "max_score": 20,
+    "thresholds": [
+      {
+        "min": 0,
+        "max": 6,
+        "label": "Faible",
+        "color": "green"
+      },
+      {
+        "min": 7,
+        "max": 13,
+        "label": "Modéré",
+        "color": "orange"
+      },
+      {
+        "min": 14,
+        "max": 20,
+        "label": "Élevé",
+        "color": "red"
+      }
+    ]
+  },
+  "declencheurs": {
+    "critiques_directs": [
+      {
+        "question_id": "E12",
+        "option_label": "Oui",
+        "priority": 1,
+        "delay_days": 7,
+        "micro_parcours": "Risque vital immédiat",
+        "option": "2"
+      },
+      {
+        "question_id": "E13",
+        "option_label": "Oui",
+        "priority": 1,
+        "delay_days": 7,
+        "micro_parcours": "Risque vital immédiat",
+        "option": "2"
+      }
+    ],
+    "ccc": [],
+    "standards": [
+      {
+        "question_id": "O49",
+        "option_label": "Depuis plus de 2 ans",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "S1",
+        "option": "2"
+      },
+      {
+        "question_id": "N8",
+        "option_label": "Toute réponse ≠ Non",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "S1",
+        "option": "1"
+      },
+      {
+        "question_id": "E14",
+        "option_label": "Entre 4 et 7",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "S1",
+        "option": "2"
+      },
+      {
+        "question_id": "E14",
+        "option_label": "Plus de 7 jours",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "S1",
+        "option": "1"
+      },
+      {
+        "question_id": "O32",
+        "option_label": "Oui",
+        "priority": 3,
+        "delay_days": 90,
+        "option": "2"
+      },
+      {
+        "question_id": "E9",
+        "option_label": "Non",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "S2",
+        "option": "2"
+      }
+    ]
+  },
+  "recommendations": {
+    "O29": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Contactez la plateforme de répit de votre territoire.",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O33": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "Service à domicile (SAD)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "1 =>Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "Service à domicile (SAD)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "1 =>Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E7": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Tracer la situation comme stable dans le dossier (dans CRM)",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "Service à domicile (SAD)",
+          "Auxiliaire de vie"
+        ],
+        "micro_tasks": [
+          {
+            "text": "2=>IDEC contacte les SAD (du territoire du domicile du proche regarder coordonnées sur google) pour demande si disponibi",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "3=>IDEC transmets à l'aidant pour choix et prise de contact.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "5=> Suivi IDEC de la mise en place de l'intervention : soit via chat avec l'aidant et/ou demande de mise en copie des éc",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E8": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Encourager l’appui de l’entourage et des ressources existantes",
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Noter un isolement ponctuel",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Discutez des difficultés d'être aidant avec l'IDEC",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Proposer un échange avec l’aidant pour évaluer le vécu émotionnel",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "Envisager un soutien psychologique",
+        "app_text_source": "excel",
+        "actors": [
+          "Psychologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Orienter vers un  soutien psychologique",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E9": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "Services à domicile (SAD)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "1 =>Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E10": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Prendre rendez-vous avec le médecin traitant afin d'échanger des difficultés d'être aidant",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC, Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter l’aidant pour évaluer la charge mentale",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "Prendre rendez-vous avec le médecin traitant afin d'échanger des difficultés d'être aidant",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC, Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Orienter vers le médecin traitant",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E11": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "Services à domicile (SAD)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "1 =>Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "2=>IDEC contacte les SAD (du territoire du domicile du proche regarder coordonnées sur google) pour demande si disponibi",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "3=>IDEC transmets à l'aidant pour choix et prise de contact.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E12": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Sollicité un service d'aide à domicile pour des interventions dans le but d'assurer la sécurité de votre proche",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC, Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Évaluer le risque immédiat ou latent",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E13": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Demandez une intervention médico-sociale renforcée.",
+        "app_text_source": "excel",
+        "actors": [
+          "Centre medico-psychologique (CMP) ou Centre medico-pédo-pédagogique (CMPP)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "IDEC contacte le CMP de secteur (recherche sur Internet)  pour prise de contact et rendez-vous avec un infirmier du CMP",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "N8": {
+      "1": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E14": {
+      "1": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "Services à domicile (SAD)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "1 =>Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Sollicité un service d'aide à domicile pour prendre le relais",
+        "app_text_source": "excel",
+        "actors": [
+          "Services à domicile (SAD)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "1 =>Confirmer avec l'aidant le nombre d'heures envisagées pour l'intervention du SAD.",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O37": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Bénéficiez d'un accompagnement d'accès aux soins (Médecin traitant…).",
+        "app_text_source": "excel",
+        "actors": [
+          "CPAM"
+        ],
+        "micro_tasks": [
+          {
+            "text": "1=>Informer sur les dispositifs d’accès aux soins en utilisant le document \"courrier DAC/CPTS\"  2=>Chercher  un médecin",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O39": {
+      "1": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Cardiologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Cardiologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Oncologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Oncologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Neurologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Neurologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Pneumologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Pneumologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "5": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Ophtalmologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Ophtamologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "6": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Psychiatre"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Psychiatre en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "7": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Chirurgien-Dentiste"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Chirurgien-dentiste en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "8": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Gastro-entérologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Gastro-Entérologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "9": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Endocrinologue",
+          "Diabetologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Endocrinolo-Diabétologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "10": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "ORL"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec ORL en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "11": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Gynecologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Gynécologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "12": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Néphrologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Cardiologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "13": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Gériatre"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Gériatre en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "14": {
+        "app_text": "Un suivi régulier est à prévoir selon les préconisations du médecin.",
+        "app_text_source": "excel",
+        "actors": [
+          "Dermatologue"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Prendre RDV avec Dermatologue en fonction de la date de la dernière consultation",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "15": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O40": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Demandez un bilan de santé.",
+        "app_text_source": "excel",
+        "actors": [
+          "Médecin traitant (ou généraliste)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E15": {
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E16": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Respecter la non-réponse sans insistance",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Proposer un temps d’échange pour faire le point",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O42": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "5": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "6": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "7": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "8": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "9": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "10": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "11": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "12": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "13": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "14": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "15": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O43": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Prendre rendez-vous avec votre médecin traitant pour bilan",
+        "app_text_source": "excel",
+        "actors": [
+          "Médecin traitant (ou généraliste)"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour exposer l'état  de santé et demander un bilan de médication",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O44": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E17": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E18": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Prendre rendez-vous avec le médecin traitant afin d'échanger sur vos troubles du sommeil",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC",
+          "Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E19": {
+      "1": {
+        "app_text": "Prendre rendez-vous avec le médecin traitantpour bilan de santé",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Prendre rendez-vous avec le médecin traitantpour bilan de santé",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC",
+          "Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "Prendre rendez-vous avec le médecin traitantpour bilan de santé",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC",
+          "Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "Prendre rendez-vous avec le médecin traitantpour bilan de santé",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC",
+          "Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "5": {
+        "app_text": "Prendre rendez-vous avec le médecin traitantpour bilan de santé",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC",
+          "Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "6": {
+        "app_text": "Prendre rendez-vous avec le médecin traitantpour bilan de santé",
+        "app_text_source": "excel",
+        "actors": [
+          "IDEC",
+          "Médecin"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Contacter le médecin traitant pour bilan de santé",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "7": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "8": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    }
+  },
+  "ccc": [
+    {
+      "id": "CCC_S1_01",
+      "name": "Épuisement",
+      "micro_parcours": "S1",
+      "conditions": [
+        {
+          "question_id": "E7",
+          "option_label": "Très fatigué·e"
+        },
+        {
+          "question_id": "E11",
+          "option_label": "Non, je risque de ne plus y arriver"
+        }
+      ],
+      "conditions_source": "legacy",
+      "reasoning_source": "ia",
+      "sens_clinique": "Risque de rupture imminente du rôle d’aidant",
+      "recommendations": {
+        "app_text": "Risque de rupture imminente du rôle d’aidant",
+        "micro_tasks": []
+      }
+    },
+    {
+      "id": "CCC_S2_01",
+      "name": "Isolement émotionnel",
+      "micro_parcours": "S2",
+      "conditions": [
+        {
+          "question_id": "E8",
+          "option_label": "Souvent"
+        },
+        {
+          "question_id": "E9",
+          "option_label": "Non"
+        }
+      ],
+      "conditions_source": "legacy",
+      "reasoning_source": "ia",
+      "sens_clinique": "Isolement affectif avec absence de récupération",
+      "recommendations": {
+        "app_text": "Isolement affectif avec absence de récupération",
+        "micro_tasks": []
+      }
+    },
+    {
+      "id": "CCC_S3_01",
+      "name": "Dégradation santé perçue",
+      "micro_parcours": "S3",
+      "conditions": [
+        {
+          "question_id": "O44",
+          "option_label": "Moins bonne"
+        },
+        {
+          "question_id": "E18",
+          "option_label": "Mauvaise"
+        }
+      ],
+      "conditions_source": "legacy",
+      "reasoning_source": "ia",
+      "sens_clinique": "Dégradation physique objectivée par le vécu",
+      "recommendations": {
+        "app_text": "Dégradation physique objectivée par le vécu",
+        "micro_tasks": []
+      }
+    },
+    {
+      "id": "CCC_S4_01",
+      "name": "Renoncement aux soins",
+      "micro_parcours": "S4",
+      "conditions": [
+        {
+          "question_id": "E15",
+          "option_label": "Oui"
+        },
+        {
+          "question_id": "E16",
+          "option_label": "Je les reporte ou les annule souvent"
+        }
+      ],
+      "conditions_source": "legacy",
+      "reasoning_source": "ia",
+      "sens_clinique": "Renoncement actif aux soins de l’aidant",
+      "recommendations": {
+        "app_text": "Renoncement actif aux soins de l’aidant",
+        "micro_tasks": []
+      }
+    }
+  ],
+  "asr": {
+    "S1": {
+      "name": "Charge, fatigue et risque d'épuisement de l'aidant",
+      "asr_objectif": "Repérer la surcharge et prévenir l'épuisement.",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "S1-A",
+          "condition": "relais ou aide réduisant la charge",
+          "source": "legacy"
+        },
+        {
+          "id": "S1-B",
+          "condition": "organisation modifiée allégeant le quotidien",
+          "source": "legacy"
+        }
+      ]
+    },
+    "S2": {
+      "name": "Inquiétudes pour la sécurité (risques graves)",
+      "asr_objectif": "Réduire les risques graves (chutes, fugue, danger domestique, crise).",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "S2-A",
+          "condition": "soutien par l'entourage",
+          "source": "legacy"
+        },
+        {
+          "id": "S2-B",
+          "condition": "accompagnement professionnel engagé",
+          "source": "legacy"
+        }
+      ]
+    },
+    "S3": {
+      "name": "Santé physique de l'aidant et renoncement aux soins",
+      "asr_objectif": "Protéger votre santé et éviter de renoncer à vos soins.",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "S3-A",
+          "condition": "suivi médical repris",
+          "source": "legacy"
+        },
+        {
+          "id": "S3-B",
+          "condition": "démarche de soin concrète engagée",
+          "source": "legacy"
+        }
+      ]
+    },
+    "S4": {
+      "name": "Hygiène de vie de l'aidant (activité et sommeil)",
+      "asr_objectif": "Améliorer votre récupération (sommeil, activité) pour tenir dans la durée.",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "S4-A",
+          "condition": "amélioration du repos ou du sommeil",
+          "source": "legacy"
+        },
+        {
+          "id": "S4-B",
+          "condition": "organisation quotidienne plus soutenable",
+          "source": "legacy"
+        }
+      ]
+    }
+  },
+  "personas": [
+    {
+      "name": "Nathalie P., 62 ans",
+      "priority_badge": "sain",
+      "description": "Équilibrée",
+      "ccc_count": 0,
+      "responses": {
+        "O29": "1",
+        "O33": "1",
+        "E7": "1",
+        "E8": "1",
+        "E9": "1",
+        "E10": "1",
+        "E11": "1",
+        "O44": "1",
+        "E18": "1",
+        "E15": "1",
+        "E16": "1",
+        "E12": "1",
+        "E13": "1",
+        "O49": "1",
+        "O50": "1",
+        "O32": "1",
+        "N8": "1",
+        "E14": "1",
+        "O37": "1",
+        "O38": "1",
+        "O39": "1",
+        "O40": "1",
+        "O41": "1",
+        "O42": "1",
+        "O43": "1",
+        "E17": "1",
+        "E19": "1"
+      }
+    },
+    {
+      "name": "Jean-Pierre L., 72 ans",
+      "priority_badge": "planifie",
+      "description": "Fragile",
+      "ccc_count": 0,
+      "responses": {
+        "O29": "1",
+        "O33": "1",
+        "E7": "1",
+        "E8": "1",
+        "E9": "1",
+        "E10": "1",
+        "E11": "1",
+        "O44": "1",
+        "E18": "1",
+        "E15": "1",
+        "E16": "1",
+        "E12": "1",
+        "E13": "1",
+        "O49": "1",
+        "O50": "1",
+        "O32": "1",
+        "N8": "1",
+        "E14": "1",
+        "O37": "1",
+        "O38": "1",
+        "O39": "1",
+        "O40": "1",
+        "O41": "1",
+        "O42": "1",
+        "O43": "1",
+        "E17": "1",
+        "E19": "1"
+      }
+    },
+    {
+      "name": "Sophie M., 45 ans",
+      "priority_badge": "prioritaire",
+      "description": "Risques",
+      "ccc_count": 0,
+      "responses": {
+        "O29": "2",
+        "O33": "2",
+        "E7": "3",
+        "E8": "3",
+        "E9": "2",
+        "E10": "3",
+        "E11": "3",
+        "O44": "2",
+        "E18": "3",
+        "E15": "2",
+        "E16": "2",
+        "E12": "2",
+        "E13": "2",
+        "O49": "2",
+        "O50": "2",
+        "O32": "2",
+        "N8": "2",
+        "E14": "2",
+        "O37": "2",
+        "O38": "2",
+        "O39": "8",
+        "O40": "2",
+        "O41": "6",
+        "O42": "8",
+        "O43": "3",
+        "E17": "2",
+        "E19": "5"
+      }
+    },
+    {
+      "name": "Ahmed K., 38 ans",
+      "priority_badge": "critique",
+      "description": "Isolement",
+      "ccc_count": 0,
+      "responses": {
+        "O29": "3",
+        "O33": "3",
+        "E7": "4",
+        "E8": "4",
+        "E9": "2",
+        "E10": "4",
+        "E11": "4",
+        "O44": "3",
+        "E18": "4",
+        "E15": "3",
+        "E16": "3",
+        "E12": "2",
+        "E13": "2",
+        "O49": "3",
+        "O50": "3",
+        "O32": "2",
+        "N8": "2",
+        "E14": "3",
+        "O37": "2",
+        "O38": "2",
+        "O39": "15",
+        "O40": "2",
+        "O41": "11",
+        "O42": "15",
+        "O43": "4",
+        "E17": "2",
+        "E19": "8"
+      }
+    },
+    {
+      "name": "Claire D., 34 ans",
+      "priority_badge": "urgent",
+      "description": "Crise",
+      "ccc_count": 0,
+      "responses": {
+        "O29": "3",
+        "O33": "3",
+        "E7": "4",
+        "E8": "4",
+        "E9": "2",
+        "E10": "4",
+        "E11": "4",
+        "O44": "3",
+        "E18": "4",
+        "E15": "3",
+        "E16": "3",
+        "E12": "2",
+        "E13": "2",
+        "O49": "3",
+        "O50": "3",
+        "O32": "2",
+        "N8": "2",
+        "E14": "3",
+        "O37": "2",
+        "O38": "2",
+        "O39": "15",
+        "O40": "2",
+        "O41": "11",
+        "O42": "15",
+        "O43": "4",
+        "E17": "2",
+        "E19": "8"
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
-# 🔗 CCC V1 — Conditions Critiques Composites
+# 🎯 CCC V1 — Conditions Critiques Composites Social et Relationnel
 
-> **Source** : `SOURCES/extracted/typologie_ccc_scoring.json` (table index 3)  
-> **Date extraction** : 2026-02-06
+> **Source** : `SOURCES/extracted/typologie_ccc_scoring.json`  
+> **Date extraction** : 2026-02-07
 
 ---
 
@@ -10,108 +10,153 @@
 ```yaml
 vulnerability: V1
 name: "Social et Relationnel"
-source: "Typologie,CCC et scoring.docx"
-extraction_date: "2026-02-06"
+source: "typologie_ccc_scoring.json"
+extraction_date: "2026-02-07"
 total_ccc: 8
+micro_parcours: ["R1", "R2", "R3", "R4"]
 ```
 
 ---
 
-## 📋 CCC par Micro-Parcours
+## 🚨 Synthèse CCC
 
-### R1 — Impact sur la vie personnelle / sociale / pro
-
-#### R1_CC_01
-
-**Questions** : O27 + O28
-
-**Logique** : O27 = "Oui" **ET** O28 = "Oui"
-
-**Sens clinique** : Retentissement massif du rôle d'aidant sur la vie privée et sociale → risque de déséquilibre global
+| MP | CCC | Questions | Description |
+|----|-----|-----------|-------------|
+| **R1** | CCC_R1_01 | O27 + O28 | Retentissement massif du rôle d’aidant sur la vie  |
+| **R1** | CCC_R1_02 | N7 + O27 | Ajustement professionnel déjà engagé avec impact f |
+| **R2** | CCC_R2_01 | N4 + E2 | Aidant seul sans soutien mobilisable → risque d’is |
+| **R2** | CCC_R2_02 | E1 + E2 | Charge quasi exclusive sans filet de sécurité |
+| **R3** | CCC_R3_01 | N20 + O48 | Isolement social du proche confirmé par faible pré |
+| **R4** | CCC_R4_01 | O30 + E4 | Dégradation du lien aidant-aidé avec perte de reco |
+| **R4** | CCC_R4_02 | E5 + E1 | Conflits familiaux associés à une charge déséquili |
+| **R4** | CCC_R4_03 | E6 + O31 | Refus d’aide externe avec anxiété projetée forte → |
 
 ---
 
-#### R1_CC_02
+## 📋 Détail des CCC
 
-**Questions** : N7 + O27
+### CCC_R1_01 — Impact sur la vie personnelle / sociale / pro
 
-**Logique** : N7 = aménagement horaires ou congés **ET** O27 = "Oui"
+**Micro-parcours** : R1 – Impact sur la vie personnelle / sociale / pro
+
+**Questions impliquées** : O27 + O28
+
+**Logique** :
+```
+O27 = "Oui" ET O28 = "Oui"
+```
+
+**Sens clinique** : Retentissement massif du rôle d’aidant sur la vie privée et sociale → risque de déséquilibre global
+
+---
+
+### CCC_R1_02 — Impact sur la vie personnelle / sociale / pro
+
+**Micro-parcours** : R1 – Impact sur la vie personnelle / sociale / pro
+
+**Questions impliquées** : N7 + O27
+
+**Logique** :
+```
+N7 = aménagement horaires ou congés ET O27 = "Oui"
+```
 
 **Sens clinique** : Ajustement professionnel déjà engagé avec impact familial → fragilisation structurelle
 
 ---
 
-### R2 — Soutien de l'entourage
+### CCC_R2_01 — Soutien de l’entourage
 
-#### R2_CC_01
+**Micro-parcours** : R2 – Soutien de l’entourage
 
-**Questions** : N4 + E2
+**Questions impliquées** : N4 + E2
 
-**Logique** : N4 = "Oui" **ET** E2 = "Très peu / personne"
+**Logique** :
+```
+N4 = "Oui" ET E2 = "Très peu / personne"
+```
 
-**Sens clinique** : Aidant seul sans soutien mobilisable → risque d'isolement de l'aidant
+**Sens clinique** : Aidant seul sans soutien mobilisable → risque d’isolement de l’aidant
 
 ---
 
-#### R2_CC_02
+### CCC_R2_02 — Soutien de l’entourage
 
-**Questions** : E1 + E2
+**Micro-parcours** : R2 – Soutien de l’entourage
 
-**Logique** : E1 = "Je fais presque tout / seul·e" **ET** E2 = "Très peu / personne"
+**Questions impliquées** : E1 + E2
+
+**Logique** :
+```
+E1 = "Je fais presque tout / seul·e" ET E2 = "Très peu / personne"
+```
 
 **Sens clinique** : Charge quasi exclusive sans filet de sécurité
 
 ---
 
-### R3 — Isolement social du proche
+### CCC_R3_01 — Isolement social du proche
 
-#### R3_CC_01
+**Micro-parcours** : R3 – Isolement social du proche
 
-**Questions** : N20 + O48
+**Questions impliquées** : N20 + O48
 
-**Logique** : N20 = "Oui" **ET** O48 ≤ 1 fois / mois
+**Logique** :
+```
+N20 = "Oui" ET O48 ≤ 1 fois / mois
+```
 
 **Sens clinique** : Isolement social du proche confirmé par faible présence relationnelle
 
 ---
 
-### R4 — Relation aidant / aidé & dynamique familiale
+### CCC_R4_01 — Relation aidant / aidé & dynamique familiale
 
-#### R4_CC_01
+**Micro-parcours** : R4 – Relation aidant / aidé & dynamique familiale
 
-**Questions** : O30 + E4
+**Questions impliquées** : O30 + E4
 
-**Logique** : O30 = "Oui" **ET** E4 = "Plus tendue / compliquée"
+**Logique** :
+```
+O30 = "Oui" ET E4 = "Plus tendue / compliquée"
+```
 
 **Sens clinique** : Dégradation du lien aidant-aidé avec perte de reconnaissance
 
 ---
 
-#### R4_CC_02
+### CCC_R4_02 — Relation aidant / aidé & dynamique familiale
 
-**Questions** : E5 + E1
+**Micro-parcours** : R4 – Relation aidant / aidé & dynamique familiale
 
-**Logique** : E5 = "Oui" **ET** E1 = "Je fais presque tout / seul·e"
+**Questions impliquées** : E5 + E1
+
+**Logique** :
+```
+E5 = "Oui" ET E1 = "Je fais presque tout / seul·e"
+```
 
 **Sens clinique** : Conflits familiaux associés à une charge déséquilibrée
 
 ---
 
-#### R4_CC_03
+### CCC_R4_03 — Relation aidant / aidé & acceptation de l’aide
 
-**Questions** : E6 + O31
+**Micro-parcours** : R4 – Relation aidant / aidé & acceptation de l’aide
 
-**Logique** : E6 = "Refuse la plupart du temps" **ET** O31 = "Oui"
+**Questions impliquées** : E6 + O31
 
-**Sens clinique** : Refus d'aide externe avec anxiété projetée forte → risque de blocage de la prise en charge
+**Logique** :
+```
+E6 = "Refuse la plupart du temps" ET O31 = "Oui"
+```
+
+**Sens clinique** : Refus d’aide externe avec anxiété projetée forte → risque de blocage de la prise en charge
 
 ---
 
-## 🤖 Contenu IA (à valider)
+## ⚠️ Règles Legacy
 
-Les CCC ci-dessus sont **100% Legacy** (source Typologie,CCC et scoring.docx).
-
-Les **micro-tâches et recommendations associées** à chaque CCC sont générées par IA et se trouvent dans :
-- `QUESTIONNAIRE/V1_social_relationnel/base/ccc_recommendations.md` (ancienne structure)
-
-> ⚠️ Ces MT CCC doivent être validées par l'équipe clinique.
+1. **Priorité** : CCC > Score pour déclenchement MP
+2. **Multi-activation** : Un aidant peut avoir plusieurs CCC actifs
+3. **Critiques directes** : Traitement séparé (pas CCC)

@@ -135,6 +135,21 @@ micro_parcours: ["M1", "M2", "M3", "M4", "M5", "M6"]
 
 ---
 
+## 📌 Signatures d'État (Legacy ASR Referent op. 030226)
+
+> Source : `Legacy ASR Referent op. 030226.docx`
+
+| MP | Signature A | Signature B |
+|----|-------------|-------------|
+| M1 | M1-A : informations médicales clarifiées | M1-B : échanges explicatifs avec un professionnel |
+| M2 | M2-A : rendez-vous accessibles | M2-B : parcours de soins fonctionnel |
+| M3 | M3-A : plan d'urgence identifié | M3-B : contacts et procédures connus |
+| M4 | M4-A : suivi actif | M4-B : accès direct à un spécialiste |
+| M5 | M5-A : médecin ou référent identifié | M5-B : coordination effective entre acteurs |
+| M6 | M6-A : plan de soins ou d'anticipation formalisé | M6-B : repères clairs pour les étapes à venir |
+
+---
+
 ## ⚠️ Règles Legacy
 
 1. **M1** = Priorité si errance diagnostique

@@ -13,7 +13,7 @@ name: "Administrative"
 bloc: "Bloc 7 – Droits, démarches, administratif & finances"
 source: "recommendations_complete.json"
 extraction_date: "2026-02-06"
-total_questions: 18
+total_questions: 21
 ```
 
 ---
@@ -257,6 +257,141 @@ total_questions: 18
 | 3 | Je ne sais pas | ⚠️ CCC A1/A3 |
 
 **⚠️ CCC A1 + A3**
+
+---
+
+
+
+### Questions additionnelles (complément source)
+
+---
+
+### Accompagnement & recours aux dispositifs
+
+---
+
+#### N43 — Dans votre rôle d'aidant avez-vous déjà bénéficié des ser...
+
+**Libellé** : Dans votre rôle d'aidant avez-vous déjà bénéficié des services des accompagnements administratifs suivants ?  (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multiples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Assistante sociale |
+| 2 | Maison départementale des Personnes Handicapées (MDPH) |
+| 3 | Maison de l'autonomie (MDA) |
+| 4 | Centres communaux d'action sociale (CCAS) |
+| 5 | Mutuelles et assurances complémentaires |
+| 6 | Associations de patients |
+| 7 | Plateformes d'accompagnement et de répit |
+| 8 | Service social de l'assurance maladie |
+| 9 | Espace Autonomie Sénior (EAS) |
+| 10 | Aucun |
+
+---
+
+#### N5 — Avez-vous  déjà eu recours aux aides suivantes
+
+**Libellé** : Avez-vous  déjà eu recours aux aides suivantes ?   (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multiples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Solutions de répit |
+| 2 | Formations dédiées aux aidants |
+| 3 | Accompagnement psychologique |
+| 4 | Aucune |
+| 5 | Autre |
+
+---
+
+### Situation financière
+
+---
+
+#### O61 — Pensez-vous avoir les moyens financiers suffisants pour f...
+
+**Libellé** : Pensez-vous avoir les moyens financiers suffisants pour faire face à cette situation ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Non |
+
+---
+
+### Démarches prioritaires / préoccupations
+
+---
+
+#### E63 — Quelles démarches vous préoccupent le plus en ce moment p...
+
+**Libellé** : Quelles démarches vous préoccupent le plus en ce moment pour votre proche ?
+
+**Type** : Obligatoire / Choix multiple
+
+| Code | Libellé |
+|------|---------|
+| 1 | Dossier de dépendance (ex. APA, PCH…) |
+| 2 | Dossier MDPH / handicap |
+| 3 | Démarches de retraite / pension |
+| 4 | Aides au logement / adaptation du domicile |
+| 5 | Aides financières ponctuelles |
+| 6 | Renouvellement de droits (ALD, mutuelle, CMU, etc.) |
+| 7 | Autre |
+| 8 | Aucune en particulier |
+
+---
+
+### Inclusion (école, structure, activité)
+
+---
+
+#### E64 — Votre enfant peut-il fréquenter une école ou une structur...
+
+**Libellé** : Votre enfant peut-il fréquenter une école ou une structure adaptée (crèche, IME, ULIS, etc.) de façon régulière ?
+
+**Type** : Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui, sans difficulté particulière |
+| 2 | Oui, mais avec des aménagements ou accompagnement (AESH, AVS, éducateur…) |
+| 3 | Très difficile, il manque souvent / la structure n’est pas adaptée |
+| 4 | Non, il ne fréquente pas d’école ou de structure adaptée |
+
+---
+
+#### E65 — Votre enfant a-t-il besoin d’un accompagnant spécialisé (...
+
+**Libellé** : Votre enfant a-t-il besoin d’un accompagnant spécialisé (AESH, AVS, éducateur, autre) pour l’école, les soins ou certaines activités ?
+
+**Type** : Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Oui, déjà en place |
+| 3 | Oui, besoin identifié mais pas encore en place |
+
+---
+
+#### E67 — Actuellement, votre proche a-t-il une activité (travail, ...
+
+**Libellé** : Actuellement, votre proche a-t-il une activité (travail, ESAT, atelier protégé, bénévolat, accueil de jour…) adaptée à son état de santé ?
+
+**Type** : Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 (tout sauf réponse 1 ou 3 ou 4)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui, activité adaptée |
+| 2 | Oui, mais elle devient difficile à tenir |
+| 3 | Non, il est sans activité mais cela ne pose pas de problème particulier |
+| 4 | Non, et cela crée des difficultés (isolement, repli, perte de repères) |
 
 ---
 

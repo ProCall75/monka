@@ -1,0 +1,1929 @@
+{
+  "metadata": {
+    "vulnerability": "V5",
+    "name": "Administrative",
+    "version": "2.1",
+    "generated_at": "2026-02-07T11:21:48.429734",
+    "sources": {
+      "questions": "questions.md",
+      "scoring": "scoring.md",
+      "declencheurs": "declencheurs.md",
+      "recommendations": "recommendations.md",
+      "ccc": "ccc.md",
+      "asr": "asr.md"
+    }
+  },
+  "questions": [
+    {
+      "id": "O45",
+      "label": "Quelle couverture de santé avez-vous ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Régime général (ou spécial) et Mutuelle",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Régime général (ou spécial)",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "CMU",
+          "score": 3
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O23",
+      "label": "Quelle couverture de santé protège la personne aidée ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Régime général (ou spécial) et Mutuelle",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Régime général (ou spécial)",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "CMU",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "N6",
+      "label": "Une mesure de protection a-t-elle été mise en place ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Habilitation familiale",
+          "score": 2
+        },
+        {
+          "code": "3",
+          "label": "Tutelle",
+          "score": 3
+        },
+        {
+          "code": "4",
+          "label": "Curatelle simple",
+          "score": 2
+        },
+        {
+          "code": "5",
+          "label": "Curatelle renforcée",
+          "score": 3
+        },
+        {
+          "code": "6",
+          "label": "Sauvegarde de justice",
+          "score": 3
+        },
+        {
+          "code": "7",
+          "label": "Mandat de protection future",
+          "score": 1
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E61",
+      "label": "Votre proche a-t-il déjà rédigé des directives anticipées ?",
+      "type": "declenchante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Je ne sais pas",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante",
+        "ccc_a3"
+      ]
+    },
+    {
+      "id": "N42",
+      "label": "Bénéficie-t-elle déjà d'une aide pour obtenir des prestations sociales en lien avec une ALD ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 3
+        },
+        {
+          "code": "3",
+          "label": "Je ne sais pas",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "N29",
+      "label": "De quels droits/aides bénéficiez-vous actuellement ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "APA (Allocation personnalisée d'autonomie)",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "APL (Aide personnalisée au logement)",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "MaPrimeAdapt' (ANAH)",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "AAH (Allocation adultes handicapés)",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "PCH (Prestation de compensation du handicap)",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "RQTH",
+          "score": 0
+        },
+        {
+          "code": "7",
+          "label": "Orientation établissement/service médico-social",
+          "score": 0
+        },
+        {
+          "code": "8",
+          "label": "Carte mobilité inclusion",
+          "score": 0
+        },
+        {
+          "code": "...",
+          "label": "(Liste complète disponible)",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E62",
+      "label": "Pour quels droits/aides avez-vous effectué une demande en cours ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "-",
+          "label": "Aucun",
+          "score": 0
+        },
+        {
+          "code": "-",
+          "label": "Je ne sais pas",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_a2"
+      ]
+    },
+    {
+      "id": "O53",
+      "label": "Une évaluation de dépendance AGGIR a-t-elle été réalisée ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Je ne sais pas",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_a2"
+      ]
+    },
+    {
+      "id": "O54",
+      "label": "Si oui, quel est le niveau GIR ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "GIR 1",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "GIR 2",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "GIR 3",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "GIR 4",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "GIR 5",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "GIR 6",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E68",
+      "label": "Combien de temps consacrez-vous aux démarches administratives ?",
+      "type": "declenchante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Moins d'1h/mois",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "1-5h/mois",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Plus de 5h/mois",
+          "score": 0,
+          "critical": true
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "declenchante",
+        "ccc_a1"
+      ]
+    },
+    {
+      "id": "E66",
+      "label": "Les démarches administratives vous semblent-elles complexes ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Pas du tout",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Un peu",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Oui",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E69",
+      "label": "Vous sentez-vous à l'aise avec les démarches en ligne ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui, tout à fait",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui, mais lent/chronophage",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Non, souvent perdu·e",
+          "score": 2
+        },
+        {
+          "code": "4",
+          "label": "Pas d'accès numérique",
+          "score": 2
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E70",
+      "label": "Avez-vous pris du retard dans vos démarches administratives ?",
+      "type": "scorante",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non, jamais",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Parfois",
+          "score": 1
+        },
+        {
+          "code": "3",
+          "label": "Souvent / toujours en retard",
+          "score": 2
+        },
+        {
+          "code": "4",
+          "label": "Je ne sais pas",
+          "score": 1
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E21",
+      "label": "Pensez-vous pouvoir maintenir la situation de vie actuelle ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non, un changement sera nécessaire",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Je ne sais pas",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": [
+        "ccc_a1"
+      ]
+    },
+    {
+      "id": "N43",
+      "label": "Dans votre rôle d'aidant avez-vous déjà bénéficié des services des accompagnements administratifs suivants ?  (plusieurs réponses possibles)",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Assistante sociale",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Maison départementale des Personnes Handicapées (MDPH)",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Maison de l'autonomie (MDA)",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Centres communaux d'action sociale (CCAS)",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "Mutuelles et assurances complémentaires",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "Associations de patients",
+          "score": 0
+        },
+        {
+          "code": "7",
+          "label": "Plateformes d'accompagnement et de répit",
+          "score": 0
+        },
+        {
+          "code": "8",
+          "label": "Service social de l'assurance maladie",
+          "score": 0
+        },
+        {
+          "code": "9",
+          "label": "Espace Autonomie Sénior (EAS)",
+          "score": 0
+        },
+        {
+          "code": "10",
+          "label": "Aucun",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "N5",
+      "label": "Avez-vous  déjà eu recours aux aides suivantes ?   (plusieurs réponses possibles)",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Solutions de répit",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Formations dédiées aux aidants",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Accompagnement psychologique",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Aucune",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "Autre",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "O61",
+      "label": "Pensez-vous avoir les moyens financiers suffisants pour faire face à cette situation ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Non",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E63",
+      "label": "Quelles démarches vous préoccupent le plus en ce moment pour votre proche ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Dossier de dépendance (ex. APA, PCH…)",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Dossier MDPH / handicap",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Démarches de retraite / pension",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Aides au logement / adaptation du domicile",
+          "score": 0
+        },
+        {
+          "code": "5",
+          "label": "Aides financières ponctuelles",
+          "score": 0
+        },
+        {
+          "code": "6",
+          "label": "Renouvellement de droits (ALD, mutuelle, CMU, etc.)",
+          "score": 0
+        },
+        {
+          "code": "7",
+          "label": "Autre",
+          "score": 0
+        },
+        {
+          "code": "8",
+          "label": "Aucune en particulier",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E64",
+      "label": "Votre enfant peut-il fréquenter une école ou une structure adaptée (crèche, IME, ULIS, etc.) de façon régulière ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui, sans difficulté particulière",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui, mais avec des aménagements ou accompagnement (AESH, AVS, éducateur…)",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Très difficile, il manque souvent / la structure n’est pas adaptée",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Non, il ne fréquente pas d’école ou de structure adaptée",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E65",
+      "label": "Votre enfant a-t-il besoin d’un accompagnant spécialisé (AESH, AVS, éducateur, autre) pour l’école, les soins ou certaines activités ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Non",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui, déjà en place",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Oui, besoin identifié mais pas encore en place",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    },
+    {
+      "id": "E67",
+      "label": "Actuellement, votre proche a-t-il une activité (travail, ESAT, atelier protégé, bénévolat, accueil de jour…) adaptée à son état de santé ?",
+      "type": "descriptive",
+      "options": [
+        {
+          "code": "1",
+          "label": "Oui, activité adaptée",
+          "score": 0
+        },
+        {
+          "code": "2",
+          "label": "Oui, mais elle devient difficile à tenir",
+          "score": 0
+        },
+        {
+          "code": "3",
+          "label": "Non, il est sans activité mais cela ne pose pas de problème particulier",
+          "score": 0
+        },
+        {
+          "code": "4",
+          "label": "Non, et cela crée des difficultés (isolement, repli, perte de repères)",
+          "score": 0
+        }
+      ],
+      "condition": null,
+      "tags": []
+    }
+  ],
+  "scoring": {
+    "questions": {
+      "E66": [
+        {
+          "response": "Pas du tout",
+          "score": 0
+        }
+      ],
+      "E69": [
+        {
+          "response": "Oui, tout à fait",
+          "score": 0
+        }
+      ],
+      "E70": [
+        {
+          "response": "Non, jamais",
+          "score": 0
+        }
+      ]
+    },
+    "max_score": 6,
+    "thresholds": [
+      {
+        "min": 0,
+        "max": 2,
+        "label": "Faible",
+        "color": "green"
+      },
+      {
+        "min": 3,
+        "max": 4,
+        "label": "Modéré",
+        "color": "orange"
+      },
+      {
+        "min": 5,
+        "max": 6,
+        "label": "Élevé",
+        "color": "red"
+      }
+    ]
+  },
+  "declencheurs": {
+    "critiques_directs": [
+      {
+        "question_id": "E68",
+        "option_label": "> 5h",
+        "priority": 1,
+        "delay_days": 7,
+        "micro_parcours": "Charge administrative incompatible",
+        "option": "99"
+      },
+      {
+        "question_id": "E68",
+        "option_label": "mois",
+        "priority": 1,
+        "delay_days": 7,
+        "micro_parcours": "Charge administrative incompatible",
+        "option": "1"
+      },
+      {
+        "question_id": "E62",
+        "option_label": "Aucun droit engagé malgré besoin",
+        "priority": 1,
+        "delay_days": 7,
+        "micro_parcours": "Risque de rupture financière / sociale",
+        "option": "-"
+      },
+      {
+        "question_id": "E61",
+        "option_label": "Refus total + situation instable",
+        "priority": 1,
+        "delay_days": 7,
+        "micro_parcours": "Risque décisionnel majeur en crise",
+        "option": "99"
+      }
+    ],
+    "ccc": [],
+    "standards": [
+      {
+        "question_id": "E68",
+        "option_label": "≥ 1h",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A1",
+        "option": "99"
+      },
+      {
+        "question_id": "E68",
+        "option_label": "mois",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A1",
+        "option": "1"
+      },
+      {
+        "question_id": "E62",
+        "option_label": "Aucun",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A2",
+        "option": "-"
+      },
+      {
+        "question_id": "E62",
+        "option_label": "Je ne sais pas",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A2",
+        "option": "-"
+      },
+      {
+        "question_id": "O53",
+        "option_label": "Non",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A2",
+        "option": "2"
+      },
+      {
+        "question_id": "O53",
+        "option_label": "Je ne sais pas",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A2",
+        "option": "3"
+      },
+      {
+        "question_id": "E61",
+        "option_label": "Non",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A3",
+        "option": "2"
+      },
+      {
+        "question_id": "E61",
+        "option_label": "Je ne sais pas",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A3",
+        "option": "3"
+      },
+      {
+        "question_id": "E21",
+        "option_label": "Non",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A1/A3",
+        "option": "2"
+      },
+      {
+        "question_id": "E21",
+        "option_label": "incertain",
+        "priority": 3,
+        "delay_days": 90,
+        "micro_parcours": "A1/A3",
+        "option": "99"
+      }
+    ]
+  },
+  "recommendations": {
+    "N6": {
+      "1": {
+        "app_text": "Anticipez et renseignez vous sur les différentes protections juridiques possibles.",
+        "app_text_source": "excel",
+        "actors": [
+          "Assistante sociale"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Rappeler à l'aidant de contacter L'AS (c'est l'aidant qui contacte l'AS, pas L'IDEC)  pour faire une demande de protecti",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "5": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "6": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "7": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E61": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "N43": {
+      "1": {
+        "app_text": "Demandez à être guider dans vos démarches et à accéder aux aides et ressources disponibles pour alléger votre rôle d'aid",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "5": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "6": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "7": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "8": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "9": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "10": {
+        "app_text": "-",
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "O61": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "-"
+        ],
+        "micro_tasks": [
+          {
+            "text": "-",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": "Accèdez à des financements complémentaires.",
+        "app_text_source": "excel",
+        "actors": [
+          "Mutuelle"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Informer l’aidant sur les possibilités de financement via la mutuelle",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E63": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "5": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "6": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "7": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "8": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E64": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Évaluer les difficultés rencontrées avec la famille",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Informer la famille sur les démarches possibles",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E65": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "Accompagner la constitution d’un dossier MDPH",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E66": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E67": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E68": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E69": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    },
+    "E70": {
+      "1": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "2": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "3": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      },
+      "4": {
+        "app_text": null,
+        "app_text_source": "excel",
+        "actors": [
+          "N",
+          "A"
+        ],
+        "micro_tasks": [
+          {
+            "text": "N/A",
+            "type": "STRUC",
+            "actor": "IDEC"
+          }
+        ]
+      }
+    }
+  },
+  "ccc": [
+    {
+      "id": "CCC_A1_01",
+      "name": "Saturation administrative",
+      "micro_parcours": "A1",
+      "conditions": [
+        {
+          "question_id": "E68",
+          "option_label": "Plus de 5h par mois"
+        },
+        {
+          "question_id": "E21",
+          "option_label": "Non, un changement sera nécessaire"
+        }
+      ],
+      "conditions_source": "legacy",
+      "reasoning_source": "ia",
+      "sens_clinique": "Charge administrative excessive avec incapacité perçue à maintenir la situation",
+      "recommendations": {
+        "app_text": "Charge administrative excessive avec incapacité perçue à maintenir la situation",
+        "micro_tasks": []
+      }
+    },
+    {
+      "id": "CCC_A2_01",
+      "name": "Rupture de droits",
+      "micro_parcours": "A2",
+      "conditions": [
+        {
+          "question_id": "E62",
+          "option_label": "Aucun"
+        },
+        {
+          "question_id": "O53",
+          "option_label": "Non"
+        }
+      ],
+      "conditions_source": "legacy",
+      "reasoning_source": "ia",
+      "sens_clinique": "Absence de droits ouverts malgré un besoin potentiel",
+      "recommendations": {
+        "app_text": "Absence de droits ouverts malgré un besoin potentiel",
+        "micro_tasks": []
+      }
+    },
+    {
+      "id": "CCC_A3_01",
+      "name": "Absence d’anticipation",
+      "micro_parcours": "A3",
+      "conditions": [
+        {
+          "question_id": "E61",
+          "option_label": "Non"
+        },
+        {
+          "question_id": "E21",
+          "option_label": "Non, un changement sera nécessaire"
+        }
+      ],
+      "conditions_source": "legacy",
+      "reasoning_source": "ia",
+      "sens_clinique": "Décisions futures à risque en cas de dégradation ou de crise",
+      "recommendations": {
+        "app_text": "Décisions futures à risque en cas de dégradation ou de crise",
+        "micro_tasks": []
+      }
+    }
+  ],
+  "asr": {
+    "A1": {
+      "name": "Couverture santé et protections juridiques",
+      "asr_objectif": "Sécuriser la couverture santé et les protections juridiques (mesure de protection, directives anticipées, assurances).",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "A1-A",
+          "condition": "couverture santé active",
+          "source": "legacy"
+        },
+        {
+          "id": "A1-B",
+          "condition": "protection juridique ou administrative en place",
+          "source": "legacy"
+        }
+      ]
+    },
+    "A2": {
+      "name": "Droits, aides et évaluation dépendance",
+      "asr_objectif": "Identifier les droits et aides mobilisables (financières, humaines, médico-sociales) et organiser les demandes.",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "A2-A",
+          "condition": "aide financière active",
+          "source": "legacy"
+        },
+        {
+          "id": "A2-B",
+          "condition": "aide humaine ou accompagnement en cours",
+          "source": "legacy"
+        }
+      ]
+    },
+    "A3": {
+      "name": "Charge et complexité des démarches administratives",
+      "asr_objectif": "Réduire la charge mentale liée aux démarches et éviter les urgences administratives (retards, ruptures de droits).",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "A3-A",
+          "condition": "aide extérieure à la gestion",
+          "source": "legacy"
+        },
+        {
+          "id": "A3-B",
+          "condition": "organisation administrative clarifiée et stabilisée",
+          "source": "legacy"
+        }
+      ]
+    },
+    "A4": {
+      "name": "Situation scolaire/professionnelle du proche et budget",
+      "asr_objectif": "Clarifier la situation d'inclusion (école, structure, travail/ESAT) et les impacts sur le budget du foyer.",
+      "asr_source": "legacy",
+      "signatures": [
+        {
+          "id": "A4-A",
+          "condition": "ajustement professionnel effectif",
+          "source": "legacy"
+        },
+        {
+          "id": "A4-B",
+          "condition": "soutien financier ou compensation active",
+          "source": "legacy"
+        }
+      ]
+    }
+  },
+  "personas": [
+    {
+      "name": "Nathalie P., 62 ans",
+      "priority_badge": "sain",
+      "description": "Équilibrée",
+      "ccc_count": 0,
+      "responses": {
+        "O45": "1",
+        "O23": "1",
+        "N6": "1",
+        "E61": "1",
+        "N42": "1",
+        "N29": "1",
+        "E62": "-",
+        "O53": "1",
+        "O54": "1",
+        "E68": "1",
+        "E66": "1",
+        "E69": "1",
+        "E70": "1",
+        "E21": "1",
+        "N43": "1",
+        "N5": "1",
+        "O61": "1",
+        "E63": "1",
+        "E64": "1",
+        "E65": "1",
+        "E67": "1"
+      }
+    },
+    {
+      "name": "Jean-Pierre L., 72 ans",
+      "priority_badge": "planifie",
+      "description": "Fragile",
+      "ccc_count": 0,
+      "responses": {
+        "O45": "1",
+        "O23": "1",
+        "N6": "1",
+        "E61": "1",
+        "N42": "1",
+        "N29": "1",
+        "E62": "-",
+        "O53": "1",
+        "O54": "1",
+        "E68": "1",
+        "E66": "1",
+        "E69": "1",
+        "E70": "1",
+        "E21": "1",
+        "N43": "1",
+        "N5": "1",
+        "O61": "1",
+        "E63": "1",
+        "E64": "1",
+        "E65": "1",
+        "E67": "1"
+      }
+    },
+    {
+      "name": "Sophie M., 45 ans",
+      "priority_badge": "prioritaire",
+      "description": "Risques",
+      "ccc_count": 0,
+      "responses": {
+        "O45": "2",
+        "O23": "2",
+        "N6": "4",
+        "E61": "2",
+        "N42": "2",
+        "N29": "5",
+        "E62": "-",
+        "O53": "2",
+        "O54": "4",
+        "E68": "2",
+        "E66": "2",
+        "E69": "3",
+        "E70": "3",
+        "E21": "2",
+        "N43": "6",
+        "N5": "3",
+        "O61": "2",
+        "E63": "5",
+        "E64": "3",
+        "E65": "2",
+        "E67": "3"
+      }
+    },
+    {
+      "name": "Ahmed K., 38 ans",
+      "priority_badge": "critique",
+      "description": "Isolement",
+      "ccc_count": 0,
+      "responses": {
+        "O45": "3",
+        "O23": "3",
+        "N6": "7",
+        "E61": "3",
+        "N42": "3",
+        "N29": "...",
+        "E62": "-",
+        "O53": "3",
+        "O54": "6",
+        "E68": "3",
+        "E66": "3",
+        "E69": "4",
+        "E70": "4",
+        "E21": "3",
+        "N43": "10",
+        "N5": "5",
+        "O61": "2",
+        "E63": "8",
+        "E64": "4",
+        "E65": "3",
+        "E67": "4"
+      }
+    },
+    {
+      "name": "Claire D., 34 ans",
+      "priority_badge": "urgent",
+      "description": "Crise",
+      "ccc_count": 0,
+      "responses": {
+        "O45": "3",
+        "O23": "3",
+        "N6": "7",
+        "E61": "3",
+        "N42": "3",
+        "N29": "...",
+        "E62": "-",
+        "O53": "3",
+        "O54": "6",
+        "E68": "3",
+        "E66": "3",
+        "E69": "4",
+        "E70": "4",
+        "E21": "3",
+        "N43": "10",
+        "N5": "5",
+        "O61": "2",
+        "E63": "8",
+        "E64": "4",
+        "E65": "3",
+        "E67": "4"
+      }
+    }
+  ]
+}

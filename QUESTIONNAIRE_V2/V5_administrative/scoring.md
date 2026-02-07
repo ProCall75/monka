@@ -1,7 +1,7 @@
 # 📊 Scoring V5 — Administrative
 
-> **Source** : `SOURCES/extracted/typologie_ccc_scoring.json` (tables index 6, 10-11)  
-> **Date extraction** : 2026-02-06
+> **Source** : `SOURCES/extracted/scores_by_vulnerability.json`  
+> **Date extraction** : 2026-02-07
 
 ---
 
@@ -10,70 +10,49 @@
 ```yaml
 vulnerability: V5
 name: "Administrative"
-source: "typologie_ccc_scoring.json"
-extraction_date: "2026-02-06"
-total_scorantes: 3
+source: "scores_by_vulnerability.json"
+extraction_date: "2026-02-07"
 score_max: 6
+questions_scorantes: 3
 ```
 
 ---
 
-## 🔢 Questions Scorantes V5
+## 📋 Questions Scorantes
 
-| ID | Question | Type | Justification |
-|----|----------|------|---------------|
-| **E66** | Complexité perçue | Scorante | Charge mentale |
-| **E69** | Maîtrise numérique | Scorante | Accessibilité |
-| **E70** | Retards démarches | Scorante | Signal désorganisation |
+Score max global : 6
 
----
-
-## 📈 Table de Scoring
-
-### E66 — Complexité perçue
-
-| Réponse | Score |
-|---------|-------|
-| Pas du tout | 0 |
-| Un peu | 1 |
-| Oui | 2 |
+| Question | Réponse | Score |
+|----------|---------|-------|
+| **E66** — Les démarches administratives liées à votre proche vous para | Pas du tout | 0 |
+| | Un peu | 1 |
+| | Oui | 2 |
+| **E69** — Vous sentez-vous à l’aise avec les démarches administratives | Oui, tout à fait | 0 |
+| | Oui, mais cela me prend beaucoup de temps | 1 |
+| | Non, je suis souvent perdu·e | 2 |
+| | Je n’ai pas facilement accès à un ordinateur / internet | 2 |
+| **E70** — Vous arrive-t-il de devoir gérer des démarches administrativ | Non, jamais | 0 |
+| | Parfois | 1 |
+| | Souvent, je suis toujours en retard | 2 |
+| | Je ne sais pas | 1 |
 
 ---
 
-### E69 — Maîtrise numérique
+## 🎯 Seuils d'Interprétation
 
-| Réponse | Score |
-|---------|-------|
-| Oui, tout à fait | 0 |
-| Oui, mais lent/chronophage | 1 |
-| Non, souvent perdu·e | 2 |
-| Pas d'accès numérique | 2 |
-
----
-
-### E70 — Retards démarches
-
-| Réponse | Score |
-|---------|-------|
-| Non, jamais | 0 |
-| Parfois | 1 |
-| Souvent / toujours en retard | 2 |
-| Je ne sais pas | 1 |
+| Score | Niveau | Couleur |
+|-------|--------|---------|
+| 0-2 | Faible | 🟢 Vert |
+| 3-4 | Modéré | 🟠 Orange |
+| 5-6 | Élevé | 🔴 Rouge |
 
 ---
 
-## 🎯 Seuils d'Alerte V5
+## ⚠️ Règle Clé
 
-| Score | Couleur | Lecture |
-|-------|---------|---------|
-| **0 – 2** | 🟢 Vert | Démarches maîtrisées |
-| **3 – 4** | 🟠 Orange | Charge administrative notable |
-| **5 – 6** | 🔴 Rouge | Saturation administrative avérée |
+> **Le scoring mesure une INTENSITÉ, il ne déclenche JAMAIS seul un micro-parcours.**
 
----
-
-## ⚠️ Règles Legacy
-
-1. **Score sur 6** (3 questions × 2 max)
-2. **CCC** : Activés indépendamment du score (E68 temps démarches)
-3. **E68 > 5h** : Charge critique même si score faible
+Le scoring sert à :
+- Moduler la priorité d'affichage
+- Nuancer l'urgence
+- Compléter les déclencheurs

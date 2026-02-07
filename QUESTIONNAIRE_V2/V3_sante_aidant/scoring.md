@@ -1,7 +1,7 @@
-# 📊 Scoring V3 — Santé Physique et Psychologique de l'Aidant
+# 📊 Scoring V3 — Santé de l'Aidant
 
-> **Source** : `SOURCES/extracted/typologie_ccc_scoring.json` (tables index 12, 16-17)  
-> **Date extraction** : 2026-02-06
+> **Source** : `SOURCES/extracted/scores_by_vulnerability.json`  
+> **Date extraction** : 2026-02-07
 
 ---
 
@@ -9,134 +9,73 @@
 
 ```yaml
 vulnerability: V3
-name: "Santé Physique et Psychologique de l'Aidant"
-source: "typologie_ccc_scoring.json"
-extraction_date: "2026-02-06"
-total_scorantes: 9
-score_max: 18
+name: "Santé de l'Aidant"
+source: "scores_by_vulnerability.json"
+extraction_date: "2026-02-07"
+score_max: 20
+questions_scorantes: 10
 ```
 
 ---
 
-## 🔢 Questions Scorantes V3
+## 📋 Questions Scorantes
 
-| ID | Question | Type | Justification |
-|----|----------|------|---------------|
-| **O29** | Retentissement santé | Scorante | Impact direct |
-| **O33** | Charge ressentie | Scorante | Charge subjective |
-| **E7** | Épuisement | Scorante | Indicateur clé |
-| **E8** | Solitude émotionnelle | Scorante | Fragilité psychique |
-| **E9** | Temps pour soi | Scorante | Déséquilibre |
-| **E10** | Stress / moral | Scorante | Charge psychologique |
-| **E11** | Capacité à continuer | Scorante | Risque de rupture |
-| **O44** | Santé perçue | Scorante | Auto-évaluation |
-| **E18** | Qualité sommeil | Scorante | Marqueur clinique |
+Score max global : 20
 
----
-
-## 📈 Table de Scoring
-
-### O29 — Retentissement santé
-
-| Réponse | Score |
-|---------|-------|
-| Pas du tout | 0 |
-| Un peu | 1 |
-| Oui | 2 |
-
----
-
-### O33 — Charge ressentie
-
-| Réponse | Score |
-|---------|-------|
-| Pas du tout | 0 |
-| Un peu | 1 |
-| Oui | 2 |
-
----
-
-### E7 — Épuisement
-
-| Réponse | Score |
-|---------|-------|
-| Pas du tout fatigué·e | 0 |
-| Un peu | 1 |
-| Très fatigué·e / Épuisé·e | 2 |
+| Question | Réponse | Score |
+|----------|---------|-------|
+| **E7** — À quel point vous sentez-vous épuisé·e par votre rôle d’aida | Pas du tout fatigué·e | 0 |
+| | Un peu fatigué·e | 1 |
+| | Très fatigué·e | 2 |
+| | Épuisé·e / au bord de craquer | 2 |
+| **E8** — Avez-vous le sentiment d’être seul(e) émotionnellement face  | Jamais | 0 |
+| | Parfois | 1 |
+| | Souvent | 2 |
+| | Tout le temps | 2 |
+| **E9** — Parvenez-vous à avoir du temps pour vous au cours d’une sema | Oui | 0 |
+| | Non | 2 |
+| **E10** — Sur le plan moral (stress, inquiétude), où vous situez-vous  | Ça va globalement | 0 |
+| | Parfois tendu·e / inquiet·e | 1 |
+| | Souvent tendu·e / inquiet·e | 2 |
+| | Débordé·e / au bord de craquer | 2 |
+| **E11** — Si rien ne change, pensez-vous pouvoir continuer à vous occu | Oui, sans difficulté | 0 |
+| | Oui, mais ce sera difficile | 1 |
+| | Je ne suis pas sûr·e | 2 |
+| | Non, je risque de ne plus y arriver | 2 |
+| **E18** — Globalement, comment évalueriez-vous la qualité de votre som | Bonne | 0 |
+| | Correcte | 1 |
+| | Mauvaise | 2 |
+| | Très mauvaise | 2 |
+| **O6** — O6 | Non | 0 |
+| | Oui, sans gravité | 1 |
+| | Oui avec complication / plusieurs chutes | 2 |
+| **O29** — Vous occuper de la personne aidée a-t-il un retentissement s | Pas du tout | 0 |
+| | Un peu | 1 |
+| | Oui | 2 |
+| **O33** — Ressentez-vous une charge en vous occupant de cette personne | Pas du tout | 0 |
+| | Un peu | 1 |
+| | Oui | 2 |
+| **O44** — Selon vous et par rapport à une personne du même âge, diriez | Meilleure | 0 |
+| | Identique | 1 |
+| | Moins bonne | 2 |
 
 ---
 
-### E8 — Solitude émotionnelle
+## 🎯 Seuils d'Interprétation
 
-| Réponse | Score |
-|---------|-------|
-| Jamais | 0 |
-| Parfois | 1 |
-| Souvent / Tout le temps | 2 |
-
----
-
-### E9 — Temps pour soi
-
-| Réponse | Score |
-|---------|-------|
-| Oui | 0 |
-| Non | 2 |
+| Score | Niveau | Couleur |
+|-------|--------|---------|
+| 0-6 | Faible | 🟢 Vert |
+| 7-13 | Modéré | 🟠 Orange |
+| 14-20 | Élevé | 🔴 Rouge |
 
 ---
 
-### E10 — Stress / moral
+## ⚠️ Règle Clé
 
-| Réponse | Score |
-|---------|-------|
-| Ça va | 0 |
-| Parfois | 1 |
-| Souvent / débordé·e | 2 |
+> **Le scoring mesure une INTENSITÉ, il ne déclenche JAMAIS seul un micro-parcours.**
 
----
-
-### E11 — Capacité à continuer
-
-| Réponse | Score |
-|---------|-------|
-| Oui sans difficulté | 0 |
-| Difficile / incertain | 1 |
-| Non | 2 |
-
----
-
-### O44 — Santé perçue
-
-| Réponse | Score |
-|---------|-------|
-| Meilleure | 0 |
-| Identique | 1 |
-| Moins bonne | 2 |
-
----
-
-### E18 — Qualité sommeil
-
-| Réponse | Score |
-|---------|-------|
-| Bonne | 0 |
-| Correcte | 1 |
-| Mauvaise / très mauvaise | 2 |
-
----
-
-## 🎯 Seuils d'Alerte V3
-
-| Score | Couleur | Lecture |
-|-------|---------|---------|
-| **0 – 6** | 🟢 Vert | Santé globalement préservée |
-| **7 – 13** | 🟠 Orange | Fatigue et fragilisation |
-| **14 – 18+** | 🔴 Rouge | Épuisement avéré, risque de rupture |
-
----
-
-## ⚠️ Règles Legacy
-
-1. **Score sur 18** (9 questions × 2 max)
-2. **Critiques directes** : E12, E13 non incluses dans le score
-3. **CCC** : Activés indépendamment du score
+Le scoring sert à :
+- Moduler la priorité d'affichage
+- Nuancer l'urgence
+- Compléter les déclencheurs

@@ -99,6 +99,19 @@ micro_parcours: ["A1", "A2", "A3", "A4"]
 
 ---
 
+## 📌 Signatures d'État (Legacy ASR Referent op. 030226)
+
+> Source : `Legacy ASR Referent op. 030226.docx`
+
+| MP | Signature A | Signature B |
+|----|-------------|-------------|
+| A1 | A1-A : couverture santé active | A1-B : protection juridique ou administrative en place |
+| A2 | A2-A : aide financière active | A2-B : aide humaine ou accompagnement en cours |
+| A3 | A3-A : aide extérieure à la gestion | A3-B : organisation administrative clarifiée et stabilisée |
+| A4 | A4-A : ajustement professionnel effectif | A4-B : soutien financier ou compensation active |
+
+---
+
 ## ⚠️ Règles Legacy
 
 1. **A1** = Base (couverture santé, protection juridique)

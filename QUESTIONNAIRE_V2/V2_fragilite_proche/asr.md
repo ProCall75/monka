@@ -135,6 +135,21 @@ micro_parcours: ["F1", "F2", "F3", "F4", "F5", "F6"]
 
 ---
 
+## 📌 Signatures d'État (Legacy ASR Referent op. 030226)
+
+> Source : `Legacy ASR Referent op. 030226.docx`
+
+| MP | Signature A | Signature B |
+|----|-------------|-------------|
+| F1 | F1-A : organisation structurée | F1-B : soutien ou aide quotidienne identifiée |
+| F2 | F2-A : aide régulière active | F2-B : aide mobilisable en cas de besoin |
+| F3 | F3-A : dispositifs ou adaptations réduisant le risque | F3-B : encadrement humain effectif |
+| F4 | F4-A : suivi ou traitement en cours | F4-B : accompagnement soulageant l'état général |
+| F5 | F5-A : plan d'action identifié | F5-B : dispositif de réponse mobilisable |
+| F6 | F6-A : aides techniques installées | F6-B : aménagements de l'environnement réalisés |
+
+---
+
 ## ⚠️ Règles Legacy
 
 1. **1 MP = 1 ASR** : Chaque micro-parcours a un objectif utilisateur unique

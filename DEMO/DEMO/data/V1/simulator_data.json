@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "vulnerability": "V1",
+    "name": "Social et Relationnel",
+    "version": "2.0",
+    "generated_at": "2026-02-06T20:35:33.150421",
+    "sources": {
+      "questions": "questions.md",
+      "scoring": "scoring.md",
+      "triggers": "declencheurs.md",
+      "recommendations": "recommendations.md",
+      "ccc": "ccc.md",
+      "asr": "asr.md"
+    }
+  },
+  "questions": [],
+  "scoring": {
+    "questions": {},
+    "max_score": 0,
+    "thresholds": []
+  },
+  "triggers": {
+    "critical_direct": [
+      {
+        "question_id": "E6",
+        "option_label": "« Refuse la plupart du temps »",
+        "priority": 1,
+        "delay_days": 7,
+        "option": "99"
+      },
+      {
+        "question_id": "E2",
+        "option_label": "« Personne »",
+        "priority": 1,
+        "delay_days": 7,
+        "option": "99"
+      },
+      {
+        "question_id": "C",
+        "option_label": "Objectif",
+        "priority": 1,
+        "delay_days": 7,
+        "option": "99"
+      },
+      {
+        "question_id": "R1",
+        "option_label": "Rééquilibrage vie perso/pro",
+        "priority": 1,
+        "delay_days": 7,
+        "option": "99"
+      },
+      {
+        "question_id": "R2",
+        "option_label": "Identifier et mobiliser des relais",
+        "priority": 1,
+        "delay_days": 7,
+        "option": "99"
+      },
+      {
+        "question_id": "R3",
+        "option_label": "Recréer du lien social",
+        "priority": 1,
+        "delay_days": 7,
+        "option": "99"
+      },
+      {
+        "question_id": "R4",
+        "option_label": "Apaiser les tensions, accepter l'aide",
+        "priority": 1,
+        "delay_days": 7,
+        "option": "99"
+      }
+    ],
+    "standard": [
+      {
+        "question_id": "N7",
+        "option_label": "« Aménagement des horaires » / « Congés »",
+        "micro_parcours": "R1",
+        "priority": 3,
+        "delay_days": 90,
+        "option": "99"
+      },
+      {
+        "question_id": "O48",
+        "option_label": "« 1 fois par mois ou moins »",
+        "micro_parcours": "R3",
+        "priority": 3,
+        "delay_days": 90,
+        "option": "99"
+      },
+      {
+        "question_id": "N4",
+        "option_label": "« Oui »",
+        "micro_parcours": "R2",
+        "priority": 3,
+        "delay_days": 90,
+        "option": "99"
+      },
+      {
+        "question_id": "E6",
+        "option_label": "« Refuse la plupart du temps »",
+        "micro_parcours": "R4",
+        "priority": 3,
+        "delay_days": 90,
+        "option": "99"
+      }
+    ],
+    "ccc": []
+  },
+  "recommendations": {},
+  "ccc": [],
+  "asr": {},
+  "personas": [
+    {
+      "name": "Nathalie P., 62 ans",
+      "description": "Situation équilibrée",
+      "priority_badge": "sain",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Jean-Pierre L., 72 ans",
+      "description": "Fragilités légères",
+      "priority_badge": "planifie",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Sophie M., 45 ans",
+      "description": "Risques modérés",
+      "priority_badge": "prioritaire",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Ahmed K., 38 ans",
+      "description": "Isolement, critique",
+      "priority_badge": "critique",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Claire D., 34 ans",
+      "description": "Crise aiguë",
+      "priority_badge": "urgent",
+      "ccc_count": 0,
+      "responses": {}
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-GEN-01",
+      "description": "Données générées automatiquement conformes au template engine_data.json"
+    }
+  ]
+}

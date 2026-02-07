@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "vulnerability": "V4",
+    "name": "Santé du Proche",
+    "version": "2.0",
+    "generated_at": "2026-02-06T20:35:33.187472",
+    "sources": {
+      "questions": "questions.md",
+      "scoring": "scoring.md",
+      "triggers": "declencheurs.md",
+      "recommendations": "recommendations.md",
+      "ccc": "ccc.md",
+      "asr": "asr.md"
+    }
+  },
+  "questions": [],
+  "scoring": {
+    "questions": {},
+    "max_score": 0,
+    "thresholds": []
+  },
+  "triggers": {
+    "critical_direct": [],
+    "standard": [],
+    "ccc": []
+  },
+  "recommendations": {},
+  "ccc": [],
+  "asr": {},
+  "personas": [
+    {
+      "name": "Nathalie P., 62 ans",
+      "description": "Situation équilibrée",
+      "priority_badge": "sain",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Jean-Pierre L., 72 ans",
+      "description": "Fragilités légères",
+      "priority_badge": "planifie",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Sophie M., 45 ans",
+      "description": "Risques modérés",
+      "priority_badge": "prioritaire",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Ahmed K., 38 ans",
+      "description": "Isolement, critique",
+      "priority_badge": "critique",
+      "ccc_count": 0,
+      "responses": {}
+    },
+    {
+      "name": "Claire D., 34 ans",
+      "description": "Crise aiguë",
+      "priority_badge": "urgent",
+      "ccc_count": 0,
+      "responses": {}
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-GEN-01",
+      "description": "Données générées automatiquement conformes au template engine_data.json"
+    }
+  ]
+}

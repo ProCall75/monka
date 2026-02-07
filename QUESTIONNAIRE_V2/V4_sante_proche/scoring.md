@@ -1,7 +1,7 @@
 # 📊 Scoring V4 — Parcours Médical du Proche
 
-> **Source** : `SOURCES/extracted/typologie_ccc_scoring.json` (tables index 25, 26-31)  
-> **Date extraction** : 2026-02-06
+> **Source** : `SOURCES/extracted/scores_by_vulnerability.json`  
+> **Date extraction** : 2026-02-07
 
 ---
 
@@ -10,121 +10,56 @@
 ```yaml
 vulnerability: V4
 name: "Parcours Médical du Proche"
-source: "typologie_ccc_scoring.json"
-extraction_date: "2026-02-06"
-total_scorantes: 8
-score_max: 16
+source: "scores_by_vulnerability.json"
+extraction_date: "2026-02-07"
+score_max: 12
+questions_scorantes: 6
 ```
 
 ---
 
-## 🔢 Questions Scorantes V4
+## 📋 Questions Scorantes
 
-| ID | Question | Type | Justification |
-|----|----------|------|---------------|
-| **N41** | ALD | Scorante | Protection sociale |
-| **E36** | Errance diagnostique | Scorante | Retard parcours |
-| **O24** | Difficultés accès soins | Scorante | Accessibilité |
-| **E42** | Hospitalisations | Scorante | Épisodes aigus |
-| **O48** | Addictions | Scorante | Facteur risque |
-| **E54** | Organisation soins | Scorante | Lisibilité globale |
-| **E57** | Plan de route | Scorante | Pilotage |
-| **N18** | Proximité pro santé | Scorante | Point d'appui |
+Score max global : 12
 
----
-
-## 📈 Table de Scoring
-
-### N41 — ALD
-
-| Réponse | Score |
-|---------|-------|
-| Oui | 0 |
-| Non | 3 |
-| Je ne sais pas | 2 |
-
----
-
-### E36 — Errance diagnostique
-
-| Réponse | Score |
-|---------|-------|
-| Non, pas particulièrement | 0 |
-| Oui, un peu | 1 |
-| Oui, beaucoup | 2 |
+| Question | Réponse | Score |
+|----------|---------|-------|
+| **E36** — Depuis le début des problèmes de santé de votre proche, avez | Non, pas particulièrement | 0 |
+| | Oui, un peu | 1 |
+| | Oui, beaucoup | 2 |
+| **E37** — Avez-vous déjà reçu des avis médicaux contradictoires sur la | Non | 0 |
+| | Oui, parfois | 1 |
+| | Oui, souvent | 2 |
+| **E43** — Au cours des 12 derniers mois, y a-t-il eu des périodes de p | Non | 0 |
+| | Oui, une période de 3 à 6 mois | 1 |
+| | Oui, plusieurs périodes ou > 6 mois | 2 |
+| **E47** — Quand l’état de santé de votre proche se dégrade brusquement | Oui, on sait quoi faire | 0 |
+| | Quelques repères | 1 |
+| | Non, on improvise / urgences | 2 |
+| **E54** — Comment décririez-vous l’organisation des soins de votre pro | Plutôt simple et bien organisée | 0 |
+| | Gérable mais parfois compliquée | 1 |
+| | Très compliquée / ingérable | 2 |
+| **E57** — Avez-vous l’impression qu’il existe un ‘plan de route’ clair | Oui, c’est clair | 0 |
+| | Partiellement | 1 |
+| | Non, on avance au jour le jour | 2 |
 
 ---
 
-### O24 — Difficultés accès soins
+## 🎯 Seuils d'Interprétation
 
-| Réponse | Score |
-|---------|-------|
-| Non | 0 |
-| Oui | 2 |
-
----
-
-### E42 — Hospitalisations récentes
-
-| Réponse | Score |
-|---------|-------|
-| Aucune | 0 |
-| 1 fois | 1 |
-| 2 fois ou plus | 2 |
+| Score | Niveau | Couleur |
+|-------|--------|---------|
+| 0-4 | Faible | 🟢 Vert |
+| 5-8 | Modéré | 🟠 Orange |
+| 9-12 | Élevé | 🔴 Rouge |
 
 ---
 
-### O48 — Addictions
+## ⚠️ Règle Clé
 
-| Réponse | Score |
-|---------|-------|
-| Non | 0 |
-| Oui | 2 |
+> **Le scoring mesure une INTENSITÉ, il ne déclenche JAMAIS seul un micro-parcours.**
 
----
-
-### E54 — Organisation globale soins
-
-| Réponse | Score |
-|---------|-------|
-| Bien organisé | 0 |
-| Moyennement | 1 |
-| Mal organisé | 2 |
-
----
-
-### E57 — Plan de route clair
-
-| Réponse | Score |
-|---------|-------|
-| Oui | 0 |
-| Partiellement | 1 |
-| Non | 2 |
-
----
-
-### N18 — Proximité pro santé
-
-| Réponse | Score |
-|---------|-------|
-| Proche | 0 |
-| Éloigné | 1 |
-| Très éloigné | 2 |
-
----
-
-## 🎯 Seuils d'Alerte V4
-
-| Score | Couleur | Lecture |
-|-------|---------|---------|
-| **0 – 5** | 🟢 Vert | Parcours médical stable |
-| **6 – 10** | 🟠 Orange | Parcours fragilisé |
-| **11 – 16+** | 🔴 Rouge | Parcours désorganisé, intervention urgente |
-
----
-
-## ⚠️ Règles Legacy
-
-1. **Score sur 16** (8 questions × 2 max)
-2. **CCC** : Activés indépendamment du score
-3. **Addictions (O48)** : Priorité M4
+Le scoring sert à :
+- Moduler la priorité d'affichage
+- Nuancer l'urgence
+- Compléter les déclencheurs

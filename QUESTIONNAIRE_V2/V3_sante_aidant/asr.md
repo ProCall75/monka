@@ -99,6 +99,19 @@ micro_parcours: ["S1", "S2", "S3", "S4"]
 
 ---
 
+## 📌 Signatures d'État (Legacy ASR Referent op. 030226)
+
+> Source : `Legacy ASR Referent op. 030226.docx`
+
+| MP | Signature A | Signature B |
+|----|-------------|-------------|
+| S1 | S1-A : relais ou aide réduisant la charge | S1-B : organisation modifiée allégeant le quotidien |
+| S2 | S2-A : soutien par l'entourage | S2-B : accompagnement professionnel engagé |
+| S3 | S3-A : suivi médical repris | S3-B : démarche de soin concrète engagée |
+| S4 | S4-A : amélioration du repos ou du sommeil | S4-B : organisation quotidienne plus soutenable |
+
+---
+
 ## ⚠️ Règles Legacy
 
 1. **S1** = Priorité maximale (épuisement = risque de rupture)

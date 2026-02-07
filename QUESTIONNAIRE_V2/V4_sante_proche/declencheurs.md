@@ -1,7 +1,7 @@
 # 🚀 Déclencheurs V4 — Parcours Médical du Proche
 
-> **Source** : `SOURCES/extracted/typologie_ccc_scoring.json` (table index 25)  
-> **Date extraction** : 2026-02-06
+> **Source** : `SOURCES/extracted/typologie_ccc_scoring.json`  
+> **Date extraction** : 2026-02-07
 
 ---
 
@@ -11,91 +11,38 @@
 vulnerability: V4
 name: "Parcours Médical du Proche"
 source: "typologie_ccc_scoring.json"
-extraction_date: "2026-02-06"
-total_declencheurs: 6
+extraction_date: "2026-02-07"
+total_declencheurs: 9
+critiques_directes: 0
 ```
 
 ---
 
-## 🎯 Questions Déclenchantes V4
+## 📋 Questions Déclenchantes Standard
 
-| ID | Question | Réponse déclenchante | Effet |
-|----|----------|----------------------|-------|
-| **E35** | Diagnostic clair ? | "Non, pas de diagnostic" | Ouvre M1 – Compréhension diagnostic |
-| **E46** | Troubles psychiques | "Oui" | Ouvre M4 – Troubles psy/addictions |
-| **O48** | Addictions | "Oui" | Ouvre M4 – Troubles psy/addictions |
-| **O24** | Difficultés accès soins | "Oui" | Ouvre M2 – Accès aux soins |
-| **E52** | Coordinateur identifié | "Non, personne" | Ouvre M5 – Coordination |
-| **E57** | Plan de route clair | "Non" | Ouvre M6 – Plan de soins |
-
----
-
-## 📋 Détail des Déclencheurs
-
-### E35 — Clarté du diagnostic
-
-**Libellé** : Avez-vous l'impression que le diagnostic de votre proche est clair et bien établi ?
-
-**Réponse déclenchante** : "Non, personne ne nous a vraiment donné de diagnostic"
-
-**Effet** : Ouvre MP M1 → Consultation médicale explicative
+| Question | ID | Réponse déclenchante | Micro-parcours |
+|----------|----|--------------------|----------------|
+| Examens nombreux sans clarification | **E36** | Oui, beaucoup | M1 |
+| Avis médicaux contradictoires | **E37** | Oui, souvent | M1 |
+| RDV non programmés récents | **E42** | ≥ 2 | M3 |
+| Bilan de synthèse global | **E44** | Non, jamais | M3 |
+| Suivi addictologie | **E45** | Non | M4 |
+| Suivi post-hospitalisation | **E46** | Non | M3/M6 |
+| Plan en cas d'aggravation | **E47** | Non, on improvise | M3/M6 |
+| Observance traitement psy | **E50** | Non, pas de suivi | M3/M6 |
+| Coordinateur identifié | **E52** | Non, personne ne coordonne | M5 |
 
 ---
 
-### E46 — Troubles psychiques
+## 🚨 Questions Critiques Directes
 
-**Libellé** : Votre proche a-t-il des troubles psychiques ?
-
-**Réponse déclenchante** : "Oui"
-
-**Effet** : Ouvre MP M4 → Suivi psychiatrique adapté
-
----
-
-### O48 — Addictions
-
-**Libellé** : Votre proche a-t-il des problèmes d'addiction ?
-
-**Réponse déclenchante** : "Oui"
-
-**Effet** : Ouvre MP M4 → Orientation addictologie
-
----
-
-### O24 — Difficultés accès soins
-
-**Libellé** : Rencontrez-vous des difficultés pour accéder aux soins ?
-
-**Réponse déclenchante** : "Oui"
-
-**Effet** : Ouvre MP M2 → Facilitation accès soins
-
----
-
-### E52 — Coordinateur identifié
-
-**Libellé** : Y a-t-il une personne qui coordonne les soins ?
-
-**Réponse déclenchante** : "Non, personne ne coordonne vraiment"
-
-**Effet** : Ouvre MP M5 → Mise en place coordination
-
-**Justification** : Gouvernance du parcours
-
----
-
-### E57 — Plan de route clair
-
-**Libellé** : Avez-vous un plan de route clair pour le parcours de soins ?
-
-**Réponse déclenchante** : "Non"
-
-**Effet** : Ouvre MP M6 → Construction plan de soins
+> Pas de critiques directes en V4 : la sécurité est gérée via V3 (E12, E13)
 
 ---
 
 ## ⚠️ Règles Legacy
 
-1. **Pas de critiques directes en V4** : La sécurité est gérée via V3 (E12, E13)
-2. **Multi-déclencheurs** : Plusieurs MP peuvent s'ouvrir simultanément
-3. **Priorité M4** : Addictions/troubles psy = traitement prioritaire
+1. **Critiques** : Priorité niveau 1, délai 7 jours
+2. **Standard** : Priorité niveau 3, délai 90 jours
+3. **Multi-déclencheurs** : Plusieurs MP peuvent s'ouvrir simultanément
+4. **CCC > Score** : Conditions critiques composites priment sur le scoring

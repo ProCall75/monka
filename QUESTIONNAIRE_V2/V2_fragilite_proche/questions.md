@@ -475,6 +475,460 @@ total_questions: 57
 
 ---
 
+
+
+### Questions additionnelles (complément source)
+
+---
+
+### 5.1 – Vie quotidienne, budget et entourage du proche
+
+---
+
+#### E20 — Si vous pensez aux 6–12 prochains mois, où souhaiteriez-v...
+
+**Libellé** : Si vous pensez aux 6–12 prochains mois, où souhaiteriez-vous idéalement que vive votre proche ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | À son domicile actuel |
+| 2 | À mon domicile |
+| 3 | En établissement (EHPAD, résidence, foyer…) |
+| 4 | Je ne sais pas / nous n’en avons pas parlé |
+
+---
+
+### 5.2 – Autonomie, aide humaine et présence nécessaire
+
+---
+
+#### E22 — Globalement, combien d’heures d’aide humaine (aide à domi...
+
+**Libellé** : Globalement, combien d’heures d’aide humaine (aide à domicile, infirmier·e, etc.) votre proche reçoit-il par semaine ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Moins de 5 heures |
+| 2 | Entre 5 et 14 heures |
+| 3 | 15 à 30 heures |
+| 4 | Plus de 30 heures |
+| 5 | Je ne sais pas |
+
+---
+
+### 5.3 – Mémoire, comportement et risques pour soi ou pour les autres
+
+---
+
+#### N19 — Ressentez-vous souvent des changements d'humeur ou de com...
+
+**Libellé** : Ressentez-vous souvent des changements d'humeur ou de comportement chez elle ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Jamais |
+| 2 | Parfois |
+| 3 | Souvent |
+
+---
+
+### 5.4 – Douleur, fatigue, sommeil et état général du proche
+
+---
+
+#### O5 — Selon vous et par rapport à une personne du même âge, dir...
+
+**Libellé** : Selon vous et par rapport à une personne du même âge, diriez-vous que la personne aidée est :
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | En meilleure santé |
+| 2 | Santé équivalente |
+| 3 | En moins bonne santé |
+
+---
+
+#### N44 — Avez-vous constaté un changement de poids
+
+**Libellé** : Avez-vous constaté un changement de poids ?
+
+**Type** : Obligatoire / Choix Unique / conditionnel N3 (réponse 1,2,
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Oui |
+
+---
+
+#### O3 — Combien de médicaments différents prend-elle chaque jour
+
+**Libellé** : Combien de médicaments différents prend-elle chaque jour ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Elle ne prend pas de traitement actuellement |
+| 2 | 1 à 3 médicaments |
+| 3 | 4 à 6 médicaments |
+| 4 | 7 médicament et plus |
+
+---
+
+#### O15 — La personne aidée consomme-t-elle de manière habituelle :...
+
+**Libellé** : La personne aidée consomme-t-elle de manière habituelle :  (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multipples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Alcool (plus de 3 verres par jour) |
+| 2 | Tabac |
+| 3 | Aucun des deux |
+
+---
+
+#### O26 — Avez-vous constaté une diminution de sa taille habituelle
+
+**Libellé** : Avez-vous constaté une diminution de sa taille habituelle ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé | Score |
+|------|---------|-------|
+| 1 | Oui | 0 |
+| 2 | Non | 2 |
+
+---
+
+#### O22 — Quels ont été les principaux constats suite aux derniers ...
+
+**Libellé** : Quels ont été les principaux constats suite aux derniers examens de vue et d'audition ?
+
+**Type** : Obligatoire / Choix multiples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Correct |
+| 2 | Correct avec le port de lunettes ou de lentilles |
+| 3 | Correct avec appareillage auditif |
+| 4 | Mauvais malgré le port de lunettes ou de lentilles |
+| 5 | Mauvais malgré l'appareillage auditif |
+| 6 | Je ne sais pas |
+
+---
+
+### 5.5 – Niveau de dépendance, handicap reconnu et épisodes aigus
+
+---
+
+#### O54 — Quel est son niveau de dépendance selon cette grille AGGIR
+
+**Libellé** : Quel est son niveau de dépendance selon cette grille AGGIR ?
+
+**Type** : Obligatoire / Choix Unique / Contionnel O53(1)
+
+| Code | Libellé |
+|------|---------|
+| 1 | 1/2/3/4/5/6/Je ne sais pas |
+
+---
+
+#### N16 — Quelle est l'origine du handicap de la personne aidée
+
+**Libellé** : Quelle est l'origine du handicap de la personne aidée ?
+
+**Type** : Obligatoire / Choix Unique Conditionnel N3 réponse 2
+
+| Code | Libellé |
+|------|---------|
+| 1 | Situation de handicap depuis la naissance |
+| 2 | Situation de handicap suite à une maladie |
+| 3 | Situation de handicap suite à un accident |
+
+---
+
+#### N30 — Quel est le taux d'incapacité reconnu
+
+**Libellé** : Quel est le taux d'incapacité reconnu ?
+
+**Type** : Obligatoire / Choix Unique Conditionnel N3 réponse 2
+
+| Code | Libellé |
+|------|---------|
+| 1 | Inférieur à 50% |
+| 2 | Compris entre 50% et 79% |
+| 3 | Supérieur ou égal à 80% |
+| 4 | Je ne sais pas |
+
+---
+
+#### N37 — Quel type d'addiction la personne aidée présente-t-elle
+
+**Libellé** : Quel type d'addiction la personne aidée présente-t-elle ?  (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multiples / conditionnel N3 (5)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Alcool |
+| 2 | Tabac |
+| 3 | Produits stupéfiants |
+| 4 | Médicaments |
+| 5 | Jeux d'argent |
+| 6 | Jeux vidéo |
+| 7 | Autre |
+
+---
+
+#### N38 — La personne aidée a-t-elle des difficultés à contrôler sa...
+
+**Libellé** : La personne aidée a-t-elle des difficultés à contrôler sa consommation ou son comportement addictif ?
+
+**Type** : Obligatoire / Choix Unique / conditionnel N3 (5)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Parfois |
+| 3 | Oui |
+
+---
+
+#### N39 — Observez-vous, chez la personne aidée, des problèmes de s...
+
+**Libellé** : Observez-vous, chez la personne aidée, des problèmes de santé physique liés à l'addiction ?
+
+**Type** : Obligatoire / Choix Unique / conditionnel N3 (5)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Je ne sais pas |
+| 3 | Oui |
+
+---
+
+#### N40 — La personne aidée a-t-elle déjà tenté de se sevrer ou de ...
+
+**Libellé** : La personne aidée a-t-elle déjà tenté de se sevrer ou de suivre un traitement pour son addiction ?
+
+**Type** : Obligatoire / Choix Unique / conditionnel N3 (5)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Je ne sais pas |
+| 3 | Oui |
+
+---
+
+#### E29 — Parmi ces hospitalisations, combien étaient programmées (...
+
+**Libellé** : Parmi ces hospitalisations, combien étaient programmées (prévue à l’avance) ?
+
+**Type** : Obligatoire / Choix Unique / conditionnel EXX (tout sauf 1 ou 6)
+
+| Code | Libellé |
+|------|---------|
+| 1 | 0 / 1 / 2 / 3 / 4 ou plus / Je ne sais pas |
+
+---
+
+#### E30 — Parmi les hospitalisations non programmées, combien ont c...
+
+**Libellé** : Parmi les hospitalisations non programmées, combien ont commencé par un passage aux urgences ?
+
+**Type** : Obligatoire / Choix Unique / conditionnel EXX (1 ou6)
+
+| Code | Libellé |
+|------|---------|
+| 1 | 0 / 1 / 2 / 3 / 4 ou plus / Je ne sais pas |
+
+---
+
+#### E31 — Quelle a été la durée de la dernière hospitalisation (la ...
+
+**Libellé** : Quelle a été la durée de la dernière hospitalisation (la plus récente) ?
+
+**Type** : Obligatoire / Choix Unique / condtionnel EXX1 (tout sauf 1 ou 6)
+
+| Code | Libellé |
+|------|---------|
+| 1 | Moins d’une journée / 1 à 3 jours / 4 à 7 jours / Plus de 7 jours / Je ne sais pas |
+
+---
+
+### 5.x – Autres éléments sur les fragilités du proche
+
+---
+
+#### N18 — La personne aidée peut-elle réaliser seule ses activités ...
+
+**Libellé** : La personne aidée peut-elle réaliser seule ses activités de la vie quotidienne (toilette, habillage, préparations des repas) ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Non elle a besoin d'aide |
+
+---
+
+#### E32 — A-t-elle des difficultés à se lever d’un lit, s’asseoir o...
+
+**Libellé** : A-t-elle des difficultés à se lever d’un lit, s’asseoir ou se lever d’un fauteuil sans aide ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Parfois |
+| 3 | Oui |
+
+---
+
+#### O12 — Peut-elle se nourrir par elle-même
+
+**Libellé** : Peut-elle se nourrir par elle-même ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Parfois |
+| 3 | Non |
+
+---
+
+#### O11 — Est-elle incontinente
+
+**Libellé** : Est-elle incontinente ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Parfois |
+| 3 | Oui |
+
+---
+
+#### E33 — A-t-elle des difficultés à utiliser le téléphone ou des a...
+
+**Libellé** : A-t-elle des difficultés à utiliser le téléphone ou des appareils simples (télécommande, micro-ondes, sonnette) ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Parfois |
+| 3 | Oui |
+
+---
+
+#### N32 — Y-a-t-il des aides techniques en place
+
+**Libellé** : Y-a-t-il des aides techniques en place ?  (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multiples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Aucune |
+| 2 | Aides à la mobilité (fauteuil roulant, prothèse, canne,…) |
+| 3 | Aides à la communication (synthèse vocale, tablette, amplificateur de voix,…) |
+| 4 | Aides aux soins personnels (lève-personne, siège de douche, barres d'appui, lit médicalisé) |
+| 5 | Aides sensorielles (appareil auditif, lunettes adaptées, système de guidage pour malvoyants) |
+| 6 | Aides à l'aménagement du domicile (rampes d'accès, monte escalier, portes élargies) |
+| 7 | Aides technologiques (commande à distance, domotique, ordinateur adapté) |
+| 8 | Aides à l'apprentissage et à la cognition (logiciels spécialisés, agendas électroniques) |
+
+---
+
+#### N14 — La personne aidée éprouve-t-elle des difficultés à suivre...
+
+**Libellé** : La personne aidée éprouve-t-elle des difficultés à suivre son traitement médical ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Parfois |
+| 3 | Oui |
+
+---
+
+#### O16 — La personne aidée est-elle ou a-t-elle été concernée par ...
+
+**Libellé** : La personne aidée est-elle ou a-t-elle été concernée par : (plusieurs réponses possibles)
+
+**Type** : Obligatoire / Choix Multiples
+
+| Code | Libellé |
+|------|---------|
+| 1 | Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, Troubles du déficit de l'attention avec ou sans hyperactivité TDAH…) |
+| 2 | Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...) |
+| 3 | Dermatologique (dermatite atopique, psoriasis, acné…) |
+| 4 | Respiratoire (asthme, maladie pulmonaire obstructive chronique…) |
+| 5 | Génito-urinaire (infections urinaires à répétition, hypertrophie benigne de la prostate, endométriose…) |
+| 6 | Endocrinienne (hyper ou hypo thyroidie, obésité sévère…) |
+| 7 | Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…) |
+| 8 | Métabolique (diabète, cholesterol…) |
+| 9 | Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…) |
+| 10 | Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…) |
+| 11 | Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…) |
+| 12 | Maladie génétique (muchovicidose, trisomie…) |
+| 13 | Troubles visuels sévères (DMLA, cécité…) |
+| 14 | Troubles auditifs sévères |
+| 15 | Aucun |
+| 16 | Je ne sais pas |
+
+---
+
+#### N36 — A-t-elle besoin d'aide pour organiser et planifier ses jo...
+
+**Libellé** : A-t-elle besoin d'aide pour organiser et planifier ses journées ?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Non |
+| 2 | Parfois |
+| 3 | Oui |
+
+---
+
+#### O51 — Songez-vous à adapter son lieu de vie son quotidien
+
+**Libellé** : Songez-vous à adapter son lieu de vie son quotidien?
+
+**Type** : Obligatoire / Choix Unique
+
+| Code | Libellé |
+|------|---------|
+| 1 | Oui |
+| 2 | Non |
+
+---
+
 ## ⚠️ Règles Legacy
 
 1. **Questions critiques directes** : E27, N22, N25, N38, N39 → Priorité niveau 1
