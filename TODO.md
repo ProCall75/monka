@@ -1,174 +1,260 @@
 # 📋 TODO — Monka Clinical Engine
 
-> **Mise à jour** : 09/02/2026  
+> **Mise à jour** : 10/02/2026  
 > **Priorité #1** : Valider la base (KERNEL + données sources) avant toute production  
 > **Source de vérité** : [`RECAP_FONDATION_MONKA.md`](KERNEL/RECAP_FONDATION_MONKA.md) (v4 FINALE — 13 règles K1→K13)
 
 ---
 
-## 🧹 PHASE 0 — Nettoyage & Restructuration Repo
+## 🧹 PHASE 0 — Nettoyage & Restructuration Repo ✅
 
-> **Objectif** : Supprimer le legacy, clarifier la structure, ne garder que ce qui sert.
-
-- [x] **Archiver `QUESTIONNAIRE/`** → `_ARCHIVE/QUESTIONNAIRE_LEGACY/`
-- [x] **Archiver `Q-V3/`** → `_ARCHIVE/Q-V3/`
-- [x] **Déplacer fichiers orphelins racine** → `REFLEXION/`
-- [x] **Archiver `AUTRES/`** → `_ARCHIVE/AUTRES/`
-- [x] **Archiver `SOURCES/legacy+excel+scripts`** → `_ARCHIVE/SOURCES_LEGACY/`
-- [x] **Archiver vieux simulateurs + DEMO/** → `_ARCHIVE/DEMO/`
-- [x] **Archiver `AUDIT/`** → `_ARCHIVE/AUDIT/`
-- [x] **Archiver KERNEL intermédiaires** (Vx, templates, all/, docs) → `_ARCHIVE/KERNEL_INTERMEDIATES/`
-- [x] **Renommer `QUESTIONNAIRE_V2/`** → **`KERNEL/`**
-- [x] **Réécrire `UNDERSTANDING.md`** aligné sur le KERNEL v4 (6 divergences corrigées)
-- [x] **Docs IA** (CNRS + correspondance) → `IA/`
-- [x] **Nettoyage READMEs** — 1 seul README à la racine
-- [x] **Réécrire `README.md`** racine (explication complète du repo)
+- [x] Archiver legacy (`QUESTIONNAIRE/`, `Q-V3/`, `AUTRES/`, `SOURCES/`, `DEMO/`, `AUDIT/`, KERNEL intermédiaires)
+- [x] Renommer `QUESTIONNAIRE_V2/` → `KERNEL/`
+- [x] Réécrire `UNDERSTANDING.md` aligné KERNEL v4 (6 divergences corrigées)
+- [x] Réécrire `README.md` racine
+- [x] Nettoyage READMEs
 
 ---
 
 ## ✅ PHASE 1 — Validation des Données Sources
 
-> **Objectif** : S'assurer que les données sont cohérentes et complètes AVANT de remplir les templates.
+> **Objectif** : S'assurer que les données sont cohérentes et complètes.
 
-### 1.1 — Référentiel Questions
+### 1.1 — Référentiel Questions ✅
 
-Le fichier critique est dans `SOURCES/VERIF/Référence Questionnaire (1).xlsx` — contient la classification état/facteur de chaque question.
+- [x] Extraire et mapper le référentiel état/facteur → 150/150 = 100% cohérence
+- [x] Rapport de cohérence → `LIVRABLES/Audit/rapport_coherence_etat_facteur.md`
 
-- [ ] **Extraire et documenter** le référentiel état/facteur
-- [ ] **Mapper le référentiel état/facteur** sur les 150 questions
+### 1.2 — Audit 150+15 vs 153 ✅
 
-### 1.2 — Audit 150+15 vs 153 (URGENT — demande Dr. Monka)
+- [x] Identifier l'écart → 3 triggers (O2, N31, O49) expliquent la différence
+- [x] Rapport → `LIVRABLES/Audit/rapport_audit_153_vs_150.md`
+- [x] ✅ **Confirmé par Dr. Monka** : 150 questions + 15 triggers
 
-> ⚠️ Coquille identifiée par le médecin : 153 questions dans le doc état/facteur vs 150+15 dans le questionnaire.
+### 1.3 — Export Excel du Questionnaire ✅
 
-- [ ] **Lister les 150 questions** du questionnaire figé (par V1→V5)
-- [ ] **Lister les 15 triggers** (liste fermée connue)
-- [ ] **Lister les 153 questions** du doc état/facteur
-- [ ] **Produire un rapport de différence** → Quelles 3 questions sont en trop ou en moins ?
-- [ ] **Livrer ce rapport** au Dr. Monka
+- [x] Exporter questionnaire figé (150 + 15 triggers + 30 suivi + 24 MP) → `LIVRABLES/Questionnaire_Monka_Complet.xlsx`
+- [x] Ajouter colonne **Typage** (scorante/déclenchante/etc.) — vérification croisée 100%
+- [x] Retirer colonne "Aidance" (redondante)
 
-### 1.3 — Fiches Identité Questions (demande Dr. Monka)
+### 1.4 — Règles d'Activation ✅
 
-> Chaque question doit avoir une fiche complète.
+- [x] Créer table `activation_rules` → 68 règles (12 critiques + 28 CCC + 28 standard)
+- [x] Couvrir 24/24 MP (21 legacy + 3 proposés IA pour F6, M6, A4)
+- [x] Rédiger réflexion CCC inter-vulnérabilités → `LIVRABLES/Audit/reflexion_ccc_inter_vulnerabilites.md`
+- [x] Vérification KERNEL K1→K13 → 13/13 conforme
 
-- [ ] **Créer une fiche par question** avec :
-  - ID de la question
-  - Libellé
-  - Vulnérabilité (V1→V5)
-  - MP associé(s) (micro-parcours)
-  - MT associée(s) (micro-tâches)
-  - Type de question : scorante / déclenchante / trigger / informative
-  - Classification État / Facteur (depuis le nouveau référentiel VERIF)
-- [ ] **Rapport de cohérence** entre la typologie (scorante/déclenchante/etc.) et la classification état/facteur
-- [ ] **Livrer au format exploitable** (markdown + Excel si demandé)
+### 1.5 — Architecture Recommandations ✅
 
-### 1.4 — Export Excel du Questionnaire Figé (demande Dr. Monka)
-
-> Oublié la dernière fois — à produire maintenant.
-
-- [ ] **Exporter le questionnaire figé (150 + 15 triggers)** → fichier Excel
-- [ ] **Exporter le questionnaire de suivi** → fichier Excel
-- [ ] **Placer dans `LIVRABLES/excel/`** et envoyer au Dr. Monka
+- [x] Valider le modèle MP→Recos (via activation_rule) → `LIVRABLES/Audit/architecture_recommandations_par_mp.md`
+- [x] Badge dynamique MP = MAX(niveaux recos incomplètes) → dé-escalade
+- [x] Délai figé à la date du questionnaire
 
 ---
 
-## 📝 PHASE 2 — Production des Templates KERNEL (A→E)
+## 📝 PHASE 2 — Ingestion & Regroupement des Données
 
-> **Objectif** : Remplir les 5 templates pour chaque V, en partant des données validées en Phase 1.
+> **Objectif** : Ingérer tout le legacy dans Supabase, regrouper les recos par MP, préparer le terrain pour les templates.
 
-### 2.0 — Prérequis
+### 2.1 — Ingestion Supabase ✅
 
-- [ ] Phase 1 **entièrement validée** par Dr. Monka
-- [ ] Templates vierges dans `TEMPLATES_FONDATION/` vérifiés et conformes au RECAP
+> 4 tables créées + données ingérées.
 
-### 2.1 — Pilote V1 (Social / Relationnel)
+- [x] **Ingérer `recommendations`** — 707 réponses legacy (316 avec reco, 359 avec IDEC) ✅
+- [x] **Ingérer `micro_taches`** — 299 MT typées (V1: 41 .md + V2-V5: 258 .json) ✅
+- [x] **Ingérer `scoring_questions`** — 38 questions scorantes + pondérations (V1→V5) ✅
 
-Remplir dans l'ordre de dépendance :
+### 2.2 — Audit & Regroupement Recos par MP ✅
 
-- [ ] **A** — `A_activation.md` → Règles d'activation de chaque MP de V1
-- [ ] **E** — `E_scoring.md` → Scoring (indépendant, peut être fait en parallèle)
-- [ ] **B** — `B_recos_variations.md` → Recos par niveau (Critique/CCC/Standard/Prévention)
-- [ ] **C** — `C_master_mt_asr.md` → Toutes les MT + conditions de validation ASR
-- [ ] **D** — `D_suivi.md` → Questions de suivi dynamique
+> Audit complet → `LIVRABLES/Audit/audit_regroupement_recos_mt_par_mp.md`
+
+- [x] **Cartographier les recos legacy** par question → 24/24 MP couverts ✅
+- [x] **Doc d'audit recos** → 14/24 MP bien couverts, 5 faiblement documentés ✅
+- [x] **Regrouper les MT par MP** (V1 via question_id, V2-V5 par V) ✅
+- [x] **Contrôle qualité** : 0 reco perdue (707/707), 0 MT perdue (299/299) ✅
+
+### 2.3 — Points en attente Dr. Monka
+
+> Items issus des retours du 09/02 et des sessions de travail.
+
+- [ ] **Validation architecture recos** → envoyer `architecture_recommandations_par_mp.md`
+- [ ] **Décision multi-MP** : 5 questions liées à 2 MP (E21, O51, O53, O54, E46) → 1:1 ou 1:N ?
+- [ ] **Validation règles activation F6, M6, A4** (proposées par IA)
+- [ ] **Vérifier aidance** : 5 questions mentionnent "enfant" (E38, E59, E60, E64, E65) — faut-il filtrer par profil d'aidant ?
+
+---
+
+## 🤖 PHASE 3 — Propositions IA & Enrichissement
+
+> L'IA propose, le médecin valide. Chaque livrable est un doc clair avec choix justifiés.
+
+### 3.1 — Regroupement Recos par MP + Dédoublonnage ✅
+
+- [x] Extraire 324 recos legacy par MP, dédoublonner → 238 recos structurées
+- [x] Regrouper par question → **103 recos regroupées** (modèle actif)
+- [x] Lier aux activation_rules (79/103 liées, 24 sans MT)
+- [x] Créer table `recommendations` + insérer 103 recos
+- [x] → Source de vérité : `LIVRABLES/recos_regroupees_par_mp.md`
+- [x] → Risques : `LIVRABLES/Audit/risques_regroupements_phase3.md`
+- [x] → Backup 238 : `_ARCHIVE/LIVRABLES/phase3_recos_238_detail.md`
+
+### 3.2 — Rattachement MT → Recos ✅
+
+- [x] Matcher 299 MT aux 103 recos regroupées (matching sémantique V1-V5)
+- [x] 299/299 MT rattachées, 0 orpheline
+- [x] Mis à jour `reco_id` + `matching_source` dans `micro_taches`
+
+### 3.3 — Règle de Scoring ⏳
+
+> **Scénario D** : reclassifier les questions mal classifiées → règle unique « état = scorant »
+> Voir : `LIVRABLES/Audit/scoring_vs_legacy_vs_toutes_etat.md` + `reflexion_methodologie_scoring.md`
+
+- [x] Analyse comparative : 38 legacy vs 55 toutes état
+- [x] Raisonnement méthodologique (5 axes) → doc réflexion
+- [ ] **Envoyer doc scoring à Dr. Monka** (pas encore envoyé)
+- [ ] **Reclassifier ~15 questions** (E1, E2, N20, E43 + ~11 V2)
+- [ ] **Valider pondération** (+1 standard / +2 critique)
+- [ ] Appliquer classification en base → scoring automatique
+
+### 3.4 — Validation Dr. Monka (batch) ⏳
+
+- [x] ✅ **CCC inter-vulnérabilités** : valide les 3 combos (1, 2, 4) + nouvelles règles F6, M6, A4 (11/02)
+- [x] ✅ **Architecture recos par MP** : valide le principe multi-recos par MP (11/02)
+- [ ] Validation 103 recos regroupées (doc envoyé)
+- [ ] Validation 20 cas à risque (doc envoyé)
+- [ ] Validation scoring (doc **pas encore envoyé**)
+
+---
+
+## 📄 PHASE 4 — Production Templates KERNEL (A→E)
+
+> Une fois les propositions validées, on produit les templates définitifs.
+
+### 4.1 — Pilote V1 (Social & Relationnel)
+
+Ordre de dépendance :
+
+- [ ] **A** — `A_activation.md` → ✅ Données prêtes (activation_rules)
+- [ ] **E** — `E_scoring.md` → Données prêtes + règle scoring validée (Phase 3.3)
+- [ ] **B** — `B_recos_variations.md` → Recos par MP × niveaux (post Phase 3.1)
+- [ ] **C** — `C_master_mt_asr.md` → MT typées + domaine + prescription + ASR (post Phase 3.2)
+- [ ] **D** — `D_suivi.md` → ✅ Données prêtes (suivi_questions)
 - [ ] **Validation Dr. Monka** sur V1 complète
 
-### 2.2 — Déploiement V2→V5
+### 4.2 — Déploiement V2→V5
 
-> Une fois le pilote V1 validé, le pattern est calé.
+> Pattern calé sur V1, on déroule.
 
 - [ ] V2 — Fragilité Proche (A→E)
 - [ ] V3 — Santé Aidant (A→E)
 - [ ] V4 — Santé Proche (A→E)
 - [ ] V5 — Administrative (A→E)
 
-### 2.3 — Transversaux
+### 4.3 — Transversaux
 
 - [ ] **E_GLOBAL** — Scoring global inter-vulnérabilités
-- [ ] **Triggers** — Mise à jour `all/triggers.md`
-- [ ] **Progression** — Mise à jour `all/progression.md`
+- [ ] **Triggers** — `all/triggers.md`
+- [ ] **Fiches identité questions** — fiche complète par question (ID, V, MP, MT, typage, classification)
 
 ---
 
-## 🖥️ PHASE 3 — Simulateur KERNEL (Vite/React)
+## 🖥️ PHASE 5 — Simulateur KERNEL (Vite/React)
 
-> **Objectif** : Créer un simulateur rapide pour tester le KERNEL en live.
-> Remplace les simulateurs legacy HTML (`monka_simulator.html`, `v2.html`, `v3.html`).
+> Tester le KERNEL en live. Remplace les simulateurs legacy HTML.
 
-### 3.1 — Setup
+### 5.1 — Setup
 
-- [ ] **Créer le projet** Vite + React + TypeScript dans `SIMULATOR/`
-- [ ] **Définir le schéma JSON** alimenté par les templates (A→rules.json, B→content.json, C→engine.json, D→followup.json, E→scoring.json)
-- [ ] **Générer les JSON** depuis les templates V1 remplis (adapter `generate_json_v3.py` ou réécrire)
+- [ ] Créer le projet Vite + React + TypeScript dans `SIMULATOR/`
+- [ ] Définir le schéma JSON alimenté par les templates
+- [ ] Générer les JSON depuis les templates V1
 
-### 3.2 — Fonctionnalités Core
+### 5.2 — Fonctionnalités Core
 
-- [ ] **Questionnaire interactif** : poser les 150 questions, collecter les réponses
-- [ ] **Moteur d'activation** : déclencher les MP selon les réponses (K2/K3)
-- [ ] **Affichage Recos** : afficher les recos par niveau d'activation (K1/K3/K4)
-- [ ] **Moteur MT & ASR** : barre de progression, validation ASR (K9/K10/K11)
-- [ ] **Scoring** : calcul en temps réel (K13)
-- [ ] **CCC** : détection des conditions critiques composites
-- [ ] **Suivi dynamique** : entonnoir 3 niveaux
+- [ ] Questionnaire interactif (150 questions)
+- [ ] Moteur d'activation (K2/K3)
+- [ ] Affichage Recos par niveau (K1/K3/K4) + badge dynamique MP
+- [ ] Moteur MT & ASR (K9/K10/K11) + barre de progression
+- [ ] Scoring temps réel (K13)
+- [ ] Détection CCC
+- [ ] Suivi dynamique (entonnoir 3 niveaux)
 
-### 3.3 — UX & Polish
+### 5.3 — UX & Polish
 
-- [ ] **Sélection de vulnérabilité** (V1→V5)
-- [ ] **Personas / Profils de test** pour valider rapidement
-- [ ] **Export résultats** (PDF ou partage)
-- [ ] **Design premium** (pas un proto moche)
-
----
-
-## 📊 PHASE 4 — Documentation Médecin
-
-> **Objectif** : Fournir au Dr. Monka toute la documentation nécessaire basée exclusivement sur le KERNEL.
-
-- [ ] **Rapport de cohérence état/facteur** (issu de Phase 1.3)
-- [ ] **26 documents remplis** (5 templates × 5 V + E_GLOBAL)
-- [ ] **Rapport d'audit global** consolidé (remplace les 9 rapports actuels dans `AUDIT/`)
-- [ ] **Guide d'utilisation simulateur** pour le médecin
-- [ ] **Excels exportés** du questionnaire figé + suivi
+- [ ] Sélection vulnérabilité (V1→V5)
+- [ ] Personas / Profils de test
+- [ ] Export résultats
+- [ ] Design premium
 
 ---
 
-## 🟡 BACKLOG — Évolutions Futures (pas prioritaire)
+## 📊 PHASE 6 — Documentation Médecin
 
-### Copywriting & Contenu
-- [ ] Audit des formulations : recos utilisateur vs MT IDEC
-- [ ] Harmonisation du wording
+- [ ] 26 documents remplis (5 templates × 5 V + E_GLOBAL)
+- [ ] Rapport d'audit global consolidé
+- [ ] Guide d'utilisation simulateur
+- [ ] Excels exportés
 
-### Personnalisation Personas
-- [ ] Exploiter les triggers pour la détection de persona
-- [ ] Personnalisation des recos selon persona détecté
+---
 
-### Maquettes UI/UX App Utilisateur
-- [ ] Créer des maquettes pour l'app finale
-- [ ] Proposer des améliorations UI/UX
+## 🔮 BACKLOG — Évolutions Futures
 
-### Intelligence Artificielle (fichiers VERIF)
-- [ ] Analyser le plan CNRS Phase III
-- [ ] Définir la correspondance Legacy→IA
-- [ ] Préparer l'intégration IA sur le moteur KERNEL
+- [ ] **Recos désactivables par contexte** — si une reco est impossible (ex: aucun entourage familial mobilisable), pouvoir la désactiver pour ce profil. Déclenché par réponses aux questions triggers/facteur. *(Retour Dr. Monka 11/02)*
+- [ ] Scoring bi-dimensionnel (V2 scoring) — état + facteurs en deux dimensions séparées
+- [ ] Audit copywriting : wording recos vs MT IDEC
+- [ ] Personnalisation par persona (exploiter triggers)
+- [ ] Maquettes UI/UX app utilisateur finale
+- [ ] Intelligence Artificielle : plan CNRS Phase III, correspondance Legacy→IA
+- [ ] Glossaire acronymes (Dr. Monka, déjà sur Wimi)
+
+---
+
+## 📨 RÉCAP — Docs à envoyer à Dr. Monka (10/02/2026)
+
+### Docs à transmettre
+
+| # | Doc | Contenu | Action demandée |
+|---|---|---|---|
+| 1 | `LIVRABLES/recos_regroupees_par_mp.md` | 103 recos structurées par MP, avec MT rattachées | Valider les regroupements |
+| 2 | `LIVRABLES/Audit/risques_regroupements_phase3.md` | 20 regroupements douteux à vérifier | Annoter ✅/❌/📝 |
+| 3 | `LIVRABLES/Audit/scoring_vs_legacy_vs_toutes_etat.md` | Comparaison scoring + 2 décisions à prendre | Reclassifier 15 questions + valider pondération |
+| 4 | `LIVRABLES/Audit/reflexion_methodologie_scoring.md` | Réflexion complète : 5 axes d'analyse du scoring | Lecture optionnelle — le raisonnement derrière |
+| 5 | `LIVRABLES/Audit/glossaire_reco_vs_mt.md` | Définitions Reco vs MT | Contexte |
+
+### Message à copier-coller
+
+> Voici les résultats du travail de structuration des recommandations et l'analyse du scoring.
+>
+> **Ce qu'on a fait** :
+> - On a pris les 324 textes de recos du CAT, supprimé les doublons, et regroupé par question pour arriver à **103 recommandations structurées** par Micro-Parcours. Les 299 micro-tâches ont été rattachées à ces recos.
+> - On a analysé en détail le scoring actuel (38 questions scorées) vs le scénario où toutes les questions "état" seraient scorantes (55 questions).
+>
+> **Ce dont j'ai besoin** :
+>
+> 1. **Valider les regroupements** — le doc principal (`recos_regroupees_par_mp.md`) montre chaque MP avec ses recos en tableau. Vérifie que ça fait sens cliniquement.
+>
+> 2. **Vérifier les 20 cas à risque** — le doc risque (`risques_regroupements_phase3.md`) liste 20 cas où le regroupement est un peu forcing :
+>    - **9 cas 🔴** mélangent médical + social + psycho → tu veux séparer ?
+>    - **11 cas 🟡** même thème mais titres à reformuler
+>    - Pour chaque cas, annote : ✅ (garder), ❌ (séparer), ou 📝 (reformuler)
+>
+> 3. **Scoring — 6 décisions à prendre** (doc `scoring_vs_legacy_vs_toutes_etat.md`) :
+>    - 4 questions "facteur" sont scorées dans le legacy → garder ou retirer ?
+>    - V2 chute de 22 à 8 pts si on corrige → acceptable ?
+>    - Pondération uniforme (+1) ou différenciée (+1/+2) par gravité clinique ?
+>    - Seuils d'interprétation : uniformes ou par V ?
+>    - Le doc détaille chaque cas avec mon raisonnement et ma recommandation.
+>
+> 4. **Définir les activation_rules manquantes** — 3 MPs n'ont pas de règle d'activation : **A4**, **F6**, **M6**.
+>
+> Les textes originaux sont tous conservés dans les sections dépliables des docs si besoin.
+
+### Retours attendus
+
+| # | Retour | Impact |
+|---|---|---|
+| 1 | Validation regroupements (✅/❌/📝 sur les 20 cas) | On ajuste les recos en base |
+| 2 | Scoring : 6 décisions (voir doc) | On peut produire les templates scoring |
+| 3 | Activation rules pour A4, F6, M6 | On peut compléter les niveaux manquants |
 
 ---
 
@@ -176,9 +262,9 @@ Remplir dans l'ordre de dépendance :
 
 | Principe | Détail |
 |----------|--------|
-| **KERNEL = source de vérité** | Plus de legacy, plus de V1/V2 séparés. Tout part du RECAP_FONDATION_MONKA.md |
-| **Questions figées** | 150 + 15 triggers. Pas de modifications |
-| **Ordre strict** | Phase 0 → 1 → 2 → 3 → 4. Ne pas sauter |
-| **Validation incrémentale** | Chaque phase est validée avant de passer à la suivante |
-| **Excel = livrable médecin** | Le médecin travaille sur Excel, on lui fournit les exports |
-| **Simulateur = outil de test** | Pour valider le KERNEL en live, pas un produit final |
+| **KERNEL = source de vérité** | Tout part du RECAP_FONDATION_MONKA.md |
+| **Questions figées** | 150 état/facteur + 15 triggers. Pas de modifications |
+| **Ordre strict** | Phase 0 → 1 → 2 → 3 → 4 → 5 → 6 |
+| **Validation incrémentale** | Chaque phase validée avant la suivante |
+| **IA propose, médecin valide** | Toute proposition IA est documentée avec justification |
+| **Data quality** | 0 reco perdue, 0 MT perdue pendant les opérations |
