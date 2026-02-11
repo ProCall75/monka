@@ -2,9 +2,9 @@
 
 > **Vulnérabilité** : V3 — Santé de l'Aidant
 > **Date de production** : 11/02/2026
-> **Statut** : 🟡 Mixte — questions scorantes legacy, seuils proposés par IA
+> **Statut** : 🟡 À valider par Dr. Monka — barème complet, seuils IA
 > **Règles KERNEL** : K13 (scoring indépendant de l'activation)
-> **Méthode** : Scénario D — règle « questions d'état = scorantes »
+> **Source pondérations** : `typologie_ccc_scoring.json` (legacy — Doc Word Dr. Rimaud)
 
 ---
 
@@ -14,29 +14,113 @@
 |---|---|
 | Vulnérabilité | V3 — Santé de l'Aidant |
 | Questions totales V3 | ~21 |
-| Questions scorantes (legacy) | 10 |
-| Score max (legacy) | 20 |
+| Questions scorantes | 10 |
+| Score max | 20 |
 
 ---
 
-## Questions scorantes
+## Barème complet — Réponse → Score
 
-| # | Question ID | Libellé | Classification | Réponse non-scorante (score=0) | Source |
-|---|---|---|---|---|---|
-| 1 | E7 | À quel point vous sentez-vous épuisé·e ? | etat | Pas du tout fatigué·e → 0 | Legacy ✅ |
-| 2 | E8 | Sentiment d'être seul(e) émotionnellement ? | etat | Jamais → 0 | Legacy ✅ |
-| 3 | E9 | Parvenez-vous à avoir du temps pour vous ? | etat | Oui → 0 | Legacy ✅ |
-| 4 | E10 | Sur le plan moral, où vous situez-vous ? | etat | Ça va globalement → 0 | Legacy ✅ |
-| 5 | E11 | Pensez-vous pouvoir continuer dans les 6 prochains mois ? | etat | Oui, sans difficulté → 0 | Legacy ✅ |
-| 6 | E18 | Qualité de votre sommeil ? | etat | Bonne → 0 | Legacy ✅ |
-| 7 | O6 | A-t-elle chuté dans les 6 derniers mois ? | etat | Non → 0 | Legacy ✅ |
-| 8 | O29 | Retentissement sur votre santé ? | etat | Pas du tout → 0 | Legacy ✅ |
-| 9 | O33 | Ressentez-vous une charge ? | etat | Pas du tout → 0 | Legacy ✅ |
-| 10 | O44 | Votre santé par rapport à une personne du même âge ? | etat | Meilleure → 0 | Legacy ✅ |
+> 🤖 **Décision IA** : Pondérations extraites intégralement du legacy. E9 est binaire (0/2) car l'absence de temps personnel est un signal d'alerte fort, sans état intermédiaire dans le questionnaire.
 
-> **Note** : Score max = 20 avec 10 questions → certaines réponses valent +2 (gravité élevée). Les pondérations exactes ne sont pas encore détaillées dans le legacy.
+### O29 — Retentissement sur votre propre santé
 
-**Score maximum** : 20
+| Réponse | Score |
+|---|---|
+| Pas du tout | **0** |
+| Un peu | **+1** |
+| Oui | **+2** |
+
+### O33 — Ressentez-vous une charge ?
+
+| Réponse | Score |
+|---|---|
+| Pas du tout | **0** |
+| Un peu | **+1** |
+| Oui | **+2** |
+
+### E7 — Épuisement lié au rôle d'aidant
+
+| Réponse | Score |
+|---|---|
+| Pas du tout fatigué·e | **0** |
+| Un peu | **+1** |
+| Très fatigué·e / Épuisé·e | **+2** |
+
+### E8 — Sentiment de solitude émotionnelle
+
+| Réponse | Score |
+|---|---|
+| Jamais | **0** |
+| Parfois | **+1** |
+| Souvent / tout le temps | **+2** |
+
+### E9 — Temps pour vous dans une semaine
+
+| Réponse | Score |
+|---|---|
+| Oui | **0** |
+| Non | **+2** |
+
+> ⚠️ **Note** : E9 est binaire (0 ou 2, pas de +1). L'absence totale de temps personnel est un signal d'alerte fort.
+
+### E10 — Sur le plan moral (stress, inquiétude)
+
+| Réponse | Score |
+|---|---|
+| Ça va globalement | **0** |
+| Parfois stressé·e / inquiet·e | **+1** |
+| Souvent débordé·e / submergé·e | **+2** |
+
+### E11 — Capacité à continuer dans les 6 prochains mois
+
+| Réponse | Score |
+|---|---|
+| Oui, sans difficulté | **0** |
+| Difficile / incertain | **+1** |
+| Non, je risque de ne plus y arriver | **+2** |
+
+### O44 — Votre santé par rapport à une personne du même âge
+
+| Réponse | Score |
+|---|---|
+| Meilleure | **0** |
+| Identique | **+1** |
+| Moins bonne | **+2** |
+
+### E18 — Qualité de votre sommeil
+
+| Réponse | Score |
+|---|---|
+| Bonne | **0** |
+| Correcte | **+1** |
+| Mauvaise / très mauvaise | **+2** |
+
+### O6 — Chute dans les 6 derniers mois (aidant)
+
+| Réponse | Score |
+|---|---|
+| Non | **0** |
+| Oui, sans gravité | **+1** |
+| Oui, avec complication / plusieurs chutes | **+2** |
+
+---
+
+## Vérification du score max
+
+| Question | Score max | Type |
+|---|---|---|
+| O29 | 2 | 3 niveaux |
+| O33 | 2 | 3 niveaux |
+| E7 | 2 | 3 niveaux |
+| E8 | 2 | 3 niveaux |
+| E9 | 2 | Binaire |
+| E10 | 2 | 3 niveaux |
+| E11 | 2 | 3 niveaux |
+| O44 | 2 | 3 niveaux |
+| E18 | 2 | 3 niveaux |
+| O6 | 2 | 3 niveaux |
+| **TOTAL** | **20** | ✅ Conforme au legacy |
 
 ---
 
@@ -45,24 +129,26 @@
 | Niveau | Plage | % du max | Signification | Source |
 |---|---|---|---|---|
 | 🟢 Faible | 0 – 5 | 0-25% | Santé de l'aidant préservée | IA 🤖 |
-| 🟡 Modéré | 6 – 10 | 30-50% | Risque d'épuisement modéré — vigilance | IA 🤖 |
+| 🟡 Modéré | 6 – 10 | 30-50% | Risque d'épuisement modéré | IA 🤖 |
 | 🟠 Élevé | 11 – 15 | 55-75% | Épuisement probable — actions prioritaires | IA 🤖 |
 | 🔴 Critique | 16 – 20 | 80-100% | Épuisement avancé — intervention urgente | IA 🤖 |
 
+> 🤖 **Décision IA** : Legacy utilise 3 niveaux (🟢 0-6 / 🟠 7-13 / 🔴 14-20). J'ai ajouté un niveau 🟡 pour plus de granularité.
+
 ---
 
-## Questions NON scorantes (facteur pur) — V3
+## Questions NON scorantes — V3
 
 | # | Question ID | Libellé | Classification | Pourquoi non-scorante |
 |---|---|---|---|---|
-| 1 | E14 | Jours d'arrêt sur 30 jours | facteur | Compteur factuel, pas un état |
-| 2 | E17 | Activité physique régulière ? | facteur | Habitude, non évolutive |
-| 3 | N8 | Arrêt de travail lié au rôle d'aidant ? | facteur | Événement passé |
-| 4 | O49 | Depuis combien de temps l'aidez-vous ? | aucun | Circonstance fixe |
-| 5 | O50 | Combien de temps lui consacrez-vous ? | facteur | Donnée quantitative |
+| 1 | E14 | Jours d'arrêt sur 30 jours | facteur | Compteur factuel |
+| 2 | E17 | Activité physique régulière | facteur | Habitude |
+| 3 | N8 | Arrêt de travail lié au rôle | facteur | Événement passé |
+| 4 | O49 | Durée d'aidance | descriptive | Circonstance fixe |
+| 5 | O50 | Temps consacré au proche | facteur | Donnée quantitative |
 
 ---
 
 > ⚠️ **À VALIDER PAR DR. MONKA** :
-> - Les seuils d'interprétation (🟢🟡🟠🔴) sont des propositions IA
-> - Les pondérations (+1/+2) par réponse ne sont pas encore détaillées (seul le score max de 20 est connu du legacy)
+> - Les seuils d'interprétation (4 niveaux vs 3 legacy)
+> - Confirmer que les pondérations legacy sont toujours d'actualité

@@ -2,9 +2,9 @@
 
 > **Vulnérabilité** : V4 — Parcours Médical du Proche
 > **Date de production** : 11/02/2026
-> **Statut** : 🟡 Mixte — questions scorantes legacy, seuils proposés par IA
+> **Statut** : 🟡 À valider par Dr. Monka — barème complet, seuils IA
 > **Règles KERNEL** : K13 (scoring indépendant de l'activation)
-> **Méthode** : Scénario D — règle « questions d'état = scorantes »
+> **Source pondérations** : `typologie_ccc_scoring.json` (legacy — Doc Word Dr. Rimaud)
 
 ---
 
@@ -14,23 +14,76 @@
 |---|---|
 | Vulnérabilité | V4 — Parcours Médical du Proche |
 | Questions totales V4 | ~30 |
-| Questions scorantes (legacy) | 6 |
-| Score max (legacy) | 12 |
+| Questions scorantes | 6 |
+| Score max | 12 |
 
 ---
 
-## Questions scorantes
+## Barème complet — Réponse → Score
 
-| # | Question ID | Libellé | Classification | Réponse non-scorante (score=0) | Source |
-|---|---|---|---|---|---|
-| 1 | E36 | Examens/consultations nombreux sans clarification ? | etat | Non, pas particulièrement → 0 | Legacy ✅ |
-| 2 | E37 | Avis des médecins souvent contradictoires ? | etat | Non → 0 | Legacy ✅ |
-| 3 | E43 | Ruptures dans le suivi médical ? | etat | Non → 0 | Legacy ✅ |
-| 4 | E47 | En cas d'aggravation, savez-vous quoi faire ? | etat | Oui, on sait quoi faire → 0 | Legacy ✅ |
-| 5 | E54 | Organisation des soins ? | etat | Plutôt simple et bien organisée → 0 | Legacy ✅ |
-| 6 | E57 | Comprenez-vous le plan de soins ? | etat | Oui, c'est clair → 0 | Legacy ✅ |
+> 🤖 **Décision IA** : Pondérations extraites intégralement du legacy. Toutes les 6 questions suivent le pattern 0/1/2 à 3 niveaux.
 
-**Score maximum** : 12
+### E36 — Examens/consultations nombreux sans clarification
+
+| Réponse | Score |
+|---|---|
+| Non, pas particulièrement | **0** |
+| Oui, un peu | **+1** |
+| Oui, beaucoup | **+2** |
+
+### E37 — Avis médicaux contradictoires
+
+| Réponse | Score |
+|---|---|
+| Non | **0** |
+| Oui, parfois | **+1** |
+| Oui, souvent | **+2** |
+
+### E43 — Ruptures dans le suivi médical (12 derniers mois)
+
+| Réponse | Score |
+|---|---|
+| Non | **0** |
+| Oui, une période de 3 à 6 mois | **+1** |
+| Oui, plusieurs périodes ou > 6 mois | **+2** |
+
+### E47 — Plan en cas d'aggravation
+
+| Réponse | Score |
+|---|---|
+| Oui, on sait quoi faire | **0** |
+| Quelques repères | **+1** |
+| Non, on improvise / urgences | **+2** |
+
+### E54 — Organisation des soins
+
+| Réponse | Score |
+|---|---|
+| Plutôt simple et bien organisée | **0** |
+| Gérable mais parfois compliquée | **+1** |
+| Très compliquée / ingérable | **+2** |
+
+### E57 — Plan de route clair pour la suite des soins
+
+| Réponse | Score |
+|---|---|
+| Oui, c'est clair | **0** |
+| Partiellement | **+1** |
+| Non, on avance au jour le jour | **+2** |
+
+---
+
+## Vérification du score max
+
+| Question | Score max | Type |
+|---|---|---|
+| E36 | 2 | 3 niveaux |
+| E37 | 2 | 3 niveaux |
+| E43 | 2 | 3 niveaux |
+| E47 | 2 | 3 niveaux |
+| E54 | 2 | 3 niveaux |
+| E57 | 2 | 3 niveaux |
+| **TOTAL** | **12** | ✅ Conforme au legacy |
 
 ---
 
@@ -40,30 +93,32 @@
 |---|---|---|---|---|
 | 🟢 Faible | 0 – 3 | 0-25% | Parcours médical structuré | IA 🤖 |
 | 🟡 Modéré | 4 – 6 | 33-50% | Parcours fragile — à clarifier | IA 🤖 |
-| 🟠 Élevé | 7 – 9 | 58-75% | Parcours médical désorganisé — risque de rupture | IA 🤖 |
+| 🟠 Élevé | 7 – 9 | 58-75% | Parcours désorganisé — risque de rupture | IA 🤖 |
 | 🔴 Critique | 10 – 12 | 83-100% | Parcours en rupture — intervention urgente | IA 🤖 |
+
+> 🤖 **Décision IA** : Legacy utilise 3 niveaux (🟢 0-4 / 🟠 5-8 / 🔴 9-12). J'ai ajouté un niveau 🟡 pour plus de granularité.
 
 ---
 
-## Questions NON scorantes (facteur pur) — V4
+## Questions NON scorantes — V4
 
-| # | Question ID | Libellé | Classification | Pourquoi non-scorante |
+| # | Question ID | Libellé | Rôle legacy | Pourquoi non-scorante |
 |---|---|---|---|---|
-| 1 | E34 | Maladie(s) du proche | aucun | Donnée descriptive |
-| 2 | E35 | Diagnostic posé clairement | facteur | Passé |
-| 3 | E38 | Passage pédiatrie/adulte | facteur | Événement ponctuel |
-| 4 | E39 | Spécialistes consultés | facteur | Listing factuel |
-| 5 | E40 | Difficultés accès soins | facteur | Obstacle concret |
-| 6 | E41 | Libéraux impliqués | facteur | Listing factuel |
-| 7 | E42 | RDV non programmés (nombre) | facteur | Compteur |
-| 8 | E44 | Bilan synthèse réalisé | facteur | Passé |
-| 9 | E45 | Suivi addictologie | facteur | Statut |
-| 10 | E46 | Accompagnement retour hôpital | facteur | Passé |
-| 11 | E48-E51 | Troubles, addictions, traitement, observance | facteur | Données cliniques factuelles |
-| 12 | E52 | Coordination existante | facteur | Constat |
+| 1 | E34 | Maladie(s) du proche | descriptive | Donnée factuelle |
+| 2 | E35 | Diagnostic posé clairement | scorante (source) | ⚠️ Présent comme "scorante" dans la source mais absent du tableau de scoring |
+| 3 | E38 | Transition enfant/adulte | descriptive | Situation ponctuelle |
+| 4 | E39-E41 | Spécialistes, accès, ETP | descriptive | Listing factuel |
+| 5 | E42 | RDV non programmés | déclenchante | Active MP, pas scorée |
+| 6 | E44 | Bilan synthèse | déclenchante | Active MP, pas scorée |
+| 7 | E45-E46 | Addictologie, post-hospit | déclenchante | Active MP, pas scorée |
+| 8 | E48-E52 | Troubles psy, addiction, coord | descriptive/déclenchante | Contexte ou activation |
+| 9 | O24 | Difficulté prendre RDV | scorante (source) | ⚠️ Présent comme "scorante" dans la source mais absent du tableau de scoring |
+
+> 🤖 **Note** : E35 et O24 sont étiquetés "scorante" dans la classification typologique mais n'apparaissent PAS dans le tableau de scoring legacy. J'ai choisi de **respecter le tableau de scoring** (6 questions, max 12) plutôt que la classification. Dr. Monka peut les ajouter s'il le souhaite.
 
 ---
 
 > ⚠️ **À VALIDER PAR DR. MONKA** :
-> - Les seuils d'interprétation (🟢🟡🟠🔴) sont des propositions IA
-> - Avec 6 questions et score max 12, chaque question peut valoir jusqu'à 2 points
+> - Les seuils d'interprétation (4 niveaux vs 3 legacy)
+> - E35 et O24 : doivent-elles être scorantes ? (présentes dans la classification mais pas dans le barème)
+> - Confirmer que les pondérations legacy sont toujours d'actualité

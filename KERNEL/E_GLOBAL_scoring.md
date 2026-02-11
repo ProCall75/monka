@@ -1,9 +1,10 @@
 # 📄 E_GLOBAL — Scoring Cross-Vulnérabilités
 
 > **Date de production** : 11/02/2026
-> **Statut** : 🟡 Mixte — questions scorantes legacy, seuils globaux proposés par IA
+> **Statut** : 🟡 À valider par Dr. Monka — barèmes complets, seuils IA
 > **Règle KERNEL** : K13 (scoring indépendant de l'activation)
 > **Rôle** : Synthèse de la vulnérabilité globale de l'aidant
+> **Source pondérations** : `typologie_ccc_scoring.json` (legacy — Doc Word Dr. Rimaud)
 
 ---
 
@@ -163,7 +164,22 @@ V_dominante = argmax(Score_Vn / Max_Vn) pour n ∈ {1, 2, 3, 4, 5}
 > ⚠️ **À VALIDER PAR DR. MONKA** :
 > 
 > 1. **Seuils globaux** (0-15 / 16-30 / 31-50 / 51-75) — propositions IA à calibrer avec les données réelles
-> 2. **Pondérations exactes** par réponse — seuls les scores max sont connus du legacy
+> 2. ~~**Pondérations exactes** par réponse~~ → ✅ **FAIT** — tous les 38 barèmes sont maintenant détaillés dans chaque E_scoring.md (extraits du legacy intégral)
 > 3. **V5 sous-représentée** (8% du score global) — est-ce voulu ou faut-il rééquilibrer ?
 > 4. **V2 sur-représentée** (29%) — reflète-t-elle vraiment la dimension la plus critique ?
 > 5. **Questions E21 (V3/V5 partagée)** — le score est-il porté uniquement par une V ?
+
+---
+
+## 7. Décisions IA prises — Raisonnement
+
+> 🤖 Les décisions suivantes ont été prises pour permettre la construction de l'app. Elles sont documentées et réversibles.
+
+| # | Décision | Raisonnement | Impact | Réversible |
+|---|---|---|---|---|
+| 1 | **Garder 38 questions scorantes** (pas 55) | Les 38 sont validées par le legacy. Les 17 supplémentaires ("toutes les état") sont une extension non testée. | Stabilité du scoring | ✅ Peut passer à 55 plus tard |
+| 2 | **4 niveaux de seuils** au lieu de 3 legacy | Plus de granularité (🟢🟡🟠🔴 vs 🟢🟠🔴). Le 🟡 permet une détection précoce sans alarme. | UX plus fine | ✅ Peut revenir à 3 |
+| 3 | **O27/O28/O30/O31** classées `état` | Elles mesurent un impact évolutif, pas un fait fixe. Déjà scorantes dans le legacy. | Aucun (déjà scorées) | ✅ Cosmétique |
+| 4 | **E64/E65 restent non-scorantes** | Concernent les enfants (situation scolaire). Les inclure changerait le profil V5. | V5 reste à max 6 | ✅ Peut ajouter (max→10) |
+| 5 | **E35/O24 restent non-scorantes** (V4) | Étiquetées "scorante" dans la classification mais absentes du tableau de barème legacy. | V4 reste à max 12 | ✅ Peut ajouter |
+| 6 | **Barèmes = 100% legacy** | Aucune pondération n'a été inventée. Toutes extraites du doc original Dr. Rimaud. | Fidélité maximale | — |
