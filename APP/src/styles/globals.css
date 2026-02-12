@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* =============================================
+   MONKA APP — Design Tokens
+   Source: monka.care + PRAGMA Design System
+   ============================================= */
+
+@theme {
+  /* —— Monka Brand Colors —— */
+  --color-monka-primary: #58BF94;
+  --color-monka-primary-light: #7CD4AD;
+  --color-monka-primary-dark: #3FA87A;
+  --color-monka-accent: #CFFF92;
+  --color-monka-accent-dim: rgba(207, 255, 146, 0.3);
+  --color-monka-dark: #063B26;
+  --color-monka-dark-soft: #0B3323;
+  --color-monka-bg: #F0F5F6;
+  --color-monka-text: #3B3B3B;
+  --color-monka-heading: #0A0A0A;
+  --color-monka-ui: #86C0CF;
+  --color-monka-muted: #8A9BA0;
+  --color-monka-border: rgba(88, 191, 148, 0.15);
+
+  /* —— Semantic Colors —— */
+  --color-success: #00DC82;
+  --color-warning: #F5A623;
+  --color-error: #EF4444;
+  --color-info: #58BF94;
+
+  /* —— Vulnerability Level Colors —— */
+  --color-v-green: #00DC82;
+  --color-v-yellow: #F5D245;
+  --color-v-orange: #F5A623;
+  --color-v-red: #EF4444;
+
+  /* —— Spacing —— */
+  --spacing-sidebar: 280px;
+
+  /* —— Typography —— */
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* —— Border Radius —— */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+}
+
+/* =============================================
+   BASE STYLES
+   ============================================= */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-monka-bg);
+    color: var(--color-monka-text);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-monka-heading);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.25rem; font-weight: 600; }
+}
+
+/* =============================================
+   GLASS EFFECTS (PRAGMA Design System)
+   ============================================= */
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
+  .glass-dark {
+    background: rgba(6, 59, 38, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.04),
+      0 8px 24px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.06),
+      0 16px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .gradient-monka {
+    background: linear-gradient(135deg, #58BF94 0%, #86C0CF 50%, #CFFF92 100%);
+  }
+
+  .gradient-monka-subtle {
+    background: linear-gradient(135deg, rgba(88, 191, 148, 0.08) 0%, rgba(134, 192, 207, 0.08) 50%, rgba(207, 255, 146, 0.08) 100%);
+  }
+
+  .text-gradient-monka {
+    background: linear-gradient(135deg, #58BF94, #86C0CF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* =============================================
+   SCROLLBAR STYLING
+   ============================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(88, 191, 148, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(88, 191, 148, 0.5);
+}

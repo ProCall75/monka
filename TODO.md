@@ -1,6 +1,6 @@
 # 📋 TODO — Monka Clinical Engine
 
-> **Mise à jour** : 10/02/2026  
+> **Mise à jour** : 11/02/2026  
 > **Priorité #1** : Valider la base (KERNEL + données sources) avant toute production  
 > **Source de vérité** : [`RECAP_FONDATION_MONKA.md`](KERNEL/RECAP_FONDATION_MONKA.md) (v4 FINALE — 13 règles K1→K13)
 
@@ -58,11 +58,18 @@
 
 ### 2.1 — Ingestion Supabase ✅
 
-> 4 tables créées + données ingérées.
+> 10 tables créées + données ingérées.
 
-- [x] **Ingérer `recommendations`** — 707 réponses legacy (316 avec reco, 359 avec IDEC) ✅
-- [x] **Ingérer `micro_taches`** — 299 MT typées (V1: 41 .md + V2-V5: 258 .json) ✅
-- [x] **Ingérer `scoring_questions`** — 38 questions scorantes + pondérations (V1→V5) ✅
+- [x] **Ingérer `questions`** — 165 questions (150 + 15 triggers) ✅
+- [x] **Ingérer `vulnerabilities`** — 5 vulnérabilités ✅
+- [x] **Ingérer `micro_parcours`** — 24 MP ✅
+- [x] **Ingérer `question_mp_mapping`** — liens questions↔MP ✅
+- [x] **Ingérer `activation_rules`** — 68 règles (12 critiques + 28 CCC + 28 standard) ✅
+- [x] **Ingérer `recommendations`** — 103 recos regroupées ✅
+- [x] **Ingérer `micro_taches`** — 299 MT typées ✅
+- [x] **Ingérer `scoring_questions`** — 38 questions scorantes + pondérations ✅
+- [x] **Ingérer `scoring_thresholds`** — seuils par vulnérabilité ✅
+- [x] **Ingérer `suivi_questions`** — 30 questions de suivi ✅
 
 ### 2.2 — Audit & Regroupement Recos par MP ✅
 
@@ -128,31 +135,28 @@
 
 ## 📄 PHASE 4 — Production Templates KERNEL (A→E)
 
-> Une fois les propositions validées, on produit les templates définitifs.
+> 25 fichiers templates produits (5 V × 5 templates A→E). Reste la **validation clinique** par Dr. Monka.
 
-### 4.1 — Pilote V1 (Social & Relationnel)
+### 4.1 — Pilote V1 (Social & Relationnel) ✅ PRODUIT
 
-Ordre de dépendance :
-
-- [ ] **A** — `A_activation.md` → ✅ Données prêtes (activation_rules)
-- [ ] **E** — `E_scoring.md` → Données prêtes + règle scoring validée (Phase 3.3)
-- [ ] **B** — `B_recos_variations.md` → Recos par MP × niveaux (post Phase 3.1)
-- [ ] **C** — `C_master_mt_asr.md` → MT typées + domaine + prescription + ASR (post Phase 3.2)
-- [ ] **D** — `D_suivi.md` → ✅ Données prêtes (suivi_questions)
+- [x] **A** — `V1_social_relationnel/A_activation.md` (177 lignes — 14 règles, 4 MP)
+- [x] **B** — `V1_social_relationnel/B_recos_variations.md` (265 lignes — recos × niveaux)
+- [x] **C** — `V1_social_relationnel/C_master_mt_asr.md` (177 lignes — MT typées + ASR)
+- [x] **D** — `V1_social_relationnel/D_suivi.md` (124 lignes — questions de suivi)
+- [x] **E** — `V1_social_relationnel/E_scoring.md` (139 lignes — barèmes + seuils)
 - [ ] **Validation Dr. Monka** sur V1 complète
 
-### 4.2 — Déploiement V2→V5
+### 4.2 — Déploiement V2→V5 ✅ PRODUIT
 
-> Pattern calé sur V1, on déroule.
-
-- [ ] V2 — Fragilité Proche (A→E)
-- [ ] V3 — Santé Aidant (A→E)
-- [ ] V4 — Santé Proche (A→E)
-- [ ] V5 — Administrative (A→E)
+- [x] V2 — Fragilité Proche (A→E) — 5 fichiers remplis
+- [x] V3 — Santé Aidant (A→E) — 5 fichiers remplis
+- [x] V4 — Parcours Médical (A→E) — 5 fichiers remplis
+- [x] V5 — Administratif & Juridique (A→E) — 5 fichiers remplis
+- [ ] **Validation Dr. Monka** sur V2→V5
 
 ### 4.3 — Transversaux
 
-- [ ] **E_GLOBAL** — Scoring global inter-vulnérabilités
+- [x] **E_GLOBAL** — `E_GLOBAL_scoring.md` — Scoring global inter-vulnérabilités
 - [ ] **Triggers** — `all/triggers.md`
 - [ ] **Fiches identité questions** — fiche complète par question (ID, V, MP, MT, typage, classification)
 
@@ -160,30 +164,39 @@ Ordre de dépendance :
 
 ## 🖥️ PHASE 5 — Simulateur KERNEL (Vite/React)
 
-> Tester le KERNEL en live. Remplace les simulateurs legacy HTML.
+> App React/Vite dans `APP/`. Connectée à Supabase en live. Remplace les simulateurs legacy HTML.
 
-### 5.1 — Setup
+### 5.1 — Setup ✅
 
-- [ ] Créer le projet Vite + React + TypeScript dans `SIMULATOR/`
-- [ ] Définir le schéma JSON alimenté par les templates
-- [ ] Générer les JSON depuis les templates V1
+- [x] Créer le projet Vite + React + TypeScript dans `APP/`
+- [x] Configurer Tailwind CSS + design system (couleurs Monka, glass-card, gradients)
+- [x] Connecter Supabase (client singleton `src/lib/supabase.ts`)
+- [x] Créer la couche data (`src/engine/supabaseData.ts`) — fetch 10 tables en parallèle + cache
+- [x] Hook React `useMonkaData` pour chargement avec loading/error states
 
-### 5.2 — Fonctionnalités Core
+### 5.2 — Fonctionnalités Core ✅
 
-- [ ] Questionnaire interactif (150 questions)
-- [ ] Moteur d'activation (K2/K3)
-- [ ] Affichage Recos par niveau (K1/K3/K4) + badge dynamique MP
-- [ ] Moteur MT & ASR (K9/K10/K11) + barre de progression
-- [ ] Scoring temps réel (K13)
-- [ ] Détection CCC
+- [x] Questionnaire interactif (165 questions groupées par sous-bloc)
+- [x] Moteur d'activation (évalue condition_logic en temps réel → MP actifs)
+- [x] Affichage Recos par MP + badge MP ACTIF
+- [x] Scoring temps réel (score par V + score total + seuils)
+- [x] Détection CCC (via activation_rules niveau 'ccc')
+- [x] Vue interne (6 onglets : Scoring, Activation, Recos, Règles, Tâches, Résumé)
+- [x] Vue externe — parcours utilisateur (MP → Recos → MT imbriqués)
+- [x] Labels Social / Médico-social sur les micro-tâches
+- [x] Sélection vulnérabilité (V1→V5 + ALL)
+
+### 5.3 — UX & Polish ✅
+
+- [x] Sidebar avec navigation (Simulateur, Personas, Docs, Roadmap)
+- [x] SidebarContext (margin dynamique open/pinned/collapsed)
+- [x] Design premium (glassmorphism, gradients, animations Framer Motion)
+- [x] Personas — 5 profils aidants (A1-A5) avec auto-fill simulator
+- [x] Page Docs (templates KERNEL)
+- [x] Page Roadmap (3 priorités, contexte vulgarisé)
+- [x] Délimiteurs visuels (borders, divide-y) dans toute l'app
+- [ ] Export résultats (PDF/JSON)
 - [ ] Suivi dynamique (entonnoir 3 niveaux)
-
-### 5.3 — UX & Polish
-
-- [ ] Sélection vulnérabilité (V1→V5)
-- [ ] Personas / Profils de test
-- [ ] Export résultats
-- [ ] Design premium
 
 ---
 
