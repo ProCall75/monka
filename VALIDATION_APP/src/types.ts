@@ -10,6 +10,18 @@ export interface Annotation {
     updated_at?: string;
 }
 
+export interface TodoItem {
+    id: string;
+    vulnerability: string;
+    mp_id: string;
+    section_id: string;
+    label: string;
+    checked: boolean;
+    checked_at?: string;
+    checked_by?: string;
+    created_at?: string;
+}
+
 export interface MPSection {
     id: string;
     title: string;
@@ -28,6 +40,7 @@ export interface MPData {
     id: string;
     title: string;
     subtitle: string;
+    vulnerability: string;
     questions: number;
     categories: number;
     rules: number;

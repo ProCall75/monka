@@ -3,10 +3,32 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { loadAllMPs } from './utils/parseMarkdown';
 import { supabase } from './supabaseClient';
-import type { Annotation, MPData } from './types';
+import type { Annotation, MPData, TodoItem } from './types';
 
 const ACCESS_CODE = 'monka2026';
 const ALL_MPs = loadAllMPs();
+
+// Group MPs by vulnerability
+const MP_BY_VULN: Record<string, MPData[]> = {};
+ALL_MPs.forEach((mp) => {
+    if (!MP_BY_VULN[mp.vulnerability]) MP_BY_VULN[mp.vulnerability] = [];
+    MP_BY_VULN[mp.vulnerability].push(mp);
+});
+
+const VULN_META: Record<string, { label: string; icon: string; color: string }> = {
+    V1: { label: 'Social & Relationnel', icon: '🤝', color: '#6C5CE7' },
+    V2: { label: 'Administrative', icon: '📋', color: '#fdcb6e' },
+    V3: { label: 'Santé de l\'Aidant', icon: '❤️', color: '#e17055' },
+    V4: { label: 'Fragilité du Proche', icon: '🧓', color: '#00b894' },
+    V5: { label: 'Parcours Médical', icon: '🏥', color: '#74b9ff' },
+};
+
+const MP_ICONS: Record<string, string> = {
+    R1: '🏠', R2: '🤝', R3: '👤', R4: '💬',
+    A1: '🏥', A2: '📑', A3: '⚙️', A4: '🎓',
+    S1: '😰', S2: '🔒', S3: '🩺', S4: '🏃',
+    F1: '🏡', F2: '🧑‍🤝‍🧑', F3: '🧠', F4: '💊', F5: '♿', F6: '🦽',
+};
 
 // ─── Toast Component ───
 function Toast({ message, visible }: { message: string; visible: boolean }) {
@@ -51,7 +73,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
     );
 }
 
-// ─── Decision Widget ───
+// ─── Decision Widget (Improved UX) ───
 function DecisionWidget({
     mpId,
     sectionId,
@@ -67,9 +89,15 @@ function DecisionWidget({
     annotation?: Annotation;
     onSave: (a: Partial<Annotation>) => void;
 }) {
+    const [editing, setEditing] = useState(false);
     const [showComment, setShowComment] = useState(false);
     const [comment, setComment] = useState(annotation?.comment || '');
     const status = annotation?.status || 'pending';
+    const isResolved = status === 'validated' || status === 'rejected';
+
+    useEffect(() => {
+        setComment(annotation?.comment || '');
+    }, [annotation?.comment]);
 
     const handleAction = (newStatus: 'validated' | 'rejected') => {
         if (newStatus === 'rejected' && !showComment) {
@@ -84,6 +112,8 @@ function DecisionWidget({
             comment: comment || undefined,
             reviewer: 'dr_monka',
         });
+        setEditing(false);
+        setShowComment(false);
     };
 
     const handleComment = () => {
@@ -91,13 +121,49 @@ function DecisionWidget({
             mp_id: mpId,
             section_id: sectionId,
             item_id: itemId,
-            status: 'comment',
+            status: status === 'pending' ? 'comment' : status,
             comment,
             reviewer: 'dr_monka',
         });
         setShowComment(false);
     };
 
+    // ─── Resolved state: show badge + pencil ───
+    if (isResolved && !editing) {
+        return (
+            <div className={`decision-widget ${status}`}>
+                <div className="decision-header">
+                    <span className="decision-label">{label}</span>
+                    <div className="decision-actions">
+                        <span className={`decision-resolved-badge ${status}`}>
+                            {status === 'validated' ? '✅ Validé' : '❌ Rejeté'}
+                        </span>
+                        <button
+                            className="decision-btn edit-btn"
+                            onClick={() => setEditing(true)}
+                            title="Modifier la décision"
+                        >
+                            ✏️
+                        </button>
+                    </div>
+                </div>
+                {annotation?.comment && (
+                    <div className="saved-comment">
+                        💬 {annotation.comment}
+                        <button
+                            className="edit-comment-btn"
+                            onClick={() => { setEditing(true); setShowComment(true); }}
+                            title="Modifier le commentaire"
+                        >
+                            ✏️
+                        </button>
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    // ─── Pending / editing state: show action buttons ───
     return (
         <div className={`decision-widget ${status}`}>
             <div className="decision-header">
@@ -117,6 +183,25 @@ function DecisionWidget({
                     >
                         ❌ Rejeter
                     </button>
+                    {editing && (
+                        <button
+                            className="decision-btn reset-btn"
+                            onClick={() => {
+                                onSave({
+                                    mp_id: mpId,
+                                    section_id: sectionId,
+                                    item_id: itemId,
+                                    status: 'pending',
+                                    comment: comment || undefined,
+                                    reviewer: 'dr_monka',
+                                });
+                                setEditing(false);
+                            }}
+                            title="Remettre à valider"
+                        >
+                            🔄 À valider
+                        </button>
+                    )}
                     <button
                         className="decision-btn comment-btn"
                         onClick={() => setShowComment(!showComment)}
@@ -124,9 +209,18 @@ function DecisionWidget({
                     >
                         💬
                     </button>
+                    {editing && (
+                        <button
+                            className="decision-btn cancel-btn"
+                            onClick={() => setEditing(false)}
+                            title="Annuler"
+                        >
+                            ✕
+                        </button>
+                    )}
                 </div>
             </div>
-            {(showComment || annotation?.comment) && (
+            {(showComment || (editing && annotation?.comment)) && (
                 <div className="decision-comment">
                     <textarea
                         value={comment}
@@ -139,9 +233,6 @@ function DecisionWidget({
                         </button>
                     </div>
                 </div>
-            )}
-            {annotation?.comment && !showComment && (
-                <div className="saved-comment">💬 {annotation.comment}</div>
             )}
         </div>
     );
@@ -166,15 +257,8 @@ function SectionBlock({
     const sectionAnnotations = annotations.filter(
         (a) => a.section_id === section.id
     );
-    const totalItems = section.decisionItems.length;
-    const validatedItems = sectionAnnotations.filter(
-        (a) => a.status === 'validated'
-    ).length;
-    const rejectedItems = sectionAnnotations.filter(
-        (a) => a.status === 'rejected'
-    ).length;
 
-    // Also check for "Dr. Monka" decision blocks in content
+    // Check for "Dr. Monka" decision blocks in content
     const drMonkaBlocks = section.content.match(/\*\*Décision Dr\. Monka\*\*/g);
     const hasDrMonkaDecisions = drMonkaBlocks && drMonkaBlocks.length > 0;
 
@@ -183,6 +267,27 @@ function SectionBlock({
     const hasWordingItems = wordingItems && wordingItems.length > 0;
 
     const needsReview = hasDrMonkaDecisions || hasWordingItems;
+
+    // Calculate resolved status for badge
+    const relatedAnnotations = sectionAnnotations.filter(
+        (a) => a.item_id?.startsWith(section.id)
+    );
+    const allResolved = relatedAnnotations.length > 0 &&
+        relatedAnnotations.every((a) => a.status === 'validated' || a.status === 'rejected');
+    const hasRejected = relatedAnnotations.some((a) => a.status === 'rejected');
+
+    let badgeClass = 'badge-pending';
+    let badgeText = 'À valider';
+    if (allResolved && !hasRejected) {
+        badgeClass = 'badge-done';
+        badgeText = '✅ Validé';
+    } else if (allResolved && hasRejected) {
+        badgeClass = 'badge-rejected';
+        badgeText = '❌ Rejeté';
+    } else if (relatedAnnotations.length > 0) {
+        badgeClass = 'badge-progress';
+        badgeText = 'En cours';
+    }
 
     return (
         <div className="section-block">
@@ -193,20 +298,8 @@ function SectionBlock({
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                     {needsReview && (
-                        <span className="section-badge badge-progress">
-                            À valider
-                        </span>
-                    )}
-                    {totalItems > 0 && (
-                        <span
-                            className={`section-badge ${validatedItems === totalItems && totalItems > 0
-                                    ? 'badge-done'
-                                    : rejectedItems > 0
-                                        ? 'badge-progress'
-                                        : 'badge-pending'
-                                }`}
-                        >
-                            {validatedItems}/{totalItems}
+                        <span className={`section-badge ${badgeClass}`}>
+                            {badgeText}
                         </span>
                     )}
                 </div>
@@ -218,7 +311,6 @@ function SectionBlock({
                             {section.content}
                         </ReactMarkdown>
                     </div>
-                    {/* Decision widgets for Dr. Monka items */}
                     {needsReview && (
                         <>
                             <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '1.5rem 0' }} />
@@ -268,20 +360,11 @@ function MPViewer({
     onSave: (a: Partial<Annotation>) => void;
 }) {
     const mpAnnotations = annotations.filter((a) => a.mp_id === mp.id);
-    const totalSections = mp.sections.filter(
-        (s) =>
-            s.content.includes('**Décision Dr. Monka**') ||
-            s.content.includes('| 💡 |')
-    ).length;
-    const validatedSections = mp.sections.filter((s) => {
-        const sectionAnns = mpAnnotations.filter((a) => a.section_id === s.id);
-        return sectionAnns.length > 0 && sectionAnns.every((a) => a.status === 'validated');
-    }).length;
     const rejectedCount = mpAnnotations.filter((a) => a.status === 'rejected').length;
-
     const totalDecisions = mpAnnotations.length;
     const validatedDecisions = mpAnnotations.filter((a) => a.status === 'validated').length;
     const progressPct = totalDecisions > 0 ? (validatedDecisions / totalDecisions) * 100 : 0;
+    const vulnMeta = VULN_META[mp.vulnerability] || VULN_META.V1;
 
     return (
         <div>
@@ -289,7 +372,7 @@ function MPViewer({
                 <h1>
                     <span>{mp.title}</span> — {mp.subtitle}
                 </h1>
-                <p className="mp-header-sub">V1 — Social & Relationnel</p>
+                <p className="mp-header-sub">{mp.vulnerability} — {vulnMeta.label}</p>
                 <div className="mp-stats">
                     <div className="mp-stat">
                         <span className="mp-stat-value">{mp.questions}</span>
@@ -355,16 +438,136 @@ function MPViewer({
     );
 }
 
-// ─── Dashboard ───
-function Dashboard({ annotations }: { annotations: Annotation[] }) {
-    const mpStats = ALL_MPs.map((mp) => {
-        const mpAnns = annotations.filter((a) => a.mp_id === mp.id);
-        const validated = mpAnns.filter((a) => a.status === 'validated').length;
-        const rejected = mpAnns.filter((a) => a.status === 'rejected').length;
-        const comments = mpAnns.filter((a) => a.status === 'comment').length;
-        return { mp, total: mpAnns.length, validated, rejected, comments };
-    });
+// ─── Todo Page ───
+function TodoPage({
+    todos,
+    onToggle,
+    annotations,
+}: {
+    todos: TodoItem[];
+    onToggle: (id: string, checked: boolean) => void;
+    annotations: Annotation[];
+}) {
+    const vulns = [...new Set(todos.map((t) => t.vulnerability))].sort();
 
+    return (
+        <div>
+            <div className="mp-header">
+                <h1>
+                    <span>À faire</span> — Checklist de validation
+                </h1>
+                <p className="mp-header-sub">
+                    Cochez chaque section une fois relue. Antonin suit votre avancée en temps réel.
+                </p>
+            </div>
+
+            {/* Global progress */}
+            {todos.length > 0 && (
+                <div className="progress-bar-container">
+                    <div className="progress-bar-header">
+                        <span className="progress-bar-label">Progression globale</span>
+                        <span className="progress-bar-count">
+                            {todos.filter((t) => t.checked).length}/{todos.length} cochés
+                        </span>
+                    </div>
+                    <div className="progress-bar-track">
+                        <div
+                            className="progress-bar-fill"
+                            style={{
+                                width: `${(todos.filter((t) => t.checked).length / todos.length) * 100}%`,
+                            }}
+                        />
+                    </div>
+                </div>
+            )}
+
+            {vulns.map((vuln) => {
+                const vulnTodos = todos.filter((t) => t.vulnerability === vuln);
+                const vulnMeta = VULN_META[vuln] || VULN_META.V1;
+                const mps = [...new Set(vulnTodos.map((t) => t.mp_id))].sort();
+                const checkedCount = vulnTodos.filter((t) => t.checked).length;
+
+                return (
+                    <div key={vuln} className="todo-vuln-group">
+                        <div className="todo-vuln-header">
+                            <div className="todo-vuln-title">
+                                <span className="todo-vuln-icon">{vulnMeta.icon}</span>
+                                <span>{vuln} — {vulnMeta.label}</span>
+                            </div>
+                            <span className={`section-badge ${checkedCount === vulnTodos.length ? 'badge-done' : 'badge-progress'}`}>
+                                {checkedCount}/{vulnTodos.length}
+                            </span>
+                        </div>
+
+                        {mps.map((mp) => {
+                            const mpTodos = vulnTodos.filter((t) => t.mp_id === mp);
+                            const mpAnnotations = annotations.filter((a) => a.mp_id === mp);
+                            const mpChecked = mpTodos.filter((t) => t.checked).length;
+                            const mpData = ALL_MPs.find((m) => m.id === mp);
+
+                            return (
+                                <div key={mp} className="todo-mp-group">
+                                    <div className="todo-mp-header">
+                                        <span className="todo-mp-icon">{MP_ICONS[mp] || '📄'}</span>
+                                        <span className="todo-mp-title">{mp}</span>
+                                        <span className="todo-mp-subtitle">{mpData?.subtitle || ''}</span>
+                                        <span className={`sidebar-item-badge ${mpChecked === mpTodos.length ? 'badge-done' : mpChecked > 0 ? 'badge-progress' : 'badge-pending'}`}>
+                                            {mpChecked}/{mpTodos.length}
+                                        </span>
+                                    </div>
+                                    <div className="todo-items">
+                                        {mpTodos.map((todo) => {
+                                            // Check if section has annotations
+                                            const sectionAnns = mpAnnotations.filter((a) =>
+                                                a.section_id?.includes(todo.section_id) || a.item_id?.includes(todo.section_id)
+                                            );
+                                            const hasValidated = sectionAnns.some((a) => a.status === 'validated');
+                                            const hasRejected = sectionAnns.some((a) => a.status === 'rejected');
+
+                                            return (
+                                                <label key={todo.id} className={`todo-item ${todo.checked ? 'checked' : ''}`}>
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={todo.checked}
+                                                        onChange={(e) => onToggle(todo.id, e.target.checked)}
+                                                    />
+                                                    <span className="todo-checkbox-custom" />
+                                                    <span className="todo-label">{todo.label}</span>
+                                                    {hasValidated && <span className="todo-annotation-dot validated" title="Décision validée">✅</span>}
+                                                    {hasRejected && <span className="todo-annotation-dot rejected" title="Décision rejetée">❌</span>}
+                                                    {todo.checked && todo.checked_at && (
+                                                        <span className="todo-timestamp">
+                                                            {new Date(todo.checked_at).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                                                        </span>
+                                                    )}
+                                                </label>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
+// ─── Dashboard (Improved) ───
+function Dashboard({
+    annotations,
+    todos,
+}: {
+    annotations: Annotation[];
+    todos: TodoItem[];
+}) {
+    const vulns = Object.keys(VULN_META).filter(
+        (v) => MP_BY_VULN[v] && MP_BY_VULN[v].length > 0
+    );
+
+    const totalTodos = todos.length;
+    const checkedTodos = todos.filter((t) => t.checked).length;
     const totalAnnotations = annotations.length;
     const totalValidated = annotations.filter((a) => a.status === 'validated').length;
     const totalRejected = annotations.filter((a) => a.status === 'rejected').length;
@@ -375,7 +578,7 @@ function Dashboard({ annotations }: { annotations: Annotation[] }) {
                 new Date(b.updated_at || '').getTime() -
                 new Date(a.updated_at || '').getTime()
         )
-        .slice(0, 20);
+        .slice(0, 15);
 
     return (
         <div>
@@ -384,65 +587,97 @@ function Dashboard({ annotations }: { annotations: Annotation[] }) {
                     <span>Dashboard</span> — Vue consolidée
                 </h1>
                 <p className="mp-header-sub">
-                    Suivi des annotations de Dr. Monka sur les templates V1
+                    Suivi en temps réel des retours de Dr. Monka
                 </p>
             </div>
 
-            {totalAnnotations > 0 && (
-                <div className="progress-bar-container">
-                    <div className="progress-bar-header">
-                        <span className="progress-bar-label">Progression globale</span>
-                        <span className="progress-bar-count">
-                            {totalValidated}/{totalAnnotations}
-                        </span>
-                    </div>
-                    <div className="progress-bar-track">
-                        <div
-                            className="progress-bar-fill"
-                            style={{
-                                width: `${totalAnnotations > 0
-                                        ? (totalValidated / totalAnnotations) * 100
-                                        : 0
-                                    }%`,
-                            }}
-                        />
-                    </div>
+            {/* Global stats */}
+            <div className="dashboard-global-stats">
+                <div className="dashboard-global-stat">
+                    <div className="dgs-value">{checkedTodos}</div>
+                    <div className="dgs-label">Sections relues</div>
+                    <div className="dgs-sub">sur {totalTodos}</div>
                 </div>
-            )}
-
-            <div className="dashboard-grid">
-                {mpStats.map(({ mp, total, validated, rejected, comments }) => (
-                    <div key={mp.id} className="dashboard-card">
-                        <h3>
-                            {mp.id} — {mp.subtitle}
-                        </h3>
-                        <div className="dashboard-stat-row">
-                            <span className="dashboard-stat-label">Annotations</span>
-                            <span className="dashboard-stat-value">{total}</span>
-                        </div>
-                        <div className="dashboard-stat-row">
-                            <span className="dashboard-stat-label">✅ Validés</span>
-                            <span className="dashboard-stat-value" style={{ color: 'var(--green)' }}>
-                                {validated}
-                            </span>
-                        </div>
-                        <div className="dashboard-stat-row">
-                            <span className="dashboard-stat-label">❌ Rejetés</span>
-                            <span className="dashboard-stat-value" style={{ color: 'var(--red)' }}>
-                                {rejected}
-                            </span>
-                        </div>
-                        <div className="dashboard-stat-row">
-                            <span className="dashboard-stat-label">💬 Commentaires</span>
-                            <span className="dashboard-stat-value" style={{ color: 'var(--blue)' }}>
-                                {comments}
-                            </span>
-                        </div>
+                <div className="dashboard-global-stat">
+                    <div className="dgs-value" style={{ color: 'var(--green)' }}>{totalValidated}</div>
+                    <div className="dgs-label">Décisions validées</div>
+                    <div className="dgs-sub">sur {totalAnnotations} annotations</div>
+                </div>
+                <div className="dashboard-global-stat">
+                    <div className="dgs-value" style={{ color: 'var(--red)' }}>{totalRejected}</div>
+                    <div className="dgs-label">Points rejetés</div>
+                    <div className="dgs-sub">à corriger</div>
+                </div>
+                <div className="dashboard-global-stat">
+                    <div className="dgs-value" style={{ color: 'var(--yellow)' }}>
+                        {totalTodos - checkedTodos}
                     </div>
-                ))}
+                    <div className="dgs-label">Sections restantes</div>
+                    <div className="dgs-sub">à relire</div>
+                </div>
             </div>
 
-            <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>
+            {/* Per-vulnerability progress */}
+            <h3 style={{ margin: '1.5rem 0 1rem', fontSize: '1rem' }}>Avancée par vulnérabilité</h3>
+            {vulns.map((vuln) => {
+                const vulnMeta = VULN_META[vuln];
+                const mps = MP_BY_VULN[vuln] || [];
+                const vulnTodos = todos.filter((t) => t.vulnerability === vuln);
+                const vulnChecked = vulnTodos.filter((t) => t.checked).length;
+                const vulnAnnotations = annotations.filter((a) =>
+                    mps.some((mp) => mp.id === a.mp_id)
+                );
+                const vulnValidated = vulnAnnotations.filter((a) => a.status === 'validated').length;
+                const vulnRejected = vulnAnnotations.filter((a) => a.status === 'rejected').length;
+
+                return (
+                    <div key={vuln} className="dashboard-vuln-card">
+                        <div className="dvc-header">
+                            <span className="dvc-icon">{vulnMeta.icon}</span>
+                            <div className="dvc-info">
+                                <div className="dvc-title">{vuln} — {vulnMeta.label}</div>
+                                <div className="dvc-progress-track">
+                                    <div
+                                        className="dvc-progress-fill"
+                                        style={{
+                                            width: `${vulnTodos.length > 0 ? (vulnChecked / vulnTodos.length) * 100 : 0}%`,
+                                            background: vulnMeta.color,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <span className={`section-badge ${vulnChecked === vulnTodos.length && vulnTodos.length > 0 ? 'badge-done' : 'badge-progress'}`}>
+                                {vulnChecked}/{vulnTodos.length}
+                            </span>
+                        </div>
+                        <div className="dvc-mps">
+                            {mps.map((mp) => {
+                                const mpTodos = vulnTodos.filter((t) => t.mp_id === mp.id);
+                                const mpChecked = mpTodos.filter((t) => t.checked).length;
+                                const mpAnns = vulnAnnotations.filter((a) => a.mp_id === mp.id);
+                                const mpValidated = mpAnns.filter((a) => a.status === 'validated').length;
+                                const mpRejected = mpAnns.filter((a) => a.status === 'rejected').length;
+
+                                return (
+                                    <div key={mp.id} className="dvc-mp-row">
+                                        <span className="dvc-mp-icon">{MP_ICONS[mp.id] || '📄'}</span>
+                                        <span className="dvc-mp-name">{mp.id}</span>
+                                        <span className="dvc-mp-subtitle">{mp.subtitle.slice(0, 30)}</span>
+                                        <div className="dvc-mp-badges">
+                                            <span className="dvc-mp-badge todo">{mpChecked}/{mpTodos.length} relu</span>
+                                            {mpValidated > 0 && <span className="dvc-mp-badge ok">✅ {mpValidated}</span>}
+                                            {mpRejected > 0 && <span className="dvc-mp-badge ko">❌ {mpRejected}</span>}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                );
+            })}
+
+            {/* Recent annotations */}
+            <h3 style={{ margin: '1.5rem 0 1rem', fontSize: '1rem' }}>
                 Annotations récentes
             </h3>
             {recentAnnotations.length === 0 ? (
@@ -463,7 +698,11 @@ function Dashboard({ annotations }: { annotations: Annotation[] }) {
                             </span>
                             <span className="mp-label">{a.mp_id}</span>
                             <span className="section-label">
-                                {a.section_id.replace(/_/g, ' ')}
+                                {a.section_id.replace(/_/g, ' ').replace(/section \d+/, (m) => {
+                                    const num = parseInt(m.split(' ')[1]);
+                                    const section = ALL_MPs.find((mp) => mp.id === a.mp_id)?.sections[num];
+                                    return section ? section.title.slice(0, 40) : m;
+                                })}
                             </span>
                             {a.comment && (
                                 <span className="comment-preview">{a.comment}</span>
@@ -482,33 +721,31 @@ export default function App() {
         localStorage.getItem('monka_auth') === 'true'
     );
     const [activeMp, setActiveMp] = useState<string>('R1');
-    const [activeView, setActiveView] = useState<'review' | 'dashboard'>('review');
+    const [activeView, setActiveView] = useState<'review' | 'dashboard' | 'todo'>('review');
     const [annotations, setAnnotations] = useState<Annotation[]>([]);
+    const [todos, setTodos] = useState<TodoItem[]>([]);
+    const [expandedVulns, setExpandedVulns] = useState<Record<string, boolean>>({ V1: true, V2: true, V3: true });
     const [toast, setToast] = useState<{ message: string; visible: boolean }>({
         message: '',
         visible: false,
     });
 
-    // Load annotations from Supabase
-    const loadAnnotations = useCallback(async () => {
-        const { data, error } = await supabase
-            .from('mp_annotations')
-            .select('*')
-            .order('updated_at', { ascending: false });
-        if (data && !error) {
-            setAnnotations(data);
-        }
+    // Load data from Supabase
+    const loadData = useCallback(async () => {
+        const [annResult, todoResult] = await Promise.all([
+            supabase.from('mp_annotations').select('*').order('updated_at', { ascending: false }),
+            supabase.from('mp_todos').select('*').order('created_at', { ascending: true }),
+        ]);
+        if (annResult.data) setAnnotations(annResult.data);
+        if (todoResult.data) setTodos(todoResult.data);
     }, []);
 
     useEffect(() => {
-        if (authed) {
-            loadAnnotations();
-        }
-    }, [authed, loadAnnotations]);
+        if (authed) loadData();
+    }, [authed, loadData]);
 
     // Save annotation
     const handleSave = async (partial: Partial<Annotation>) => {
-        // Check if exists
         const existing = annotations.find(
             (a) =>
                 a.mp_id === partial.mp_id &&
@@ -550,6 +787,30 @@ export default function App() {
         }
     };
 
+    // Toggle todo
+    const handleToggleTodo = async (id: string, checked: boolean) => {
+        const now = new Date().toISOString();
+        const { error } = await supabase
+            .from('mp_todos')
+            .update({
+                checked,
+                checked_at: checked ? now : null,
+                checked_by: checked ? 'dr_monka' : null,
+            })
+            .eq('id', id);
+
+        if (!error) {
+            setTodos((prev) =>
+                prev.map((t) =>
+                    t.id === id
+                        ? { ...t, checked, checked_at: checked ? now : undefined, checked_by: checked ? 'dr_monka' : undefined }
+                        : t
+                )
+            );
+            showToast(checked ? 'Section cochée ✅' : 'Section décochée');
+        }
+    };
+
     const showToast = (message: string) => {
         setToast({ message, visible: true });
         setTimeout(() => setToast({ message: '', visible: false }), 2500);
@@ -560,6 +821,7 @@ export default function App() {
     }
 
     const currentMp = ALL_MPs.find((mp) => mp.id === activeMp);
+    const todosChecked = todos.filter((t) => t.checked).length;
 
     return (
         <div className="app-layout">
@@ -568,54 +830,86 @@ export default function App() {
 
                 <div className="sidebar-subtitle">Navigation</div>
                 <div
-                    className={`sidebar-nav-link ${activeView === 'review' ? 'active' : ''}`}
-                    onClick={() => setActiveView('review')}
-                >
-                    📄 Revue des templates
-                </div>
-                <div
                     className={`sidebar-nav-link ${activeView === 'dashboard' ? 'active' : ''}`}
                     onClick={() => setActiveView('dashboard')}
                 >
                     📊 Dashboard
                 </div>
+                <div
+                    className={`sidebar-nav-link ${activeView === 'todo' ? 'active' : ''}`}
+                    onClick={() => setActiveView('todo')}
+                >
+                    ☑️ À faire
+                    {todos.length > 0 && (
+                        <span className={`sidebar-todo-badge ${todosChecked === todos.length ? 'done' : ''}`}>
+                            {todosChecked}/{todos.length}
+                        </span>
+                    )}
+                </div>
 
-                <div className="sidebar-subtitle">Templates V1</div>
-                {ALL_MPs.map((mp) => {
-                    const mpAnns = annotations.filter((a) => a.mp_id === mp.id);
-                    const validated = mpAnns.filter((a) => a.status === 'validated').length;
-                    const total = mpAnns.length;
-
+                {/* Templates grouped by vulnerability */}
+                {Object.entries(MP_BY_VULN).map(([vuln, mps]) => {
+                    const vulnMeta = VULN_META[vuln] || VULN_META.V1;
+                    const isExpanded = expandedVulns[vuln] ?? false;
+                    const vulnTodos = todos.filter((t) => mps.some((m) => m.id === t.mp_id));
+                    const vulnChecked = vulnTodos.filter((t) => t.checked).length;
+                    const vulnTotal = vulnTodos.length;
                     return (
-                        <div
-                            key={mp.id}
-                            className={`sidebar-item ${activeView === 'review' && activeMp === mp.id ? 'active' : ''
-                                }`}
-                            onClick={() => {
-                                setActiveMp(mp.id);
-                                setActiveView('review');
-                            }}
-                        >
-                            <span className="sidebar-item-icon">
-                                {mp.id === 'R1'
-                                    ? '🏠'
-                                    : mp.id === 'R2'
-                                        ? '🤝'
-                                        : mp.id === 'R3'
-                                            ? '👤'
-                                            : '💬'}
-                            </span>
-                            <div className="sidebar-item-info">
-                                <div className="sidebar-item-title">{mp.id}</div>
-                                <div className="sidebar-item-sub">{mp.subtitle}</div>
+                        <div key={vuln} className="sidebar-vuln-group">
+                            <div
+                                className="sidebar-vuln-header"
+                                onClick={() =>
+                                    setExpandedVulns((prev) => ({ ...prev, [vuln]: !prev[vuln] }))
+                                }
+                            >
+                                <div className="sidebar-vuln-left">
+                                    <span className={`sidebar-vuln-chevron ${isExpanded ? 'expanded' : ''}`}>▶</span>
+                                    <span>{vulnMeta.icon}</span>
+                                    <span className="sidebar-vuln-id">{vuln}</span>
+                                    <span className="sidebar-vuln-name">{vulnMeta.label}</span>
+                                </div>
+                                {vulnTotal > 0 && (
+                                    <span className={`sidebar-item-badge ${vulnChecked === vulnTotal ? 'badge-done' : 'badge-progress'}`}>
+                                        {vulnChecked}/{vulnTotal}
+                                    </span>
+                                )}
                             </div>
-                            {total > 0 && (
-                                <span
-                                    className={`sidebar-item-badge ${validated === total ? 'badge-done' : 'badge-progress'
-                                        }`}
-                                >
-                                    {validated}/{total}
-                                </span>
+                            {isExpanded && (
+                                <div className="sidebar-vuln-items">
+                                    {mps.map((mp) => {
+                                        const mpTodos = todos.filter((t) => t.mp_id === mp.id);
+                                        const checked = mpTodos.filter((t) => t.checked).length;
+                                        const total = mpTodos.length;
+
+                                        return (
+                                            <div
+                                                key={mp.id}
+                                                className={`sidebar-item ${activeView === 'review' && activeMp === mp.id ? 'active' : ''
+                                                    }`}
+                                                onClick={() => {
+                                                    setActiveMp(mp.id);
+                                                    setActiveView('review');
+                                                }}
+                                            >
+                                                <span className="sidebar-item-icon">
+                                                    {MP_ICONS[mp.id] || '📄'}
+                                                </span>
+                                                <div className="sidebar-item-info">
+                                                    <div className="sidebar-item-title">{mp.id}</div>
+                                                    <div className="sidebar-item-sub">{mp.subtitle}</div>
+                                                </div>
+                                                {total > 0 && (
+                                                    <span
+                                                        className={`sidebar-item-badge ${checked === total ? 'badge-done' : 'badge-progress'
+                                                            }`}
+                                                    >
+                                                        {checked}/{total}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             )}
                         </div>
                     );
@@ -624,7 +918,9 @@ export default function App() {
 
             <div className="main-content">
                 {activeView === 'dashboard' ? (
-                    <Dashboard annotations={annotations} />
+                    <Dashboard annotations={annotations} todos={todos} />
+                ) : activeView === 'todo' ? (
+                    <TodoPage todos={todos} onToggle={handleToggleTodo} annotations={annotations} />
                 ) : currentMp ? (
                     <MPViewer
                         mp={currentMp}

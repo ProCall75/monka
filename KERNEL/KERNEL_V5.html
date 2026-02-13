@@ -286,9 +286,9 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            padding: 20px 18px;
+            padding: 20px 14px;
             text-align: center;
-            min-width: 170px;
+            min-width: 140px;
             flex: 1;
             max-width: 240px;
         }
@@ -1106,7 +1106,7 @@
                 <div class="pipeline-box">
                     <div class="pipeline-box-icon">📋</div>
                     <h4>Questionnaire</h4>
-                    <p>150 questions · 15 triggers · ~30 suivi</p>
+                    <p>150 questions · 15 triggers</p>
                 </div>
                 <div class="pipeline-arrow">→</div>
                 <div class="pipeline-box active">
@@ -1120,6 +1120,7 @@
                     <h4>Sortie</h4>
                     <p>Recommandations · Micro-Tâches · Scores & Alertes</p>
                 </div>
+
             </div>
 
             <div class="principles">
@@ -1148,6 +1149,35 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 4e bloc — Questionnaire de suivi -->
+            <div style="margin-top: 20px; padding: 20px 24px; border-radius: var(--radius-sm); background: rgba(116, 185, 255, 0.04); border: 1px solid rgba(116, 185, 255, 0.25);">
+                <h4 style="font-size: 0.95rem; margin-bottom: 8px;">🔄 Questionnaire de suivi — 30 questions périodiques</h4>
+                <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">
+                    Après le parcours initial, un <strong>questionnaire de suivi</strong> est administré périodiquement pour détecter les changements de situation.
+                    Il fonctionne en <strong>entonnoir progressif à 3 niveaux</strong> :</p>
+                <div style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 8px; align-items: center;">
+                    <div style="padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(116, 185, 255, 0.08); border: 1px solid rgba(116, 185, 255, 0.15); text-align: center;">
+                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 2px;">Niveau 1</div>
+                        <div style="font-size: 0.82rem; font-weight: 700;">1 question racine</div>
+                        <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">« Y a-t-il eu des changements ? »</div>
+                    </div>
+                    <div style="font-size: 1.2rem; color: var(--text-muted);">→</div>
+                    <div style="padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(116, 185, 255, 0.08); border: 1px solid rgba(116, 185, 255, 0.15); text-align: center;">
+                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 2px;">Niveau 2</div>
+                        <div style="font-size: 0.82rem; font-weight: 700;">5 questions par V</div>
+                        <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">1 par vulnérabilité (V1–V5)</div>
+                    </div>
+                    <div style="font-size: 1.2rem; color: var(--text-muted);">→</div>
+                    <div style="padding: 10px 12px; border-radius: var(--radius-sm); background: rgba(116, 185, 255, 0.08); border: 1px solid rgba(116, 185, 255, 0.15); text-align: center;">
+                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 2px;">Niveau 3</div>
+                        <div style="font-size: 0.82rem; font-weight: 700;">24 questions par MP</div>
+                        <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Réouvrent les questions initiales ciblées</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; margin-top: 10px;">
+                    💡 Si l'aidant signale un changement au niveau V, le système <strong>descend au niveau MP</strong> et <strong>réouvre automatiquement</strong> les questions initiales concernées pour réévaluer la situation avec précision.</p>
+            </div>
         </div>
         <div class="slide-footer">
             <span class="brand">MONKA KERNEL v5</span>
@@ -1175,7 +1205,7 @@
                 <div class="glossary-item">
                     <span class="glossary-term">Question (Q)</span>
                     <span class="glossary-def"><strong>150 questions</strong> état/facteur + <strong>15
-                            triggers</strong>. Figées.</span>
+                            triggers</strong>. Versionnées.</span>
                 </div>
                 <div class="glossary-item">
                     <span class="glossary-term">Trigger</span>
@@ -1254,9 +1284,30 @@
                 </div>
                 <div class="glossary-item" style="grid-column: span 2;">
                     <span class="glossary-term">Acteurs</span>
-                    <span class="glossary-def"><strong>IDEC</strong> · Aidant (autonome) · Médecin traitant ·
-                        Psychologue · Médecin spécialiste · Professionnel de santé · AS · Service d'aide à
-                        domicile</span>
+                    <span class="glossary-def">Source : <strong>Tableau CAT validé</strong> (Sophie / Dr. Rimaud)</span>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;">
+                <div style="padding: 12px 16px; border-radius: var(--radius-sm); background: rgba(88, 191, 148, 0.04); border: 1px solid rgba(88, 191, 148, 0.2);">
+                    <h4 style="font-size: 0.82rem; margin-bottom: 6px; color: var(--success);">👤 Acteurs principaux</h4>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.6;">
+                        <strong>IDEC</strong> (89x) · Médecin traitant (38x) · Psychologue (17x) · Assistant(e) social(e) (15x) · Psychiatre (11x) · Ergothérapeute (8x) · Kinésithérapeute (7x) · Infirmier(e) libéral(e) (6x) · Gériatre (6x) · Neurologue (4x) · Aidant autonome (2x)</p>
+                </div>
+                <div style="padding: 12px 16px; border-radius: var(--radius-sm); background: rgba(116, 185, 255, 0.04); border: 1px solid rgba(116, 185, 255, 0.2);">
+                    <h4 style="font-size: 0.82rem; margin-bottom: 6px; color: var(--accent-2);">🏥 Médecins spécialistes (20+)</h4>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.6;">
+                        Ophtalmologue · ORL · Chirurgien-Dentiste · Endocrinologue · Cardiologue · Dermatologue · Gastro-entérologue · Néphrologue · Oncologue · Pneumologue · Gynécologue · Rhumatologue · Urologue · Nutritionniste · Addictologue · Diététicien · Médecin du travail</p>
+                </div>
+                <div style="padding: 12px 16px; border-radius: var(--radius-sm); background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.2);">
+                    <h4 style="font-size: 0.82rem; margin-bottom: 6px; color: var(--accent-1);">🏛️ Structures & institutions</h4>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.6;">
+                        Service d'aide à domicile · SAD (26x) · Plateforme de répit (5x) · CMP / CMPP (4x) · DAC · CPAM · CPTS · SSIAD · ESAD · Pharmacien · Centre hospitalier · Urgences</p>
+                </div>
+                <div style="padding: 12px 16px; border-radius: var(--radius-sm); background: rgba(253, 203, 110, 0.04); border: 1px solid rgba(253, 203, 110, 0.2);">
+                    <h4 style="font-size: 0.82rem; margin-bottom: 6px; color: var(--warning);">📊 Chiffres clés</h4>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.6;">
+                        <strong>~40 acteurs uniques</strong> identifiés dans le CAT · L'IDEC est acteur dans <strong>89 recommandations</strong> · Le Médecin traitant dans <strong>38</strong> · Les spécialistes sont mobilisés selon le <strong>contexte clinique</strong> du MP</p>
                 </div>
             </div>
         </div>
@@ -1349,7 +1400,9 @@
                         class="rule-desc">Niveau <strong>le plus haut</strong> s'affiche. Catégories différentes ne
                         s'absorbent <strong>jamais</strong>.</span></div>
                 <div class="rule-row"><span class="rule-id">K4</span><span class="rule-name">Prévention</span><span
-                        class="rule-desc"><strong>1 reco ⚪</strong> quand aucune règle n'a firé.</span></div>
+                        class="rule-desc">Si aucune règle d'activation ne se déclenche sur un MP, le moteur génère
+                        automatiquement <strong>1 recommandation de prévention ⚪</strong> (conseil préventif par
+                        défaut).</span></div>
             </div>
 
             <div class="bloc-header">
@@ -1478,8 +1531,8 @@
                         <h4>L'aidant répond au questionnaire</h4>
                         <p><strong>150 questions</strong> + 15 triggers. La combinaison des réponses est ce qui compte.
                         </p>
-                        <div class="step-highlight">Le questionnaire est <strong>figé</strong> — on ne modifie jamais
-                            les questions.</div>
+                        <div class="step-highlight">Le questionnaire est <strong>versionné</strong> — chaque évolution
+                            est traçable et documentée.</div>
                     </div>
                 </div>
                 <div class="step">
@@ -1606,18 +1659,18 @@
             <div class="section-label">§7 · Questionnaire</div>
             <h2>Données d'entrée</h2>
             <p class="section-desc" style="text-align: center;">Le questionnaire est la source unique de données du
-                moteur. Il est figé.</p>
+                moteur. Il est versionné et évoluera dans le temps.</p>
 
             <div class="stats-row" style="width: 100%; max-width: 700px;">
                 <div class="stat-card">
                     <div class="number">150</div>
                     <div class="label">Questions état / facteur</div>
-                    <div class="status">✅ Figées</div>
+                    <div class="status">✅ V5 actuelle</div>
                 </div>
                 <div class="stat-card">
                     <div class="number">15</div>
                     <div class="label">Triggers contextuels</div>
-                    <div class="status">✅ Figés</div>
+                    <div class="status">✅ V5 actuelle</div>
                 </div>
                 <div class="stat-card">
                     <div class="number">~30</div>
@@ -1755,54 +1808,50 @@
         <div class="slide-body">
             <div class="section-label">§8 · Réflexion Personas</div>
             <h2>5 Personas Aidants (A1–A5)</h2>
-            <p class="section-desc" style="margin-bottom: 12px;">Identifiés automatiquement via les triggers. Chaque
-                persona ajuste acteurs, délais, ressources et ton.</p>
+            <p class="section-desc" style="margin-bottom: 12px;">Identifiés <strong>uniquement via les
+                    triggers</strong>. Chaque persona ajuste acteurs, délais, ressources et ton des sorties.</p>
 
             <div class="persona-grid">
                 <div class="persona-card a1">
                     <div class="persona-id">A1</div>
                     <h4>💼 Actif Équilibré</h4>
-                    <div class="persona-criteria"><strong>N1</strong> = Salarié/Fonctionnaire · <strong>E7</strong> ≠
-                        Crise · <strong>O49</strong> ≥ 6 mois</div>
+                    <div class="persona-criteria"><strong>N1</strong> = En activité · <strong>O49</strong> ≥ 6 mois
+                    </div>
                     <div class="persona-focus">→ CPA, AJPA, Service RH, solutions compatibles travail</div>
                 </div>
                 <div class="persona-card a2">
                     <div class="persona-id">A2</div>
                     <h4>🏠 Engagé Stable</h4>
-                    <div class="persona-criteria"><strong>N1</strong> = Retraité/Sans emploi · <strong>E7</strong> ≠
-                        Crise · <strong>E2</strong> = Soutien · <strong>O49</strong> ≥ 6 mois</div>
+                    <div class="persona-criteria"><strong>N1</strong> = Retraité/Sans activité · <strong>O49</strong> ≥
+                        6 mois · <strong>O36</strong> ≥ 65 ans</div>
                     <div class="persona-focus">→ APA, PCH, associations, prévention auto-négligence</div>
                 </div>
                 <div class="persona-card a3">
                     <div class="persona-id">A3</div>
-                    <h4>🔴 En Crise</h4>
-                    <div class="persona-criteria"><strong>E7</strong> = Épuisé · OU <strong>E11</strong> = Non sûr · OU
-                        CCC santé activée</div>
-                    <div class="persona-focus">→ IDEC ≤48h, hébergement temporaire, alerte médecin, multi-acteurs</div>
+                    <h4>🟠 Fragilisé</h4>
+                    <div class="persona-criteria"><strong>E71</strong> = « Tenir physiquement » · <strong>N1</strong> ≠
+                        En activité</div>
+                    <div class="persona-focus">→ IDEC prioritaire, répit, psychologue, alerte médecin</div>
                 </div>
                 <div class="persona-card a4">
                     <div class="persona-id">A4</div>
                     <h4>🏝️ Isolé</h4>
-                    <div class="persona-criteria"><strong>E2</strong> = Personne · <strong>N4</strong> = Seul ·
-                        <strong>E7</strong> ≠ Crise
-                    </div>
+                    <div class="persona-criteria"><strong>O46</strong> = Ami/Autre · <strong>E72</strong> = Non</div>
                     <div class="persona-focus">→ Création de réseau, pairs aidants, groupes de parole</div>
                 </div>
                 <div class="persona-card a5">
                     <div class="persona-id">A5</div>
                     <h4>🌱 Découvreur</h4>
-                    <div class="persona-criteria"><strong>O49</strong> &lt; 6 mois (tous les autres critères ignorés)
-                    </div>
-                    <div class="persona-focus">→ Information prioritaire, cartographie acteurs, initiation MDPH/APA
-                    </div>
+                    <div class="persona-criteria"><strong>O49</strong> &lt; 6 mois (priorité absolue)</div>
+                    <div class="persona-focus">→ Information prioritaire, cartographie acteurs, initiation droits</div>
                 </div>
             </div>
 
             <div
                 style="margin-top: 12px; padding: 12px 18px; background: rgba(88, 191, 148, 0.06); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0;">
                 <p style="font-size: 0.78rem; color: var(--text-muted);"><strong
-                        style="color: var(--primary-light);">Arbre de décision :</strong> O49 &lt; 6 mois → A5 · Sinon
-                    E7=Épuisé/CCC → A3 · Sinon E2=Personne+N4=Oui → A4 · Sinon N1=Salarié → A1 · Sinon → A2</p>
+                        style="color: var(--primary-light);">Arbre (triggers only) :</strong> O49 &lt; 6m → A5 · Sinon
+                    N1=Actif → A1 · Sinon E71=Tenir → A3 · Sinon O46=Ami+E72=Non → A4 · Sinon → A2</p>
             </div>
         </div>
         <div class="slide-footer">
@@ -1817,22 +1866,22 @@
         <div class="slide-body">
             <div class="section-label">§8 · Réflexion Personas</div>
             <h2>5 Personas Aidés (P1–P5)</h2>
-            <p class="section-desc" style="margin-bottom: 12px;">Identifiés via N3 (situation d'aidance) + détection
-                TNC. Personnalisent les recommandations médicales.</p>
+            <p class="section-desc" style="margin-bottom: 12px;">Identifiés <strong>uniquement via les triggers</strong>
+                N3 (situation d'aidance), O1 (âge), O2 (lieu de vie) et N31 (établissement).</p>
 
             <div class="persona-grid">
                 <div class="persona-card p1">
                     <div class="persona-id">P1</div>
-                    <h4>🌿 Âgée Autonome</h4>
-                    <div class="persona-criteria"><strong>N3</strong> = Vieillissement ou maladie chronique · Autonomie
-                        préservée</div>
+                    <h4>🌿 Autonome</h4>
+                    <div class="persona-criteria"><strong>N3</strong> = Vieillissement/Chronique · <strong>O1</strong>
+                        &lt; 75 · <strong>O2</strong> ≠ Établissement</div>
                     <div class="persona-focus">→ Prévention chute, téléassistance, suivi gériatrique préventif</div>
                 </div>
                 <div class="persona-card p2">
                     <div class="persona-id">P2</div>
                     <h4>🛏️ Perte d'Autonomie</h4>
-                    <div class="persona-criteria"><strong>N3</strong> = Vieillissement ou maladie chronique · Dépendante
-                        au quotidien</div>
+                    <div class="persona-criteria"><strong>N3</strong> = Vieillissement/Chronique · <strong>O1</strong> ≥
+                        75 <strong>ou</strong> <strong>O2</strong> = Établissement</div>
                     <div class="persona-focus">→ APA, PCH, coordination intervenants, maintien domicile vs établissement
                     </div>
                 </div>
@@ -1844,9 +1893,8 @@
                 </div>
                 <div class="persona-card p4">
                     <div class="persona-id">P4</div>
-                    <h4>🧠 Troubles Psy / TNC</h4>
-                    <div class="persona-criteria"><strong>N3</strong> = Troubles psychiques · OU détection TNC
-                        (O13+N24+E26)</div>
+                    <h4>🧠 Troubles Psy</h4>
+                    <div class="persona-criteria"><strong>N3</strong> = Troubles psychiques</div>
                     <div class="persona-focus">→ Sécurité comportementale, observance, protocole de crise, CMP</div>
                 </div>
                 <div class="persona-card p5">
@@ -1860,8 +1908,8 @@
             <div
                 style="margin-top: 12px; padding: 12px 18px; background: rgba(88, 191, 148, 0.06); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0;">
                 <p style="font-size: 0.78rem; color: var(--text-muted);"><strong
-                        style="color: var(--primary-light);">Surcharge TNC :</strong> Si O13 + N24 + E26 positifs →
-                    surcharge vers P4, quel que soit le N3 initial.</p>
+                        style="color: var(--primary-light);">Arbre (triggers only) :</strong> N3 = Addictions → P5 · N3
+                    = Psy → P4 · N3 = Handicap → P3 · Sinon O1 ≥ 75 ou O2 = Établissement → P2 · Sinon → P1</p>
             </div>
         </div>
         <div class="slide-footer">
@@ -1875,61 +1923,77 @@
     <div class="slide">
         <div class="slide-body">
             <div class="section-label">§8 · Réflexion Personas</div>
-            <h2>Mécanisme d'Override Persona</h2>
-            <p class="section-desc" style="margin-bottom: 12px;">Les personas ne remplacent pas le KERNEL — ils ajoutent
-                une couche de <strong>détail clinique</strong> spécifique à chaque type d'aidance.</p>
+            <h2>Impact des Personas sur le Questionnaire</h2>
+            <p class="section-desc" style="margin-bottom: 8px;">Les personas ne remplacent pas le KERNEL — ils
+                <strong>filtrent les questions</strong> et ajoutent une couche de <strong>précision clinique</strong> en
+                sortie.
+            </p>
 
             <div class="override-diagram">
                 <div class="override-layer base">
-                    <h4>📦 Couche 1 — KERNEL BASE (identique pour tous)</h4>
-                    <p>Règles d'activation → Micro-Parcours → Recommandations → Micro-Tâches. Le détail de la base n'est
-                        pas encore listé ici.</p>
+                    <h4>📋 Questionnaire : pas 100% universel</h4>
+                    <p>Sur les 150 questions V1-V5, <strong>~115 sont communes</strong> à tous. <strong>~25 doivent être
+                            masquées</strong> selon le type d'aidance (N3) et l'âge de l'aidé (O1). <strong>~10
+                            nécessitent un rewording</strong> (termes inadaptés selon le profil).</p>
                 </div>
                 <div class="override-arrow">▼</div>
                 <div class="override-layer persona">
-                    <h4>👤 Couche 2 — OVERRIDE PERSONA (personnalisé)</h4>
-                    <p>On stocke uniquement le <strong>DELTA</strong> (ce qui change par rapport à la base). Les
-                        personas ajoutent un détail clinique pour les situations spécifiques à un persona, et vont être
-                        encore plus précis selon le type d'aidance.</p>
+                    <h4>🎯 Sorties personnalisées par persona</h4>
+                    <p>Les personas ajustent les <strong>acteurs</strong> mobilisés, le <strong>ton</strong>, les
+                        <strong>délais</strong> d'intervention et les <strong>micro-tâches</strong> spécifiques.
+                        <strong>5 × 5 = 25 combinaisons</strong> de parcours personnalisés.
+                    </p>
                 </div>
             </div>
 
-            <h2 style="font-size: 1rem; margin-bottom: 10px;">Qui override quoi ?</h2>
+            <h2 style="font-size: 0.95rem; margin-bottom: 8px;">Questions à masquer selon N3</h2>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px;">
                 <div
-                    style="padding: 18px 22px; border-radius: var(--radius-sm); background: rgba(88, 191, 148, 0.04); border: 1px solid rgba(88, 191, 148, 0.2);">
-                    <h4 style="font-size: 0.9rem; margin-bottom: 6px;">👤 Personas Aidants (A1–A5)</h4>
-                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">Viennent override le
-                        KERNEL BASE sur les vulnérabilités <strong>V1, V2 et V3</strong> (Social, Administrative, Santé
-                        de l'aidant).</p>
-                    <p style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px;">Exemple : un aidant salarié
-                        (A1) reçoit des recos intégrant droits CPA et acteurs RH sur V1 et V2.</p>
+                    style="padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(88, 191, 148, 0.04); border: 1px solid rgba(88, 191, 148, 0.2);">
+                    <h4 style="font-size: 0.78rem; margin-bottom: 2px;">👶 « Enfant »</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;"><strong>5
+                            questions</strong> (E59, E60, E64, E65, E38) — masquer si O1 &gt; 20 ans</p>
                 </div>
                 <div
-                    style="padding: 18px 22px; border-radius: var(--radius-sm); background: rgba(207, 255, 146, 0.04); border: 1px solid rgba(207, 255, 146, 0.2);">
-                    <h4 style="font-size: 0.9rem; margin-bottom: 6px;">🩺 Personas Aidés (P1–P5)</h4>
-                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">Viennent override le
-                        KERNEL BASE sur les vulnérabilités <strong>V4 et V5</strong> (Fragilité du proche, Parcours
-                        médical).</p>
-                    <p style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px;">Exemple : un aidé avec
-                        troubles psychiques (P4) active des recos sécurité comportementale et protocole de crise sur V4.
-                    </p>
+                    style="padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <h4 style="font-size: 0.78rem; margin-bottom: 2px;">🍷 Addictions</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;"><strong>7
+                            questions</strong> (N37–N40, E45, E49, E51) — masquer si N3 ≠ Addictions</p>
+                </div>
+                <div
+                    style="padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(134, 192, 207, 0.04); border: 1px solid rgba(134, 192, 207, 0.2);">
+                    <h4 style="font-size: 0.78rem; margin-bottom: 2px;">♿ Handicap</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;"><strong>3
+                            questions</strong> (N16, N17, N30) — masquer si N3 ≠ Handicap</p>
+                </div>
+                <div
+                    style="padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.2);">
+                    <h4 style="font-size: 0.78rem; margin-bottom: 2px;">🧠 Troubles psy</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;"><strong>3
+                            questions</strong> (E48, E50, N25) — masquer si N3 ≠ Psy</p>
+                </div>
+                <div
+                    style="padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(245, 166, 35, 0.04); border: 1px solid rgba(245, 166, 35, 0.2);">
+                    <h4 style="font-size: 0.78rem; margin-bottom: 2px;">👴 GIR / AGGIR</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;"><strong>4
+                            questions</strong> (O53, O54, E58, O6) — masquer si N3 ≠ Vieillissement</p>
+                </div>
+                <div
+                    style="padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(207, 255, 146, 0.04); border: 1px solid rgba(207, 255, 146, 0.2);">
+                    <h4 style="font-size: 0.78rem; margin-bottom: 2px;">✏️ Rewording</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;"><strong>~10
+                            questions</strong> mélangent ESAT, MDPH, scolaire — à reformuler selon N3</p>
                 </div>
             </div>
 
             <div
                 style="padding: 14px 20px; background: rgba(88, 191, 148, 0.06); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0;">
                 <p style="font-size: 0.78rem; color: var(--text-muted);"><strong
-                        style="color: var(--primary-light);">Principe clé :</strong> Les personas ajoutent un
-                    <strong>détail clinique</strong> adapté au profil de l'aidant et au type de pathologie du proche. Le
-                    KERNEL base reste inchangé — les overrides précisent les recos et MTs pour chaque situation
-                    spécifique. <strong>5 × 5 = 25 combinaisons possibles.</strong></p>
-            </div>
-
-            <div style="margin-top: 14px; text-align: center;">
-                <div class="footer-lock">🔒 KERNEL base inchangé — les personas ajoutent de la précision clinique,
-                    jamais de la complexité</div>
+                        style="color: var(--primary-light);">Synthèse :</strong> 77% des questions sont communes à tous.
+                    17% doivent être conditionnées par N3/O1. 6% nécessitent un rewording. Le KERNEL base reste inchangé
+                    — les personas précisent les sorties. <strong>Voir document d'analyse détaillé joint.</strong>
+                </p>
             </div>
         </div>
         <div class="slide-footer">
