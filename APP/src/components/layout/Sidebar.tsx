@@ -14,10 +14,17 @@ import {
     Users,
     Shield,
     FileQuestion,
+    LayoutDashboard,
 } from 'lucide-react'
 import { useSidebar } from './SidebarContext'
 
 const navItems = [
+    {
+        path: '/dashboard',
+        label: 'Dashboard',
+        icon: LayoutDashboard,
+        description: 'Vue d\'ensemble DB',
+    },
     {
         path: '/simulator',
         label: 'Simulateur',

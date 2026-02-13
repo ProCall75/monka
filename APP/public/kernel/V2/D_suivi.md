@@ -1,63 +1,127 @@
-# 📄 TEMPLATE D — Suivi Dynamique — V2 Fragilité du Proche
+# 📄 TEMPLATE D — Suivi Dynamique — V2 Administrative
 
-> **Vulnérabilité** : V2 — Fragilité du Proche
+> **Vulnérabilité** : V2 — Administrative
 > **Date de production** : 11/02/2026
-> **Statut** : 🟢 Données legacy
+> **Statut** : 🟢 Données legacy — certifiées
+> **Dépendance** : Template A + Template C
 
 ---
 
-## Question N2
+## Métadonnées
 
-| ID | Libellé | Source |
-|---|---|---|
-| S_V2 | Y a-t-il eu des changements concernant les fragilités de votre proche ? | Legacy ✅ |
+| Clé | Valeur |
+|---|---|
+| Vulnérabilité | V2 — Administrative |
+| Nombre de MP | 4 |
+| Questions de suivi N3 | 4 |
+| Questions initiales réouvrables | 22 |
 
 ---
 
-## Questions N3
+## Rappel — Entonnoir de suivi
 
-### MP F1 — Vie quotidienne, budget et entourage
+```
+N1 : « Des changements depuis le dernier suivi ? » → Oui/Non
+  └── OUI ↓
 
-| ID | S_F1 |
-|---|---|
-| **Libellé** | Y a-t-il eu des changements concernant : vie quotidienne, budget et entourage du proche ? |
-| **Si Oui →** | E20, E21, N10, N21, N23, N27, N9, O51 |
+N2 : « Changements dans V5 — Administratif ? » → Oui/Non
+  └── OUI ↓
 
-### MP F2 — Autonomie, aide humaine et présence
-
-| ID | S_F2 |
-|---|---|
-| **Libellé** | Y a-t-il eu des changements concernant : autonomie, aide humaine et présence nécessaire ? |
-| **Si Oui →** | E22, E23, E24, N18, N36, O8, O9 |
-
-### MP F3 — Mémoire, comportement et risques
-
-| ID | S_F3 |
-|---|---|
-| **Libellé** | Y a-t-il eu des changements concernant : mémoire, comportement et risques ? |
-| **Si Oui →** | E25, E26, E27, N19, N22, N24, N25, O13 |
-
-### MP F4 — Douleur, fatigue, sommeil et état général
-
-| ID | S_F4 |
-|---|---|
-| **Libellé** | Y a-t-il eu des changements concernant : douleur, fatigue, sommeil et état général ? |
-| **Si Oui →** | N11, N12, N13, N34, N44, O15, O22, O26, O3, O4, O5, O7 |
-
-### MP F5 — Dépendance, handicap, addictions et épisodes aigus
-
-| ID | S_F5 |
-|---|---|
-| **Libellé** | Y a-t-il eu des changements concernant : dépendance, handicap, addictions et épisodes aigus ? |
-| **Si Oui →** | E28, E29, E30, E31, N16, N30, N37, N38, N39, N40, O53, O54 |
-
-### MP F6 — Autonomie fonctionnelle, chutes et aides techniques
-
-| ID | S_F6 |
-|---|---|
-| **Libellé** | Y a-t-il eu des changements concernant : autonomie fonctionnelle, chutes et aides techniques ? |
-| **Si Oui →** | E32, E33, N32, O11, O12, O16, O51, O6 |
+N3 : 1 question par MP ci-dessous
+```
 
 ---
 
-> ✅ **100% legacy. 7 questions N3 (6 MP-spécifiques + 1 N2).**
+## Question N2 — Vulnérabilité
+
+| ID | Libellé | Réponses | Source |
+|---|---|---|---|
+| S_V5 | Y a-t-il eu des changements concernant les démarches administratives ? | Oui / Non | Legacy ✅ |
+
+---
+
+## Questions N3 — Par Micro-Parcours
+
+### MP A1 — Couverture santé et protections juridiques
+
+| Champ | Valeur |
+|---|---|
+| **Question N3 ID** | S_A1 |
+| **Libellé** | Y a-t-il eu des changements concernant : couverture santé et protections juridiques ? |
+| **Réponses** | Oui / Non |
+| **Source** | Legacy ✅ |
+
+**Si Oui → Réouverture :**
+
+| # | Question ID | Libellé | Classification |
+|---|---|---|---|
+| 1 | E21 | Maintien situation de vie sans changement ? | etat |
+| 2 | E68 | Temps consacré aux démarches administratives | facteur |
+| 3 | O23 | Couverture maladie complémentaire | facteur |
+| 4 | O45 | Mesure de protection juridique | facteur |
+
+---
+
+### MP A2 — Droits, aides et évaluation dépendance
+
+| Champ | Valeur |
+|---|---|
+| **Question N3 ID** | S_A2 |
+| **Libellé** | Y a-t-il eu des changements concernant : droits, aides et évaluation dépendance ? |
+| **Source** | Legacy ✅ |
+
+**Si Oui → Réouverture :**
+
+| # | Question ID | Libellé | Classification |
+|---|---|---|---|
+| 1 | E62 | Droits/aides demandées | facteur |
+| 2 | N29 | Aides financières reçues | facteur |
+| 3 | N42 | Prestations handicap | facteur |
+| 4 | O53 | Évaluation dépendance AGGIR | facteur |
+| 5 | O54 | Classement GIR | facteur |
+
+---
+
+### MP A3 — Charge et complexité des démarches
+
+| Champ | Valeur |
+|---|---|
+| **Question N3 ID** | S_A3 |
+| **Libellé** | Y a-t-il eu des changements concernant : charge et complexité des démarches ? |
+| **Source** | Legacy ✅ |
+
+**Si Oui → Réouverture :**
+
+| # | Question ID | Libellé | Classification |
+|---|---|---|---|
+| 1 | E61 | Directives anticipées | facteur |
+| 2 | E66 | Complexité des démarches ressentie | etat |
+| 3 | E69 | Information suffisante sur les droits | etat |
+| 4 | E70 | Renoncement à des démarches | etat |
+| 5 | N6 | Accompagnement dans les démarches | facteur |
+
+---
+
+### MP A4 — Situation scolaire/professionnelle et budget
+
+| Champ | Valeur |
+|---|---|
+| **Question N3 ID** | S_A4 |
+| **Libellé** | Y a-t-il eu des changements concernant : situation scolaire/professionnelle et budget ? |
+| **Source** | Legacy ✅ |
+
+**Si Oui → Réouverture :**
+
+| # | Question ID | Libellé | Classification |
+|---|---|---|---|
+| 1 | E63 | Situation professionnelle de l'aidant | facteur |
+| 2 | E64 | Impact financier du rôle d'aidant | etat |
+| 3 | E65 | Budget du ménage | etat |
+| 4 | E67 | Situation scolaire | facteur |
+| 5 | N5 | Revenus du ménage | facteur |
+| 6 | N43 | Aides de la mutuelle | facteur |
+| 7 | O61 | Reste à charge | facteur |
+
+---
+
+> ✅ **100% des questions de suivi V5 sont legacy.**

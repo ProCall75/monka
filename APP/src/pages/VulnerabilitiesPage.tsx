@@ -5,7 +5,7 @@ import {
     Users,
     Heart,
     Stethoscope,
-    FileText,
+    Scale,
     Activity,
     CheckCircle2,
     AlertTriangle,
@@ -16,6 +16,8 @@ import {
     List,
     BarChart3,
     Layers,
+    Trophy,
+    ListChecks,
 } from 'lucide-react'
 import { useMonkaData } from '../engine/useMonkaData'
 import type { MonkaData } from '../engine/supabaseData'
@@ -31,7 +33,7 @@ const VULN_META: Record<string, {
 }> = {
     V1: {
         label: 'V1',
-        fullName: 'Social & Relationnel',
+        fullName: 'Social et relationnel',
         icon: Users,
         color: '#58BF94',
         gradient: 'from-emerald-400 to-emerald-600',
@@ -39,39 +41,39 @@ const VULN_META: Record<string, {
     },
     V2: {
         label: 'V2',
-        fullName: 'Fragilité du Proche',
-        icon: Shield,
-        color: '#5B8DEF',
-        gradient: 'from-blue-400 to-blue-600',
-        description: 'Évaluation de la situation administrative, financière et des droits du proche aidé.'
+        fullName: 'Administrative',
+        icon: Scale,
+        color: '#86C0CF',
+        gradient: 'from-cyan-400 to-cyan-600',
+        description: 'Évaluation de la situation administrative, financière et des droits.'
     },
     V3: {
         label: 'V3',
-        fullName: 'Santé de l\'Aidant',
+        fullName: 'Santé physique et psychologique',
         icon: Heart,
-        color: '#E46B8B',
-        gradient: 'from-pink-400 to-pink-600',
+        color: '#F5A623',
+        gradient: 'from-amber-400 to-amber-600',
         description: 'Fatigue, stress, sommeil, état psychologique et physique de l\'aidant.'
     },
     V4: {
         label: 'V4',
-        fullName: 'Parcours Médical',
+        fullName: 'Fragilité du proche',
         icon: Stethoscope,
-        color: '#E48B65',
-        gradient: 'from-orange-400 to-orange-600',
+        color: '#EF4444',
+        gradient: 'from-red-400 to-red-600',
         description: 'Pathologies, traitements, autonomie et parcours de soins du proche aidé.'
     },
     V5: {
         label: 'V5',
-        fullName: 'Administratif & Juridique',
-        icon: FileText,
+        fullName: 'Parcours médical du proche',
+        icon: Target,
         color: '#7748F6',
         gradient: 'from-violet-400 to-violet-600',
         description: 'Démarches, droits, coordination des intervenants et organisation des soins.'
     },
 }
 
-type TabId = 'overview' | 'questions' | 'scoring' | 'mps' | 'rules' | 'recos'
+type TabId = 'overview' | 'questions' | 'scoring' | 'mps' | 'rules' | 'recos' | 'mts' | 'asr'
 
 function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
     const [activeTab, setActiveTab] = useState<TabId>('overview')
@@ -87,6 +89,7 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
         const thresholds = data.scoringThresholds.filter(t => t.vulnerability_id === vulnId)
         const recos = data.recommendations.filter(r => r.vulnerability_id === vulnId)
         const mts = data.microTaches.filter(mt => mt.vulnerability_id === vulnId)
+        const asrs = data.asrs.filter(a => a.vulnerability_id === vulnId)
 
         const questionsByClassification = questions.reduce((acc, q) => {
             const cls = q.classification || 'non classé'
@@ -101,7 +104,7 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
 
         const maxScore = scoring.length > 0 ? Math.max(...scoring.map(s => s.max_score_vulnerability || 0)) : 0
 
-        return { questions, mps, rules, scoring, thresholds, recos, mts, questionsByClassification, rulesByNiveau, maxScore }
+        return { questions, mps, rules, scoring, thresholds, recos, mts, asrs, questionsByClassification, rulesByNiveau, maxScore }
     }, [vulnId, data])
 
     const tabs: { id: TabId; label: string; icon: typeof Activity; count?: number }[] = [
@@ -111,6 +114,8 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
         { id: 'mps', label: 'Micro-Parcours', icon: Layers, count: stats.mps.length },
         { id: 'rules', label: 'Règles', icon: Zap, count: stats.rules.length },
         { id: 'recos', label: 'Recommandations', icon: Target, count: stats.recos.length },
+        { id: 'mts', label: 'Micro-Tâches', icon: ListChecks, count: stats.mts.length },
+        { id: 'asr', label: 'ASR', icon: Trophy, count: stats.asrs.length },
     ]
 
     return (
@@ -373,11 +378,11 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                         <table className="w-full text-xs">
                             <thead>
                                 <tr className="border-b border-monka-border bg-gray-50/80">
-                                    <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase">ID</th>
-                                    <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase">MP</th>
-                                    <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase">Niveau</th>
-                                    <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase">Questions</th>
-                                    <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase">Sens clinique</th>
+                                    <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">ID</th>
+                                    <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">MP</th>
+                                    <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Niveau</th>
+                                    <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Conditions d'activation</th>
+                                    <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Sens clinique</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -387,17 +392,44 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                         ccc: 'bg-amber-50 text-amber-600',
                                         standard: 'bg-emerald-50 text-emerald-600',
                                     }
+                                    // Parse condition_logic to show human-readable conditions
+                                    const logic = rule.condition_logic as { operator?: string; conditions?: Array<{ question_id?: string; operator?: string; value?: string; values?: string[] }> }
+                                    const conditions = logic?.conditions || []
                                     return (
-                                        <tr key={rule.id} className="border-b border-monka-border/50 hover:bg-gray-50/50">
-                                            <td className="px-4 py-2 font-mono text-monka-muted">{rule.id}</td>
-                                            <td className="px-4 py-2 font-bold" style={{ color: meta.color }}>{rule.mp_id}</td>
-                                            <td className="px-4 py-2">
+                                        <tr key={rule.id} className="border-b border-monka-border/50 hover:bg-gray-50/50 align-top">
+                                            <td className="px-3 py-2 font-mono text-monka-muted">{rule.id}</td>
+                                            <td className="px-3 py-2 font-bold" style={{ color: meta.color }}>{rule.mp_id}</td>
+                                            <td className="px-3 py-2">
                                                 <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${niveauColors[rule.niveau] || 'bg-gray-50'}`}>
                                                     {rule.niveau}
                                                 </span>
                                             </td>
-                                            <td className="px-4 py-2 font-mono text-monka-muted">{rule.question_ids?.join(', ')}</td>
-                                            <td className="px-4 py-2 text-monka-text max-w-[200px] truncate">{rule.sens_clinique || '—'}</td>
+                                            <td className="px-3 py-2 max-w-[350px]">
+                                                {conditions.length > 0 ? (
+                                                    <div className="space-y-1">
+                                                        {conditions.map((cond, i) => (
+                                                            <div key={i} className="flex items-baseline gap-1 flex-wrap">
+                                                                {i > 0 && <span className="text-[9px] text-monka-muted font-bold uppercase">{logic.operator || 'ET'}</span>}
+                                                                <span className="font-mono font-bold" style={{ color: meta.color }}>{cond.question_id}</span>
+                                                                <span className="text-monka-muted">=</span>
+                                                                {cond.values ? (
+                                                                    cond.values.map((v, j) => (
+                                                                        <span key={j}>
+                                                                            {j > 0 && <span className="text-monka-muted mx-0.5">ou</span>}
+                                                                            <span className="px-1 py-0.5 rounded bg-gray-100 text-[10px]">{v}</span>
+                                                                        </span>
+                                                                    ))
+                                                                ) : (
+                                                                    <span className="px-1 py-0.5 rounded bg-gray-100 text-[10px]">{cond.value}</span>
+                                                                )}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                ) : (
+                                                    <span className="text-monka-muted">{rule.question_ids?.join(', ')}</span>
+                                                )}
+                                            </td>
+                                            <td className="px-3 py-2 text-monka-text max-w-[200px]">{rule.sens_clinique || '—'}</td>
                                         </tr>
                                     )
                                 })}
@@ -410,6 +442,19 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                     <div className="space-y-2">
                         {stats.recos.map(reco => {
                             const recoMTs = stats.mts.filter(mt => mt.reco_id === reco.id)
+                            const contributiveMTs = recoMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type))
+                            const nonContributiveMTs = recoMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type))
+                            const niveauCls = reco.niveau === 'critique'
+                                ? 'bg-red-50 text-red-600 border-red-200'
+                                : reco.niveau === 'ccc'
+                                    ? 'bg-amber-50 text-amber-600 border-amber-200'
+                                    : reco.niveau === 'standard'
+                                        ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                                        : 'bg-gray-50 text-gray-500 border-gray-200'
+                            // Find the associated activation rule
+                            const linkedRule = reco.activation_rule_id
+                                ? stats.rules.find(r => r.id === reco.activation_rule_id)
+                                : null
                             return (
                                 <div key={reco.id} className="glass-card p-3">
                                     <div className="flex items-start gap-3">
@@ -419,20 +464,50 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                                 <span className="text-[10px] font-mono text-monka-muted">{reco.id}</span>
                                                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-monka-muted">{reco.mp_id}</span>
                                                 {reco.niveau && (
-                                                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-monka-primary/10 text-monka-primary font-medium">
+                                                    <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold ${niveauCls}`}>
                                                         {reco.niveau}
+                                                    </span>
+                                                )}
+                                                {linkedRule && (
+                                                    <span className="text-[10px] text-monka-muted italic">
+                                                        ← {linkedRule.id}
                                                     </span>
                                                 )}
                                             </div>
                                             <p className="text-xs text-monka-text leading-relaxed">{reco.texte_utilisateur}</p>
-                                            {recoMTs.length > 0 && (
-                                                <div className="mt-2 pl-3 border-l-2 space-y-1" style={{ borderColor: `${meta.color}30` }}>
-                                                    {recoMTs.map(mt => (
-                                                        <div key={mt.id} className="text-[10px] text-monka-muted flex items-center gap-1.5">
-                                                            <span className="px-1 py-0.5 rounded bg-gray-100 font-mono">{mt.type}</span>
-                                                            {mt.libelle}
-                                                        </div>
-                                                    ))}
+                                            {contributiveMTs.length > 0 && (
+                                                <div className="mt-2 pl-3 border-l-2 border-emerald-200 space-y-1">
+                                                    <span className="text-[9px] font-bold text-emerald-600 uppercase">📍 Sécurisation ({contributiveMTs.length})</span>
+                                                    {contributiveMTs.map(mt => {
+                                                        const mtColors: Record<string, string> = {
+                                                            STRUC: 'bg-blue-50 text-blue-600',
+                                                            SEC: 'bg-orange-50 text-orange-600',
+                                                            MED: 'bg-red-50 text-red-600',
+                                                        }
+                                                        return (
+                                                            <div key={mt.id} className="text-[10px] text-monka-muted flex items-center gap-1.5">
+                                                                <span className={`px-1 py-0.5 rounded font-mono font-bold ${mtColors[mt.type] || 'bg-gray-50'}`}>{mt.type}</span>
+                                                                <span className="line-clamp-1">{mt.libelle}</span>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            )}
+                                            {nonContributiveMTs.length > 0 && (
+                                                <div className="mt-1.5 pl-3 border-l-2 border-gray-200 space-y-1">
+                                                    <span className="text-[9px] font-bold text-gray-400 uppercase">💡 Amélioration ({nonContributiveMTs.length})</span>
+                                                    {nonContributiveMTs.map(mt => {
+                                                        const mtColors: Record<string, string> = {
+                                                            INFO: 'bg-green-50 text-green-600',
+                                                            ORGA: 'bg-purple-50 text-purple-600',
+                                                        }
+                                                        return (
+                                                            <div key={mt.id} className="text-[10px] text-monka-muted flex items-center gap-1.5">
+                                                                <span className={`px-1 py-0.5 rounded font-mono font-bold ${mtColors[mt.type] || 'bg-gray-50'}`}>{mt.type}</span>
+                                                                <span className="line-clamp-1">{mt.libelle}</span>
+                                                            </div>
+                                                        )
+                                                    })}
                                                 </div>
                                             )}
                                         </div>
@@ -440,6 +515,271 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                 </div>
                             )
                         })}
+                    </div>
+                )}
+
+                {activeTab === 'mts' && (
+                    <div>
+                        {/* MT summaries */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {(['STRUC', 'SEC', 'MED', 'INFO', 'ORGA'] as const).map(type => {
+                                const count = stats.mts.filter(mt => mt.type === type).length
+                                const typeColors: Record<string, string> = {
+                                    STRUC: 'bg-blue-100 text-blue-600 border-blue-200',
+                                    SEC: 'bg-orange-100 text-orange-600 border-orange-200',
+                                    MED: 'bg-red-100 text-red-600 border-red-200',
+                                    INFO: 'bg-green-100 text-green-600 border-green-200',
+                                    ORGA: 'bg-purple-100 text-purple-600 border-purple-200',
+                                }
+                                return (
+                                    <div key={type} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${typeColors[type]}`}>
+                                        {type} <span className="ml-1 opacity-70">{count}</span>
+                                    </div>
+                                )
+                            })}
+                            <div className="w-px bg-gray-200 mx-1" />
+                            {(['medical', 'medico-social'] as const).map(dom => {
+                                const count = stats.mts.filter(mt => mt.domaine === dom).length
+                                return (
+                                    <div key={dom} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${dom === 'medical' ? 'bg-rose-50 text-rose-600 border-rose-200' : 'bg-teal-50 text-teal-600 border-teal-200'
+                                        }`}>
+                                        {dom === 'medical' ? 'Médical' : 'Médico-social'} <span className="ml-1 opacity-70">{count}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+
+                        {/* MT table */}
+                        <div className="glass-card overflow-hidden">
+                            <table className="w-full text-xs">
+                                <thead>
+                                    <tr className="border-b border-monka-border bg-gray-50/80">
+                                        <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">ID</th>
+                                        <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Type</th>
+                                        <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Domaine</th>
+                                        <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Libellé</th>
+                                        <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Acteur</th>
+                                        <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">Reco</th>
+                                        <th className="text-left px-3 py-2.5 font-bold text-monka-muted uppercase">MP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {stats.mts.map(mt => {
+                                        const typeColors: Record<string, string> = {
+                                            STRUC: 'bg-blue-50 text-blue-600',
+                                            SEC: 'bg-orange-50 text-orange-600',
+                                            MED: 'bg-red-50 text-red-600',
+                                            INFO: 'bg-green-50 text-green-600',
+                                            ORGA: 'bg-purple-50 text-purple-600',
+                                        }
+                                        const reco = stats.recos.find(r => r.id === mt.reco_id)
+                                        return (
+                                            <tr key={mt.id} className="border-b border-monka-border/50 hover:bg-gray-50/50">
+                                                <td className="px-3 py-2 font-mono text-monka-muted">{mt.id}</td>
+                                                <td className="px-3 py-2">
+                                                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${typeColors[mt.type] || 'bg-gray-50'}`}>
+                                                        {mt.type}
+                                                    </span>
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    {mt.domaine && (
+                                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${mt.domaine === 'medical' ? 'bg-rose-50 text-rose-600' : 'bg-teal-50 text-teal-600'
+                                                            }`}>
+                                                            {mt.domaine === 'medical' ? 'Médical' : 'Médico-social'}
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td className="px-3 py-2 text-monka-text max-w-[300px]">
+                                                    <span className="line-clamp-2">{mt.libelle}</span>
+                                                </td>
+                                                <td className="px-3 py-2 text-monka-muted">
+                                                    {mt.acteur && (
+                                                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 font-medium text-monka-text">
+                                                            {mt.acteur}
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td className="px-3 py-2 font-mono text-monka-muted">{mt.reco_id || '—'}</td>
+                                                <td className="px-3 py-2">
+                                                    {reco?.mp_id && (
+                                                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 font-medium" style={{ color: meta.color }}>
+                                                            {reco.mp_id}
+                                                        </span>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'asr' && (
+                    <div className="space-y-4">
+                        {/* ASR header */}
+                        <div className="glass-card p-4">
+                            <h4 className="text-sm font-bold text-monka-heading mb-1">Actions Structurantes de Référence</h4>
+                            <p className="text-xs text-monka-muted">
+                                Chaque MP a un objectif (ASR) validé quand 100% des MT contributives (STRUC/SEC/MED) sont complétées.
+                                Les MT INFO/ORGA améliorent la qualité de vie mais ne contribuent pas à l'ASR.
+                            </p>
+                            <div className="flex gap-3 mt-3">
+                                <div className="flex items-center gap-1.5">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                                    <span className="text-[10px] text-monka-muted">Contributive (STRUC/SEC/MED)</span>
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                    <span className="w-2 h-2 rounded-full bg-gray-300" />
+                                    <span className="text-[10px] text-monka-muted">Non-contributive (INFO/ORGA)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Per-MP ASR cards */}
+                        {stats.mps.map(mp => {
+                            const mpRecos = stats.recos.filter(r => r.mp_id === mp.id)
+                            const mpRecoIds = mpRecos.map(r => r.id)
+                            const mpMTs = stats.mts.filter(mt => mpRecoIds.includes(mt.reco_id))
+                            const contributive = mpMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type))
+                            const nonContributive = mpMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type))
+                            const contribByType = contributive.reduce((acc, mt) => {
+                                acc[mt.type] = (acc[mt.type] || 0) + 1
+                                return acc
+                            }, {} as Record<string, number>)
+                            const nonContribByType = nonContributive.reduce((acc, mt) => {
+                                acc[mt.type] = (acc[mt.type] || 0) + 1
+                                return acc
+                            }, {} as Record<string, number>)
+
+                            // Get ASR for this MP from the dedicated table
+                            const asr = stats.asrs.find(a => a.mp_id === mp.id)
+
+                            // Get highest activation level for this MP
+                            const mpRules = stats.rules.filter(r => r.mp_id === mp.id)
+                            const hasCritique = mpRules.some(r => r.niveau === 'critique')
+                            const hasCCC = mpRules.some(r => r.niveau === 'ccc')
+                            const highest = hasCritique ? 'critique' : hasCCC ? 'ccc' : mpRules.length > 0 ? 'standard' : null
+                            const niveauBadge = highest === 'critique'
+                                ? 'bg-red-50 text-red-600 border-red-200'
+                                : highest === 'ccc'
+                                    ? 'bg-amber-50 text-amber-600 border-amber-200'
+                                    : highest === 'standard'
+                                        ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                                        : 'bg-gray-50 text-gray-400 border-gray-200'
+
+                            return (
+                                <div key={mp.id} className="glass-card p-4">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-xs font-bold px-2 py-0.5 rounded-md text-white" style={{ backgroundColor: meta.color }}>
+                                                {mp.id}
+                                            </span>
+                                            <span className="text-sm font-semibold text-monka-heading">{mp.nom}</span>
+                                            {highest && (
+                                                <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold ${niveauBadge}`}>
+                                                    {highest}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="text-xs font-bold" style={{ color: meta.color }}>
+                                                {contributive.length} contributives
+                                            </span>
+                                            <span className="text-xs text-monka-muted ml-2">
+                                                {nonContributive.length} amélioration
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* ASR Signature + Objectif from dedicated table */}
+                                    {asr && (
+                                        <div className="mb-3 p-2.5 rounded-lg border border-blue-100 bg-blue-50/50">
+                                            <div className="flex items-start gap-2">
+                                                <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">🎯 ASR</span>
+                                                <div>
+                                                    <div className="text-xs font-semibold text-blue-800">{asr.signature}</div>
+                                                    {asr.objectif && (
+                                                        <div className="text-[10px] text-blue-600 mt-0.5">{asr.objectif}</div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* ASR progress bar */}
+                                    {contributive.length > 0 ? (
+                                        <div className="mb-3">
+                                            <div className="flex items-center gap-2 mb-1.5">
+                                                <span className="text-[10px] font-bold text-monka-muted uppercase">📍 Sécurisation — MT contributives</span>
+                                            </div>
+                                            <div className="w-full h-4 bg-gray-100 rounded-full overflow-hidden flex">
+                                                {['STRUC', 'SEC', 'MED'].map(type => {
+                                                    const count = contribByType[type] || 0
+                                                    if (count === 0) return null
+                                                    const pct = (count / contributive.length) * 100
+                                                    const colors: Record<string, string> = {
+                                                        STRUC: '#3B82F6',
+                                                        SEC: '#F97316',
+                                                        MED: '#EF4444',
+                                                    }
+                                                    return (
+                                                        <div
+                                                            key={type}
+                                                            className="h-full flex items-center justify-center text-[9px] font-bold text-white"
+                                                            style={{ width: `${pct}%`, backgroundColor: colors[type] }}
+                                                            title={`${type}: ${count}`}
+                                                        >
+                                                            {count > 0 && `${type} ${count}`}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                            <div className="flex gap-2 mt-1.5">
+                                                {Object.entries(contribByType).map(([type, count]) => (
+                                                    <span key={type} className="text-[10px] text-monka-muted">
+                                                        {type}: <strong>{count}</strong>
+                                                    </span>
+                                                ))}
+                                                <span className="text-[10px] text-monka-muted ml-auto">Total: <strong>{contributive.length}</strong></span>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="mb-3 text-[10px] text-amber-500 bg-amber-50 rounded px-2 py-1">
+                                            ⚠️ Aucune MT contributive — l'ASR ne peut pas être validée
+                                        </div>
+                                    )}
+
+                                    {/* Non-contributive summary */}
+                                    {nonContributive.length > 0 && (
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1.5">
+                                                <span className="text-[10px] font-bold text-monka-muted uppercase">💡 Amélioration — MT non-contributives</span>
+                                            </div>
+                                            <div className="flex gap-2">
+                                                {Object.entries(nonContribByType).map(([type, count]) => (
+                                                    <span key={type} className={`text-[10px] px-2 py-1 rounded ${type === 'INFO' ? 'bg-green-50 text-green-600' : 'bg-purple-50 text-purple-600'}`}>
+                                                        {type}: <strong>{count}</strong>
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        })}
+
+                        {/* Summary footer */}
+                        <div className="glass-card p-3 text-center">
+                            <span className="text-xs text-monka-muted">
+                                {stats.asrs.length} ASR ({stats.mps.length} MPs)
+                                {' · '}
+                                {stats.mts.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type)).length} MT contributives total
+                                {' · '}
+                                {stats.mts.filter(mt => ['INFO', 'ORGA'].includes(mt.type)).length} MT d'amélioration
+                            </span>
+                        </div>
                     </div>
                 )}
             </div>

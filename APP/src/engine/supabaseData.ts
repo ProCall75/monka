@@ -116,6 +116,14 @@ export interface DBSuiviQuestion {
     questions_reouvertes: string[] | null
 }
 
+export interface DBASR {
+    id: string
+    mp_id: string
+    vulnerability_id: string
+    signature: string
+    objectif: string | null
+}
+
 // === Cached data store ===
 
 export interface MonkaData {
@@ -129,6 +137,7 @@ export interface MonkaData {
     recommendations: DBRecommendation[]
     microTaches: DBMicroTache[]
     suiviQuestions: DBSuiviQuestion[]
+    asrs: DBASR[]
     loaded: boolean
     loading: boolean
     error: string | null
@@ -152,6 +161,7 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         recoRes,
         mtRes,
         suiviRes,
+        asrRes,
     ] = await Promise.all([
         supabase.from('vulnerabilities').select('*').order('id'),
         supabase.from('questions').select('*').order('vulnerability_id').order('ordre_global'),
@@ -163,10 +173,11 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         supabase.from('recommendations').select('*').order('vulnerability_id').order('mp_id'),
         supabase.from('micro_taches').select('*').order('vulnerability_id'),
         supabase.from('suivi_questions').select('*').order('vulnerability_id').order('mp_id'),
+        supabase.from('asr').select('*').order('vulnerability_id').order('id'),
     ])
 
     // Check for errors
-    const errors = [vulnRes, questRes, mpRes, mappingRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes]
+    const errors = [vulnRes, questRes, mpRes, mappingRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes, asrRes]
         .map((r, i) => r.error ? `Table ${i}: ${r.error.message}` : null)
         .filter(Boolean)
 
@@ -174,7 +185,7 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         const errorData: MonkaData = {
             vulnerabilities: [], questions: [], microParcours: [], questionMPMapping: [],
             activationRules: [], scoringQuestions: [], scoringThresholds: [],
-            recommendations: [], microTaches: [], suiviQuestions: [],
+            recommendations: [], microTaches: [], suiviQuestions: [], asrs: [],
             loaded: false, loading: false, error: errors.join('; '),
         }
         return errorData
@@ -191,6 +202,7 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         recommendations: (recoRes.data || []) as DBRecommendation[],
         microTaches: (mtRes.data || []) as DBMicroTache[],
         suiviQuestions: (suiviRes.data || []) as DBSuiviQuestion[],
+        asrs: (asrRes.data || []) as DBASR[],
         loaded: true,
         loading: false,
         error: null,
@@ -214,6 +226,11 @@ export function getAllQuestions(data: MonkaData): DBQuestion[] {
 /** Get micro-parcours for a vulnerability */
 export function getMPsForVuln(data: MonkaData, v: VulnerabilityId): DBMicroParcours[] {
     return data.microParcours.filter(mp => mp.vulnerability_id === v)
+}
+
+/** Get ASRs for a vulnerability */
+export function getASRsForVuln(data: MonkaData, v: VulnerabilityId): DBASR[] {
+    return data.asrs.filter(a => a.vulnerability_id === v)
 }
 
 /** Get all MP IDs mapped to a question */

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     BookOpen,
@@ -37,21 +37,24 @@ const templates: TemplateInfo[] = [
 ]
 
 const deliverables = [
-    { id: 'recapFondation', name: 'Récap Fondation Monka', file: 'RECAP_FONDATION_MONKA.md' },
-    { id: 'roadmapValid', name: 'Roadmap Validation', file: 'ROADMAP_VALIDATION.md' },
-    { id: 'guideValidation', name: 'Guide Validation Dr. Monka', file: 'GUIDE_VALIDATION_DR_MONKA.md' },
-    { id: 'triggers', name: 'Triggers & Personas', file: 'TRIGGERS_ET_PERSONAS.md' },
-    { id: 'understanding', name: 'Understanding', file: 'UNDERSTANDING.md' },
-    { id: 'globalScoring', name: 'Scoring Global (E)', file: 'E_GLOBAL_scoring.md' },
-    { id: 'schema', name: 'Schéma Supabase', file: 'SCHEMA_SUPABASE.md' },
+    { id: 'todoValidation', name: '📋 TODO Validation Dr. Monka', file: 'TODO_VALIDATION_DR_MONKA.md', description: 'Checklist de validation V par V' },
+    { id: 'recapEvolutions', name: '🔄 Évolutions Post-Fondation', file: 'RECAP_EVOLUTIONS_POST_KERNEL.md', description: 'Tout ce qui a changé depuis le 07/02' },
+    { id: 'recapFondation', name: '📖 Récap Fondation Monka', file: 'RECAP_FONDATION_MONKA.md', description: 'Les 13 règles du KERNEL (K1-K13)' },
+    { id: 'globalScoring', name: '📊 Scoring Global', file: 'E_GLOBAL_scoring.md', description: 'Scoring inter-vulnérabilités' },
+    { id: 'triggers', name: '🎯 Triggers & Personas', file: 'TRIGGERS_ET_PERSONAS.md', description: '15 triggers + 10 personas' },
+    { id: 'raisonnement', name: '🤖 Raisonnement Enrichissements IA', file: 'RAISONNEMENT_ENRICHISSEMENT_IA.md', description: '621 propositions IA documentées' },
+    { id: 'guideValidation', name: '📝 Guide Validation Dr. Monka', file: 'GUIDE_VALIDATION_DR_MONKA.md', description: 'Mode d\'emploi par type de validation' },
+    { id: 'roadmapValid', name: '🗺️ Roadmap Validation', file: 'ROADMAP_VALIDATION.md', description: 'Plan de validation en 4 phases' },
+    { id: 'schema', name: '🗄️ Schéma Supabase', file: 'SCHEMA_SUPABASE.md', description: 'Architecture de la base de données' },
+    { id: 'understanding', name: '📚 Glossaire KERNEL', file: 'UNDERSTANDING.md', description: 'Glossaire aligné KERNEL v4' },
 ]
 
 const vLabels: Record<VKey, string> = {
-    V1: 'Social & Relationnel',
-    V2: 'Fragilité du Proche',
-    V3: 'Santé Aidant',
-    V4: 'Parcours Médical',
-    V5: 'Admin & Juridique',
+    V1: 'Social et relationnel',
+    V2: 'Administrative',
+    V3: 'Santé physique et psychologique',
+    V4: 'Fragilité du proche',
+    V5: 'Parcours médical du proche',
 }
 
 const vColors: Record<VKey, string> = {
@@ -348,9 +351,6 @@ export default function DocsPage() {
                             <button
                                 key={d.id}
                                 onClick={() => {
-                                    // Deliverables are at the KERNEL root
-                                    const path = `/kernel/../KERNEL/${d.file}`
-                                    // We'll try loading from public folder; if not found, show error
                                     loadDocument(`/kernel/${d.file}`, d.name)
                                 }}
                                 className="w-full glass-card px-5 py-4 flex items-center gap-3 text-left hover:bg-white/60 transition-all duration-200 group"
@@ -360,7 +360,7 @@ export default function DocsPage() {
                                 </div>
                                 <div className="flex-1">
                                     <h4 className="text-sm font-semibold text-monka-heading">{d.name}</h4>
-                                    <p className="text-[10px] text-monka-muted font-mono">{d.file}</p>
+                                    <p className="text-[10px] text-monka-muted">{d.description}</p>
                                 </div>
                                 <ExternalLink className="w-4 h-4 text-monka-muted group-hover:text-monka-primary transition-colors" />
                             </button>

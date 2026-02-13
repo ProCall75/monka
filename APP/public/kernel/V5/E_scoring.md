@@ -1,6 +1,6 @@
-# 📄 TEMPLATE E — Scoring — V5 Administratif & Juridique
+# 📄 TEMPLATE E — Scoring — V5 Parcours Médical du Proche
 
-> **Vulnérabilité** : V5 — Administratif & Juridique
+> **Vulnérabilité** : V5 — Parcours Médical du Proche
 > **Date de production** : 11/02/2026
 > **Statut** : 🟡 À valider par Dr. Monka — barème complet, seuils IA
 > **Règles KERNEL** : K13 (scoring indépendant de l'activation)
@@ -12,46 +12,64 @@
 
 | Clé | Valeur |
 |---|---|
-| Vulnérabilité | V5 — Administratif & Juridique |
-| Questions totales V5 | ~15 |
-| Questions scorantes | 3 |
-| Score max | 6 |
-
-> 🤖 **Décision IA — E64 et E65** : Ces deux questions sont classifiées "état" mais ne sont PAS dans le tableau de scoring legacy. J'ai décidé de **garder les 3 questions legacy** pour la stabilité. Raison : E64 et E65 concernent des enfants (situation scolaire, AESH) — les ajouter changerait le profil de scoring V5 qui cible les démarches administratives générales. Dr. Monka peut les ajouter s'il le souhaite (score max passerait de 6 à 10).
+| Vulnérabilité | V5 — Parcours Médical du Proche |
+| Questions totales V4 | ~30 |
+| Questions scorantes | 6 |
+| Score max | 12 |
 
 ---
 
 ## Barème complet — Réponse → Score
 
-### E66 — Complexité des démarches comme obstacle
+> 🤖 **Décision IA** : Pondérations extraites intégralement du legacy. Toutes les 6 questions suivent le pattern 0/1/2 à 3 niveaux.
+
+### E36 — Examens/consultations nombreux sans clarification
 
 | Réponse | Score |
 |---|---|
-| Pas du tout | **0** |
-| Un peu | **+1** |
-| Oui | **+2** |
+| Non, pas particulièrement | **0** |
+| Oui, un peu | **+1** |
+| Oui, beaucoup | **+2** |
 
-### E69 — Aisance avec les démarches en ligne
-
-| Réponse | Score |
-|---|---|
-| Oui, tout à fait | **0** |
-| Oui, mais lent / chronophage | **+1** |
-| Non, souvent perdu·e | **+2** |
-| Pas d'accès numérique | **+2** |
-
-> ⚠️ **Note** : E69 a 4 options de réponse au lieu de 3. Les deux dernières ("perdu·e" et "pas d'accès") sont toutes les deux à +2 car elles indiquent une incapacité fonctionnelle.
-
-### E70 — Démarches admin dans l'urgence
+### E37 — Avis médicaux contradictoires
 
 | Réponse | Score |
 |---|---|
-| Non, jamais | **0** |
-| Parfois | **+1** |
-| Souvent / toujours en retard | **+2** |
-| Je ne sais pas | **+1** |
+| Non | **0** |
+| Oui, parfois | **+1** |
+| Oui, souvent | **+2** |
 
-> ⚠️ **Note** : E70 a aussi 4 options. "Je ne sais pas" vaut +1 car c'est un signal d'incertitude (pas d'absence de démarches).
+### E43 — Ruptures dans le suivi médical (12 derniers mois)
+
+| Réponse | Score |
+|---|---|
+| Non | **0** |
+| Oui, une période de 3 à 6 mois | **+1** |
+| Oui, plusieurs périodes ou > 6 mois | **+2** |
+
+### E47 — Plan en cas d'aggravation
+
+| Réponse | Score |
+|---|---|
+| Oui, on sait quoi faire | **0** |
+| Quelques repères | **+1** |
+| Non, on improvise / urgences | **+2** |
+
+### E54 — Organisation des soins
+
+| Réponse | Score |
+|---|---|
+| Plutôt simple et bien organisée | **0** |
+| Gérable mais parfois compliquée | **+1** |
+| Très compliquée / ingérable | **+2** |
+
+### E57 — Plan de route clair pour la suite des soins
+
+| Réponse | Score |
+|---|---|
+| Oui, c'est clair | **0** |
+| Partiellement | **+1** |
+| Non, on avance au jour le jour | **+2** |
 
 ---
 
@@ -59,10 +77,13 @@
 
 | Question | Score max | Type |
 |---|---|---|
-| E66 | 2 | 3 niveaux |
-| E69 | 2 | 4 niveaux (2 à +2) |
-| E70 | 2 | 4 niveaux (+1 pour "ne sais pas") |
-| **TOTAL** | **6** | ✅ Conforme au legacy |
+| E36 | 2 | 3 niveaux |
+| E37 | 2 | 3 niveaux |
+| E43 | 2 | 3 niveaux |
+| E47 | 2 | 3 niveaux |
+| E54 | 2 | 3 niveaux |
+| E57 | 2 | 3 niveaux |
+| **TOTAL** | **12** | ✅ Conforme au legacy |
 
 ---
 
@@ -70,31 +91,34 @@
 
 | Niveau | Plage | % du max | Signification | Source |
 |---|---|---|---|---|
-| 🟢 Faible | 0 – 1 | 0-17% | Démarches maîtrisées | IA 🤖 |
-| 🟡 Modéré | 2 – 3 | 33-50% | Difficultés administratives émergentes | IA 🤖 |
-| 🟠 Élevé | 4 – 5 | 67-83% | Charge administrative lourde | IA 🤖 |
-| 🔴 Critique | 6 | 100% | Renoncement et décrochage administratif | IA 🤖 |
+| 🟢 Faible | 0 – 3 | 0-25% | Parcours médical structuré | IA 🤖 |
+| 🟡 Modéré | 4 – 6 | 33-50% | Parcours fragile — à clarifier | IA 🤖 |
+| 🟠 Élevé | 7 – 9 | 58-75% | Parcours désorganisé — risque de rupture | IA 🤖 |
+| 🔴 Critique | 10 – 12 | 83-100% | Parcours en rupture — intervention urgente | IA 🤖 |
 
-> 🤖 **Décision IA** : Avec seulement 3 questions et un max de 6, les seuils sont serrés. J'ai utilisé des paliers naturels. Le legacy n'avait que 3 niveaux sur une base de /20 (inapplicable ici).
+> 🤖 **Décision IA** : Legacy utilise 3 niveaux (🟢 0-4 / 🟠 5-8 / 🔴 9-12). J'ai ajouté un niveau 🟡 pour plus de granularité.
 
 ---
 
-## Questions NON scorantes — V5
+## Questions NON scorantes — V4
 
-| # | Question ID | Libellé | Classification | Pourquoi non-scorante |
+| # | Question ID | Libellé | Rôle legacy | Pourquoi non-scorante |
 |---|---|---|---|---|
-| 1 | E21 | Maintien situation de vie | déclenchante | Partagée avec V3 — score porté par V3 |
-| 2 | E61 | Directives anticipées | facteur | Statut factuel |
-| 3 | E62 | Droits/aides demandés | facteur | Listing factuel |
-| 4 | E63 | Situation professionnelle | facteur | Descriptif |
-| 5 | E64 | Impact financier / inclusion | etat | ⚠️ Potentiellement scorante (enfants) |
-| 6 | E65 | Besoin AESH / AVS | etat | ⚠️ Potentiellement scorante (enfants) |
-| 7 | E67 | Situation scolaire | facteur | Descriptif |
-| 8 | E68 | Temps démarches admin | facteur | Compteur (déclenchante) |
+| 1 | E34 | Maladie(s) du proche | descriptive | Donnée factuelle |
+| 2 | E35 | Diagnostic posé clairement | scorante (source) | ⚠️ Présent comme "scorante" dans la source mais absent du tableau de scoring |
+| 3 | E38 | Transition enfant/adulte | descriptive | Situation ponctuelle |
+| 4 | E39-E41 | Spécialistes, accès, ETP | descriptive | Listing factuel |
+| 5 | E42 | RDV non programmés | déclenchante | Active MP, pas scorée |
+| 6 | E44 | Bilan synthèse | déclenchante | Active MP, pas scorée |
+| 7 | E45-E46 | Addictologie, post-hospit | déclenchante | Active MP, pas scorée |
+| 8 | E48-E52 | Troubles psy, addiction, coord | descriptive/déclenchante | Contexte ou activation |
+| 9 | O24 | Difficulté prendre RDV | scorante (source) | ⚠️ Présent comme "scorante" dans la source mais absent du tableau de scoring |
+
+> 🤖 **Note** : E35 et O24 sont étiquetés "scorante" dans la classification typologique mais n'apparaissent PAS dans le tableau de scoring legacy. J'ai choisi de **respecter le tableau de scoring** (6 questions, max 12) plutôt que la classification. Dr. Monka peut les ajouter s'il le souhaite.
 
 ---
 
 > ⚠️ **À VALIDER PAR DR. MONKA** :
-> - E64 et E65 : doivent-elles devenir scorantes ? (impact : score max 6→10)
-> - Les seuils d'interprétation sur une base de 6 points
-> - V5 ne représente que 8% du score global — est-ce voulu ?
+> - Les seuils d'interprétation (4 niveaux vs 3 legacy)
+> - E35 et O24 : doivent-elles être scorantes ? (présentes dans la classification mais pas dans le barème)
+> - Confirmer que les pondérations legacy sont toujours d'actualité

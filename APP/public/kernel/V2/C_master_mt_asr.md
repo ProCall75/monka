@@ -1,8 +1,9 @@
-# 📄 TEMPLATE C — Master MT & ASR — V2 Fragilité du Proche
+# 📄 TEMPLATE C — Master MT & ASR — V2 Administrative
 
-> **Vulnérabilité** : V2 — Fragilité du Proche
+> **Vulnérabilité** : V2 — Administrative
 > **Date de production** : 11/02/2026
-> **Statut** : 🟡 Mixte — MTs legacy, domaine/acteur IA
+> **Statut** : 🟢 100% legacy — MTs, domaines et acteurs tous confirmés
+> **Règles KERNEL** : K9, K10, K11, K12
 > **Rôle** : SOURCE DE VÉRITÉ pour les MT
 
 ---
@@ -11,111 +12,123 @@
 
 | Clé | Valeur |
 |---|---|
-| Vulnérabilité | V2 — Fragilité du Proche |
-| Nombre de MP | 6 |
-| Nombre total de MT | 82 |
+| Vulnérabilité | V2 — Administrative |
+| Nombre de MP | 4 |
+| Nombre total de MT | 6 |
+| dont 📍 contributives (STRUC/SEC/MED) | 1 |
+| dont 💡 non-contributives (INFO/ORGA) | 5 |
 
 ### Répartition par type
 
-| Type | Catégorie | Count |
-|---|---|---|
-| MED | 📍 Sécurisation | 19 |
-| SEC | 📍 Sécurisation | 28 |
-| STRUC | 📍 Sécurisation | 5 |
-| INFO | 💡 Amélioration | 6 |
-| ORGA | 💡 Amélioration | 24 |
-
-### Répartition par MP
-
-| MP | MTs | Recos |
-|---|---|---|
-| F1 | 24 | 9 |
-| F2 | 13 | 8 |
-| F3 | 10 | 8 |
-| F4 | 17 | 10 |
-| F5 | 2 | 2 |
-| F6 | 16 | 7 |
+| Type | Code | Catégorie | Count |
+|---|---|---|---|
+| Médical | MED | 📍 Sécurisation | 0 |
+| Sécurité | SEC | 📍 Sécurisation | 1 |
+| Structurel | STRUC | 📍 Sécurisation | 0 |
+| Information | INFO | 💡 Amélioration | 4 |
+| Organisationnel | ORGA | 💡 Amélioration | 1 |
 
 ---
 
-## Résumé MT par Reco (source de vérité)
+## MP A1 — Couverture santé et protections juridiques
 
-> Chaque ligne groupe les MT par reco et type. Les MTs contributives (📍) sont MED, SEC, STRUC. Les non-contributives (💡) sont INFO, ORGA.
+### 🏆 ASR
 
-### MP F1 — Vie quotidienne (24 MTs)
+> « Sécuriser couverture santé et protections juridiques »
+> **Signature A** : A1-A — Couverture santé active | **Signature B** : A1-B — Protection juridique en place
 
-| Reco | Type | Count | MT IDs |
-|---|---|---|---|
-| F1_RECO_02 | 💡 ORGA | 5 | MT_V2_034, 036, 039, 041, 044 |
-| F1_RECO_02 | 📍 STRUC | 1 | MT_V2_079 |
-| F1_RECO_03 | 💡 ORGA | 2 | MT_V2_032, 037 |
-| F1_RECO_03 | 📍 SEC | 2 | MT_V2_004, 020 |
-| F1_RECO_03 | 📍 STRUC | 1 | MT_V2_080 |
-| F1_RECO_04 | 💡 INFO | 1 | MT_V2_072 |
-| F1_RECO_04 | 📍 SEC | 2 | MT_V2_006, 010 |
-| F1_RECO_05 | 📍 MED | 2 | MT_V2_050, 068 |
-| F1_RECO_05 | 📍 SEC | 2 | MT_V2_025, 027 |
-| F1_RECO_06 | 📍 SEC | 2 | MT_V2_016, 024 |
-| F1_RECO_07 | 📍 STRUC | 1 | MT_V2_082 |
-| F1_RECO_08 | 💡 INFO | 2 | MT_V2_074, 076 |
-| F1_RECO_09 | 💡 ORGA | 1 | MT_V2_030 |
+### 📍 MT Contributives — Actions de Sécurisation
 
-### MP F2 — Autonomie (13 MTs)
+| # | MT_ID | Libellé | Type | Acteur | Domaine | Reco | Source |
+|---|---|---|---|---|---|---|---|
+| 1 | MT_V5_006 | Accompagner la constitution d'un dossier MDPH | SEC | IDEC | 🤝 Médico-social | A1_RECO_01 | Legacy ✅ |
 
-| Reco | Type | Count | MT IDs |
-|---|---|---|---|
-| F2_RECO_01 | 💡 INFO | 1 | MT_V2_073 |
-| F2_RECO_01 | 💡 ORGA | 2 | MT_V2_031, 043 |
-| F2_RECO_01 | 📍 SEC | 2 | MT_V2_008, 013 |
-| F2_RECO_02 | 📍 STRUC | 1 | MT_V2_078 |
-| F2_RECO_03 | 💡 ORGA | 3 | MT_V2_035, 038, 047 |
-| F2_RECO_03 | 📍 SEC | 1 | MT_V2_014 |
-| F2_RECO_05 | 📍 MED | 1 | MT_V2_065 |
-| F2_RECO_05 | 📍 STRUC | 1 | MT_V2_081 |
-| F2_RECO_07 | 📍 MED | 1 | MT_V2_069 |
+**Condition de validation** : 1 MT contributive → 100% = **ASR validée** ✅
 
-### MP F3 — Mémoire et risques (10 MTs)
+### 💡 MT Non-Contributives — Actions d'Amélioration
 
-| Reco | Type | Count | MT IDs |
-|---|---|---|---|
-| F3_RECO_03 | 💡 INFO | 1 | MT_V2_075 |
-| F3_RECO_03 | 💡 ORGA | 3 | MT_V2_040, 042, 045 |
-| F3_RECO_06 | 📍 MED | 1 | MT_V2_061 |
-| F3_RECO_07 | 📍 MED | 1 | MT_V2_059 |
-| F3_RECO_08 | 📍 MED | 3 | MT_V2_056, 062, 067 |
+| # | MT_ID | Libellé | Type | Acteur | Domaine | Reco | Source |
+|---|---|---|---|---|---|---|---|
+| 1 | MT_V5_005 | Informer la famille sur les démarches possibles | INFO | Aidant (autonome) | 🤝 Médico-social | A1_RECO_01 | Legacy ✅ |
+| 2 | MT_V5_001 | Évaluer les difficultés rencontrées avec la famille | ORGA | IDEC | 🤝 Médico-social | A1_RECO_01 | Legacy ✅ |
 
-### MP F4 — Douleur et état général (17 MTs)
-
-| Reco | Type | Count | MT IDs |
-|---|---|---|---|
-| F4_RECO_01 | 📍 MED | 1 | MT_V2_049 |
-| F4_RECO_02 | 📍 MED | 3 | MT_V2_057, 058, 063 |
-| F4_RECO_04 | 📍 MED | 1 | MT_V2_054 |
-| F4_RECO_04 | 📍 SEC | 1 | MT_V2_009 |
-| F4_RECO_06 | 📍 SEC | 3 | MT_V2_017, 022, 028 |
-| F4_RECO_07 | 📍 MED | 1 | MT_V2_064 |
-| F4_RECO_08 | 📍 MED | 1 | MT_V2_052 |
-| F4_RECO_09 | 📍 MED | 3 | MT_V2_051, 053, 070 |
-| F4_RECO_10 | 📍 SEC | 1 | MT_V2_003 |
-
-### MP F5 — Dépendance et addictions (2 MTs)
-
-| Reco | Type | Count | MT IDs |
-|---|---|---|---|
-| F5_RECO_01 | 📍 SEC | 1 | MT_V2_011 |
-| F5_RECO_02 | 💡 INFO | 1 | MT_V2_077 |
-
-### MP F6 — Autonomie fonctionnelle (16 MTs)
-
-| Reco | Type | Count | MT IDs |
-|---|---|---|---|
-| F6_RECO_01 | 💡 ORGA | 2 | MT_V2_033, 046 |
-| F6_RECO_02 | 📍 MED | 1 | MT_V2_066 |
-| F6_RECO_03 | 📍 MED | 2 | MT_V2_060, 071 |
-| F6_RECO_04 | 📍 MED | 1 | MT_V2_048 |
-| F6_RECO_05 | 📍 SEC | 12 | MT_V2_001-029 (12 suivis pathologies) |
-| F6_RECO_07 | 📍 MED | 1 | MT_V2_055 |
+### Question de suivi N3
+> **ID** : S_A1 | **Libellé** : « Y a-t-il eu des changements concernant : couverture santé et protections juridiques ? »
+> **Si Oui →** réouvre : E21, E68, O23, O45
 
 ---
 
-> ⚠️ **À VALIDER PAR DR. MONKA** : domaine et acteur de chaque MT (propositions IA)
+## MP A2 — Droits, aides et évaluation dépendance
+
+### 🏆 ASR
+
+> « Identifier et activer les droits mobilisables »
+> **Signature A** : A2-A — Aide financière active | **Signature B** : A2-B — Aide humaine en cours
+
+### 📍 MT Contributives
+
+*Aucune MT pour ce MP.*
+
+> ⚠️ **MP A2** : aucune MT rattachée. La reco A2_RECO_01 (APA) n'est associée à aucune micro-tâche.
+
+### Question de suivi N3
+> **ID** : S_A2 | **Libellé** : « Y a-t-il eu des changements concernant : droits, aides et évaluation dépendance ? »
+> **Si Oui →** réouvre : E62, N29, N42, O53, O54
+
+---
+
+## MP A3 — Charge et complexité des démarches
+
+### 🏆 ASR
+
+> « Réduire la charge mentale administrative »
+> **Signature A** : A3-A — Aide extérieure à la gestion | **Signature B** : A3-B — Organisation admin stabilisée
+
+### 📍 MT Contributives
+
+*Aucune MT pour ce MP.*
+
+> ⚠️ **MP A3** : aucune MT rattachée. La reco A3_RECO_01 (protections juridiques) n'est associée à aucune micro-tâche.
+
+### Question de suivi N3
+> **ID** : S_A3 | **Libellé** : « Y a-t-il eu des changements concernant : charge et complexité des démarches ? »
+> **Si Oui →** réouvre : E61, E66, E69, E70, N6
+
+---
+
+## MP A4 — Situation scolaire/professionnelle et budget
+
+### 🏆 ASR
+
+> « Sécuriser la situation financière et professionnelle »
+> **Signature A** : A4-A — Budget stabilisé | **Signature B** : A4-B — Ressources complémentaires identifiées
+
+### 📍 MT Contributives
+
+*Aucune MT contributive pour ce MP.*
+
+### 💡 MT Non-Contributives — Actions d'Amélioration
+
+| # | MT_ID | Libellé | Type | Acteur | Domaine | Reco | Source |
+|---|---|---|---|---|---|---|---|
+| 1 | MT_V5_002 | Rappeler à l'aidant de contacter l'AS | INFO | IDEC | 🤝 Médico-social | A4_RECO_02 | Legacy ✅ |
+| 2 | MT_V5_003 | Rappeler à l'aidant de contacter l'AS pour demande de protection | INFO | IDEC | 🤝 Médico-social | A4_RECO_02 | Legacy ✅ |
+| 3 | MT_V5_004 | Informer l'aidant sur les possibilités de financement via la mutuelle | INFO | Aidant (autonome) | 🤝 Médico-social | A4_RECO_02 | Legacy ✅ |
+
+> ⚠️ **MP A4** : uniquement des MTs INFO (non-contributives). L'ASR ne peut pas être validée par des MTs.
+
+### Question de suivi N3
+> **ID** : S_A4 | **Libellé** : « Y a-t-il eu des changements concernant : situation scolaire/professionnelle et budget ? »
+> **Si Oui →** réouvre : E63, E64, E65, E67, N43, N5, O61
+
+---
+
+## Légende
+
+| Badge | Signification |
+|---|---|
+| Legacy ✅ | MT et libellé issus du CAT Excel — validés |
+
+> ✅ **100% des MTs V5 sont legacy** — y compris acteurs et domaines (aucune proposition IA pour V5).
+> 
+> ⚠️ **Points d'attention** : MPs A2 et A3 n'ont aucune MT rattachée. MP A4 n'a que des MTs INFO, rendant l'ASR non validable.

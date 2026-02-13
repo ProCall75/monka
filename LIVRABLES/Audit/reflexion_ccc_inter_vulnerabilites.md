@@ -1,9 +1,9 @@
 # 🧠 Réflexion : Les CCC Peuvent-Elles Traverser les Vulnérabilités ?
 
-> **Date** : 09/02/2026  
+> **Date** : 09/02/2026 — **Annoté le 12/02/2026**  
 > **Pour** : Dr. Benjamin Rumaud  
 > **Par** : Antonin Rumaud (analyse clinique + produit/tech)  
-> **Statut** : 📋 Document de réflexion — à discuter ensemble  
+> **Statut** : ✅ **VALIDÉ** par Dr. Monka (12/02) — Combos inter-V + règles d'activation 3 MPs manquants  
 > **Contexte** : Nous avons injecté 68 règles d'activation dans Monka. Ce document pose la question : faut-il aller plus loin en créant des combinaisons **entre** vulnérabilités ?
 
 ---
@@ -77,7 +77,7 @@ L'épuisement seul est gérable **si l'aidant a un réseau** (famille, amis, voi
 **Intérêt clinique : ⭐⭐⭐⭐⭐**  
 Ni l'un ni l'autre MP seul ne capte la **gravité de la combinaison**. C'est ce qu'on appelle en gériatrie une « cascade de fragilité » : chaque élément aggrave l'autre dans un cercle vicieux.
 
-> 💬 **Question pour Dr. Monka** : Ce combo devrait-il déclencher un signal d'urgence spécifique (ex : alerte IDEC prioritaire), ou l'activation séparée des deux MP suffit-elle ?
+> ✅ **Retour Dr. Monka (12/02)** : **CCC à créer.** Signal d'urgence spécifique confirmé. Les deux MPs se déclenchent déjà de manière standard séparément — la CCC sert à élever le signal quand les deux coexistent.
 
 ---
 
@@ -100,7 +100,7 @@ Le renoncement aux soins prend une dimension critique quand il est **contraint, 
 **Intérêt clinique : ⭐⭐⭐⭐**  
 Cette combinaison **change la nature de la recommandation**, pas juste sa priorité. C'est ça qui la rend intéressante.
 
-> 💬 **Question** : Est-ce que ce phénomène (renoncement contraint) est fréquent dans votre expérience clinique ? Mérite-t-il un traitement distinct ?
+> ✅ **Retour Dr. Monka (12/02)** : **CCC à valider.** Confirmé comme pertinent. Cependant, la formulation « quand des signes de renoncement apparaissent » est une **interprétation**, pas une réponse directe à la question *« Sur le plan moral… »*. Il faut identifier la question exacte qui capture le renoncement aux soins (probablement en V3 Santé de l'aidant) pour construire une CCC propre basée sur des questions standard/déclenchantes.
 
 ---
 
@@ -123,7 +123,9 @@ Un parcours médical compliqué est **gérable avec les bons droits** (APA, PCH,
 **Intérêt clinique : ⭐⭐⭐⭐**  
 Mais une nuance : ce croisement **existe déjà partiellement** via la question pivot mentionnée plus haut.
 
-> 💬 **Question** : Le fait que l'activation séparée existe déjà rend-il ce combo redondant, ou le formaliser ajouterait-il de la valeur ?
+> **Clarification (12/02)** : La « question pivot » mentionnée est celle de la section 1 (ligne 43) : *« Pensez-vous qu'il sera possible de maintenir cette situation de vie sans changement majeur ? »*. Quand l'aidant répond « Non » ou « Je ne sais pas », cette question active déjà des MPs dans Fragilité du proche ET Dimension administrative — créant un pont multi-V implicite. Le Combo 3 formaliserait ce lien, mais la couverture partielle existe déjà.
+>
+> 🟡 **À discuter** — potentiellement redondant avec la question pivot.
 
 ---
 
@@ -146,7 +148,7 @@ La question sur les comportements dangereux déclenche **déjà une alerte criti
 **Intérêt clinique : ⭐⭐⭐⭐⭐**  
 La dangerosité du proche + l'incapacité de l'aidant à y répondre = situation d'urgence maximale.
 
-> 💬 **Question** : Ce combo devrait-il créer un **signal au-dessus du critique** (urgence absolue nécessitant une intervention immédiate), ou l'activation critique du MP « Mémoire, comportement et risques » suffit-elle ?
+> ✅ **Retour Dr. Monka (12/02)** : **CCC confirmée — mais le sujet dépasse l'activation.** Le questionnement ici est au niveau **produit** : il faut un combo CCC critique qui remonte dans le **CRM Lifelink de Monka** pour informer de l'urgence. C'est donc un point KERNEL + Produit sur comment faire apparaître cette urgence dans le système. → **Décision P6** ajoutée au TODO_VALIDATION.
 
 ---
 
@@ -166,6 +168,8 @@ La dangerosité du proche + l'incapacité de l'aidant à y répondre = situation
 L'isolement est plus préoccupant quand aucun professionnel ne compense le manque de réseau familial. Mais les deux MP s'activent **déjà séparément** — pas sûr que la combinaison apporte une valeur clinique distincte.
 
 > ❌ **Verdict** : Probablement **pas nécessaire** — les MP séparés couvrent le besoin.
+>
+> ❌ **Validé Dr. Monka (12/02)** : Confirmé — pas de CCC nécessaire.
 
 ---
 
@@ -181,19 +185,21 @@ L'isolement est plus préoccupant quand aucun professionnel ne compense le manqu
 L'administratif est souvent un facteur d'épuisement sous-estimé. Mais la recommandation serait identique : alléger la charge. L'ajout d'une CCC ne changerait **pas l'action proposée**.
 
 > ❌ **Verdict** : **Pas nécessaire** — la reco est la même avec ou sans la CCC.
+>
+> ❌ **Validé Dr. Monka (12/02)** : Confirmé — pas de CCC nécessaire.
 
 ---
 
 ## 3. Synthèse : Quelles Combinaisons Valent le Coup ?
 
-| Combo | Résumé | Change la recommandation ? | Verdict |
-|---|---|---|---|
-| **1. Épuisé + Personne sur qui compter** | Rupture imminente sans filet | **Oui** — alerte urgente spécifique | ✅ **À implémenter** |
-| **2. Renonce à ses soins + proche non autonome** | Sacrifice contraint | **Oui** — reco différente (relais, pas juste "consultez") | ✅ **À implémenter** |
-| **3. Soins chaotiques + pas de droits** | Impuissance administrative | Modérément — existe déjà en partie | 🟡 **À discuter** |
-| **4. Proche dangereux + aidant épuisé** | Danger bidirectionnel | **Oui** — urgence maximale | ✅ **À implémenter** |
-| **5. Isolement + pas de coordination** | Couvert par MP séparés | Non | ❌ Pas nécessaire |
-| **6. Admin lourde + épuisement** | Même reco de toute façon | Non | ❌ Pas nécessaire |
+| Combo | Résumé | Change la reco ? | Verdict | Dr. Monka (12/02) |
+|---|---|---|---|---|
+| **1. Épuisé + Personne sur qui compter** | Rupture imminente sans filet | **Oui** — alerte urgente | ✅ À implémenter | ✅ **CCC confirmée** |
+| **2. Renonce à ses soins + proche non autonome** | Sacrifice contraint | **Oui** — reco différente | ✅ À implémenter | ✅ **CCC à valider** (préciser la question) |
+| **3. Soins chaotiques + pas de droits** | Impuissance administrative | Modérément | 🟡 À discuter | 🟡 Partiellement couvert par question pivot |
+| **4. Proche dangereux + aidant épuisé** | Danger bidirectionnel | **Oui** — urgence max | ✅ À implémenter | ✅ **CCC + signal produit P6** |
+| **5. Isolement + pas de coordination** | Couvert par MP séparés | Non | ❌ | ❌ **Rejeté Dr. Monka** |
+| **6. Admin lourde + épuisement** | Même reco de toute façon | Non | ❌ | ❌ **Rejeté Dr. Monka** |
 
 **Critère de sélection** : Une CCC inter-vulnérabilité ne vaut le coup **que si elle change la recommandation** ou révèle un risque **que les MP séparés ne captent pas**.
 
@@ -270,9 +276,11 @@ La bonne nouvelle : **on n'a pas besoin de créer de nouvelles questions**. Chac
 | 🟢 **Standard** | *« A-t-elle chuté ? »* = « Oui sans gravité » | Une chute même bénigne signale un risque → mérite un accompagnement sous 90 jours |
 | 🟢 **Standard** | *« A-t-elle des difficultés à se lever ? »* = « Oui » | Perte d'autonomie physique installée |
 | 🟠 **CCC** | *« A-t-elle chuté ? »* = « Oui avec complication ou plusieurs fois » **ET** *« Aucune aide technique en place »* | Chutes graves OU répétées **sans** équipement de protection = situation à risque de chute grave |
-| 🟠 **CCC** | *« Peut-elle se nourrir ? »* = « Non » **ET** *« Est-elle incontinente ? »* = « Oui » | Cumul de pertes d'autonomie fondamentales = dépendance fonctionnelle lourde nécessitant un bilan |
+| 🟠 **CCC** | *« Peut-elle se nourrir ? »* = « Non » **ET** *« Est-elle incontinente ? »* = « Oui » | Cumul de pertes d'autonomie fondamentales = dépendance fonctionnelle lourde |
 
-> 💬 **Question Dr. Monka** : La chute avec complication doit-elle être en 🔴 critique (risque immédiat de récidive grave) ou en 🟠 CCC est-il suffisant ?
+> ✅ **Retour Dr. Monka (12/02)** :
+> - **Chute** : 🟠 CCC suffisant. Pas de 🔴 critique car pas d'accès à la temporalité dans les questions → impossible de juger si bilan IDEC urgent.
+> - **Nutrition + incontinence** : 🟠 CCC maintenu. Le bilan ne changera pas grand-chose car la personne est déjà fragile — ce n'est pas une situation nouvelle nécessitant une urgence de prise en charge.
 
 ---
 
@@ -300,7 +308,7 @@ La bonne nouvelle : **on n'a pas besoin de créer de nouvelles questions**. Chac
 | 🟠 **CCC** | *« Plan de route ? »* = « Non, on avance au jour le jour » **ET** *« Organisation des soins ? »* = « Souvent très compliquée » ou « Ingérable » | Aucun cap ET complexité élevée = le proche navigue à vue dans un parcours chaotique |
 | 🟢 **Standard** | *« Enfant orienté vers structure TND ? »* = « Non, personne ne nous en a parlé » | Besoin non identifié par les professionnels = risque de retard de prise en charge |
 
-> 💬 **Question Dr. Monka** : Faut-il distinguer les situations « adulte/personne âgée » (évaluation gériatrique) et « enfant » (TND) dans deux règles séparées, ou une seule règle suffit-elle ?
+> ✅ **Retour Dr. Monka (12/02)** : Pas de distinction enfant/adulte pour l'instant. La différenciation viendra ultérieurement avec l'introduction des **personas** (aidants et aidés). On garde la base unifiée couvrant tous les profils.
 
 ---
 
@@ -330,7 +338,7 @@ La bonne nouvelle : **on n'a pas besoin de créer de nouvelles questions**. Chac
 | 🟠 **CCC** | *« Moyens financiers ? »* = « Non » **ET** *« Accompagnement admin ? »* = « Aucun » | Pas d'argent ET pas d'aide pour savoir quoi demander = isolement administratif total |
 | 🟢 **Standard** | *« Activité adaptée ? »* = « Non, et cela crée des difficultés (isolement, repli, perte de repères) » | Absence d'activité avec retentissement psychosocial |
 
-> 💬 **Question Dr. Monka** : Le « Non » aux moyens financiers devrait-il être en 🔴 critique si combiné avec un refus de tous droits (question E62 de la dimension administrative) ? Ou est-ce redondant avec les règles de A2 qui couvrent déjà l'absence de droits ?
+> ✅ **Retour Dr. Monka (12/02)** : **Non, redondant.** Si réponse « Non » à E62 (droits), cela déclenche déjà une règle d'activation critique existante dans A2. Pas besoin de CCC supplémentaire.
 
 ---
 

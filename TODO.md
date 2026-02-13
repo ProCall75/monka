@@ -148,10 +148,10 @@
 
 ### 4.2 — Déploiement V2→V5 ✅ PRODUIT
 
-- [x] V2 — Fragilité Proche (A→E) — 5 fichiers remplis
-- [x] V3 — Santé Aidant (A→E) — 5 fichiers remplis
-- [x] V4 — Parcours Médical (A→E) — 5 fichiers remplis
-- [x] V5 — Administratif & Juridique (A→E) — 5 fichiers remplis
+- [x] V2 — Administrative (A1-A4) (A→E) — 5 fichiers remplis
+- [x] V3 — Santé Aidant (S1-S4) (A→E) — 5 fichiers remplis
+- [x] V4 — Fragilité du Proche (F1-F6) (A→E) — 5 fichiers remplis
+- [x] V5 — Parcours Médical (M1-M6) (A→E) — 5 fichiers remplis
 - [ ] **Validation Dr. Monka** sur V2→V5
 
 ### 4.3 — Transversaux

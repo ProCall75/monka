@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KERNEL v5 — Moteur Clinique Monka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #58BF94;
+            --primary-light: #7CD4AD;
+            --primary-dark: #3FA87A;
+            --accent: #86C0CF;
+            --accent-2: #CFFF92;
+            --bg: #0A1F16;
+            --bg-card: #112B1F;
+            --bg-card-hover: #1A3D2C;
+            --bg-elevated: #0E2519;
+            --text: #E8F0EC;
+            --text-muted: #9BB5A8;
+            --text-dim: #6B8578;
+            --border: #1E3D2D;
+            --success: #00DC82;
+            --warning: #F5A623;
+            --danger: #EF4444;
+            --critical: #D63031;
+            --radius: 16px;
+            --radius-sm: 10px;
+
+            --slide-w: 1280px;
+            --slide-h: 720px;
+        }
+
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #1a1a2e;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ──── SLIDE SYSTEM ──── */
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 20px auto;
+            background: var(--bg);
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        /* ──── Slide inner padding ──── */
+        .slide-body {
+            padding: 48px 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ──── Slide footer ──── */
+        .slide-footer {
+            padding: 12px 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .slide-footer .brand {
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        /* ──── Section Labels ──── */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        /* ════════════════════════════════════════════
+           SLIDE 1 — HERO
+           ════════════════════════════════════════════ */
+        .slide.hero-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .slide.hero-slide::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(88, 191, 148, 0.15) 0%, transparent 70%);
+            top: -150px;
+            right: -80px;
+            border-radius: 50%;
+        }
+
+        .slide.hero-slide::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(207, 255, 146, 0.1) 0%, transparent 70%);
+            bottom: -80px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(88, 191, 148, 0.15);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .hero-meta-item strong {
+            color: var(--text);
+        }
+
+        /* ──── Principles ──── */
+        .principles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .principle {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .principle-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .principle-icon.purple {
+            background: rgba(88, 191, 148, 0.15);
+        }
+
+        .principle-icon.teal {
+            background: rgba(134, 192, 207, 0.15);
+        }
+
+        .principle-icon.pink {
+            background: rgba(207, 255, 146, 0.15);
+        }
+
+        .principle h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .principle p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ──── Pipeline Flow ──── */
+        .pipeline-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 24px;
+        }
+
+        .pipeline-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 20px 18px;
+            text-align: center;
+            min-width: 170px;
+            flex: 1;
+            max-width: 240px;
+        }
+
+        .pipeline-box.active {
+            border-color: var(--primary);
+            background: rgba(88, 191, 148, 0.08);
+        }
+
+        .pipeline-box-icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+
+        .pipeline-box h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .pipeline-box p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        .pipeline-arrow {
+            font-size: 1.3rem;
+            color: var(--primary-light);
+            padding: 0 10px;
+        }
+
+        /* ──── Glossary ──── */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            flex: 1;
+            align-content: start;
+        }
+
+        .glossary-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            align-items: baseline;
+        }
+
+        .glossary-term {
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--accent);
+            min-width: 110px;
+            flex-shrink: 0;
+        }
+
+        .glossary-def {
+            font-size: 0.73rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .glossary-def strong {
+            color: var(--text);
+        }
+
+        /* ──── Vuln Cards ──── */
+        .vuln-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .vuln-grid-row2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            max-width: 66%;
+            margin: 14px auto 0;
+        }
+
+        .vuln-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vuln-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .vuln-card.v1::before {
+            background: linear-gradient(90deg, #58BF94, #7CD4AD);
+        }
+
+        .vuln-card.v2::before {
+            background: linear-gradient(90deg, #86C0CF, #A8D8E0);
+        }
+
+        .vuln-card.v3::before {
+            background: linear-gradient(90deg, #F5A623, #F5D245);
+        }
+
+        .vuln-card.v4::before {
+            background: linear-gradient(90deg, #EF4444, #D63031);
+        }
+
+        .vuln-card.v5::before {
+            background: linear-gradient(90deg, #00B894, #55EFC4);
+        }
+
+        .vuln-id {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+
+        .vuln-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .vuln-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(45, 45, 74, 0.5);
+        }
+
+        .vuln-stat:first-of-type {
+            border-top: none;
+        }
+
+        .vuln-stat strong {
+            color: var(--text);
+        }
+
+        /* ──── Rules ──── */
+        .bloc-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .bloc-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.04em;
+        }
+
+        .bloc-badge.a {
+            background: rgba(88, 191, 148, 0.12);
+            color: var(--primary-light);
+        }
+
+        .bloc-badge.b {
+            background: rgba(134, 192, 207, 0.12);
+            color: var(--accent);
+        }
+
+        .bloc-badge.c {
+            background: rgba(207, 255, 146, 0.12);
+            color: var(--accent-2);
+        }
+
+        .bloc-badge.d {
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--warning);
+        }
+
+        .bloc-badge.e {
+            background: rgba(0, 184, 148, 0.12);
+            color: var(--success);
+        }
+
+        .bloc-title {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .rules-list {
+            display: grid;
+            gap: 7px;
+        }
+
+        .rule-row {
+            display: grid;
+            grid-template-columns: 50px 170px 1fr;
+            gap: 12px;
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            align-items: baseline;
+        }
+
+        .rule-id {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(88, 191, 148, 0.15);
+            color: var(--primary-light);
+            font-weight: 700;
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+
+        .rule-name {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 0.78rem;
+        }
+
+        .rule-desc {
+            color: var(--text-muted);
+            line-height: 1.4;
+            font-size: 0.78rem;
+        }
+
+        .rule-desc strong {
+            color: var(--text);
+        }
+
+        /* ──── Pipeline Steps ──── */
+        .steps {
+            display: grid;
+            gap: 16px;
+            flex: 1;
+            align-content: start;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #0A1F16;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .step-content p strong {
+            color: var(--text);
+        }
+
+        .step-highlight {
+            margin-top: 8px;
+            padding: 10px 14px;
+            background: rgba(88, 191, 148, 0.06);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .step-highlight strong {
+            color: var(--primary-light);
+        }
+
+        .step-list {
+            list-style: none;
+            margin-top: 6px;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 16px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .step-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-light);
+        }
+
+        /* ──── MP Structure ──── */
+        .mp-structure {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+        }
+
+        .mp-tree-line {
+            padding: 4px 0;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .mp-tree-line.header {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .mp-tree-line .indent-1 {
+            padding-left: 20px;
+        }
+
+        .mp-tree-line .indent-2 {
+            padding-left: 40px;
+        }
+
+        .badge-crit {
+            display: inline-block;
+            padding: 1px 7px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .badge-crit.red {
+            background: rgba(214, 48, 49, 0.15);
+            color: #EF4444;
+        }
+
+        .badge-crit.orange {
+            background: rgba(245, 166, 35, 0.15);
+            color: #F5A623;
+        }
+
+        .badge-crit.green {
+            background: rgba(0, 184, 148, 0.15);
+            color: #00B894;
+        }
+
+        .badge-crit.white {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-dim);
+        }
+
+        .mp-tree-note {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            font-style: italic;
+            padding-left: 40px;
+        }
+
+        /* ──── MT Types ──── */
+        .mt-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .mt-type-card {
+            padding: 18px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .mt-type-card.contrib {
+            background: rgba(0, 184, 148, 0.04);
+            border-color: rgba(0, 184, 148, 0.2);
+        }
+
+        .mt-type-card.non-contrib {
+            background: rgba(253, 203, 110, 0.04);
+            border-color: rgba(253, 203, 110, 0.2);
+        }
+
+        .mt-type-card h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .mt-type-card .types {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .mt-type-card .asr-note {
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .mt-type-card.contrib .asr-note {
+            color: var(--success);
+        }
+
+        .mt-type-card.non-contrib .asr-note {
+            color: var(--warning);
+        }
+
+        /* ──── Stats ──── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .stat-card .status {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--success);
+            margin-top: 6px;
+        }
+
+        /* ──── Footer Lock ──── */
+        .footer-lock {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+        }
+
+        /* ──── Persona Grid ──── */
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            flex: 1;
+            align-content: start;
+        }
+
+        .persona-grid.two-col {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .persona-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .persona-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .persona-card.a1::before {
+            background: linear-gradient(90deg, #58BF94, #7CD4AD);
+        }
+
+        .persona-card.a2::before {
+            background: linear-gradient(90deg, #86C0CF, #A8D8E0);
+        }
+
+        .persona-card.a3::before {
+            background: linear-gradient(90deg, #EF4444, #D63031);
+        }
+
+        .persona-card.a4::before {
+            background: linear-gradient(90deg, #F5A623, #F5D245);
+        }
+
+        .persona-card.a5::before {
+            background: linear-gradient(90deg, #CFFF92, #A8E06D);
+        }
+
+        .persona-card.p1::before {
+            background: linear-gradient(90deg, #58BF94, #7CD4AD);
+        }
+
+        .persona-card.p2::before {
+            background: linear-gradient(90deg, #86C0CF, #A8D8E0);
+        }
+
+        .persona-card.p3::before {
+            background: linear-gradient(90deg, #F5A623, #F5D245);
+        }
+
+        .persona-card.p4::before {
+            background: linear-gradient(90deg, #EF4444, #D63031);
+        }
+
+        .persona-card.p5::before {
+            background: linear-gradient(90deg, #CFFF92, #A8E06D);
+        }
+
+        .persona-card .persona-id {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+
+        .persona-card h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .persona-card .persona-criteria {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .persona-card .persona-focus {
+            font-size: 0.72rem;
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        /* ──── Trigger table ──── */
+        .trigger-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 2px;
+        }
+
+        .trigger-table th {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            padding: 6px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .trigger-table td {
+            padding: 5px 10px;
+            font-size: 0.72rem;
+            background: var(--bg-card);
+            color: var(--text-muted);
+        }
+
+        .trigger-table tr td:first-child {
+            border-radius: 6px 0 0 6px;
+            font-weight: 700;
+            color: var(--primary-light);
+            width: 50px;
+        }
+
+        .trigger-table tr td:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+
+        .trigger-table td strong {
+            color: var(--text);
+        }
+
+        .trigger-bloc-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 5px;
+            margin-bottom: 4px;
+            margin-top: 8px;
+        }
+
+        .trigger-bloc-label.blue {
+            background: rgba(88, 191, 148, 0.12);
+            color: var(--primary-light);
+        }
+
+        .trigger-bloc-label.green {
+            background: rgba(0, 220, 130, 0.12);
+            color: var(--success);
+        }
+
+        .trigger-bloc-label.yellow {
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--warning);
+        }
+
+        .trigger-bloc-label.purple {
+            background: rgba(134, 192, 207, 0.12);
+            color: var(--accent);
+        }
+
+        /* ──── Override Diagram ──── */
+        .override-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .override-layer {
+            padding: 20px 28px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .override-layer.base {
+            background: rgba(88, 191, 148, 0.04);
+            border-color: rgba(88, 191, 148, 0.2);
+        }
+
+        .override-layer.persona {
+            background: rgba(207, 255, 146, 0.04);
+            border-color: rgba(207, 255, 146, 0.2);
+        }
+
+        .override-layer h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .override-layer p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .override-arrow {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--primary-light);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .impact-item {
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .impact-item .impact-label {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .impact-item .impact-val {
+            font-size: 0.76rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ──── Print Overrides ──── */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body {
+                background: var(--bg) !important;
+            }
+
+            .slide {
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+                background: var(--bg) !important;
+            }
+
+            .slide.hero-slide {
+                background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%) !important;
+            }
+
+            .slide-body,
+            .slide-footer,
+            .principle,
+            .pipeline-box,
+            .glossary-item,
+            .vuln-card,
+            .rule-row,
+            .step-highlight,
+            .mp-structure,
+            .mt-type-card,
+            .stat-card,
+            .persona-card,
+            .override-layer,
+            .impact-item,
+            .trigger-table td {
+                background-color: inherit !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .hero-slide h1 span,
+            .stat-card .number,
+            .step-num {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════ SLIDE 1 — HERO ═══════════════ -->
+    <div class="slide hero-slide">
+        <div class="hero-badge">🔒 Source de Vérité</div>
+        <h1>MONKA <span>KERNEL v5</span></h1>
+        <p class="hero-sub">Référence complète du moteur clinique.<br>Système déterministe d'analyse des vulnérabilités
+            et de génération de recommandations personnalisées pour les aidants.</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">📅 <strong>12/02/2026</strong></div>
+            <div class="hero-meta-item">📐 <strong>21 règles</strong></div>
+            <div class="hero-meta-item">🩺 <strong>5 vulnérabilités</strong></div>
+            <div class="hero-meta-item">📋 <strong>150 questions</strong></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 2 — VUE D'ENSEMBLE ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§1 · Vue d'ensemble</div>
+            <h2>Comment fonctionne le moteur</h2>
+            <p class="section-desc">Le moteur Monka est un système <strong>100% déterministe</strong> qui analyse les
+                réponses d'un aidant, détecte ses vulnérabilités et génère des recommandations personnalisées.</p>
+
+            <div class="pipeline-flow">
+                <div class="pipeline-box">
+                    <div class="pipeline-box-icon">📋</div>
+                    <h4>Questionnaire</h4>
+                    <p>150 questions · 15 triggers · ~30 suivi</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box active">
+                    <div class="pipeline-box-icon">⚙️</div>
+                    <h4>Moteur</h4>
+                    <p>Règles d'activation · SI Q=R → Reco · Scoring</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box">
+                    <div class="pipeline-box-icon">🎯</div>
+                    <h4>Sortie</h4>
+                    <p>Recommandations · Micro-Tâches · Scores & Alertes</p>
+                </div>
+            </div>
+
+            <div class="principles">
+                <div class="principle">
+                    <div class="principle-icon purple">🔒</div>
+                    <div>
+                        <h4>100% Déterministe</h4>
+                        <p>Pas d'IA dans la décision clinique. Chaque sortie est traçable à une règle. Auditable,
+                            reproductible.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon teal">🏠</div>
+                    <div>
+                        <h4>Autonomie de l'aidant</h4>
+                        <p>Le système fonctionne avec ou sans IDEC. L'aidant peut utiliser Monka en totale autonomie.
+                        </p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon pink">👥</div>
+                    <div>
+                        <h4>Double wording</h4>
+                        <p>Deux audiences voient les mêmes recos : l'aidant (conseil bienveillant) et l'IDEC (directive
+                            pro).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§1 Vue d'ensemble</span>
+            <span>2 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 3 — GLOSSAIRE 1/2 ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§2 · Glossaire</div>
+            <h2>Les termes du moteur (1/2)</h2>
+            <p class="section-desc">Le vocabulaire commun de l'équipe Monka.</p>
+
+            <div class="glossary-grid">
+                <div class="glossary-item">
+                    <span class="glossary-term">Vulnérabilité (V)</span>
+                    <span class="glossary-def">Domaine de risque pour l'aidant. Il y en a <strong>5</strong>.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Micro-Parcours (MP)</span>
+                    <span class="glossary-def">Sous-thème clinique au sein d'une V. <strong>24 au total</strong>.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Question (Q)</span>
+                    <span class="glossary-def"><strong>150 questions</strong> état/facteur + <strong>15
+                            triggers</strong>. Figées.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Trigger</span>
+                    <span class="glossary-def">Contexte/profil (âge, situation…). Pas dans le scoring.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Règle d'activation</span>
+                    <span class="glossary-def"><strong>SI Q = R ALORS activer reco</strong>. Cœur du moteur.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Reco</span>
+                    <span class="glossary-def">Conseil donné à l'aidant, 2 versions : Utilisateur et IDEC.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Catégorie de reco</span>
+                    <span class="glossary-def">Axe d'action clinique dans un MP. <strong>Autant que
+                            nécessaire</strong>.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Criticité</span>
+                    <span class="glossary-def">🔴 Critique (≤7j) · 🟠 CCC (≤30j) · 🟢 Standard (≤90j) · ⚪
+                        Prévention</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">CCC</span>
+                    <span class="glossary-def"><strong>Condition Critique Composite</strong>. Combinaison → alerte
+                        supérieure.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Micro-Tâche (MT)</span>
+                    <span class="glossary-def">Action concrète, <strong>verbe d'action</strong>, 2 versions.</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§2 Glossaire</span>
+            <span>3 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 4 — GLOSSAIRE 2/2 ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§2 · Glossaire</div>
+            <h2>Les termes du moteur (2/2)</h2>
+            <p class="section-desc">ASR, types de MT, scoring et acteurs.</p>
+
+            <div class="glossary-grid">
+                <div class="glossary-item">
+                    <span class="glossary-term">ASR</span>
+                    <span class="glossary-def"><strong>Action Seuil de Réussite</strong>. Objectif mesurable d'un
+                        MP.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">MT Contributive 📍</span>
+                    <span class="glossary-def">Fait avancer l'ASR. Types : <strong>STRUC, SEC, MED</strong>.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">MT Non-contrib. 💡</span>
+                    <span class="glossary-def">Accompagnement. Types : <strong>INFO, ORGA</strong>. Ne bloque pas
+                        l'ASR.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Scoring</span>
+                    <span class="glossary-def">Note d'intensité d'une V. <strong>Ne déclenche jamais un
+                            MP</strong>.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">IDEC</span>
+                    <span class="glossary-def"><strong>IDE Coordinateur</strong>. Le professionnel côté pro.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">Domaine</span>
+                    <span class="glossary-def">🏥 <strong>Médical</strong> ou 🤝 <strong>Médico-social</strong>.</span>
+                </div>
+                <div class="glossary-item" style="grid-column: span 2;">
+                    <span class="glossary-term">Acteurs</span>
+                    <span class="glossary-def"><strong>IDEC</strong> · Aidant (autonome) · Médecin traitant ·
+                        Psychologue · Médecin spécialiste · Professionnel de santé · AS · Service d'aide à
+                        domicile</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§2 Glossaire</span>
+            <span>4 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 5 — VULNÉRABILITÉS ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§3 · Les 5 vulnérabilités</div>
+            <h2>Domaines de risque analysés</h2>
+            <p class="section-desc">Chaque vulnérabilité explore un domaine de la vie de l'aidant et contient des
+                micro-parcours ciblés.</p>
+
+            <div class="vuln-grid">
+                <div class="vuln-card v1">
+                    <div class="vuln-id">V1</div>
+                    <h4>Social & Relationnel</h4>
+                    <div class="vuln-stat"><span>MP</span><strong>R1–R4</strong></div>
+                    <div class="vuln-stat"><span>Questions</span><strong>15</strong></div>
+                    <div class="vuln-stat"><span>Focus</span><span style="font-size: 0.72rem;">Impact, soutien,
+                            isolement</span></div>
+                </div>
+                <div class="vuln-card v2">
+                    <div class="vuln-id">V2</div>
+                    <h4>Administrative</h4>
+                    <div class="vuln-stat"><span>MP</span><strong>A1–A4</strong></div>
+                    <div class="vuln-stat"><span>Questions</span><strong>36</strong></div>
+                    <div class="vuln-stat"><span>Focus</span><span style="font-size: 0.72rem;">Droits, aides,
+                            budget</span></div>
+                </div>
+                <div class="vuln-card v3">
+                    <div class="vuln-id">V3</div>
+                    <h4>Santé de l'aidant</h4>
+                    <div class="vuln-stat"><span>MP</span><strong>S1–S4</strong></div>
+                    <div class="vuln-stat"><span>Questions</span><strong>26</strong></div>
+                    <div class="vuln-stat"><span>Focus</span><span style="font-size: 0.72rem;">Physique, psy,
+                            épuisement</span></div>
+                </div>
+            </div>
+            <div class="vuln-grid-row2">
+                <div class="vuln-card v4">
+                    <div class="vuln-id">V4</div>
+                    <h4>Fragilité du proche</h4>
+                    <div class="vuln-stat"><span>MP</span><strong>F1–F6</strong></div>
+                    <div class="vuln-stat"><span>Questions</span><strong>55</strong></div>
+                    <div class="vuln-stat"><span>Focus</span><span style="font-size: 0.72rem;">Autonomie, comportement,
+                            sécurité</span></div>
+                </div>
+                <div class="vuln-card v5">
+                    <div class="vuln-id">V5</div>
+                    <h4>Parcours médical</h4>
+                    <div class="vuln-stat"><span>MP</span><strong>M1–M6</strong></div>
+                    <div class="vuln-stat"><span>Questions</span><strong>18</strong></div>
+                    <div class="vuln-stat"><span>Focus</span><span style="font-size: 0.72rem;">Soins, plan de santé,
+                            coordination</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§3 Vulnérabilités</span>
+            <span>5 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 6 — RÈGLES BLOC A + B ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§4 · Les 21 règles</div>
+            <h2>Activation & Recommandations</h2>
+            <p class="section-desc" style="margin-bottom: 16px;">Règles K1 à K8 — comment le moteur active les
+                recommandations.</p>
+
+            <div class="bloc-header">
+                <span class="bloc-badge a">BLOC A</span>
+                <span class="bloc-title">Activation</span>
+            </div>
+            <div class="rules-list" style="margin-bottom: 16px;">
+                <div class="rule-row"><span class="rule-id">K1</span><span class="rule-name">Recos par MP</span><span
+                        class="rule-desc">Organisées par MP, <strong>activées</strong> par les règles Q/A.</span></div>
+                <div class="rule-row"><span class="rule-id">K2</span><span class="rule-name">3 niveaux</span><span
+                        class="rule-desc">🔴 Critique (≤7j) · 🟠 CCC (≤30j) · 🟢 Standard (≤90j) · ⚪ Prévention.</span>
+                </div>
+                <div class="rule-row"><span class="rule-id">K3</span><span class="rule-name">Englobement</span><span
+                        class="rule-desc">Niveau <strong>le plus haut</strong> s'affiche. Catégories différentes ne
+                        s'absorbent <strong>jamais</strong>.</span></div>
+                <div class="rule-row"><span class="rule-id">K4</span><span class="rule-name">Prévention</span><span
+                        class="rule-desc"><strong>1 reco ⚪</strong> quand aucune règle n'a firé.</span></div>
+            </div>
+
+            <div class="bloc-header">
+                <span class="bloc-badge b">BLOC B</span>
+                <span class="bloc-title">Recommandations & Micro-Tâches</span>
+            </div>
+            <div class="rules-list">
+                <div class="rule-row"><span class="rule-id">K5</span><span class="rule-name">Reco =
+                        enveloppe</span><span class="rule-desc">Une reco <strong>contient</strong> des
+                        micro-tâches.</span></div>
+                <div class="rule-row"><span class="rule-id">K6</span><span class="rule-name">Double version</span><span
+                        class="rule-desc">Mêmes recos/MT. Seul le <strong>wording</strong> change (Utilisateur /
+                        IDEC).</span></div>
+                <div class="rule-row"><span class="rule-id">K7</span><span class="rule-name">Autonomie</span><span
+                        class="rule-desc">Conçu pour fonctionner <strong>sans IDEC</strong>.</span></div>
+                <div class="rule-row"><span class="rule-id">K8</span><span class="rule-name">Délégation</span><span
+                        class="rule-desc">"Qui fait quoi" au niveau de la <strong>reco</strong>.</span></div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§4 Règles — Blocs A & B</span>
+            <span>6 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 7 — RÈGLES BLOC C + D ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§4 · Les 21 règles</div>
+            <h2>MT, Validation & Scoring</h2>
+            <p class="section-desc" style="margin-bottom: 16px;">Règles K9 à K13 — micro-tâches, ASR et scoring.</p>
+
+            <div class="bloc-header">
+                <span class="bloc-badge c">BLOC C</span>
+                <span class="bloc-title">MT, ASR & Validation</span>
+            </div>
+            <div class="rules-list" style="margin-bottom: 20px;">
+                <div class="rule-row"><span class="rule-id">K9</span><span class="rule-name">1 MP = 1 ASR</span><span
+                        class="rule-desc"><strong>Une et une seule</strong> ASR par MP (objectif = changement
+                        d'état).</span></div>
+                <div class="rule-row"><span class="rule-id">K10</span><span class="rule-name">2 catégories
+                        MT</span><span class="rule-desc"><strong>Contributives 📍</strong> (STRUC/SEC/MED) ·
+                        <strong>Non-contributives 💡</strong> (INFO/ORGA).</span></div>
+                <div class="rule-row"><span class="rule-id">K11</span><span class="rule-name">100% contrib =
+                        ASR</span><span class="rule-desc">ASR validée quand <strong>toutes les MT contributives</strong>
+                        sont complétées.</span></div>
+                <div class="rule-row"><span class="rule-id">K12</span><span class="rule-name">Types
+                        flexibles</span><span class="rule-desc">Un MP peut ne pas avoir les 3 types contributifs. K11
+                        s'applique sur <strong>ce qui existe</strong>.</span></div>
+            </div>
+
+            <div class="bloc-header">
+                <span class="bloc-badge d">BLOC D</span>
+                <span class="bloc-title">Scoring</span>
+            </div>
+            <div class="rules-list">
+                <div class="rule-row"><span class="rule-id">K13</span><span class="rule-name">Scoring
+                        indépendant</span><span class="rule-desc">Mesure l'<strong>intensité</strong> d'une V.
+                        <strong>Ne déclenche jamais</strong> un MP. Indicateur contextuel.</span></div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§4 Règles — Blocs C & D</span>
+            <span>7 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 8 — RÈGLES BLOC E ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§4 · Les 21 règles</div>
+            <h2>Règles complémentaires</h2>
+            <p class="section-desc" style="margin-bottom: 16px;">Règles K14 à K21 — CCC, wording et cohérence.</p>
+
+            <div class="bloc-header">
+                <span class="bloc-badge e">BLOC E</span>
+                <span class="bloc-title">Complémentaires</span>
+            </div>
+            <div class="rules-list">
+                <div class="rule-row"><span class="rule-id">K14</span><span class="rule-name">CCC inter-V</span><span
+                        class="rule-desc">Les CCC peuvent combiner des questions de <strong>vulnérabilités
+                            différentes</strong>.</span></div>
+                <div class="rule-row"><span class="rule-id">K15</span><span class="rule-name">Conflit
+                        crit/CCC</span><span class="rule-desc">Pas de CCC sur <strong>la même catégorie du même
+                            MP</strong> si déjà en critique (K3).</span></div>
+                <div class="rule-row"><span class="rule-id">K16</span><span class="rule-name">CCC utile</span><span
+                        class="rule-desc">CCC inter-V uniquement si elle <strong>change la reco</strong> ou révèle un
+                        risque invisible.</span></div>
+                <div class="rule-row"><span class="rule-id">K17</span><span class="rule-name">N catégories</span><span
+                        class="rule-desc"><strong>N catégories</strong> par MP, jusqu'à 4 versions (🔴🟠🟢⚪). Version
+                        créée ssi Q/A réelle.</span></div>
+                <div class="rule-row"><span class="rule-id">K18</span><span class="rule-name">MT = catégorie</span><span
+                        class="rule-desc">MT rattachées à la <strong>catégorie</strong>, pas à la criticité. Seul le
+                        <strong>wording</strong> change.</span></div>
+                <div class="rule-row"><span class="rule-id">K19</span><span class="rule-name">2 wordings</span><span
+                        class="rule-desc">Chaque MT/reco a <strong>2 versions</strong> : IDEC (directive) + Utilisateur
+                        (action). Sans exception.</span></div>
+                <div class="rule-row"><span class="rule-id">K20</span><span class="rule-name">Reco ≠ MT</span><span
+                        class="rule-desc">Reco = <strong>label court</strong>. MT = <strong>verbe d'action</strong>
+                        concret.</span></div>
+                <div class="rule-row"><span class="rule-id">K21</span><span class="rule-name">Domaine</span><span
+                        class="rule-desc">Chaque MT classée 🏥 <strong>Médical</strong> ou 🤝
+                        <strong>Médico-social</strong>.</span></div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§4 Règles — Bloc E</span>
+            <span>8 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 9 — PIPELINE 1/2 ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§5 · Pipeline</div>
+            <h2>Du questionnaire aux recommandations (1/2)</h2>
+            <p class="section-desc" style="margin-bottom: 16px;">Étapes 1 à 3 — collecte, évaluation, génération.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4>L'aidant répond au questionnaire</h4>
+                        <p><strong>150 questions</strong> + 15 triggers. La combinaison des réponses est ce qui compte.
+                        </p>
+                        <div class="step-highlight">Le questionnaire est <strong>figé</strong> — on ne modifie jamais
+                            les questions.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4>Le moteur évalue les règles d'activation</h4>
+                        <p>Chaque catégorie de reco a des règles <strong>SI Q = R ALORS activer</strong>. Le moteur les
+                            parcourt toutes.</p>
+                        <div class="step-highlight"><strong>C'est la règle qui active — pas le MP.</strong> Si plusieurs
+                            niveaux → K3 : le plus haut absorbe.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h4>Le moteur génère les recommandations</h4>
+                        <ul class="step-list">
+                            <li><strong>La reco</strong> : conseil adapté à la criticité, 2 versions</li>
+                            <li><strong>Les MT</strong> : mêmes MT quelle que soit la criticité (K18), wording adapté
+                            </li>
+                            <li><strong>Métadonnées</strong> : acteur, domaine (🏥/🤝), type contributif</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§5 Pipeline</span>
+            <span>9 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 10 — PIPELINE 2/2 ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§5 · Pipeline</div>
+            <h2>Du questionnaire aux recommandations (2/2)</h2>
+            <p class="section-desc" style="margin-bottom: 16px;">Étapes 4 & 5 — scoring indépendant et suivi continu.
+            </p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h4>Le scoring (indépendant)</h4>
+                        <p>Score d'intensité par vulnérabilité = somme des points des réponses.</p>
+                        <div class="step-highlight">Le score <strong>ne déclenche jamais un MP</strong> (K13). C'est un
+                            indicateur contextuel, pas un prescripteur. Un score élevé sans règle activée = impacté mais
+                            pas en schéma d'action immédiate.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h4>Suivi dans le temps</h4>
+                        <p><strong>~30 questions de suivi</strong> rattachées aux MPs. Périodiquement : « Y a-t-il eu
+                            des changements ? »</p>
+                        <div class="step-highlight">Si oui → questions réouvertes → règles réévaluées → recos mises à
+                            jour. <strong>C'est un cycle continu.</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§5 Pipeline</span>
+            <span>10 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 11 — STRUCTURE MP ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§6 · Structure</div>
+            <h2>Anatomie d'un Micro-Parcours</h2>
+            <p class="section-desc" style="margin-bottom: 14px;">Chaque MP suit la même structure : ASR, catégories,
+                criticité, prévention.</p>
+
+            <div class="mp-structure">
+                <div class="mp-tree-line header">📦 MP [ID] — [NOM]</div>
+                <div class="mp-tree-line"><span class="indent-1">🏆 ASR : « Objectif mesurable »</span></div>
+                <br>
+                <div class="mp-tree-line"><span class="indent-1">📌 CATÉGORIE 1 : « Action clinique distincte »</span>
+                </div>
+                <div class="mp-tree-line"><span class="indent-2"><span class="badge-crit red">🔴 Critique</span> → Reco
+                        urgente + MT wording urgent</span></div>
+                <div class="mp-tree-line"><span class="indent-2"><span class="badge-crit orange">🟠 CCC</span> → Reco
+                        vigilance + MT wording vigilant</span></div>
+                <div class="mp-tree-line"><span class="indent-2"><span class="badge-crit green">🟢 Standard</span> →
+                        Reco progressive + MT wording progressif</span></div>
+                <div class="mp-tree-note">K3 : seul le niveau le plus haut s'affiche · K18 : mêmes MT, wording différent
+                </div>
+                <br>
+                <div class="mp-tree-line"><span class="indent-1">📌 CATÉGORIE 2 : « Autre action clinique » —
+                        indépendante</span></div>
+                <div class="mp-tree-line"><span class="indent-1"><span class="badge-crit white">⚪ PRÉVENTION</span> —
+                        quand aucune règle ne fire → reco conseil + MT de veille</span></div>
+            </div>
+
+            <div class="mt-types">
+                <div class="mt-type-card contrib">
+                    <h4>📍 Contributives</h4>
+                    <div class="types">STRUC · SEC · MED</div>
+                    <div class="asr-note">✅ Font avancer l'ASR</div>
+                </div>
+                <div class="mt-type-card non-contrib">
+                    <h4>💡 Non-contributives</h4>
+                    <div class="types">INFO · ORGA</div>
+                    <div class="asr-note">⏸️ Ne bloquent pas l'ASR</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§6 Structure MP</span>
+            <span>11 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 12 — QUESTIONNAIRE + CLOSING ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body" style="justify-content: center; align-items: center; text-align: center;">
+            <div class="section-label">§7 · Questionnaire</div>
+            <h2>Données d'entrée</h2>
+            <p class="section-desc" style="text-align: center;">Le questionnaire est la source unique de données du
+                moteur. Il est figé.</p>
+
+            <div class="stats-row" style="width: 100%; max-width: 700px;">
+                <div class="stat-card">
+                    <div class="number">150</div>
+                    <div class="label">Questions état / facteur</div>
+                    <div class="status">✅ Figées</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">15</div>
+                    <div class="label">Triggers contextuels</div>
+                    <div class="status">✅ Figés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">~30</div>
+                    <div class="label">Questions de suivi</div>
+                    <div class="status">✅ Définies</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <div class="footer-lock">🔒 KERNEL v5 — Source de vérité du moteur clinique Monka</div>
+                <p style="margin-top: 14px; font-size: 0.8rem; color: var(--text-dim);">Version 5 · 12 février 2026 · 21
+                    règles · 5 vulnérabilités · 24 micro-parcours · 150 questions</p>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§7 Questionnaire</span>
+            <span>12 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 13 — TRIGGERS ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§8 · Réflexion Personas</div>
+            <h2>Les 15 Questions Triggers</h2>
+            <p class="section-desc" style="margin-bottom: 6px;">Posées EN PREMIER, elles cadrent le contexte. Elles ne
+                scorent jamais — elles orientent tout le parcours.</p>
+
+            <div style="display: flex; gap: 16px; flex: 1;">
+                <div style="flex: 1;">
+                    <div class="trigger-bloc-label blue" style="margin-top: 0;">🔵 L'aidant (7 questions)</div>
+                    <table class="trigger-table">
+                        <tr>
+                            <td>O35</td>
+                            <td>Sexe biologique</td>
+                            <td>Profil démographique</td>
+                        </tr>
+                        <tr>
+                            <td>O36</td>
+                            <td>Âge</td>
+                            <td>Tranche d'âge → risque spécifique</td>
+                        </tr>
+                        <tr>
+                            <td>N1</td>
+                            <td>Activité professionnelle</td>
+                            <td>Actif / retraité → droits différents</td>
+                        </tr>
+                        <tr>
+                            <td>O46</td>
+                            <td>Lien de parenté</td>
+                            <td>Conjoint / enfant → vécu différent</td>
+                        </tr>
+                        <tr>
+                            <td>O64</td>
+                            <td>Code postal</td>
+                            <td>Orientation locale</td>
+                        </tr>
+                        <tr>
+                            <td>O49</td>
+                            <td>Durée d'aidance</td>
+                            <td>Débutant (&lt;6 mois) vs expérimenté</td>
+                        </tr>
+                        <tr>
+                            <td>N3</td>
+                            <td>Situation d'aidance</td>
+                            <td>Vieillissement, handicap, psy, addiction…</td>
+                        </tr>
+                    </table>
+
+                    <div class="trigger-bloc-label yellow">🟡 Contexte médical (1)</div>
+                    <table class="trigger-table">
+                        <tr>
+                            <td>N31</td>
+                            <td>Prise en charge établissement</td>
+                            <td>Encadrement existant</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="flex: 1;">
+                    <div class="trigger-bloc-label green" style="margin-top: 0;">🟢 Le proche (4 questions)</div>
+                    <table class="trigger-table">
+                        <tr>
+                            <td>O14</td>
+                            <td>Sexe biologique aidé</td>
+                            <td>Infos santé adaptées</td>
+                        </tr>
+                        <tr>
+                            <td>O1</td>
+                            <td>Âge aidé</td>
+                            <td>Mineur, adulte, senior → parcours différents</td>
+                        </tr>
+                        <tr>
+                            <td>O63</td>
+                            <td>Code postal aidé</td>
+                            <td>Proximité + ressources locales</td>
+                        </tr>
+                        <tr>
+                            <td>O2</td>
+                            <td>Lieu de vie aidé</td>
+                            <td>Domicile, établissement, famille</td>
+                        </tr>
+                    </table>
+
+                    <div class="trigger-bloc-label purple">🟣 Priorités & orientation (3)</div>
+                    <table class="trigger-table">
+                        <tr>
+                            <td>N26</td>
+                            <td>Besoins complémentaires</td>
+                            <td>Orientation MPs</td>
+                        </tr>
+                        <tr>
+                            <td>E71</td>
+                            <td>Priorité principale</td>
+                            <td>Focus parcours</td>
+                        </tr>
+                        <tr>
+                            <td>E72</td>
+                            <td>Contact IDEC</td>
+                            <td>Consentement</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§8 Réflexion Personas</span>
+            <span>13 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 14 — PERSONAS AIDANTS ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§8 · Réflexion Personas</div>
+            <h2>5 Personas Aidants (A1–A5)</h2>
+            <p class="section-desc" style="margin-bottom: 12px;">Identifiés automatiquement via les triggers. Chaque
+                persona ajuste acteurs, délais, ressources et ton.</p>
+
+            <div class="persona-grid">
+                <div class="persona-card a1">
+                    <div class="persona-id">A1</div>
+                    <h4>💼 Actif Équilibré</h4>
+                    <div class="persona-criteria"><strong>N1</strong> = Salarié/Fonctionnaire · <strong>E7</strong> ≠
+                        Crise · <strong>O49</strong> ≥ 6 mois</div>
+                    <div class="persona-focus">→ CPA, AJPA, Service RH, solutions compatibles travail</div>
+                </div>
+                <div class="persona-card a2">
+                    <div class="persona-id">A2</div>
+                    <h4>🏠 Engagé Stable</h4>
+                    <div class="persona-criteria"><strong>N1</strong> = Retraité/Sans emploi · <strong>E7</strong> ≠
+                        Crise · <strong>E2</strong> = Soutien · <strong>O49</strong> ≥ 6 mois</div>
+                    <div class="persona-focus">→ APA, PCH, associations, prévention auto-négligence</div>
+                </div>
+                <div class="persona-card a3">
+                    <div class="persona-id">A3</div>
+                    <h4>🔴 En Crise</h4>
+                    <div class="persona-criteria"><strong>E7</strong> = Épuisé · OU <strong>E11</strong> = Non sûr · OU
+                        CCC santé activée</div>
+                    <div class="persona-focus">→ IDEC ≤48h, hébergement temporaire, alerte médecin, multi-acteurs</div>
+                </div>
+                <div class="persona-card a4">
+                    <div class="persona-id">A4</div>
+                    <h4>🏝️ Isolé</h4>
+                    <div class="persona-criteria"><strong>E2</strong> = Personne · <strong>N4</strong> = Seul ·
+                        <strong>E7</strong> ≠ Crise
+                    </div>
+                    <div class="persona-focus">→ Création de réseau, pairs aidants, groupes de parole</div>
+                </div>
+                <div class="persona-card a5">
+                    <div class="persona-id">A5</div>
+                    <h4>🌱 Découvreur</h4>
+                    <div class="persona-criteria"><strong>O49</strong> &lt; 6 mois (tous les autres critères ignorés)
+                    </div>
+                    <div class="persona-focus">→ Information prioritaire, cartographie acteurs, initiation MDPH/APA
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 12px; padding: 12px 18px; background: rgba(88, 191, 148, 0.06); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0;">
+                <p style="font-size: 0.78rem; color: var(--text-muted);"><strong
+                        style="color: var(--primary-light);">Arbre de décision :</strong> O49 &lt; 6 mois → A5 · Sinon
+                    E7=Épuisé/CCC → A3 · Sinon E2=Personne+N4=Oui → A4 · Sinon N1=Salarié → A1 · Sinon → A2</p>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§8 Réflexion Personas</span>
+            <span>14 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 15 — PERSONAS AIDÉS ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§8 · Réflexion Personas</div>
+            <h2>5 Personas Aidés (P1–P5)</h2>
+            <p class="section-desc" style="margin-bottom: 12px;">Identifiés via N3 (situation d'aidance) + détection
+                TNC. Personnalisent les recommandations médicales.</p>
+
+            <div class="persona-grid">
+                <div class="persona-card p1">
+                    <div class="persona-id">P1</div>
+                    <h4>🌿 Âgée Autonome</h4>
+                    <div class="persona-criteria"><strong>N3</strong> = Vieillissement ou maladie chronique · Autonomie
+                        préservée</div>
+                    <div class="persona-focus">→ Prévention chute, téléassistance, suivi gériatrique préventif</div>
+                </div>
+                <div class="persona-card p2">
+                    <div class="persona-id">P2</div>
+                    <h4>🛏️ Perte d'Autonomie</h4>
+                    <div class="persona-criteria"><strong>N3</strong> = Vieillissement ou maladie chronique · Dépendante
+                        au quotidien</div>
+                    <div class="persona-focus">→ APA, PCH, coordination intervenants, maintien domicile vs établissement
+                    </div>
+                </div>
+                <div class="persona-card p3">
+                    <div class="persona-id">P3</div>
+                    <h4>♿ Handicap</h4>
+                    <div class="persona-criteria"><strong>N3</strong> = En situation de handicap</div>
+                    <div class="persona-focus">→ Parcours MDPH, PCH, AAH, inclusion scolaire/pro, aides techniques</div>
+                </div>
+                <div class="persona-card p4">
+                    <div class="persona-id">P4</div>
+                    <h4>🧠 Troubles Psy / TNC</h4>
+                    <div class="persona-criteria"><strong>N3</strong> = Troubles psychiques · OU détection TNC
+                        (O13+N24+E26)</div>
+                    <div class="persona-focus">→ Sécurité comportementale, observance, protocole de crise, CMP</div>
+                </div>
+                <div class="persona-card p5">
+                    <div class="persona-id">P5</div>
+                    <h4>🍷 Addictions</h4>
+                    <div class="persona-criteria"><strong>N3</strong> = Addictions sévères</div>
+                    <div class="persona-focus">→ CSAPA, gestion rechutes, codépendance, limites à poser</div>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 12px; padding: 12px 18px; background: rgba(88, 191, 148, 0.06); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0;">
+                <p style="font-size: 0.78rem; color: var(--text-muted);"><strong
+                        style="color: var(--primary-light);">Surcharge TNC :</strong> Si O13 + N24 + E26 positifs →
+                    surcharge vers P4, quel que soit le N3 initial.</p>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§8 Réflexion Personas</span>
+            <span>15 / 16</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 16 — OVERRIDE & IMPACT ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§8 · Réflexion Personas</div>
+            <h2>Mécanisme d'Override Persona</h2>
+            <p class="section-desc" style="margin-bottom: 12px;">Les personas ne remplacent pas le KERNEL — ils ajoutent
+                une couche de <strong>détail clinique</strong> spécifique à chaque type d'aidance.</p>
+
+            <div class="override-diagram">
+                <div class="override-layer base">
+                    <h4>📦 Couche 1 — KERNEL BASE (identique pour tous)</h4>
+                    <p>Règles d'activation → Micro-Parcours → Recommandations → Micro-Tâches. Le détail de la base n'est
+                        pas encore listé ici.</p>
+                </div>
+                <div class="override-arrow">▼</div>
+                <div class="override-layer persona">
+                    <h4>👤 Couche 2 — OVERRIDE PERSONA (personnalisé)</h4>
+                    <p>On stocke uniquement le <strong>DELTA</strong> (ce qui change par rapport à la base). Les
+                        personas ajoutent un détail clinique pour les situations spécifiques à un persona, et vont être
+                        encore plus précis selon le type d'aidance.</p>
+                </div>
+            </div>
+
+            <h2 style="font-size: 1rem; margin-bottom: 10px;">Qui override quoi ?</h2>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+                <div
+                    style="padding: 18px 22px; border-radius: var(--radius-sm); background: rgba(88, 191, 148, 0.04); border: 1px solid rgba(88, 191, 148, 0.2);">
+                    <h4 style="font-size: 0.9rem; margin-bottom: 6px;">👤 Personas Aidants (A1–A5)</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">Viennent override le
+                        KERNEL BASE sur les vulnérabilités <strong>V1, V2 et V3</strong> (Social, Administrative, Santé
+                        de l'aidant).</p>
+                    <p style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px;">Exemple : un aidant salarié
+                        (A1) reçoit des recos intégrant droits CPA et acteurs RH sur V1 et V2.</p>
+                </div>
+                <div
+                    style="padding: 18px 22px; border-radius: var(--radius-sm); background: rgba(207, 255, 146, 0.04); border: 1px solid rgba(207, 255, 146, 0.2);">
+                    <h4 style="font-size: 0.9rem; margin-bottom: 6px;">🩺 Personas Aidés (P1–P5)</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">Viennent override le
+                        KERNEL BASE sur les vulnérabilités <strong>V4 et V5</strong> (Fragilité du proche, Parcours
+                        médical).</p>
+                    <p style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px;">Exemple : un aidé avec
+                        troubles psychiques (P4) active des recos sécurité comportementale et protocole de crise sur V4.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                style="padding: 14px 20px; background: rgba(88, 191, 148, 0.06); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0;">
+                <p style="font-size: 0.78rem; color: var(--text-muted);"><strong
+                        style="color: var(--primary-light);">Principe clé :</strong> Les personas ajoutent un
+                    <strong>détail clinique</strong> adapté au profil de l'aidant et au type de pathologie du proche. Le
+                    KERNEL base reste inchangé — les overrides précisent les recos et MTs pour chaque situation
+                    spécifique. <strong>5 × 5 = 25 combinaisons possibles.</strong></p>
+            </div>
+
+            <div style="margin-top: 14px; text-align: center;">
+                <div class="footer-lock">🔒 KERNEL base inchangé — les personas ajoutent de la précision clinique,
+                    jamais de la complexité</div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">MONKA KERNEL v5</span>
+            <span>§8 Réflexion Personas</span>
+            <span>16 / 16</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

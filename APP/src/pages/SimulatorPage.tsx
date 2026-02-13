@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
     Activity,
     TrendingUp,
-    AlertTriangle,
     ListChecks,
     Shield,
     BarChart3,
@@ -14,7 +13,6 @@ import {
     ChevronDown,
     ChevronRight,
     CheckCircle2,
-    Circle,
     FileText,
     Layers,
     Loader2,
@@ -51,11 +49,11 @@ type ViewMode = 'internal' | 'external'
 type VFilter = VulnerabilityId | 'ALL'
 
 const vulnerabilities: { id: VulnerabilityId; label: string; color: string; icon: typeof Activity }[] = [
-    { id: 'V1', label: 'Social & Relationnel', color: '#58BF94', icon: Users },
-    { id: 'V2', label: 'Administratif', color: '#86C0CF', icon: Scale },
-    { id: 'V3', label: 'Santé Aidant', color: '#F5A623', icon: Heart },
-    { id: 'V4', label: 'Fragilité du Proche', color: '#EF4444', icon: Stethoscope },
-    { id: 'V5', label: 'Parcours Médical', color: '#7748F6', icon: Target },
+    { id: 'V1', label: 'Social et relationnel', color: '#58BF94', icon: Users },
+    { id: 'V2', label: 'Administrative', color: '#86C0CF', icon: Scale },
+    { id: 'V3', label: 'Santé physique et psychologique', color: '#F5A623', icon: Heart },
+    { id: 'V4', label: 'Fragilité du proche', color: '#EF4444', icon: Stethoscope },
+    { id: 'V5', label: 'Parcours médical du proche', color: '#7748F6', icon: Target },
 ]
 
 const vColorMap: Record<VulnerabilityId, string> = {
@@ -660,43 +658,104 @@ function SimulatorContent({
                                                 )}
 
                                                 {/* RECOMMENDATIONS TAB */}
-                                                {activeInternalTab === 'recommendations' && (
-                                                    <div>
-                                                        <h3 className="text-sm font-bold text-monka-heading mb-4">
-                                                            Recommandations ({data.recommendations.filter(r => activeV === 'ALL' || r.vulnerability_id === activeV).length})
-                                                        </h3>
-                                                        <div className="divide-y divide-monka-border rounded-xl border border-monka-border overflow-hidden">
-                                                            {data.recommendations
-                                                                .filter(r => activeV === 'ALL' || r.vulnerability_id === activeV)
-                                                                .slice(0, 20)
-                                                                .map(reco => {
-                                                                    const mpInfo = mpMap[reco.mp_id]
-                                                                    const recoColor = vColorMap[reco.vulnerability_id as VulnerabilityId] || '#999'
-                                                                    const isLinkedMPActive = activatedMPs.includes(reco.mp_id)
+                                                {activeInternalTab === 'recommendations' && (() => {
+                                                    const filteredRecos = data.recommendations
+                                                        .filter(r => activeV === 'ALL' || r.vulnerability_id === activeV)
+                                                    // Group by MP for clarity
+                                                    const recosByMP: Record<string, typeof filteredRecos> = {}
+                                                    filteredRecos.forEach(r => {
+                                                        if (!recosByMP[r.mp_id]) recosByMP[r.mp_id] = []
+                                                        recosByMP[r.mp_id].push(r)
+                                                    })
+                                                    return (
+                                                        <div>
+                                                            <h3 className="text-sm font-bold text-monka-heading mb-4">
+                                                                Recommandations ({filteredRecos.length}) — {Object.keys(recosByMP).length} MP
+                                                            </h3>
+                                                            <div className="space-y-3">
+                                                                {Object.entries(recosByMP).map(([mpId, recos]) => {
+                                                                    const mp = mpMap[mpId]
+                                                                    const mpColor = vColorMap[(mp?.vulnerability_id || recos[0]?.vulnerability_id) as VulnerabilityId] || '#999'
+                                                                    const isActive = activatedMPs.includes(mpId)
+                                                                    // Max criticality for MP
+                                                                    const critOrder = { critique: 3, ccc: 2, standard: 1 }
+                                                                    const maxCrit = recos.reduce((max, r) => {
+                                                                        const level = critOrder[r.niveau as keyof typeof critOrder] || 0
+                                                                        return level > max ? level : max
+                                                                    }, 0)
+                                                                    const maxCritLabel = maxCrit === 3 ? 'critique' : maxCrit === 2 ? 'ccc' : 'standard'
+                                                                    const critCls = maxCritLabel === 'critique'
+                                                                        ? 'bg-red-50 text-red-600 border-red-200'
+                                                                        : maxCritLabel === 'ccc'
+                                                                            ? 'bg-amber-50 text-amber-600 border-amber-200'
+                                                                            : 'bg-emerald-50 text-emerald-600 border-emerald-200'
+
                                                                     return (
-                                                                        <div key={reco.id} className={`px-4 py-3 transition-all ${isLinkedMPActive ? 'bg-monka-primary/5' : 'bg-white/30'}`}>
-                                                                            <div className="flex items-center gap-2 mb-2">
-                                                                                <span className="text-xs font-bold text-white px-2 py-0.5 rounded-md" style={{ backgroundColor: recoColor }}>{reco.mp_id}</span>
-                                                                                {reco.niveau && <span className="text-[10px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{reco.niveau}</span>}
-                                                                                {isLinkedMPActive && <span className="text-[10px] text-green-600 bg-green-50 px-1.5 py-0.5 rounded font-bold">MP ACTIF</span>}
+                                                                        <div key={mpId} className={`rounded-xl border overflow-hidden ${isActive ? 'border-monka-primary/30' : 'border-monka-border'}`}>
+                                                                            {/* MP header */}
+                                                                            <div className={`px-4 py-2.5 flex items-center gap-2 ${isActive ? 'bg-monka-primary/5' : 'bg-gray-50/50'}`}>
+                                                                                <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded" style={{ backgroundColor: mpColor }}>{mpId}</span>
+                                                                                <span className="text-xs font-medium text-monka-heading flex-1 truncate">{mp?.nom || mpId}</span>
+                                                                                <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold ${critCls}`}>{maxCritLabel}</span>
+                                                                                {isActive && <span className="text-[10px] text-green-600 bg-green-50 px-1.5 py-0.5 rounded font-bold">ACTIF</span>}
                                                                             </div>
-                                                                            <p className="text-sm text-monka-text leading-snug mb-1">{reco.texte_utilisateur}</p>
-                                                                            {reco.acteurs && reco.acteurs.length > 0 && (
-                                                                                <div className="flex gap-1 mt-1.5">
-                                                                                    {reco.acteurs.map(a => (
-                                                                                        <span key={a} className="text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ backgroundColor: `${recoColor}15`, color: recoColor }}>{a}</span>
-                                                                                    ))}
-                                                                                </div>
-                                                                            )}
-                                                                            {reco.idec_actions && (
-                                                                                <p className="text-[10px] text-monka-muted mt-1">IDEC: {reco.idec_actions}</p>
-                                                                            )}
+                                                                            {/* Recos for this MP */}
+                                                                            <div className="divide-y divide-monka-border">
+                                                                                {recos.map(reco => {
+                                                                                    const niveauCls = reco.niveau === 'critique'
+                                                                                        ? 'bg-red-50 text-red-600 border-red-200'
+                                                                                        : reco.niveau === 'ccc'
+                                                                                            ? 'bg-amber-50 text-amber-600 border-amber-200'
+                                                                                            : 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                                                                                    // MTs linked to this reco
+                                                                                    const recoMTs = data.microTaches.filter(mt => mt.reco_id === reco.id)
+                                                                                    const contributiveMTs = recoMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type || ''))
+                                                                                    const nonContributiveMTs = recoMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type || ''))
+
+                                                                                    return (
+                                                                                        <div key={reco.id} className="px-4 py-3">
+                                                                                            <div className="flex items-center gap-2 mb-1.5">
+                                                                                                <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold ${niveauCls}`}>{reco.niveau}</span>
+                                                                                                {reco.activation_rule_id && (
+                                                                                                    <span className="text-[9px] text-monka-muted font-mono">← {reco.activation_rule_id}</span>
+                                                                                                )}
+                                                                                            </div>
+                                                                                            <p className="text-sm text-monka-text leading-snug mb-1">{reco.texte_utilisateur}</p>
+                                                                                            {/* Contributive MTs */}
+                                                                                            {contributiveMTs.length > 0 && (
+                                                                                                <div className="mt-2 pl-3 border-l-2 border-emerald-200 space-y-1">
+                                                                                                    <span className="text-[9px] font-bold text-emerald-600 uppercase">📍 Sécurisation ({contributiveMTs.length})</span>
+                                                                                                    {contributiveMTs.map(mt => (
+                                                                                                        <div key={mt.id} className="flex items-center gap-1.5 text-[11px]">
+                                                                                                            <span className={`px-1 py-0.5 rounded text-[9px] font-bold ${mt.type === 'MED' ? 'bg-red-100 text-red-600' : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
+                                                                                                            <span className="text-monka-text">{mt.libelle}</span>
+                                                                                                        </div>
+                                                                                                    ))}
+                                                                                                </div>
+                                                                                            )}
+                                                                                            {/* Non-contributive MTs */}
+                                                                                            {nonContributiveMTs.length > 0 && (
+                                                                                                <div className="mt-1.5 pl-3 border-l-2 border-gray-200 space-y-1">
+                                                                                                    <span className="text-[9px] font-bold text-gray-400 uppercase">💡 Amélioration ({nonContributiveMTs.length})</span>
+                                                                                                    {nonContributiveMTs.map(mt => (
+                                                                                                        <div key={mt.id} className="flex items-center gap-1.5 text-[11px]">
+                                                                                                            <span className={`px-1 py-0.5 rounded text-[9px] font-bold ${mt.type === 'INFO' ? 'bg-green-100 text-green-600' : 'bg-purple-100 text-purple-600'}`}>{mt.type}</span>
+                                                                                                            <span className="text-monka-muted">{mt.libelle}</span>
+                                                                                                        </div>
+                                                                                                    ))}
+                                                                                                </div>
+                                                                                            )}
+                                                                                        </div>
+                                                                                    )
+                                                                                })}
+                                                                            </div>
                                                                         </div>
                                                                     )
                                                                 })}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    )
+                                                })()}
 
                                                 {/* RULES TAB */}
                                                 {activeInternalTab === 'rules' && (
@@ -738,42 +797,81 @@ function SimulatorContent({
                                                 )}
 
                                                 {/* TASKS TAB */}
-                                                {activeInternalTab === 'tasks' && (
-                                                    <div>
-                                                        <h3 className="text-sm font-bold text-monka-heading mb-4">
-                                                            Micro-Tâches ({data.microTaches.filter(mt => activeV === 'ALL' || mt.vulnerability_id === activeV).length})
-                                                        </h3>
-                                                        <div className="divide-y divide-monka-border rounded-xl border border-monka-border overflow-hidden">
-                                                            {data.microTaches
-                                                                .filter(mt => activeV === 'ALL' || mt.vulnerability_id === activeV)
-                                                                .slice(0, 30)
-                                                                .map(mt => {
-                                                                    const mtColor = vColorMap[mt.vulnerability_id as VulnerabilityId] || '#999'
-                                                                    // Determine social vs médico-social
-                                                                    const isMedicoSocial = ['MED', 'SEC'].includes(mt.type || '')
-                                                                    const domainLabel = isMedicoSocial ? 'Médico-social' : 'Social'
-                                                                    const domainColor = isMedicoSocial ? 'bg-rose-100 text-rose-700' : 'bg-teal-100 text-teal-700'
-                                                                    return (
-                                                                        <div key={mt.id} className="px-4 py-3 bg-white/30 hover:bg-white/50 transition-all text-xs">
-                                                                            <div className="flex items-center gap-2 mb-1">
-                                                                                <span className="font-bold text-white px-1.5 py-0.5 rounded text-[10px]" style={{ backgroundColor: mtColor }}>{mt.vulnerability_id}</span>
-                                                                                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${mt.type === 'MED' ? 'bg-red-100 text-red-600' :
-                                                                                    mt.type === 'STRUC' ? 'bg-blue-100 text-blue-600' :
-                                                                                        mt.type === 'SEC' ? 'bg-orange-100 text-orange-600' :
-                                                                                            mt.type === 'INFO' ? 'bg-green-100 text-green-600' :
-                                                                                                'bg-purple-100 text-purple-600'
-                                                                                    }`}>{mt.type}</span>
-                                                                                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${domainColor}`}>{domainLabel}</span>
-                                                                                {mt.acteur && <span className="text-monka-muted">{mt.acteur}</span>}
-                                                                            </div>
-                                                                            <p className="text-sm text-monka-text">{mt.libelle}</p>
-                                                                            {mt.justification && <p className="text-[10px] text-monka-muted mt-1">{mt.justification}</p>}
-                                                                        </div>
-                                                                    )
-                                                                })}
+                                                {activeInternalTab === 'tasks' && (() => {
+                                                    const filteredMTs = data.microTaches
+                                                        .filter(mt => activeV === 'ALL' || mt.vulnerability_id === activeV)
+                                                    const contributive = filteredMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type || ''))
+                                                    const nonContributive = filteredMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type || ''))
+                                                    // Filter out generic "Aidant" actors
+                                                    const cleanActeur = (a: string | null) => {
+                                                        if (!a) return null
+                                                        if (a.toLowerCase().includes('aidant') || a.toLowerCase().includes('autonome')) return null
+                                                        return a
+                                                    }
+                                                    return (
+                                                        <div>
+                                                            <h3 className="text-sm font-bold text-monka-heading mb-2">
+                                                                Micro-Tâches ({filteredMTs.length})
+                                                            </h3>
+                                                            <div className="flex gap-2 mb-4 text-[10px]">
+                                                                <span className="px-2 py-1 rounded bg-emerald-50 text-emerald-600 font-bold">📍 Sécurisation: {contributive.length}</span>
+                                                                <span className="px-2 py-1 rounded bg-gray-100 text-gray-500 font-bold">💡 Amélioration: {nonContributive.length}</span>
+                                                            </div>
+
+                                                            {/* Contributive MTs */}
+                                                            {contributive.length > 0 && (
+                                                                <div className="mb-3">
+                                                                    <div className="text-[10px] font-bold text-emerald-600 uppercase mb-1.5 px-1">📍 Sécurisation — valident l'ASR</div>
+                                                                    <div className="divide-y divide-monka-border rounded-xl border border-emerald-200 overflow-hidden">
+                                                                        {contributive.slice(0, 25).map(mt => {
+                                                                            const mtColor = vColorMap[mt.vulnerability_id as VulnerabilityId] || '#999'
+                                                                            const domainLabel = mt.domaine === 'medical' ? 'Médical' : mt.domaine === 'medico-social' ? 'Médico-social' : mt.domaine || '—'
+                                                                            const domainColor = mt.domaine === 'medical' ? 'bg-rose-100 text-rose-700' : 'bg-teal-100 text-teal-700'
+                                                                            const acteur = cleanActeur(mt.acteur)
+                                                                            return (
+                                                                                <div key={mt.id} className="px-4 py-2.5 bg-white/30 hover:bg-white/50 transition-all text-xs">
+                                                                                    <div className="flex items-center gap-2 mb-1">
+                                                                                        <span className="font-bold text-white px-1.5 py-0.5 rounded text-[10px]" style={{ backgroundColor: mtColor }}>{mt.vulnerability_id}</span>
+                                                                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${mt.type === 'MED' ? 'bg-red-100 text-red-600' : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
+                                                                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${domainColor}`}>{domainLabel}</span>
+                                                                                        {acteur && <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{acteur}</span>}
+                                                                                    </div>
+                                                                                    <p className="text-sm text-monka-text">{mt.libelle}</p>
+                                                                                </div>
+                                                                            )
+                                                                        })}
+                                                                    </div>
+                                                                </div>
+                                                            )}
+
+                                                            {/* Non-contributive MTs */}
+                                                            {nonContributive.length > 0 && (
+                                                                <div>
+                                                                    <div className="text-[10px] font-bold text-gray-400 uppercase mb-1.5 px-1">💡 Amélioration — qualité de vie</div>
+                                                                    <div className="divide-y divide-monka-border rounded-xl border border-gray-200 overflow-hidden">
+                                                                        {nonContributive.slice(0, 25).map(mt => {
+                                                                            const mtColor = vColorMap[mt.vulnerability_id as VulnerabilityId] || '#999'
+                                                                            const domainLabel = mt.domaine === 'medical' ? 'Médical' : mt.domaine === 'medico-social' ? 'Médico-social' : mt.domaine || '—'
+                                                                            const domainColor = mt.domaine === 'medical' ? 'bg-rose-100 text-rose-700' : 'bg-teal-100 text-teal-700'
+                                                                            const acteur = cleanActeur(mt.acteur)
+                                                                            return (
+                                                                                <div key={mt.id} className="px-4 py-2.5 bg-white/20 hover:bg-white/40 transition-all text-xs">
+                                                                                    <div className="flex items-center gap-2 mb-1">
+                                                                                        <span className="font-bold text-white px-1.5 py-0.5 rounded text-[10px]" style={{ backgroundColor: mtColor }}>{mt.vulnerability_id}</span>
+                                                                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${mt.type === 'INFO' ? 'bg-green-100 text-green-600' : 'bg-purple-100 text-purple-600'}`}>{mt.type}</span>
+                                                                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${domainColor}`}>{domainLabel}</span>
+                                                                                        {acteur && <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{acteur}</span>}
+                                                                                    </div>
+                                                                                    <p className="text-sm text-monka-muted">{mt.libelle}</p>
+                                                                                </div>
+                                                                            )
+                                                                        })}
+                                                                    </div>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    )
+                                                })()}
 
                                                 {/* SUMMARY TAB */}
                                                 {activeInternalTab === 'summary' && (
@@ -856,19 +954,48 @@ function SimulatorContent({
                                             {activatedMPs.map(mpId => {
                                                 const mp = mpMap[mpId]
                                                 if (!mp) return null
-                                                const mpColor = vColorMap[mp.vulnerability_id as VulnerabilityId] || '#999'
                                                 const mpRecos = data.recommendations.filter(r => r.mp_id === mpId)
+                                                // Compute max criticality for this MP
+                                                const critOrder: Record<string, number> = { critique: 3, ccc: 2, standard: 1 }
+                                                const maxCrit = mpRecos.reduce((max, r) => {
+                                                    const level = critOrder[r.niveau || ''] || 0
+                                                    return level > max ? level : max
+                                                }, 0)
+                                                const maxCritLabel = maxCrit === 3 ? 'critique' : maxCrit === 2 ? 'ccc' : 'standard'
+                                                const critColorMap: Record<string, { bg: string; text: string; border: string; gradient: string }> = {
+                                                    critique: { bg: '#EF4444', text: '#FECACA', border: '#EF444440', gradient: 'linear-gradient(135deg, #DC2626, #B91C1C)' },
+                                                    ccc: { bg: '#F59E0B', text: '#FEF3C7', border: '#F59E0B40', gradient: 'linear-gradient(135deg, #D97706, #B45309)' },
+                                                    standard: { bg: '#10B981', text: '#D1FAE5', border: '#10B98140', gradient: 'linear-gradient(135deg, #059669, #047857)' },
+                                                }
+                                                const critColors = critColorMap[maxCritLabel] || critColorMap.standard
+                                                // All MTs for this MP (via reco_id linkage)
+                                                const mpRecoIds = new Set(mpRecos.map(r => r.id))
+                                                const mpMTs = data.microTaches.filter(mt => mt.reco_id && mpRecoIds.has(mt.reco_id))
+                                                const contributiveMTs = mpMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type || ''))
+                                                const nonContributiveMTs = mpMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type || ''))
 
                                                 return (
-                                                    <div key={mpId} className="rounded-2xl border-2 overflow-hidden" style={{ borderColor: `${mpColor}40` }}>
-                                                        {/* MP Header */}
-                                                        <div className="px-5 py-4" style={{ background: `linear-gradient(135deg, ${mpColor}, ${mpColor}CC)` }}>
+                                                    <div key={mpId} className="rounded-2xl border-2 overflow-hidden" style={{ borderColor: critColors.border }}>
+                                                        {/* MP Header — colored by max criticality */}
+                                                        <div className="px-5 py-4" style={{ background: critColors.gradient }}>
                                                             <div className="flex items-center gap-2 mb-1">
-                                                                <span className="text-white/60 text-xs font-bold bg-white/20 px-2 py-0.5 rounded">{mpId}</span>
+                                                                <span className="text-white/80 text-xs font-bold bg-white/20 px-2 py-0.5 rounded">{mpId}</span>
                                                                 <span className="text-white/60 text-xs">{mp.vulnerability_id}</span>
+                                                                <span className="text-white text-[10px] font-bold bg-white/25 px-1.5 py-0.5 rounded uppercase">{maxCritLabel}</span>
                                                             </div>
                                                             <h4 className="text-white font-bold text-base">{mp.nom}</h4>
-                                                            {mp.objectif && <p className="text-white/80 text-xs mt-1">{mp.objectif}</p>}
+                                                            {/* ASR objective */}
+                                                            {mp.objectif && (
+                                                                <div className="mt-2 flex items-start gap-1.5">
+                                                                    <span className="text-white/90 text-[10px] font-bold bg-white/20 px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">🎯 ASR</span>
+                                                                    <p className="text-white/90 text-xs">{mp.objectif}</p>
+                                                                </div>
+                                                            )}
+                                                            {/* MT counts */}
+                                                            <div className="flex gap-3 mt-2">
+                                                                <span className="text-white/70 text-[10px]">📍 {contributiveMTs.length} sécu</span>
+                                                                <span className="text-white/70 text-[10px]">💡 {nonContributiveMTs.length} amél</span>
+                                                            </div>
                                                         </div>
 
                                                         {/* Signatures */}
@@ -879,44 +1006,61 @@ function SimulatorContent({
                                                             </div>
                                                         )}
 
-                                                        {/* Recommendations with nested MTs */}
+                                                        {/* Recommendations grouped with proper MT linkage */}
                                                         {mpRecos.length > 0 ? (
                                                             <div className="divide-y divide-monka-border">
-                                                                {mpRecos.map((reco, recoIdx) => {
-                                                                    // Find MTs linked to this reco's vulnerability + same MP context
-                                                                    const recoMTs = data.microTaches.filter(mt =>
-                                                                        mt.vulnerability_id === reco.vulnerability_id
-                                                                    ).slice(recoIdx * 3, recoIdx * 3 + 3) // distribute MTs across recos
+                                                                {mpRecos.map(reco => {
+                                                                    const niveauCls = reco.niveau === 'critique'
+                                                                        ? 'bg-red-50 text-red-600 border-red-200'
+                                                                        : reco.niveau === 'ccc'
+                                                                            ? 'bg-amber-50 text-amber-600 border-amber-200'
+                                                                            : 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                                                                    // MTs actually linked to this reco
+                                                                    const recoMTs = data.microTaches.filter(mt => mt.reco_id === reco.id)
+                                                                    const recoContrib = recoMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type || ''))
+                                                                    const recoNonContrib = recoMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type || ''))
 
                                                                     return (
                                                                         <div key={reco.id} className="px-5 py-4">
-                                                                            {/* Reco */}
+                                                                            {/* Reco header */}
                                                                             <div className="flex items-start gap-2 mb-2">
-                                                                                <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: mpColor }} />
+                                                                                <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: critColors.bg }} />
                                                                                 <div className="flex-1">
+                                                                                    <div className="flex items-center gap-2 mb-1">
+                                                                                        <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold ${niveauCls}`}>{reco.niveau}</span>
+                                                                                    </div>
                                                                                     <p className="text-sm text-monka-text font-medium leading-snug">{reco.texte_utilisateur}</p>
-                                                                                    {reco.acteurs && reco.acteurs.length > 0 && (
-                                                                                        <div className="flex gap-1 mt-1.5">
-                                                                                            {reco.acteurs.map(a => (
-                                                                                                <span key={a} className="text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ backgroundColor: `${mpColor}15`, color: mpColor }}>{a}</span>
-                                                                                            ))}
-                                                                                        </div>
-                                                                                    )}
                                                                                 </div>
                                                                             </div>
 
-                                                                            {/* Nested MTs for this reco */}
-                                                                            {recoMTs.length > 0 && (
-                                                                                <div className="ml-6 mt-2 space-y-1 border-l-2 pl-3" style={{ borderColor: `${mpColor}30` }}>
-                                                                                    {recoMTs.map(mt => {
-                                                                                        const isMedicoSocial = ['MED', 'SEC'].includes(mt.type || '')
+                                                                            {/* Contributive MTs — Sécurisation */}
+                                                                            {recoContrib.length > 0 && (
+                                                                                <div className="ml-6 mt-2 space-y-1 border-l-2 border-emerald-200 pl-3">
+                                                                                    <span className="text-[9px] font-bold text-emerald-600 uppercase">📍 Sécurisation</span>
+                                                                                    {recoContrib.map(mt => {
+                                                                                        const acteur = mt.acteur && !mt.acteur.toLowerCase().includes('aidant') && !mt.acteur.toLowerCase().includes('autonome') ? mt.acteur : null
                                                                                         return (
-                                                                                            <div key={mt.id} className="flex items-center gap-2 text-xs py-1.5">
-                                                                                                <Circle className="w-2.5 h-2.5 flex-shrink-0" style={{ color: `${mpColor}60` }} />
+                                                                                            <div key={mt.id} className="flex items-center gap-2 text-xs py-1">
+                                                                                                <span className={`px-1 py-0.5 rounded text-[9px] font-bold ${mt.type === 'MED' ? 'bg-red-100 text-red-600' : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
                                                                                                 <span className="text-monka-text flex-1">{mt.libelle}</span>
-                                                                                                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${isMedicoSocial ? 'bg-rose-100 text-rose-700' : 'bg-teal-100 text-teal-700'}`}>
-                                                                                                    {isMedicoSocial ? 'Médico' : 'Social'}
-                                                                                                </span>
+                                                                                                {acteur && <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{acteur}</span>}
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
+                                                                            )}
+
+                                                                            {/* Non-contributive MTs — Amélioration */}
+                                                                            {recoNonContrib.length > 0 && (
+                                                                                <div className="ml-6 mt-1.5 space-y-1 border-l-2 border-gray-200 pl-3">
+                                                                                    <span className="text-[9px] font-bold text-gray-400 uppercase">💡 Amélioration</span>
+                                                                                    {recoNonContrib.map(mt => {
+                                                                                        const acteur = mt.acteur && !mt.acteur.toLowerCase().includes('aidant') && !mt.acteur.toLowerCase().includes('autonome') ? mt.acteur : null
+                                                                                        return (
+                                                                                            <div key={mt.id} className="flex items-center gap-2 text-xs py-1">
+                                                                                                <span className={`px-1 py-0.5 rounded text-[9px] font-bold ${mt.type === 'INFO' ? 'bg-green-100 text-green-600' : 'bg-purple-100 text-purple-600'}`}>{mt.type}</span>
+                                                                                                <span className="text-monka-muted flex-1">{mt.libelle}</span>
+                                                                                                {acteur && <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600">{acteur}</span>}
                                                                                             </div>
                                                                                         )
                                                                                     })}

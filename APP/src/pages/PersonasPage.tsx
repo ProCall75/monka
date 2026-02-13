@@ -72,14 +72,11 @@ const marieAnswers: Record<string, string> = {
 
     // ─── V2 — FRAGILITÉ DU PROCHE (22 questions) ───
     'O32': 'Oui',
-    'O34': 'Oui',
-    'N2': 'Oui',
     'E61': 'Oui',
     'N5': 'Oui, il en bénéficie',
     'E62': 'Oui, clairement',
     'N6': 'Non',
     'O37': 'Oui',
-    'O52': 'Oui',
     'O38': 'Oui',
     'O39': 'Un peu',
     'O40': 'Un peu',
@@ -88,7 +85,6 @@ const marieAnswers: Record<string, string> = {
     'N43': 'Non',
     'E63': 'Non',
     'E64': 'Non',
-    'N46': 'Non',
     'E65': 'Non',
     'E66': 'Non',
     'E67': 'Partiellement',
@@ -256,14 +252,11 @@ const jeanPierreAnswers: Record<string, string> = {
 
     // ─── V2 — FRAGILITÉ DU PROCHE ───
     'O32': 'Oui',
-    'O34': 'Oui',
-    'N2': 'Oui',
     'E61': 'Oui',
     'N5': 'Non, il n\'en bénéficie pas',
     'E62': 'Partiellement',
     'N6': 'Non',
     'O37': 'Oui',
-    'O52': 'Non',
     'O38': 'Oui',
     'O39': 'Oui',
     'O40': 'Oui',
@@ -272,7 +265,6 @@ const jeanPierreAnswers: Record<string, string> = {
     'N43': 'Oui',
     'E63': 'Oui',
     'E64': 'Non',
-    'N46': 'Non',
     'E65': 'Non',
     'E66': 'Non',
     'E67': 'Non',
@@ -440,14 +432,11 @@ const camilleAnswers: Record<string, string> = {
 
     // ─── V2 — FRAGILITÉ DU PROCHE ───
     'O32': 'Non',
-    'O34': 'Non',
-    'N2': 'Oui',
     'E61': 'Non',
     'N5': 'Non, il n\'en bénéficie pas',
     'E62': 'Non',
     'N6': 'Non',
     'O37': 'Non',
-    'O52': 'Non',
     'O38': 'Non',
     'O39': 'Pas du tout',
     'O40': 'Pas du tout',
@@ -456,7 +445,6 @@ const camilleAnswers: Record<string, string> = {
     'N43': 'Non',
     'E63': 'Non',
     'E64': 'Non',
-    'N46': 'Non',
     'E65': 'Non',
     'E66': 'Non',
     'E67': 'Non',
@@ -852,7 +840,7 @@ export default function PersonasPage() {
                     <div>
                         <h4 className="text-sm font-bold text-monka-heading mb-1">Comment ça fonctionne</h4>
                         <p className="text-xs text-monka-muted leading-relaxed">
-                            Cliquez sur <strong>"Simuler"</strong> pour charger automatiquement les {Object.keys(marieAnswers).length}+ réponses du persona dans le simulateur.
+                            Cliquez sur <strong>"Simuler"</strong> pour charger automatiquement les 165 réponses du persona dans le simulateur.
                             Le moteur calculera les scores, détectera les vulnérabilités et activera les micro-parcours correspondants.
                             Chaque profil a été construit à partir d'une situation réelle d'aidance avec des réponses cohérentes sur les 5 vulnérabilités.
                         </p>

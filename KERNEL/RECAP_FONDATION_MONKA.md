@@ -488,10 +488,10 @@ QUESTIONNAIRE_V2/
 │   ├── asr.md                            ← Existant
 │   └── suivi.md                          ← Existant
 │
-├── V2_fragilite_proche/                  ← Idem (même structure)
+├── V2_administrative/                  ← Idem (même structure)
 ├── V3_sante_aidant/
 ├── V4_sante_proche/
-├── V5_administrative/
+├── V5_parcours_medical/
 │
 ├── all/
 │   ├── progression.md

@@ -1,8 +1,8 @@
-# 📄 TEMPLATE B — Recommandations & Variations — V2 Fragilité du Proche
+# 📄 TEMPLATE B — Recommandations & Variations — V2 Administrative
 
-> **Vulnérabilité** : V2 — Fragilité du Proche
+> **Vulnérabilité** : V2 — Administrative
 > **Date de production** : 11/02/2026
-> **Statut** : 🟡 Mixte — legacy + ia_reformulé
+> **Statut** : 🟡 Mixte — 3 legacy, 2 ia_reformulé
 > **Dépendance** : Template A (niveaux d'activation)
 
 ---
@@ -11,90 +11,80 @@
 
 | Clé | Valeur |
 |---|---|
-| Vulnérabilité | V2 — Fragilité du Proche |
-| Nombre de MP | 6 |
-| Nombre total de recos | 44 |
-| Recos legacy | 18 |
-| Recos ia_reformulé | 26 |
+| Vulnérabilité | V2 — Administrative |
+| Nombre de MP | 4 |
+| Nombre total de recos | 5 |
+| Recos legacy | 3 |
+| Recos ia_reformulé | 2 |
+
+> V5 est la vulnérabilité la plus légère — seulement 5 recos et 6 MTs au total.
 
 ---
 
-## MP F1 — Vie quotidienne, budget et entourage du proche (9 recos)
+## MP A1 — Couverture santé et protections juridiques (1 reco)
 
-| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
-|---|---|---|---|---|---|---|
-| 1 | F1_RECO_03 | Transition hébergement | 🟠 CCC | V2_F1_CCC_01 | IDEC/SAD | ia_reformulé |
-| 2 | F1_RECO_02 | Projet de vie | 🟠 CCC | V2_F1_CCC_01 | — | Legacy ✅ |
-| 3 | F1_RECO_08 | Assistant social | 🟠 CCC | V2_F1_CCC_01 | AS | Legacy ✅ |
-| 4 | F1_RECO_05 | Dossier aide MT | 🟠 CCC | V2_F1_CCC_01 | Médecin traitant | Legacy ✅ |
-| 5 | F1_RECO_09 | Bilan ergo | 🟢 STD | V2_F1_STD_02 | Ergothérapeute | Legacy ✅ |
-| 6 | F1_RECO_01 | Renforcer maintien | 🟢 STD | V2_F1_STD_01 | IDEC/SAD | ia_reformulé |
-| 7 | F1_RECO_04 | Soutien psycho | 🟢 STD | V2_F1_STD_01 | AS/Psy/SAD | ia_reformulé |
-| 8 | F1_RECO_06 | Suivi psychiatre | 🟢 STD | V2_F1_STD_01 | Psychiatre | ia_reformulé |
-| 9 | F1_RECO_07 | Anti-isolement | 🟢 STD | V2_F1_STD_01 | Asso/Psy | ia_reformulé |
+### 🟠 CCC
 
-## MP F2 — Autonomie, aide humaine et présence (8 recos)
+| # | Reco ID | Texte utilisateur | Actions IDEC | Source |
+|---|---|---|---|---|
+| 1 | A1_RECO_01 | Favoriser la réflexion et l'anticipation du projet de vie | Accompagner la constitution d'un dossier MDPH | ia_reformulé |
 
-| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
-|---|---|---|---|---|---|---|
-| 1 | F2_RECO_06 | Bilan kiné/ergo | 🟠 CCC | V2_F2_CCC_01 | Médecin traitant | Legacy ✅ |
-| 2 | F2_RECO_07 | Bilan ergo/kiné autonomie | 🟠 CCC | V2_F2_CCC_01 | Médecin traitant | Legacy ✅ |
-| 3 | F2_RECO_08 | Bilan ergo/kiné motricité | 🟠 CCC | V2_F2_CCC_01 | Médecin traitant | Legacy ✅ |
-| 4 | F2_RECO_02 | Sécuriser absences | 🟠 CCC | V2_F2_CCC_01 | IDEC/Aidant | ia_reformulé |
-| 5 | F2_RECO_03 | Sécuriser nuits | 🟠 CCC | V2_F2_CCC_01 | IDEC/Aidant | ia_reformulé |
-| 6 | F2_RECO_05 | Suivi CMP | 🟢 STD | V2_F2_STD_01 | CMP/Psychiatre | ia_reformulé |
-| 7 | F2_RECO_04 | Évaluation MDPH | 🟢 STD | V2_F2_STD_01 | Médecin traitant | Legacy ✅ |
-| 8 | F2_RECO_01 | Coordination intervenants | 🟢 STD | V2_F2_STD_01 | IDEC | ia_reformulé |
+### MTs rattachées
 
-## MP F3 — Mémoire, comportement et risques (8 recos)
-
-| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
-|---|---|---|---|---|---|---|
-| 1 | F3_RECO_03 | Action urgente risque | 🔴 CRIT | V2_F3_CRIT_01 | — | ia_reformulé |
-| 2 | F3_RECO_05 | Prévention détérioration | 🔴 CRIT | V2_F3_CRIT_02 | MT/Psy | ia_reformulé |
-| 3 | F3_RECO_01 | Troubles veille-sommeil | 🟠 CCC | V2_F3_CCC_01 | IDEC | ia_reformulé |
-| 4 | F3_RECO_02 | Désorientation | 🟠 CCC | V2_F3_CCC_01 | IDEC | ia_reformulé |
-| 5 | F3_RECO_04 | Évaluer humeur/comportement | 🟠 CCC | V2_F3_CCC_01 | Psychiatre/Psy | ia_reformulé |
-| 6 | F3_RECO_06 | Troubles mémoire | 🟠 CCC | V2_F3_CCC_01 | Psychiatre | ia_reformulé |
-| 7 | F3_RECO_07 | Risque suicidaire | 🟠 CCC | V2_F3_CCC_01 | MT/Psy | ia_reformulé |
-| 8 | F3_RECO_08 | Consultation gériatrique | 🟠 CCC | V2_F3_CCC_01 | Médecin traitant | ia_reformulé |
-
-## MP F4 — Douleur, fatigue, sommeil et état général (10 recos)
-
-| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
-|---|---|---|---|---|---|---|
-| 1 | F4_RECO_01 | Bilan douleur | 🟠 CCC | V2_F4_CCC_01 | Médecin traitant | ia_reformulé |
-| 2 | F4_RECO_02 | Réévaluer traitements | 🟠 CCC | V2_F4_CCC_01 | Médecin traitant | ia_reformulé |
-| 3 | F4_RECO_03 | Troubles sommeil | 🟠 CCC | V2_F4_CCC_01 | MT/Psy | ia_reformulé |
-| 4 | F4_RECO_04 | État bucco-dentaire | 🟠 CCC | V2_F4_CCC_01 | Dentiste/MT | ia_reformulé |
-| 5 | F4_RECO_05 | Bilan nutritionnel | 🟠 CCC | V2_F4_CCC_01 | Médecin traitant | Legacy ✅ |
-| 6 | F4_RECO_06 | Suivi annuel | 🟠 CCC | V2_F4_CCC_01 | ORL/Ophtalmo | ia_reformulé |
-| 7 | F4_RECO_07 | Bilan osseux | 🟠 CCC | V2_F4_CCC_01 | Médecin traitant | Legacy ✅ |
-| 8 | F4_RECO_08 | Bilan médication | 🟠 CCC | V2_F4_CCC_01 | Médecin traitant | Legacy ✅ |
-| 9 | F4_RECO_09 | Prescription psychologue | 🟠 CCC | V2_F4_CCC_01 | Médecin traitant | Legacy ✅ |
-| 10 | F4_RECO_10 | Vérification dentaire | 🟠 CCC | V2_F4_CCC_01 | Dentiste/MT | ia_reformulé |
-
-## MP F5 — Dépendance, handicap, addictions et épisodes aigus (2 recos)
-
-| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
-|---|---|---|---|---|---|---|
-| 1 | F5_RECO_02 | APA | 🟠 CCC | V2_F5_CCC_01 | Conseil départemental | Legacy ✅ |
-| 2 | F5_RECO_01 | Suivi addictologie | 🟢 STD | V2_F5_STD_01 | MT / Psychologue | ia_reformulé |
-
-## MP F6 — Autonomie fonctionnelle, chutes et aides techniques (7 recos)
-
-> ⚠️ Aucune règle d'activation — recos assignées directement
-
-| # | Reco ID | Libellé court | Niveau | Acteurs | Source |
-|---|---|---|---|---|---|
-| 1 | F6_RECO_01 | Prévenir chutes | — | IDEC/Aidant/Kiné | ia_reformulé |
-| 2 | F6_RECO_02 | Matériel médical + ergo | — | Médecin traitant | Legacy ✅ |
-| 3 | F6_RECO_03 | Bilan nutritionnel | — | MT/Nutritionniste | ia_reformulé |
-| 4 | F6_RECO_04 | APA + gériatre | — | Médecin traitant | Legacy ✅ |
-| 5 | F6_RECO_05 | Suivi pathologies chroniques | — | Spécialistes | Legacy ✅ |
-| 6 | F6_RECO_06 | Aides techniques AVQ | — | Ergothérapeute | Legacy ✅ |
-| 7 | F6_RECO_07 | Bilan chute | — | Médecin traitant | Legacy ✅ |
+| Reco | MTs | Types |
+|---|---|---|
+| A1_RECO_01 | 3 | SEC(1), INFO(1), ORGA(1) |
 
 ---
 
-> **Bilan** : V2 est la vulnérabilité la plus dense. Sur 44 recos, 18 sont legacy et 26 sont ia_reformulé (reformulation par l'IA avec validation partielle).
+## MP A2 — Droits, aides et évaluation dépendance (1 reco)
+
+### 🟠 CCC
+
+| # | Reco ID | Texte utilisateur | Actions IDEC | Source |
+|---|---|---|---|---|
+| 1 | A2_RECO_01 | Demandez le financement de la perte d'autonomie via l'APA | Informer et accompagner la demande APA | Legacy ✅ |
+
+### MTs rattachées
+
+*Aucune MT rattachée à cette reco.*
+
+---
+
+## MP A3 — Charge et complexité des démarches (1 reco)
+
+### 🟢 Standard
+
+| # | Reco ID | Texte utilisateur | Actions IDEC | Source |
+|---|---|---|---|---|
+| 1 | A3_RECO_01 | Anticipez et renseignez-vous sur les différentes protections juridiques possibles | Informer sur les options de protection juridique | Legacy ✅ |
+
+### MTs rattachées
+
+*Aucune MT rattachée à cette reco.*
+
+---
+
+## MP A4 — Situation scolaire/professionnelle et budget (2 recos)
+
+> ⚠️ Aucune règle d'activation. Niveau non défini.
+
+| # | Reco ID | Texte utilisateur | Actions IDEC | Source |
+|---|---|---|---|---|
+| 1 | A4_RECO_01 | Demandez à être guidé dans vos démarches et à accéder aux aides pour alléger votre rôle d'aidant | Orientations vers les dispositifs d'aide | Legacy ✅ |
+| 2 | A4_RECO_02 | Accédez à des financements complémentaires | Rappeler de contacter l'AS + informer possibilités mutuelle | ia_reformulé |
+
+### MTs rattachées
+
+| Reco | MTs | Types |
+|---|---|---|
+| A4_RECO_02 | 3 | INFO(3) |
+
+---
+
+## Légende
+
+| Badge | Signification |
+|---|---|
+| Legacy ✅ | Reco issue du CAT Excel — validée |
+| ia_reformulé | Reformulation IA — à valider par Dr. Monka |

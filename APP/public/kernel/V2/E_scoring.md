@@ -1,6 +1,6 @@
-# 📄 TEMPLATE E — Scoring — V2 Fragilité du Proche
+# 📄 TEMPLATE E — Scoring — V2 Administrative
 
-> **Vulnérabilité** : V2 — Fragilité du Proche
+> **Vulnérabilité** : V2 — Administrative
 > **Date de production** : 11/02/2026
 > **Statut** : 🟡 À valider par Dr. Monka — barème complet, seuils IA
 > **Règles KERNEL** : K13 (scoring indépendant de l'activation)
@@ -12,105 +12,46 @@
 
 | Clé | Valeur |
 |---|---|
-| Vulnérabilité | V2 — Fragilité du Proche |
-| Questions totales V2 | ~32 |
-| Questions scorantes (legacy) | 11 |
-| Score max (legacy) | 22 |
+| Vulnérabilité | V2 — Administrative |
+| Questions totales V5 | ~15 |
+| Questions scorantes | 3 |
+| Score max | 6 |
 
-> 🤖 **Décision IA** : Le document source liste 14 questions comme "scorantes" dans la section V2 (incluant E32, E33, O6). Cependant, le tableau de scoring legacy ne contient QUE 11 questions avec pondérations. E32, E33 et O6 sont référencées dans V3 (santé aidant) et non dans le scoring V2. J'ai conservé les **11 questions du tableau de scoring V2** pour rester fidèle aux barèmes legacy.
+> 🤖 **Décision IA — E64 et E65** : Ces deux questions sont classifiées "état" mais ne sont PAS dans le tableau de scoring legacy. J'ai décidé de **garder les 3 questions legacy** pour la stabilité. Raison : E64 et E65 concernent des enfants (situation scolaire, AESH) — les ajouter changerait le profil de scoring V5 qui cible les démarches administratives générales. Dr. Monka peut les ajouter s'il le souhaite (score max passerait de 6 à 10).
 
 ---
 
 ## Barème complet — Réponse → Score
 
-### O7 — Changements alimentaires de la personne aidée
+### E66 — Complexité des démarches comme obstacle
 
 | Réponse | Score |
 |---|---|
-| Non | **0** |
-| Oui | **+1** |
-| Oui et dénutrition | **+2** |
+| Pas du tout | **0** |
+| Un peu | **+1** |
+| Oui | **+2** |
 
-### O13 — Détérioration des fonctions cognitives
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Diminution de certaines fonctions | **+1** |
-| Fonctions totalement altérées | **+2** |
-
-### N24 — Troubles de mémoire ou de concentration
+### E69 — Aisance avec les démarches en ligne
 
 | Réponse | Score |
 |---|---|
-| Non | **0** |
+| Oui, tout à fait | **0** |
+| Oui, mais lent / chronophage | **+1** |
+| Non, souvent perdu·e | **+2** |
+| Pas d'accès numérique | **+2** |
+
+> ⚠️ **Note** : E69 a 4 options de réponse au lieu de 3. Les deux dernières ("perdu·e" et "pas d'accès") sont toutes les deux à +2 car elles indiquent une incapacité fonctionnelle.
+
+### E70 — Démarches admin dans l'urgence
+
+| Réponse | Score |
+|---|---|
+| Non, jamais | **0** |
 | Parfois | **+1** |
-| Oui | **+2** |
+| Souvent / toujours en retard | **+2** |
+| Je ne sais pas | **+1** |
 
-### E25 — Confusion jour/nuit
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Parfois | **+1** |
-| Oui | **+2** |
-
-### E26 — Désorientation dans des lieux familiers
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Parfois | **+1** |
-| Oui | **+2** |
-
-### O4 — Humeur actuelle de la personne aidée
-
-| Réponse | Score |
-|---|---|
-| Humeur normale | **0** |
-| Parfois anxieuse ou triste | **+1** |
-| Déprimée | **+2** |
-
-### N11 — Douleurs chroniques
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Occasionnellement | **+1** |
-| Oui | **+2** |
-
-### N12 — Fatigue / manque d'énergie
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Parfois | **+1** |
-| Oui | **+2** |
-
-### N13 — Troubles du sommeil
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Parfois | **+1** |
-| Oui | **+2** |
-
-### N34 — Difficultés alimentaires
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Parfois | **+1** |
-| Oui | **+2** |
-
-### O26 — Diminution de la taille habituelle
-
-| Réponse | Score |
-|---|---|
-| Non | **0** |
-| Oui | **+2** |
-
-> ⚠️ **Note** : O26 est binaire (0 ou 2, pas de +1). C'est conforme au legacy — la perte de taille est un signal fort de fragilité osseuse.
+> ⚠️ **Note** : E70 a aussi 4 options. "Je ne sais pas" vaut +1 car c'est un signal d'incertitude (pas d'absence de démarches).
 
 ---
 
@@ -118,18 +59,10 @@
 
 | Question | Score max | Type |
 |---|---|---|
-| O7 | 2 | 3 niveaux |
-| O13 | 2 | 3 niveaux |
-| N24 | 2 | 3 niveaux |
-| E25 | 2 | 3 niveaux |
-| E26 | 2 | 3 niveaux |
-| O4 | 2 | 3 niveaux |
-| N11 | 2 | 3 niveaux |
-| N12 | 2 | 3 niveaux |
-| N13 | 2 | 3 niveaux |
-| N34 | 2 | 3 niveaux |
-| O26 | 2 | Binaire |
-| **TOTAL** | **22** | ✅ Conforme au legacy |
+| E66 | 2 | 3 niveaux |
+| E69 | 2 | 4 niveaux (2 à +2) |
+| E70 | 2 | 4 niveaux (+1 pour "ne sais pas") |
+| **TOTAL** | **6** | ✅ Conforme au legacy |
 
 ---
 
@@ -137,16 +70,31 @@
 
 | Niveau | Plage | % du max | Signification | Source |
 |---|---|---|---|---|
-| 🟢 Faible | 0 – 5 | 0-23% | Fragilité faible, autonomie préservée | IA 🤖 |
-| 🟡 Modéré | 6 – 11 | 27-50% | Fragilisation installée — vigilance | IA 🤖 |
-| 🟠 Élevé | 12 – 17 | 55-77% | Fragilité élevée — actions prioritaires | IA 🤖 |
-| 🔴 Critique | 18 – 22 | 82-100% | Dépendance / risques significatifs | IA 🤖 |
+| 🟢 Faible | 0 – 1 | 0-17% | Démarches maîtrisées | IA 🤖 |
+| 🟡 Modéré | 2 – 3 | 33-50% | Difficultés administratives émergentes | IA 🤖 |
+| 🟠 Élevé | 4 – 5 | 67-83% | Charge administrative lourde | IA 🤖 |
+| 🔴 Critique | 6 | 100% | Renoncement et décrochage administratif | IA 🤖 |
 
-> 🤖 **Décision IA** : Legacy utilise 3 niveaux (🟢 0-7 / 🟠 8-14 / 🔴 15-22). J'ai ajouté un niveau 🟡 pour plus de granularité.
+> 🤖 **Décision IA** : Avec seulement 3 questions et un max de 6, les seuils sont serrés. J'ai utilisé des paliers naturels. Le legacy n'avait que 3 niveaux sur une base de /20 (inapplicable ici).
+
+---
+
+## Questions NON scorantes — V5
+
+| # | Question ID | Libellé | Classification | Pourquoi non-scorante |
+|---|---|---|---|---|
+| 1 | E21 | Maintien situation de vie | déclenchante | Partagée avec V3 — score porté par V3 |
+| 2 | E61 | Directives anticipées | facteur | Statut factuel |
+| 3 | E62 | Droits/aides demandés | facteur | Listing factuel |
+| 4 | E63 | Situation professionnelle | facteur | Descriptif |
+| 5 | E64 | Impact financier / inclusion | etat | ⚠️ Potentiellement scorante (enfants) |
+| 6 | E65 | Besoin AESH / AVS | etat | ⚠️ Potentiellement scorante (enfants) |
+| 7 | E67 | Situation scolaire | facteur | Descriptif |
+| 8 | E68 | Temps démarches admin | facteur | Compteur (déclenchante) |
 
 ---
 
 > ⚠️ **À VALIDER PAR DR. MONKA** :
-> - Les seuils d'interprétation (4 niveaux vs 3 legacy)
-> - V2 représente 29% du score global — est-ce proportionné ?
-> - Confirmer que les pondérations legacy sont toujours d'actualité
+> - E64 et E65 : doivent-elles devenir scorantes ? (impact : score max 6→10)
+> - Les seuils d'interprétation sur une base de 6 points
+> - V5 ne représente que 8% du score global — est-ce voulu ?

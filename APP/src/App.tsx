@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import AppLayout from './components/layout/AppLayout'
+import DashboardPage from './pages/DashboardPage'
 import SimulatorPage from './pages/SimulatorPage'
 import DocsPage from './pages/DocsPage'
 import RoadmapPage from './pages/RoadmapPage'
@@ -12,7 +13,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<Navigate to="/simulator" replace />} />
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
           <Route path="simulator" element={<SimulatorPage />} />
           <Route path="personas" element={<PersonasPage />} />
           <Route path="vulnerabilities" element={<VulnerabilitiesPage />} />

@@ -28,10 +28,10 @@ Les 38 questions scorantes ont été extraites de votre document Word original e
 | Fichier | Contenu | Temps estimé |
 |---|---|---|
 | [`V1/E_scoring.md`](KERNEL/V1_social_relationnel/E_scoring.md) | 8 questions, max 15 (E4 n'a que 2 niveaux) | 5 min |
-| [`V2/E_scoring.md`](KERNEL/V2_fragilite_proche/E_scoring.md) | 11 questions, max 22 (O26 binaire) | 5 min |
+| [`V2/E_scoring.md`](KERNEL/V2_administrative/E_scoring.md) | 11 questions, max 22 (O26 binaire) | 5 min |
 | [`V3/E_scoring.md`](KERNEL/V3_sante_aidant/E_scoring.md) | 10 questions, max 20 (E9 binaire) | 5 min |
-| [`V4/E_scoring.md`](KERNEL/V4_parcours_medical/E_scoring.md) | 6 questions, max 12 | 5 min |
-| [`V5/E_scoring.md`](KERNEL/V5_administratif_juridique/E_scoring.md) | 3 questions, max 6 (E69/E70 ont 4 options) | 3 min |
+| [`V4/E_scoring.md`](KERNEL/V4_fragilite_proche/E_scoring.md) | 6 questions, max 12 | 5 min |
+| [`V5/E_scoring.md`](KERNEL/V5_parcours_medical/E_scoring.md) | 3 questions, max 6 (E69/E70 ont 4 options) | 3 min |
 | [`E_GLOBAL_scoring.md`](KERNEL/E_GLOBAL_scoring.md) | Vue d'ensemble + seuils globaux + profil radar | 5 min |
 
 ### Décisions à valider
@@ -55,10 +55,10 @@ Les 38 questions scorantes ont été extraites de votre document Word original e
 | Fichier | Contenu | Temps estimé |
 |---|---|---|
 | [`V1/A_activation.md`](KERNEL/V1_social_relationnel/A_activation.md) | Règles R1→R4 | 5 min |
-| [`V2/A_activation.md`](KERNEL/V2_fragilite_proche/A_activation.md) | Règles F1→F6 | 5 min |
+| [`V2/A_activation.md`](KERNEL/V2_administrative/A_activation.md) | Règles F1→F6 | 5 min |
 | [`V3/A_activation.md`](KERNEL/V3_sante_aidant/A_activation.md) | Règles S1→S4 | 5 min |
-| [`V4/A_activation.md`](KERNEL/V4_parcours_medical/A_activation.md) | Règles M1→M6 | 5 min |
-| [`V5/A_activation.md`](KERNEL/V5_administratif_juridique/A_activation.md) | Règles A1→A4 | 5 min |
+| [`V4/A_activation.md`](KERNEL/V4_fragilite_proche/A_activation.md) | Règles M1→M6 | 5 min |
+| [`V5/A_activation.md`](KERNEL/V5_parcours_medical/A_activation.md) | Règles A1→A4 | 5 min |
 
 ### Décisions à valider
 
@@ -97,10 +97,10 @@ Pour les 20 cas à risque, annotez :
 | Fichier | Contenu | Temps estimé |
 |---|---|---|
 | [`V1/C_master_mt_asr.md`](KERNEL/V1_social_relationnel/C_master_mt_asr.md) | MTs V1 + ASR | 5 min |
-| [`V2/C_master_mt_asr.md`](KERNEL/V2_fragilite_proche/C_master_mt_asr.md) | MTs V2 + ASR | 5 min |
+| [`V2/C_master_mt_asr.md`](KERNEL/V2_administrative/C_master_mt_asr.md) | MTs V2 + ASR | 5 min |
 | [`V3/C_master_mt_asr.md`](KERNEL/V3_sante_aidant/C_master_mt_asr.md) | MTs V3 + ASR | 5 min |
-| [`V4/C_master_mt_asr.md`](KERNEL/V4_parcours_medical/C_master_mt_asr.md) | MTs V4 + ASR (la plus massive) | 10 min |
-| [`V5/C_master_mt_asr.md`](KERNEL/V5_administratif_juridique/C_master_mt_asr.md) | MTs V5 + ASR | 5 min |
+| [`V4/C_master_mt_asr.md`](KERNEL/V4_fragilite_proche/C_master_mt_asr.md) | MTs V4 + ASR (la plus massive) | 10 min |
+| [`V5/C_master_mt_asr.md`](KERNEL/V5_parcours_medical/C_master_mt_asr.md) | MTs V5 + ASR | 5 min |
 
 ### Décisions à valider
 
@@ -131,10 +131,10 @@ Pour les 20 cas à risque, annotez :
 | Fichier | Contenu |
 |---|---|
 | [`V1/D_suivi.md`](KERNEL/V1_social_relationnel/D_suivi.md) | Questions N3 suivi V1 |
-| [`V2/D_suivi.md`](KERNEL/V2_fragilite_proche/D_suivi.md) | Questions N3 suivi V2 |
+| [`V2/D_suivi.md`](KERNEL/V2_administrative/D_suivi.md) | Questions N3 suivi V2 |
 | [`V3/D_suivi.md`](KERNEL/V3_sante_aidant/D_suivi.md) | Questions N3 suivi V3 |
-| [`V4/D_suivi.md`](KERNEL/V4_parcours_medical/D_suivi.md) | Questions N3 suivi V4 |
-| [`V5/D_suivi.md`](KERNEL/V5_administratif_juridique/D_suivi.md) | Questions N3 suivi V5 |
+| [`V4/D_suivi.md`](KERNEL/V4_fragilite_proche/D_suivi.md) | Questions N3 suivi V4 |
+| [`V5/D_suivi.md`](KERNEL/V5_parcours_medical/D_suivi.md) | Questions N3 suivi V5 |
 
 ---
 

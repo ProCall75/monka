@@ -1,8 +1,8 @@
-# 📄 TEMPLATE B — Recommandations & Variations — V4 Parcours Médical du Proche
+# 📄 TEMPLATE B — Recommandations & Variations — V4 Fragilité du Proche
 
-> **Vulnérabilité** : V4 — Parcours Médical du Proche
+> **Vulnérabilité** : V4 — Fragilité du Proche
 > **Date de production** : 11/02/2026
-> **Statut** : 🟡 Mixte — 3 legacy, 29 ia_reformulé
+> **Statut** : 🟡 Mixte — legacy + ia_reformulé
 > **Dépendance** : Template A (niveaux d'activation)
 
 ---
@@ -11,116 +11,90 @@
 
 | Clé | Valeur |
 |---|---|
-| Vulnérabilité | V4 — Parcours Médical du Proche |
+| Vulnérabilité | V4 — Fragilité du Proche |
 | Nombre de MP | 6 |
-| Nombre total de recos | 32 |
-| Recos legacy | 3 |
-| Recos ia_reformulé | 29 |
-
-> ⚠️ **V4 est la vulnérabilité la plus reformulée** : 29/32 recos sont des propositions IA.
+| Nombre total de recos | 44 |
+| Recos legacy | 18 |
+| Recos ia_reformulé | 26 |
 
 ---
 
-## MP M1 — Compréhension du diagnostic (7 recos)
+## MP F1 — Vie quotidienne, budget et entourage du proche (9 recos)
 
-### 🟠 CCC
+| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
+|---|---|---|---|---|---|---|
+| 1 | F1_RECO_03 | Transition hébergement | 🟠 CCC | V4_F1_CCC_01 | IDEC/SAD | ia_reformulé |
+| 2 | F1_RECO_02 | Projet de vie | 🟠 CCC | V4_F1_CCC_01 | — | Legacy ✅ |
+| 3 | F1_RECO_08 | Assistant social | 🟠 CCC | V4_F1_CCC_01 | AS | Legacy ✅ |
+| 4 | F1_RECO_05 | Dossier aide MT | 🟠 CCC | V4_F1_CCC_01 | Médecin traitant | Legacy ✅ |
+| 5 | F1_RECO_09 | Bilan ergo | 🟢 STD | V4_F1_STD_02 | Ergothérapeute | Legacy ✅ |
+| 6 | F1_RECO_01 | Renforcer maintien | 🟢 STD | V4_F1_STD_01 | IDEC/SAD | ia_reformulé |
+| 7 | F1_RECO_04 | Soutien psycho | 🟢 STD | V4_F1_STD_01 | AS/Psy/SAD | ia_reformulé |
+| 8 | F1_RECO_06 | Suivi psychiatre | 🟢 STD | V4_F1_STD_01 | Psychiatre | ia_reformulé |
+| 9 | F1_RECO_07 | Anti-isolement | 🟢 STD | V4_F1_STD_01 | Asso/Psy | ia_reformulé |
 
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 1 | M1_RECO_03 | Maintenir le suivi médical actuel et rester attentif à l'évolution | Legacy ✅ |
-| 2 | M1_RECO_04 | Clarifier le parcours de soins et les étapes à venir | ia_reformulé |
-| 3 | M1_RECO_05 | Mettre en place un accompagnement renforcé pour harmoniser le suivi | ia_reformulé |
-| 4 | M1_RECO_06 | Clarifier les modalités de la transition et les interlocuteurs | ia_reformulé |
+## MP F2 — Autonomie, aide humaine et présence (8 recos)
 
-### 🟢 Standard
+| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
+|---|---|---|---|---|---|---|
+| 1 | F2_RECO_06 | Bilan kiné/ergo | 🟠 CCC | V4_F2_CCC_01 | Médecin traitant | Legacy ✅ |
+| 2 | F2_RECO_07 | Bilan ergo/kiné autonomie | 🟠 CCC | V4_F2_CCC_01 | Médecin traitant | Legacy ✅ |
+| 3 | F2_RECO_08 | Bilan ergo/kiné motricité | 🟠 CCC | V4_F2_CCC_01 | Médecin traitant | Legacy ✅ |
+| 4 | F2_RECO_02 | Sécuriser absences | 🟠 CCC | V4_F2_CCC_01 | IDEC/Aidant | ia_reformulé |
+| 5 | F2_RECO_03 | Sécuriser nuits | 🟠 CCC | V4_F2_CCC_01 | IDEC/Aidant | ia_reformulé |
+| 6 | F2_RECO_05 | Suivi CMP | 🟢 STD | V4_F2_STD_01 | CMP/Psychiatre | ia_reformulé |
+| 7 | F2_RECO_04 | Évaluation MDPH | 🟢 STD | V4_F2_STD_01 | Médecin traitant | Legacy ✅ |
+| 8 | F2_RECO_01 | Coordination intervenants | 🟢 STD | V4_F2_STD_01 | IDEC | ia_reformulé |
 
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 5 | M1_RECO_01 | Renforcer l'information et clarifier certains points médicaux | ia_reformulé |
-| 6 | M1_RECO_02 | Clarifier la situation médicale et les hypothèses en cours | ia_reformulé |
-| 7 | M1_RECO_07 | Demandez à vérifier l'éligibilité à la mise sous ALD | Legacy ✅ |
+## MP F3 — Mémoire, comportement et risques (8 recos)
 
----
+| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
+|---|---|---|---|---|---|---|
+| 1 | F3_RECO_03 | Action urgente risque | 🔴 CRIT | V4_F3_CRIT_01 | — | ia_reformulé |
+| 2 | F3_RECO_05 | Prévention détérioration | 🔴 CRIT | V4_F3_CRIT_02 | MT/Psy | ia_reformulé |
+| 3 | F3_RECO_01 | Troubles veille-sommeil | 🟠 CCC | V4_F3_CCC_01 | IDEC | ia_reformulé |
+| 4 | F3_RECO_02 | Désorientation | 🟠 CCC | V4_F3_CCC_01 | IDEC | ia_reformulé |
+| 5 | F3_RECO_04 | Évaluer humeur/comportement | 🟠 CCC | V4_F3_CCC_01 | Psychiatre/Psy | ia_reformulé |
+| 6 | F3_RECO_06 | Troubles mémoire | 🟠 CCC | V4_F3_CCC_01 | Psychiatre | ia_reformulé |
+| 7 | F3_RECO_07 | Risque suicidaire | 🟠 CCC | V4_F3_CCC_01 | MT/Psy | ia_reformulé |
+| 8 | F3_RECO_08 | Consultation gériatrique | 🟠 CCC | V4_F3_CCC_01 | Médecin traitant | ia_reformulé |
 
-## MP M2 — Accès aux soins (6 recos)
+## MP F4 — Douleur, fatigue, sommeil et état général (10 recos)
 
-### 🟠 CCC
+| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
+|---|---|---|---|---|---|---|
+| 1 | F4_RECO_01 | Bilan douleur | 🟠 CCC | V4_F4_CCC_01 | Médecin traitant | ia_reformulé |
+| 2 | F4_RECO_02 | Réévaluer traitements | 🟠 CCC | V4_F4_CCC_01 | Médecin traitant | ia_reformulé |
+| 3 | F4_RECO_03 | Troubles sommeil | 🟠 CCC | V4_F4_CCC_01 | MT/Psy | ia_reformulé |
+| 4 | F4_RECO_04 | État bucco-dentaire | 🟠 CCC | V4_F4_CCC_01 | Dentiste/MT | ia_reformulé |
+| 5 | F4_RECO_05 | Bilan nutritionnel | 🟠 CCC | V4_F4_CCC_01 | Médecin traitant | Legacy ✅ |
+| 6 | F4_RECO_06 | Suivi annuel | 🟠 CCC | V4_F4_CCC_01 | ORL/Ophtalmo | ia_reformulé |
+| 7 | F4_RECO_07 | Bilan osseux | 🟠 CCC | V4_F4_CCC_01 | Médecin traitant | Legacy ✅ |
+| 8 | F4_RECO_08 | Bilan médication | 🟠 CCC | V4_F4_CCC_01 | Médecin traitant | Legacy ✅ |
+| 9 | F4_RECO_09 | Prescription psychologue | 🟠 CCC | V4_F4_CCC_01 | Médecin traitant | Legacy ✅ |
+| 10 | F4_RECO_10 | Vérification dentaire | 🟠 CCC | V4_F4_CCC_01 | Dentiste/MT | ia_reformulé |
 
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 1 | M2_RECO_01 | Identifier des solutions pour faciliter l'accès aux soins | ia_reformulé |
-| 2 | M2_RECO_02 | Accompagner l'utilisation des outils numériques | ia_reformulé |
-| 3 | M2_RECO_03 | Informer sur l'existence et l'intérêt des programmes ETP | ia_reformulé |
-| 4 | M2_RECO_04 | Demandez un bilan gériatrique et en particulier un bilan mémoire | ia_reformulé |
-| 5 | M2_RECO_05 | Contactez le DAC de votre territoire | ia_reformulé |
-| 6 | M2_RECO_06 | Un suivi régulier est à prévoir selon les préconisations du médecin | Legacy ✅ |
+## MP F5 — Dépendance, handicap, addictions et épisodes aigus (2 recos)
 
----
+| # | Reco ID | Libellé court | Niveau | Règle | Acteurs | Source |
+|---|---|---|---|---|---|---|
+| 1 | F5_RECO_02 | APA | 🟠 CCC | V4_F5_CCC_01 | Conseil départemental | Legacy ✅ |
+| 2 | F5_RECO_01 | Suivi addictologie | 🟢 STD | V4_F5_STD_01 | MT / Psychologue | ia_reformulé |
 
-## MP M3 — Urgences/hospitalisations (4 recos)
+## MP F6 — Autonomie fonctionnelle, chutes et aides techniques (7 recos)
 
-### 🟠 CCC
+> ⚠️ Aucune règle d'activation — recos assignées directement
 
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 1 | M3_RECO_03 | Réévaluer l'intérêt d'un nouveau bilan de synthèse | ia_reformulé |
-| 2 | M3_RECO_04 | Compléter et sécuriser l'organisation du suivi post-hospitalisation | ia_reformulé |
-
-### 🟢 Standard
-
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 3 | M3_RECO_01 | Réévaluer l'organisation du suivi médical | ia_reformulé |
-| 4 | M3_RECO_02 | Clarifier l'historique du suivi médical | ia_reformulé |
-
----
-
-## MP M4 — Troubles psychiques/addictions (7 recos)
-
-### 🟢 Standard (toutes)
-
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 1 | M4_RECO_01 | Clarifier la situation médicale et l'historique de suivi | ia_reformulé |
-| 2 | M4_RECO_02 | Compléter et sécuriser l'organisation du suivi post-hospitalisation | ia_reformulé |
-| 3 | M4_RECO_03 | Clarifier et formaliser un plan d'action en cas de crise | ia_reformulé |
-| 4 | M4_RECO_04 | Maintenir le lien avec la structure et suivre le projet de soins | ia_reformulé |
-| 5 | M4_RECO_05 | Maintenir l'accompagnement social et éducatif | ia_reformulé |
-| 6 | M4_RECO_06 | Clarifier la situation de suivi et de traitement | ia_reformulé |
-| 7 | M4_RECO_07 | Mettre en place rapidement un accompagnement adapté | ia_reformulé |
-
----
-
-## MP M5 — Coordination des soins (3 recos)
-
-### 🟢 Standard (toutes)
-
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 1 | M5_RECO_01 | Clarifier l'organisation actuelle des soins | ia_reformulé |
-| 2 | M5_RECO_02 | Faire le point avec l'aidant sur les intervenants existants | ia_reformulé |
-| 3 | M5_RECO_03 | Mettre en place une coordination renforcée et structurée | ia_reformulé |
+| # | Reco ID | Libellé court | Niveau | Acteurs | Source |
+|---|---|---|---|---|---|
+| 1 | F6_RECO_01 | Prévenir chutes | — | IDEC/Aidant/Kiné | ia_reformulé |
+| 2 | F6_RECO_02 | Matériel médical + ergo | — | Médecin traitant | Legacy ✅ |
+| 3 | F6_RECO_03 | Bilan nutritionnel | — | MT/Nutritionniste | ia_reformulé |
+| 4 | F6_RECO_04 | APA + gériatre | — | Médecin traitant | Legacy ✅ |
+| 5 | F6_RECO_05 | Suivi pathologies chroniques | — | Spécialistes | Legacy ✅ |
+| 6 | F6_RECO_06 | Aides techniques AVQ | — | Ergothérapeute | Legacy ✅ |
+| 7 | F6_RECO_07 | Bilan chute | — | Médecin traitant | Legacy ✅ |
 
 ---
 
-## MP M6 — Plan de soins, évaluations et inquiétudes (6 recos)
-
-> ⚠️ Aucune règle d'activation. Niveau non défini pour ces recos.
-
-| # | Reco ID | Texte utilisateur | Source |
-|---|---|---|---|
-| 1 | M6_RECO_01 | Situation à risque nécessitant une réorganisation globale des soins | ia_reformulé |
-| 2 | M6_RECO_02 | Renforcer l'évaluation cognitive et le suivi adapté | ia_reformulé |
-| 3 | M6_RECO_03 | Clarifier et formaliser les éléments manquants du plan de soins | ia_reformulé |
-| 4 | M6_RECO_04 | Mettre en place des actions de prévention des chutes | ia_reformulé |
-| 5 | M6_RECO_05 | Clarifier la situation et l'historique des orientations | ia_reformulé |
-| 6 | M6_RECO_06 | Maintenir l'accompagnement et en évaluer les bénéfices | ia_reformulé |
-
----
-
-## Légende
-
-| Badge | Signification |
-|---|---|
-| Legacy ✅ | Reco issue du CAT Excel — validée |
-| ia_reformulé | Reformulation IA — **à valider par Dr. Monka** |
+> **Bilan** : V2 est la vulnérabilité la plus dense. Sur 44 recos, 18 sont legacy et 26 sont ia_reformulé (reformulation par l'IA avec validation partielle).

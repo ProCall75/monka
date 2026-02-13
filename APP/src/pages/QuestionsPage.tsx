@@ -17,18 +17,18 @@ import type { MonkaData, DBQuestion } from '../engine/supabaseData'
 
 const VULN_COLORS: Record<string, string> = {
     V1: '#58BF94',
-    V2: '#5B8DEF',
-    V3: '#E46B8B',
-    V4: '#E48B65',
+    V2: '#86C0CF',
+    V3: '#F5A623',
+    V4: '#EF4444',
     V5: '#7748F6',
 }
 
 const VULN_NAMES: Record<string, string> = {
-    V1: 'Social & Relationnel',
-    V2: 'Fragilité du Proche',
-    V3: 'Santé de l\'Aidant',
-    V4: 'Parcours Médical',
-    V5: 'Admin & Juridique',
+    V1: 'Social et relationnel',
+    V2: 'Administrative',
+    V3: 'Santé physique et psychologique',
+    V4: 'Fragilité du proche',
+    V5: 'Parcours médical du proche',
 }
 
 function QuestionCard({ question, data, expanded, onToggle }: {
@@ -112,6 +112,19 @@ function QuestionCard({ question, data, expanded, onToggle }: {
                                 {mappedMPs.length} MP
                             </span>
                         )}
+                        {relatedRules.length > 0 && (() => {
+                            const hasCCC = relatedRules.some(r => r.niveau === 'ccc')
+                            const hasCritique = relatedRules.some(r => r.niveau === 'critique')
+                            const highest = hasCritique ? 'critique' : hasCCC ? 'CCC' : 'standard'
+                            const cls = hasCritique ? 'bg-red-50 text-red-600 border-red-200' :
+                                hasCCC ? 'bg-amber-50 text-amber-600 border-amber-200' :
+                                    'bg-emerald-50 text-emerald-600 border-emerald-200'
+                            return (
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold ${cls}`}>
+                                    {highest}
+                                </span>
+                            )
+                        })()}
                     </div>
 
                     {expanded ? <ChevronDown className="w-4 h-4 text-monka-muted" /> : <ChevronRight className="w-4 h-4 text-monka-muted" />}
@@ -199,21 +212,49 @@ function QuestionCard({ question, data, expanded, onToggle }: {
                                 </div>
                             )}
 
-                            {/* Related rules */}
+                            {/* Related rules — with full condition detail */}
                             {relatedRules.length > 0 && (
                                 <div>
-                                    <p className="text-[10px] font-bold text-monka-muted uppercase mb-2">Règles d'activation utilisant cette question</p>
-                                    <div className="space-y-1">
+                                    <p className="text-[10px] font-bold text-monka-muted uppercase mb-2">
+                                        Règles d'activation utilisant cette question ({relatedRules.length})
+                                    </p>
+                                    <div className="space-y-2">
                                         {relatedRules.map(rule => {
-                                            const niveauColor = rule.niveau === 'critique' ? 'text-red-600 bg-red-50' :
-                                                rule.niveau === 'ccc' ? 'text-amber-600 bg-amber-50' : 'text-emerald-600 bg-emerald-50'
+                                            const niveauColor = rule.niveau === 'critique' ? 'text-red-600 bg-red-50 border-red-200' :
+                                                rule.niveau === 'ccc' ? 'text-amber-600 bg-amber-50 border-amber-200' : 'text-emerald-600 bg-emerald-50 border-emerald-200'
+                                            const logic = rule.condition_logic as { operator?: string; conditions?: Array<{ question_id?: string; operator?: string; value?: string; values?: string[] }> }
+                                            const conditions = logic?.conditions || []
                                             return (
-                                                <div key={rule.id} className="flex items-center gap-2 text-xs p-2 rounded-lg bg-gray-50 border border-monka-border">
-                                                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${niveauColor}`}>{rule.niveau}</span>
-                                                    <span className="font-mono text-monka-muted">{rule.id}</span>
-                                                    <span className="text-monka-muted">→ {rule.mp_id}</span>
-                                                    {rule.sens_clinique && (
-                                                        <span className="text-monka-text ml-2 truncate">{rule.sens_clinique}</span>
+                                                <div key={rule.id} className="p-2.5 rounded-lg bg-gray-50 border border-monka-border">
+                                                    <div className="flex items-center gap-2 mb-1.5">
+                                                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${niveauColor}`}>{rule.niveau}</span>
+                                                        <span className="font-mono text-[10px] text-monka-muted">{rule.id}</span>
+                                                        <span className="text-monka-muted text-[10px]">→</span>
+                                                        <span className="text-[10px] font-bold" style={{ color }}>{rule.mp_id}</span>
+                                                        {rule.sens_clinique && (
+                                                            <span className="text-[10px] text-monka-text ml-1">{rule.sens_clinique}</span>
+                                                        )}
+                                                    </div>
+                                                    {conditions.length > 0 && (
+                                                        <div className="pl-2 border-l-2 space-y-1 mt-1" style={{ borderColor: `${color}40` }}>
+                                                            {conditions.map((cond, i) => (
+                                                                <div key={i} className="flex items-baseline gap-1 flex-wrap text-[11px]">
+                                                                    {i > 0 && <span className="text-[9px] text-monka-muted font-bold uppercase">{logic.operator || 'ET'}</span>}
+                                                                    <span className="font-mono font-bold" style={{ color: VULN_COLORS[rule.vulnerability_id] || color }}>{cond.question_id}</span>
+                                                                    <span className="text-monka-muted">=</span>
+                                                                    {cond.values ? (
+                                                                        cond.values.map((v, j) => (
+                                                                            <span key={j}>
+                                                                                {j > 0 && <span className="text-monka-muted mx-0.5">ou</span>}
+                                                                                <span className="px-1 py-0.5 rounded bg-white border border-monka-border text-[10px]">{v}</span>
+                                                                            </span>
+                                                                        ))
+                                                                    ) : (
+                                                                        <span className="px-1 py-0.5 rounded bg-white border border-monka-border text-[10px]">{cond.value}</span>
+                                                                    )}
+                                                                </div>
+                                                            ))}
+                                                        </div>
                                                     )}
                                                 </div>
                                             )

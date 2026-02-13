@@ -1,8 +1,8 @@
-# 📄 TEMPLATE A — Activation — V2 Fragilité du Proche
+# 📄 TEMPLATE A — Activation — V2 Administrative
 
-> **Vulnérabilité** : V2 — Fragilité du Proche
+> **Vulnérabilité** : V2 — Administrative
 > **Date de production** : 11/02/2026
-> **Statut** : 🟢 Données legacy — certifiées
+> **Statut** : 🟢 Données legacy — certifiées par le CAT Excel source
 > **Règles KERNEL** : K2 (3 niveaux), K3 (englobement)
 
 ---
@@ -11,135 +11,137 @@
 
 | Clé | Valeur |
 |---|---|
-| Vulnérabilité | V2 — Fragilité du Proche |
-| Nombre de MP | 6 (F1, F2, F3, F4, F5, F6) |
-| Nombre de règles d'activation | 15 |
-| dont 🔴 Critique | 5 |
-| dont 🟠 CCC | 4 |
-| dont 🟢 Standard | 6 |
-| ⚠️ MP sans règle d'activation | 1 (F6) |
+| Vulnérabilité | V2 — Administrative |
+| Nombre de MP | 4 (A1, A2, A3, A4) |
+| Nombre de règles d'activation | 11 |
+| dont 🔴 Critique | 3 |
+| dont 🟠 CCC | 3 |
+| dont 🟢 Standard | 5 |
+| MP sans règle d'activation | 1 (A4) |
 
 ---
 
-## MP F1 — Vie quotidienne, budget et entourage du proche
+## MP A1 — Couverture santé et protections juridiques
 
-> **ASR** : « Comprendre le quotidien du proche »
-> **Signature A** : F1-A — Organisation structurée | **Signature B** : F1-B — Soutien ou aide quotidienne identifiée
+> **ASR** : « Sécuriser couverture santé et protections juridiques »
+> **Signature A** : A1-A — Couverture santé active
+> **Signature B** : A1-B — Protection juridique en place
 
-### Règles d'activation
+### Questions rattachées à ce MP
 
-#### 🟠 CCC
-
-| Règle ID | Condition | Sens clinique | Source |
+| # | Question ID | Libellé | Classification |
 |---|---|---|---|
-| V2_F1_CCC_01 | E21 = « Non, un changement sera nécessaire » **ET** (N21 = « Oui » **OU** N9 = « Oui ») | Vie quotidienne non tenable + fragilités financières/gestion | Legacy ✅ |
-
-#### 🟢 Standard
-
-| Règle ID | Condition | Sens clinique | Source |
-|---|---|---|---|
-| V2_F1_STD_01 | E21 ∈ {Non, Je ne sais pas} | Maintien situation sans changement impossible | Legacy ✅ |
-| V2_F1_STD_02 | O51 = « Oui » | Projet adaptation lieu de vie | Legacy ✅ |
-
----
-
-## MP F2 — Autonomie, aide humaine et présence nécessaire
-
-> **ASR** : « Évaluer le niveau d'aide nécessaire »
-> **Signature A** : F2-A — Aide régulière active | **Signature B** : F2-B — Aide mobilisable en cas de besoin
-
-### Règles d'activation
-
-#### 🟠 CCC
-
-| Règle ID | Condition | Sens clinique | Source |
-|---|---|---|---|
-| V2_F2_CCC_01 | ≥ 2 parmi : E23 ∈ {≤1h, Ne peut pas rester seul}, E24=Oui, O8=Oui, O9=Oui | Dépendance fonctionnelle élevée nécessitant réorganisation urgente | Legacy ✅ |
-
-#### 🟢 Standard
-
-| Règle ID | Condition | Sens clinique | Source |
-|---|---|---|---|
-| V2_F2_STD_01 | E24 = « Oui » | Besoin présence la nuit | Legacy ✅ |
-| V2_F2_STD_02 | E23 ∈ {≤1h, Ne peut pas rester seul} | Temps possible seul très limité | Legacy ✅ |
-
----
-
-## MP F3 — Mémoire, comportement et risques
-
-> **ASR** : « Repérer les troubles cognitifs/comportementaux »
-> **Signature A** : F3-A — Dispositifs réduisant le risque | **Signature B** : F3-B — Encadrement humain effectif
+| 1 | E21 | Pensez-vous qu'il sera possible de maintenir cette situation de vie sans changement majeur dans les prochains mois ? | etat |
+| 2 | E68 | Combien de temps consacrez-vous chaque mois aux démarches administratives pour votre proche ? | facteur |
 
 ### Règles d'activation
 
 #### 🔴 Critique (≤ 7 jours)
 
-| Règle ID | Condition | Sens clinique | Source |
-|---|---|---|---|
-| V2_F3_CRIT_01 | E27 = « Oui » | Comportements dangereux pour le proche ou l'aidant | Legacy ✅ |
-| V2_F3_CRIT_02 | N22 = « Oui » | Comportements à risque — mise en danger | Legacy ✅ |
+| Règle ID | Question | Réponse déclenchante | Sens clinique | Source |
+|---|---|---|---|---|
+| V2_A1_CRIT_01 | E68 | > 5h | Charge administrative > 5h/mois = incompatible avec l'équilibre | Legacy ✅ |
 
-#### 🟠 CCC
+#### 🟠 CCC — Condition Critique Composite (≤ 30 jours)
 
-| Règle ID | Condition | Sens clinique | Source |
+| Règle ID | Condition (ET logique) | Sens clinique | Source |
 |---|---|---|---|
-| V2_F3_CCC_01 | O13 ∈ {Diminution notable, Altération totale} **ET** (E25=Oui **OU** E26=Oui) | Désorganisation cognitive installée avec retentissement fonctionnel | Legacy ✅ |
+| V2_A1_CCC_01 | E68 > 5h **ET** E21 ∈ {Non un changement sera nécessaire, Je ne sais pas} | Charge administrative excessive + incapacité à maintenir la situation | Legacy ✅ |
+
+#### 🟢 Standard (≤ 90 jours)
+
+| Règle ID | Question | Réponse déclenchante | Sens clinique | Source |
+|---|---|---|---|---|
+| V2_A1_STD_01 | E68 | ≥ 1h | Temps administratif mensuel ≥ 1h | Legacy ✅ |
+| V2_A1_STD_02 | E21 | ∈ {Non, Je ne sais pas} | Maintien de la situation de vie incertain | Legacy ✅ |
 
 ---
 
-## MP F4 — Douleur, fatigue, sommeil et état général
+## MP A2 — Droits, aides et évaluation dépendance
 
-> **ASR** : « Comprendre l'état général du proche »
-> **Signature A** : F4-A — Suivi ou traitement en cours | **Signature B** : F4-B — Accompagnement soulageant l'état général
+> **ASR** : « Identifier et activer les droits mobilisables »
+> **Signature A** : A2-A — Aide financière active
+> **Signature B** : A2-B — Aide humaine en cours
+
+### Questions rattachées à ce MP
+
+| # | Question ID | Libellé | Classification |
+|---|---|---|---|
+| 1 | E62 | Pour quels droits/aides avez-vous effectué une demande actuellement en cours ? | facteur |
+| 2 | O53 | La dépendance a-t-elle été évaluée par les services sociaux ? (grille AGGIR) | facteur |
 
 ### Règles d'activation
 
 #### 🔴 Critique (≤ 7 jours)
 
-| Règle ID | Condition | Sens clinique | Source |
-|---|---|---|---|
-| V2_F4_CRIT_01 | N25 = « Oui » | Idées suicidaires — risque vital immédiat | Legacy ✅ |
-| V2_F4_CRIT_02 | N38 = « Oui » | Perte de contrôle addiction | Legacy ✅ |
-| V2_F4_CRIT_03 | N39 = « Oui » | Violence passive ou active | Legacy ✅ |
+| Règle ID | Question | Réponse déclenchante | Sens clinique | Source |
+|---|---|---|---|---|
+| V2_A2_CRIT_01 | E62 | « Aucun » | Aucun droit engagé malgré besoin → rupture financière/sociale | Legacy ✅ |
 
-#### 🟠 CCC
+#### 🟠 CCC — Condition Critique Composite (≤ 30 jours)
 
-| Règle ID | Condition | Sens clinique | Source |
+| Règle ID | Condition (ET logique) | Sens clinique | Source |
 |---|---|---|---|
-| V2_F4_CCC_01 | ≥ 2 parmi : N11=Oui, N12=Oui, N13=Oui, N34=Oui, O4=Déprimée | Dégradation somato-psychique globale par accumulation | Legacy ✅ |
+| V2_A2_CCC_01 | E62 ∈ {Aucun, Je ne sais pas} **ET** O53 ∈ {Non, Je ne sais pas} | Absence de droits ouverts + besoin potentiel non évalué | Legacy ✅ |
+
+#### 🟢 Standard (≤ 90 jours)
+
+| Règle ID | Question | Réponse déclenchante | Sens clinique | Source |
+|---|---|---|---|---|
+| V2_A2_STD_01 | E62 | ∈ {Aucun, Je ne sais pas} | Aucun droit ou aide demandé | Legacy ✅ |
+| V2_A2_STD_02 | O53 | ∈ {Non, Je ne sais pas} | Évaluation dépendance AGGIR non réalisée | Legacy ✅ |
 
 ---
 
-## MP F5 — Dépendance, handicap, addictions et épisodes aigus
+## MP A3 — Charge et complexité des démarches
 
-> **ASR** : « Qualifier la situation pour orienter »
-> **Signature A** : F5-A — Plan d'action identifié | **Signature B** : F5-B — Dispositif de réponse mobilisable
+> **ASR** : « Réduire la charge mentale administrative »
+> **Signature A** : A3-A — Aide extérieure à la gestion
+> **Signature B** : A3-B — Organisation administrative stabilisée
+
+### Questions rattachées à ce MP
+
+| # | Question ID | Libellé | Classification |
+|---|---|---|---|
+| 1 | E21 | Pensez-vous qu'il sera possible de maintenir cette situation de vie ? | etat |
+| 2 | E61 | Votre proche a-t-il rédigé des directives anticipées ? | facteur |
 
 ### Règles d'activation
 
-#### 🟠 CCC
+#### 🔴 Critique (≤ 7 jours)
 
-| Règle ID | Condition | Sens clinique | Source |
+| Règle ID | Question | Réponse déclenchante | Sens clinique | Source |
+|---|---|---|---|---|
+| V2_A3_CRIT_01 | E61 | « Non » | Refus directives + situation instable → risque décisionnel majeur | Legacy ✅ |
+
+#### 🟠 CCC — Condition Critique Composite (≤ 30 jours)
+
+| Règle ID | Condition (ET logique) | Sens clinique | Source |
 |---|---|---|---|
-| V2_F5_CCC_01 | E28 ≥ 2 **ET** O53 = « Non » | Instabilité médico-sociale avec épisodes aigus sans cadre | Legacy ✅ |
+| V2_A3_CCC_01 | E61 ∈ {Non, Je ne sais pas} **ET** E21 ∈ {Non un changement sera nécessaire, Je ne sais pas} | Décisions futures à risque en cas de dégradation | Legacy ✅ |
 
-#### 🟢 Standard
+#### 🟢 Standard (≤ 90 jours)
 
-| Règle ID | Condition | Sens clinique | Source |
-|---|---|---|---|
-| V2_F5_STD_01 | E28 ≥ 2 | Hospitalisations récentes ≥ 2 | Legacy ✅ |
+| Règle ID | Question | Réponse déclenchante | Sens clinique | Source |
+|---|---|---|---|---|
+| V2_A3_STD_01 | E61 | ∈ {Non, Je ne sais pas} | Directives anticipées non rédigées | Legacy ✅ |
 
 ---
 
-## MP F6 — Autonomie fonctionnelle, chutes et aides techniques
+## MP A4 — Situation scolaire/professionnelle et budget
 
-> **ASR** : « Évaluer l'autonomie fonctionnelle »
-> **Signature A** : — | **Signature B** : —
+> **ASR** : « Sécuriser la situation financière et professionnelle »
+> **Signature A** : A4-A — Budget stabilisé
+> **Signature B** : A4-B — Ressources complémentaires identifiées
 
-### Règles d'activation
-
-> ⚠️ **Aucune règle d'activation pour F6.** Ce MP est activé systématiquement (toujours ouvert) ou par assignation manuelle. 7 recos sont rattachées directement sans condition.
+> ⚠️ **Aucune règle d'activation** — les 2 recos de ce MP sont assignées directement.
 
 ---
 
-> ✅ **100% des règles V2 sont legacy.**
+## Légende Sources
+
+| Badge | Signification |
+|---|---|
+| Legacy ✅ | Règle issue du CAT Excel de Dr. Monka — validée |
+
+> ✅ **100% des règles V5 sont legacy** — aucune proposition IA dans ce template.

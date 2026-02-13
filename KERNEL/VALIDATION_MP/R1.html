@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche MP R1 — Impact sur la vie personnelle et professionnelle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --surface2: #232736;
+            --border: #2d3148;
+            --text: #e4e6ef;
+            --text-muted: #8b8fa8;
+            --accent: #7c5cfc;
+            --accent-light: #9b82fd;
+            --crit: #ff4d6a;
+            --crit-bg: rgba(255, 77, 106, 0.08);
+            --ccc: #ff9f43;
+            --ccc-bg: rgba(255, 159, 67, 0.08);
+            --std: #2ed573;
+            --std-bg: rgba(46, 213, 115, 0.08);
+            --prev: #a0a4c0;
+            --prev-bg: rgba(160, 164, 192, 0.08);
+            --warn: #ffa502;
+            --warn-bg: rgba(255, 165, 2, 0.08);
+            --success: #2ed573;
+            --fail: #ff4d6a;
+            --idea: #00d2d3;
+            --idea-bg: rgba(0, 210, 211, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* === HEADER === */
+        .header {
+            background: linear-gradient(135deg, var(--accent) 0%, #5b3fd4 100%);
+            border-radius: 16px;
+            padding: 36px 40px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 15px;
+            opacity: 0.85;
+            margin-top: 6px;
+        }
+
+        .header .meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 18px;
+            font-size: 13px;
+            opacity: 0.75;
+            flex-wrap: wrap;
+        }
+
+        .header .meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            position: absolute;
+            top: 20px;
+            right: 24px;
+        }
+
+        /* === SECTIONS === */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header .num {
+            background: var(--accent);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .section-header .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .section-body {
+            padding: 24px 28px;
+        }
+
+        /* === TABLES === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 12px;
+            background: var(--surface2);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(124, 92, 252, 0.03);
+        }
+
+        /* === BADGES === */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge.crit {
+            background: var(--crit-bg);
+            color: var(--crit);
+            border: 1px solid rgba(255, 77, 106, 0.2);
+        }
+
+        .badge.ccc {
+            background: var(--ccc-bg);
+            color: var(--ccc);
+            border: 1px solid rgba(255, 159, 67, 0.2);
+        }
+
+        .badge.std {
+            background: var(--std-bg);
+            color: var(--std);
+            border: 1px solid rgba(46, 213, 115, 0.2);
+        }
+
+        .badge.prev {
+            background: var(--prev-bg);
+            color: var(--prev);
+            border: 1px solid rgba(160, 164, 192, 0.2);
+        }
+
+        .badge.legacy {
+            background: rgba(46, 213, 115, 0.08);
+            color: var(--success);
+            border: 1px solid rgba(46, 213, 115, 0.2);
+        }
+
+        .badge.missing {
+            background: var(--crit-bg);
+            color: var(--crit);
+            border: 1px solid rgba(255, 77, 106, 0.2);
+        }
+
+        .badge.warn {
+            background: var(--warn-bg);
+            color: var(--warn);
+            border: 1px solid rgba(255, 165, 2, 0.2);
+        }
+
+        .badge.contrib {
+            background: rgba(124, 92, 252, 0.1);
+            color: var(--accent-light);
+            border: 1px solid rgba(124, 92, 252, 0.2);
+        }
+
+        .badge.info {
+            background: rgba(160, 164, 192, 0.08);
+            color: var(--text-muted);
+            border: 1px solid rgba(160, 164, 192, 0.2);
+        }
+
+        /* === ALERTS === */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin: 16px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .alert.warn {
+            background: var(--warn-bg);
+            border: 1px solid rgba(255, 165, 2, 0.2);
+            color: var(--warn);
+        }
+
+        .alert.error {
+            background: var(--crit-bg);
+            border: 1px solid rgba(255, 77, 106, 0.2);
+            color: var(--crit);
+        }
+
+        .alert.info {
+            background: rgba(124, 92, 252, 0.06);
+            border: 1px solid rgba(124, 92, 252, 0.15);
+            color: var(--accent-light);
+        }
+
+        .alert.idea {
+            background: var(--idea-bg);
+            border: 1px solid rgba(0, 210, 211, 0.2);
+            color: var(--idea);
+        }
+
+        .alert .icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* === REASONING BOX === */
+        .reasoning {
+            background: linear-gradient(135deg, rgba(124, 92, 252, 0.06), rgba(124, 92, 252, 0.02));
+            border: 1px solid rgba(124, 92, 252, 0.15);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .reasoning .title {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--accent-light);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* === PROPOSAL BOX === */
+        .proposals {
+            background: var(--idea-bg);
+            border: 1px solid rgba(0, 210, 211, 0.2);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-top: 20px;
+        }
+
+        .proposals .title {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--idea);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .proposals table {
+            margin-top: 8px;
+        }
+
+        .proposals th {
+            background: rgba(0, 210, 211, 0.08);
+            color: var(--idea);
+        }
+
+        .proposals td {
+            border-bottom-color: rgba(0, 210, 211, 0.1);
+        }
+
+        /* === CATEGORY CARDS === */
+        .cat-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .cat-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cat-card .desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .cat-card .levels {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* === WORDING === */
+        .wording-block {
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 12px 0;
+            border-left: 3px solid var(--border);
+            font-size: 13px;
+        }
+
+        .wording-block.ccc {
+            border-left-color: var(--ccc);
+        }
+
+        .wording-block.std {
+            border-left-color: var(--std);
+        }
+
+        .wording-block.crit {
+            border-left-color: var(--crit);
+        }
+
+        .wording-block .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .wording-block q {
+            font-style: italic;
+            color: var(--text);
+            quotes: "« " " »";
+        }
+
+        .wording-block .missing {
+            color: var(--crit);
+            font-style: italic;
+        }
+
+        /* === CHECKLIST === */
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .check-icon.ok {
+            color: var(--success);
+        }
+
+        .check-icon.fail {
+            color: var(--fail);
+        }
+
+        /* === SUMMARY === */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+        }
+
+        .summary-card {
+            background: var(--surface2);
+            border-radius: 10px;
+            padding: 18px 20px;
+            text-align: center;
+        }
+
+        .summary-card .value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent-light);
+        }
+
+        .summary-card .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* === DECISION TABLE === */
+        .decision-table td:first-child {
+            font-weight: 600;
+        }
+
+        .decision-table .priority-high {
+            color: var(--crit);
+        }
+
+        .decision-table .priority-med {
+            color: var(--ccc);
+        }
+
+        .decision-table .priority-low {
+            color: var(--warn);
+        }
+
+        /* === MISC === */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        h3.cat-title {
+            font-size: 14px;
+            margin-bottom: 16px;
+            color: var(--accent-light);
+        }
+
+        code {
+            background: var(--surface2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <span class="status-badge">🔲 À Valider</span>
+        <h1>📋 R1 — Impact sur la vie personnelle et professionnelle</h1>
+        <div class="subtitle">V1 — Social & Relationnel</div>
+        <div class="meta">
+            <span>🎯 ASR : « Mesurer l'impact de l'aidance sur votre vie et ajuster »</span>
+            <span>📊 Checks : 4/8</span>
+            <span>⚡ 7 décisions à prendre</span>
+        </div>
+    </div>
+
+    <!-- CONTEXTE BIG PICTURE -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num" style="background:#545a7a;">📍</div>
+            <div>
+                <div class="label">Big Picture — Contexte V1</div>
+                <h2>Répartition des 15 questions V1 entre les 4 MPs</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>MP</th>
+                        <th>Nom</th>
+                        <th>Nb Q</th>
+                        <th>Questions</th>
+                        <th>Thème</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background:rgba(124,92,252,0.06);">
+                        <td><strong>R1</strong></td>
+                        <td>Impact vie perso/pro</td>
+                        <td>3</td>
+                        <td><code>O27</code> <code>O28</code> <code>N7</code></td>
+                        <td>Retentissement de l'aidance sur la vie de l'aidant</td>
+                    </tr>
+                    <tr>
+                        <td>R2</td>
+                        <td>Soutien entourage</td>
+                        <td>4</td>
+                        <td><code>E1</code> <code>E2</code> <code>E3</code> <code>N4</code></td>
+                        <td>Réseau de soutien, isolement aidant</td>
+                    </tr>
+                    <tr>
+                        <td>R3</td>
+                        <td>Isolement du proche</td>
+                        <td>3</td>
+                        <td><code>N20</code> <code>O47</code> <code>O48</code></td>
+                        <td>Vie sociale du proche aidé</td>
+                    </tr>
+                    <tr>
+                        <td>R4</td>
+                        <td>Relation aidant/proche</td>
+                        <td>5</td>
+                        <td><code>E4</code> <code>E5</code> <code>E6</code> <code>O30</code> <code>O31</code></td>
+                        <td>Qualité de la relation, acceptation aide</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="reasoning" style="margin-top:20px;">
+                <div class="title">🧠 Pourquoi R1 est distinct des autres MPs</div>
+                <strong>R1 = l'IMPACT</strong> (la conséquence de l'aidance sur la vie de l'aidant).<br>
+                R2 = le SOUTIEN (le réseau humain), R3 = l'ISOLEMENT DU PROCHE (pas de l'aidant), R4 = la RELATION
+                INTERPERSONNELLE.<br><br>
+                La frontière clinique : <strong>R1 = « Qu'est-ce que ça change dans MA vie ? »</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 0 : DONNÉES FIGÉES -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num" style="background:#545a7a;">0</div>
+            <div>
+                <div class="label">Données figées</div>
+                <h2>Questions rattachées à R1</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>Libellé</th>
+                        <th>Classification</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><code>O27</code></td>
+                        <td>Vous occuper de la personne aidée entraîne-t-il des difficultés dans votre <strong>vie
+                                familiale</strong> ?</td>
+                        <td>facteur & état</td>
+                        <td>Oui / Non</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><code>O28</code></td>
+                        <td>Vous occuper de la personne aidée entraîne-t-il des difficultés dans vos <strong>relations
+                                avec vos amis, loisirs ou travail</strong> ?</td>
+                        <td>facteur & état</td>
+                        <td>Oui / Non</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><code>N7</code></td>
+                        <td>Avez-vous dû <strong>aménager votre activité professionnelle</strong> pour faire face à
+                            votre rôle d'aidant ?</td>
+                        <td>facteur</td>
+                        <td>Non / Aménagement horaires / Congés / Arrêt</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="reasoning" style="margin-top:20px;">
+                <div class="title">🧠 Pourquoi ces 3 questions ?</div>
+                <strong>O27 + O28</strong> forment un duo qui mesure l'impact subjectif sur deux sphères :<br>
+                • O27 = sphère familiale intime (vie de famille)<br>
+                • O28 = sphère sociale et professionnelle<br>
+                → Dans R1 et pas R2 car elles mesurent l'<strong>IMPACT</strong> (conséquence), pas l'isolement (cause)
+                ni le soutien (ressource).<br><br>
+                <strong>N7</strong> mesure un marqueur <strong>objectif</strong> : l'aménagement professionnel effectué.
+                Ce n'est pas un ressenti mais un fait concret (congés pris, horaires aménagés, arrêt).<br>
+                → C'est un "facteur" pur qui quantifie les sacrifices professionnels de l'aidant.
+            </div>
+
+            <div class="proposals">
+                <div class="title">💡 Propositions d'amélioration</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Proposition</th>
+                            <th>Justification</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>Ajouter une question sur l'impact financier</strong></td>
+                            <td>L'aidance a souvent un impact économique. O27/O28 couvrent le social mais pas le
+                                financier.</td>
+                            <td>⚡ Enrichir la détection</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>Scinder O28</strong> en 2 questions (amis/loisirs vs travail)</td>
+                            <td>O28 mélange 3 domaines différents. Un aidant peut avoir des difficultés pro sans impact
+                                sur les loisirs.</td>
+                            <td>⚡ Finesse d'activation</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Exploiter N7 = « Arrêt »</strong> dans les règles</td>
+                            <td>Arrêt de travail = signal grave, aucune règle ne le capte actuellement.</td>
+                            <td style="color:var(--crit);">🔴 Signal critique non capté</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top:10px;font-size:12px;color:var(--text-muted);">⚠️ Propositions 1 et 2 = V2 du
+                    questionnaire. Proposition 3 = exploitable immédiatement.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION 1 : QUOI -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">1</div>
+            <div>
+                <div class="label">QUOI — Catégories de Reco/Actions</div>
+                <h2>Quelles actions cliniques différentes pour ce MP ?</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="reasoning">
+                <div class="title">🧠 Raisonnement</div>
+                Les 3 recos legacy (R1_RECO_01 à 03) montrent <strong>3 actions cliniques indépendantes</strong> :<br>
+                1. <strong>Orienter vers l'AS</strong> → orientation vers un professionnel<br>
+                2. <strong>Orienter vers le répit</strong> → accès à un service<br>
+                3. <strong>Soutien psychologique via MT</strong> → acte de soin<br><br>
+                Ces 3 actions sont indépendantes : on peut recommander l'AS sans le psy, et inversement. Elles ne se
+                substituent pas → <strong>3 catégories distinctes</strong>.
+            </div>
+
+            <div class="cat-card">
+                <h3>📌 CAT_01 — Accompagnement social (AS)</h3>
+                <div class="desc">Orienter vers une assistante sociale pour les impacts administratifs et professionnels
+                </div>
+                <div class="levels"><span class="badge ccc">🟠 CCC</span><span class="badge std">🟢 Standard</span>
+                </div>
+            </div>
+            <div class="cat-card">
+                <h3>📌 CAT_02 — Répit et relais</h3>
+                <div class="desc">Orienter vers la plateforme de répit du territoire pour alléger la charge</div>
+                <div class="levels"><span class="badge ccc">🟠 CCC</span></div>
+            </div>
+            <div class="cat-card">
+                <h3>📌 CAT_03 — Soutien psychologique</h3>
+                <div class="desc">Discuter avec le médecin traitant des difficultés / prescription soutien psy</div>
+                <div class="levels"><span class="badge ccc">🟠 CCC</span></div>
+            </div>
+
+            <div class="proposals">
+                <div class="title">💡 Propositions d'amélioration</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Proposition</th>
+                            <th>Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>Ajouter CAT_04 : Information sur les droits</strong></td>
+                            <td>MT_V1_033 "Informer sur les droits" est perdue dans CAT_03. C'est une action distincte
+                                (informer ≠ soigner).</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>Fusionner CAT_02 et CAT_03 ?</strong></td>
+                            <td>Elles partagent la même règle (CCC_01). Actions séparées ou plan d'action unique ?</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Renommer CAT_01</strong> → "Accompagnement administratif et professionnel"</td>
+                            <td>"Accompagnement social" est vague. L'AS intervient spécifiquement sur l'impact pro et
+                                les démarches.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION 2 : QUAND -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">2</div>
+            <div>
+                <div class="label">QUAND — Règles d'activation</div>
+                <h2>Quelles Q/A déclenchent chaque catégorie ?</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="reasoning">
+                <div class="title">🧠 Raisonnement</div>
+                Les règles legacy combinent O27, O28, N7 pour détecter des situations de gravité croissante :<br>
+                • <strong>STD_01</strong> : N7 seule (aménagement pro = signal d'impact) → CAT_01<br>
+                • <strong>CCC_01</strong> : O27+O28 (double impact personnel ET social) → CAT_02 + CAT_03<br>
+                • <strong>CCC_02</strong> : N7+O27 (aménagement pro + impact familial) → CAT_01<br><br>
+                Logique clinique : <strong>plus les sphères impactées sont nombreuses, plus le niveau monte</strong>.
+            </div>
+
+            <h3 class="cat-title">Catégorie 1 — Accompagnement social</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Niveau</th>
+                        <th>Règle</th>
+                        <th>Question(s)</th>
+                        <th>Réponse(s)</th>
+                        <th>Sens clinique</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge crit">🔴 Critique</span></td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td style="color:var(--text-muted);font-style:italic;">Aucune critique</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge ccc">🟠 CCC</span></td>
+                        <td><code>V1_R1_CCC_02</code></td>
+                        <td><code>N7</code> + <code>O27</code></td>
+                        <td>N7 ∈ {Aménagement, Congés} <strong>ET</strong> O27 = « Oui »</td>
+                        <td>Ajustement professionnel déjà engagé avec impact familial</td>
+                        <td><span class="badge legacy">Legacy ✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge std">🟢 Standard</span></td>
+                        <td><code>V1_R1_STD_01</code></td>
+                        <td><code>N7</code></td>
+                        <td>N7 ∈ {Aménagement, Congés}</td>
+                        <td>Aménagement activité professionnelle déjà engagé</td>
+                        <td><span class="badge legacy">Legacy ✅</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="wording-block ccc">
+                <div class="label">🟠 CCC — Texte utilisateur</div>
+                <q>Contacter une assistante sociale</q>
+            </div>
+            <div class="wording-block std">
+                <div class="label">🟢 Standard — Texte utilisateur</div>
+                <span class="missing">⚠️ Manquant — à créer</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 class="cat-title">Catégorie 2 — Répit et relais</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Niveau</th>
+                        <th>Règle</th>
+                        <th>Question(s)</th>
+                        <th>Réponse(s)</th>
+                        <th>Sens clinique</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge ccc">🟠 CCC</span></td>
+                        <td><code>V1_R1_CCC_01</code></td>
+                        <td><code>O27</code> + <code>O28</code></td>
+                        <td>O27 = « Oui » <strong>ET</strong> O28 = « Oui »</td>
+                        <td>Retentissement massif sur la vie privée et sociale</td>
+                        <td><span class="badge legacy">Legacy ✅</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="wording-block ccc">
+                <div class="label">🟠 CCC — Texte utilisateur</div>
+                <q>Contactez la plateforme de répit de votre territoire</q>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 class="cat-title">Catégorie 3 — Soutien psychologique</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Niveau</th>
+                        <th>Règle</th>
+                        <th>Question(s)</th>
+                        <th>Réponse(s)</th>
+                        <th>Sens clinique</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge ccc">🟠 CCC</span></td>
+                        <td><code>V1_R1_CCC_01</code></td>
+                        <td><code>O27</code> + <code>O28</code></td>
+                        <td>O27 = « Oui » <strong>ET</strong> O28 = « Oui »</td>
+                        <td>Retentissement massif → besoin de soutien psy</td>
+                        <td><span class="badge legacy">Legacy ✅</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="wording-block ccc">
+                <div class="label">🟠 CCC — Texte utilisateur</div>
+                <q>Discutez des difficultés d'être aidant avec votre médecin traitant</q>
+            </div>
+
+            <div class="alert info" style="margin-top:16px;">
+                <span class="icon">ℹ️</span>
+                <div>CAT_02 et CAT_03 partagent la même règle <code>V1_R1_CCC_01</code>. Ce sont 2 actions différentes
+                    déclenchées dans la même situation — c'est normal (K17).</div>
+            </div>
+
+            <div class="proposals">
+                <div class="title">💡 Propositions — Nouvelles règles</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Proposition</th>
+                            <th>Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>🔴 Critique : N7 = « Arrêt »</strong></td>
+                            <td>Un aidant qui a ARRÊTÉ de travailler est en situation bien plus grave. Aucune règle ne
+                                capte ce signal. → Activer CAT_01 en critique.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>🔴 Critique : N7 = « Arrêt » + O27 + O28 = « Oui »</strong></td>
+                            <td>Triple impact (arrêt pro + famille + social) = effondrement → activer les 3 catégories
+                                en critique.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>🟢 Standard pour CAT_02 : O27 = « Oui » seule</strong></td>
+                            <td>Impact familial seul pourrait suffire pour recommander le répit. Actuellement O27
+                                n'active rien seule.</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>🟢 Standard pour CAT_03 : O27 = « Oui » seule</strong></td>
+                            <td>Impact familial = début de souffrance psychique → conseil proactif vers le MT.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>Vérifier O28</strong></td>
+                            <td>O28 n'est jamais déclenchante seule. Si O28 = « Oui » et O27 = « Non » → on ne fait rien
+                                pour cet aidant.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION 3 : COMMENT -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">3</div>
+            <div>
+                <div class="label">COMMENT — Micro-Tâches</div>
+                <h2>Quelles MT pour chaque version de reco ?</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="reasoning">
+                <div class="title">🧠 Raisonnement</div>
+                Dans le legacy, les 8 MT sont <strong>toutes rattachées à R1_RECO_03</strong> (soutien psy, CCC). CAT_01
+                et CAT_02 n'ont aucune MT.<br>
+                C'est un artefact du système legacy qui attachait les MT à une seule reco "principale".<br><br>
+                En analysant les MT, <strong>3 sont thématiquement dans la mauvaise catégorie</strong> :<br>
+                • MT_V1_030 "Orienter vers répit" → devrait être dans CAT_02<br>
+                • MT_V1_032 "Évaluer impact pro" → devrait être dans CAT_01<br>
+                • MT_V1_033 "Droits des aidants" → devrait être dans CAT_01
+            </div>
+
+            <h3 class="cat-title">CAT_01 — Accompagnement social</h3>
+            <div class="alert error" style="margin-top:0;">
+                <span class="icon">❌</span>
+                <div>Aucune MT legacy rattachée à cette catégorie.</div>
+            </div>
+            <div class="proposals" style="margin-top:12px;">
+                <div class="title">💡 Redistribution proposée</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MT</th>
+                            <th>Libellé</th>
+                            <th>📍/💡</th>
+                            <th>Pourquoi ici ?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>MT_V1_032</code></td>
+                            <td>Évaluer l'impact professionnel</td>
+                            <td>💡 ORGA</td>
+                            <td>Sujet AS, pas psy</td>
+                        </tr>
+                        <tr>
+                            <td><code>MT_V1_033</code></td>
+                            <td>Informer sur les droits des aidants</td>
+                            <td>💡 INFO</td>
+                            <td>Droits = compétence AS</td>
+                        </tr>
+                        <tr>
+                            <td><code>MT_V1_034</code></td>
+                            <td>Proposer des solutions d'aménagement</td>
+                            <td>📍 STRUC</td>
+                            <td>Aménagement = action AS</td>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--idea);">NOUVELLE</td>
+                            <td>Faciliter la prise de contact avec l'AS</td>
+                            <td>📍 SEC</td>
+                            <td>Sécuriser l'orientation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 class="cat-title">CAT_02 — Répit et relais</h3>
+            <div class="alert error" style="margin-top:0;">
+                <span class="icon">❌</span>
+                <div>Aucune MT legacy rattachée à cette catégorie.</div>
+            </div>
+            <div class="proposals" style="margin-top:12px;">
+                <div class="title">💡 Redistribution proposée</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MT</th>
+                            <th>Libellé</th>
+                            <th>📍/💡</th>
+                            <th>Pourquoi ici ?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>MT_V1_030</code></td>
+                            <td>Orienter vers des solutions de répit</td>
+                            <td>💡 INFO</td>
+                            <td>MT la plus évidente pour CAT_02</td>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--idea);">NOUVELLE</td>
+                            <td>Identifier la plateforme de répit du territoire</td>
+                            <td>📍 STRUC</td>
+                            <td>Transformer l'info en action</td>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--idea);">NOUVELLE</td>
+                            <td>Organiser un premier contact avec la plateforme</td>
+                            <td>📍 SEC</td>
+                            <td>Sécuriser l'accès au répit</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 class="cat-title">CAT_03 — Soutien psychologique <span class="badge ccc" style="margin-left:8px;">🟠
+                    CCC</span></h3>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Après redistribution proposée — MT
+                restantes dans cette catégorie :</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>MT ID</th>
+                        <th>Libellé</th>
+                        <th>Type</th>
+                        <th>📍/💡</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>MT_V1_029</code></td>
+                        <td>Proposer un soutien psychologique</td>
+                        <td><span class="badge contrib">SEC</span></td>
+                        <td>📍</td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_027</code></td>
+                        <td>Rester attentif aux signaux de dégradation</td>
+                        <td><span class="badge info">ORGA</span></td>
+                        <td>💡</td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_028</code></td>
+                        <td>Identifier les domaines les plus impactés</td>
+                        <td><span class="badge info">ORGA</span></td>
+                        <td>💡</td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_031</code></td>
+                        <td>Identifier les activités les plus impactées</td>
+                        <td><span class="badge info">ORGA</span></td>
+                        <td>💡</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ACTION 4 : ENRICHIR -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">4</div>
+            <div>
+                <div class="label">ENRICHIR — Acteurs, Typologie, Justification</div>
+                <h2>Métadonnées des MT</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>MT ID</th>
+                        <th>Libellé</th>
+                        <th>Type</th>
+                        <th>Acteur</th>
+                        <th>📍/💡</th>
+                        <th>Justification</th>
+                        <th>Cat.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>MT_V1_029</code></td>
+                        <td>Proposer soutien psychologique</td>
+                        <td><span class="badge contrib">SEC</span></td>
+                        <td>Médecin traitant</td>
+                        <td>📍</td>
+                        <td>Prévenir la dégradation psychique</td>
+                        <td>CAT_03</td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_034</code></td>
+                        <td>Proposer solutions d'aménagement</td>
+                        <td><span class="badge contrib">STRUC</span></td>
+                        <td>IDEC</td>
+                        <td>📍</td>
+                        <td>Adapter l'organisation quotidienne</td>
+                        <td>CAT_03 <span class="badge warn">→01?</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_027</code></td>
+                        <td>Rester attentif signaux dégradation</td>
+                        <td><span class="badge info">ORGA</span></td>
+                        <td>IDEC</td>
+                        <td>💡</td>
+                        <td>Vigilance continue</td>
+                        <td>CAT_03</td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_028</code></td>
+                        <td>Identifier domaines impactés</td>
+                        <td><span class="badge info">ORGA</span></td>
+                        <td>IDEC</td>
+                        <td>💡</td>
+                        <td>Prioriser les interventions</td>
+                        <td>CAT_03</td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_030</code></td>
+                        <td>Orienter vers répit</td>
+                        <td><span class="badge info">INFO</span></td>
+                        <td>IDEC</td>
+                        <td>💡</td>
+                        <td>Informer sur le répit</td>
+                        <td>CAT_03 <span class="badge warn">→02?</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_031</code></td>
+                        <td>Identifier activités impactées</td>
+                        <td><span class="badge info">ORGA</span></td>
+                        <td>IDEC</td>
+                        <td>💡</td>
+                        <td>Compléter le diagnostic</td>
+                        <td>CAT_03</td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_032</code></td>
+                        <td>Évaluer impact professionnel</td>
+                        <td><span class="badge info">ORGA</span></td>
+                        <td>IDEC</td>
+                        <td>💡</td>
+                        <td>Mesurer les sacrifices pro</td>
+                        <td>CAT_03 <span class="badge warn">→01?</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>MT_V1_033</code></td>
+                        <td>Informer sur droits aidants</td>
+                        <td><span class="badge info">INFO</span></td>
+                        <td>IDEC</td>
+                        <td>💡</td>
+                        <td>Accès méconnu aux dispositifs légaux</td>
+                        <td>CAT_03 <span class="badge warn">→01?</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top:16px; display:flex; gap:16px; flex-wrap:wrap;">
+                <div style="background:var(--surface2);border-radius:8px;padding:12px 16px;flex:1;min-width:120px;">
+                    <div style="font-size:24px;font-weight:800;color:var(--accent-light);">8</div>
+                    <div style="font-size:11px;color:var(--text-muted);">MT totales</div>
+                </div>
+                <div style="background:var(--surface2);border-radius:8px;padding:12px 16px;flex:1;min-width:120px;">
+                    <div style="font-size:24px;font-weight:800;color:var(--accent-light);">2</div>
+                    <div style="font-size:11px;color:var(--text-muted);">📍 Contributives</div>
+                </div>
+                <div style="background:var(--surface2);border-radius:8px;padding:12px 16px;flex:1;min-width:120px;">
+                    <div style="font-size:24px;font-weight:800;color:var(--text-muted);">6</div>
+                    <div style="font-size:11px;color:var(--text-muted);">💡 Non-contrib.</div>
+                </div>
+                <div style="background:var(--surface2);border-radius:8px;padding:12px 16px;flex:1;min-width:120px;">
+                    <div style="font-size:24px;font-weight:800;color:var(--warn);">4</div>
+                    <div style="font-size:11px;color:var(--text-muted);">⚠️ Mal catégorisées</div>
+                </div>
+            </div>
+
+            <div class="proposals" style="margin-top:16px;">
+                <div class="title">💡 Propositions — Types et acteurs</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Proposition</th>
+                            <th>Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>MT_V1_032 → type SEC</strong> (pas ORGA)</td>
+                            <td>Évaluer l'impact pro = sécurisation (prévenir un arrêt non anticipé)</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>MT_V1_033 → acteur AS</strong> (pas IDEC)</td>
+                            <td>L'AS est légitime pour informer sur les droits</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>MT_V1_029 → noter "prescription"</strong></td>
+                            <td>Soutien psy nécessite prescription médicale → info pour le workflow IDEC</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION 5 : WORDING -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">5</div>
+            <div>
+                <div class="label">WORDING — Reco = conseil, MT = action</div>
+                <h2>Vérification du ton et versioning IDEC</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="reasoning">
+                <div class="title">🧠 Raisonnement</div>
+                La reco doit être un <strong>CONSEIL bienveillant</strong>, pas un ordre. L'aidant est en situation
+                difficile — on l'accompagne. Le texte IDEC peut être plus directif car c'est pour un professionnel.
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cat.</th>
+                        <th>Niveau</th>
+                        <th>Texte actuel</th>
+                        <th>Verdict</th>
+                        <th>Correction proposée</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CAT_01</td>
+                        <td><span class="badge ccc">🟠</span></td>
+                        <td>« Contacter une assistante sociale »</td>
+                        <td style="color:var(--fail);">❌ Directif</td>
+                        <td style="font-size:12px;color:var(--text-muted);">« Vous pouvez être accompagné par une AS
+                            pour alléger l'impact sur votre quotidien »</td>
+                    </tr>
+                    <tr>
+                        <td>CAT_02</td>
+                        <td><span class="badge ccc">🟠</span></td>
+                        <td>« Contactez la plateforme de répit de votre territoire »</td>
+                        <td style="color:var(--fail);">❌ Directif</td>
+                        <td style="font-size:12px;color:var(--text-muted);">« Des solutions de répit existent dans votre
+                            territoire pour vous soulager »</td>
+                    </tr>
+                    <tr>
+                        <td>CAT_03</td>
+                        <td><span class="badge ccc">🟠</span></td>
+                        <td>« Discutez des difficultés d'être aidant avec votre médecin traitant »</td>
+                        <td style="color:var(--success);">✅ Conseil</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="divider"></div>
+
+            <h3 class="cat-title">Versioning Utilisateur / IDEC</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cat.</th>
+                        <th>Lvl</th>
+                        <th>Texte Utilisateur</th>
+                        <th>Texte IDEC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CAT_01</td>
+                        <td><span class="badge ccc">🟠</span></td>
+                        <td>Contacter une assistante sociale</td>
+                        <td>Rappeler à l'aidant de contacter l'AS</td>
+                    </tr>
+                    <tr>
+                        <td>CAT_02</td>
+                        <td><span class="badge ccc">🟠</span></td>
+                        <td>Contactez la plateforme de répit</td>
+                        <td>Orienter vers la plateforme de répit. Faciliter la prise de contact.</td>
+                    </tr>
+                    <tr>
+                        <td>CAT_03</td>
+                        <td><span class="badge ccc">🟠</span></td>
+                        <td>Discutez des difficultés avec votre MT</td>
+                        <td>Contacter le MT pour prescription de soutien psychologique</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="proposals" style="margin-top:16px;">
+                <div class="title">💡 Propositions — Wording</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Proposition</th>
+                            <th>Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>CAT_01 IDEC trop passif</strong></td>
+                            <td>"Rappeler" est faible → "Organiser l'orientation vers l'AS du secteur"</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>CAT_03 IDEC ambigu</strong></td>
+                            <td>"Contacter le MT" → qui contacte ? → "L'IDEC contacte le MT pour demander une
+                                prescription psy"</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Version 🟢 Standard plus douce</strong></td>
+                            <td>Information, pas orientation. Ex: "Il existe des AS spécialisées dans l'accompagnement
+                                des aidants"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION 6 : COHÉRENCE -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">6</div>
+            <div>
+                <div class="label">COHÉRENCE — Prévention + Contrôle global</div>
+                <h2>Checklist de validation</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="alert error" style="margin-top:0;">
+                <span class="icon">❌</span>
+                <div><strong>Reco prévention ⚪</strong> — Manquante. Aucune reco quand R1 n'est pas activé.</div>
+            </div>
+
+            <div class="proposals" style="margin-top:16px;">
+                <div class="title">💡 Proposition de reco prévention</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Texte Utilisateur</th>
+                            <th>Texte IDEC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>« L'aidance peut avoir un impact sur votre vie sans que vous vous en rendiez compte.
+                                N'hésitez pas à en parler si vous ressentez des changements. »</td>
+                            <td>« Surveiller l'apparition de signaux d'impact. Réévaluer au prochain suivi. »</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top:24px;">
+                <div class="check-item"><span class="check-icon fail">✗</span> Chaque question du MP → ≥1 règle —
+                    <em>O28 uniquement en combo, jamais seule</em></div>
+                <div class="check-item"><span class="check-icon ok">✓</span> Chaque règle → ≥1 version de reco</div>
+                <div class="check-item"><span class="check-icon fail">✗</span> Chaque catégorie → ses MT — <em>CAT_01 et
+                        CAT_02 sans MT</em></div>
+                <div class="check-item"><span class="check-icon ok">✓</span> K3 respecté</div>
+                <div class="check-item"><span class="check-icon ok">✓</span> Aucune MT orpheline</div>
+                <div class="check-item"><span class="check-icon fail">✗</span> Reco prévention — <em>Manquante</em>
+                </div>
+                <div class="check-item"><span class="check-icon fail">✗</span> Wording conseil — <em>2 recos trop
+                        directives</em></div>
+                <div class="check-item"><span class="check-icon ok">✓</span> Sens clinique renseigné</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SYNTHÈSE -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num" style="background:var(--accent);">★</div>
+            <div>
+                <div class="label">Synthèse finale</div>
+                <h2>R1 — État + Décisions à prendre</h2>
+            </div>
+        </div>
+        <div class="section-body">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="value">3</div>
+                    <div class="label">Catégories reco</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">4</div>
+                    <div class="label">Versions totales</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value" style="color:var(--ccc);">0/2/1</div>
+                    <div class="label">🔴 / 🟠 / 🟢</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">2 / 6</div>
+                    <div class="label">📍 / 💡 MTs</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value" style="color:var(--fail);">Non</div>
+                    <div class="label">Prévention</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value" style="font-size:18px;">4/8</div>
+                    <div class="label">Checks OK</div>
+                </div>
+            </div>
+
+            <div style="margin-top:24px;">
+                <h3 class="cat-title">📋 Décisions à prendre</h3>
+                <table class="decision-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Décision</th>
+                            <th>Priorité</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Valider les 3 catégories (ou 4 avec "droits")</td>
+                            <td class="priority-med">🟠 Haute</td>
+                            <td>Structure des recos</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Créer une règle critique pour N7 = « Arrêt »</td>
+                            <td class="priority-high">🔴 Haute</td>
+                            <td>Sécurité patient</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Créer les versions Standard manquantes</td>
+                            <td class="priority-low">🟡 Moyenne</td>
+                            <td>Couverture Q/A</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Redistribuer les MT entre catégories</td>
+                            <td class="priority-med">🟠 Haute</td>
+                            <td>Cohérence des actions</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Corriger le wording de 2 recos</td>
+                            <td class="priority-low">🟡 Moyenne</td>
+                            <td>UX / ton</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Créer la reco prévention</td>
+                            <td class="priority-med">🟠 Haute</td>
+                            <td>Couverture complète</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Statuer sur O28 seule</td>
+                            <td class="priority-low">🟡 Moyenne</td>
+                            <td>Couverture Q/A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;padding:40px 0;color:var(--text-muted);font-size:12px;">
+        Fiche de validation MP — MONKA KERNEL v5 — Généré le 12/02/2026
+    </div>
+
+</body>
+
+</html>
