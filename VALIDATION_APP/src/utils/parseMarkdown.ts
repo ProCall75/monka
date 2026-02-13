@@ -26,14 +26,29 @@ import F4_RAW from '../../data/F4.md?raw';
 import F5_RAW from '../../data/F5.md?raw';
 import F6_RAW from '../../data/F6.md?raw';
 
+// Import raw markdown content — V5
+import M1_RAW from '../../data/M1.md?raw';
+import M2_RAW from '../../data/M2.md?raw';
+import M3_RAW from '../../data/M3.md?raw';
+import M4_RAW from '../../data/M4.md?raw';
+import M5_RAW from '../../data/M5.md?raw';
+import M6_RAW from '../../data/M6.md?raw';
+
 function extractDecisionItems(sectionId: string, content: string, vuln: string): DecisionItem[] {
     const items: DecisionItem[] = [];
 
     // Dynamic patterns based on vulnerability
     // V1: MT_V1_012 (global numbering, no MP ID in MT name)
     // V2: MT_V2_A1_01 (MP ID embedded in MT name)
-    // V1: MT_V1_012 (global numbering) — V2: MT_V2_A1_01 (MP ID in name) — V3: MT_V3_004 (global numbering like V1) — V4: MT_V4_063 (global numbering like V1/V3)
-    const mtIdPattern = (vuln === 'V1' || vuln === 'V3' || vuln === 'V4') ? `MT_${vuln}_\\d+` : `MT_${vuln}_${sectionId.split('_')[0]}_\\d+`;
+    // V5 uses legacy MT_V4_xxx patterns
+    let mtIdPattern: string;
+    if (vuln === 'V5') {
+        mtIdPattern = `MT_V4_\\d+|MT_V5_${sectionId.split('_')[0]}_(?:P|PREV_)\\d+`;
+    } else if (vuln === 'V1' || vuln === 'V3' || vuln === 'V4') {
+        mtIdPattern = `MT_${vuln}_\\d+`;
+    } else {
+        mtIdPattern = `MT_${vuln}_${sectionId.split('_')[0]}_\\d+`;
+    }
 
     // Extract MT wording items (💡 markers)
     const mtWordingRegex = new RegExp(
@@ -78,22 +93,32 @@ function parseMarkdown(id: string, raw: string, vuln: string): MPData {
     const questionsMatch = raw.match(/Total\s*:\s*(\d+)\s*questions/i);
     const questions = questionsMatch ? parseInt(questionsMatch[1]) : 0;
 
-    const mpPrefix = vuln === 'V1' ? 'R' : vuln === 'V2' ? 'A' : vuln === 'V3' ? 'S' : vuln === 'V4' ? 'F' : 'X';
+    const mpPrefix = vuln === 'V1' ? 'R' : vuln === 'V2' ? 'A' : vuln === 'V3' ? 'S' : vuln === 'V4' ? 'F' : vuln === 'V5' ? 'M' : 'X';
 
     const catRegex = new RegExp(`${id}_CAT_\\d+`, 'g');
     const catMatches = raw.match(catRegex);
     const categories = catMatches ? new Set(catMatches).size : 0;
 
-    const ruleRegex = new RegExp(`V\\d_${id}_(STD|CCC|CRIT)_\\d+`, 'g');
+    const ruleRegex = new RegExp(`V\\d_${id}_(STD|CCC|CRIT)_P?\\d+`, 'g');
     const ruleMatches = raw.match(ruleRegex);
     const rules = ruleMatches ? new Set(ruleMatches).size : 0;
 
     // V1: MT_V1_012 (global numbering) — V2: MT_V2_A1_01 (MP ID in name) — V3: MT_V3_004 (global like V1) — V4: MT_V4_063 (global like V1/V3)
-    const mtRegex = (vuln === 'V1' || vuln === 'V3' || vuln === 'V4')
-        ? new RegExp(`MT_${vuln}_\\d+`, 'g')
-        : new RegExp(`MT_${vuln}_${id}_\\d+`, 'g');
-    const mtMatches = raw.match(mtRegex);
-    const microTasks = mtMatches ? new Set(mtMatches).size : 0;
+    // V5: Mixed pattern — legacy MTs use MT_V4_xxx, proposed use MT_V5_Mx_xxx. Count both.
+    let mtMatches: string[] = [];
+    if (vuln === 'V5') {
+        // V5 uses legacy MT_V4_xxx and proposed MT_V5_Mx_xxx and prevention MT_V5_Mx_PREV_xx
+        const legacyMtRegex = /MT_V4_\d+/g;
+        const proposedMtRegex = new RegExp(`MT_V5_${id}_(?:P|PREV_)\\d+`, 'g');
+        const legacyMatches = raw.match(legacyMtRegex) || [];
+        const proposedMatches = raw.match(proposedMtRegex) || [];
+        mtMatches = [...legacyMatches, ...proposedMatches];
+    } else if (vuln === 'V1' || vuln === 'V3' || vuln === 'V4') {
+        mtMatches = raw.match(new RegExp(`MT_${vuln}_\\d+`, 'g')) || [];
+    } else {
+        mtMatches = raw.match(new RegExp(`MT_${vuln}_${id}_\\d+`, 'g')) || [];
+    }
+    const microTasks = new Set(mtMatches).size;
 
     // Split into sections by H2
     const sections: MPSection[] = [];
@@ -171,5 +196,12 @@ export function loadAllMPs(): MPData[] {
         parseMarkdown('F4', F4_RAW, 'V4'),
         parseMarkdown('F5', F5_RAW, 'V4'),
         parseMarkdown('F6', F6_RAW, 'V4'),
+        // V5 — Parcours Médical
+        parseMarkdown('M1', M1_RAW, 'V5'),
+        parseMarkdown('M2', M2_RAW, 'V5'),
+        parseMarkdown('M3', M3_RAW, 'V5'),
+        parseMarkdown('M4', M4_RAW, 'V5'),
+        parseMarkdown('M5', M5_RAW, 'V5'),
+        parseMarkdown('M6', M6_RAW, 'V5'),
     ];
 }
