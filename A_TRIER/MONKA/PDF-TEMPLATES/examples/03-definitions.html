@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Typologie des Questions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a1a;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            height: 6px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 48px 100px 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #1a1a1a;
+            margin-bottom: 36px;
+            flex-shrink: 0;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .section-num {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        /* Table */
+        .table-container {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 14px 24px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #6b7280;
+            background: #f9fafb;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        td {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .type-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .type-tag {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            margin-top: 6px;
+        }
+
+        .tag-scoring {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .tag-trigger {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .tag-critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tag-descriptive {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .type-effect {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .rule-box {
+            margin-top: 32px;
+            padding: 20px 28px;
+            background: #f9fafb;
+            border-left: 4px solid #7748F6;
+            flex-shrink: 0;
+        }
+
+        .rule-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #7748F6;
+            margin-bottom: 6px;
+        }
+
+        .rule-text {
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 20px;
+            opacity: 0.6;
+        }
+
+        .footer-separator {
+            width: 1px;
+            height: 16px;
+            background: #e5e7eb;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .page-num {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        @media print {
+
+            html,
+            body {
+                overflow: hidden;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-bar"></div>
+
+        <div class="content">
+            <div class="page-header">
+                <h1 class="page-title">Typologie des Questions</h1>
+                <span class="section-num">Section 4.1</span>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 28%;">Type</th>
+                            <th style="width: 72%;">Effet moteur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="type-name">Scorante</div>
+                                <span class="type-tag tag-scoring">Score</span>
+                            </td>
+                            <td>
+                                <div class="type-effect">Incrémente le score de vulnérabilité</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="type-name">Déclenchante (trigger)</div>
+                                <span class="type-tag tag-trigger">Trigger</span>
+                            </td>
+                            <td>
+                                <div class="type-effect">Active un micro-parcours spécifique si option sélectionnée
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="type-name">Critique</div>
+                                <span class="type-tag tag-critical">Urgent</span>
+                            </td>
+                            <td>
+                                <div class="type-effect">Force priorité niveau 1 (≤7 jours) si option critique
+                                    sélectionnée</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="type-name">Descriptive</div>
+                                <span class="type-tag tag-descriptive">Contexte</span>
+                            </td>
+                            <td>
+                                <div class="type-effect">Contexte uniquement, pas d'effet algorithmique</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="rule-box">
+                    <div class="rule-label">Règle Legacy</div>
+                    <div class="rule-text">1 question = 1 rôle. Une question ne peut avoir qu'un seul type parmi les
+                        quatre.</div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="../assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-separator"></div>
+                    <img src="../assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="page-num">5</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

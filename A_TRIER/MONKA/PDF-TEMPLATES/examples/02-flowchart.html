@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fonctionnement du Moteur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a1a;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            height: 6px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 48px 100px 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #1a1a1a;
+            margin-bottom: 36px;
+            flex-shrink: 0;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .section-num {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        /* Main grid */
+        .main-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 60px;
+            overflow: hidden;
+        }
+
+        /* Flowchart */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .flow-number {
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flow-num-circle {
+            width: 28px;
+            height: 28px;
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .flow-line {
+            width: 2px;
+            flex: 1;
+            background: #e5e7eb;
+            margin-top: 6px;
+        }
+
+        .flow-content {
+            flex: 1;
+            padding-bottom: 20px;
+            padding-left: 16px;
+        }
+
+        .flow-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .flow-desc {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Priority */
+        .priority-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            padding-left: 56px;
+        }
+
+        .priority-box {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            background: #fafafa;
+        }
+
+        .priority-level {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .priority-1 .priority-level {
+            color: #dc2626;
+        }
+
+        .priority-2 .priority-level {
+            color: #d97706;
+        }
+
+        .priority-3 .priority-level {
+            color: #059669;
+        }
+
+        .priority-text {
+            font-size: 12px;
+        }
+
+        .priority-delay {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            border-left: 1px solid #e5e7eb;
+            padding-left: 40px;
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 24px;
+        }
+
+        .sidebar-block {
+            margin-bottom: 28px;
+        }
+
+        .sidebar-block-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .sidebar-text {
+            font-size: 12px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .sidebar-formula {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 12px;
+            background: #f3f4f6;
+            padding: 10px 14px;
+            margin-top: 10px;
+            border-left: 3px solid #7748F6;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 20px;
+            opacity: 0.6;
+        }
+
+        .footer-separator {
+            width: 1px;
+            height: 16px;
+            background: #e5e7eb;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .page-num {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        @media print {
+
+            html,
+            body {
+                overflow: hidden;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-bar"></div>
+
+        <div class="content">
+            <div class="page-header">
+                <h1 class="page-title">Fonctionnement du Moteur</h1>
+                <span class="section-num">Section 3</span>
+            </div>
+
+            <div class="main-grid">
+                <div class="flowchart">
+                    <div class="flow-step">
+                        <div class="flow-number">
+                            <div class="flow-num-circle">1</div>
+                            <div class="flow-line"></div>
+                        </div>
+                        <div class="flow-content">
+                            <div class="flow-title">Le moteur enregistre la réponse</div>
+                            <div class="flow-desc">L'utilisateur répond à une question du questionnaire.</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">
+                            <div class="flow-num-circle">2</div>
+                            <div class="flow-line"></div>
+                        </div>
+                        <div class="flow-content">
+                            <div class="flow-title">Calcul du score</div>
+                            <div class="flow-desc">Additionne les points des réponses aux questions scorantes, puis
+                                ramène sur 20.</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">
+                            <div class="flow-num-circle">3</div>
+                            <div class="flow-line"></div>
+                        </div>
+                        <div class="flow-content">
+                            <div class="flow-title">Vérifie les combinaisons (CCC)</div>
+                            <div class="flow-desc">Si plusieurs réponses à risque ensemble → alerte via Conditions
+                                Critiques Composites.</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">
+                            <div class="flow-num-circle">4</div>
+                            <div class="flow-line"></div>
+                        </div>
+                        <div class="flow-content">
+                            <div class="flow-title">Active les parcours concernés</div>
+                            <div class="flow-desc">Selon la réponse directe ou via une combinaison CCC.</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">
+                            <div class="flow-num-circle">5</div>
+                        </div>
+                        <div class="flow-content">
+                            <div class="flow-title">Détermine l'urgence</div>
+                            <div class="flow-desc">Attribution du niveau de priorité selon les déclencheurs.</div>
+                        </div>
+                    </div>
+
+                    <div class="priority-row">
+                        <div class="priority-box priority-1">
+                            <div class="priority-level">Niveau 1</div>
+                            <div class="priority-text">Question critique</div>
+                            <div class="priority-delay">≤ 7 jours</div>
+                        </div>
+                        <div class="priority-box priority-2">
+                            <div class="priority-level">Niveau 2</div>
+                            <div class="priority-text">CCC activée</div>
+                            <div class="priority-delay">≤ 15 jours</div>
+                        </div>
+                        <div class="priority-box priority-3">
+                            <div class="priority-level">Niveau 3</div>
+                            <div class="priority-text">Score seul</div>
+                            <div class="priority-delay">> 1 mois</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar">
+                    <div class="sidebar-title">Références clés</div>
+
+                    <div class="sidebar-block">
+                        <div class="sidebar-block-title">Algorithme de scoring</div>
+                        <div class="sidebar-text">Le calcul se fait en 2 temps : score brut puis normalisation.</div>
+                        <div class="sidebar-formula">Score = (Brut / Max) × 20</div>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <div class="sidebar-block-title">CCC</div>
+                        <div class="sidebar-text">Conditions Critiques Composites : règles booléennes combinant
+                            plusieurs réponses via logique ET/OU.</div>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <div class="sidebar-block-title">Micro-parcours</div>
+                        <div class="sidebar-text">24 parcours adaptatifs sur 5 vulnérabilités : R1-R4, F1-F6, S1-S4,
+                            M1-M6, A1-A4.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="../assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-separator"></div>
+                    <img src="../assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="page-num">3</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

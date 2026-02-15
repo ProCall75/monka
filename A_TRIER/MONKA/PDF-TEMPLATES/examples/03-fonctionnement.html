@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fonctionnement du Moteur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 48px 80px 40px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Clean header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 40px;
+            flex-shrink: 0;
+        }
+
+        .section-tag {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999999;
+        }
+
+        .page-title {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #111111;
+        }
+
+        .page-num {
+            font-size: 14px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        /* Main grid */
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            gap: 60px;
+            overflow: hidden;
+        }
+
+        /* Left: Flow diagram image */
+        .flow-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Right: Tables */
+        .tables-section {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .table-block {
+            background: #FFFFFF;
+        }
+
+        .table-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #999999;
+            margin-bottom: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 14px 0;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #666666;
+            border-bottom: 2px solid #111111;
+        }
+
+        td {
+            padding: 16px 0;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 15px;
+            color: #111111;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            padding-right: 24px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Priority indicators */
+        .priority {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .priority::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        .priority-1::before {
+            background: #DC2626;
+        }
+
+        .priority-2::before {
+            background: #D97706;
+        }
+
+        .priority-3::before {
+            background: #059669;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            height: 20px;
+            opacity: 0.4;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 16px;
+            background: #E0E0E0;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .footer-page {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7748F6;
+        }
+
+        @media print {
+
+            html,
+            body {
+                overflow: hidden;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+
+        <div class="content">
+            <div class="page-header">
+                <div>
+                    <span class="section-tag">Section 3</span>
+                    <h1 class="page-title">Fonctionnement du Moteur</h1>
+                </div>
+                <span class="page-num">03 / 08</span>
+            </div>
+
+            <div class="main-content">
+                <div class="flow-section">
+                    <img src="../assets/flow-diagram.png" alt="Flux de traitement" class="flow-image">
+                </div>
+
+                <div class="tables-section">
+                    <div class="table-block">
+                        <div class="table-label">Typologie des questions</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Fonction moteur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Scorante</td>
+                                    <td>Incrémente le score de vulnérabilité</td>
+                                </tr>
+                                <tr>
+                                    <td>Déclenchante</td>
+                                    <td>Active un micro-parcours spécifique</td>
+                                </tr>
+                                <tr>
+                                    <td>Critique directe</td>
+                                    <td>Force une priorité niveau 1 (≤7 jours)</td>
+                                </tr>
+                                <tr>
+                                    <td>Descriptive</td>
+                                    <td>Contexte, pas d'effet algorithmique</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-block">
+                        <div class="table-label">Priorisation automatique</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Niveau</th>
+                                    <th>Déclencheur</th>
+                                    <th>Délai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="priority priority-1">1</span></td>
+                                    <td>Question critique directe</td>
+                                    <td>≤ 7 jours</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="priority priority-2">2</span></td>
+                                    <td>CCC activée</td>
+                                    <td>≤ 15 jours</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="priority priority-3">3</span></td>
+                                    <td>Score + déclenchantes</td>
+                                    <td>> 1 mois</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="../assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-divider"></div>
+                    <img src="../assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="footer-page">03</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

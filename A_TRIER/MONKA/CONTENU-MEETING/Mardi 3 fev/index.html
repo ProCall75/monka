@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAGMA - MONKA Discovery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --text-primary: #111827;
+            /* Gray 900 */
+            --text-secondary: #4B5563;
+            /* Gray 600 */
+            --accent-purple: #7C3AED;
+            /* Violet 600 */
+            --accent-soft: #F3F4F6;
+            /* Gray 100 */
+            --border-color: #E5E7EB;
+            /* Gray 200 */
+
+            --slide-width: 297mm;
+            --slide-height: 210mm;
+            --margin: 20mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f0f0f0;
+            color: var(--text-primary);
+        }
+
+        .slides-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            gap: 40px;
+        }
+
+        .slide {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: var(--bg-color);
+            padding: var(--margin);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Global Layout --- */
+        .header {
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-left: 20px;
+            border-left: 6px solid var(--accent-purple);
+        }
+
+        .slide-title {
+            font-size: 32pt;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 0.2rem;
+        }
+
+        .slide-subtitle {
+            font-size: 16pt;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10pt;
+            color: var(--text-secondary);
+        }
+
+        /* --- Components --- */
+        .card-intro {
+            font-size: 24pt;
+            line-height: 1.5;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .highlight {
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+
+        /* --- Slide 1: Cover --- */
+        .slide.cover {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* --- Slide 2: Section Title Cover --- */
+        .slide.section-cover {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--accent-purple);
+            /* Option: Colored background or White? User said "centrée avec marqué qui nous sommes". Usually simple white is safer unless specified. keeping white for consistency with print */
+            background: #FFFFFF;
+        }
+
+        .section-title {
+            font-size: 60pt;
+            font-weight: 800;
+            color: var(--text-primary);
+            /* color: #FFFFFF; if dark bg */
+        }
+
+        .logos-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 120px;
+            /* Large space between logos */
+            width: 100%;
+        }
+
+        /* Specific sizing for balance */
+        .logo-pragma {
+            height: 350px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-monka {
+            height: 120px;
+            /* Usually wider, so smaller height balances */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .x-separator {
+            font-size: 60pt;
+            font-weight: 200;
+            color: #E5E7EB;
+            /* Very subtle gray */
+            margin: 0 40px;
+            padding-bottom: 10px;
+            /* Alignment tweak */
+        }
+
+        /* --- Slide 3: Problem / Solution (Combined) --- */
+        .ps-grid {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            gap: 10px;
+            height: 100%;
+            padding: 5px 0;
+        }
+
+        .ps-row {
+            display: grid;
+            grid-template-columns: 0.8fr 0.2fr 1fr;
+            align-items: center;
+            padding: 12px 24px;
+            background: var(--accent-soft);
+            border-radius: 12px;
+            transition: transform 0.2s;
+            text-decoration: none;
+            /* For links */
+            cursor: pointer;
+        }
+
+        .ps-row:hover {
+            transform: translateX(10px);
+            background: #EDE9FE;
+            /* Light purple hover */
+        }
+
+        .ps-arrow {
+            text-align: center;
+            font-size: 18pt;
+            color: var(--accent-purple);
+            font-weight: bold;
+        }
+
+        .ps-col-left,
+        .ps-col-right {
+            padding: 0 20px;
+        }
+
+        .ps-label {
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .ps-text-pain {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .ps-text-sol {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--accent-purple);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* --- Slide 4: Questions --- */
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-left: 20px;
+        }
+
+        .question-item {
+            font-size: 32pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .question-mark {
+            color: var(--accent-purple);
+            font-weight: 800;
+        }
+
+        /* --- Slide 5: Next Steps --- */
+        .steps-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .step-big {
+            font-size: 42pt;
+            font-weight: 800;
+            color: var(--accent-purple);
+            margin-bottom: 40px;
+        }
+
+        .step-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .step-opt {
+            background: var(--accent-soft);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16pt;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Print Override */
+        @media print {
+            body {
+                background: none;
+            }
+
+            .slides-container {
+                display: block;
+                padding: 0;
+            }
+
+            .slide {
+                width: 100%;
+                height: 100vh;
+                box-shadow: none;
+                margin: 0;
+                border: none;
+                page-break-after: always;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+
+            /* Remove underline on print if desired, but keep for interactivity hint */
+            .ps-text-sol {
+                text-decoration: none;
+                color: var(--accent-purple);
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slides-container">
+
+        <!-- SLIDE 1: COVER (Logos Only) -->
+        <div class="slide cover">
+            <div class="logos-container">
+                <!-- Pragma Logo -->
+                <img src="pragma-logo-transparent.png" alt="PRAGMA" class="logo-pragma">
+
+                <span class="x-separator">×</span>
+
+                <!-- Monka Logo -->
+                <img src="monka-logo-transparent.png" alt="MONKA" class="logo-monka">
+            </div>
+        </div>
+
+        <!-- SLIDE 2: SECTION TITLE (Simplified) -->
+        <div class="slide section-cover">
+            <h1 class="section-title">Qui nous sommes</h1>
+
+            <div class="footer" style="width: 100%; position: absolute; bottom: 20mm; padding: 0 40mm;">
+                <span>PRAGMA</span>
+                <span>2 / 4</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: PAIN / PRODUIT (Clickable) -->
+        <div class="slide">
+            <div class="header">
+                <h2 class="slide-title">Pistes à explorer</h2>
+                <p class="slide-subtitle">De l'enjeu au produit concret (Cliquez pour voir).</p>
+            </div>
+
+            <div class="content">
+                <div class="ps-grid">
+                    <!-- Row 1: Portail -->
+                    <a href="DEMO-Portail-Partenaires.html" target="_blank" class="ps-row">
+                        <div class="ps-col-left">
+                            <span class="ps-label">L'Enjeu</span>
+                            <div class="ps-text-pain">Prouver la rentabilité Clinique</div>
+                        </div>
+                        <div class="ps-arrow">→</div>
+                        <div class="ps-col-right">
+                            <span class="ps-label">Le Produit</span>
+                            <div class="ps-text-sol">Portail Partenaires 360°</div>
+                        </div>
+                    </a>
+
+                    <!-- Row 2: App IDEC -->
+                    <a href="DEMO-Copilote-IDEC.html" target="_blank" class="ps-row">
+                        <div class="ps-col-left">
+                            <span class="ps-label">L'Enjeu</span>
+                            <div class="ps-text-pain">Prioriser les urgences médicales</div>
+                        </div>
+                        <div class="ps-arrow">→</div>
+                        <div class="ps-col-right">
+                            <span class="ps-label">Le Produit</span>
+                            <div class="ps-text-sol">App pour l'IDEC</div>
+                        </div>
+                    </a>
+
+                    <!-- Row 3: Generateur AAP -->
+                    <a href="DEMO-Generateur-AAP.html" target="_blank" class="ps-row">
+                        <div class="ps-col-left">
+                            <span class="ps-label">L'Enjeu</span>
+                            <div class="ps-text-pain">Produire la documentation AAP</div>
+                        </div>
+                        <div class="ps-arrow">→</div>
+                        <div class="ps-col-right">
+                            <span class="ps-label">Le Produit</span>
+                            <div class="ps-text-sol">Générateur de Dossiers</div>
+                        </div>
+                    </a>
+
+                    <!-- Row 4: Monka Simulator -->
+                    <a href="DEMO-Monka-Simulator.html" target="_blank" class="ps-row">
+                        <div class="ps-col-left">
+                            <span class="ps-label">Le Moteur</span>
+                            <div class="ps-text-pain">Algorithme Questionnaires</div>
+                        </div>
+                        <div class="ps-arrow">→</div>
+                        <div class="ps-col-right">
+                            <span class="ps-label">Le Produit</span>
+                            <div class="ps-text-sol">Monka Simulator</div>
+                        </div>
+                    </a>
+
+                    <!-- Row 5: Newsletter Interne -->
+                    <a href="DEMO-Newsletter-IA.html" target="_blank" class="ps-row">
+                        <div class="ps-col-left">
+                            <span class="ps-label">L'Enjeu</span>
+                            <div class="ps-text-pain">Informer les parties prenantes</div>
+                        </div>
+                        <div class="ps-arrow">→</div>
+                        <div class="ps-col-right">
+                            <span class="ps-label">Le Produit</span>
+                            <div class="ps-text-sol">Newsletter Interne</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer">
+                <span>PRAGMA</span>
+                <span>3 / 4</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: MERCI -->
+        <div class="slide cover">
+            <h1 class="section-title" style="font-size: 80pt; color: var(--accent-purple);">Merci</h1>
+
+            <div class="footer" style="width: 100%; position: absolute; bottom: 20mm; padding: 0 40mm;">
+                <span>PRAGMA</span>
+                <span>4 / 4</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=0.5, user-scalable=yes">
+    <title>4. Structure des Livrables</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px 80px 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 32px;
+            flex-shrink: 0;
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #7748F6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #111111;
+            margin-top: 6px;
+        }
+
+        .page-num {
+            font-size: 13px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            overflow: hidden;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .table-block {
+            background: #FFFFFF;
+        }
+
+        .table-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 12px;
+        }
+
+        .diagram-box {
+            background: #FAFAFA;
+            border-radius: 4px;
+            padding: 20px 24px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        .note-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            font-size: 15px;
+            color: #111111;
+            padding: 10px 0;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-bullet {
+            width: 6px;
+            height: 6px;
+            background: #7748F6;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.4;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 14px;
+            background: #E0E0E0;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #999999;
+        }
+
+        .footer-page {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7748F6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+        <div class="content">
+            <div class="page-header">
+                <div>
+                    <span class="section-num">Section 4</span>
+                    <h1 class="page-title">Structure des Livrables</h1>
+                </div>
+                <span class="page-num">06 / 08</span>
+            </div>
+            <div class="main-content">
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">4.1 Organisation fichiers</div>
+                        <div class="diagram-box">monka/
+                            ├── QUESTIONNAIRE/
+                            │ └── V[1-5]_*/base/
+                            │ ├── questions.md # Questions + options
+                            │ ├── recommendations.md # Mappings recommandations
+                            │ ├── ccc_recommendations.md
+                            │ └── asr_definitions.md
+                            │
+                            ├── SOURCES/extracted/
+                            │ └── *.json # Données structurées
+                            │
+                            └── DEMO/
+                            └── monka_simulator.html # Prototype fonctionnel</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">4.2 Prototype HTML</div>
+                        <p class="note-text">Fichier autonome contenant :</p>
+                        <ul class="feature-list" style="margin-top: 16px;">
+                            <li><span class="feature-bullet"></span>Interface questionnaire</li>
+                            <li><span class="feature-bullet"></span>Moteur de règles JavaScript</li>
+                            <li><span class="feature-bullet"></span>Données V1 intégrées</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-divider"></div>
+                    <img src="assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="footer-page">06</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=0.5, user-scalable=yes">
+    <title>3. Fonctionnement du Moteur (suite)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 36px 80px 28px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #7748F6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #111111;
+            margin-top: 6px;
+        }
+
+        .page-num {
+            font-size: 13px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 32px;
+            overflow: hidden;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .table-block {
+            background: #FFFFFF;
+        }
+
+        .table-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #666666;
+            border-bottom: 2px solid #111111;
+            background: #FAFAFA;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 13px;
+            color: #111111;
+            vertical-align: top;
+            line-height: 1.4;
+        }
+
+        td:first-child {
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .note-text {
+            font-size: 13px;
+            color: #666666;
+            line-height: 1.5;
+        }
+
+        .diagram-box {
+            background: #FAFAFA;
+            border-radius: 4px;
+            padding: 14px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 11px;
+            line-height: 1.5;
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.4;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 14px;
+            background: #E0E0E0;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #999999;
+        }
+
+        .footer-page {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7748F6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+        <div class="content">
+            <div class="page-header">
+                <div>
+                    <span class="section-num">Section 3 (suite)</span>
+                    <h1 class="page-title">Fonctionnement du Moteur — CCC, Micro-parcours, Priorisation</h1>
+                </div>
+                <span class="page-num">05 / 08</span>
+            </div>
+            <div class="main-content">
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">3.4 Conditions Critiques Composites (CCC)</div>
+                        <p class="note-text">Les CCC détectent des <strong>combinaisons</strong> de réponses à risque
+                            via une logique booléenne :</p>
+                        <div class="diagram-box" style="margin-top: 12px;">Exemple CCC :
+                            ┌─────────────────────────────────────────┐
+                            │ SI (Question A = "Oui") │
+                            │ ET (Question B = "Jamais") │
+                            │ ALORS → Activer Micro-parcours X │
+                            │ + Priorité niveau 2 │
+                            └─────────────────────────────────────────┘</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">3.5 Micro-parcours</div>
+                        <p class="note-text">Le moteur gère 24 micro-parcours adaptatifs répartis sur 5 vulnérabilités :
+                        </p>
+                        <table style="margin-top: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>V</th>
+                                    <th>Préfixe</th>
+                                    <th>Parcours</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>V1</td>
+                                    <td>R</td>
+                                    <td>R1, R2, R3, R4</td>
+                                </tr>
+                                <tr>
+                                    <td>V2</td>
+                                    <td>F</td>
+                                    <td>F1 → F6</td>
+                                </tr>
+                                <tr>
+                                    <td>V3</td>
+                                    <td>S</td>
+                                    <td>S1, S2, S3, S4</td>
+                                </tr>
+                                <tr>
+                                    <td>V4</td>
+                                    <td>M</td>
+                                    <td>M1 → M6</td>
+                                </tr>
+                                <tr>
+                                    <td>V5</td>
+                                    <td>A</td>
+                                    <td>A1, A2, A3, A4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="note-text" style="margin-top: 12px;">Chaque parcours contient des ASR (Actions
+                            Structurantes de Référence) avec états de suivi.</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">3.6 Priorisation</div>
+                        <p class="note-text">Le moteur calcule automatiquement le niveau de priorité :</p>
+                        <table style="margin-top: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>Niveau</th>
+                                    <th>Déclencheur</th>
+                                    <th>Délai max</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Question critique directe</td>
+                                    <td>≤ 7 jours</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>CCC activée</td>
+                                    <td>≤ 15 jours</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Score + déclenchantes</td>
+                                    <td>> 1 mois</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-divider"></div>
+                    <img src="assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="footer-page">05</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

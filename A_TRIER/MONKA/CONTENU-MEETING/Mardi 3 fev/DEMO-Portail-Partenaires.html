@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monka — Portail Partenaires</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Monka brand colors */
+            --mint: #5DDEBE;
+            --mint-soft: #E8FBF5;
+            --peach: #F5B895;
+            --peach-dark: #3D7A8C;
+            --light-blue: #E2F2FC;
+            --bg: #FAF9F7;
+            --white: #FFFFFF;
+            --black: #0A0A0A;
+            --text: #1A1A1A;
+            --text-2: #3B3B3B;
+            --text-3: #6B6B6B;
+            --border: #E5E5E5;
+            --red: #E85A5A;
+            --green: #22C55E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .logo span {
+            color: var(--text-3);
+            font-weight: 500;
+        }
+
+        .partner-badge {
+            background: var(--mint-soft);
+            color: var(--peach-dark);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .btn-primary {
+            background: var(--black);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--mint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Main content */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--text-3);
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+        }
+
+        .kpi-label {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .kpi-change {
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .kpi-change.positive {
+            color: var(--green);
+        }
+
+        .kpi-change.negative {
+            color: var(--red);
+        }
+
+        .kpi-card.highlight {
+            background: var(--mint);
+        }
+
+        .kpi-card.highlight .kpi-label {
+            color: var(--text-2);
+        }
+
+        /* Charts section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .period-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .period-btn {
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            border: none;
+            background: var(--bg);
+            color: var(--text-3);
+            cursor: pointer;
+        }
+
+        .period-btn.active {
+            background: var(--black);
+            color: white;
+        }
+
+        /* Chart placeholder */
+        .chart-placeholder {
+            height: 280px;
+            background: linear-gradient(180deg, var(--mint-soft) 0%, var(--bg) 100%);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            height: 200px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--mint);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+        .chart-bar::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+
+        /* ROI card */
+        .roi-display {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .roi-value {
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .roi-label {
+            font-size: 16px;
+            color: var(--text-3);
+            margin-bottom: 24px;
+        }
+
+        .roi-details {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .roi-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .roi-line:not(:last-child) {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .roi-line span:first-child {
+            color: var(--text-3);
+        }
+
+        .roi-line span:last-child {
+            font-weight: 600;
+        }
+
+        /* Table section */
+        .table-section {
+            margin-bottom: 40px;
+        }
+
+        .table-container {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 18px 28px;
+            text-align: left;
+        }
+
+        th {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-3);
+            background: var(--bg);
+        }
+
+        td {
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: var(--mint-soft);
+            color: var(--peach-dark);
+        }
+
+        .status-badge.pending {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        /* Export section */
+        .export-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+        }
+
+        .export-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .export-card {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .export-card:hover {
+            border-color: var(--mint);
+            background: var(--mint-soft);
+        }
+
+        .export-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .export-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .export-desc {
+            font-size: 12px;
+            color: var(--text-3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">Monka <span>Partners</span></div>
+            <span class="partner-badge">MGEN</span>
+        </div>
+        <div class="header-right">
+            <button class="btn btn-secondary">Support</button>
+            <button class="btn btn-primary">Exporter le rapport</button>
+            <div class="user-avatar">JD</div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="page-header">
+            <h1 class="page-title">Tableau de bord partenaire</h1>
+            <p class="page-subtitle">Suivi en temps réel de l'utilisation MyMonka par vos adhérents</p>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Adhérents inscrits</div>
+                <div class="kpi-value">847</div>
+                <div class="kpi-change positive">+12% vs mois dernier</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Utilisateurs actifs</div>
+                <div class="kpi-value">623</div>
+                <div class="kpi-change positive">+8% ce mois</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Accompagnements réalisés</div>
+                <div class="kpi-value">156</div>
+                <div class="kpi-change positive">+23% ce mois</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="kpi-label">Taux de satisfaction</div>
+                <div class="kpi-value">94%</div>
+                <div class="kpi-change">NPS moyen : 72</div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Inscriptions mensuelles</div>
+                    <div class="period-selector">
+                        <button class="period-btn">6M</button>
+                        <button class="period-btn active">12M</button>
+                        <button class="period-btn">Tout</button>
+                    </div>
+                </div>
+                <div class="chart-placeholder">
+                    <div class="chart-bars">
+                        <div class="chart-bar" style="height: 40%;" data-label="Fév"></div>
+                        <div class="chart-bar" style="height: 55%;" data-label="Mar"></div>
+                        <div class="chart-bar" style="height: 45%;" data-label="Avr"></div>
+                        <div class="chart-bar" style="height: 65%;" data-label="Mai"></div>
+                        <div class="chart-bar" style="height: 78%;" data-label="Juin"></div>
+                        <div class="chart-bar" style="height: 70%;" data-label="Juil"></div>
+                        <div class="chart-bar" style="height: 82%;" data-label="Août"></div>
+                        <div class="chart-bar" style="height: 68%;" data-label="Sep"></div>
+                        <div class="chart-bar" style="height: 90%;" data-label="Oct"></div>
+                        <div class="chart-bar" style="height: 85%;" data-label="Nov"></div>
+                        <div class="chart-bar" style="height: 95%;" data-label="Déc"></div>
+                        <div class="chart-bar" style="height: 100%;" data-label="Jan"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Retour sur investissement</div>
+                </div>
+                <div class="roi-display">
+                    <div class="roi-value">3.2x</div>
+                    <div class="roi-label">ROI estimé sur 12 mois</div>
+                    <div class="roi-details">
+                        <div class="roi-line">
+                            <span>Investissement annuel</span>
+                            <span>24 000 €</span>
+                        </div>
+                        <div class="roi-line">
+                            <span>Valeur générée</span>
+                            <span>76 800 €</span>
+                        </div>
+                        <div class="roi-line">
+                            <span>Économies estimées</span>
+                            <span>52 800 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dernières activités -->
+        <div class="table-section">
+            <div class="table-container">
+                <div class="table-header">
+                    <div class="card-title">Dernières inscriptions</div>
+                    <button class="btn btn-secondary">Voir tout</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Adhérent</th>
+                            <th>Date d'inscription</th>
+                            <th>Profil aidant</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Marie D.</td>
+                            <td>2 février 2026</td>
+                            <td>Fille aidante — Alzheimer</td>
+                            <td><span class="status-badge active">Accompagné</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pierre L.</td>
+                            <td>1er février 2026</td>
+                            <td>Conjoint aidant — AVC</td>
+                            <td><span class="status-badge active">Accompagné</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sophie M.</td>
+                            <td>31 janvier 2026</td>
+                            <td>Fille aidante — Parkinson</td>
+                            <td><span class="status-badge pending">En attente</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jean-Paul R.</td>
+                            <td>30 janvier 2026</td>
+                            <td>Fils aidant — Dépendance</td>
+                            <td><span class="status-badge active">Accompagné</span></td>
+                        </tr>
+                        <tr>
+                            <td>Catherine B.</td>
+                            <td>29 janvier 2026</td>
+                            <td>Conjointe aidante — Cancer</td>
+                            <td><span class="status-badge active">Accompagné</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Export -->
+        <div class="export-section">
+            <div class="card-title">Exporter les données</div>
+            <div class="export-grid">
+                <div class="export-card">
+                    <div class="export-icon">📊</div>
+                    <div class="export-title">Rapport mensuel</div>
+                    <div class="export-desc">PDF détaillé avec KPIs</div>
+                </div>
+                <div class="export-card">
+                    <div class="export-icon">📈</div>
+                    <div class="export-title">Données brutes</div>
+                    <div class="export-desc">Export CSV anonymisé</div>
+                </div>
+                <div class="export-card">
+                    <div class="export-icon">📋</div>
+                    <div class="export-title">Bilan annuel</div>
+                    <div class="export-desc">Synthèse pour comité</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

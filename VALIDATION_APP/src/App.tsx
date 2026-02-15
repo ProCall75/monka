@@ -718,9 +718,7 @@ function Dashboard({
 
 // ─── Main App ───
 export default function App() {
-    const [authed, setAuthed] = useState(
-        localStorage.getItem('monka_auth') === 'true'
-    );
+    const [authed] = useState(true);
     const [activeMp, setActiveMp] = useState<string>('R1');
     const [activeView, setActiveView] = useState<'review' | 'dashboard' | 'todo'>('review');
     const [annotations, setAnnotations] = useState<Annotation[]>([]);
@@ -742,8 +740,8 @@ export default function App() {
     }, []);
 
     useEffect(() => {
-        if (authed) loadData();
-    }, [authed, loadData]);
+        loadData();
+    }, [loadData]);
 
     // Save annotation
     const handleSave = async (partial: Partial<Annotation>) => {
@@ -817,9 +815,7 @@ export default function App() {
         setTimeout(() => setToast({ message: '', visible: false }), 2500);
     };
 
-    if (!authed) {
-        return <LoginScreen onLogin={() => setAuthed(true)} />;
-    }
+    // Auth gate removed — direct access
 
     const currentMp = ALL_MPs.find((mp) => mp.id === activeMp);
     const todosChecked = todos.filter((t) => t.checked).length;

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=0.5, user-scalable=yes">
+    <title>3. Fonctionnement du Moteur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 36px 80px 28px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #7748F6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #111111;
+            margin-top: 6px;
+        }
+
+        .page-num {
+            font-size: 13px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            gap: 32px;
+            overflow: hidden;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .subsection {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .diagram-box {
+            background: #FAFAFA;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 10px;
+            line-height: 1.4;
+            white-space: pre;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .table-block {
+            background: #FFFFFF;
+        }
+
+        .table-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 8px 10px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #666666;
+            border-bottom: 2px solid #111111;
+            background: #FAFAFA;
+        }
+
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 13px;
+            color: #111111;
+            vertical-align: top;
+            line-height: 1.4;
+        }
+
+        td:first-child {
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .note-text {
+            font-size: 13px;
+            color: #666666;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.4;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 14px;
+            background: #E0E0E0;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #999999;
+        }
+
+        .footer-page {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7748F6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+        <div class="content">
+            <div class="page-header">
+                <div>
+                    <span class="section-num">Section 3</span>
+                    <h1 class="page-title">Fonctionnement du Moteur</h1>
+                </div>
+                <span class="page-num">04 / 08</span>
+            </div>
+            <div class="main-content">
+                <div class="column">
+                    <div class="subsection">3.1 Flux principal</div>
+                    <div class="diagram-box">┌────────────────────────────────────────────────────────────────┐
+                        │ FLUX MOTEUR │
+                        ├────────────────────────────────────────────────────────────────┤
+                        │ │
+                        │ [RÉPONSE] │
+                        │ │ │
+                        │ ▼ │
+                        │ ┌───────────────────────────────────────┐ │
+                        │ │ DÉTECTION TYPE QUESTION │ │
+                        │ │ ┌────────┬────────────┬──────────┐ │ │
+                        │ │ │SCORANTE│DÉCLENCHANTE│ CRITIQUE │ │ │
+                        │ │ └───┬────┴─────┬──────┴────┬─────┘ │ │
+                        │ └──────┼──────────┼───────────┼─────────┘ │
+                        │ ▼ ▼ ▼ │
+                        │ Calcul Activation Priorité │
+                        │ score MP immédiate │
+                        │ │ │ │ │
+                        │ └──────────┴───────────┘ │
+                        │ │ │
+                        │ ▼ │
+                        │ ┌─────────────────┐ │
+                        │ │ ÉVALUATION CCC │ │
+                        │ │ (ET / OU) │ │
+                        │ └────────┬────────┘ │
+                        │ │ │
+                        │ ▼ │
+                        │ [RECOMMANDATIONS] │
+                        │ [MICRO-TÂCHES] │
+                        │ │
+                        └────────────────────────────────────────────────────────────────┘</div>
+                </div>
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">3.2 Typologie des questions</div>
+                        <p class="note-text">Le moteur distingue 4 types de questions (règle Legacy : "1 question = 1
+                            rôle") :</p>
+                        <table style="margin-top: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Fonction moteur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Scorante</td>
+                                    <td>Incrémente le score de vulnérabilité</td>
+                                </tr>
+                                <tr>
+                                    <td>Déclenchante</td>
+                                    <td>Active un micro-parcours spécifique</td>
+                                </tr>
+                                <tr>
+                                    <td>Critique directe</td>
+                                    <td>Force une priorité niveau 1 (≤7 jours)</td>
+                                </tr>
+                                <tr>
+                                    <td>Descriptive</td>
+                                    <td>Contexte, pas d'effet algorithmique</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-block">
+                        <div class="table-label">3.3 Mécanisme de scoring</div>
+                        <p class="note-text">Le moteur calcule un score par vulnérabilité :</p>
+                        <div class="diagram-box" style="flex: 0; padding: 12px; margin-top: 8px;">Score normalisé =
+                            (Score brut / Score max) × 20</div>
+                        <p class="note-text">Le score détermine la <strong>temporalité</strong> d'action, pas le contenu
+                            des recommandations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-divider"></div>
+                    <img src="assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="footer-page">04</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

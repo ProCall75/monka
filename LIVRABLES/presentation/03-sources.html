@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=0.5, user-scalable=yes">
+    <title>2. Sources Documentaires</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 36px 80px 28px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #7748F6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #111111;
+            margin-top: 6px;
+        }
+
+        .page-num {
+            font-size: 13px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            overflow: hidden;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .table-block {
+            background: #FFFFFF;
+        }
+
+        .table-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #666666;
+            border-bottom: 2px solid #111111;
+            background: #FAFAFA;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 13px;
+            color: #111111;
+            vertical-align: top;
+            line-height: 1.4;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            width: 200px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .diagram-box {
+            background: #FAFAFA;
+            border-radius: 4px;
+            padding: 16px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 11px;
+            line-height: 1.5;
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.4;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 14px;
+            background: #E0E0E0;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #999999;
+        }
+
+        .footer-page {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7748F6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+        <div class="content">
+            <div class="page-header">
+                <div>
+                    <span class="section-num">Section 2</span>
+                    <h1 class="page-title">Sources Documentaires</h1>
+                </div>
+                <span class="page-num">03 / 08</span>
+            </div>
+            <div class="main-content">
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">2.1 Documents Legacy (référence règles métier)</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fichier</th>
+                                    <th>Contenu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Legacy scoring</td>
+                                    <td>Définition des questions scorantes, formules de normalisation</td>
+                                </tr>
+                                <tr>
+                                    <td>Legacy questionnaire</td>
+                                    <td>Typologie des questions (scorante/déclenchante/critique)</td>
+                                </tr>
+                                <tr>
+                                    <td>Legacy Priorisation</td>
+                                    <td>Niveaux de gravité (1/2/3), délais d'action</td>
+                                </tr>
+                                <tr>
+                                    <td>Legacy CCC</td>
+                                    <td>Conditions Critiques Composites (logique ET/OU)</td>
+                                </tr>
+                                <tr>
+                                    <td>Legacy Micro parcours</td>
+                                    <td>24 parcours adaptatifs (R1-R4, F1-F6, S1-S4, M1-M6, A1-A4)</td>
+                                </tr>
+                                <tr>
+                                    <td>Legacy ASR Referent</td>
+                                    <td>Actions Structurantes de Référence, états de validation</td>
+                                </tr>
+                                <tr>
+                                    <td>Legacy typologie micro taches</td>
+                                    <td>5 types d'actions : INFO, ORGA, STRUC, SEC, MED</td>
+                                </tr>
+                                <tr>
+                                    <td>Legacy moteur applicatif</td>
+                                    <td>Règles de sécurité médicale, escalade</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-block">
+                        <div class="table-label">2.2 Fichiers Excel (données)</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fichier</th>
+                                    <th>Contenu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Questionnaire_Etienne_1258</td>
+                                    <td>Questions par vulnérabilité, réponses possibles</td>
+                                </tr>
+                                <tr>
+                                    <td>microparcours_aidant</td>
+                                    <td>Mapping question → micro-parcours</td>
+                                </tr>
+                                <tr>
+                                    <td>Tableau SOPHIE CAT</td>
+                                    <td>Recommandations liées aux réponses</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="table-block">
+                        <div class="table-label">2.3 Articulation sources → moteur</div>
+                        <div class="diagram-box">┌─────────────────────────────────────────────────────────────────┐
+                            │ ARCHITECTURE SOURCES │
+                            ├─────────────────────────────────────────────────────────────────┤
+                            │ │
+                            │ LEGACY (règles) EXCEL (données) │
+                            │ │ │ │
+                            │ ▼ ▼ │
+                            │ ┌─────────┐ ┌──────────┐ │
+                            │ │ Comment │ │ Quoi │ │
+                            │ │ scorer │ │ scorer │ │
+                            │ │ décider │ │ afficher │ │
+                            │ └────┬────┘ └────┬─────┘ │
+                            │ │ │ │
+                            │ └───────────┬───────────────┘ │
+                            │ ▼ │
+                            │ ┌──────────────┐ │
+                            │ │ MOTEUR │ │
+                            │ │ (logique) │ │
+                            │ └──────────────┘ │
+                            │ │
+                            └─────────────────────────────────────────────────────────────────┘</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-divider"></div>
+                    <img src="assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="footer-page">03</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

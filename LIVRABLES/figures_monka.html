@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figures & Tableaux - Rapport Technique Monka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* PRAGMA AUTHORITY V1.0 - Board Meeting Grade Protocol */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f1f5f9;
+            color: #1a1a2e;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #1e293b;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #cbd5e1;
+        }
+
+        h2.section-header {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            margin: 48px 0 16px 0;
+            font-weight: 600;
+        }
+
+        /* NANOBANANA FIGURE STYLING */
+        figure {
+            background: #fff;
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        figcaption {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* PRAGMA AUTHORITY TABLE STYLING (McKinsey Style) */
+        .table-container {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .table-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            border-top: 2px solid #1e293b;
+            /* Heavy Top Border */
+            border-bottom: 2px solid #1e293b;
+            /* Heavy Bottom Border */
+        }
+
+        th {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #1e293b;
+            /* Separator Header/Body */
+            background: #fff;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            /* Hairline Divider */
+            color: #1e293b;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+            /* Zebra Striping */
+        }
+
+        /* Utility badges */
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .file-name {
+            font-family: monospace;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #475569;
+            font-size: 0.9em;
+        }
+
+        /* Status Colors */
+        .bg-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .bg-orange {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        .bg-red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📚 Monka — Figures & Tableaux de Référence</h1>
+
+    <h2 class="section-header">1. Architecture Moteur</h2>
+
+    <figure>
+        <img src="assets/monka_engine_flow_v2.png" alt="Flux Moteur Clinique Monka" style="max-width: 500px;">
+        <figcaption>Figure 1.1 : Flux séquentiel de traitement du Moteur Clinique (Protocole Nanobanana V2)</figcaption>
+    </figure>
+
+    <h2 class="section-header">2. Tableaux de Données (Pragma Authority Style)</h2>
+
+    <!-- Table: Objet du livrable -->
+    <div class="table-container">
+        <div class="table-title">Tableau 1 : Objet du livrable</div>
+        <table>
+            <tr>
+                <th>Composant</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Moteur de règles</strong></td>
+                <td>Logique de scoring, déclenchement, priorités</td>
+            </tr>
+            <tr>
+                <td><strong>Structure de données</strong></td>
+                <td>Questions typées, recommandations, micro-tâches</td>
+            </tr>
+            <tr>
+                <td><strong>Prototype HTML</strong></td>
+                <td>Démonstration fonctionnelle du moteur</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Documents Haute Priorité -->
+    <div class="table-container">
+        <div class="table-title">Tableau 2.1 : Documents Haute Priorité (Règles Métier)</div>
+        <table>
+            <tr>
+                <th>Fichier exact</th>
+                <th>Contenu</th>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy scoring 310127.docx</span></td>
+                <td>Règles de scoring, questions scorantes, formules de normalisation sur 20</td>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy questionnaire 290127.docx</span></td>
+                <td>Typologie des questions : scorante / déclenchante / critique / descriptive</td>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy Priorisation 300127.docx</span></td>
+                <td>3 niveaux de gravité avec délais d'action (7j / 15j / 1mois+)</td>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy typologie des micro taches 030226.docx</span></td>
+                <td>5 types : INFO, ORGA, STRUC, SEC, MED — règle R-MT-ASR-01</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Documents Référentiels -->
+    <div class="table-container">
+        <div class="table-title">Tableau 2.2 : Documents Référentiels</div>
+        <table>
+            <tr>
+                <th>Fichier exact</th>
+                <th>Contenu</th>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy ASR Referent op. 030226.docx</span></td>
+                <td>24 ASR (1 par micro-parcours), signatures d'état</td>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy Micro parcours 030226.docx</span></td>
+                <td>24 micro-parcours (R1-R4, F1-F6, S1-S4, M1-M6, A1-A4)</td>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy moteur applicatif et sécurité médicale 020326.docx</span></td>
+                <td>22 règles de sécurité médicale, alertes</td>
+            </tr>
+            <tr>
+                <td><span class="file-name">Legacy Arborescence Globale 030226.docx</span></td>
+                <td>Architecture des 5 vulnérabilités</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Scoring Interpretation -->
+    <div class="table-container">
+        <div class="table-title">Tableau 3.3 : Interprétation du Scoring</div>
+        <table>
+            <tr>
+                <th>Score /20</th>
+                <th>Couleur</th>
+                <th>Interprétation</th>
+            </tr>
+            <tr>
+                <td>0 – 6</td>
+                <td class="bg-green">🟢 Vert</td>
+                <td>Situation préservée</td>
+            </tr>
+            <tr>
+                <td>7 – 12</td>
+                <td class="bg-orange">🟠 Orange</td>
+                <td>Vigilance requise</td>
+            </tr>
+            <tr>
+                <td>13 – 20</td>
+                <td class="bg-red">🔴 Rouge</td>
+                <td>Vulnérabilité élevée</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Typologie Questions -->
+    <div class="table-container">
+        <div class="table-title">Tableau 4.1 : Typologie des Questions</div>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Effet Moteur</th>
+            </tr>
+            <tr>
+                <td><strong>Scorante</strong></td>
+                <td>Incrémente le score de vulnérabilité</td>
+            </tr>
+            <tr>
+                <td><strong>Déclenchante (trigger)</strong></td>
+                <td>Active un micro-parcours spécifique si option sélectionnée</td>
+            </tr>
+            <tr>
+                <td><strong>Critique</strong></td>
+                <td>Force priorité niveau 1 (≤7 jours) si option critique sélectionnée</td>
+            </tr>
+            <tr>
+                <td><strong>Descriptive</strong></td>
+                <td>Contexte uniquement, pas d'effet algorithmique</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Micro Parcours -->
+    <div class="table-container">
+        <div class="table-title">Tableau 5 : Micro-Parcours</div>
+        <table>
+            <tr>
+                <th>V</th>
+                <th>Préfixe</th>
+                <th>Parcours</th>
+                <th>Thème</th>
+            </tr>
+            <tr>
+                <td>V1</td>
+                <td>R</td>
+                <td>R1, R2, R3, R4</td>
+                <td>Social & Relationnel</td>
+            </tr>
+            <tr>
+                <td>V2</td>
+                <td>F</td>
+                <td>F1 → F6</td>
+                <td>Fragilité du Proche</td>
+            </tr>
+            <tr>
+                <td>V3</td>
+                <td>S</td>
+                <td>S1, S2, S3, S4</td>
+                <td>Santé de l'Aidant</td>
+            </tr>
+            <tr>
+                <td>V4</td>
+                <td>M</td>
+                <td>M1 → M6</td>
+                <td>Parcours Médical</td>
+            </tr>
+            <tr>
+                <td>V5</td>
+                <td>A</td>
+                <td>A1, A2, A3, A4</td>
+                <td>Administratif</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Micro Taches -->
+    <div class="table-container">
+        <div class="table-title">Tableau 6 : Micro-Tâches</div>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Contribue ASR</th>
+            </tr>
+            <tr>
+                <td><strong>INFO</strong></td>
+                <td>Information, explication</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><strong>ORGA</strong></td>
+                <td>Organisation, planification</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><strong>STRUC</strong></td>
+                <td>Mise en place structurante</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><strong>SEC</strong></td>
+                <td>Sécurisation</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><strong>MED</strong></td>
+                <td>Prescription médicale</td>
+                <td>✅</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: ASR -->
+    <div class="table-container">
+        <div class="table-title">Tableau 7 : États ASR</div>
+        <table>
+            <tr>
+                <th>État</th>
+                <th>Signification</th>
+            </tr>
+            <tr>
+                <td><strong>❌ Non atteinte</strong></td>
+                <td>Aucune signature valide</td>
+            </tr>
+            <tr>
+                <td><strong>✔ Atteinte</strong></td>
+                <td>≥ 1 signature détectée</td>
+            </tr>
+            <tr>
+                <td><strong>⚠ Non confirmée</strong></td>
+                <td>Atteinte mais non reconfirmée au suivi</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Priorisation -->
+    <div class="table-container">
+        <div class="table-title">Tableau 8 : Priorisation</div>
+        <table>
+            <tr>
+                <th>Niveau</th>
+                <th>Déclencheur</th>
+                <th>Délai</th>
+            </tr>
+            <tr>
+                <td><strong>1</strong></td>
+                <td>Question critique directe</td>
+                <td>≤ 7 jours</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td>CCC activée</td>
+                <td>≤ 15 jours</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td>Score seul</td>
+                <td>&gt; 1 mois</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Integration A -->
+    <div class="table-container">
+        <div class="table-title">Option A : Iframe / WebView</div>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Détail</th>
+            </tr>
+            <tr>
+                <td><strong>Principe</strong></td>
+                <td>Intégration fichier HTML direct (client-side)</td>
+            </tr>
+            <tr>
+                <td><strong>Avantages</strong></td>
+                <td>Déploiement immédiat, zéro dev</td>
+            </tr>
+            <tr>
+                <td><strong>Limites</strong></td>
+                <td>Pas d'accès backend, styling isolé</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Integration B -->
+    <div class="table-container">
+        <div class="table-title">Option B : Module JS</div>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Détail</th>
+            </tr>
+            <tr>
+                <td><strong>Principe</strong></td>
+                <td>Import module ES6 dans codebase React/Vue</td>
+            </tr>
+            <tr>
+                <td><strong>Avantages</strong></td>
+                <td>Accès data, styling unifié</td>
+            </tr>
+            <tr>
+                <td><strong>Limites</strong></td>
+                <td>Intervention dev requise</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table: Integration C -->
+    <div class="table-container">
+        <div class="table-title">Option C : Import Data (Custom)</div>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Détail</th>
+            </tr>
+            <tr>
+                <td><strong>Principe</strong></td>
+                <td>Export JSON/SQL -> Réimplémentation totale</td>
+            </tr>
+            <tr>
+                <td><strong>Avantages</strong></td>
+                <td>Contrôle total architecture</td>
+            </tr>
+            <tr>
+                <td><strong>Limites</strong></td>
+                <td>Développement lourd, risque divergence</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-header">3. Propositions Neuro-Ergonomiques (Visualisation Intelligente)</h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <figure>
+            <img src="assets/monka_logic_quadrant.png" alt="Quadrant Logique Monka" style="max-width: 400px;">
+            <figcaption>Figure 3.1 : Le "Quadrant Logique" — Visualisation de l'effet parallèle d'une réponse (Score,
+                Trigger, Critique, Contexte).</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/monka_priority_pyramid.png" alt="Pyramide de Priorité Monka" style="max-width: 400px;">
+            <figcaption>Figure 3.2 : La "Pyramide d'Urgence" — Hiérarchisation visuelle des niveaux d'action (1 à 3).
+            </figcaption>
+        </figure>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lettre d'Intention Article 51 — MyMonka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Monka brand colors */
+            --mint: #5DDEBE;
+            --mint-soft: #E8FBF5;
+            --peach: #F5B895;
+            --peach-dark: #3D7A8C;
+            --bg: #FAF9F7;
+            --card: #FFFFFF;
+            --primary: #5DDEBE;
+            --primary-dark: #3D7A8C;
+            --text: #1A1A1A;
+            --text-muted: #6B6B6B;
+            --border: #E5E5E5;
+            --success: #22C55E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .header {
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--mint);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-left h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .badge-phase {
+            background: var(--mint-soft);
+            color: var(--peach-dark);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-deadline {
+            background: rgba(239, 68, 68, 0.2);
+            color: #F87171;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .btn-export {
+            background: #0A0A0A;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Tabs navigation */
+        .tabs-nav {
+            display: flex;
+            gap: 8px;
+            padding: 16px 40px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: var(--bg);
+            color: var(--text-muted);
+        }
+
+        .tab:hover {
+            background: var(--mint-soft);
+            color: var(--text);
+        }
+
+        .tab.active {
+            background: #0A0A0A;
+            color: white;
+        }
+
+        .tab.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .tab .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 100px;
+            font-size: 11px;
+            margin-left: 8px;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: calc(100vh - 60px);
+        }
+
+        /* Formulaire */
+        .col-form {
+            padding: 24px 32px;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header h2 {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filename {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+
+        .chapter {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .chapter-header:hover {
+            background: var(--mint-soft);
+        }
+
+        .chapter-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .chapter-num {
+            width: 32px;
+            height: 32px;
+            background: var(--mint);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .chapter-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .chapter-constraint {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg);
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        .chapter-body {
+            padding: 20px;
+        }
+
+        .chapter.collapsed .chapter-body {
+            display: none;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .field:last-child {
+            margin-bottom: 0;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .field textarea {
+            min-height: 100px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .field-hint {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .btn-ai {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--mint-soft);
+            border: 1px solid var(--mint);
+            color: var(--peach-dark);
+            padding: 8px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .btn-ai:hover {
+            background: var(--mint);
+            color: var(--text);
+        }
+
+        /* Preview */
+        .col-preview {
+            background: #F8F7FF;
+            overflow-y: auto;
+        }
+
+        .preview-doc {
+            max-width: 650px;
+            margin: 32px auto;
+            background: white;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+            padding: 48px 56px;
+            color: #1A1A2E;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* Style officiel type ministère */
+        .doc-masthead {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #000091;
+        }
+
+        .doc-republic {
+            width: 60px;
+        }
+
+        .doc-republic img {
+            width: 100%;
+        }
+
+        .doc-republic-text {
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000091;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .doc-ref {
+            text-align: right;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .doc-ref strong {
+            display: block;
+            font-size: 11px;
+            color: #1A1A2E;
+        }
+
+        .doc-title {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .doc-title h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000091;
+            margin-bottom: 8px;
+        }
+
+        .doc-title .subtitle {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .doc-title .project-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-top: 12px;
+            padding: 12px 20px;
+            background: #F0F0F8;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .doc-chapter {
+            margin-bottom: 24px;
+        }
+
+        .doc-chapter h2 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #000091;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #E0E0E8;
+        }
+
+        .doc-chapter p {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        .doc-chapter ul {
+            margin: 8px 0 8px 20px;
+        }
+
+        .doc-chapter li {
+            margin-bottom: 4px;
+        }
+
+        .doc-chapter .info-box {
+            background: #F8F8FC;
+            border-left: 3px solid #000091;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 11px;
+        }
+
+        .doc-chapter .info-box strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 11px;
+        }
+
+        .doc-table th,
+        .doc-table td {
+            border: 1px solid #E0E0E8;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .doc-table th {
+            background: #F0F0F8;
+            font-weight: 600;
+        }
+
+        .doc-signature {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #E0E0E8;
+        }
+
+        .doc-signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .doc-signature-block {
+            text-align: center;
+        }
+
+        .doc-signature-block .label {
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        .doc-signature-block .name {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .doc-signature-block .role {
+            font-size: 10px;
+            color: #666;
+        }
+
+        .doc-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #E0E0E8;
+            font-size: 9px;
+            color: #999;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <h1>Générateur de Documents</h1>
+        </div>
+        <button class="btn-export">Exporter .docx</button>
+    </header>
+
+    <!-- Tabs navigation -->
+    <nav class="tabs-nav">
+        <button class="tab active">
+            AAP État
+            <span class="badge">Article 51</span>
+        </button>
+        <button class="tab disabled" title="Bientôt disponible">
+            Investisseurs
+        </button>
+        <button class="tab disabled" title="Bientôt disponible">
+            Partenaires
+        </button>
+        <button class="tab disabled" title="Bientôt disponible">
+            BPI / Subventions
+        </button>
+    </nav>
+
+    <div class="main">
+        <!-- FORMULAIRE -->
+        <div class="col-form">
+            <div class="form-header">
+                <h2>Lettre d'Intention — Phase 1</h2>
+                <span class="filename">20260202_MyMonka_LI_V1.docx</span>
+            </div>
+
+            <!-- Chapitre I -->
+            <div class="chapter">
+                <div class="chapter-header" onclick="toggleChapter(this)">
+                    <div class="chapter-title">
+                        <div class="chapter-num">I</div>
+                        <span class="chapter-name">Description du porteur</span>
+                    </div>
+                    <span class="chapter-constraint">1 page max</span>
+                </div>
+                <div class="chapter-body">
+                    <div class="field">
+                        <label>Nom de la structure porteuse</label>
+                        <input type="text" value="MONKA SAS" />
+                    </div>
+                    <div class="field">
+                        <label>Type de structure</label>
+                        <select>
+                            <option>Startup / Société commerciale</option>
+                            <option>Établissement de santé</option>
+                            <option>Association</option>
+                            <option>GCS / GCSMS</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Activité principale</label>
+                        <textarea>Monka développe MyMonka, une application mobile d'accompagnement des aidants familiaux. La solution associe intelligence artificielle et coordination humaine (IDEC) pour personnaliser le suivi des aidants et prévenir leur épuisement.</textarea>
+                    </div>
+                    <div class="field">
+                        <label>Atouts du porteur pour piloter l'expérimentation</label>
+                        <textarea>• Équipe pluridisciplinaire : médecin co-fondateur, CTO, IDEC certifiée
+• Conseil scientifique : CHU de Tours, Hôpital Foch de Suresnes
+• Base utilisateurs existante : 3 200 aidants actifs
+• Partenariats mutuelles en cours : MGEN, Klésia</textarea>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Interlocuteur principal</label>
+                            <input type="text" value="Étienne RUBI, CEO" />
+                        </div>
+                        <div class="field">
+                            <label>Email contact</label>
+                            <input type="email" value="etienne@monka.care" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapitre II -->
+            <div class="chapter">
+                <div class="chapter-header" onclick="toggleChapter(this)">
+                    <div class="chapter-title">
+                        <div class="chapter-num">II</div>
+                        <span class="chapter-name">Expérimentateurs et partenaires</span>
+                    </div>
+                    <span class="chapter-constraint">Distinction claire</span>
+                </div>
+                <div class="chapter-body">
+                    <div class="field">
+                        <label>II.1 — Expérimentateurs (percevront un financement)</label>
+                        <textarea>• CHU d'Angers — Département de gériatrie : inclusion des patients, suivi clinique
+• CHU de Tours — Service de médecine interne : validation des protocoles, évaluation
+• IDEC Monka — Coordination du parcours aidant, contact J+1, bilans réguliers</textarea>
+                        <div class="field-hint">Ceux qui prendront en charge les bénéficiaires ou participeront
+                            activement à la mise en œuvre.</div>
+                    </div>
+                    <div class="field">
+                        <label>II.2 — Partenaires (soutien sans financement)</label>
+                        <textarea>• MGEN — Déploiement auprès de leurs adhérents aidants
+• Klésia — Expérimentation sur le volet salariés aidants
+• CNRS — Projet de recherche IA sur les facteurs de vulnérabilité
+• France Assos Santé — Représentation des usagers</textarea>
+                        <div class="field-hint">Sponsors institutionnels, associations, collectivités...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapitre III -->
+            <div class="chapter">
+                <div class="chapter-header" onclick="toggleChapter(this)">
+                    <div class="chapter-title">
+                        <div class="chapter-num">III</div>
+                        <span class="chapter-name">Contexte et constats</span>
+                    </div>
+                    <span class="chapter-constraint">2 pages max</span>
+                </div>
+                <div class="chapter-body">
+                    <div class="field">
+                        <label>Problématique et limites de la situation actuelle</label>
+                        <textarea
+                            id="contexte">En France, 11 millions de personnes accompagnent un proche en situation de dépendance (source : DREES 2023). Parmi eux, 65% déclarent y consacrer plus de 5 heures par semaine.
+
+Le parcours actuel de l'aidant est caractérisé par :
+• Une fragmentation de l'information : données dispersées entre médecins, SSIAD, EHPAD, administrations
+• Une absence de coordination : l'aidant devient le seul lien entre les acteurs du soin
+• Un risque d'épuisement : 48% des aidants déclarent des problèmes de santé liés à leur rôle (baromètre BVA/Fondation April 2024)
+
+Le droit commun ne prévoit pas de financement pour l'accompagnement préventif de l'aidant en tant que tel. Les dispositifs existants (accueil de jour, hébergement temporaire) ciblent le proche aidé, non l'aidant lui-même.</textarea>
+                    </div>
+                    <button class="btn-ai">Enrichir avec données bibliographiques</button>
+                    <div class="field" style="margin-top: 16px;">
+                        <label>Justification du recours à l'article 51</label>
+                        <textarea>L'expérimentation nécessite une dérogation tarifaire pour financer :
+• Le temps IDEC dédié à l'aidant (actuellement non facturable à l'Assurance Maladie)
+• L'intervention préventive avant toute prise en charge du proche aidé
+• Un forfait annuel par aidant, indépendant des actes du proche</textarea>
+                    </div>
+                    <div class="field">
+                        <label>Cohérence avec les politiques de santé</label>
+                        <textarea>• Stratégie nationale "Agir pour les aidants 2023-2027" : axe 3 — repérage et prévention
+• PRS Pays de la Loire : priorité "Parcours personnes âgées et proches aidants"
+• Feuille de route "Vieillir en bonne santé" : objectif de maintien à domicile</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapitre IV-V -->
+            <div class="chapter">
+                <div class="chapter-header" onclick="toggleChapter(this)">
+                    <div class="chapter-title">
+                        <div class="chapter-num">IV</div>
+                        <span class="chapter-name">Objectifs de l'expérimentation</span>
+                    </div>
+                    <span class="chapter-constraint">1-4 objectifs mesurables</span>
+                </div>
+                <div class="chapter-body">
+                    <div class="field">
+                        <label>Objectif principal</label>
+                        <textarea>Réduire de 20% le score de fardeau de l'aidant (échelle de Zarit) à 12 mois chez les aidants accompagnés par MyMonka, par rapport au groupe témoin.</textarea>
+                    </div>
+                    <div class="field">
+                        <label>Objectifs secondaires</label>
+                        <textarea>• Diminuer de 15% les hospitalisations non programmées du proche aidé
+• Atteindre un délai moyen de premier contact IDEC < 24 heures
+• Obtenir un NPS (Net Promoter Score) utilisateur > 50</textarea>
+                    </div>
+                    <div class="field-hint">Les objectifs doivent être mesurables et ne pas relever de la recherche
+                        clinique.</div>
+                </div>
+            </div>
+
+            <!-- Chapitre VI -->
+            <div class="chapter">
+                <div class="chapter-header" onclick="toggleChapter(this)">
+                    <div class="chapter-title">
+                        <div class="chapter-num">VI</div>
+                        <span class="chapter-name">Financement de l'expérimentation</span>
+                    </div>
+                    <span class="chapter-constraint">Estimation</span>
+                </div>
+                <div class="chapter-body">
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Modèle de financement</label>
+                            <select>
+                                <option>Forfait individuel par aidant</option>
+                                <option>Forfait collectif par structure</option>
+                                <option>Financement mixte</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Durée expérimentation</label>
+                            <input type="text" value="36 mois" />
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Coût par aidant / an</label>
+                            <input type="text" value="180 €" />
+                        </div>
+                        <div class="field">
+                            <label>Effectif cible</label>
+                            <input type="text" value="1 500 aidants" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Coût total estimé</label>
+                        <input type="text" value="810 000 € sur 3 ans" readonly
+                            style="background: rgba(119,72,246,0.1); border-color: var(--primary);" />
+                    </div>
+                    <div class="field">
+                        <label>Économies potentielles attendues</label>
+                        <textarea>Hypothèse : réduction de 15% des hospitalisations non programmées
+Coût moyen 1 journée hospitalisation : 1 200 € (source : ATIH)
+Économie estimée : 2,1 jours évités × 1 200 € × 1 500 aidants = 3,78 M€
+
+ROI pour l'Assurance Maladie : 4,6x sur 3 ans</textarea>
+                    </div>
+                    <div class="field">
+                        <label>Autres sources de financement (le cas échéant)</label>
+                        <textarea>• Fonds propres Monka : développement technologique (hors périmètre Article 51)
+• CNRS : co-financement du volet recherche IA</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapitre VII -->
+            <div class="chapter collapsed">
+                <div class="chapter-header" onclick="toggleChapter(this)">
+                    <div class="chapter-title">
+                        <div class="chapter-num">VII</div>
+                        <span class="chapter-name">Bibliographie</span>
+                    </div>
+                    <span class="chapter-constraint">Références numérotées</span>
+                </div>
+                <div class="chapter-body">
+                    <div class="field">
+                        <label>Références bibliographiques citées</label>
+                        <textarea>[1] DREES (2023). Les proches aidants des personnes âgées. Études et Résultats, n°1208.
+[2] BVA / Fondation April (2024). Baromètre des aidants. 8ème édition.
+[3] HAS (2022). Stratégie nationale de santé - Parcours aidants.
+[4] ATIH (2023). Coûts moyens des séjours hospitaliers en MCO.
+[5] Zarit SH, Reever KE, Bach-Peterson J. (1980). Relatives of the impaired elderly: correlates of feelings of burden. Gerontologist, 20(6):649-55.</textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PREVIEW DOCUMENT -->
+        <div class="col-preview">
+            <div class="preview-doc">
+
+                <!-- En-tête officiel -->
+                <div class="doc-masthead">
+                    <div class="doc-republic">
+                        <div class="doc-republic-text">République<br />Française</div>
+                    </div>
+                    <div class="doc-ref">
+                        <strong>Réf. : 20260202_MyMonka_LI_V1</strong>
+                        Date : 02 février 2026<br />
+                        Version : 1.0
+                    </div>
+                </div>
+
+                <!-- Titre -->
+                <div class="doc-title">
+                    <h1>LETTRE D'INTENTION</h1>
+                    <div class="subtitle">Dispositif Article 51 — Expérimentation en santé</div>
+                    <div class="project-name">MyMonka — Parcours coordonné de l'aidant familial</div>
+                </div>
+
+                <!-- Chapitre I -->
+                <div class="doc-chapter">
+                    <h2>I. Description du porteur</h2>
+                    <div class="info-box">
+                        <strong>MONKA SAS</strong>
+                        Startup HealthTech — Application d'accompagnement des aidants familiaux<br />
+                        Contact : Étienne RUBI, CEO — etienne@monka.care
+                    </div>
+                    <p>Monka développe MyMonka, une application mobile associant intelligence artificielle et
+                        coordination humaine (IDEC) pour personnaliser le suivi des aidants et prévenir leur épuisement.
+                    </p>
+                    <p><strong>Atouts du porteur :</strong></p>
+                    <ul>
+                        <li>Équipe pluridisciplinaire : médecin co-fondateur, CTO, IDEC certifiée</li>
+                        <li>Conseil scientifique : CHU de Tours, Hôpital Foch de Suresnes</li>
+                        <li>Base utilisateurs existante : 3 200 aidants actifs</li>
+                        <li>Partenariats mutuelles en cours : MGEN, Klésia</li>
+                    </ul>
+                </div>
+
+                <!-- Chapitre II -->
+                <div class="doc-chapter">
+                    <h2>II. Expérimentateurs et partenaires</h2>
+                    <p><strong>II.1 Expérimentateurs</strong></p>
+                    <table class="doc-table">
+                        <tr>
+                            <th>Structure</th>
+                            <th>Rôle / Contribution</th>
+                        </tr>
+                        <tr>
+                            <td>CHU d'Angers</td>
+                            <td>Inclusion patients, suivi clinique</td>
+                        </tr>
+                        <tr>
+                            <td>CHU de Tours</td>
+                            <td>Validation protocoles, évaluation</td>
+                        </tr>
+                        <tr>
+                            <td>IDEC Monka</td>
+                            <td>Coordination parcours, contact J+1</td>
+                        </tr>
+                    </table>
+                    <p><strong>II.2 Partenaires</strong> : MGEN (déploiement adhérents), Klésia (salariés aidants), CNRS
+                        (recherche IA), France Assos Santé (représentation usagers).</p>
+                </div>
+
+                <!-- Chapitre III -->
+                <div class="doc-chapter">
+                    <h2>III. Contexte et constats</h2>
+                    <p>En France, <strong>11 millions de personnes</strong> accompagnent un proche en situation de
+                        dépendance [1]. Parmi eux, 65% déclarent y consacrer plus de 5 heures par semaine.</p>
+                    <p>Le parcours actuel de l'aidant est caractérisé par :</p>
+                    <ul>
+                        <li>Une <strong>fragmentation de l'information</strong> entre les acteurs du soin</li>
+                        <li>Une <strong>absence de coordination</strong> : l'aidant devient le seul lien</li>
+                        <li>Un <strong>risque d'épuisement</strong> : 48% déclarent des problèmes de santé liés [2]</li>
+                    </ul>
+                    <p><strong>Justification Article 51</strong> : Le droit commun ne prévoit pas de financement pour
+                        l'accompagnement préventif de l'aidant. Une dérogation tarifaire est nécessaire pour financer le
+                        temps IDEC dédié et l'intervention préventive.</p>
+                </div>
+
+                <!-- Chapitre IV -->
+                <div class="doc-chapter">
+                    <h2>IV. Objectifs de l'expérimentation</h2>
+                    <p><strong>Objectif principal :</strong></p>
+                    <div class="info-box">
+                        Réduire de <strong>20%</strong> le score de fardeau de l'aidant (échelle de Zarit) à 12 mois.
+                    </div>
+                    <p><strong>Objectifs secondaires :</strong></p>
+                    <ul>
+                        <li>Diminuer de 15% les hospitalisations non programmées du proche aidé</li>
+                        <li>Délai moyen de premier contact IDEC < 24 heures</li>
+                        <li>NPS utilisateur > 50</li>
+                    </ul>
+                </div>
+
+                <!-- Chapitre VI -->
+                <div class="doc-chapter">
+                    <h2>VI. Financement de l'expérimentation</h2>
+                    <table class="doc-table">
+                        <tr>
+                            <th>Paramètre</th>
+                            <th>Valeur</th>
+                        </tr>
+                        <tr>
+                            <td>Modèle</td>
+                            <td>Forfait individuel par aidant</td>
+                        </tr>
+                        <tr>
+                            <td>Coût unitaire</td>
+                            <td>180 € / aidant / an</td>
+                        </tr>
+                        <tr>
+                            <td>Effectif cible</td>
+                            <td>1 500 aidants</td>
+                        </tr>
+                        <tr>
+                            <td>Durée</td>
+                            <td>36 mois</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coût total</strong></td>
+                            <td><strong>810 000 €</strong></td>
+                        </tr>
+                    </table>
+                    <p><strong>Économies attendues :</strong> Réduction de 15% des hospitalisations → économie estimée
+                        de 3,78 M€. <strong>ROI : 4,6x</strong> sur 3 ans.</p>
+                </div>
+
+                <!-- Signature -->
+                <div class="doc-signature">
+                    <div class="doc-signature-grid">
+                        <div class="doc-signature-block">
+                            <div class="label">Le Porteur de projet</div>
+                            <div class="name">[Nom du représentant]</div>
+                            <div class="role">[Fonction], [Structure]</div>
+                        </div>
+                        <div class="doc-signature-block">
+                            <div class="label">Le Référent médical</div>
+                            <div class="name">[Nom du référent]</div>
+                            <div class="role">[Fonction], [Structure]</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="doc-footer">
+                    [Raison sociale] — [SIRET] — [Site web]<br />
+                    Document généré le [Date] — Format conforme trame LI Article 51
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleChapter(header) {
+            header.parentElement.classList.toggle('collapsed');
+        }
+    </script>
+
+</body>
+
+</html>

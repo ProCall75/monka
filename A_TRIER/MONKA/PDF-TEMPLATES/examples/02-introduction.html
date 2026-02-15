@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Introduction — Objet du livrable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #1A1A1A;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            height: 6px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 48px 100px 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #1A1A1A;
+            margin-bottom: 48px;
+            flex-shrink: 0;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .section-num {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6B7280;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            overflow: hidden;
+        }
+
+        /* Left: Intro + Table */
+        .intro-section {}
+
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #4B5563;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 14px 20px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #6B7280;
+            background: #F9FAFB;
+            border-bottom: 2px solid #1A1A1A;
+        }
+
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            width: 35%;
+        }
+
+        .callout {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+        }
+
+        .callout-text {
+            font-size: 13px;
+            color: #92400E;
+            line-height: 1.6;
+        }
+
+        /* Right: Architecture diagram */
+        .diagram-section {}
+
+        .diagram-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #9CA3AF;
+            margin-bottom: 24px;
+        }
+
+        .diagram-box {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            padding: 40px;
+            height: calc(100% - 40px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .diagram-row {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 32px;
+        }
+
+        .diagram-node {
+            padding: 20px 32px;
+            border: 2px solid #1A1A1A;
+            background: #FFF;
+            text-align: center;
+        }
+
+        .diagram-node-title {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .diagram-node-sub {
+            font-size: 11px;
+            color: #6B7280;
+        }
+
+        .diagram-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9CA3AF;
+        }
+
+        .arrow-line {
+            width: 2px;
+            height: 24px;
+            background: #D1D5DB;
+        }
+
+        .arrow-head {
+            font-size: 14px;
+        }
+
+        .diagram-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .diagram-node-main {
+            padding: 24px 48px;
+            background: #1A1A1A;
+            color: #FFF;
+            text-align: center;
+        }
+
+        .diagram-node-main .diagram-node-title {
+            color: #FFF;
+        }
+
+        .diagram-node-main .diagram-node-sub {
+            color: #9CA3AF;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #E5E7EB;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.6;
+        }
+
+        .footer-separator {
+            width: 1px;
+            height: 14px;
+            background: #E5E7EB;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .page-num {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+        }
+
+        @media print {
+
+            html,
+            body {
+                overflow: hidden;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-bar"></div>
+
+        <div class="content">
+            <div class="page-header">
+                <h1 class="page-title">Introduction</h1>
+                <span class="section-num">Section 1</span>
+            </div>
+
+            <div class="main-content">
+                <div class="intro-section">
+                    <p class="intro-text">Ce document décrit le fonctionnement du moteur clinique Monka basé sur les
+                        règles définies dans vos documents Legacy.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Composant</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Moteur de règles</td>
+                                <td>Logique de scoring, déclenchement, priorités</td>
+                            </tr>
+                            <tr>
+                                <td>Structure de données</td>
+                                <td>Questions typées, recommandations, micro-tâches</td>
+                            </tr>
+                            <tr>
+                                <td>Prototype HTML</td>
+                                <td>Démonstration fonctionnelle du moteur</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="callout">
+                        <p class="callout-text">⚠️ Les données mappées sont issues des sources Legacy et Excel. Leur
+                            véracité clinique reste à valider par votre équipe médicale.</p>
+                    </div>
+                </div>
+
+                <div class="diagram-section">
+                    <div class="diagram-label">Articulation sources → moteur</div>
+
+                    <div class="diagram-box">
+                        <div class="diagram-row">
+                            <div class="diagram-node">
+                                <div class="diagram-node-title">LEGACY (règles)</div>
+                                <div class="diagram-node-sub">Comment scorer, décider</div>
+                            </div>
+                            <div class="diagram-node">
+                                <div class="diagram-node-title">EXCEL (données)</div>
+                                <div class="diagram-node-sub">Quoi scorer, afficher</div>
+                            </div>
+                        </div>
+
+                        <div class="diagram-arrow">
+                            <div class="arrow-line"></div>
+                            <span class="arrow-head">▼</span>
+                        </div>
+
+                        <div class="diagram-center">
+                            <div class="diagram-node diagram-node-main">
+                                <div class="diagram-node-title">MOTEUR</div>
+                                <div class="diagram-node-sub">(logique)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="../assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-separator"></div>
+                    <img src="../assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="page-num">2</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

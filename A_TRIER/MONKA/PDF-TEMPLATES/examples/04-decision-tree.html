@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Architecture du Moteur Clinique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a1a;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            height: 6px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 48px 80px 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #1a1a1a;
+            margin-bottom: 32px;
+            flex-shrink: 0;
+        }
+
+        .page-title {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .section-num {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        /* Tree container */
+        .tree-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Tree structure */
+        .tree {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Node styles */
+        .node {
+            display: flex;
+            align-items: center;
+        }
+
+        .node-box {
+            padding: 12px 20px;
+            border: 2px solid #1a1a1a;
+            background: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .node-root {
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 14px;
+            padding: 16px 24px;
+        }
+
+        .node-branch {
+            background: #f9fafb;
+            border-color: #1a1a1a;
+        }
+
+        .node-leaf {
+            border-width: 1px;
+            border-color: #d1d5db;
+            font-weight: 500;
+            font-size: 12px;
+            padding: 8px 14px;
+            background: #fff;
+        }
+
+        .node-leaf-green {
+            background: #f0fdf4;
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        /* Connectors */
+        .connector-h {
+            width: 32px;
+            height: 2px;
+            background: #d1d5db;
+        }
+
+        .connector-short {
+            width: 20px;
+        }
+
+        .branch-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .branch-item {
+            display: flex;
+            align-items: center;
+            margin: 4px 0;
+        }
+
+        .branch-line {
+            position: absolute;
+            left: 0;
+            width: 2px;
+            background: #d1d5db;
+        }
+
+        /* Vertical connector for multiple children */
+        .children-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .children-group::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            bottom: 14px;
+            width: 2px;
+            background: #d1d5db;
+        }
+
+        .child-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .child-connector {
+            width: 20px;
+            height: 2px;
+            background: #d1d5db;
+        }
+
+        /* Two main sections */
+        .main-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-row {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .sub-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .sub-sections::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            bottom: 20px;
+            width: 2px;
+            background: #d1d5db;
+        }
+
+        .sub-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .leaves {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .leaves::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            bottom: 12px;
+            width: 2px;
+            background: #e5e7eb;
+        }
+
+        .leaf-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .leaf-connector {
+            width: 16px;
+            height: 2px;
+            background: #e5e7eb;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.6;
+        }
+
+        .footer-separator {
+            width: 1px;
+            height: 14px;
+            background: #e5e7eb;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .page-num {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        @media print {
+
+            html,
+            body {
+                overflow: hidden;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-bar"></div>
+
+        <div class="content">
+            <div class="page-header">
+                <h1 class="page-title">Architecture du Moteur Clinique</h1>
+                <span class="section-num">Section 2</span>
+            </div>
+
+            <div class="tree-wrapper">
+                <div class="tree">
+                    <!-- Root -->
+                    <div class="node-box node-root">Moteur Clinique Monka</div>
+                    <div class="connector-h"></div>
+
+                    <!-- Main branches -->
+                    <div class="main-sections">
+                        <!-- Branch 1: Fonctionnement du moteur -->
+                        <div class="section-row">
+                            <div class="node-box node-branch">Fonctionnement du moteur</div>
+                            <div class="connector-h connector-short"></div>
+
+                            <div class="sub-sections">
+                                <!-- Typologie des questions -->
+                                <div class="sub-row">
+                                    <div class="child-connector"></div>
+                                    <div class="node-box node-branch">Typologie des questions</div>
+                                    <div class="connector-h connector-short"></div>
+                                    <div class="leaves">
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Scorante (Score
+                                                vulnérabilité)</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Déclenchante (Active MP)
+                                            </div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Critique directe (Priorité
+                                                1)</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Descriptive (Contexte)</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Logique de calcul -->
+                                <div class="sub-row">
+                                    <div class="child-connector"></div>
+                                    <div class="node-box node-branch">Logique de calcul</div>
+                                    <div class="connector-h connector-short"></div>
+                                    <div class="leaves">
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Scoring normalisé (0-20)
+                                            </div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Évaluation CCC (logique
+                                                ET/OU)</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Déclenchement
+                                                recommandations</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Niveaux de priorité -->
+                                <div class="sub-row">
+                                    <div class="child-connector"></div>
+                                    <div class="node-box node-branch">Niveaux de priorité</div>
+                                    <div class="connector-h connector-short"></div>
+                                    <div class="leaves">
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Niveau 1: Immédiat (≤ 7
+                                                jours)</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Niveau 2: Moyen terme (≤ 15
+                                                jours)</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Niveau 3: Long terme (> 1
+                                                mois)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Branch 2: Architecture et Livrables -->
+                        <div class="section-row">
+                            <div class="node-box node-branch">Architecture et Livrables</div>
+                            <div class="connector-h connector-short"></div>
+
+                            <div class="sub-sections">
+                                <!-- Structure fichiers -->
+                                <div class="sub-row">
+                                    <div class="child-connector"></div>
+                                    <div class="node-box node-branch">Structure fichiers</div>
+                                    <div class="connector-h connector-short"></div>
+                                    <div class="leaves">
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Dossier QUESTIONNAIRE
+                                                (V1-V5)</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Dossier SOURCES (JSON)</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">DEMO (Simulateur HTML)</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Options d'intégration -->
+                                <div class="sub-row">
+                                    <div class="child-connector"></div>
+                                    <div class="node-box node-branch">Options d'intégration</div>
+                                    <div class="connector-h connector-short"></div>
+                                    <div class="leaves">
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Option A: HTML direct</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Option B: Extraction moteur
+                                                JS</div>
+                                        </div>
+                                        <div class="leaf-row">
+                                            <div class="leaf-connector"></div>
+                                            <div class="node-box node-leaf node-leaf-green">Option C: Import JSON en DB
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="../assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-separator"></div>
+                    <img src="../assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="page-num">2</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

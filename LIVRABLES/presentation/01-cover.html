@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=0.5, user-scalable=yes">
+    <title>Rapport Technique Monka — Moteur Clinique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .cover-content {
+            flex: 1;
+            padding: 48px 80px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cover-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .logo-divider {
+            width: 1px;
+            height: 24px;
+            background: #E0E0E0;
+        }
+
+        .cover-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        .cover-type {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .cover-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            color: #111111;
+            margin-bottom: 16px;
+        }
+
+        .cover-subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            color: #666666;
+            line-height: 1.4;
+        }
+
+        .cover-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 32px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .metadata-grid {
+            display: flex;
+            gap: 48px;
+        }
+
+        .metadata-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #999999;
+            margin-bottom: 4px;
+        }
+
+        .metadata-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #111111;
+        }
+
+        .document-info {
+            text-align: right;
+        }
+
+        .version-tag {
+            font-size: 12px;
+            font-weight: 500;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .confidential {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #999999;
+        }
+
+        @media print {
+
+            html,
+            body {
+                overflow: hidden;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+        <div class="cover-content">
+            <div class="cover-top">
+                <div class="logo-section">
+                    <img src="assets/pragma-logo-transparent.png" alt="Pragma" class="logo">
+                    <div class="logo-divider"></div>
+                    <img src="assets/monka-logo-transparent.png" alt="Monka" class="logo">
+                </div>
+            </div>
+            <div class="cover-main">
+                <div class="cover-type">📊 Rapport Technique</div>
+                <h1 class="cover-title">Rapport Technique Monka — Moteur Clinique</h1>
+                <p class="cover-subtitle">Fonctionnement du moteur et pistes d'intégration</p>
+            </div>
+            <div class="cover-bottom">
+                <div class="metadata-grid">
+                    <div class="metadata-item">
+                        <div class="metadata-label">Destinataires</div>
+                        <div class="metadata-value">Équipe technique Monka</div>
+                    </div>
+                    <div class="metadata-item">
+                        <div class="metadata-label">Date</div>
+                        <div class="metadata-value">04 février 2026</div>
+                    </div>
+                    <div class="metadata-item">
+                        <div class="metadata-label">Objet</div>
+                        <div class="metadata-value">Fonctionnement du moteur et pistes d'intégration</div>
+                    </div>
+                </div>
+                <div class="document-info">
+                    <div class="version-tag">📄 Rapport Technique Monka — Focus Moteur — 04/02/2026</div>
+                    <div class="confidential">Confidentiel</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

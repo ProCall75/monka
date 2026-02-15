@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Technique Monka — Moteur Clinique</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Pragma Color System */
+            --bg-page: #FAF9F7;
+            --bg-surface: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #64748B;
+            --border-light: #E2E8F0;
+            --primary-accent: #7748F6;
+            /* Pragma Purple */
+            --monka-mint: #5DDEBE;
+            /* Monka Identity */
+
+            /* Semantic Colors (Authority Mode) */
+            --info-bg: #F8FAFC;
+            --info-border: #E2E8F0;
+            --warning-bg: #FFFBEB;
+            --warning-border: #FCD34D;
+            --success-bg: #F0FDF4;
+            --success-border: #86EFAC;
+            --tech-bg: #F5F3FF;
+            --tech-border: #DDD6FE;
+
+            /* Spacing & Radius */
+            --radius-pill: 9999px;
+            --radius-card: 16px;
+            --space-unit: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 4rem 2rem;
+        }
+
+        .report-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-surface);
+            padding: 4rem;
+            border-radius: 24px;
+            /* Soft Pragma aesthetic */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+            /* Ultra subtle */
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: var(--primary-accent);
+            margin-right: 12px;
+            border-radius: 4px;
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #374151;
+            font-weight: 400;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        /* Header Meta Grid */
+        .header-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-light);
+            /* Standard separator */
+            padding-bottom: 2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+            color: #94A3B8;
+        }
+
+        .meta-value {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* HR equivalent */
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-light);
+            margin: 3rem 0;
+        }
+
+        /* Tables - McKinsey/Pragma Style */
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            background: var(--bg-surface);
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1.5rem;
+            background: #F8FAFC;
+            color: var(--text-secondary);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-light);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            color: #334155;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Colors for specific cells based on content (Scoring Table) */
+        td.cell-green {
+            background: #ECFDF5;
+            color: #065F46;
+            font-weight: 500;
+        }
+
+        td.cell-orange {
+            background: #FFFBEB;
+            color: #92400E;
+            font-weight: 500;
+        }
+
+        td.cell-red {
+            background: #FEF2F2;
+            color: #B91C1C;
+            font-weight: 500;
+        }
+
+        /* Alerts / Cards */
+        .alert {
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            font-size: 0.925rem;
+            border: 1px solid transparent;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .alert-warning {
+            background: var(--warning-bg);
+            border-color: var(--warning-border);
+            color: #92400E;
+        }
+
+        .alert-info {
+            background: var(--info-bg);
+            border-color: var(--info-border);
+            color: #1E293B;
+        }
+
+        .alert-success {
+            /* .example in legacy */
+            background: var(--success-bg);
+            border-color: var(--success-border);
+            color: #065F46;
+        }
+
+        .alert-tech {
+            background: var(--tech-bg);
+            border-color: var(--tech-border);
+            color: #5B21B6;
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .file-name {
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            font-size: 0.8rem;
+            background: #F1F5F9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            color: #475569;
+            border: 1px solid #E2E8F0;
+        }
+
+        .legend {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* Flow Diagram (Section 3.2 logic) */
+        .logic-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2.5rem;
+            background: #F8FAFC;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .flow-header {
+            font-weight: 600;
+            color: var(--primary-accent);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #EDE9FE;
+            border-radius: var(--radius-pill);
+        }
+
+        .flow-step {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .flow-step strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .flow-step span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: block;
+        }
+
+        /* Connectors */
+        .flow-arrow {
+            color: var(--border-light);
+            /* Creating the line using ::after on steps usually, but simple svg or div is fine here */
+            height: 1.5rem;
+            width: 1px;
+            background: var(--border-light);
+            position: relative;
+        }
+
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 6px solid var(--border-light);
+        }
+
+        .pre-block {
+            display: none;
+            /* Hide original ASCII but keep content if needed for screen readers? No, replacing visually */
+        }
+
+        /* Cover Page */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            page-break-after: always;
+            position: relative;
+        }
+
+
+
+        .cover-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .cover-meta {
+            margin-top: 4rem;
+            display: grid;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Table of Contents */
+        .toc-section {
+            padding: 4rem 0;
+            page-break-after: always;
+        }
+
+        .toc-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--primary-accent);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-item {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            width: 100%;
+            border-bottom: 1px dotted var(--border-light);
+            padding-bottom: 0.25rem;
+        }
+
+        .toc-link:hover {
+            color: var(--primary-accent);
+        }
+
+        /* Footer */
+        .page-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: white;
+            z-index: 1000;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .page-footer .footer-left {
+            font-weight: 500;
+        }
+
+        .page-footer .footer-right::after {
+            content: "Page " counter(page);
+        }
+
+        /* Logos */
+
+
+        /* Printing */
+        /* Printing */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+                /* Full bleed or minimal margin control via body */
+                margin-bottom: 60px;
+
+                /* Space for footer */
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            body {
+                padding: 20px 40px;
+                /* Internal margins for content */
+                background: white;
+                font-size: 11pt;
+                /* Slightly smaller for better fit */
+                color: black;
+                width: 100%;
+                margin: 0;
+            }
+
+            .report-container {
+                box-shadow: none;
+                padding: 0;
+                width: 100%;
+                max-width: 100%;
+                border: none;
+                margin: 0;
+            }
+
+            /* Adjust spacing for print */
+            h1,
+            h2,
+            h3 {
+                page-break-after: avoid;
+                color: black !important;
+                /* Ensure crisp text */
+            }
+
+            p,
+            ul,
+            ol {
+                orphans: 3;
+                widows: 3;
+            }
+
+            /* Strict Page Breaking Strategy */
+            h2 {
+                page-break-before: always;
+                margin-top: 0;
+                padding-top: 2rem;
+                border-bottom: 2px solid black;
+            }
+
+            /* Exceptions: No break for Intro if it fits (usually fits after TOC? No, force start) */
+            h2#intro {
+                page-break-before: always;
+            }
+
+            /* Scale down content to fit width */
+            .logic-flow {
+                transform: scale(0.9);
+                transform-origin: top center;
+                margin-bottom: 2rem;
+            }
+
+            /* Ensure tables don't bleed */
+            table {
+                font-size: 10pt;
+                width: 100%;
+            }
+
+            /* Container constraint */
+            .report-container {
+                max-width: 100% !important;
+                width: 100% !important;
+                overflow: hidden;
+            }
+        }
+
+        /* Force covers and TOC pages */
+        .cover-page {
+            height: 100vh;
+            page-break-after: always;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toc-section {
+            page-break-after: always;
+            padding-top: 2rem;
+        }
+
+        /* Prevent elements from being cut off */
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Footer positioning */
+        .page-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0 40px;
+            border-top: 1px solid #ddd;
+        }
+
+
+        /* Utility for manual breaks */
+        .force-break {
+            page-break-before: always;
+            display: block;
+            height: 0;
+            margin: 0;
+        }
+
+        /* Diagram scaling wrapper */
+        .diagram-container {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="report-container">
+
+        <!-- Cover Page -->
+        <div class="cover-page">
+
+
+            <h1 class="cover-title">Rapport Technique Monka</h1>
+            <div class="cover-subtitle">Moteur Clinique — Spécifications & Intégration</div>
+
+            <div class="cover-meta">
+                <div><strong>Destinataires :</strong> Équipe technique Monka</div>
+                <div><strong>Date :</strong> 04 février 2026</div>
+                <div><strong>Objet :</strong> Fonctionnement du moteur et pistes d'intégration</div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc-section">
+            <div class="toc-title">Sommaire</div>
+            <ul class="toc-list">
+                <li class="toc-item"><a href="#intro" class="toc-link">1. Introduction</a></li>
+                <li class="toc-item"><a href="#sources" class="toc-link">2. Sources Documentaires</a></li>
+                <li class="toc-item"><a href="#architecture" class="toc-link">3. Architecture Technique</a></li>
+                <li class="toc-item"><a href="#fonctionnement" class="toc-link">4. Fonctionnement du Moteur</a></li>
+                <li class="toc-item"><a href="#parcours" class="toc-link">5. Micro-Parcours</a></li>
+                <li class="toc-item"><a href="#taches" class="toc-link">6. Micro-Tâches</a></li>
+                <li class="toc-item"><a href="#asr" class="toc-link">7. ASR — Actions Structurantes</a></li>
+                <li class="toc-item"><a href="#priorisation" class="toc-link">8. Priorisation</a></li>
+                <li class="toc-item"><a href="#integration" class="toc-link">9. Options d'Intégration</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+
+        <h1 style="display:none;">Rapport Technique Monka — Moteur Clinique</h1>
+
+        <div class="header-meta" style="display:none;">
+            <!-- Hidden as moved to cover -->
+        </div>
+
+        <h2 id="intro">1. Introduction</h2>
+        <p>Ce document décrit le fonctionnement du moteur clinique Monka basé sur les règles définies dans vos documents
+            Legacy.</p>
+
+        <h3>Objet du livrable</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Composant</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Moteur de règles</strong></td>
+                        <td>Logique de scoring, déclenchement, priorités</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Structure de données</strong></td>
+                        <td>Questions typées, recommandations, micro-tâches</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prototype HTML</strong></td>
+                        <td>Démonstration fonctionnelle du moteur</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="alert alert-warning">
+            <span class="alert-icon">⚠️</span>
+            <div>
+                Les données mappées sont issues des sources Legacy et Excel. Leur véracité clinique reste à valider par
+                votre équipe médicale.
+            </div>
+        </div>
+
+        <h2 id="sources">2. Sources Documentaires — Legacy (14 fichiers)</h2>
+
+        <h3>2.1 Documents Haute Priorité (règles métier)</h3>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fichier exact</th>
+                        <th>Contenu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="file-name">Legacy scoring 310127.docx</span></td>
+                        <td>Règles de scoring, questions scorantes, formules de normalisation sur 20</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy questionnaire 290127.docx</span></td>
+                        <td>Typologie des questions : scorante / déclenchante / critique / descriptive</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy Priorisation 300127.docx</span></td>
+                        <td>3 niveaux de gravité avec délais d'action (7j / 15j / 1mois+)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy typologie des micro taches 030226.docx</span></td>
+                        <td>5 types : INFO, ORGA, STRUC, SEC, MED — règle R-MT-ASR-01</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>2.2 Documents Référentiels</h3>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fichier exact</th>
+                        <th>Contenu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="file-name">Legacy ASR Referent op. 030226.docx</span></td>
+                        <td>24 ASR (1 par micro-parcours), signatures d'état</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy Micro parcours 030226.docx</span></td>
+                        <td>24 micro-parcours (R1-R4, F1-F6, S1-S4, M1-M6, A1-A4)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy moteur applicatif et sécurité médicale 020326.docx</span>
+                        </td>
+                        <td>22 règles de sécurité médicale, alertes</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy Arborescence Globale 030226.docx</span></td>
+                        <td>Architecture des 5 vulnérabilités</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>2.3 Documents Complémentaires</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fichier</th>
+                        <th>Contenu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="file-name">Legacy suivi longitudinal 030226.docx</span></td>
+                        <td>Suivi dans le temps, reconfirmation ASR</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy grammaire de progression 190126.docx</span></td>
+                        <td>Transitions entre états</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy CR Médecin 030226.docx</span></td>
+                        <td>Comptes-rendus médecins</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy referentiel phrase CR MT 030226.docx</span></td>
+                        <td>Phrases types CR</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">Legacy Fondateur 030226pages.docx</span></td>
+                        <td>Vision fondatrice</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-name">CR MT Projection moteur 030226.docx</span></td>
+                        <td>Projection technique</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="architecture">3. Architecture Technique du Moteur</h2>
+
+        <div class="alert alert-tech">
+            <span class="alert-icon">🛠️</span>
+            <div>
+                <strong>Précision importante :</strong> Le fichier HTML fourni est une <strong>interface de
+                    visualisation</strong> permettant de tester et comprendre le moteur. L'aspect visuel (couleurs,
+                boutons, mise en page) n'est pas le sujet — c'est un habillage pour rendre l'algorithme
+                tangible.<br><br>
+                <strong>Le cœur du livrable est le moteur JavaScript</strong> qui contient toute la logique métier :
+                scoring, évaluation des CCC, activation des micro-parcours, calcul des priorités. Ce moteur peut être
+                extrait et réutilisé indépendamment de l'interface visuelle.
+            </div>
+        </div>
+
+        <h3>3.1 Structure des données</h3>
+
+        <p>Le moteur manipule 5 entités principales :</p>
+        <p><strong>Exemple de volumes (V1) :</strong> ~35 questions, ~6 règles CCC, 4 micro-parcours, 4 ASR, ~40
+            micro-tâches.</p>
+
+        <h3>3.2 Fonctionnement du moteur</h3>
+
+        <!-- Replaced Preformatted Diagram with Visual Logic Flow -->
+        <div class="diagram-container">
+            <div class="logic-flow">
+                <div class="flow-header">LOGIQUE DU MOTEUR (étape par étape)</div>
+
+                <div class="flow-step">
+                    <strong>L'utilisateur répond à une question</strong>
+                </div>
+
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step">
+                    <strong>1. Le moteur enregistre la réponse</strong>
+                </div>
+
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step">
+                    <strong>2. Calcul du score</strong>
+                    <span>→ Additionne les points<br>→ Ramène sur 20</span>
+                </div>
+
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step">
+                    <strong>3. Vérifie les combinaisons (CCC)</strong>
+                    <span>→ Si plusieurs réponses à risque ensemble → alerte</span>
+                </div>
+
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step">
+                    <strong>4. Active les parcours concernés</strong>
+                    <span>→ Selon la réponse directe<br>→ Ou via une combinaison (CCC)</span>
+                </div>
+
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step">
+                    <strong>5. Détermine l'urgence</strong>
+                    <span>→ Niveau 1 = critique (≤7j)<br>→ Niveau 2 = important (≤15j)<br>→ Niveau 3 = planifié (>1
+                        mois)</span>
+                </div>
+
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step" style="border-color: var(--primary-accent); background: #F5F3FF;">
+                    <strong>Résultat : Score, Urgence, Parcours, Recommandations</strong>
+                </div>
+            </div>
+
+
+            <h3>3.3 Algorithme de scoring</h3>
+
+            <p>Le calcul du score se fait en 2 temps :</p>
+            <ol>
+                <li><strong>Score brut</strong> = somme des points des réponses aux questions scorantes</li>
+                <li><strong>Score normalisé</strong> = (score brut / score max théorique) × 20</li>
+            </ol>
+
+            <p>La couleur d'interprétation est déterminée par seuils :</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Score /20</th>
+                            <th>Couleur</th>
+                            <th>Interprétation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0 – 6</td>
+                            <td class="cell-green">🟢 Vert</td>
+                            <td>Situation préservée</td>
+                        </tr>
+                        <tr>
+                            <td>7 – 12</td>
+                            <td class="cell-orange">🟠 Orange</td>
+                            <td>Vigilance requise</td>
+                        </tr>
+                        <tr>
+                            <td>13 – 20</td>
+                            <td class="cell-red">🔴 Rouge</td>
+                            <td>Vulnérabilité élevée</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="fonctionnement">4. Fonctionnement du Moteur</h2>
+
+            <h3>4.1 Typologie des questions</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Effet moteur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Scorante</strong></td>
+                            <td>Incrémente le score de vulnérabilité</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Déclenchante (trigger)</strong></td>
+                            <td>Active un micro-parcours spécifique si option sélectionnée</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Critique</strong></td>
+                            <td>Force priorité niveau 1 (≤7 jours) si option critique sélectionnée</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Descriptive</strong></td>
+                            <td>Contexte uniquement, pas d'effet algorithmique</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>4.2 Conditions Critiques Composites (CCC)</h3>
+            <p>Les CCC sont des règles booléennes combinant plusieurs réponses. Quand la condition est remplie, le
+                moteur :
+            </p>
+            <ul>
+                <li>Active le micro-parcours associé</li>
+                <li>Passe la priorité en niveau 2 minimum</li>
+                <li>Déclenche les recommandations spécifiques à cette CCC</li>
+            </ul>
+
+            <div class="alert alert-success">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>Exemple :</strong> CCC R2_CC_01<br>
+                    <strong>Condition :</strong> "Aidant seul" (N4=Oui) <strong>ET</strong> "Personne pour aider"
+                    (E2=Personne)<br>
+                    <strong>Effet :</strong> → Active MP R2 + Priorité 2
+                </div>
+            </div>
+
+            <h2 id="parcours">5. Micro-Parcours</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>V</th>
+                            <th>Préfixe</th>
+                            <th>Parcours</th>
+                            <th>Thème</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>V1</td>
+                            <td>R</td>
+                            <td>R1, R2, R3, R4</td>
+                            <td>Social & Relationnel</td>
+                        </tr>
+                        <tr>
+                            <td>V2</td>
+                            <td>F</td>
+                            <td>F1 → F6</td>
+                            <td>Fragilité du Proche</td>
+                        </tr>
+                        <tr>
+                            <td>V3</td>
+                            <td>S</td>
+                            <td>S1, S2, S3, S4</td>
+                            <td>Santé de l'Aidant</td>
+                        </tr>
+                        <tr>
+                            <td>V4</td>
+                            <td>M</td>
+                            <td>M1 → M6</td>
+                            <td>Parcours Médical</td>
+                        </tr>
+                        <tr>
+                            <td>V5</td>
+                            <td>A</td>
+                            <td>A1, A2, A3, A4</td>
+                            <td>Administratif</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="taches">6. Micro-Tâches</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Contribue ASR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>INFO</strong></td>
+                            <td>Information, explication</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ORGA</strong></td>
+                            <td>Organisation, planification</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td><strong>STRUC</strong></td>
+                            <td>Mise en place structurante</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SEC</strong></td>
+                            <td>Sécurisation</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MED</strong></td>
+                            <td>Prescription médicale</td>
+                            <td>✅</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">📌</span>
+                <div>
+                    <strong>Règle R-MT-ASR-01</strong> : Aucune micro-tâche ne valide directement une ASR. Les tâches
+                    sont
+                    des moyens, l'ASR est un état du monde observé.
+                </div>
+            </div>
+
+            <h2 id="asr">7. ASR — Actions Structurantes de Référence</h2>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">📌</span>
+                <div>
+                    <strong>Règle R-ASR-01</strong> : 1 Micro-Parcours = 1 ASR unique
+                </div>
+            </div>
+
+            <p>Chaque ASR représente un état cible validé par des "signatures d'état" (déclarations factuelles). Une
+                seule
+                signature suffit.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>État</th>
+                            <th>Signification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>❌ Non atteinte</strong></td>
+                            <td>Aucune signature valide</td>
+                        </tr>
+                        <tr>
+                            <td><strong>✔ Atteinte</strong></td>
+                            <td>≥ 1 signature détectée</td>
+                        </tr>
+                        <tr>
+                            <td><strong>⚠ Non confirmée</strong></td>
+                            <td>Atteinte mais non reconfirmée au suivi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="priorisation">8. Priorisation</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Niveau</th>
+                            <th>Déclencheur</th>
+                            <th>Délai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td>Question critique directe</td>
+                            <td>≤ 7 jours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td>CCC activée</td>
+                            <td>> 7 jours à < 1 mois</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td>Score seul</td>
+                            <td>&gt; 1 mois</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="integration">9. Options d'Intégration</h2>
+
+            <h3>Option A — Intégration via iframe ou WebView</h3>
+            <span class="legend">(= embarquer le HTML directement dans votre application)</span>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Détail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Principe</strong></td>
+                            <td>Intégrer le fichier HTML dans une iframe (web) ou WebView (mobile).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Avantages</strong></td>
+                            <td>Aucun développement, déploiement immédiat, isolation complète</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Limites</strong></td>
+                            <td>Pas d'accès aux données depuis votre backend, styling séparé</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Option B — Extraction en module JavaScript</h3>
+            <span class="legend">(= extraire le moteur pour l'importer dans votre codebase JS/TS)</span>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Détail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Principe</strong></td>
+                            <td>Refactorer le moteur en module ES6 exportable. Vos développeurs importent les fonctions
+                                (calculateScore, evaluateCCC, etc.) dans votre app React/Vue/Node.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Avantages</strong></td>
+                            <td>Intégration native, accès aux données, styling unifié</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Limites</strong></td>
+                            <td>Nécessite intervention de vos devs pour l'adaptation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Option C — Import des données vers votre base</h3>
+            <span class="legend">(= importer les structures de données, recoder le moteur dans votre stack)</span>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Détail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Principe</strong></td>
+                            <td>Exporter les données (questions, CCC, ASR) en JSON ou SQL. Votre équipe réimplémente la
+                                logique moteur dans votre langage (Python, Go, Java...).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Avantages</strong></td>
+                            <td>Contrôle total, intégration profonde avec votre architecture</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Limites</strong></td>
+                            <td>Développement significatif, risque de divergence avec nos règles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Synthèse comparative</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Critère</th>
+                            <th>Option A</th>
+                            <th>Option B</th>
+                            <th>Option C</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Contrôle</td>
+                            <td>Faible</td>
+                            <td>Moyen</td>
+                            <td>Total</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenabilité</td>
+                            <td>Dépend de nous</td>
+                            <td>Partagée</td>
+                            <td>Votre équipe</td>
+                        </tr>
+                        <tr>
+                            <td>Cas d'usage</td>
+                            <td>POC, démo, test</td>
+                            <td>Prod web/mobile</td>
+                            <td>Prod avec custom</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+
+
+
+</body>
+
+</html>

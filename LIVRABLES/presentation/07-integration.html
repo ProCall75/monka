@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=0.5, user-scalable=yes">
+    <title>5. Options d'Intégration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px 80px 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 28px;
+            flex-shrink: 0;
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #7748F6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #111111;
+            margin-top: 6px;
+        }
+
+        .page-num {
+            font-size: 13px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 32px;
+            overflow: hidden;
+        }
+
+        .option-card {
+            background: #FAFAFA;
+            border-radius: 4px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #7748F6;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 2px;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .option-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111111;
+            margin-bottom: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 0;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #666666;
+            border-bottom: 2px solid #111111;
+        }
+
+        td {
+            padding: 10px 0;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 13px;
+            color: #111111;
+            vertical-align: top;
+            line-height: 1.4;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            width: 80px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .code-box {
+            background: #1a1a2e;
+            border-radius: 4px;
+            padding: 16px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #E0E0E0;
+            white-space: pre;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .code-comment {
+            color: #6B7280;
+        }
+
+        .code-function {
+            color: #A78BFA;
+        }
+
+        .code-param {
+            color: #FCD34D;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.4;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 14px;
+            background: #E0E0E0;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #999999;
+        }
+
+        .footer-page {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7748F6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+        <div class="content">
+            <div class="page-header">
+                <div>
+                    <span class="section-num">Section 5</span>
+                    <h1 class="page-title">Options d'Intégration</h1>
+                </div>
+                <span class="page-num">07 / 08</span>
+            </div>
+            <div class="main-content">
+                <div class="option-card">
+                    <span class="option-tag">Option A</span>
+                    <div class="option-title">Utilisation directe du HTML</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Usage</th>
+                                <th>Limite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="font-weight: normal;">Démos, tests fonctionnels</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="font-weight: normal; color: #DC2626;">Non modulaire</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="option-card">
+                    <span class="option-tag">Option B</span>
+                    <div class="option-title">Extraction du moteur JS</div>
+                    <div class="code-box"><span class="code-comment">// Fonctions à extraire :</span>
+                        <span class="code-function">calculateScore</span>(<span class="code-param">answers,
+                            vulnerability</span>)
+                        <span class="code-function">evaluateCCC</span>(<span class="code-param">answers</span>)
+                        <span class="code-function">getRecommendations</span>(<span class="code-param">answers</span>)
+                        <span class="code-function">getPriority</span>(<span class="code-param">criticals, cccActive,
+                            score</span>)
+                    </div>
+                    <table style="margin-top: 16px;">
+                        <thead>
+                            <tr>
+                                <th>Usage</th>
+                                <th>Effort</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="font-weight: normal;">Intégration dans votre stack</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="font-weight: normal;">~2-3 jours refactoring</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="option-card">
+                    <span class="option-tag">Option C</span>
+                    <div class="option-title">Import JSON vers votre DB</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Usage</th>
+                                <th>Effort</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="font-weight: normal;">Contrôle total, votre infra</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="font-weight: normal;">Script d'import + logique à recoder</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-divider"></div>
+                    <img src="assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="footer-page">07</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

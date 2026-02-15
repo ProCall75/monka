@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=0.5, user-scalable=yes">
+    <title>6. Prochaines Étapes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: #FFFFFF;
+            color: #111111;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header-line {
+            height: 3px;
+            background: #7748F6;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+            padding: 48px 80px 40px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 48px;
+            flex-shrink: 0;
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #7748F6;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #111111;
+            margin-top: 8px;
+        }
+
+        .page-num {
+            font-size: 13px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1400px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .step-card {
+            border-top: 3px solid #111111;
+            padding-top: 24px;
+        }
+
+        .step-card.active {
+            border-color: #7748F6;
+        }
+
+        .step-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #E0E0E0;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .step-card.active .step-number {
+            color: #7748F6;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111111;
+            margin-bottom: 12px;
+        }
+
+        .step-description {
+            font-size: 16px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            padding: 20px 24px;
+            background: #FAFAFA;
+            border-radius: 4px;
+            border-left: 3px solid #999999;
+        }
+
+        .footer-note-text {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            height: 18px;
+            opacity: 0.4;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 14px;
+            background: #E0E0E0;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #999999;
+        }
+
+        .footer-page {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7748F6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide">
+        <div class="header-line"></div>
+        <div class="content">
+            <div class="page-header">
+                <div>
+                    <span class="section-num">Section 6</span>
+                    <h1 class="page-title">Prochaines Étapes</h1>
+                </div>
+                <span class="page-num">08 / 08</span>
+            </div>
+            <div class="main-content">
+                <div class="steps-grid">
+                    <div class="step-card active">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Validation données</div>
+                        <div class="step-description">Vérifier la véracité des mappings avec l'équipe clinique</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Choix option intégration</div>
+                        <div class="step-description">A, B ou C selon vos priorités</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Extension V2-V5</div>
+                        <div class="step-description">Même logique moteur, données à intégrer</div>
+                    </div>
+                </div>
+                <div class="footer-note">
+                    <p class="footer-note-text">📄 Rapport Technique Monka — Focus Moteur — 04/02/2026</p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-logos">
+                    <img src="assets/pragma-logo-transparent.png" alt="Pragma" class="footer-logo">
+                    <div class="footer-divider"></div>
+                    <img src="assets/monka-logo-transparent.png" alt="Monka" class="footer-logo">
+                </div>
+                <span class="footer-text">Rapport Technique Monka — Confidentiel</span>
+                <span class="footer-page">08</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

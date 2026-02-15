@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+    /* ═══════════════════════════════════════
+     MONKA — Tokens extraits des 2 références
+     Font: Outfit | Fond: crème chaud
+     ═══════════════════════════════════════ */
+
+    /* ── Base chaud ── */
+    --color-cream: #FDF6F0;
+    --color-cream-alt: #F3EAE3;
+    --color-surface: #FFFFFF;
+    --color-input-bg: #EBE0D6;
+    --color-input-bg-alt: #F3E6DE;
+    --color-dark: #1A1A1A;
+    --color-gray: #8C8C8C;
+    --color-gray-light: #D4D4D4;
+
+    /* ── Vulnérabilité : palettes contextuelles ── */
+    --color-vuln-red: #F8D7DA;
+    --color-vuln-red-deep: #F2C4B3;
+    --color-vuln-gold: #FFEAC2;
+    --color-vuln-blue: #C5D1F7;
+    --color-vuln-green: #C8E6C9;
+    --color-vuln-green-alt: #D1E8D8;
+
+    /* ── Mood emojis ── */
+    --color-mood-happy: #FFE5A5;
+    --color-mood-calm: #A8C6A3;
+    --color-mood-angry: #EAB4A8;
+    --color-mood-sad: #AECBEB;
+    --color-mood-neutral: #EAEAEA;
+    --color-mood-anxious: #C7C0E4;
+
+    /* ── Dot grid ── */
+    --color-dot-filled: #A8C6A3;
+    --color-dot-light: #D4E5D1;
+    --color-dot-empty: #F0F0F0;
+
+    /* ── Badges ── */
+    --color-badge-critique: #E57373;
+    --color-badge-vigilance: #FBC02D;
+    --color-badge-standard: #66BB6A;
+
+    /* ── Radii ── */
+    --radius-card: 32px;
+    --radius-btn: 20px;
+    --radius-pill: 9999px;
+    --radius-input: 24px;
+
+    /* ── Shadows ── */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --shadow-nav: 0 -10px 40px rgba(0, 0, 0, 0.05);
+    --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+@layer base {
+    html {
+        font-family: 'Outfit', sans-serif;
+        background-color: #f0f2f5;
+        color: var(--color-dark);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        min-height: 100dvh;
+    }
+}
+
+/* ── Scrollbar cache ── */
+@utility no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ── Blob decoratif ── */
+@utility blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── Screen transitions ── */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@utility animate-fadeIn {
+    animation: fadeIn 0.2s ease-out both;
+}
+
+/* ── Gradient text (static) ── */
+.gradient-text {
+    background: linear-gradient(135deg, #2D2A26 0%, #7C3AED 50%, #EC4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── React Flow fullscreen fix ── */
+.react-flow-fullscreen-container:fullscreen,
+.react-flow-fullscreen-container:-webkit-full-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #0F172A;
+}
+
+.react-flow-fullscreen-container:fullscreen .react-flow,
+.react-flow-fullscreen-container:-webkit-full-screen .react-flow {
+    width: 100% !important;
+    height: 100% !important;
+}

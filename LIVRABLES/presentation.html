@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Technique Monka — Moteur Clinique</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #1e1e1e;
+            color: #111111;
+        }
+
+        /* SCALE ENGINE */
+        #viewport {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #scaler {
+            width: 1920px;
+            height: 1080px;
+            transform-origin: center center;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+        }
+
+        .deck-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background: #eef2f6;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        /* HEADER */
+        .header-line {
+            height: 12px;
+            background: #7748F6;
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        /* LAYOUT & TYPOGRAPHY - INTELLIGENT MODE */
+        .slide-content {
+            padding: 50px 70px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .slide-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #E2E8F0;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 26px;
+            /* Larger Section Header */
+            font-weight: 700;
+            color: #7748F6;
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 26px;
+            background: #7748F6;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        p,
+        li {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #374151;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* PRAGMA INTELLIGENT CARDS */
+        .card-grid {
+            display: grid;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            font-family: 'Plus Jakarta Sans';
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            font-size: 18px;
+            color: #475569;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        /* TABLE REPLACEMENT: VISUAL LISTS */
+        .visual-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .visual-row:last-child {
+            border-bottom: none;
+        }
+
+        .visual-label {
+            font-weight: 700;
+            color: #1E293B;
+            font-size: 20px;
+            width: 30%;
+        }
+
+        .visual-value {
+            font-size: 18px;
+            color: #475569;
+            width: 65%;
+        }
+
+        /* TRAFFIC LIGHT SYSTEM (PRIORITE) */
+        .traffic-light-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            gap: 15px;
+        }
+
+        .priority-card {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Plus Jakarta Sans';
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .prio-level {
+            font-size: 60px;
+            font-weight: 900;
+            opacity: 0.9;
+            margin-right: 40px;
+            width: 80px;
+            text-align: center;
+        }
+
+        .prio-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .prio-trigger {
+            font-weight: 800;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .prio-delay {
+            font-size: 20px;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        .bg-red-gradient {
+            background: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+        }
+
+        .bg-orange-gradient {
+            background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
+        }
+
+        .bg-green-gradient {
+            background: linear-gradient(135deg, #10B981 0%, #047857 100%);
+        }
+
+        /* STATUS BADGES (ASR) */
+        .status-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid;
+            height: 100%;
+        }
+
+        .status-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .status-title {
+            font-weight: 800;
+            font-size: 28px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .status-desc {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #475569;
+        }
+
+        /* ALERTS - BIGGER */
+        .alert {
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 20px;
+            display: flex;
+            gap: 20px;
+            border: 1px solid transparent;
+            align-items: flex-start;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .alert-warning {
+            background: #FFFBEB;
+            border-color: #FCD34D;
+            color: #92400E;
+        }
+
+        .alert-info {
+            background: #F8FAFC;
+            border-color: #E2E8F0;
+            color: #1E293B;
+        }
+
+        .alert-success {
+            background: #F0FDF4;
+            border-color: #86EFAC;
+            color: #065F46;
+        }
+
+        .alert-tech {
+            background: #F5F3FF;
+            border-color: #DDD6FE;
+            color: #5B21B6;
+        }
+
+        .file-name {
+            font-family: monospace;
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #475569;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* LAYOUT UTILS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            height: 100%;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            height: 100%;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 30px;
+            height: 100%;
+        }
+
+        .v-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            height: 100%;
+        }
+
+        .fill {
+            flex: 1;
+        }
+
+        /* DIAGRAMS */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            background: #F8F9FA;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #E2E8F0;
+            height: 100%;
+            align-items: center;
+        }
+
+        .flow-step-box {
+            background: white;
+            border: 3px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 40px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .flow-arrow-down {
+            font-size: 32px;
+            color: #CBD5E0;
+        }
+
+        /* FOOTER */
+        .slide-footer {
+            height: 70px;
+            border-top: 2px solid #E2E8F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 70px;
+            background: white;
+            margin-top: auto;
+        }
+
+        .footer-logo {
+            height: 32px;
+        }
+
+        .footer-meta {
+            font-size: 16px;
+            color: #718096;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* CONTROLS */
+        #controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 40px;
+            z-index: 1000;
+        }
+
+        button {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* PRAGMA AUTHORITY TABLE STYLES - SCALED for Slide 1 & 2 where tables make sense */
+        .table-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #334155;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            border-top: 3px solid #1e293b;
+            border-bottom: 3px solid #1e293b;
+            height: 100%;
+        }
+
+        th {
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            font-weight: 700;
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 2px solid #1e293b;
+            background: #fff;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #1e293b;
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="viewport">
+        <div id="scaler">
+            <div class="deck-container">
+
+                <!-- SLIDE 1: COUVERTURE -->
+                <div class="slide active">
+                    <div class="header-line"></div>
+                    <div class="slide-content" style="align-items:center; justify-content:center; text-align:center;">
+                        <img src="assets/monka-logo-transparent.png" style="height:180px; margin-bottom:60px;"
+                            onerror="this. style.display='none'">
+                        <h1 style="font-size:110px; font-weight:900; line-height:1.1; margin-bottom:30px;">Rapport
+                            Technique<br><span style="color:#7748F6;">Moteur Clinique</span></h1>
+                        <p style="font-size:48px; color:#64748B; font-weight:500;">Spécifications, Règles & Intégration
+                        </p>
+
+                        <div
+                            style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:60px; margin-top:100px; text-align:center; width: 90%; border-top: 2px solid #E2E8F0; padding-top: 60px;">
+                            <div>
+                                <div
+                                    style="font-size:18px; font-weight:700; color:#A0AEC0; text-transform:uppercase; margin-bottom:15px;">
+                                    Destinataires</div>
+                                <div style="font-size:32px; font-weight:700;">Équipe technique Monka</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size:18px; font-weight:700; color:#A0AEC0; text-transform:uppercase; margin-bottom:15px;">
+                                    Date</div>
+                                <div style="font-size:32px; font-weight:700;">04 février 2026</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size:18px; font-weight:700; color:#A0AEC0; text-transform:uppercase; margin-bottom:15px;">
+                                    Objet</div>
+                                <div style="font-size:32px; font-weight:700;">Fonctionnement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2: INTRO & SOURCES -->
+                <div class="slide">
+                    <div class="header-line"></div>
+                    <div class="slide-content">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                            <h1 class="slide-title" style="border:none; margin:0;">1. Introduction & Sources</h1>
+                        </div>
+                        <p style="font-size:22px; font-weight:500; color:#4B5563;">
+                            Ce document décrit le fonctionnement du moteur clinique Monka basé sur les règles définies
+                            dans vos documents Legacy (14 fichiers).
+                        </p>
+
+                        <div class="grid-2 fill">
+                            <div class="v-stack">
+                                <h2 class="section-title">Objet du livrable</h2>
+                                <div class="card fill">
+                                    <div class="visual-row">
+                                        <div class="visual-label">Moteur de règles</div>
+                                        <div class="visual-value">Logique de scoring, déclenchement, priorités</div>
+                                    </div>
+                                    <div class="visual-row">
+                                        <div class="visual-label">Structure données</div>
+                                        <div class="visual-value">Questions typées, recommandations, micro-tâches</div>
+                                    </div>
+                                    <div class="visual-row">
+                                        <div class="visual-label">Prototype HTML</div>
+                                        <div class="visual-value">Démonstration fonctionnelle du moteur</div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-warning" style="margin-top:0;">
+                                    <span class="alert-icon">⚠️</span>
+                                    <div>Les données mappées sont issues des sources Legacy et Excel. Leur véracité
+                                        clinique reste à valider.</div>
+                                </div>
+
+                                <h2 class="section-title">2.1 Documents Haute Priorité</h2>
+                                <div class="table-container fill">
+                                    <table>
+                                        <tr>
+                                            <th>Fichier exact</th>
+                                            <th>Contenu</th>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy scoring...</span></td>
+                                            <td>Règles de scoring, formules</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy quest...</span></td>
+                                            <td>Typologie quest.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy Prior...</span></td>
+                                            <td>3 niveaux (7j/15j/1m)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy typol...</span></td>
+                                            <td>5 types tâches, règles</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="v-stack">
+                                <h2 class="section-title">2.2 & 2.3 Référentiels</h2>
+                                <div class="table-container fill">
+                                    <div class="table-title">2.2 Documents Référentiels</div>
+                                    <table>
+                                        <tr>
+                                            <th>Fichier exact</th>
+                                            <th>Contenu</th>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy ASR...</span></td>
+                                            <td>24 ASR, signatures</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy Micro...</span></td>
+                                            <td>24 MP (R1-R4, F1-F6...)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy moteur...</span></td>
+                                            <td>22 règles sécurité</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy Arbo...</span></td>
+                                            <td>Architecture Vulnérab.</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="table-container fill">
+                                    <div class="table-title">2.3 Documents Complémentaires</div>
+                                    <table>
+                                        <tr>
+                                            <th>Fichier</th>
+                                            <th>Contenu</th>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy suivi...</span></td>
+                                            <td>Suivi temps</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy gramm...</span></td>
+                                            <td>Transitions états</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy CR...</span></td>
+                                            <td>Comptes-rendus</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">Legacy Fonda...</span></td>
+                                            <td>Vision fondatrice</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="file-name">CR MT Projec...</span></td>
+                                            <td>Projection technique</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer"><img src="assets/monka-logo-transparent.png" class="footer-logo"><span
+                            class="footer-meta">02 / 07</span></div>
+                </div>
+
+                <!-- SLIDE 3: ARCHITECTURE & LOGIC -->
+                <div class="slide">
+                    <div class="header-line"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">3. Architecture Technique</h1>
+
+                        <div class="alert alert-tech" style="font-size:18px;">
+                            <span class="alert-icon">🛠️</span>
+                            <div><strong>Précision importante :</strong> Le HTML fourni est une interface de
+                                visualisation. Le cœur du livrable est le moteur JavaScript (scoring, CCC, activation
+                                MP) extractible indépendamment.</div>
+                        </div>
+
+                        <div class="grid-2 fill">
+                            <div class="v-stack">
+                                <div class="fill">
+                                    <h2 class="section-title">3.1 Structure des données</h2>
+                                    <p class="card fill" style="justify-content:center;">Le moteur manipule 5 entités
+                                        principales. Exemple de volumes (V1) : ~35 questions, ~6 règles CCC, 4
+                                        micro-parcours, 4 ASR, ~40 micro-tâches.</p>
+                                </div>
+                                <div class="fill">
+                                    <h2 class="section-title">3.3 Algorithme de scoring</h2>
+                                    <div class="card fill" style="padding:0;">
+                                        <div style="padding:20px; border-bottom:1px solid #E2E8F0;">
+                                            1. <strong>Score brut</strong> = somme points<br>2. <strong>Score
+                                                normalisé</strong> = (brut / max) × 20
+                                        </div>
+                                        <div style="display:flex; flex:1;">
+                                            <div
+                                                style="flex:1; background:#F0FDF4; display:flex; flex-direction:column; justify-content:center; align-items:center; border-right:1px solid #E2E8F0; padding:10px;">
+                                                <div style="font-size:30px; font-weight:800; color:#166534;">0 – 6</div>
+                                                <div style="color:#166534; font-weight:700;">Préservé</div>
+                                                <div class="bg-green" style="margin-top:10px;">🟢 Vert</div>
+                                            </div>
+                                            <div
+                                                style="flex:1; background:#FFF7ED; display:flex; flex-direction:column; justify-content:center; align-items:center; border-right:1px solid #E2E8F0; padding:10px;">
+                                                <div style="font-size:30px; font-weight:800; color:#9A3412;">7 – 12
+                                                </div>
+                                                <div style="color:#9A3412; font-weight:700;">Vigilance</div>
+                                                <div class="bg-orange" style="margin-top:10px;">🟠 Orange</div>
+                                            </div>
+                                            <div
+                                                style="flex:1; background:#FEF2F2; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:10px;">
+                                                <div style="font-size:30px; font-weight:800; color:#991B1B;">13 – 20
+                                                </div>
+                                                <div style="color:#991B1B; font-weight:700;">Vulnérabilité</div>
+                                                <div class="bg-red" style="margin-top:10px;">🔴 Rouge</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="v-stack">
+                                <h2 class="section-title">3.2 Fonctionnement (Logic Flow)</h2>
+                                <div class="flow-container fill">
+                                    <div class="flow-step-box"><strong>Utilisateur répond</strong></div>
+                                    <div class="flow-arrow-down">▼</div>
+                                    <div class="flow-step-box"><strong>1. Enregistrement réponse</strong></div>
+                                    <div class="flow-arrow-down">▼</div>
+                                    <div class="flow-step-box"><strong>2. Calcul Score</strong></div>
+                                    <div class="flow-arrow-down">▼</div>
+                                    <div class="flow-step-box"><strong>3. Vérifie CCC</strong></div>
+                                    <div class="flow-arrow-down">▼</div>
+                                    <div class="flow-step-box"><strong>4. Active Parcours</strong></div>
+                                    <div class="flow-arrow-down">▼</div>
+                                    <div class="flow-step-box"><strong>5. Urgence</strong></div>
+                                    <div class="flow-arrow-down">▼</div>
+                                    <div class="flow-step-box"
+                                        style="background:#F3E8FF; border-color:#7748F6; color:#5B21B6; font-weight:700;">
+                                        Résultat complet</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer"><img src="assets/monka-logo-transparent.png" class="footer-logo"><span
+                            class="footer-meta">03 / 07</span></div>
+                </div>
+
+                <!-- SLIDE 4: TYPOLOGY & CCC - INTELLIGENT REDESIGN -->
+                <div class="slide">
+                    <div class="header-line"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">4. Fonctionnement du Moteur</h1>
+
+                        <div class="grid-2 fill">
+                            <div class="v-stack">
+                                <h2 class="section-title">4.1 Typologie des questions</h2>
+                                <!-- 4 Cards instead of Table -->
+                                <div class="grid-4 fill"
+                                    style="grid-template-rows: 1fr 1fr; grid-template-columns: 1fr 1fr; gap:20px;">
+                                    <div class="card" style="border-left:8px solid #64748B;">
+                                        <div class="card-header">Scorante 📊</div>
+                                        <div class="card-body">Incrémente le score de vulnérabilité.</div>
+                                    </div>
+                                    <div class="card" style="border-left:8px solid #7748F6;">
+                                        <div class="card-header">Déclenchante ⚡</div>
+                                        <div class="card-body">Active un micro-parcours spécifique si option
+                                            sélectionnée.</div>
+                                    </div>
+                                    <div class="card" style="border-left:8px solid #EF4444;">
+                                        <div class="card-header" style="color:#B91C1C;">Critique 🚨</div>
+                                        <div class="card-body">Force priorité niveau 1 (≤7 jours) si option critique.
+                                        </div>
+                                    </div>
+                                    <div class="card" style="border-left:8px solid #10B981;">
+                                        <div class="card-header">Descriptive 📝</div>
+                                        <div class="card-body">Contexte uniquement, pas d'effet algorithmique.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="v-stack">
+                                <h2 class="section-title">4.2 Conditions Critiques (CCC)</h2>
+                                <div class="fill"
+                                    style="background:#F8FAFC; padding:30px; border-radius:12px; border:1px solid #E2E8F0;">
+                                    <p style="font-weight:600; font-size:20px; color:#1E293B;">Les CCC sont des règles
+                                        booléennes combinant plusieurs réponses. Quand la condition est remplie, le
+                                        moteur :</p>
+                                    <div style="display:flex; flex-direction:column; gap:15px; margin-top:20px;">
+                                        <div style="display:flex; align-items:center; font-size:20px;"><span
+                                                style="color:#7748F6; font-size:24px; margin-right:15px;">▶</span>
+                                            Active le micro-parcours associé</div>
+                                        <div style="display:flex; align-items:center; font-size:20px;"><span
+                                                style="color:#7748F6; font-size:24px; margin-right:15px;">▶</span> Passe
+                                            la priorité en niveau 2 minimum</div>
+                                        <div style="display:flex; align-items:center; font-size:20px;"><span
+                                                style="color:#7748F6; font-size:24px; margin-right:15px;">▶</span>
+                                            Déclenche les recommandations spécifiques</div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-success fill"
+                                    style="flex-direction:column; align-items:flex-start; justify-content:center;">
+                                    <div
+                                        style="display:flex; align-items:center; gap:15px; margin-bottom:20px; border-bottom:1px solid #86EFAC; padding-bottom:15px; width:100%;">
+                                        <span class="alert-icon" style="font-size:30px;">💡</span>
+                                        <strong>Exemple Concret : CCC R2_CC_01</strong>
+                                    </div>
+                                    <div style="line-height:1.8; font-size:18px;">
+                                        <strong>Condition :</strong> "Aidant seul" (N4=Oui) <strong>ET</strong>
+                                        "Personne pour aider" (E2=Personne)<br>
+                                        <strong>Effet :</strong> → Active MP R2 + Priorité 2
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer"><img src="assets/monka-logo-transparent.png" class="footer-logo"><span
+                            class="footer-meta">04 / 07</span></div>
+                </div>
+
+                <!-- SLIDE 5: MP & MT -->
+                <div class="slide">
+                    <div class="header-line"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">5. Parcours & 6. Tâches</h1>
+
+                        <div class="grid-2 fill">
+                            <div class="v-stack">
+                                <h2 class="section-title">5. Micro-Parcours</h2>
+                                <div class="card fill" style="padding:0; overflow:hidden;">
+                                    <div class="visual-row" style="padding:20px; background:#F8FAFC;">
+                                        <div style="font-weight:700; width:10%; color:#64748B;">V</div>
+                                        <div style="font-weight:700; width:10%; color:#64748B;">ID</div>
+                                        <div style="font-weight:700; width:20%; color:#64748B;">Codes</div>
+                                        <div style="font-weight:700; color:#64748B;">Thème</div>
+                                    </div>
+                                    <div class="visual-row" style="padding:20px;">
+                                        <div style="width:10%;">V1</div>
+                                        <div style="width:10%;">R</div>
+                                        <div style="width:20%; font-family:monospace;">R1-R4</div>
+                                        <div>Social & Relationnel</div>
+                                    </div>
+                                    <div class="visual-row" style="padding:20px;">
+                                        <div style="width:10%;">V2</div>
+                                        <div style="width:10%;">F</div>
+                                        <div style="width:20%; font-family:monospace;">F1-F6</div>
+                                        <div>Fragilité du Proche</div>
+                                    </div>
+                                    <div class="visual-row" style="padding:20px;">
+                                        <div style="width:10%;">V3</div>
+                                        <div style="width:10%;">S</div>
+                                        <div style="width:20%; font-family:monospace;">S1-S4</div>
+                                        <div>Santé de l'Aidant</div>
+                                    </div>
+                                    <div class="visual-row" style="padding:20px;">
+                                        <div style="width:10%;">V4</div>
+                                        <div style="width:10%;">M</div>
+                                        <div style="width:20%; font-family:monospace;">M1-M6</div>
+                                        <div>Parcours Médical</div>
+                                    </div>
+                                    <div class="visual-row" style="padding:20px;">
+                                        <div style="width:10%;">V5</div>
+                                        <div style="width:10%;">A</div>
+                                        <div style="width:20%; font-family:monospace;">A1-A4</div>
+                                        <div>Administratif</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="v-stack">
+                                <h2 class="section-title">6. Micro-Tâches (Types)</h2>
+                                <div class="card-grid"
+                                    style="grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr 1fr;">
+                                    <div class="card" style="padding:15px; border-left:4px solid #CBD5E1;">
+                                        <div class="card-header" style="font-size:16px;">INFO</div>
+                                        <div style="font-size:14px; color:#666;">Information</div>
+                                        <div style="margin-top:auto; font-size:14px; color:#94A3B8;">❌ Contribue ASR
+                                        </div>
+                                    </div>
+                                    <div class="card" style="padding:15px; border-left:4px solid #CBD5E1;">
+                                        <div class="card-header" style="font-size:16px;">ORGA</div>
+                                        <div style="font-size:14px; color:#666;">Organisation / Planif</div>
+                                        <div style="margin-top:auto; font-size:14px; color:#94A3B8;">❌ Contribue ASR
+                                        </div>
+                                    </div>
+                                    <div class="card" style="padding:15px; border-left:4px solid #10B981;">
+                                        <div class="card-header" style="font-size:16px;">STRUC</div>
+                                        <div style="font-size:14px; color:#666;">Structurant</div>
+                                        <div style="margin-top:auto; font-size:14px; color:#166534; font-weight:700;">✅
+                                            Contribue ASR</div>
+                                    </div>
+                                    <div class="card" style="padding:15px; border-left:4px solid #10B981;">
+                                        <div class="card-header" style="font-size:16px;">SEC</div>
+                                        <div style="font-size:14px; color:#666;">Sécurisation</div>
+                                        <div style="margin-top:auto; font-size:14px; color:#166534; font-weight:700;">✅
+                                            Contribue ASR</div>
+                                    </div>
+                                    <div class="card" style="padding:15px; border-left:4px solid #10B981;">
+                                        <div class="card-header" style="font-size:16px;">MED</div>
+                                        <div style="font-size:14px; color:#666;">Médical</div>
+                                        <div style="margin-top:auto; font-size:14px; color:#166534; font-weight:700;">✅
+                                            Contribue ASR</div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-info" style="margin-top:0; font-size:16px;">
+                                    <span class="alert-icon">📌</span>
+                                    <div><strong>Règle R-MT-ASR-01</strong> : Aucune micro-tâche ne valide directement
+                                        une ASR. Les tâches sont des moyens, l'ASR est un état.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer"><img src="assets/monka-logo-transparent.png" class="footer-logo"><span
+                            class="footer-meta">05 / 07</span></div>
+                </div>
+
+                <!-- SLIDE 6: ASR & PRIORISATION - TRAFFIC LIGHTS -->
+                <div class="slide">
+                    <div class="header-line"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">7. ASR & 8. Priorisation</h1>
+
+                        <div class="grid-2 fill">
+                            <div class="v-stack">
+                                <h2 class="section-title">7. ASR - Actions Structurantes</h2>
+                                <div class="grid-3 fill" style="height:auto;">
+                                    <div class="status-card"
+                                        style="border-color:#EF4444; background:#FEF2F2; color:#991B1B;">
+                                        <div class="status-icon">❌</div>
+                                        <div class="status-title">Non atteinte</div>
+                                        <div class="status-desc">Aucune signature valide.</div>
+                                    </div>
+                                    <div class="status-card"
+                                        style="border-color:#10B981; background:#F0FDF4; color:#065F46;">
+                                        <div class="status-icon">✔</div>
+                                        <div class="status-title">Atteinte</div>
+                                        <div class="status-desc">≥ 1 signature détectée.</div>
+                                    </div>
+                                    <div class="status-card"
+                                        style="border-color:#F59E0B; background:#FFFBEB; color:#92400E;">
+                                        <div class="status-icon">⚠</div>
+                                        <div class="status-title">Non confirmée</div>
+                                        <div class="status-desc">Atteinte mais non reconfirmée au suivi.</div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-info">
+                                    <span class="alert-icon">📌</span>
+                                    <div><strong>Règle R-ASR-01</strong> : 1 Micro-Parcours = 1 ASR unique. Chaque ASR
+                                        représente un état cible validé par des "signatures".</div>
+                                </div>
+                            </div>
+
+                            <div class="v-stack">
+                                <h2 class="section-title">8. Priorisation (Traffic Light)</h2>
+                                <div class="traffic-light-container">
+                                    <div class="priority-card bg-red-gradient">
+                                        <div class="prio-level">1</div>
+                                        <div class="prio-content">
+                                            <div class="prio-trigger">Question Critique</div>
+                                            <div class="prio-delay">Action ≤ 7 jours</div>
+                                        </div>
+                                    </div>
+                                    <div class="priority-card bg-orange-gradient">
+                                        <div class="prio-level">2</div>
+                                        <div class="prio-content">
+                                            <div class="prio-trigger">CCC Activée</div>
+                                            <div class="prio-delay">Action ≤ 15 jours</div>
+                                        </div>
+                                    </div>
+                                    <div class="priority-card bg-green-gradient">
+                                        <div class="prio-level">3</div>
+                                        <div class="prio-content">
+                                            <div class="prio-trigger">Score Seul</div>
+                                            <div class="prio-delay">Action > 1 mois</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer"><img src="assets/monka-logo-transparent.png" class="footer-logo"><span
+                            class="footer-meta">06 / 07</span></div>
+                </div>
+
+                <!-- SLIDE 7: INTEGRATION -->
+                <div class="slide">
+                    <div class="header-line"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">9. Options d'Intégration</h1>
+
+                        <div class="grid-3 fill" style="height:60%;">
+                            <div class="card fill" style="justify-content:space-between; border-top:4px solid #64748B;">
+                                <div class="card-header"
+                                    style="justify-content:center; flex-direction:column; gap:5px;">
+                                    <div style="font-size:16px; color:#64748B; text-transform:uppercase;">Option A</div>
+                                    <div style="font-size:20px;">Iframe/WebView</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Principe</div>
+                                    <div style="text-align:right;">Fichier HTML direct</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Avantage</div>
+                                    <div style="text-align:right;">Zéro dev</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Limite</div>
+                                    <div style="text-align:right;">Pas d'accès data</div>
+                                </div>
+                            </div>
+                            <div class="card fill"
+                                style="justify-content:space-between; border-top:4px solid #7748F6; box-shadow:0 10px 15px rgba(119, 72, 246, 0.15);">
+                                <div class="card-header"
+                                    style="justify-content:center; flex-direction:column; gap:5px;">
+                                    <div style="font-size:16px; color:#7748F6; text-transform:uppercase;">Option B
+                                        (Recom.)</div>
+                                    <div style="font-size:24px;">Module JS</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Principe</div>
+                                    <div style="text-align:right;">Import ES6</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Avantage</div>
+                                    <div style="text-align:right;">Natif, Data</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Limite</div>
+                                    <div style="text-align:right;">Intervention dev</div>
+                                </div>
+                            </div>
+                            <div class="card fill" style="justify-content:space-between; border-top:4px solid #64748B;">
+                                <div class="card-header"
+                                    style="justify-content:center; flex-direction:column; gap:5px;">
+                                    <div style="font-size:16px; color:#64748B; text-transform:uppercase;">Option C</div>
+                                    <div style="font-size:20px;">Import Data</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Principe</div>
+                                    <div style="text-align:right;">Export JSON</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Avantage</div>
+                                    <div style="text-align:right;">Contrôle total</div>
+                                </div>
+                                <div class="visual-row">
+                                    <div style="font-weight:700;">Limite</div>
+                                    <div style="text-align:right;">Risque divergence</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SYNTHESIS TABLE (KEEPING AS TABLE FOR COMPARISON) -->
+                        <div class="table-container fill" style="height:35%;">
+                            <div class="table-title">Synthèse Comparative</div>
+                            <table>
+                                <tr>
+                                    <th>Critère</th>
+                                    <th>Option A</th>
+                                    <th>Option B</th>
+                                    <th>Option C</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Contrôle</strong></td>
+                                    <td>Faible</td>
+                                    <td>Moyen</td>
+                                    <td>Total</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maintenabilité</strong></td>
+                                    <td>Dépend de nous</td>
+                                    <td>Partagée</td>
+                                    <td>Votre équipe</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cas d'usage</strong></td>
+                                    <td>POC, démo, test</td>
+                                    <td>Production</td>
+                                    <td>Custom</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="slide-footer"><img src="assets/monka-logo-transparent.png" class="footer-logo"><span
+                            class="footer-meta">07 / 07</span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div id="controls">
+        <button onclick="changeSlide(-1)">←</button>
+        <span style="color:white; align-self:center; font-size:20px; font-weight:700;" id="slide-count">1</span>
+        <button onclick="changeSlide(1)">→</button>
+    </div>
+
+    <script>
+        function resize() {
+            const scaler = document.getElementById('scaler');
+            const targetW = window.innerWidth; const targetH = window.innerHeight;
+            const scale = Math.min(targetW / 1920, targetH / 1080);
+            scaler.style.transform = `scale(${scale})`;
+        }
+        window.addEventListener('resize', resize); resize();
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const countDisplay = document.getElementById('slide-count');
+        function updateSlides() {
+            slides.forEach((s, i) => { s.classList.toggle('active', i === currentSlide); });
+            countDisplay.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+        function changeSlide(dir) { currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + dir)); updateSlides(); }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+        });
+    </script>
+</body>
+
+</html>

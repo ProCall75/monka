@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Visuel Screenshots — Monka</title>
+    <style>
+        body {
+            font-family: -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin-top: 2em;
+        }
+
+        hr {
+            margin: 3em 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f5f5f5;
+        }
+
+        blockquote {
+            border-left: 4px solid #999;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+            background: #f9f9f9;
+        }
+
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 1em 0;
+        }
+
+        .screenshots img {
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .severity-bloquant {
+            color: #d00;
+            font-weight: bold;
+        }
+
+        .severity-majeur {
+            color: #e67700;
+            font-weight: bold;
+        }
+
+        .severity-mineur {
+            color: #b8860b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📸 Audit Visuel Screenshots — Monka App</h1>
+    <p><strong>Date</strong> : Février 2026<br>
+        <strong>Périmètre</strong> : 80 screenshots (IMG_3683 – IMG_3762)<br>
+        <strong>Parcours couvert</strong> : Onboarding → Questionnaire (4 sections) → Dashboard (4 onglets) → Ressources
+        → Messagerie → Mes informations → Contacts
+    </p>
+
+    <hr>
+
+    <h2>1. Cartographie des écrans</h2>
+
+    <h3>Onboarding — Inscription (IMG_3683 – IMG_3688)</h3>
+    <p>Splash, connexion, formulaire prénom, demande notifications</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3683.PNG" alt="3683">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3684.PNG" alt="3684">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3685.PNG" alt="3685">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3686.PNG" alt="3686">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3687.PNG" alt="3687">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3688.PNG" alt="3688">
+    </div>
+
+    <h3>Questionnaire Section 1 — Profil aidant (IMG_3689 – IMG_3699)</h3>
+    <p>Q1 (sexe) → Q11 (aides déjà utilisées), 11 questions à choix unique (sauf Q10-Q11 multi-select)</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3689.PNG" alt="3689">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3690.PNG" alt="3690">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3691.PNG" alt="3691">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3692.PNG" alt="3692">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3693.PNG" alt="3693">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3694.PNG" alt="3694">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3695.PNG" alt="3695">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3696.PNG" alt="3696">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3697.PNG" alt="3697">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3698.PNG" alt="3698">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3699.PNG" alt="3699">
+    </div>
+
+    <h3>Analyse / Loading (IMG_3700)</h3>
+    <p>Écran "Analyse en cours…" avec barre de progression et checklist 4 étapes</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3700.PNG" alt="3700">
+    </div>
+
+    <h3>Essai gratuit / Paywall (IMG_3701)</h3>
+    <p>Paywall "Monka Essentiel" – 7 jours gratuits</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3701.PNG" alt="3701">
+    </div>
+
+    <h3>Dashboard — À la une (IMG_3702 – IMG_3704)</h3>
+    <p>Accueil personnalisé "Bonjour, Marwane", carousel actions, compteur 0/12</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3702.PNG" alt="3702">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3703.PNG" alt="3703">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3704.PNG" alt="3704">
+    </div>
+
+    <h3>Dashboard — Santé (IMG_3705 – IMG_3706)</h3>
+    <p>Hero card prescription examens, task cards</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3705.PNG" alt="3705">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3706.PNG" alt="3706">
+    </div>
+
+    <h3>Dashboard — Démarches (IMG_3707 – IMG_3708)</h3>
+    <p>Hero card CAF, task cards conseil départemental, CARSAT</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3707.PNG" alt="3707">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3708.PNG" alt="3708">
+    </div>
+
+    <h3>Dashboard — Services (IMG_3709 – IMG_3710)</h3>
+    <p>Hero card CCAS/mairie, task cards plateforme de répit</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3709.PNG" alt="3709">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3710.PNG" alt="3710">
+    </div>
+
+    <h3>Ressources (IMG_3711)</h3>
+    <p>"Mes ressources" avec carousel articles et sections</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3711.PNG" alt="3711">
+    </div>
+
+    <h3>Messagerie (IMG_3712)</h3>
+    <p>Chat IDEC "Sophie", paywall abonnement</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3712.PNG" alt="3712">
+    </div>
+
+    <h3>Mes informations (IMG_3713 – IMG_3716)</h3>
+    <p>Historique, paramètres, aide, déconnexion</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3713.PNG" alt="3713">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3714.PNG" alt="3714">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3715.PNG" alt="3715">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3716.PNG" alt="3716">
+    </div>
+
+    <h3>Profil (IMG_3717)</h3>
+    <p>Données aidant + aidé (Vous et votre proche)</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3717.PNG" alt="3717">
+    </div>
+
+    <h3>Contacts (IMG_3718 – IMG_3719)</h3>
+    <p>Mes soignants / Mes interlocuteurs, onglets, ajout contact</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3718.PNG" alt="3718">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3719.PNG" alt="3719">
+    </div>
+
+    <h3>Détail Ressource (IMG_3720 – IMG_3722)</h3>
+    <p>Article "La plateforme de répit", contenu détaillé, bas de page</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3720.PNG" alt="3720">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3721.PNG" alt="3721">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3722.PNG" alt="3722">
+    </div>
+
+    <h3>Détail tâche / Fiche action (IMG_3723 – IMG_3727)</h3>
+    <p>Fiche action complète avec tags, description, lien ressource. Exemple : "Contactez la plateforme de répit"</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3723.PNG" alt="3723">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3724.PNG" alt="3724">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3725.PNG" alt="3725">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3726.PNG" alt="3726">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3727.PNG" alt="3727">
+    </div>
+
+    <h3>Dashboard scrollé / Compléments (IMG_3728 – IMG_3738)</h3>
+    <p>Suite du dashboard, vues scrollées, sections additionnelles</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3728.PNG" alt="3728">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3729.PNG" alt="3729">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3730.PNG" alt="3730">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3731.PNG" alt="3731">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3732.PNG" alt="3732">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3733.PNG" alt="3733">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3734.PNG" alt="3734">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3735.PNG" alt="3735">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3736.PNG" alt="3736">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3737.PNG" alt="3737">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3738.PNG" alt="3738">
+    </div>
+
+    <h3>Questionnaire Section 2 — Santé (IMG_3739 – IMG_3742)</h3>
+    <p>Maladies, médicaments, santé perçue, couverture santé</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3739.PNG" alt="3739">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3740.PNG" alt="3740">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3741.PNG" alt="3741">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3742.PNG" alt="3742">
+    </div>
+
+    <h3>Questionnaire Section 3 — Personne aidée (IMG_3743 – IMG_3752)</h3>
+    <p>Pathologies, médecin traitant, spécialistes, historique bilans, couverture santé, difficultés RDV spécialistes,
+        besoins complémentaires</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3743.PNG" alt="3743">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3744.PNG" alt="3744">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3745.PNG" alt="3745">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3746.PNG" alt="3746">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3747.PNG" alt="3747">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3748.PNG" alt="3748">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3749.PNG" alt="3749">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3750.PNG" alt="3750">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3751.PNG" alt="3751">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3752.PNG" alt="3752">
+    </div>
+
+    <h3>Questionnaire Section 4 — Précisons sa situation (IMG_3753 – IMG_3761)</h3>
+    <p>Origine handicap, type handicap (multi-select 8+ options), taux d'incapacité, difficultés professionnelles,
+        relations sociales, isolement social, humeur (avec typo "anxieuxe"), fatigue/énergie. ~20 questions au total
+        dans cette section.</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3753.PNG" alt="3753">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3754.PNG" alt="3754">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3755.PNG" alt="3755">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3756.PNG" alt="3756">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3757.PNG" alt="3757">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3758.PNG" alt="3758">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3759.PNG" alt="3759">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3760.PNG" alt="3760">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3761.PNG" alt="3761">
+    </div>
+
+    <h3>Dashboard post-questionnaire complet (IMG_3762)</h3>
+    <p>Dashboard après complétion du questionnaire complet (4 sections). Compteur 0/66 actions. Sections "Vos priorités
+        santé" et "Vos premières démarches".</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3762.PNG" alt="3762">
+    </div>
+
+    <hr>
+
+    <h2>2. Diagnostic — Critiques existantes confirmées</h2>
+
+    <h3 class="severity-bloquant">🔴 BLOQUANTS</h3>
+
+    <h4>C01 — Zéro profondeur — tout est à plat</h4>
+    <table>
+        <tr>
+            <th>Preuve</th>
+            <th>Screenshots</th>
+        </tr>
+        <tr>
+            <td>Dashboard = empilement vertical de cartes + carousels sans hiérarchie</td>
+            <td>IMG_3702, IMG_3703, IMG_3704</td>
+        </tr>
+        <tr>
+            <td>Onglets (À la une, Santé, Démarches, Services) = <strong>même structure</strong> dupliquée</td>
+            <td>IMG_3705 – IMG_3710</td>
+        </tr>
+        <tr>
+            <td>Impossible de « rentrer dans » un sujet — tout au même niveau</td>
+            <td>Ensemble du dashboard</td>
+        </tr>
+    </table>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3702.PNG" alt="3702">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3705.PNG" alt="3705">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3707.PNG" alt="3707">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3709.PNG" alt="3709">
+    </div>
+    <blockquote><strong>Verdict : ✅ CONFIRMÉ</strong> — Le dashboard est un empilement vertical identique sur les 4
+        onglets. La seule différence est la couleur de fond (vert/orange/bleu). Aucune sous-page, aucune navigation
+        imbriquée.</blockquote>
+
+    <h4>C03 — Polypathologie ignorée</h4>
+    <table>
+        <tr>
+            <th>Preuve</th>
+            <th>Screenshots</th>
+        </tr>
+        <tr>
+            <td>Q3 (âge personne aidée) utilise des boutons radio uniques</td>
+            <td>IMG_3691</td>
+        </tr>
+        <tr>
+            <td>Format identique pour Q1-Q9 : un seul choix possible</td>
+            <td>IMG_3689 – IMG_3697</td>
+        </tr>
+    </table>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3691.PNG" alt="3691">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3698.PNG" alt="3698">
+    </div>
+    <blockquote><strong>Verdict : ✅ CONFIRMÉ</strong> — Les questions Q1 à Q9 utilisent toutes un format à choix unique
+        (radio buttons). Seules Q10 et Q11 (IMG_3698, IMG_3699) utilisent du multi-select.</blockquote>
+
+    <hr>
+
+    <h3 class="severity-majeur">🟠 MAJEURS</h3>
+
+    <h4>C06 — Zéro personnalisation post-onboarding</h4>
+    <table>
+        <tr>
+            <th>Preuve</th>
+            <th>Screenshots</th>
+        </tr>
+        <tr>
+            <td>Hero cards : « Renseignez-vous auprès de la CAF », « Consultez la CPAM » — 100% générique</td>
+            <td>IMG_3707, IMG_3708</td>
+        </tr>
+        <tr>
+            <td>Task cards marquées « Pour Francine » ✅ mais jamais dans les titres ou hero</td>
+            <td>IMG_3708, IMG_3710</td>
+        </tr>
+        <tr>
+            <td>Dashboard : « Bonjour, Marwane » ✅ mais aucune mention de l'aidé</td>
+            <td>IMG_3702</td>
+        </tr>
+        <tr>
+            <td>Ressources : « Pour mon proche » sans prénom</td>
+            <td>IMG_3711</td>
+        </tr>
+    </table>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3702.PNG" alt="3702">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3707.PNG" alt="3707">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3711.PNG" alt="3711">
+    </div>
+    <blockquote><strong>Verdict : ⚠️ PARTIELLEMENT CONFIRMÉ</strong> — Le prénom de l'aidant apparaît en header, et «
+        Pour Francine » apparaît sur certaines task cards. Mais les hero cards, titres, et sections restent génériques.
+        Personnalisation superficielle et incohérente.</blockquote>
+
+    <h4>C07 — Aucune pédagogie / contextualisation</h4>
+    <table>
+        <tr>
+            <th>Preuve</th>
+            <th>Screenshots</th>
+        </tr>
+        <tr>
+            <td>Dashboard : aucune explication de ce que sont les « actions clés du mois »</td>
+            <td>IMG_3702</td>
+        </tr>
+        <tr>
+            <td>Task cards : « Sollicitez le département… » sans expliquer pourquoi</td>
+            <td>IMG_3708</td>
+        </tr>
+        <tr>
+            <td>« Analyse en cours… » : 4 étapes sans explication de la valeur</td>
+            <td>IMG_3700</td>
+        </tr>
+    </table>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3700.PNG" alt="3700">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3702.PNG" alt="3702">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3708.PNG" alt="3708">
+    </div>
+    <blockquote><strong>Verdict : ✅ CONFIRMÉ</strong> — L'app impose des tâches sans contexte. L'utilisateur ne sait pas
+        pourquoi il doit « contacter la plateforme de répit ».</blockquote>
+
+    <h4>C08 — Absence d'onboarding tutoriel</h4>
+    <table>
+        <tr>
+            <th>Preuve</th>
+            <th>Screenshots</th>
+        </tr>
+        <tr>
+            <td>Après le questionnaire → loading → paywall → dashboard direct</td>
+            <td>IMG_3700 → IMG_3701 → IMG_3702</td>
+        </tr>
+        <tr>
+            <td>Aucun tooltip, bulle d'aide, ou tour guidé visible</td>
+            <td>Ensemble des screenshots</td>
+        </tr>
+    </table>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3700.PNG" alt="3700">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3701.PNG" alt="3701">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3702.PNG" alt="3702">
+    </div>
+    <blockquote><strong>Verdict : ✅ CONFIRMÉ</strong> — Transition brutale questionnaire → paywall → dashboard sans
+        aucune explication des fonctionnalités.</blockquote>
+
+    <h4>C09 — Contacts non segmentés par onglet</h4>
+    <table>
+        <tr>
+            <th>Preuve</th>
+            <th>Screenshots</th>
+        </tr>
+        <tr>
+            <td>Onglet Santé : « Mes soignants », sections vides</td>
+            <td>IMG_3718</td>
+        </tr>
+        <tr>
+            <td>Onglet Démarches : « Mes interlocuteurs », bottom sheet = liste géante non filtrée</td>
+            <td>IMG_3719</td>
+        </tr>
+    </table>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3718.PNG" alt="3718">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3719.PNG" alt="3719">
+    </div>
+    <blockquote><strong>Verdict : ✅ CONFIRMÉ</strong> — La liste de contacts dans le bottom sheet mélange toutes les
+        catégories.</blockquote>
+
+    <hr>
+
+    <h3 class="severity-mineur">🟡 MINEURS</h3>
+
+    <h4>C10 — Ressources dupliquées</h4>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3711.PNG" alt="3711">
+    </div>
+    <blockquote><strong>Verdict : ⚠️ PROBABLE</strong> — Les illustrations « À la une pour moi » et « Pour mon proche »
+        semblent identiques.</blockquote>
+
+    <h4>C12 — UX Confuse (hiérarchie visuelle)</h4>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3705.PNG" alt="3705">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3708.PNG" alt="3708">
+    </div>
+    <blockquote><strong>Verdict : ✅ CONFIRMÉ</strong> — Les cartes utilisent un design uniforme. Aucune distinction
+        visuelle entre priorité haute/basse, tâche/conseil.</blockquote>
+
+    <h4>C13 — Wording & Typos</h4>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3717.PNG" alt="3717">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3760.PNG"
+            alt="3760 - typo anxieuxe">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3758.PNG"
+            alt="3758 - double espace">
+    </div>
+    <blockquote><strong>Verdict : ✅ CONFIRMÉ</strong> — Typo "Modifer" visible (IMG_3717). Typo "anxieuxe" au lieu de
+        "anxieuse" (IMG_3760). Double espace "A-t-elle des difficultés" (IMG_3758). Incohérence de nommage : "Pour
+        vous", "Pour Moi", "Pour Francine", "Pour Mon Proche" coexistent.</blockquote>
+
+    <hr>
+
+    <h2>3. Nouveaux problèmes découverts</h2>
+
+    <h3 class="severity-bloquant">🔴 N01 — Paywall mal positionné dans le parcours</h3>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3700.PNG" alt="3700">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3701.PNG" alt="3701">
+    </div>
+    <blockquote><strong>Impact</strong> : L'utilisateur vient de remplir 11+ questions. Au lieu de lui montrer le
+        résultat et la valeur de l'app, on lui impose un mur de paiement. Cela brise le contrat implicite : « réponds et
+        on t'aide ».<br><strong>Sévérité : 🔴 BLOQUANT</strong></blockquote>
+
+    <h3 class="severity-majeur">🟠 N02 — Messagerie inaccessible sans abonnement</h3>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3712.PNG" alt="3712">
+    </div>
+    <blockquote><strong>Impact</strong> : Une fonctionnalité centrale (contact IDEC) est totalement verrouillée. Chat
+        vide avec bannière « S'abonner » — expérience frustrante.<br><strong>Sévérité : 🟠 MAJEUR</strong></blockquote>
+
+    <h3 class="severity-majeur">🟠 N03 — Dashboard : 4 onglets = 4× la même structure</h3>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3702.PNG" alt="3702">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3705.PNG" alt="3705">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3707.PNG" alt="3707">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3709.PNG" alt="3709">
+    </div>
+    <blockquote><strong>Impact</strong> : L'utilisateur n'a aucune raison de naviguer entre les onglets — l'expérience
+        est identique. Seule la couleur de fond change.<br><strong>Sévérité : 🟠 MAJEUR</strong></blockquote>
+
+    <h3 class="severity-majeur">🟠 N04 — Historique vide sans explication</h3>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3713.PNG" alt="3713">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3715.PNG" alt="3715">
+    </div>
+    <blockquote><strong>Impact</strong> : L'utilisateur ouvre la section et voit rien. Pas de message explicatif type «
+        Vous n'avez pas encore de tâches terminées ».<br><strong>Sévérité : 🟠 MAJEUR</strong></blockquote>
+
+    <h3 class="severity-mineur">🟡 N05 — Questionnaire : fatigue cognitive</h3>
+    <p>11 questions consécutives avec le même layout, puis 4 sections supplémentaires (~20+ questions au total dans les
+        sections 2-4). Pas de barre de progression pendant la section 1.</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3689.PNG" alt="3689">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3695.PNG" alt="3695">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3753.PNG" alt="3753">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3757.PNG" alt="3757">
+    </div>
+    <blockquote><strong>Note</strong> : Les sections 2-4 ont une barre de progression (tirets), mais la section 4 montre
+        ~20 tirets (= ~20 questions), ce qui est excessif. L'utilisateur ne sait pas combien de temps
+        reste.<br><strong>Sévérité : 🟡 MINEUR</strong></blockquote>
+
+    <h3 class="severity-mineur">🟡 N06 — Contacts : sections vides sans guidance</h3>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3718.PNG" alt="3718">
+    </div>
+    <blockquote><strong>Sévérité : 🟡 MINEUR</strong></blockquote>
+
+    <h3 class="severity-mineur">🟡 N07 — Incohérence naming "Mes soignants" vs "Mes interlocuteurs"</h3>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3718.PNG" alt="3718">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3719.PNG" alt="3719">
+    </div>
+    <blockquote><strong>Sévérité : 🟡 MINEUR</strong></blockquote>
+
+    <h3 class="severity-mineur">🟡 N08 — Feedback visuel pauvre sur sélection questionnaire</h3>
+    <p>Quand on sélectionne une option, le feedback visuel est quasi inexistant (léger contour). Difficile de savoir ce
+        qui est sélectionné.</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3756.PNG"
+            alt="3756 - Je ne sais pas sélectionné">
+    </div>
+    <blockquote><strong>Sévérité : 🟡 MINEUR</strong></blockquote>
+
+    <h3 class="severity-mineur">🟡 N09 — Dashboard 0/66 après questionnaire complet</h3>
+    <p>Après avoir complété les 4 sections du questionnaire (~40+ questions), le dashboard affiche 0/66 actions.
+        L'utilisateur n'a aucune action complétée malgré l'effort investi. Renforce la critique C06 (personnalisation
+        insuffisante).</p>
+    <div class="screenshots">
+        <img src="../../A_TRIER/MONKA/screenshots/Nouveau dossier contenant des éléments/IMG_3762.PNG" alt="3762">
+    </div>
+    <blockquote><strong>Sévérité : 🟡 MINEUR</strong> (mais renforce les critiques C06 et C07)</blockquote>
+
+    <hr>
+
+    <h2>4. Synthèse</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Critique</th>
+            <th>Statut</th>
+            <th>Sévérité</th>
+        </tr>
+        <tr>
+            <td>C01</td>
+            <td>Zéro profondeur</td>
+            <td>✅ Confirmé</td>
+            <td>🔴</td>
+        </tr>
+        <tr>
+            <td>C02</td>
+            <td>Recherche acteurs HS</td>
+            <td>❓ Non testable</td>
+            <td>🔴</td>
+        </tr>
+        <tr>
+            <td>C03</td>
+            <td>Polypathologie ignorée</td>
+            <td>✅ Confirmé</td>
+            <td>🔴</td>
+        </tr>
+        <tr>
+            <td>C04</td>
+            <td>Workflow cassé</td>
+            <td>❓ Non testable</td>
+            <td>🟠</td>
+        </tr>
+        <tr>
+            <td>C05</td>
+            <td>Blog mobile</td>
+            <td>❓ Non visible</td>
+            <td>🟠</td>
+        </tr>
+        <tr>
+            <td>C06</td>
+            <td>Zéro personnalisation</td>
+            <td>⚠️ Partiel</td>
+            <td>🟠</td>
+        </tr>
+        <tr>
+            <td>C07</td>
+            <td>Aucune pédagogie</td>
+            <td>✅ Confirmé</td>
+            <td>🟠</td>
+        </tr>
+        <tr>
+            <td>C08</td>
+            <td>Pas d'onboarding tutoriel</td>
+            <td>✅ Confirmé</td>
+            <td>🟠</td>
+        </tr>
+        <tr>
+            <td>C09</td>
+            <td>Contacts non segmentés</td>
+            <td>✅ Confirmé</td>
+            <td>🟠</td>
+        </tr>
+        <tr>
+            <td>C10</td>
+            <td>Ressources dupliquées</td>
+            <td>⚠️ Probable</td>
+            <td>🟡</td>
+        </tr>
+        <tr>
+            <td>C11</td>
+            <td>Performance images</td>
+            <td>❓ Non testable</td>
+            <td>🟡</td>
+        </tr>
+        <tr>
+            <td>C12</td>
+            <td>UX Confuse</td>
+            <td>✅ Confirmé</td>
+            <td>🟡</td>
+        </tr>
+        <tr>
+            <td>C13</td>
+            <td>Wording & Typos</td>
+            <td>✅ Confirmé</td>
+            <td>🟡</td>
+        </tr>
+        <tr style="background:#fff0f0">
+            <td><strong>N01</strong></td>
+            <td><strong>Paywall mal positionné</strong></td>
+            <td>🆕</td>
+            <td>🔴</td>
+        </tr>
+        <tr style="background:#fff8f0">
+            <td><strong>N02</strong></td>
+            <td><strong>Messagerie verrouillée</strong></td>
+            <td>🆕</td>
+            <td>🟠</td>
+        </tr>
+        <tr style="background:#fff8f0">
+            <td><strong>N03</strong></td>
+            <td><strong>4 onglets = même structure</strong></td>
+            <td>🆕</td>
+            <td>🟠</td>
+        </tr>
+        <tr style="background:#fff8f0">
+            <td><strong>N04</strong></td>
+            <td><strong>Historique vide</strong></td>
+            <td>🆕</td>
+            <td>🟠</td>
+        </tr>
+        <tr style="background:#fffff0">
+            <td><strong>N05</strong></td>
+            <td><strong>Fatigue questionnaire</strong></td>
+            <td>🆕</td>
+            <td>🟡</td>
+        </tr>
+        <tr style="background:#fffff0">
+            <td><strong>N06</strong></td>
+            <td><strong>Contacts vides</strong></td>
+            <td>🆕</td>
+            <td>🟡</td>
+        </tr>
+        <tr style="background:#fffff0">
+            <td><strong>N07</strong></td>
+            <td><strong>Naming incohérent</strong></td>
+            <td>🆕</td>
+            <td>🟡</td>
+        </tr>
+        <tr style="background:#fffff0">
+            <td><strong>N08</strong></td>
+            <td><strong>Feedback sélection pauvre</strong></td>
+            <td>🆕</td>
+            <td>🟡</td>
+        </tr>
+        <tr style="background:#fffff0">
+            <td><strong>N09</strong></td>
+            <td><strong>0/66 post-questionnaire</strong></td>
+            <td>🆕</td>
+            <td>🟡</td>
+        </tr>
+    </table>
+
+    <h3>Compteurs</h3>
+    <table>
+        <tr>
+            <th>Sévérité</th>
+            <th>Existantes confirmées</th>
+            <th>Nouvelles</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>🔴 Bloquant</td>
+            <td>2</td>
+            <td>1</td>
+            <td><strong>3</strong></td>
+        </tr>
+        <tr>
+            <td>🟠 Majeur</td>
+            <td>4</td>
+            <td>3</td>
+            <td><strong>7</strong></td>
+        </tr>
+        <tr>
+            <td>🟡 Mineur</td>
+            <td>3</td>
+            <td>5</td>
+            <td><strong>8</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>9/13 évaluées</strong></td>
+            <td><strong>9 nouvelles</strong></td>
+            <td><strong>18</strong></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>5. Recommandations prioritaires</h2>
+    <ol>
+        <li><strong>Restructurer la navigation</strong> — Remplacer les 4 onglets identiques par une architecture en
+            profondeur</li>
+        <li><strong>Déplacer le paywall</strong> — Laisser l'utilisateur découvrir son profil personnalisé et au moins
+            2-3 tâches AVANT de proposer l'abonnement</li>
+        <li><strong>Ajouter un onboarding tutoriel</strong> — 3-4 écrans post-questionnaire expliquant les sections de
+            l'app</li>
+        <li><strong>Personnaliser systématiquement</strong> — « Réservez un RDV pour Francine » partout, pas seulement
+            en sous-texte</li>
+        <li><strong>Contextualiser chaque tâche</strong> — Ajouter un « Pourquoi ? » sous chaque action recommandée</li>
+        <li><strong>Segmenter réellement les contacts</strong> — Chaque onglet = liste filtrée</li>
+        <li><strong>Soigner les empty states</strong> — Chaque section vide = message explicatif + CTA</li>
+        <li><strong>Réduire la fatigue questionnaire</strong> — Grouper thématiquement, ajouter des barres de
+            progression partout, réduire les questions redondantes</li>
+        <li><strong>Corriger les typos</strong> — "Modifer", "anxieuxe", double espaces</li>
+    </ol>
+
+</body>
+
+</html>
