@@ -2,11 +2,27 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { loadAllMPs } from './utils/parseMarkdown';
+import { loadAllCompletudeDocs, type CompletudeDoc } from './utils/parseCompletude';
 import { supabase } from './supabaseClient';
 import type { Annotation, MPData, TodoItem } from './types';
 
 const ACCESS_CODE = 'monka2026';
 const ALL_MPs = loadAllMPs();
+const ALL_COMPLETUDE = loadAllCompletudeDocs();
+
+// Group completude docs by type
+const COMPLETUDE_BY_TYPE: Record<string, CompletudeDoc[]> = {};
+ALL_COMPLETUDE.forEach((doc) => {
+    const key = doc.type;
+    if (!COMPLETUDE_BY_TYPE[key]) COMPLETUDE_BY_TYPE[key] = [];
+    COMPLETUDE_BY_TYPE[key].push(doc);
+});
+
+const COMPLETUDE_TYPE_META: Record<string, { label: string; icon: string }> = {
+    mp_completude: { label: 'Fiches MP', icon: '📄' },
+    coherence_check: { label: 'Contrôles Cohérence', icon: '🔎' },
+    global_audit: { label: 'Audit Global', icon: '🌐' },
+};
 
 // Group MPs by vulnerability
 const MP_BY_VULN: Record<string, MPData[]> = {};
@@ -716,14 +732,220 @@ function Dashboard({
     );
 }
 
+// ─── Completude Viewer ───
+function CompletudeViewer({
+    doc,
+    annotations,
+    onSave,
+}: {
+    doc: CompletudeDoc;
+    annotations: Annotation[];
+    onSave: (a: Partial<Annotation>) => void;
+}) {
+    const docAnnotations = annotations.filter((a) => a.mp_id === doc.id);
+    const totalDecisions = docAnnotations.length;
+    const validatedDecisions = docAnnotations.filter((a) => a.status === 'validated').length;
+    const rejectedCount = docAnnotations.filter((a) => a.status === 'rejected').length;
+    const progressPct = totalDecisions > 0 ? (validatedDecisions / totalDecisions) * 100 : 0;
+
+    const typeLabel = doc.type === 'mp_completude' ? 'Complétude MP'
+        : doc.type === 'coherence_check' ? 'Contrôle Cohérence'
+            : 'Audit Global';
+
+    const typeColor = doc.type === 'mp_completude' ? '#e17055'
+        : doc.type === 'coherence_check' ? '#6C5CE7'
+            : '#00b894';
+
+    return (
+        <div>
+            <div className="mp-header">
+                <h1>
+                    <span>{doc.title}</span>
+                </h1>
+                <p className="mp-header-sub">
+                    <span style={{
+                        display: 'inline-block',
+                        padding: '0.15rem 0.6rem',
+                        borderRadius: '4px',
+                        background: typeColor + '22',
+                        color: typeColor,
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        marginRight: '0.5rem',
+                    }}>
+                        {typeLabel}
+                    </span>
+                    {doc.subtitle}
+                </p>
+                <div className="mp-stats">
+                    {doc.score && (
+                        <div className="mp-stat">
+                            <span className="mp-stat-value">{doc.score}</span>
+                            <span className="mp-stat-label">score</span>
+                        </div>
+                    )}
+                    <div className="mp-stat">
+                        <span className="mp-stat-value">{doc.sections.length}</span>
+                        <span className="mp-stat-label">sections</span>
+                    </div>
+                    <div className="mp-stat">
+                        <span className="mp-stat-value">
+                            {doc.sections.filter((s) => s.hasDecisionItems).length}
+                        </span>
+                        <span className="mp-stat-label">à valider</span>
+                    </div>
+                </div>
+            </div>
+
+            {totalDecisions > 0 && (
+                <div className="progress-bar-container">
+                    <div className="progress-bar-header">
+                        <span className="progress-bar-label">Progression de la validation</span>
+                        <span className="progress-bar-count">
+                            {validatedDecisions}/{totalDecisions} validés
+                        </span>
+                    </div>
+                    <div className="progress-bar-track">
+                        <div
+                            className="progress-bar-fill"
+                            style={{ width: `${progressPct}%` }}
+                        />
+                    </div>
+                    <div className="progress-stats">
+                        <div className="progress-stat">
+                            <div className="progress-dot validated" />
+                            {validatedDecisions} validés
+                        </div>
+                        <div className="progress-stat">
+                            <div className="progress-dot rejected" />
+                            {rejectedCount} rejetés
+                        </div>
+                        <div className="progress-stat">
+                            <div className="progress-dot pending" />
+                            {totalDecisions - validatedDecisions - rejectedCount} en attente
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {doc.sections.map((section, i) => {
+                const sectionAnnotations = docAnnotations.filter(
+                    (a) => a.section_id === section.id
+                );
+
+                // Calculate resolved status for badge
+                const relatedAnnotations = sectionAnnotations.filter(
+                    (a) => a.item_id?.startsWith(section.id)
+                );
+                const allResolved = relatedAnnotations.length > 0 &&
+                    relatedAnnotations.every((a) => a.status === 'validated' || a.status === 'rejected');
+                const hasRejected = relatedAnnotations.some((a) => a.status === 'rejected');
+
+                let badgeClass = 'badge-pending';
+                let badgeText = 'À valider';
+                if (allResolved && !hasRejected) {
+                    badgeClass = 'badge-done';
+                    badgeText = '✅ Validé';
+                } else if (allResolved && hasRejected) {
+                    badgeClass = 'badge-rejected';
+                    badgeText = '❌ Rejeté';
+                } else if (relatedAnnotations.length > 0) {
+                    badgeClass = 'badge-progress';
+                    badgeText = 'En cours';
+                }
+
+                return (
+                    <CompletudeSection
+                        key={section.id}
+                        section={section}
+                        docId={doc.id}
+                        annotations={sectionAnnotations}
+                        onSave={onSave}
+                        badgeClass={badgeClass}
+                        badgeText={badgeText}
+                        defaultOpen={i === 0}
+                    />
+                );
+            })}
+        </div>
+    );
+}
+
+function CompletudeSection({
+    section,
+    docId,
+    annotations,
+    onSave,
+    badgeClass,
+    badgeText,
+    defaultOpen,
+}: {
+    section: CompletudeDoc['sections'][0];
+    docId: string;
+    annotations: Annotation[];
+    onSave: (a: Partial<Annotation>) => void;
+    badgeClass: string;
+    badgeText: string;
+    defaultOpen?: boolean;
+}) {
+    const [open, setOpen] = useState(defaultOpen || false);
+
+    return (
+        <div className="section-block">
+            <div className="section-header" onClick={() => setOpen(!open)}>
+                <div className="section-header-left">
+                    <span className={`section-chevron ${open ? 'open' : ''}`}>▶</span>
+                    <span className="section-title">{section.title}</span>
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    {section.hasDecisionItems && (
+                        <span className={`section-badge ${badgeClass}`}>
+                            {badgeText}
+                        </span>
+                    )}
+                </div>
+            </div>
+            {open && (
+                <div className="section-body">
+                    <div className="md-content">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {section.content}
+                        </ReactMarkdown>
+                    </div>
+                    {section.hasDecisionItems && (
+                        <>
+                            <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '1.5rem 0' }} />
+                            <h4 style={{ color: 'var(--primary-light)', marginBottom: '0.75rem', fontSize: '0.9rem' }}>
+                                🎯 Validation — Dr. Monka
+                            </h4>
+                            <DecisionWidget
+                                mpId={docId}
+                                sectionId={section.id}
+                                itemId={`${section.id}_global`}
+                                label={`Validation de la section "${section.title}"`}
+                                annotation={annotations.find(
+                                    (a) => a.item_id === `${section.id}_global`
+                                )}
+                                onSave={onSave}
+                            />
+                        </>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+}
+
 // ─── Main App ───
 export default function App() {
     const [authed] = useState(true);
     const [activeMp, setActiveMp] = useState<string>('R1');
-    const [activeView, setActiveView] = useState<'review' | 'dashboard' | 'todo'>('review');
+    const [activeCompletude, setActiveCompletude] = useState<string>('');
+    const [activeView, setActiveView] = useState<'review' | 'dashboard' | 'todo' | 'completude'>('review');
     const [annotations, setAnnotations] = useState<Annotation[]>([]);
     const [todos, setTodos] = useState<TodoItem[]>([]);
     const [expandedVulns, setExpandedVulns] = useState<Record<string, boolean>>({ V1: true, V2: true, V3: true });
+    const [expandedCompletude, setExpandedCompletude] = useState<Record<string, boolean>>({ mp_completude: true });
     const [toast, setToast] = useState<{ message: string; visible: boolean }>({
         message: '',
         visible: false,
@@ -844,6 +1066,8 @@ export default function App() {
                     )}
                 </div>
 
+                <div className="sidebar-subtitle" style={{ marginTop: '1rem' }}>Templates MP</div>
+
                 {/* Templates grouped by vulnerability */}
                 {Object.entries(MP_BY_VULN).map(([vuln, mps]) => {
                     const vulnMeta = VULN_META[vuln] || VULN_META.V1;
@@ -911,6 +1135,77 @@ export default function App() {
                         </div>
                     );
                 })}
+
+                {/* ─── Complétude Section ─── */}
+                <div className="sidebar-subtitle" style={{ marginTop: '1rem' }}>📋 Complétude</div>
+
+                {Object.entries(COMPLETUDE_BY_TYPE).map(([type, docs]) => {
+                    const typeMeta = COMPLETUDE_TYPE_META[type] || { label: type, icon: '📄' };
+                    const isExpanded = expandedCompletude[type] ?? false;
+
+                    return (
+                        <div key={type} className="sidebar-vuln-group">
+                            <div
+                                className="sidebar-vuln-header"
+                                onClick={() =>
+                                    setExpandedCompletude((prev) => ({ ...prev, [type]: !prev[type] }))
+                                }
+                            >
+                                <div className="sidebar-vuln-left">
+                                    <span className={`sidebar-vuln-chevron ${isExpanded ? 'expanded' : ''}`}>▶</span>
+                                    <span>{typeMeta.icon}</span>
+                                    <span className="sidebar-vuln-name">{typeMeta.label}</span>
+                                </div>
+                                <span className="sidebar-item-badge badge-progress">
+                                    {docs.length}
+                                </span>
+                            </div>
+                            {isExpanded && (
+                                <div className="sidebar-vuln-items">
+                                    {docs.map((doc) => {
+                                        const docAnns = annotations.filter((a) => a.mp_id === doc.id);
+                                        const validated = docAnns.filter((a) => a.status === 'validated').length;
+                                        const total = docAnns.length;
+
+                                        return (
+                                            <div
+                                                key={doc.id}
+                                                className={`sidebar-item ${activeView === 'completude' && activeCompletude === doc.id ? 'active' : ''
+                                                    }`}
+                                                onClick={() => {
+                                                    setActiveCompletude(doc.id);
+                                                    setActiveView('completude');
+                                                }}
+                                            >
+                                                <span className="sidebar-item-icon">
+                                                    {doc.type === 'global_audit' ? '🌐' :
+                                                        doc.type === 'coherence_check' ? '🔎' :
+                                                            doc.score ? (doc.score === '8/8' ? '✅' : '⚠️') : '📄'}
+                                                </span>
+                                                <div className="sidebar-item-info">
+                                                    <div className="sidebar-item-title">
+                                                        {doc.id.replace('COMP_', '').replace('CHECK_', '')}
+                                                    </div>
+                                                    <div className="sidebar-item-sub">
+                                                        {doc.score ? `Score: ${doc.score}` : doc.title.slice(0, 35)}
+                                                    </div>
+                                                </div>
+                                                {total > 0 && (
+                                                    <span
+                                                        className={`sidebar-item-badge ${validated === total ? 'badge-done' : 'badge-progress'
+                                                            }`}
+                                                    >
+                                                        {validated}/{total}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
             </div>
 
             <div className="main-content">
@@ -918,6 +1213,22 @@ export default function App() {
                     <Dashboard annotations={annotations} todos={todos} />
                 ) : activeView === 'todo' ? (
                     <TodoPage todos={todos} onToggle={handleToggleTodo} annotations={annotations} />
+                ) : activeView === 'completude' ? (
+                    (() => {
+                        const compDoc = ALL_COMPLETUDE.find((d) => d.id === activeCompletude);
+                        return compDoc ? (
+                            <CompletudeViewer
+                                doc={compDoc}
+                                annotations={annotations}
+                                onSave={handleSave}
+                            />
+                        ) : (
+                            <div className="mp-header">
+                                <h1><span>Complétude</span> — Sélectionnez un document</h1>
+                                <p className="mp-header-sub">Choisissez un document de complétude dans la barre latérale</p>
+                            </div>
+                        );
+                    })()
                 ) : currentMp ? (
                     <MPViewer
                         mp={currentMp}
