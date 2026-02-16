@@ -13,7 +13,7 @@ import ReactFlow, {
     Handle,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { ArrowLeft, Warning, CheckCircle, XCircle, MapPin, ArrowsOut, ArrowsIn } from '@phosphor-icons/react';
+import { ArrowLeft, Warning, CheckCircle, XCircle, MapPin, ArrowsOut, ArrowsIn, PencilSimple, List, ArrowUp, ArrowDown, DotsSixVertical } from '@phosphor-icons/react';
 import Link from 'next/link';
 
 /* ─────────────────────────────────────────────
@@ -361,12 +361,28 @@ const JOURNEYS: JourneyConfig[] = [
 export default function ParcoursPage() {
     const [activeJourney, setActiveJourney] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [journeyScreens, setJourneyScreens] = useState<ScreenData[][]>(
+        JOURNEYS.map(j => [...j.screens])
+    );
+    const [dragIdx, setDragIdx] = useState<number | null>(null);
+    const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
     const canvasRef = useRef<HTMLDivElement>(null);
     const flowInstanceRef = useRef<any>(null);
     const journey = JOURNEYS[activeJourney];
+    const currentScreens = journeyScreens[activeJourney];
 
-    const nodes = useMemo(() => makeNodes(journey.screens), [activeJourney]);
-    const edges = useMemo(() => makeEdges(journey.screens.length, journey.color), [activeJourney]);
+    const moveScreen = useCallback((fromIdx: number, toIdx: number) => {
+        setJourneyScreens(prev => {
+            const next = prev.map(arr => [...arr]);
+            const [moved] = next[activeJourney].splice(fromIdx, 1);
+            next[activeJourney].splice(toIdx, 0, moved);
+            return next;
+        });
+    }, [activeJourney]);
+
+    const nodes = useMemo(() => makeNodes(currentScreens), [currentScreens]);
+    const edges = useMemo(() => makeEdges(currentScreens.length, journey.color), [currentScreens, journey.color]);
 
     const onInit = useCallback((instance: any) => {
         flowInstanceRef.current = instance;
@@ -398,9 +414,16 @@ export default function ParcoursPage() {
     // Stats
     const stats = useMemo(() => {
         const s = { positive: 0, warning: 0, critical: 0 };
-        journey.screens.forEach((sc) => s[sc.annotation]++);
+        currentScreens.forEach((sc) => s[sc.annotation]++);
         return s;
-    }, [activeJourney]);
+    }, [currentScreens]);
+
+    // Re-fit flow when screens change
+    useEffect(() => {
+        setTimeout(() => {
+            flowInstanceRef.current?.fitView({ padding: 0.15, duration: 300 });
+        }, 100);
+    }, [currentScreens]);
 
     return (
         <div style={{
@@ -534,154 +557,350 @@ export default function ParcoursPage() {
                             fontSize: 11,
                             fontWeight: 700,
                         }}>
-                            {j.screens.length}
+                            {journeyScreens[idx].length}
                         </span>
                     </button>
                 ))}
-            </div>
 
-            {/* ── React Flow Canvas ── */}
-            <div ref={canvasRef} style={{ flex: 1, position: 'relative', minHeight: 0 }} className="react-flow-fullscreen-container">
-                <ReactFlow
-                    key={activeJourney}
-                    nodes={nodes}
-                    edges={edges}
-                    nodeTypes={nodeTypes}
-                    onInit={onInit}
-                    fitView
-                    minZoom={0.2}
-                    maxZoom={2}
-                    defaultEdgeOptions={{
-                        type: 'smoothstep',
-                        animated: true,
-                    }}
-                    proOptions={{ hideAttribution: true }}
-                    style={{ background: '#0F172A' }}
-                >
-                    <Background
-                        color="rgba(255,255,255,0.03)"
-                        gap={20}
-                        size={1}
-                    />
-                    <Controls
-                        style={{
-                            background: '#1E293B',
-                            borderRadius: 12,
-                            border: '1px solid rgba(255,255,255,0.08)',
-                            overflow: 'hidden',
-                        }}
-                    />
-                    <MiniMap
-                        nodeColor={() => journey.color}
-                        maskColor="rgba(15,23,42,0.85)"
-                        style={{
-                            background: '#1E293B',
-                            borderRadius: 12,
-                            border: '1px solid rgba(255,255,255,0.08)',
-                        }}
-                    />
-                </ReactFlow>
+                {/* Spacer */}
+                <div style={{ flex: 1 }} />
 
-                {/* ── Fullscreen toggle ── */}
+                {/* Edit mode toggle */}
                 <button
-                    onClick={toggleFullscreen}
-                    title={isFullscreen ? 'Quitter le plein écran' : 'Plein écran'}
+                    onClick={() => setIsEditMode(!isEditMode)}
                     style={{
-                        position: 'absolute',
-                        top: 16,
-                        left: 16,
-                        width: 36,
-                        height: 36,
-                        borderRadius: 10,
-                        background: 'rgba(30,41,59,0.95)',
-                        backdropFilter: 'blur(12px)',
-                        border: '1px solid rgba(255,255,255,0.08)',
+                        padding: '10px 16px',
+                        borderRadius: 14,
+                        border: isEditMode ? '2px solid #8B5CF6' : '2px solid rgba(255,255,255,0.08)',
+                        background: isEditMode
+                            ? 'linear-gradient(135deg, #8B5CF622, #8B5CF611)'
+                            : 'rgba(255,255,255,0.03)',
+                        color: isEditMode ? '#C4B5FD' : '#64748B',
+                        cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#94A3B8',
-                        cursor: 'pointer',
-                        zIndex: 10,
-                        transition: 'all 0.2s',
+                        gap: 8,
+                        fontFamily: "'Outfit', sans-serif",
+                        transition: 'all 0.3s ease',
+                        flexShrink: 0,
+                        fontSize: 13,
+                        fontWeight: 600,
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#F1F5F9'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
                 >
-                    {isFullscreen ? <ArrowsIn size={18} weight="bold" /> : <ArrowsOut size={18} weight="bold" />}
+                    <PencilSimple size={16} weight="bold" />
+                    {isEditMode ? 'Fermer' : 'Réorganiser'}
                 </button>
+            </div>
 
-                {/* ── Floating Legend ── */}
-                <div style={{
-                    position: 'absolute',
-                    bottom: 20,
-                    left: 20,
-                    background: 'rgba(30,41,59,0.95)',
-                    backdropFilter: 'blur(12px)',
-                    borderRadius: 16,
-                    padding: '14px 18px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    display: 'flex',
-                    gap: 16,
-                    alignItems: 'center',
-                    zIndex: 10,
-                }}>
-                    <span style={{ color: '#64748B', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>
-                        Légende
-                    </span>
-                    {Object.entries(ANNOTATION_CONFIG).map(([key, cfg]) => (
-                        <div key={key} style={{
+            {/* ── Main Content Area ── */}
+            <div style={{ flex: 1, display: 'flex', minHeight: 0 }}>
+
+                {/* ── Edit Sidebar ── */}
+                {isEditMode && (
+                    <div style={{
+                        width: 320,
+                        flexShrink: 0,
+                        background: '#1E293B',
+                        borderRight: '1px solid rgba(255,255,255,0.08)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        overflow: 'hidden',
+                    }}>
+                        <div style={{
+                            padding: '16px 16px 12px',
+                            borderBottom: '1px solid rgba(255,255,255,0.06)',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: 5,
-                            padding: '3px 10px',
-                            borderRadius: 20,
-                            background: cfg.bg,
-                            border: `1px solid ${cfg.border}`,
+                            gap: 8,
                         }}>
-                            {cfg.icon}
-                            <span style={{ fontSize: 10, fontWeight: 600, color: cfg.text }}>{cfg.label}</span>
+                            <List size={16} color="#8B5CF6" weight="bold" />
+                            <span style={{ color: '#E2E8F0', fontSize: 13, fontWeight: 700 }}>Ordre des écrans</span>
+                            <span style={{ color: '#64748B', fontSize: 11, marginLeft: 'auto' }}>{currentScreens.length} écrans</span>
                         </div>
-                    ))}
-                </div>
-
-                {/* ── Journey info panel ── */}
-                <div style={{
-                    position: 'absolute',
-                    top: 16,
-                    right: 16,
-                    background: 'rgba(30,41,59,0.95)',
-                    backdropFilter: 'blur(12px)',
-                    borderRadius: 16,
-                    padding: '16px 20px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    maxWidth: 280,
-                    zIndex: 10,
-                }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                         <div style={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: '50%',
-                            background: journey.color,
-                            boxShadow: `0 0 8px ${journey.color}88`,
-                        }} />
-                        <span style={{ color: '#F1F5F9', fontSize: 13, fontWeight: 700 }}>
-                            {journey.title}
-                        </span>
+                            flex: 1,
+                            overflowY: 'auto',
+                            padding: '8px',
+                        }}>
+                            {currentScreens.map((screen, idx) => {
+                                const cfg = ANNOTATION_CONFIG[screen.annotation];
+                                const isDragging = dragIdx === idx;
+                                const isDragOver = dragOverIdx === idx;
+                                return (
+                                    <div
+                                        key={`${screen.img}-${idx}`}
+                                        draggable
+                                        onDragStart={(e) => {
+                                            setDragIdx(idx);
+                                            e.dataTransfer.effectAllowed = 'move';
+                                            e.dataTransfer.setData('text/plain', String(idx));
+                                        }}
+                                        onDragOver={(e) => {
+                                            e.preventDefault();
+                                            e.dataTransfer.dropEffect = 'move';
+                                            setDragOverIdx(idx);
+                                        }}
+                                        onDragLeave={() => {
+                                            if (dragOverIdx === idx) setDragOverIdx(null);
+                                        }}
+                                        onDrop={(e) => {
+                                            e.preventDefault();
+                                            const from = parseInt(e.dataTransfer.getData('text/plain'));
+                                            if (!isNaN(from) && from !== idx) {
+                                                moveScreen(from, idx);
+                                            }
+                                            setDragIdx(null);
+                                            setDragOverIdx(null);
+                                        }}
+                                        onDragEnd={() => {
+                                            setDragIdx(null);
+                                            setDragOverIdx(null);
+                                        }}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 10,
+                                            padding: '10px 12px',
+                                            marginBottom: 4,
+                                            borderRadius: 12,
+                                            background: isDragging
+                                                ? 'rgba(139,92,246,0.15)'
+                                                : isDragOver
+                                                    ? 'rgba(139,92,246,0.08)'
+                                                    : 'rgba(255,255,255,0.02)',
+                                            border: isDragOver
+                                                ? '2px dashed #8B5CF6'
+                                                : isDragging
+                                                    ? '2px solid #8B5CF644'
+                                                    : '2px solid transparent',
+                                            cursor: 'grab',
+                                            transition: 'all 0.15s ease',
+                                            opacity: isDragging ? 0.5 : 1,
+                                            userSelect: 'none',
+                                        }}
+                                        onMouseEnter={e => {
+                                            if (!isDragging && !isDragOver) {
+                                                e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                                            }
+                                        }}
+                                        onMouseLeave={e => {
+                                            if (!isDragging && !isDragOver) {
+                                                e.currentTarget.style.background = 'rgba(255,255,255,0.02)';
+                                            }
+                                        }}
+                                    >
+                                        <DotsSixVertical size={16} color="#475569" weight="bold" style={{ flexShrink: 0 }} />
+                                        <span style={{
+                                            width: 22,
+                                            height: 22,
+                                            borderRadius: '50%',
+                                            background: 'linear-gradient(135deg, #334155, #475569)',
+                                            color: '#fff',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: 10,
+                                            fontWeight: 700,
+                                            flexShrink: 0,
+                                        }}>{idx + 1}</span>
+                                        {/* Thumbnail */}
+                                        <div style={{
+                                            width: 32,
+                                            height: 56,
+                                            borderRadius: 6,
+                                            overflow: 'hidden',
+                                            background: '#0F172A',
+                                            flexShrink: 0,
+                                            border: `1.5px solid ${cfg.border}`,
+                                        }}>
+                                            <img
+                                                src={`/screenshots/${screen.img}.PNG`}
+                                                alt={screen.label}
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                            />
+                                        </div>
+                                        <div style={{ flex: 1, minWidth: 0 }}>
+                                            <div style={{
+                                                color: '#E2E8F0',
+                                                fontSize: 11,
+                                                fontWeight: 600,
+                                                whiteSpace: 'nowrap',
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                            }}>{screen.label}</div>
+                                            <div style={{
+                                                color: '#64748B',
+                                                fontSize: 9,
+                                                marginTop: 2,
+                                            }}>{screen.img}</div>
+                                        </div>
+                                        <div style={{
+                                            width: 8,
+                                            height: 8,
+                                            borderRadius: '50%',
+                                            background: cfg.border,
+                                            flexShrink: 0,
+                                        }} />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <div style={{
+                            padding: '12px 16px',
+                            borderTop: '1px solid rgba(255,255,255,0.06)',
+                            color: '#64748B',
+                            fontSize: 10,
+                            textAlign: 'center',
+                            lineHeight: 1.4,
+                        }}>
+                            ↕ Glissez-déposez pour réorganiser
+                        </div>
                     </div>
-                    <p style={{
-                        color: '#94A3B8',
-                        fontSize: 11,
-                        lineHeight: 1.5,
-                        margin: 0,
-                    }}>
-                        {journey.subtitle}
-                        {' • '}
-                        <span style={{ color: journey.color, fontWeight: 600 }}>{journey.screens.length} écrans</span>
-                    </p>
+                )}
 
+                {/* ── React Flow Canvas ── */}
+                <div ref={canvasRef} style={{ flex: 1, position: 'relative', minHeight: 0 }} className="react-flow-fullscreen-container">
+                    <ReactFlow
+                        key={activeJourney}
+                        nodes={nodes}
+                        edges={edges}
+                        nodeTypes={nodeTypes}
+                        onInit={onInit}
+                        fitView
+                        minZoom={0.2}
+                        maxZoom={2}
+                        defaultEdgeOptions={{
+                            type: 'smoothstep',
+                            animated: true,
+                        }}
+                        proOptions={{ hideAttribution: true }}
+                        style={{ background: '#0F172A' }}
+                    >
+                        <Background
+                            color="rgba(255,255,255,0.03)"
+                            gap={20}
+                            size={1}
+                        />
+                        <Controls
+                            style={{
+                                background: '#1E293B',
+                                borderRadius: 12,
+                                border: '1px solid rgba(255,255,255,0.08)',
+                                overflow: 'hidden',
+                            }}
+                        />
+                        <MiniMap
+                            nodeColor={() => journey.color}
+                            maskColor="rgba(15,23,42,0.85)"
+                            style={{
+                                background: '#1E293B',
+                                borderRadius: 12,
+                                border: '1px solid rgba(255,255,255,0.08)',
+                            }}
+                        />
+                    </ReactFlow>
+
+                    {/* ── Fullscreen toggle ── */}
+                    <button
+                        onClick={toggleFullscreen}
+                        title={isFullscreen ? 'Quitter le plein écran' : 'Plein écran'}
+                        style={{
+                            position: 'absolute',
+                            top: 16,
+                            left: 16,
+                            width: 36,
+                            height: 36,
+                            borderRadius: 10,
+                            background: 'rgba(30,41,59,0.95)',
+                            backdropFilter: 'blur(12px)',
+                            border: '1px solid rgba(255,255,255,0.08)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#94A3B8',
+                            cursor: 'pointer',
+                            zIndex: 10,
+                            transition: 'all 0.2s',
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.color = '#F1F5F9'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+                    >
+                        {isFullscreen ? <ArrowsIn size={18} weight="bold" /> : <ArrowsOut size={18} weight="bold" />}
+                    </button>
+
+                    {/* ── Floating Legend ── */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: 20,
+                        left: 20,
+                        background: 'rgba(30,41,59,0.95)',
+                        backdropFilter: 'blur(12px)',
+                        borderRadius: 16,
+                        padding: '14px 18px',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        display: 'flex',
+                        gap: 16,
+                        alignItems: 'center',
+                        zIndex: 10,
+                    }}>
+                        <span style={{ color: '#64748B', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>
+                            Légende
+                        </span>
+                        {Object.entries(ANNOTATION_CONFIG).map(([key, cfg]) => (
+                            <div key={key} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 5,
+                                padding: '3px 10px',
+                                borderRadius: 20,
+                                background: cfg.bg,
+                                border: `1px solid ${cfg.border}`,
+                            }}>
+                                {cfg.icon}
+                                <span style={{ fontSize: 10, fontWeight: 600, color: cfg.text }}>{cfg.label}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* ── Journey info panel ── */}
+                    <div style={{
+                        position: 'absolute',
+                        top: 16,
+                        right: 16,
+                        background: 'rgba(30,41,59,0.95)',
+                        backdropFilter: 'blur(12px)',
+                        borderRadius: 16,
+                        padding: '16px 20px',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        maxWidth: 280,
+                        zIndex: 10,
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                            <div style={{
+                                width: 8,
+                                height: 8,
+                                borderRadius: '50%',
+                                background: journey.color,
+                                boxShadow: `0 0 8px ${journey.color}88`,
+                            }} />
+                            <span style={{ color: '#F1F5F9', fontSize: 13, fontWeight: 700 }}>
+                                {journey.title}
+                            </span>
+                        </div>
+                        <p style={{
+                            color: '#94A3B8',
+                            fontSize: 11,
+                            lineHeight: 1.5,
+                            margin: 0,
+                        }}>
+                            {journey.subtitle}
+                            {' • '}
+                            <span style={{ color: journey.color, fontWeight: 600 }}>{journey.screens.length} écrans</span>
+                        </p>
+
+                    </div>
                 </div>
-            </div>
+            </div> {/* end flex row */}
         </div>
     );
 }
