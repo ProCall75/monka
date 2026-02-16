@@ -55,22 +55,25 @@
 ### Verdict d'Amal
 - Supprimé (39 lignes) — hors sujet sur le flow
 
-### Verbatims
+### Verbatims — Mapping intégral reconstruit
 - Persona : « Marwane » → « **Amal** »
-- Quotes remappées sur les bons écrans :
+- **22 écrans × 50 critiques** cross-référencés manuellement (screenshots inspectés 1 par 1)
+- Corrections clés (session soirée) :
 
-| # | Écran | Verbatim |
-|---|-------|----------|
-| 1 | Sexe | Sexe biologique non pertinent pour l'aidant |
-| 3 | Services | CARSAT/CPAM incompréhensibles |
-| 5 | Analyse | 30 min + clic retour = tout perdu |
-| 6 | Paywall | Aucune valeur vue avant abonnement |
-| 7 | Dashboard | Ne sait pas par quoi commencer |
-| 8 | Plan d'action | Pourquoi cette tâche ? |
-| 10 | Post-bilan | M'aider = me soulager, pas m'en rajouter |
+| Écran | Avant | Après |
+|-------|-------|-------|
+| Âge (3691) | Aucun verbatim | C4 coquille + U6 ordre illogique |
+| Analyse (3700) | warning | critical + U8 exact ("cliqué retour") |
+| Stepper (3701) | "Paywall" | "Stepper" + U9/U10 combinés |
+| Dashboard (3702) | U1 "pas par où" | U2 "personnalisé avant questionnaire" |
+| Dashboard scroll (3703) | U13 | **U1 "je ne sais pas par lequel commencer"** |
+| Articles (3704) | Aucun verbatim | I2 "badges = boutons" |
+| Santé (3705) | Aucun verbatim | I1 "taille police" |
+| Démarches/Services (3707-3710) | Génériques | C5, C11, C12, U12 |
+| Profil 4 écrans | 2/4 vides | 4/4 avec verbatim (V2, C4, L4, U17) |
 
-- Sévérités ajustées (CARSAT → bloquant)
-- Parcours 2 : verbatims ajoutés (Services scroll, Ressources, Messagerie IDEC)
+- Labels onglets simplifiés : « Parcours Onboarding / Dashboard / Profil »
+- Sous-titres descriptifs (plus de mention de prénom)
 
 ---
 
@@ -107,6 +110,17 @@
 - Déploiement Vercel
 - Storybook setup
 - Git push/pull résolu
+
+---
+
+## ⚠️ À vérifier (prochaine session)
+
+Le mapping verbatims→screenshots a été reconstruit. **Vérifier visuellement** :
+- [ ] Chaque verbatim correspond bien au screenshot affiché
+- [ ] Screenshots manquants à reprendre dans l'app réelle (questionnaire Q1, Q2, Q12, pricing, etc.)
+- [ ] Reconstituer les parcours complets avec les écrans manquants
+
+→ Détails dans `TODO_16_FEV.md`
 
 ---
 

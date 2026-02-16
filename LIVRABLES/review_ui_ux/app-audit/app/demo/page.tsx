@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { ArrowLeft, PaperPlaneRight, Smiley, Heart, Users as UsersIcon, ChatCircle, BookOpen, Phone, Star, ShieldCheck, MoonStars, Translate, Info, SignOut, HandHeart, FirstAid, ClipboardText, Lock, Check, MagnifyingGlass, MapPin, CaretDown, CaretUp, FileText, Lightbulb, PhoneCall, CheckCircle, Circle, ArrowSquareOut } from '@phosphor-icons/react';
 import { professionals, PRO_CATEGORIES, type Professional } from '../data/pro-finder-data';
 import { actionableAdvices, type ActionableAdvice } from '../data/actionable-advice-data';
+import { ProductTour } from '../components/molecules/ProductTour';
 
 // Dynamic import for Leaflet map (SSR-safe)
 const ProMap = dynamic(() => import('./ProMap'), { ssr: false, loading: () => <div className="w-full h-[280px] rounded-[20px] bg-[#F3F4F6] animate-pulse" /> });
@@ -21,7 +22,6 @@ import { ResourceCard } from '../components/molecules/ResourceCard';
 import { RecoCard } from '../components/molecules/RecoCard';
 import { ProfileCard } from '../components/molecules/ProfileCard';
 import { SettingsRow, SettingsSection } from '../components/molecules/SettingsRow';
-import { WeekChart } from '../components/molecules/WeekChart';
 import { StatCard } from '../components/molecules/StatCard';
 import { TimelineStep } from '../components/molecules/TimelineStep';
 import { BottomNavPill } from '../components/nav/BottomNavPill';
@@ -30,6 +30,9 @@ import { ScoreRing } from '../components/atoms/ScoreRing';
 // ── Data ──
 import { kernelMock, mockVulnerabilities, mockUser } from '../data/kernel-mock';
 import { ThemeColors, type VulnerabilityDomain, type Vulnerability, type MicroParcours } from '../data/kernel-types';
+
+// Dark mode context
+const DarkModeContext = React.createContext<{ isDark: boolean; toggle: () => void }>({ isDark: false, toggle: () => { } });
 
 /* ═══════════════════════════════════════════════════════
    TYPES
@@ -84,21 +87,21 @@ const articles: Article[] = [
         imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=200&fit=crop',
         content: `La maladie d'Alzheimer touche environ 900 000 personnes en France. En tant qu'aidant, comprendre les mécanismes de cette maladie vous permet de mieux anticiper les comportements de votre proche et d'adapter votre accompagnement.
 
-**Les 3 stades principaux :**
+    ** Les 3 stades principaux:**
 
-1. **Stade léger** — Oublis fréquents, difficulté à trouver les mots. Votre proche reste autonome pour la plupart des activités. C'est le moment idéal pour mettre en place une routine rassurante.
+        1. ** Stade léger ** — Oublis fréquents, difficulté à trouver les mots.Votre proche reste autonome pour la plupart des activités.C'est le moment idéal pour mettre en place une routine rassurante.
 
-2. **Stade modéré** — Besoin d'aide pour les tâches complexes (finances, cuisine). La communication devient plus difficile. Privilégiez les phrases courtes et le contact visuel.
+2. ** Stade modéré ** — Besoin d'aide pour les tâches complexes (finances, cuisine). La communication devient plus difficile. Privilégiez les phrases courtes et le contact visuel.
 
-3. **Stade avancé** — Assistance nécessaire pour les gestes du quotidien. La présence et le toucher deviennent les principaux moyens de communication.
+3. ** Stade avancé ** — Assistance nécessaire pour les gestes du quotidien.La présence et le toucher deviennent les principaux moyens de communication.
 
-**Ce que vous pouvez faire dès maintenant :**
-- Établir une routine quotidienne prévisible
-- Étiqueter les tiroirs et placards avec des mots ET des images
-- Garder des photos de famille accessibles pour stimuler la mémoire
-- Parler lentement, avec des phrases simples et positives
+** Ce que vous pouvez faire dès maintenant:**
+    - Établir une routine quotidienne prévisible
+        - Étiqueter les tiroirs et placards avec des mots ET des images
+            - Garder des photos de famille accessibles pour stimuler la mémoire
+                - Parler lentement, avec des phrases simples et positives
 
-> L'aidant n'a pas besoin d'être parfait — il a besoin d'être soutenu.`,
+                    > L'aidant n'a pas besoin d'être parfait — il a besoin d'être soutenu.`,
     },
     {
         id: 'art-5',
@@ -108,29 +111,29 @@ const articles: Article[] = [
         domain: 'S' as VulnerabilityDomain,
         readingTime: 7,
         imageUrl: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=400&h=200&fit=crop',
-        content: `La maladie de Parkinson est la deuxième maladie neurodégénérative la plus fréquente en France, après Alzheimer. Elle touche environ 270 000 personnes. Contrairement aux idées reçues, elle ne se résume pas aux tremblements.
+        content: `La maladie de Parkinson est la deuxième maladie neurodégénérative la plus fréquente en France, après Alzheimer.Elle touche environ 270 000 personnes.Contrairement aux idées reçues, elle ne se résume pas aux tremblements.
 
-**Les symptômes principaux :**
-- **Tremblements au repos** — Souvent un seul côté au début. Ils diminuent pendant le mouvement.
-- **Rigidité musculaire** — Raideurs dans les bras, les jambes, le cou. Votre proche peut sembler « figé ».
-- **Lenteur des mouvements (bradykinésie)** — Les gestes du quotidien deviennent plus longs : boutonner une chemise, se lever d'une chaise.
-- **Troubles de l'équilibre** — Risque de chutes accru, surtout dans les espaces encombrés.
+** Les symptômes principaux:**
+- ** Tremblements au repos ** — Souvent un seul côté au début.Ils diminuent pendant le mouvement.
+- ** Rigidité musculaire ** — Raideurs dans les bras, les jambes, le cou.Votre proche peut sembler « figé ».
+- ** Lenteur des mouvements(bradykinésie) ** — Les gestes du quotidien deviennent plus longs: boutonner une chemise, se lever d'une chaise.
+    - ** Troubles de l'équilibre** — Risque de chutes accru, surtout dans les espaces encombrés.
 
-**Les symptômes souvent méconnus :**
-- Troubles du sommeil (cauchemars agités, somnolence)
-- Perte de l'odorat
-- Constipation chronique
-- Dépression et anxiété (chez 40% des patients)
-- Voix plus faible et monotone
+        ** Les symptômes souvent méconnus:**
+            - Troubles du sommeil(cauchemars agités, somnolence)
+                - Perte de l'odorat
+                    - Constipation chronique
+                        - Dépression et anxiété(chez 40 % des patients)
+                            - Voix plus faible et monotone
 
-**Comment adapter le quotidien :**
-- Proposer des vêtements à fermeture velcro ou à boutons-pression
-- Installer des barres d'appui dans la salle de bain et les couloirs
-- Encourager la marche quotidienne — même 15 min font la différence
-- Adapter les repas : aliments faciles à mâcher, couverts ergonomiques
-- Respecter les « moments ON » (quand le traitement fait effet) pour les activités
+                                ** Comment adapter le quotidien:**
+                                    - Proposer des vêtements à fermeture velcro ou à boutons - pression
+                                        - Installer des barres d'appui dans la salle de bain et les couloirs
+                                            - Encourager la marche quotidienne — même 15 min font la différence
+                                                - Adapter les repas: aliments faciles à mâcher, couverts ergonomiques
+                                                    - Respecter les « moments ON » (quand le traitement fait effet) pour les activités
 
-> Chaque journée avec Parkinson est différente. S'adapter, c'est le plus beau geste d'accompagnement.`,
+                                                        > Chaque journée avec Parkinson est différente.S'adapter, c'est le plus beau geste d'accompagnement.`,
     },
     {
         id: 'art-6',
@@ -539,11 +542,11 @@ const ArticleReaderScreen = ({ article, onBack }: { article: Article; onBack: ()
 /* ═══════════════════════════════════════════════════════
    GUIDE DETAIL SCREEN
 ═══════════════════════════════════════════════════════ */
-const GuideDetailScreen = ({ guide, onBack, onNavigateToResources }: { guide: ActionableAdvice; onBack: () => void; onNavigateToResources?: () => void }) => {
+const GuideDetailScreen = ({ guide, onBack, onNavigateToProCategory }: { guide: ActionableAdvice; onBack: () => void; onNavigateToProCategory?: (contactName?: string) => void }) => {
     const priorityConfig: Record<string, { bg: string; text: string; label: string }> = {
-        urgent: { bg: '#FEE2E2', text: '#DC2626', label: 'Urgent' },
-        recommended: { bg: '#FEF3C7', text: '#D97706', label: 'Recommandé' },
-        optional: { bg: '#E0F2FE', text: '#0284C7', label: 'Optionnel' },
+        urgent: { bg: '#FEF3C7', text: '#D97706', label: 'À faire rapidement' },
+        recommended: { bg: '#E8F4F8', text: '#2C8C99', label: 'Conseillé' },
+        optional: { bg: '#F3F4F6', text: '#6B7280', label: 'Quand vous êtes prêt·e' },
     };
     const pc = priorityConfig[guide.priority] || priorityConfig.recommended;
 
@@ -620,7 +623,7 @@ const GuideDetailScreen = ({ guide, onBack, onNavigateToResources }: { guide: Ac
                         {guide.contacts.map((contact, i) => (
                             <button
                                 key={i}
-                                onClick={() => onNavigateToResources?.()}
+                                onClick={() => onNavigateToProCategory?.(contact.name)}
                                 className="w-full flex items-center justify-between bg-white rounded-[14px] border border-[#E5E5EA] p-3.5 hover:border-[#D1D5DB] hover:shadow-sm active:scale-[0.99] transition-all text-left"
                             >
                                 <div>
@@ -653,14 +656,18 @@ const GuideDetailScreen = ({ guide, onBack, onNavigateToResources }: { guide: Ac
 /* ═══════════════════════════════════════════════════════
    HOME SCREEN
 ═══════════════════════════════════════════════════════ */
+
+
 const HomeScreen = ({
     onSelectTheme,
     onSelectArticle,
+    onSelectGuide,
     toggledTasks = {},
     onAvatarPress,
 }: {
     onSelectTheme: (v: Vulnerability) => void;
     onSelectArticle?: (article: Article) => void;
+    onSelectGuide?: (guide: ActionableAdvice) => void;
     toggledTasks?: Record<string, boolean>;
     onAvatarPress?: () => void;
 }) => {
@@ -677,6 +684,25 @@ const HomeScreen = ({
     }).length;
     const dynamicProgress = allKernelTasks.length ? Math.round((dynamicCompleted / allKernelTasks.length) * 100) : 0;
 
+    // Find next priority action (first uncompleted contributive task)
+    const nextAction = (() => {
+        for (const v of mockVulnerabilities) {
+            for (const mp of v.microParcours) {
+                for (const cat of mp.categories) {
+                    for (const reco of cat.recommendations) {
+                        for (const task of reco.microTasks) {
+                            const isComplete = toggledTasks[task.id] !== undefined ? toggledTasks[task.id] : task.isCompleted;
+                            if (!isComplete && task.isContributive) {
+                                return { task, vulnerability: v, program: mp };
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    })();
+
     return (
         <>
             {/* Notification toast */}
@@ -687,7 +713,7 @@ const HomeScreen = ({
             )}
 
             {/* Header */}
-            <div className="mb-6">
+            <div className="mb-6" data-tour="dashboard-header">
                 <Header
                     name={mockUser.name}
                     variant="design2"
@@ -719,27 +745,107 @@ const HomeScreen = ({
                 </p>
             </div>
 
+            {/* ═══ NEXT ACTION HUB (§3.4) ═══ */}
+            {nextAction && (
+                <div data-tour="next-action" className="mb-6">
+                    <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-3">
+                        Votre prochaine action
+                    </h3>
+                    <button
+                        onClick={() => onSelectTheme(nextAction.vulnerability)}
+                        className="w-full rounded-[20px] p-5 text-left transition-all hover:shadow-lg active:scale-[0.98] relative overflow-hidden"
+                        style={{
+                            background: 'linear-gradient(135deg, #2C8C99 0%, #1A6B75 100%)',
+                            boxShadow: '0 8px 24px rgba(44,140,153,0.25)',
+                        }}
+                    >
+                        {/* Decorative circle */}
+                        <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/10" />
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-white/20 text-white">
+                                    Prioritaire
+                                </span>
+                                <span className="text-[11px] text-white/70">
+                                    {nextAction.program.title}
+                                </span>
+                            </div>
+                            <p className="text-[15px] font-semibold text-white leading-snug mb-3">
+                                {nextAction.task.text}
+                            </p>
+                            <div className="flex items-center gap-2">
+                                <span className="text-[12px] text-white/80 font-medium">
+                                    Commencer →
+                                </span>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            )}
+
             {/* Progress Card — Dynamic */}
-            <div className="mb-8">
+            <div className="mb-6">
                 <ProgressCard percentage={dynamicProgress} />
             </div>
+
 
             {/* Hero Card — filtered by selected theme */}
             <div className="space-y-4 mb-8">
                 {mockVulnerabilities.map(v => {
                     const totalTasks = v.microParcours.flatMap(mp => mp.categories.flatMap(c => c.recommendations.flatMap(r => r.microTasks))).length;
+                    // S = Santé de l'aidant ("Vous"), others = proche ("Francine")
+                    const target = v.domain === 'S' ? 'Vous' : 'Francine';
                     return (
                         <HeroCard
                             key={v.id}
                             domain={v.domain as VulnerabilityDomain}
                             title={v.userTitle}
                             subtitle={v.description}
-                            targetPerson="Francine"
+                            targetPerson={target}
                             taskCount={totalTasks}
                             onPress={() => onSelectTheme(v)}
                         />
                     );
                 })}
+            </div>
+
+            {/* ═══ GUIDES PRATIQUES (§6) ═══ */}
+            <div className="mb-6">
+                <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-4">
+                    Guides pratiques
+                </h3>
+                <div className="space-y-2.5">
+                    {actionableAdvices.slice(0, 3).map(guide => {
+                        const pc_config: Record<string, { bg: string; text: string; label: string }> = {
+                            urgent: { bg: '#FEF3C7', text: '#D97706', label: 'À faire rapidement' },
+                            recommended: { bg: '#E8F4F8', text: '#2C8C99', label: 'Conseillé' },
+                            optional: { bg: '#F3F4F6', text: '#6B7280', label: 'Quand vous êtes prêt·e' },
+                        };
+                        const pc = pc_config[guide.priority] || pc_config.recommended;
+                        return (
+                            <button
+                                key={guide.id}
+                                onClick={() => onSelectGuide?.(guide)}
+                                className="w-full text-left bg-white rounded-[14px] p-3.5 border border-[#E5E5EA] shadow-sm hover:shadow-md hover:border-[#D1D5DB] transition-all active:scale-[0.99]"
+                            >
+                                <div className="flex items-center gap-2 mb-1.5">
+                                    <span
+                                        className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider"
+                                        style={{ background: pc.bg, color: pc.text }}
+                                    >
+                                        {pc.label}
+                                    </span>
+                                </div>
+                                <h4 className="text-[14px] font-semibold text-[#1A1A2E] mb-1">{guide.title}</h4>
+                                <p className="text-[12px] text-[#6B7280] line-clamp-1">{guide.subtitle}</p>
+                                <div className="flex items-center gap-3 mt-2">
+                                    <span className="text-[11px] text-[#8E8E93]">📋 {guide.steps.length} étapes</span>
+                                    <span className="text-[11px] text-[#8E8E93]">⏱ {guide.estimatedTime}</span>
+                                </div>
+                            </button>
+                        );
+                    })}
+                </div>
             </div>
 
             {/* Quick resources preview */}
@@ -764,11 +870,6 @@ const HomeScreen = ({
                         </button>
                     ))}
                 </div>
-            </div>
-
-            {/* Week Chart */}
-            <div className="mb-8">
-                <WeekChart />
             </div>
         </>
     );
@@ -1174,7 +1275,7 @@ const ProgramDetailScreen = ({
     onToggleTask,
     guidedActionsByTaskId,
     onNavigateToGuide,
-    onNavigateToResources,
+    onNavigateToProCategory,
 }: {
     vulnerability: Vulnerability;
     program: MicroParcours;
@@ -1183,7 +1284,7 @@ const ProgramDetailScreen = ({
     onToggleTask: (taskId: string) => void;
     guidedActionsByTaskId: Record<string, ActionableAdvice>;
     onNavigateToGuide: (guide: ActionableAdvice) => void;
-    onNavigateToResources: () => void;
+    onNavigateToProCategory: (contactName?: string) => void;
 }) => {
     const theme = ThemeColors[vulnerability.domain];
     const allTasks = program.categories.flatMap(c => c.recommendations.flatMap(r => r.microTasks));
@@ -1309,7 +1410,7 @@ const ProgramDetailScreen = ({
                                             onToggle={onToggleTask}
                                             guidedAction={guidedActionsByTaskId[task.id]}
                                             onNavigateToGuide={onNavigateToGuide}
-                                            onNavigateToResources={onNavigateToResources}
+                                            onNavigateToResources={onNavigateToProCategory}
                                         />
                                     );
                                 })}
@@ -1336,13 +1437,7 @@ interface CalendarEvent {
     day: number; // 0=Lun .. 6=Dim
 }
 
-interface CircleNote {
-    id: string;
-    author: string;
-    avatar: string;
-    text: string;
-    time: string;
-}
+
 
 const caregivers = [
     { name: 'Marie', role: 'Aidante principale', avatar: 'https://ui-avatars.com/api/?name=Marie+D&background=E8F4F8&color=2C8C99&bold=true', status: 'En ligne' },
@@ -1359,37 +1454,19 @@ const weekEvents: CalendarEvent[] = [
     { id: 'ev6', title: 'Accueil de jour', time: '09:00 – 17:00', assignee: 'Marie', assigneeAvatar: caregivers[0].avatar, domain: 'M', note: 'Prévoir le sac repas', day: 4 },
 ];
 
-const circleNotes: CircleNote[] = [
-    { id: 'n1', author: 'Fatima', avatar: caregivers[1].avatar, text: "J'ai récupéré les résultats d'analyse au labo. Tout est normal.", time: 'Aujourd\'hui, 14:30' },
-    { id: 'n2', author: 'Rachid', avatar: caregivers[2].avatar, text: 'Maman avait l\'air bien ce matin, elle a bien mangé. Je repasserai jeudi.', time: 'Aujourd\'hui, 10:15' },
-    { id: 'n3', author: 'Marie', avatar: caregivers[0].avatar, text: 'RDV kiné décalé à 10h30 mercredi (au lieu de 10h). J\'ai prévenu le taxi.', time: 'Hier, 18:00' },
-    { id: 'n4', author: 'Fatima', avatar: caregivers[1].avatar, text: 'Je peux prendre la garde samedi matin si besoin.', time: 'Hier, 09:45' },
-];
+
 
 const CalendarScreen = () => {
     const [selectedDay, setSelectedDay] = useState(0);
-    const [noteInput, setNoteInput] = useState('');
     const [showShareToast, setShowShareToast] = useState(false);
     const [showMockToast, setShowMockToast] = useState('');
-    const [localNotes, setLocalNotes] = useState<CircleNote[]>(circleNotes);
 
     const showToast = (msg: string) => {
         setShowMockToast(msg);
         setTimeout(() => setShowMockToast(''), 2500);
     };
 
-    const handleSendNote = () => {
-        if (!noteInput.trim()) return;
-        const newNote: CircleNote = {
-            id: `n-${Date.now()}`,
-            author: 'Marie',
-            avatar: caregivers[0].avatar,
-            text: noteInput.trim(),
-            time: 'À l\'instant',
-        };
-        setLocalNotes(prev => [newNote, ...prev]);
-        setNoteInput('');
-    };
+
 
     // Build week days starting from today
     const today = new Date();
@@ -1540,40 +1617,7 @@ const CalendarScreen = () => {
                 Partager l&apos;agenda (Google Calendar)
             </button>
 
-            {/* Notes du cercle */}
-            <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-3">
-                Notes du cercle
-            </h3>
 
-            {/* Note input */}
-            <div className="flex items-center gap-2 mb-4">
-                <input
-                    value={noteInput}
-                    onChange={e => setNoteInput(e.target.value)}
-                    placeholder="Laisser une note au cercle..."
-                    className="flex-1 bg-white border border-[#E5E5EA] rounded-full px-4 py-2.5 text-[13px] text-[#1A1A2E] placeholder:text-[#C8CCD0] outline-none focus:border-[#2C8C99] transition-colors"
-                />
-                <button
-                    onClick={handleSendNote}
-                    className="w-10 h-10 bg-[#1A1A2E] rounded-full flex items-center justify-center text-white hover:bg-[#2C8C99] transition-colors active:scale-90"
-                >
-                    <PaperPlaneRight size={16} weight="bold" />
-                </button>
-            </div>
-
-            {/* Notes list */}
-            <div className="space-y-3 mb-6">
-                {localNotes.map(n => (
-                    <div key={n.id} className="bg-white rounded-[16px] p-3 border border-[#E5E5EA] shadow-sm">
-                        <div className="flex items-center gap-2 mb-2">
-                            <img src={n.avatar} alt={n.author} className="w-7 h-7 rounded-full" />
-                            <span className="text-[13px] font-semibold text-[#1A1A2E]">{n.author}</span>
-                            <span className="text-[10px] text-[#C8CCD0] ml-auto">{n.time}</span>
-                        </div>
-                        <p className="text-[13px] text-[#4A4A5A] leading-relaxed">{n.text}</p>
-                    </div>
-                ))}
-            </div>
         </>
     );
 };
@@ -1815,9 +1859,9 @@ const ResourcesScreen = ({ onSelectArticle, onSelectGuide }: { onSelectArticle: 
     const restArticles = filteredArticles.slice(1);
 
     const priorityConfig: Record<string, { bg: string; text: string; label: string }> = {
-        urgent: { bg: '#FEE2E2', text: '#DC2626', label: 'Urgent' },
-        recommended: { bg: '#FEF3C7', text: '#D97706', label: 'Recommandé' },
-        optional: { bg: '#E0F2FE', text: '#0284C7', label: 'Optionnel' },
+        urgent: { bg: '#FEF3C7', text: '#D97706', label: 'À faire rapidement' },
+        recommended: { bg: '#E8F4F8', text: '#2C8C99', label: 'Conseillé' },
+        optional: { bg: '#F3F4F6', text: '#6B7280', label: 'Quand vous êtes prêt·e' },
     };
 
     const domainColors: Record<string, { bg: string; text: string; label: string }> = {
@@ -2035,10 +2079,17 @@ const ResourcesScreen = ({ onSelectArticle, onSelectGuide }: { onSelectArticle: 
 /* ═══════════════════════════════════════════════════════
    COMMUNITY SCREEN
 ═══════════════════════════════════════════════════════ */
-const CommunityScreen = () => {
+const CommunityScreen = ({ initialProCategory }: { initialProCategory?: string }) => {
     const [proSearch, setProSearch] = useState('');
-    const [proCategory, setProCategory] = useState('sante');
+    const [proCategory, setProCategory] = useState(initialProCategory || 'sante');
     const [selectedPro, setSelectedPro] = useState<Professional | null>(null);
+
+    // Sync category when navigating from micro-tasks
+    useEffect(() => {
+        if (initialProCategory) {
+            setProCategory(initialProCategory);
+        }
+    }, [initialProCategory]);
 
     const filteredPros = professionals.filter(p => {
         const matchesCategory = p.category === proCategory;
@@ -2176,7 +2227,7 @@ const CommunityScreen = () => {
    SETTINGS SCREEN
 ═══════════════════════════════════════════════════════ */
 const SettingsScreen = () => {
-    const [darkMode, setDarkMode] = useState(false);
+    const { isDark, toggle: toggleDarkMode } = React.useContext(DarkModeContext);
     const [notifications, setNotifications] = useState(true);
 
     return (
@@ -2193,7 +2244,7 @@ const SettingsScreen = () => {
             {/* Preferences */}
             <div className="space-y-6">
                 <SettingsSection title="Préférences">
-                    <SettingsRow icon={<MoonStars size={20} weight="bold" color="#6366F1" />} iconBg="#EEF2FF" label="Mode sombre" action="toggle" checked={darkMode} onCheckedChange={setDarkMode} isFirst />
+                    <SettingsRow icon={<MoonStars size={20} weight="bold" color="#6366F1" />} iconBg="#EEF2FF" label="Mode sombre" action="toggle" checked={isDark} onCheckedChange={toggleDarkMode} isFirst />
                     <SettingsRow icon={<ShieldCheck size={20} weight="bold" color="#10B981" />} iconBg="#ECFDF5" label="Notifications" action="toggle" checked={notifications} onCheckedChange={setNotifications} />
                     <SettingsRow icon={<Translate size={20} weight="bold" color="#F59E0B" />} iconBg="#FFFBEB" label="Langue" action="label" actionLabel="Français" isLast />
                 </SettingsSection>
@@ -2243,6 +2294,13 @@ const ONBOARDING_SLIDES = [
         highlight: 'Prêt·e à découvrir ?',
     },
     {
+        image: '/onboarding_benefits.png',
+        title: 'Un agenda partagé',
+        subtitle: 'Coordonnez-vous en famille',
+        description: 'Planifiez les rendez-vous, les gardes et les tâches du quotidien avec votre cercle d\'aidants. Tout le monde voit qui fait quoi, quand.',
+        highlight: 'Fini les oublis et les doublons.',
+    },
+    {
         image: '/onboarding_questionnaire.png',
         title: 'Un questionnaire pour vous connaître',
         subtitle: 'Quelques minutes pour tout personnaliser',
@@ -2258,15 +2316,26 @@ const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
 
     return (
         <div className="absolute inset-0 z-[60] bg-[#E8F4F8] flex flex-col" style={{ fontFamily: "'Outfit', sans-serif" }}>
-            {/* Skip button */}
-            {!isLast && (
-                <button
-                    onClick={onComplete}
-                    className="absolute top-14 right-6 text-[13px] text-[#8E8E93] font-medium z-10 hover:text-[#1A1A2E] transition-colors"
-                >
-                    Passer
-                </button>
-            )}
+            {/* Top bar: Logo + Skip */}
+            <div className="flex items-center justify-between px-6 pt-14">
+                {/* Monka logo */}
+                <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-[10px] bg-[#2C8C99] flex items-center justify-center">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 17V7L7 12L12 4L17 12L21 7V17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </div>
+                    <span className="text-[16px] font-bold text-[#1A1A2E]">Monka</span>
+                </div>
+                {!isLast && (
+                    <button
+                        onClick={onComplete}
+                        className="text-[13px] text-[#8E8E93] font-medium z-10 hover:text-[#1A1A2E] transition-colors"
+                    >
+                        Passer
+                    </button>
+                )}
+            </div>
 
             {/* Content */}
             <div className="flex-1 flex flex-col items-center justify-center px-8 text-center" key={step} style={{ animation: 'fadeIn 0.35s ease-out' }}>
@@ -2348,9 +2417,12 @@ const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
 ═══════════════════════════════════════════════════════ */
 export default function DemoApp() {
     const [showOnboarding, setShowOnboarding] = useState(true);
+    const [showProductTour, setShowProductTour] = useState(false);
+    const [isDark, setIsDark] = useState(false);
     const [activeTab, setActiveTab] = useState<TabId>('home');
     const [screenStack, setScreenStack] = useState<Screen[]>([{ type: 'tab', tab: 'home' }]);
     const [toggledTasks, setToggledTasks] = useState<Record<string, boolean>>({});
+    const [pendingProCategory, setPendingProCategory] = useState<string | undefined>(undefined);
     const scrollRef = useRef<HTMLDivElement>(null);
 
     // Build lookup: micro-task ID → linked ActionableAdvice
@@ -2395,11 +2467,11 @@ export default function DemoApp() {
             case 'tab':
                 switch (currentScreen.tab) {
                     case 'home':
-                        return <HomeScreen onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectArticle={openArticle} toggledTasks={toggledTasks} onAvatarPress={() => setActiveTab('settings')} />;
+                        return <HomeScreen onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectArticle={openArticle} onSelectGuide={(guide) => pushScreen({ type: 'guideDetail', guide })} toggledTasks={toggledTasks} onAvatarPress={() => setActiveTab('settings')} />;
                     case 'calendar':
                         return <CalendarScreen />;
                     case 'community':
-                        return <CommunityScreen />;
+                        return <CommunityScreen initialProCategory={pendingProCategory} />;
                     case 'resources':
                         return <ResourcesScreen onSelectArticle={openArticle} onSelectGuide={(guide) => pushScreen({ type: 'guideDetail', guide })} />;
                     case 'settings':
@@ -2425,7 +2497,22 @@ export default function DemoApp() {
                         onToggleTask={handleToggleTask}
                         guidedActionsByTaskId={guidedActionsByTaskId}
                         onNavigateToGuide={(guide) => pushScreen({ type: 'guideDetail', guide })}
-                        onNavigateToResources={() => switchTab('resources')}
+                        onNavigateToProCategory={(contactName) => {
+                            // Resolve contact name to pro category
+                            const contactNameLower = contactName?.toLowerCase() || '';
+                            let targetCategory = 'social'; // default
+                            if (contactNameLower.includes('médecin') || contactNameLower.includes('psychologue') || contactNameLower.includes('infirm') || contactNameLower.includes('kiné')) {
+                                targetCategory = 'sante';
+                            } else if (contactNameLower.includes('mairie') || contactNameLower.includes('cpam') || contactNameLower.includes('caf') || contactNameLower.includes('mdph') || contactNameLower.includes('retraite') || contactNameLower.includes('autonomie')) {
+                                targetCategory = 'administratif';
+                            } else if (contactNameLower.includes('admr') || contactNameLower.includes('ergo') || contactNameLower.includes('accueil de jour') || contactNameLower.includes('domicile')) {
+                                targetCategory = 'domicile';
+                            } else {
+                                targetCategory = 'social'; // CCAS, CLIC, Plateforme de répit, France Alzheimer, etc.
+                            }
+                            setPendingProCategory(targetCategory);
+                            switchTab('community');
+                        }}
                     />
                 );
             case 'articleReader':
@@ -2440,68 +2527,154 @@ export default function DemoApp() {
                     <GuideDetailScreen
                         guide={currentScreen.guide}
                         onBack={popScreen}
-                        onNavigateToResources={() => switchTab('resources')}
+                        onNavigateToProCategory={(contactName) => {
+                            const cn = contactName?.toLowerCase() || '';
+                            let cat = 'social';
+                            if (cn.includes('médecin') || cn.includes('psychologue') || cn.includes('infirm') || cn.includes('kiné')) cat = 'sante';
+                            else if (cn.includes('mairie') || cn.includes('cpam') || cn.includes('caf') || cn.includes('mdph') || cn.includes('retraite') || cn.includes('autonomie')) cat = 'administratif';
+                            else if (cn.includes('admr') || cn.includes('ergo') || cn.includes('accueil de jour') || cn.includes('domicile')) cat = 'domicile';
+                            setPendingProCategory(cat);
+                            switchTab('community');
+                        }}
                     />
                 );
         }
     };
 
+    const darkModeCtx = useMemo(() => ({ isDark, toggle: () => setIsDark(p => !p) }), [isDark]);
+
     return (
-        <div className="fixed inset-0 sm:static sm:min-h-screen flex items-center justify-center bg-[#E8F4F8] sm:bg-[#D6EDF0]" style={{ fontFamily: "'Outfit', sans-serif" }}>
-            {/* Frame: full viewport on mobile, fixed iPhone size on desktop */}
-            <div className="relative w-screen h-[100dvh] sm:w-[393px] sm:h-[852px]">
-                {/* Bezel: invisible on mobile, iPhone border on desktop */}
-                <div className="absolute inset-0 overflow-hidden rounded-none sm:rounded-[48px] border-0 sm:border-[8px] sm:border-[#1A1A1A] sm:shadow-[0_25px_80px_rgba(0,0,0,0.25),inset_0_0_0_2px_#333]">
+        <DarkModeContext.Provider value={darkModeCtx}>
+            <div className="fixed inset-0 sm:static sm:min-h-screen flex items-center justify-center bg-[#E8F4F8] sm:bg-[#D6EDF0]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                {/* Frame: full viewport on mobile, fixed iPhone size on desktop */}
+                <div className="relative w-screen h-[100dvh] sm:w-[393px] sm:h-[852px]">
+                    {/* Bezel: invisible on mobile, iPhone border on desktop */}
+                    <div className="absolute inset-0 overflow-hidden rounded-none sm:rounded-[48px] border-0 sm:border-[8px] sm:border-[#1A1A1A] sm:shadow-[0_25px_80px_rgba(0,0,0,0.25),inset_0_0_0_2px_#333]">
 
-                    {/* Dynamic Island — desktop only */}
-                    <div className="hidden sm:block absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[120px] h-[34px] bg-black rounded-full" />
+                        {/* Dynamic Island — desktop only */}
+                        <div className="hidden sm:block absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[120px] h-[34px] bg-black rounded-full" />
 
-                    {/* Status bar — desktop only */}
-                    <div className="hidden sm:flex absolute top-0 left-0 right-0 z-40 pt-[14px] px-8 justify-between items-center">
-                        <span className="text-[12px] font-semibold text-[#1A1A2E]">
-                            {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
-                        </span>
-                        <div className="flex items-center gap-1">
-                            <svg width="16" height="12" viewBox="0 0 16 12" fill="#1A1A2E"><rect x="0" y="3" width="3" height="9" rx="1" /><rect x="4" y="2" width="3" height="10" rx="1" /><rect x="8" y="0" width="3" height="12" rx="1" /><rect x="12" y="1" width="3" height="11" rx="1" opacity="0.3" /></svg>
-                            <svg width="16" height="12" viewBox="0 0 24 24" fill="#1A1A2E"><path d="M1.3 7.5a14.5 14.5 0 0 1 21.4 0" stroke="#1A1A2E" strokeWidth="2" fill="none" /><path d="M5.5 11.5a9 9 0 0 1 13 0" stroke="#1A1A2E" strokeWidth="2" fill="none" /><circle cx="12" cy="17" r="2" /></svg>
-                            <svg width="25" height="12" viewBox="0 0 25 12" fill="#1A1A2E"><rect x="0" y="0" width="22" height="12" rx="3" stroke="#1A1A2E" strokeWidth="1.5" fill="none" /><rect x="2" y="2" width="16" height="8" rx="1.5" fill="#1A1A2E" /><rect x="23" y="4" width="2" height="4" rx="1" fill="#1A1A2E" opacity="0.4" /></svg>
+                        {/* Status bar — desktop only */}
+                        <div className={`hidden sm:flex absolute top-0 left-0 right-0 z-40 pt-[14px] px-8 justify-between items-center`}>
+                            <span className={`text-[12px] font-semibold ${isDark ? 'text-[#E2E8F0]' : 'text-[#1A1A2E]'}`}>
+                                {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                            <div className="flex items-center gap-1">
+                                <svg width="16" height="12" viewBox="0 0 16 12" fill={isDark ? '#E2E8F0' : '#1A1A2E'}><rect x="0" y="3" width="3" height="9" rx="1" /><rect x="4" y="2" width="3" height="10" rx="1" /><rect x="8" y="0" width="3" height="12" rx="1" /><rect x="12" y="1" width="3" height="11" rx="1" opacity="0.3" /></svg>
+                                <svg width="16" height="12" viewBox="0 0 24 24" fill={isDark ? '#E2E8F0' : '#1A1A2E'}><path d="M1.3 7.5a14.5 14.5 0 0 1 21.4 0" stroke={isDark ? '#E2E8F0' : '#1A1A2E'} strokeWidth="2" fill="none" /><path d="M5.5 11.5a9 9 0 0 1 13 0" stroke={isDark ? '#E2E8F0' : '#1A1A2E'} strokeWidth="2" fill="none" /><circle cx="12" cy="17" r="2" /></svg>
+                                <svg width="25" height="12" viewBox="0 0 25 12" fill={isDark ? '#E2E8F0' : '#1A1A2E'}><rect x="0" y="0" width="22" height="12" rx="3" stroke={isDark ? '#E2E8F0' : '#1A1A2E'} strokeWidth="1.5" fill="none" /><rect x="2" y="2" width="16" height="8" rx="1.5" fill={isDark ? '#E2E8F0' : '#1A1A2E'} /><rect x="23" y="4" width="2" height="4" rx="1" fill={isDark ? '#E2E8F0' : '#1A1A2E'} opacity="0.4" /></svg>
+                            </div>
                         </div>
-                    </div>
 
-                    {/* App content — scrollable */}
-                    <div
-                        ref={scrollRef}
-                        className="absolute inset-0 overflow-y-auto no-scrollbar bg-[#E8F4F8]"
-                    >
+                        {/* App content — scrollable */}
                         <div
-                            key={`${screenStack.length}-${currentScreen.type}-${currentScreen.type === 'tab' ? currentScreen.tab : ''}`}
-                            className={`px-5 pt-3 sm:px-6 sm:pt-14 animate-fadeIn pb-24 sm:pb-28`}
-                            style={{
-                                animation: 'fadeIn 0.2s ease-out',
-                                transform: 'scale(0.93)',
-                                transformOrigin: 'top center',
-                                width: `${100 / 0.93}%`,
-                                marginLeft: `${-(100 / 0.93 - 100) / 2}%`,
-                            }}
+                            ref={scrollRef}
+                            className={`absolute inset-0 overflow-y-auto no-scrollbar transition-colors duration-300 ${isDark ? 'bg-[#0F172A]' : 'bg-[#E8F4F8]'}`}
                         >
-                            {renderScreen()}
+                            <div
+                                key={`${screenStack.length}-${currentScreen.type}-${currentScreen.type === 'tab' ? currentScreen.tab : ''}`}
+                                className={`px-5 pt-3 sm:px-6 sm:pt-14 animate-fadeIn pb-24 sm:pb-28`}
+                                style={{
+                                    animation: 'fadeIn 0.2s ease-out',
+                                    transform: 'scale(0.93)',
+                                    transformOrigin: 'top center',
+                                    width: `${100 / 0.93}%`,
+                                    marginLeft: `${-(100 / 0.93 - 100) / 2}%`,
+                                }}
+                            >
+                                {renderScreen()}
+                            </div>
                         </div>
+
+                        {/* Onboarding overlay */}
+                        {showOnboarding && (
+                            <OnboardingOverlay onComplete={() => { setShowOnboarding(false); setShowProductTour(true); }} />
+                        )}
+
+                        {/* Product Tour (driver.js) — launches after onboarding */}
+                        {showProductTour && (
+                            <ProductTour onComplete={() => setShowProductTour(false)} />
+                        )}
+
+                        {/* Bottom Nav — always visible */}
+                        <div className="absolute bottom-0 left-0 right-0 z-30">
+                            <BottomNavPill activeTab={activeTab} onTabChange={switchTab} />
+                        </div>
+
+                        {/* Home indicator — desktop only */}
+                        <div className="hidden sm:block absolute bottom-2 left-1/2 -translate-x-1/2 z-50 w-[134px] h-[5px] bg-[#1A1A1A] rounded-full opacity-30" />
+
+                        {/* Dark mode CSS overrides */}
+                        {isDark && (
+                            <style>{`
+                            /* Global dark mode overrides */
+                            .bg-white, [class*="bg-white"] { background-color: #1E293B !important; }
+                            .bg-\\[\\#E8F4F8\\] { background-color: #0F172A !important; }
+                            .bg-\\[\\#F3F4F6\\] { background-color: #1E293B !important; }
+                            .bg-\\[\\#F9FAFB\\] { background-color: #1E293B !important; }
+                            .bg-\\[\\#FFFBEB\\] { background-color: #1E293B !important; }
+                            .bg-\\[\\#F0FDF4\\] { background-color: rgba(26,107,90,0.15) !important; }
+                            .bg-\\[\\#F0FAF7\\] { background-color: rgba(26,107,90,0.15) !important; }
+                            .bg-\\[\\#FEF2F2\\] { background-color: rgba(239,68,68,0.1) !important; }
+                            .bg-\\[\\#EEF2FF\\] { background-color: rgba(99,102,241,0.1) !important; }
+                            .bg-\\[\\#EFF6FF\\] { background-color: rgba(59,130,246,0.1) !important; }
+                            .bg-\\[\\#ECFDF5\\] { background-color: rgba(16,185,129,0.1) !important; }
+                            .bg-\\[\\#F5F3FF\\] { background-color: rgba(139,92,246,0.1) !important; }
+
+                            /* Text colors */
+                            .text-\\[\\#1A1A2E\\] { color: #F1F5F9 !important; }
+                            .text-\\[\\#374151\\] { color: #CBD5E1 !important; }
+                            .text-\\[\\#4A4A5A\\] { color: #94A3B8 !important; }
+                            .text-\\[\\#6B7280\\] { color: #94A3B8 !important; }
+                            .text-\\[\\#8E8E93\\] { color: #64748B !important; }
+                            .text-\\[\\#C8CCD0\\] { color: #475569 !important; }
+                            .text-\\[\\#92400E\\] { color: #FBBF24 !important; }
+                            .text-\\[\\#92770C\\] { color: #FBBF24 !important; }
+                            .text-2xl { color: #F1F5F9 !important; }
+
+                            /* Borders */
+                            .border-\\[\\#E5E5EA\\], .border-\\[\\#E5E7EB\\] { border-color: #334155 !important; }
+                            .border-white\\/50 { border-color: rgba(51,65,85,0.5) !important; }
+
+                            /* Cards & containers */
+                            [class*="rounded-"][class*="bg-white"],
+                            [class*="rounded-"][style*="background: white"],
+                            [class*="rounded-"][style*="background-color: white"] {
+                                background-color: #1E293B !important;
+                            }
+
+                            /* Gradient backgrounds */
+                            .bg-gradient-to-br.from-\\[\\#E8F4F8\\] { background: linear-gradient(to bottom right, #0F172A, #1E293B) !important; }
+                            .bg-gradient-to-br.from-\\[\\#D6EDF0\\] { background: linear-gradient(to bottom right, #0F172A, #1E293B) !important; }
+
+                            /* BottomNavPill glassmorphism */
+                            nav[class*="rounded-full"][style*="rgba(255"] {
+                                background: rgba(30,41,59,0.9) !important;
+                                border-color: rgba(51,65,85,0.5) !important;
+                            }
+
+                            /* Input fields */
+                            input[class*="bg-white"], input[class*="bg-\\[\\#F9FAFB\\]"], input[class*="bg-\\[\\#F3F4F6\\]"] {
+                                background-color: #1E293B !important;
+                                color: #F1F5F9 !important;
+                                border-color: #334155 !important;
+                            }
+                            input::placeholder { color: #475569 !important; }
+
+                            /* Shadows — muted in dark mode */
+                            [class*="shadow-sm"], [class*="shadow-md"], [class*="shadow-lg"] {
+                                --tw-shadow-color: rgba(0,0,0,0.3) !important;
+                            }
+
+                            /* Settings rows */
+                            [class*="SettingsRow"], [class*="border-b"] {
+                                border-color: #334155 !important;
+                            }
+                        `}</style>
+                        )}
                     </div>
-
-                    {/* Onboarding overlay */}
-                    {showOnboarding && (
-                        <OnboardingOverlay onComplete={() => setShowOnboarding(false)} />
-                    )}
-
-                    {/* Bottom Nav — always visible */}
-                    <div className="absolute bottom-0 left-0 right-0 z-30">
-                        <BottomNavPill activeTab={activeTab} onTabChange={switchTab} />
-                    </div>
-
-                    {/* Home indicator — desktop only */}
-                    <div className="hidden sm:block absolute bottom-2 left-1/2 -translate-x-1/2 z-50 w-[134px] h-[5px] bg-[#1A1A1A] rounded-full opacity-30" />
                 </div>
             </div>
-        </div>
+        </DarkModeContext.Provider>
     );
 }

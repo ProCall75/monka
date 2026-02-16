@@ -251,38 +251,56 @@ function makeEdges(count: number, color: string): Edge[] {
     return edges;
 }
 
-/* ── Parcours 1 : Onboarding ── */
+/* ── Parcours 1 : Onboarding → Questionnaire → Premier écran ── */
 const JOURNEY_1_SCREENS = [
-    { img: 'IMG_3689', label: 'Questionnaire — Sexe', annotation: 'positive' as const, annotationText: 'Entrée claire et accueillante', verbatim: "Pourquoi on nous demande notre sexe biologique alors que c'est nous l'aidant, pas le patient ?", verbatimSeverity: 'majeur' as const },
-    { img: 'IMG_3691', label: 'Questionnaire — Âge', annotation: 'positive' as const, annotationText: 'Question simple, bonne UX' },
-    { img: 'IMG_3698', label: 'Services domicile', annotation: 'warning' as const, annotationText: 'Termes techniques confus', verbatim: "Solliciter la CARSAT, contacter la CPAM… je ne sais même pas ce que c'est.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3760', label: 'Humeur du proche', annotation: 'positive' as const, annotationText: 'Question empathique et bien formulée' },
-    { img: 'IMG_3700', label: 'Analyse en cours', annotation: 'warning' as const, annotationText: 'Pas de barre de progression ni de durée estimée', verbatim: "J'ai passé 30 min sur le questionnaire. Un clic sur retour m'a tout fait recommencer.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3701', label: 'Paywall — Essai 7j', annotation: 'critical' as const, annotationText: 'Paywall immédiat après onboarding = friction majeure', verbatim: "On me propose de m'abonner juste après 30 min de questionnaire — je n'ai vu aucune valeur.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3702', label: 'Dashboard À la une', annotation: 'warning' as const, annotationText: 'Hiérarchie confuse, « 0/12 » non expliqué', verbatim: "Je ne sais pas par quoi commencer.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3703', label: 'Plan d\'action', annotation: 'warning' as const, annotationText: 'Écran dense sans guidage', verbatim: "On ne sait pas pourquoi je suis censée faire cette tâche.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3704', label: 'Articles & Services', annotation: 'positive' as const, annotationText: 'Contenu utile et bien structuré' },
-    { img: 'IMG_3762', label: 'Post-bilan (0/66)', annotation: 'critical' as const, annotationText: '66 tâches affichées = surcharge cognitive massive', verbatim: "M'aider, c'est me soulager d'une tâche. Là, on m'en rajoute alors que je suis déjà débordée.", verbatimSeverity: 'bloquant' as const },
+    // --- Bloc Onboarding (3660-3668) ---
+    { img: 'IMG_3660', label: 'Splash — Logo Monka', annotation: 'positive' as const, annotationText: 'Point d\'entrée de l\'app — « Le compagnon des aidants »', verbatim: undefined, verbatimSeverity: undefined },
+    { img: 'IMG_3662', label: 'Onboarding — « Parcours personnalisé »', annotation: 'warning' as const, annotationText: '[U2] « Personnalisé » affiché AVANT le questionnaire — promesse non tenue', verbatim: "Il y a marqué personnalisé avant de remplir le questionnaire, c'est pas pertinent.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3665', label: 'Inscription (email/mdp)', annotation: 'positive' as const, annotationText: 'Formulaire d\'inscription classique', verbatim: undefined, verbatimSeverity: undefined },
+    { img: 'IMG_3667', label: '« Vérifiez votre boîte mail »', annotation: 'critical' as const, annotationText: '[U11] Mail de confirmation jamais reçu → client perdu', verbatim: "Elle s'est inscrite, elle ne reçoit pas le mail de confirmation, donc un client perdu.", verbatimSeverity: 'bloquant' as const },
+    // --- Bloc Questionnaire (3683-3698) ---
+    { img: 'IMG_3683', label: 'Intro questionnaire', annotation: 'critical' as const, annotationText: '[U3] Questionnaire trop long (30 min) — inacceptable pour un onboarding', verbatim: "L'aidante a pris 30 minutes environ pour répondre au questionnaire.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3684', label: 'Q1 — Lien de parenté', annotation: 'critical' as const, annotationText: '[U4] Choix unique sur question multi-réponses + [U5] plusieurs aidés non pris en compte + [C1] « souffrante » stigmatisant', verbatim: "Le premier problème, c'est que la première question c'est une réponse unique alors qu'il peut y avoir plusieurs réponses.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3685', label: 'Q2 — Situation professionnelle', annotation: 'warning' as const, annotationText: '[C2] « Quelle activité exercez-vous ? » — les réponses ne sont pas des activités', verbatim: "La formulation de la question, les propositions sont censées être des activités.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3687', label: 'Q4 — Lieu de vie de l\'aidé', annotation: 'warning' as const, annotationText: '[U6] Ordre illogique : code postal AVANT type de domicile + [U16] pas d\'option « hospitalisée » + [C3] justification code postal incohérente', verbatim: "Il faudrait mettre la question domicile avant de demander le code postal.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3689', label: 'Q6 — Sexe biologique', annotation: 'warning' as const, annotationText: '[Q1] Sexe de l\'aidant non pertinent — l\'aidant n\'est pas le patient', verbatim: "Pourquoi on nous dit que ça permet de communiquer des informations médicales spécifiques à notre sexe alors que c'est nous l'aidant ?", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3693', label: 'Q10 — Spécialistes', annotation: 'warning' as const, annotationText: '[L3] Orthopsie mal catégorisée (ophtalmologie ≠ soins cognitifs) + [C7] ton non uniforme', verbatim: "L'orthopsie, c'est pour les yeux. Ce n'est pas un soin de communication ni un soin cognitif.", verbatimSeverity: 'mineur' as const },
+    { img: 'IMG_3696', label: 'Q13 — Priorités / Besoins', annotation: 'warning' as const, annotationText: '[C5] Question 12 illisible — formulations floues, parenthèses mal espacées', verbatim: "Plein de formulations floues, incohérentes, des parenthèses qui sont mal.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3697', label: 'Analyse en cours…', annotation: 'critical' as const, annotationText: '[U8] Bouton retour = tout recommencer (30 min perdues)', verbatim: "Elle a juste par erreur cliqué sur retour, et ça a recommencé tout le questionnaire.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3698', label: 'Résultat questionnaire', annotation: 'critical' as const, annotationText: '[U9] Paywall immédiat post-questionnaire — aucune valeur démontrée + [L2] Acronymes CARSAT, CPAM', verbatim: "Mettre un paywall juste après 30 minutes de questionnaire, ça ne va pas convertir parce qu'on ne voit pas la valeur.", verbatimSeverity: 'bloquant' as const },
+    // --- Premier contact Dashboard (3699) ---
+    { img: 'IMG_3699', label: 'Dashboard — Premier contact', annotation: 'critical' as const, annotationText: '[U1] Trop de CTA → l\'aidant ne sait pas par où commencer + [U10] stepper confondu avec boutons', verbatim: "Donc je ne sais pas par lequel commencer.", verbatimSeverity: 'bloquant' as const },
 ];
 
-/* ── Parcours 2 : Navigation Dashboard ── */
+/* ── Parcours 2 : Navigation Dashboard → Micro-tâches → Perception de valeur ── */
 const JOURNEY_2_SCREENS = [
-    { img: 'IMG_3705', label: 'Onglet Santé', annotation: 'positive' as const, annotationText: 'Card sombre lisible, bonne hiérarchie' },
-    { img: 'IMG_3706', label: 'Santé — scroll', annotation: 'warning' as const, annotationText: 'Tâche « Discutez des difficultés » trop vague', verbatim: "Vérifier, ça veut dire tu me donnes encore une tâche. Si tu me trouves la réponse directe, ça oui, ça m'aiderait.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3707', label: 'Onglet Démarches', annotation: 'positive' as const, annotationText: 'Bonne contextualisation CAF jeune aidant' },
-    { img: 'IMG_3708', label: 'Démarches — scroll', annotation: 'warning' as const, annotationText: 'Trop de cartes, scroll long et fatigant' },
-    { img: 'IMG_3709', label: 'Onglet Services', annotation: 'positive' as const, annotationText: 'CCAS / mairie bien identifiés' },
-    { img: 'IMG_3710', label: 'Services — scroll', annotation: 'warning' as const, annotationText: 'Actions aidant/aidé mélangées sans distinction', verbatim: "C'est une tâche ou c'est une info, c'est une ressource ? On ne sait pas.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3711', label: 'Ressources', annotation: 'warning' as const, annotationText: 'Contenu générique, pas assez personnalisé', verbatim: "On ne voit pas clairement quelle est la personnalisation. 'Demander des aides financières', c'est trop générique.", verbatimSeverity: 'bloquant' as const },
-    { img: 'IMG_3712', label: 'Messagerie IDEC', annotation: 'critical' as const, annotationText: 'Paywall bloquant + « IDEC » = terme inconnu', verbatim: "Si quelqu'un sait que la personne n'a pas besoin d'une infirmière, il va quitter l'appli.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3699', label: 'Dashboard — « Bonjour »', annotation: 'warning' as const, annotationText: '[V3] Aucune personnalisation visible malgré 30 min de questionnaire', verbatim: "On ne voit pas clairement quelle est la personnalisation. Demander des aides financières, c'est trop générique.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3700', label: 'Dashboard — Priorités santé', annotation: 'critical' as const, annotationText: '[V1] L\'app ajoute des tâches au lieu de soulager + [I1] Police trop petite pour aidants 50+', verbatim: "M'aider, c'est me soulager d'une tâche ou d'une angoisse. Là, on me donne encore plus de tâches alors que je suis déjà débordée.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3701', label: 'Dashboard — Premières démarches', annotation: 'critical' as const, annotationText: '[L1] « Bilan infirmier.e / IDEC » jamais défini — terme qui fait fuir + [U13] absence de « Pourquoi ? »', verbatim: "Si quelqu'un sait que la personne n'a pas besoin d'une infirmière, il va peut-être quitter l'appli.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3702', label: 'Tab Santé', annotation: 'warning' as const, annotationText: '[U7] Réponses non filtrées — propositions pour enfants/ados malgré profil personne âgée', verbatim: "Les propositions concernant les jeunes personnes ne sont pas pertinentes.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3703', label: 'Tab Démarches', annotation: 'warning' as const, annotationText: '[C6] Verbe/sujet incohérent entre questions + [C12] « Faites-vous aider » trop générique', verbatim: "T'arrives sur une appli qui est censée t'aider, ils disent fais-toi aider. Mais il n'y a pas de précision.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3704', label: 'Tab Services', annotation: 'warning' as const, annotationText: '[I2] Badges (CPAM, Démarche) perçus comme des boutons cliquables', verbatim: "Il y a des badges et elle croit que c'est des boutons parce qu'on ne comprend pas pourquoi ils sont là.", verbatimSeverity: 'majeur' as const },
+    // --- Détail micro-tâches ---
+    { img: 'IMG_3705', label: 'Guide détail', annotation: 'warning' as const, annotationText: '[L4] Langage globalement trop clinique — terminologie médicale omniprésente', verbatim: "Le langage est trop médical et clinique. Il faut adapter le langage à l'aidant.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3707', label: 'Micro-tâche détail', annotation: 'critical' as const, annotationText: '[C11] « C\'est fait » ambigu — l\'utilisateur ne comprend pas ce qu\'il valide + [U12] confusion tâche vs information', verbatim: "Mais qu'est-ce qui est fait ? Parce que là, c'est une information, ce n'est pas une tâche.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3708', label: 'Articles / Ressources', annotation: 'warning' as const, annotationText: '[V4] L\'aidant veut des solutions, pas des ordres — « Vérifiez auprès de votre mutuelle » = corvée', verbatim: "Vérifier, ça veut dire tu me donnes encore une tâche. Mais si tu me trouves la réponse directe, ça oui ça m'aiderait.", verbatimSeverity: 'bloquant' as const },
+    // --- Verdict global ---
+    { img: 'IMG_3709', label: 'Calendrier', annotation: 'warning' as const, annotationText: '[V2] Après 45 min d\'utilisation, Amal ne sait toujours pas ce que l\'app va lui apporter', verbatim: "Mon ressenti, à ce stade, je ne sais pas ce que ça va m'apporter.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3710', label: 'Mes informations', annotation: 'critical' as const, annotationText: '[V5] Sécurité du proche non adressée — besoin #1 absent + [V6] aucune envie de payer', verbatim: "Mon angoisse, c'est quand ma mère elle répond pas. J'ai besoin de savoir est-ce qu'elle est vivante ou pas.", verbatimSeverity: 'bloquant' as const },
 ];
 
-/* ── Parcours 3 : Profil & Contacts ── */
+/* ── Parcours 3 : Pricing & Conversion ── */
 const JOURNEY_3_SCREENS = [
-    { img: 'IMG_3713', label: 'Profil — Vue d\'ensemble', annotation: 'warning' as const, annotationText: 'Section historique vide, layout peu engageant' },
-    { img: 'IMG_3717', label: 'Vous et votre proche', annotation: 'positive' as const, annotationText: 'Informations lisibles et bien organisées' },
-    { img: 'IMG_3718', label: 'Mes soignants', annotation: 'warning' as const, annotationText: 'Listes vides sans onboarding ni aide contextuelle' },
-    { img: 'IMG_3719', label: 'Ajout interlocuteur', annotation: 'warning' as const, annotationText: 'Liste trop longue sans barre de recherche' },
+    { img: 'IMG_3698', label: 'Fin questionnaire → Paywall', annotation: 'critical' as const, annotationText: '[P1] Paywall avant la valeur — payer AVANT la moindre personnalisation + [U9] post-30 min', verbatim: "On me propose de m'abonner juste après 30 min de questionnaire — je n'ai vu aucune valeur.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3699', label: 'Dashboard — Pricing enfoui', annotation: 'warning' as const, annotationText: '[U14] CTA d\'abonnement tout en bas d\'une page de tâches — position incongrue', verbatim: "La carte de pricing n'est pas bien positionnée, elle est tout en bas d'une page avec des tâches.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3700', label: 'Cartes pricing — Tons incohérents', annotation: 'warning' as const, annotationText: '[C9] 3 styles différents sur les cartes + [I3] Cartes visuellement incohérentes + [C8] « Profiter de 7 jours, pour » virgule fautive', verbatim: "Les cartes de pricing ne sont pas uniformes, les tons ne sont pas uniformes.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3701', label: '« On s\'en occupe… »', annotation: 'critical' as const, annotationText: '[C10] « On s\'en occupe avec vous ou à votre place » — vague et anxiogène', verbatim: "De quoi on s'en occupe ? De qui on parle ? On parle d'un labrador ?", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3702', label: 'Formule « Découverte »', annotation: 'warning' as const, annotationText: '[P4] « Inclus en découverte » incompréhensible — expliquer les formules + [P3] période d\'essai mal formulée', verbatim: "Il faut expliquer qu'il y a différentes formules. \"En 7 jours vous y voyez plus clair, zéro euros par mois\" — Tu comprends ? — Non.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3703', label: 'Engagement non précisé', annotation: 'warning' as const, annotationText: '[P2] Les aidants âgés ont peur des abonnements — préciser « sans engagement »', verbatim: "Les vieux, ils ont peur d'abonnement. Il faut préciser que c'est sans engagement.", verbatimSeverity: 'majeur' as const },
+    { img: 'IMG_3704', label: 'Saut 7€ → 60€', annotation: 'critical' as const, annotationText: '[V7] Aucune formule intermédiaire entre 7€ et 60€ — saut trop brutal', verbatim: "Il y a deux choix d'abonnement, de 7€ ça passe à 60€. Il n'y a pas de formule intermédiaire.", verbatimSeverity: 'majeur' as const },
+    // --- Recherche de pros ---
+    { img: 'IMG_3708', label: 'Recherche de pros', annotation: 'critical' as const, annotationText: '[U17] Recherche d\'acteurs dysfonctionnelle — ne fonctionne pas hors médecin généraliste + [U15] Champ libre au lieu d\'autocomplétion', verbatim: "La recherche d'acteurs à proximité ne fonctionne pas pour tout ce qui est hors médecin généraliste.", verbatimSeverity: 'bloquant' as const },
+    { img: 'IMG_3710', label: 'Résidence « sérieuse »', annotation: 'warning' as const, annotationText: '[L5] « Résidence sérieuse » au lieu de « Résidence autonomie » — erreur de terminologie officielle', verbatim: "C'est résidence autonome, ce n'est pas résidence sérieuse.", verbatimSeverity: 'mineur' as const },
 ];
 
 /* ─────────────────────────────────────────────
@@ -310,8 +328,8 @@ interface JourneyConfig {
 const JOURNEYS: JourneyConfig[] = [
     {
         id: 'onboarding',
-        title: 'Onboarding + Découverte',
-        subtitle: 'Amal découvre Monka pour la première fois',
+        title: 'Parcours 1 — Onboarding & Questionnaire',
+        subtitle: 'Splash → Inscription → 30 min de questionnaire → Premier écran',
         emoji: '🟢',
         color: '#059669',
         colorLight: '#ECFDF5',
@@ -319,17 +337,17 @@ const JOURNEYS: JourneyConfig[] = [
     },
     {
         id: 'dashboard',
-        title: 'Navigation Dashboard',
-        subtitle: 'Explorer les 4 catégories d\'actions',
+        title: 'Parcours 2 — Dashboard & Micro-tâches',
+        subtitle: 'Navigation → Tâches → Guides → Perception de valeur',
         emoji: '🔵',
         color: '#2563EB',
         colorLight: '#EFF6FF',
         screens: JOURNEY_2_SCREENS,
     },
     {
-        id: 'profil',
-        title: 'Profil & Contacts',
-        subtitle: 'Gérer ses informations et soignants',
+        id: 'pricing',
+        title: 'Parcours 3 — Pricing & Conversion',
+        subtitle: 'Paywall → Formules → Recherche de pros → Abandon',
         emoji: '🟠',
         color: '#EA580C',
         colorLight: '#FFF7ED',

@@ -14,6 +14,10 @@ import { ProgressCard } from './components/molecules/ProgressCard';
 import { ScoreRing } from './components/atoms/ScoreRing';
 import { TaskCard } from './components/molecules/TaskCard';
 import { MicroTaskItem } from './components/molecules/MicroTaskItem';
+import { RecoCard } from './components/molecules/RecoCard';
+
+// ── Mock data ──
+import { mockVulnerabilities } from './data/kernel-mock';
 
 // ── Old Monka components (their current storybook) ──
 import { MProgressBar } from './components/atoms/MProgressBar';
@@ -323,9 +327,9 @@ export default function ReviewPage() {
     const tasksForDisplay = DEMO_TASKS.map(t => ({ ...t, isCompleted: toggledTasks[t.id] ?? t.isCompleted }));
 
     const chapters = [
-        { id: 'constat' as const, num: '01', label: 'Le Constat' },
-        { id: 'mapping' as const, num: '02', label: 'Le Défi' },
-        { id: 'preuve' as const, num: '03', label: 'La Preuve' },
+        { id: 'constat' as const, label: 'Constat' },
+        { id: 'mapping' as const, label: 'Défi' },
+        { id: 'preuve' as const, label: 'Preuve' },
     ];
 
     // ── IntersectionObserver: highlight active chapter on scroll ──
@@ -382,7 +386,6 @@ export default function ReviewPage() {
                                     color: activeChapter === ch.id ? '#FFFFFF' : '#8A857E',
                                 }}
                             >
-                                <span className="text-[10px] font-bold mr-1.5" style={{ opacity: 0.5 }}>{ch.num}</span>
                                 {ch.label}
                             </button>
                         ))}
@@ -398,7 +401,7 @@ export default function ReviewPage() {
                 <div className="text-center py-16 mb-12">
                     <p className="text-[11px] font-bold tracking-[4px] uppercase mb-4" style={{ color: '#B8B3AB' }}>Pragma · Audit UX · Février 2026</p>
                     <h1 className="text-[52px] font-extrabold leading-[1.05] tracking-[-0.03em] mb-5 gradient-text" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                        Votre moteur est<br />remarquable.<br />Révélons-le.
+                        Review UI/UX
                     </h1>
                     <p className="text-[17px] leading-relaxed max-w-lg mx-auto" style={{ color: '#8A857E' }}>
                         Analyse complète de l'interface Monka — constats, propositions concrètes,<br />et un prototype fonctionnel.
@@ -444,19 +447,64 @@ export default function ReviewPage() {
                     </div>
 
                     {/* ── Verdict d'Amal — Après le parcours ── */}
-                    <div className="rounded-[24px] p-[2px] mb-10" style={{ background: 'linear-gradient(135deg, #EF4444, #F59E0B)' }}>
-                        <div className="rounded-[22px] px-8 py-8" style={{ backgroundColor: '#0F172A' }}>
-                            <p className="text-[11px] font-bold uppercase tracking-[3px] mb-4" style={{ color: '#EF4444' }}>Verdict d&apos;Amal</p>
-                            <p className="text-[18px] font-bold leading-relaxed" style={{ color: '#F1F5F9' }}>
-                                « Je ne sais pas ce que ça va m&apos;apporter. Est-ce que ça va vraiment m&apos;aider ?
-                                <br /><span style={{ color: '#94A3B8' }}>M&apos;aider, c&apos;est me soulager d&apos;une tâche ou d&apos;une angoisse.</span>
-                                <br />Là, on me donne <span style={{ color: '#EF4444' }}>encore plus de tâches</span> alors que je suis <span style={{ color: '#EF4444' }}>déjà débordée</span>. »
-                            </p>
+                    <div className="rounded-[24px] px-8 py-8 mb-10" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
+                        <p className="text-[11px] font-bold uppercase tracking-[2px] mb-4" style={{ color: '#EF4444' }}>Verdict d&apos;Amal</p>
+                        <p className="text-[18px] font-bold leading-relaxed" style={{ color: '#2D2A26' }}>
+                            « Je ne sais pas ce que ça va m&apos;apporter. Est-ce que ça va vraiment m&apos;aider ?
+                            <br /><span style={{ color: '#8A857E' }}>M&apos;aider, c&apos;est me soulager d&apos;une tâche ou d&apos;une angoisse.</span>
+                            <br />Là, on me donne <span style={{ color: '#EF4444' }}>encore plus de tâches</span> alors que je suis <span style={{ color: '#EF4444' }}>déjà débordée</span>. »
+                        </p>
+                    </div>
+
+                    {/* ── Pédagogie UI / UX / Copywriting ── */}
+                    <div className="mb-12 rounded-[28px] p-8" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                        <SectionTag color="#8B5CF6">Avant de commencer</SectionTag>
+                        <h3 className="text-[22px] font-extrabold mb-2" style={{ color: '#2D2A26' }}>Trois axes, trois métiers</h3>
+                        <p className="text-[13px] mb-6" style={{ color: '#8A857E' }}>Pour chaque critique, on identifie si le problème relève de l'UI, de l'UX, ou du Copywriting.</p>
+                        <div className="grid grid-cols-3 gap-5">
+                            {[
+                                {
+                                    icon: '🎨',
+                                    title: 'UI — Interface',
+                                    def: 'L\'apparence visuelle : couleurs, typographie, espacement, icônes.',
+                                    impact: 'Première impression, crédibilité, confiance immédiate.',
+                                    color: '#3B82F6',
+                                    bg: '#EFF6FF',
+                                    borderColor: '#BFDBFE',
+                                },
+                                {
+                                    icon: '🧭',
+                                    title: 'UX — Expérience',
+                                    def: 'Le parcours utilisateur : navigation, friction, fluidité, architecture.',
+                                    impact: 'Rétention, conversion, satisfaction à long terme.',
+                                    color: '#F59E0B',
+                                    bg: '#FFFBEB',
+                                    borderColor: '#FDE68A',
+                                },
+                                {
+                                    icon: '✍️',
+                                    title: 'Copywriting',
+                                    def: 'Les mots utilisés : ton, clarté, jargon, cohérence éditoriale.',
+                                    impact: 'Compréhension, engagement, passage à l\'action.',
+                                    color: '#EC4899',
+                                    bg: '#FDF2F8',
+                                    borderColor: '#FBCFE8',
+                                },
+                            ].map((p, i) => (
+                                <div key={i} className="rounded-[20px] p-5" style={{ backgroundColor: p.bg, border: `1px solid ${p.borderColor}` }}>
+                                    <span className="text-[28px] block mb-3">{p.icon}</span>
+                                    <h4 className="text-[15px] font-extrabold mb-2" style={{ color: p.color }}>{p.title}</h4>
+                                    <p className="text-[12px] leading-relaxed mb-3" style={{ color: '#2D2A26' }}>{p.def}</p>
+                                    <div className="rounded-xl px-3 py-2" style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}>
+                                        <p className="text-[11px] font-semibold" style={{ color: p.color }}>Impact business : {p.impact}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
                     {/* ── 1c. Résumé des points critiques — par thème ── */}
-                    <SectionTag color="#EF4444">Acte 1 — Le Constat</SectionTag>
+                    <SectionTag color="#EF4444">Le Constat</SectionTag>
                     <SectionTitle>
                         6 points critiques identifiés,<br />3 thèmes à travailler.
                     </SectionTitle>
@@ -517,7 +565,7 @@ export default function ReviewPage() {
                     </div>
 
                     {/* ── 1d. Le Paradoxe — Visual split layout ── */}
-                    <SectionTag color="#10B981">Le Paradoxe</SectionTag>
+                    <SectionTag color="#10B981">Ce qu'on a observé</SectionTag>
                     <SectionTitle gradient>Un moteur puissant,<br />une interface qui ne l'exploite pas encore.</SectionTitle>
                     <div className="grid grid-cols-2 gap-0 rounded-[28px] overflow-hidden mb-6" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
                         {/* Left column header — Engine */}
@@ -542,14 +590,7 @@ export default function ReviewPage() {
                             </React.Fragment>
                         ))}
                     </div>
-                    <div className="text-center mb-16">
-                        <div className="inline-block rounded-[24px] px-10 py-6" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-                            <p className="text-[20px] font-medium italic leading-relaxed" style={{ color: '#8A857E' }}>
-                                « Votre moteur est <strong className="not-italic" style={{ color: '#2D2A26' }}>remarquable</strong>.<br />
-                                L'interface peut désormais en <strong className="not-italic" style={{ color: '#2D2A26' }}>révéler toute la valeur</strong>. »
-                            </p>
-                        </div>
-                    </div>
+
 
                 </section>
 
@@ -568,7 +609,7 @@ export default function ReviewPage() {
                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
                 <section id="mapping" className="scroll-mt-20">
 
-                    <SectionTag color="#3B82F6">Acte 2 — Le Défi</SectionTag>
+                    <SectionTag color="#3B82F6">Le Défi</SectionTag>
                     <SectionTitle>
                         Un moteur riche mérite<br />une app à sa hauteur.
                     </SectionTitle>
@@ -763,80 +804,124 @@ export default function ReviewPage() {
                         </div>
                     </div>
 
-                    {/* ── Problèmes de ton — Exemples réels de l'app actuelle ── */}
-                    <div className="bg-white rounded-[32px] p-8 space-y-0 mb-4" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-4" style={{ color: '#EC4899' }}>Ton de la marque — Avant / Après</p>
-                        <ToneRow before="« J'aide une personne souffrante de… »" after="« J'accompagne une personne atteinte de… »" />
-                        <div className="border-b" style={{ borderColor: '#F3EAE3' }} />
-                        <ToneRow before="« Quelle activité exercez-vous ? »" after="« Quelle est votre situation professionnelle ? »" />
-                        <div className="border-b" style={{ borderColor: '#F3EAE3' }} />
-                        <ToneRow before="« Faites-vous aider »" after="« Voici les ressources à proximité »" />
-                        <div className="border-b" style={{ borderColor: '#F3EAE3' }} />
-                        <ToneRow before="« Solliciter la CARSAT »" after="« Demander vos droits retraite »" />
-                        <div className="border-b" style={{ borderColor: '#F3EAE3' }} />
-                        <ToneRow before="« C'est fait » (bouton sur une page d'info)" after="« J'ai compris » ou « Étape suivante »" />
-                        <div className="border-b" style={{ borderColor: '#F3EAE3' }} />
-                        <ToneRow before="« Profiter de 7 jours, pour tester »" after="« Essayez gratuitement 7 jours, sans engagement »" />
+                    {/* ── Principes copywriting — Conseils actionnables ── */}
+                    <div className="bg-white rounded-[32px] p-8 space-y-5 mb-4" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-1" style={{ color: '#EC4899' }}>Charte éditoriale — 4 principes</p>
+                        <p className="text-[11px] mb-4" style={{ color: '#8A857E' }}>Chaque principe est illustré par un problème réel identifié dans l&apos;app Monka.</p>
+
+                        {/* Principe 1: Ton uniforme */}
+                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>1</div>
+                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Ton uniforme sur toute l&apos;app</span>
+                            </div>
+                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
+                                Choisir <strong>un seul registre</strong> (vouvoiement bienveillant) et s&apos;y tenir. Actuellement, l&apos;app alterne entre tutoiement, vouvoiement, et ton impersonnel d&apos;un écran à l&apos;autre.
+                            </p>
+                            <div className="flex items-center gap-3 rounded-[12px] px-4 py-3" style={{ backgroundColor: '#fff', border: '1px solid #F3EAE3' }}>
+                                <span className="text-[11px]" style={{ color: '#EF4444' }}>❌</span>
+                                <span className="text-[12px] italic" style={{ color: '#8A857E' }}>« En 7 jours vous y voyez plus clair » / « Chaque mois on refait le point » / « On s&apos;en occupe »</span>
+                            </div>
+                        </div>
+
+                        {/* Principe 2: Vocabulaire accessible */}
+                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>2</div>
+                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Vocabulaire accessible, zéro jargon</span>
+                            </div>
+                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
+                                Remplacer <strong>chaque acronyme et terme médical</strong> par son équivalent compréhensible. L&apos;aidant n&apos;est pas un professionnel de santé.
+                            </p>
+                            <div className="grid grid-cols-2 gap-2">
+                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA' }}>
+                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#EF4444' }}>Actuellement</p>
+                                    <p className="text-[12px]" style={{ color: '#991B1B' }}>« Solliciter la CARSAT » · « IDEC » · « Résidence sérieuse »</p>
+                                </div>
+                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#ECFDF5', border: '1px solid #A7F3D0' }}>
+                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#059669' }}>Recommandé</p>
+                                    <p className="text-[12px]" style={{ color: '#065F46' }}>« Vos droits retraite » · « Votre coordinateur santé » · « Résidence autonomie »</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Principe 3: Boutons actionnables */}
+                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>3</div>
+                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Boutons et CTA explicites</span>
+                            </div>
+                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
+                                Chaque bouton doit dire <strong>exactement ce qu&apos;il fait</strong>. « C&apos;est fait » sur une page info ne veut rien dire — « J&apos;ai compris » ou « Étape suivante » donne le contrôle à l&apos;aidant.
+                            </p>
+                            <div className="grid grid-cols-2 gap-2">
+                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA' }}>
+                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#EF4444' }}>Actuellement</p>
+                                    <p className="text-[12px]" style={{ color: '#991B1B' }}>« C&apos;est fait » · « Faites-vous aider » · « C&apos;est parti »</p>
+                                </div>
+                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#ECFDF5', border: '1px solid #A7F3D0' }}>
+                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#059669' }}>Recommandé</p>
+                                    <p className="text-[12px]" style={{ color: '#065F46' }}>« J&apos;ai compris » · « Voir les ressources » · « Commencer le questionnaire »</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Principe 4: Questions cohérentes */}
+                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>4</div>
+                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Questions bien formulées</span>
+                            </div>
+                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
+                                Cohérence sujet/verbe, orthographe vérifiée, et <strong>les réponses doivent correspondre à la question posée</strong>. « Quelle activité exercez-vous ? » avec des réponses qui sont des situations, pas des activités.
+                            </p>
+                            <div className="flex items-center gap-3 rounded-[12px] px-4 py-3" style={{ backgroundColor: '#fff', border: '1px solid #F3EAE3' }}>
+                                <span className="text-[11px]" style={{ color: '#EF4444' }}>❌</span>
+                                <span className="text-[12px] italic" style={{ color: '#8A857E' }}>« quel âge la personne » (manque « a ») · « Modifer » (manque « i ») · « anxieuxe »</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* ── Verbatim — Les vrais problèmes ── */}
-                    <div className="bg-white rounded-[32px] p-8 mb-8" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-4" style={{ color: '#EC4899' }}>Ce que l&apos;utilisatrice dit vraiment</p>
+
+
+                    {/* ── Double wording : IDEC vs Utilisateur (K6/K19) — REDESIGNED ── */}
+                    <div className="bg-white rounded-[32px] p-8 mb-16" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#EC4899' }}>Niveaux de criticité — Double wording</p>
+                        <p className="text-[13px] mb-6" style={{ color: '#8A857E' }}>L&apos;IDEC et l&apos;aidant voient les mêmes recommandations — seul le wording change selon le destinataire.</p>
+
+                        {/* Header row */}
+                        <div className="grid grid-cols-[180px_1fr_1fr] gap-4 mb-4 px-2">
+                            <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#B8B3AB' }}>Niveau</span>
+                            <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#6B7280' }}>Ce que l&apos;IDEC voit</span>
+                            <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#6B7280' }}>Ce que l&apos;aidant voit</span>
+                        </div>
+
+                        {/* Level cards */}
                         <div className="space-y-3">
                             {[
-                                { quote: 'Souffrante, non ? Le mot souffrante est maladroit.', issue: 'Vocabulaire stigmatisant', ref: 'C1' },
-                                { quote: 'Le langage est trop médical et clinique. Il faut adapter le langage à l\'aidant.', issue: 'Ton trop clinique', ref: 'L4' },
-                                { quote: 'Solliciter la CARSAT, je ne sais même pas ce que c\'est.', issue: 'Acronymes non définis', ref: 'L2' },
-                                { quote: 'C\'est fait ? Mais qu\'est-ce qui est fait ? C\'est une information, pas une tâche.', issue: 'CTA ambigu', ref: 'C11' },
-                                { quote: 'T\'arrives sur une appli qui est censée t\'aider, ils disent fais-toi aider. Mais il n\'y a pas de précision.', issue: 'Conseil creux', ref: 'C12' },
-                                { quote: 'Les tons ne sont pas uniformes. Le tutoiement et le vouvoiement varient d\'un écran à l\'autre.', issue: 'Ton incohérent', ref: 'C7' },
-                            ].map((v, i) => (
-                                <div key={i} className="flex items-start gap-3 rounded-[14px] px-4 py-3" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FCE7F3' }}>
-                                    <span className="text-[14px] flex-shrink-0 mt-0.5">💬</span>
-                                    <div className="flex-1">
-                                        <p className="text-[12px] italic leading-relaxed" style={{ color: '#2D2A26' }}>« {v.quote} »</p>
-                                        <div className="flex items-center gap-2 mt-1.5">
-                                            <span className="text-[9px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: '#FECDD3', color: '#9F1239' }}>{v.ref}</span>
-                                            <span className="text-[10px] font-medium" style={{ color: '#EC4899' }}>{v.issue}</span>
+                                { label: 'Critique', delay: '≤ 7 jours', idec: 'Intervention urgente requise', user: 'À faire cette semaine', color: '#EF4444', bg: '#FEE2E2', borderColor: '#FECACA' },
+                                { label: 'CCC', delay: '≤ 30 jours', idec: 'Vigilance renforcée — signaux combinés', user: 'Important ce mois-ci', color: '#F59E0B', bg: '#FEF3C7', borderColor: '#FDE68A' },
+                                { label: 'Standard', delay: '≤ 90 jours', idec: 'Suivi de routine', user: 'À votre rythme', color: '#10B981', bg: '#ECFDF5', borderColor: '#A7F3D0' },
+                                { label: 'Prévention', delay: '—', idec: 'Aucune activation', user: 'Tout va bien', color: '#9CA3AF', bg: '#F9FAFB', borderColor: '#E5E7EB' },
+                            ].map((row, i) => (
+                                <div key={i} className="grid grid-cols-[180px_1fr_1fr] gap-4 items-center rounded-[18px] px-5 py-4" style={{ backgroundColor: row.bg, border: `1.5px solid ${row.borderColor}`, borderLeft: `5px solid ${row.color}` }}>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-4 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: row.color }} />
+                                        <div>
+                                            <span className="text-[14px] font-extrabold block" style={{ color: row.color }}>{row.label}</span>
+                                            <span className="text-[11px]" style={{ color: '#8A857E' }}>{row.delay}</span>
                                         </div>
                                     </div>
+                                    <p className="text-[13px] font-medium leading-snug" style={{ color: '#2D2A26' }}>{row.idec}</p>
+                                    <p className="text-[13px] font-bold leading-snug" style={{ color: row.color }}>{row.user}</p>
                                 </div>
                             ))}
                         </div>
-                    </div>
 
-                    {/* ── Double wording : IDEC vs Utilisateur (K6/K19) ── */}
-                    <div className="bg-white rounded-[32px] p-8 mb-16" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#EC4899' }}>Niveaux de criticité — Double wording (K6)</p>
-                        <p className="text-[12px] mb-5" style={{ color: '#8A857E' }}>L&apos;IDEC et l&apos;aidant voient les mêmes recos — seul le wording change.</p>
-                        {/* Header */}
-                        <div className="grid grid-cols-[120px_1fr_1fr] gap-3 mb-3 px-4">
-                            <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#B8B3AB' }}>Moteur</span>
-                            <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#B8B3AB' }}>🩺 Ce que l&apos;IDEC voit</span>
-                            <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#B8B3AB' }}>👤 Ce que l&apos;aidant voit</span>
-                        </div>
-                        {/* Rows */}
-                        <div className="space-y-2">
-                            {[
-                                { kernel: '🔴 Critique', delay: '≤ 7 jours', idec: 'Intervention urgente requise', user: 'À faire cette semaine', color: '#EF4444', bg: '#FEE2E2' },
-                                { kernel: '🟠 CCC', delay: '≤ 30 jours', idec: 'Vigilance renforcée — signaux combinés', user: 'Important ce mois-ci', color: '#F59E0B', bg: '#FEF3C7' },
-                                { kernel: '🟢 Standard', delay: '≤ 90 jours', idec: 'Suivi de routine', user: 'À votre rythme', color: '#10B981', bg: '#ECFDF5' },
-                                { kernel: '⚪ Prévention', delay: '—', idec: 'Aucune activation', user: 'Tout va bien 💛', color: '#9CA3AF', bg: '#F9FAFB' },
-                            ].map((row, i) => (
-                                <div key={i} className="grid grid-cols-[120px_1fr_1fr] gap-3 items-center rounded-[14px] px-4 py-3" style={{ backgroundColor: row.bg }}>
-                                    <div>
-                                        <span className="text-[12px] font-bold" style={{ color: row.color }}>{row.kernel}</span>
-                                        <p className="text-[9px] mt-0.5" style={{ color: '#B8B3AB' }}>{row.delay}</p>
-                                    </div>
-                                    <p className="text-[12px] font-medium" style={{ color: '#2D2A26' }}>{row.idec}</p>
-                                    <p className="text-[12px] font-bold" style={{ color: row.color }}>{row.user}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="flex items-center gap-3 mt-4 rounded-[14px] px-5 py-3" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
-                            <span className="text-[14px]">💡</span>
-                            <p className="text-[11px]" style={{ color: '#8A857E' }}>
-                                <strong style={{ color: '#EC4899' }}>CCC = Condition Critique Composite</strong> — se déclenche quand 2+ signaux cliniques se combinent (ex: épuisé + isolé). Les délais sont des objectifs d&apos;intervention pour l&apos;IDEC, jamais affichés à l&apos;aidant.
+                        <div className="flex items-start gap-3 mt-5 rounded-[16px] px-5 py-4" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
+                            <Lightbulb size={20} weight="bold" className="flex-shrink-0 mt-0.5" style={{ color: '#EC4899' }} />
+                            <p className="text-[12px] leading-relaxed" style={{ color: '#6B7280' }}>
+                                <strong style={{ color: '#EC4899' }}>CCC = Condition Critique Composite</strong> — se déclenche quand 2+ signaux cliniques se combinent (ex : épuisé + isolé). Les délais sont des objectifs d&apos;intervention pour l&apos;IDEC, jamais affichés à l&apos;aidant.
                             </p>
                         </div>
                     </div>
@@ -907,91 +992,153 @@ export default function ReviewPage() {
                         </div>
                     </div>
 
-                    {/* ── Use Cases principaux ── */}
+                    {/* ── Use Cases principaux — Grille 3×2 ── */}
                     <div className="bg-white rounded-[32px] p-8 mb-8" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-5" style={{ color: '#F59E0B' }}>Use cases principaux</p>
-                        <div className="grid grid-cols-2 gap-4">
+                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#F59E0B' }}>Use cases principaux</p>
+                        <p className="text-[13px] mb-6" style={{ color: '#8A857E' }}>Les 6 situations concrètes que l&apos;app doit couvrir pour un aidant.</p>
+                        <div className="grid grid-cols-3 gap-4">
                             {[
                                 {
-                                    emoji: '🌅', title: 'Consultation rapide du matin', color: '#F59E0B',
-                                    bullets: [
-                                        'L\'aidant ouvre l\'app entre deux tâches',
-                                        'Voit ses 2-3 actions prioritaires du jour',
-                                        'Coche ce qu\'il a fait → progression visible',
-                                    ]
+                                    title: 'Check-in du matin', color: '#F59E0B',
+                                    desc: 'Voir ses 2-3 actions prioritaires du jour et cocher ce qui est fait.',
                                 },
                                 {
-                                    emoji: '🧭', title: 'Découverte post-questionnaire', color: '#3B82F6',
-                                    bullets: [
-                                        'Premier lancement après le questionnaire',
-                                        'Découvre ses thèmes de vie et parcours',
-                                        'Comprend par où commencer',
-                                    ]
+                                    title: 'Découverte post-questionnaire', color: '#3B82F6',
+                                    desc: 'Premier lancement : découvrir ses thèmes de vie et comprendre par où commencer.',
                                 },
                                 {
-                                    emoji: '🔍', title: 'Trouver un professionnel', color: '#10B981',
-                                    bullets: [
-                                        'L\'aidant a besoin d\'un pro spécifique',
-                                        'Cherche par spécialité et proximité',
-                                        'Trouve un contact et le sauvegarde',
-                                    ]
+                                    title: 'Trouver un professionnel', color: '#10B981',
+                                    desc: 'Chercher un pro par spécialité et proximité, sauvegarder le contact.',
                                 },
                                 {
-                                    emoji: '📖', title: 'Se renseigner sur un sujet', color: '#8B5CF6',
-                                    bullets: [
-                                        'L\'aidant se pose une question précise',
-                                        'Lit un article adapté à son contexte',
-                                        'Comprend ses droits ou les démarches',
-                                    ]
+                                    title: 'Se renseigner sur un sujet', color: '#8B5CF6',
+                                    desc: 'Lire un article adapté à son contexte, comprendre ses droits.',
                                 },
                                 {
-                                    emoji: '💬', title: 'Chercher du soutien', color: '#EC4899',
-                                    bullets: [
-                                        'Moment difficile, besoin d\'aide',
-                                        'Identifie la bonne ressource (asso, pro, ligne d\'écoute)',
-                                        'Accède au contact en 2 taps',
-                                    ]
+                                    title: 'Chercher du soutien', color: '#EC4899',
+                                    desc: 'Identifier la bonne ressource (asso, pro, ligne d\'écoute) en 2 taps.',
+                                },
+                                {
+                                    title: 'Demander de l\'aide / Parler à l\'IDEC', color: '#EF4444',
+                                    desc: 'Contacter son IDEC référent, poser une question, demander un accompagnement.',
                                 },
                             ].map((uc, i) => (
-                                <div key={i} className="flex items-start gap-3 rounded-[16px] px-4 py-4" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
-                                    <span className="text-[20px] flex-shrink-0 mt-0.5">{uc.emoji}</span>
-                                    <div>
-                                        <h5 className="text-[13px] font-bold mb-2" style={{ color: '#2D2A26' }}>{uc.title}</h5>
-                                        <ul className="space-y-1">
-                                            {uc.bullets.map((b, j) => (
-                                                <li key={j} className="text-[11px] leading-relaxed flex items-start gap-1.5" style={{ color: '#8A857E' }}>
-                                                    <span className="flex-shrink-0 mt-[3px]" style={{ color: uc.color }}>•</span>
-                                                    {b}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                <div key={i} className="rounded-[18px] p-5 flex flex-col" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
+                                    <div className="flex items-center gap-2.5 mb-3">
+                                        <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: uc.color }} />
+                                        <h5 className="text-[13px] font-bold" style={{ color: '#2D2A26' }}>{uc.title}</h5>
                                     </div>
+                                    <p className="text-[11px] leading-relaxed" style={{ color: '#8A857E' }}>{uc.desc}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* ── Inventaire des pages nécessaires ── */}
-                    <div className="bg-white rounded-[32px] p-8 mb-16" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#F59E0B' }}>Inventaire des pages</p>
-                        <p className="text-[13px] mb-6" style={{ color: '#8A857E' }}>Les écrans nécessaires pour cette application :</p>
+                    {/* ── 2.1 Audit des écrans codés + 2.2 Arborescence ── */}
+                    <div className="bg-white rounded-[32px] p-8 mb-8" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#F59E0B' }}>Arborescence du prototype</p>
+                        <p className="text-[13px] mb-6" style={{ color: '#8A857E' }}>Inventaire complet des écrans codés dans le prototype fonctionnel — 15 composants, navigation complète.</p>
+
+                        {/* Arbre de parcours — top-down journey tree */}
+                        <div className="rounded-[20px] p-8 mb-6 flex flex-col items-center" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
+                            {/* Root — Onboarding */}
+                            <div className="rounded-[14px] px-5 py-2.5 text-center font-bold text-[13px] text-white" style={{ backgroundColor: '#8B5CF6' }}>Onboarding · Questionnaire</div>
+                            <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
+
+                            {/* Dashboard */}
+                            <div className="rounded-[14px] px-5 py-2.5 text-center font-bold text-[13px] text-white" style={{ backgroundColor: '#3B82F6' }}>Dashboard</div>
+                            <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
+
+                            {/* Pages — horizontal branches from Dashboard */}
+                            <div className="relative w-full max-w-[750px] mb-6">
+                                <div className="absolute top-0 left-[8%] right-[8%] h-px" style={{ backgroundColor: '#D4D4D4' }} />
+                                <div className="grid grid-cols-5 gap-2">
+                                    {[
+                                        { label: 'Programme', icon: '📋', sub: 'Thèmes · Parcours' },
+                                        { label: 'Calendrier', icon: '📅', sub: 'Agenda semaine' },
+                                        { label: 'Ressources', icon: '📚', sub: 'Articles · Guides' },
+                                        { label: 'Communauté', icon: '👥', sub: 'Annuaire Pro' },
+                                        { label: 'Chat IDEC', icon: '💬', sub: 'Messagerie' },
+                                    ].map((p, i) => (
+                                        <div key={i} className="flex flex-col items-center">
+                                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
+                                            <div className="rounded-[12px] px-2 py-2.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+                                                <p className="text-[14px] mb-0.5">{p.icon}</p>
+                                                <p className="text-[11px] font-bold" style={{ color: '#2D2A26' }}>{p.label}</p>
+                                                <p className="text-[9px] mt-0.5" style={{ color: '#B8B3AB' }}>{p.sub}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Focus on Programme branch — engine hierarchy */}
+                            <div className="rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider" style={{ backgroundColor: '#EFF6FF', color: '#3B82F6', border: '1px solid #BFDBFE' }}>Zoom : Programme → Parcours moteur</div>
+                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
+
+                            {/* Thèmes branch label */}
+                            <div className="rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider mb-2" style={{ backgroundColor: '#FFF7ED', color: '#F59E0B', border: '1px solid #FDE68A' }}>5 thèmes de vie identifiés</div>
+                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
+
+                            {/* Thèmes branches */}
+                            <div className="relative w-full max-w-[700px]">
+                                <div className="absolute top-0 left-[10%] right-[10%] h-px" style={{ backgroundColor: '#D4D4D4' }} />
+                                <div className="grid grid-cols-5 gap-2">
+                                    {[
+                                        { label: 'Votre vie sociale', color: '#8B5CF6', domain: 'R' },
+                                        { label: 'Votre santé', color: '#EC4899', domain: 'S' },
+                                        { label: 'Parcours de soins', color: '#10B981', domain: 'M' },
+                                        { label: 'Vos démarches', color: '#3B82F6', domain: 'A' },
+                                        { label: 'Votre proche', color: '#F59E0B', domain: 'F' },
+                                    ].map((t, i) => (
+                                        <div key={i} className="flex flex-col items-center">
+                                            <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
+                                            <div className="rounded-[12px] px-3 py-2 text-center w-full" style={{ backgroundColor: `${t.color}10`, border: `1px solid ${t.color}30` }}>
+                                                <p className="text-[10px] font-bold" style={{ color: t.color }}>{t.domain}</p>
+                                                <p className="text-[11px] font-semibold mt-0.5" style={{ color: '#2D2A26' }}>{t.label}</p>
+                                            </div>
+                                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
+                                            <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }}>
+                                                <p className="text-[9px]" style={{ color: '#8A857E' }}>Micro-Parcours</p>
+                                            </div>
+                                            <div className="w-px h-3" style={{ backgroundColor: '#D4D4D4' }} />
+                                            <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }}>
+                                                <p className="text-[9px]" style={{ color: '#8A857E' }}>Recommandations</p>
+                                            </div>
+                                            <div className="w-px h-3" style={{ backgroundColor: '#D4D4D4' }} />
+                                            <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }}>
+                                                <p className="text-[9px]" style={{ color: '#8A857E' }}>Micro-Tâches ✓</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Convergence */}
+                            <div className="w-px h-5 mt-2" style={{ backgroundColor: '#D4D4D4' }} />
+                            <div className="rounded-[14px] px-5 py-2.5 text-center font-bold text-[12px]" style={{ backgroundColor: '#ECFDF5', color: '#059669', border: '1px solid #A7F3D0' }}>
+                                Progression globale • Célébration • Suivi
+                            </div>
+                        </div>
+
+                        {/* Audit cards */}
                         <div className="grid grid-cols-3 gap-3">
                             {[
-                                { name: 'Onboarding', count: '3-5 écrans', icon: '👋' },
-                                { name: 'Dashboard', count: '1 écran', icon: '🏠' },
-                                { name: 'Thème de vie', count: '5 écrans', icon: '🎯' },
-                                { name: 'Micro-Parcours', count: '24 écrans', icon: '📋' },
-                                { name: 'Détail tâche', count: '1 template', icon: '✅' },
-                                { name: 'Profil proche', count: '1 écran', icon: '👤' },
-                                { name: 'Ressources', count: '3 sous-tabs', icon: '📚' },
-                                { name: 'Recherche pro', count: '1 écran + map', icon: '🔍' },
-                                { name: 'Notifications', count: '1 centre', icon: '🔔' },
-                                { name: 'Paramètres', count: '1 écran', icon: '⚙️' },
-
-                                { name: 'Article reader', count: '1 template', icon: '📖' },
+                                { name: 'Onboarding', count: '4 slides', status: 'done' },
+                                { name: 'Dashboard', count: '1 écran', status: 'done' },
+                                { name: 'ThemeDetail', count: '5 thèmes', status: 'done' },
+                                { name: 'ProgramDetail', count: 'template', status: 'done' },
+                                { name: 'Calendrier', count: '1 écran', status: 'done' },
+                                { name: 'Chat', count: '1 écran', status: 'done' },
+                                { name: 'Ressources', count: '3 sous-tabs', status: 'done' },
+                                { name: 'Communauté', count: 'Annuaire Pro', status: 'done' },
+                                { name: 'Réglages', count: '1 écran', status: 'done' },
+                                { name: 'Article Reader', count: 'template', status: 'done' },
+                                { name: 'Guide Detail', count: 'template', status: 'done' },
+                                { name: 'Celebration', count: 'overlay', status: 'done' },
                             ].map((page, i) => (
                                 <div key={i} className="flex items-center gap-3 rounded-[14px] px-4 py-3" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
-                                    <span className="text-[16px]">{page.icon}</span>
+                                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#10B981' }} />
                                     <div>
                                         <p className="text-[12px] font-bold" style={{ color: '#2D2A26' }}>{page.name}</p>
                                         <p className="text-[10px]" style={{ color: '#B8B3AB' }}>{page.count}</p>
@@ -999,9 +1146,9 @@ export default function ReviewPage() {
                                 </div>
                             ))}
                         </div>
-                        <div className="mt-6 rounded-[16px] px-5 py-3.5 text-center" style={{ backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE' }}>
-                            <p className="text-[14px] font-bold" style={{ color: '#3B82F6' }}>
-                                ~40 écrans • Design system cohérent • Composants réutilisables
+                        <div className="mt-5 rounded-[16px] px-5 py-3.5 text-center" style={{ backgroundColor: '#ECFDF5', border: '1px solid #A7F3D0' }}>
+                            <p className="text-[13px] font-bold" style={{ color: '#059669' }}>
+                                15 écrans fonctionnels codés • Navigation complète • Composants réutilisables
                             </p>
                         </div>
                     </div>
@@ -1023,7 +1170,7 @@ export default function ReviewPage() {
                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
                 <section id="preuve" className="scroll-mt-20">
 
-                    <SectionTag color="#10B981">Acte 3 — La Preuve</SectionTag>
+                    <SectionTag color="#10B981">La Preuve</SectionTag>
                     <SectionTitle gradient>
                         On l'a prototypé.<br />Voyez par vous-même.
                     </SectionTitle>
@@ -1080,17 +1227,7 @@ export default function ReviewPage() {
                         </div>
                     </div>
 
-                    {/* ── 3c. Citation de fermeture — Large impactful closing ── */}
-                    <div className="rounded-[32px] p-[2px] mb-10" style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #EC4899 50%, #F59E0B 100%)' }}>
-                        <div className="bg-white rounded-[30px] py-14 px-10 text-center">
-                            <p className="text-[13px] font-bold uppercase tracking-[4px] mb-6" style={{ color: '#B8B3AB' }}>En résumé</p>
-                            <p className="text-[26px] font-extrabold leading-relaxed" style={{ color: '#2D2A26' }}>
-                                <span className="gradient-text">50 critiques identifiées</span>. 20 bloquantes.<br />
-                                Un moteur puissant, <span className="gradient-text">pas encore exploité</span>.<br />
-                                Et un prototype qui montre <span className="gradient-text">une autre voie</span>.
-                            </p>
-                        </div>
-                    </div>
+
 
                 </section>
 

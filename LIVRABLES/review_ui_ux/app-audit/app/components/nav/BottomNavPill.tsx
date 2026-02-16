@@ -37,11 +37,16 @@ export const BottomNavPill = ({ activeTab = 'home', onTabChange }: BottomNavPill
                     return (
                         <button
                             key={item.id}
+                            data-tour-tab={item.id}
                             onClick={() => onTabChange?.(item.id)}
-                            className={`w-11 h-11 rounded-full flex items-center justify-center transition-all relative ${isActive
-                                ? 'bg-[#1A1A1A] text-white scale-105 shadow-lg shadow-black/10'
-                                : 'text-gray-400 hover:text-[#1A1A1A] hover:bg-gray-50'
-                                }`}
+                            className="w-11 h-11 rounded-full flex items-center justify-center relative"
+                            style={{
+                                backgroundColor: isActive ? '#1A1A1A' : 'transparent',
+                                color: isActive ? '#FFFFFF' : '#9CA3AF',
+                                transform: isActive ? 'scale(1.05)' : 'scale(1)',
+                                boxShadow: isActive ? '0 4px 12px rgba(0,0,0,0.1)' : 'none',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            }}
                         >
                             <item.Icon
                                 size={20}
