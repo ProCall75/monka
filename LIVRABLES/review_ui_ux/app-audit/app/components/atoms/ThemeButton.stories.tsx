@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { ThemeButton } from './ThemeButton';
 
 const meta = {
-    title: 'Atoms/ThemeButton',
+    title: 'Moteur — Vulnérabilité/Bouton thème',
     component: ThemeButton,
     tags: ['autodocs'],
     argTypes: {

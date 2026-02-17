@@ -3,10 +3,10 @@
 import React from 'react';
 import {
     House,
-    CalendarBlank,
+    ListChecks,
     UsersThree,
     BookOpenText,
-    GearSix,
+    ChatCircle,
 } from '@phosphor-icons/react';
 
 interface BottomNavPillProps {
@@ -16,10 +16,10 @@ interface BottomNavPillProps {
 
 const navItems = [
     { id: 'home', label: 'Accueil', Icon: House },
-    { id: 'calendar', label: 'Agenda', Icon: CalendarBlank },
+    { id: 'monsuivi', label: 'Mon suivi', Icon: ListChecks },
+    { id: 'chat', label: 'Chat IDEC', Icon: ChatCircle },
     { id: 'community', label: 'Mes Pros', Icon: UsersThree },
     { id: 'resources', label: 'Ressources', Icon: BookOpenText },
-    { id: 'settings', label: 'Réglages', Icon: GearSix },
 ];
 
 export const BottomNavPill = ({ activeTab = 'home', onTabChange }: BottomNavPillProps) => {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { ResourceCard } from './ResourceCard';
 
 const meta = {
-    title: 'Molecules/ResourceCard',
+    title: 'Moteur — Recommandation/Ressource',
     component: ResourceCard,
     tags: ['autodocs'],
     argTypes: {

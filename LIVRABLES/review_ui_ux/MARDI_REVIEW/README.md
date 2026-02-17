@@ -42,25 +42,28 @@
 ```
 Acte 1 — LE CONSTAT (5 min)
 ├── Persona : Amal, 57 ans, aidante de Fatima
-├── Verbatims du test utilisateur (10 citations classées par sévérité)
-├── 6 critiques détaillées (screenshots + positive + négatif + proposition)
-├── 5 axes d'amélioration synthétisés
-├── Avant/Après : 1 niveau → 4 niveaux de navigation
-└── Le Paradoxe : moteur puissant vs interface limitée
+├── Parcours flow avec Verbatims du test utilisateur (10 citations classées par sévérité)
+├── Résumé des points critiques avec une fleche qui pointe vers - a quoi ca correspond comme theme (copywriting, user experience, user interface..)
 
-Acte 2 — LE MAPPING (5-7 min)
-├── 5 Flow Cards : Concept Kernel → Composant UI (LIVE, interactif)
+Acte 2 — EN EFFET, LE MOTEUR EST RICHE DONC LE DEFI DE LAPPLCIATION CEST DE BIEN RETRANSCIRRE CETTE RICHESSE EN UNE APP MOBILE SIMPLE, INTUITIVE, HUMAINE, pour maximiser l'adoption, la conversion et réduire le churn.
+et la on reprend chaque point impoortant dans la construction de l'application 
+├── UI 
+ 5 Flow Cards : Concept Kernel → Composant UI (LIVE, interactif)
 │   ├── Vulnérabilité → ThemeSelector + HeroCard
 │   ├── Micro-Parcours → ProgressCard + ScoreRing  
 │   ├── Recommandation → TaskCard avec urgence
 │   ├── Micro-Tâche → MicroTaskItem cochable
-│   └── Score/CCC → ⛔ JAMAIS AFFICHÉ
-├── Le Ton de la Marque (6 traductions avant/après)
+│   
+├── COPYWRITING Le Ton de la Marque (6 traductions avant/après)
+UX - la on parle de la profondeur d'app à mettre en place pour une bonne séparation des themes etc. en énoncant les uses cases pour cette app 
 └── Niveaux d'urgence humanisés
+et à la fin on fait un inventaire de ce qu'on a besoin comme pages pour une app comme celle ci. 
 
-Acte 3 — LA PREUVE (5-7 min)
+Acte 3 — LA PREUVE (5-7 min) 
+pendant que les gens naviguent dans l'app je dois commenter et reprendre du coup les themes et qu'ils comprennent que cette demo répond aux exigeances qu'on ac ité 
 ├── QR Code → scan & test sur téléphone
-├── Liens : Démo app / Storybook / Parcours utilisateur
+├── Liens : Démo app seulement
+a la fin de la présentation de la démo, on revient vite fait sur le parcours flow pour dire que c'est comme ça qu'on s'organise quand ons 'occupe de l'app. là ils ont pu naviguer partout etc mais ce qu'on fait c'est qu'on va vraiment construire les parcours selon les uses case, et A/B tester des parcours différents et récolter la data poru voir lequels sont ls plus efficaces pour convertir, rétention...  
 └── Message de clôture
 ```
 

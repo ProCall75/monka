@@ -1,57 +1,76 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
+import { CaretRight } from '@phosphor-icons/react';
+import { ThemeColors, UrgencyConfig, type VulnerabilityDomain, type Criticality } from '../../data/kernel-types';
 
 interface RecoCardProps {
-    icon: React.ReactNode;
-    iconBg?: string;
+    /** Titre de la recommandation */
     title: string;
-    description: string;
-    defaultAdded?: boolean;
-    onToggle?: (added: boolean) => void;
+    /** Domaine de vulnérabilité (R, A, S, F, M) — détermine la couleur */
+    domain: VulnerabilityDomain;
+    /** Criticité de la recommandation — affiche le badge d'urgence */
+    urgency: Criticality;
+    /** Callback au clic — navigue vers le détail / déplie la reco */
+    onClick?: () => void;
 }
 
 export const RecoCard = ({
-    icon,
-    iconBg = '#FDF3D8',
     title,
-    description,
-    defaultAdded = false,
-    onToggle,
+    domain,
+    urgency,
+    onClick,
 }: RecoCardProps) => {
-    const [added, setAdded] = useState(defaultAdded);
-
-    const handleToggle = () => {
-        const next = !added;
-        setAdded(next);
-        onToggle?.(next);
-    };
+    const theme = ThemeColors[domain];
+    const urg = UrgencyConfig[urgency];
 
     return (
-        <div className="bg-white rounded-[24px] p-5 flex items-start gap-4 transition-transform active:scale-[0.98]"
-            style={{ boxShadow: '0 4px 20px -6px rgba(0,0,0,0.06)' }}
+        <button
+            onClick={onClick}
+            className="w-full text-left rounded-[16px] px-4 py-3.5 border transition-all active:scale-[0.99] hover:shadow-md group"
+            style={{
+                backgroundColor: 'white',
+                borderColor: '#E5E5EA',
+                borderLeftWidth: 4,
+                borderLeftColor: theme.color,
+                boxShadow: '0 2px 8px -3px rgba(0,0,0,0.05)',
+            }}
         >
-            <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ backgroundColor: iconBg }}
-            >
-                {icon}
+            <div className="flex items-center gap-3">
+                {/* Left content */}
+                <div className="flex-1 min-w-0">
+                    {/* Urgency badge + theme label */}
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <span
+                            className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider"
+                            style={{ backgroundColor: urg.softColor, color: urg.color }}
+                        >
+                            {urg.userLabel}
+                        </span>
+                        <span
+                            className="text-[10px] font-medium"
+                            style={{ color: theme.color }}
+                        >
+                            {theme.label}
+                        </span>
+                    </div>
+
+                    {/* Title */}
+                    <h4
+                        className="text-[14px] font-semibold leading-snug text-[#1A1A2E]"
+                        style={{ fontFamily: "'Outfit', sans-serif" }}
+                    >
+                        {title}
+                    </h4>
+                </div>
+
+                {/* Right chevron */}
+                <CaretRight
+                    size={16}
+                    weight="bold"
+                    className="text-[#C8CCD0] group-hover:text-[#8E8E93] flex-shrink-0 transition-colors"
+                />
             </div>
-            <div className="flex-1 min-w-0">
-                <h4 className="font-bold text-sm text-[#1A1A1A]">{title}</h4>
-                <p className="text-xs text-[#8C8C8C] mt-1 leading-relaxed">{description}</p>
-            </div>
-            <button onClick={handleToggle} className="flex-shrink-0 mt-0.5 transition-colors">
-                {added ? (
-                    <svg width="28" height="28" viewBox="0 0 256 256" fill="#16A34A">
-                        <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z" />
-                    </svg>
-                ) : (
-                    <svg width="28" height="28" viewBox="0 0 256 256" fill="#8F6B22">
-                        <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-88a8,8,0,0,1-8,8H136v24a8,8,0,0,1-16,0V136H96a8,8,0,0,1,0-16h24V96a8,8,0,0,1,16,0v24h24A8,8,0,0,1,168,128Z" />
-                    </svg>
-                )}
-            </button>
-        </div>
+        </button>
     );
 };

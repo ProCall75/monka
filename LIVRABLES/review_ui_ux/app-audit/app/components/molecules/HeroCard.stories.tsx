@@ -3,7 +3,7 @@ import { HeroCard } from './HeroCard';
 import React from 'react';
 
 const meta = {
-    title: 'Molecules/HeroCard',
+    title: 'Moteur — Vulnérabilité/Carte thème',
     component: HeroCard,
     tags: ['autodocs'],
     argTypes: {

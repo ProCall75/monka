@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { MoodRow } from './MoodRow';
 
 const meta = {
-    title: 'Molecules/MoodRow',
+    title: 'Moteur — Questionnaire/Humeur',
     component: MoodRow,
     tags: ['autodocs'],
 } satisfies Meta<typeof MoodRow>;

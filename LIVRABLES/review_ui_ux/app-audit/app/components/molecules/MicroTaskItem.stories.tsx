@@ -4,7 +4,7 @@ import type { MicroTask } from '../../data/kernel-types';
 import React from 'react';
 
 const meta = {
-  title: 'Molecules/MicroTaskItem',
+  title: 'Moteur — Micro-Tâche/Item',
   component: MicroTaskItem,
   tags: ['autodocs'],
 } satisfies Meta<typeof MicroTaskItem>;

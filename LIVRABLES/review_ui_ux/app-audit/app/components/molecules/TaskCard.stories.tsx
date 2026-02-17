@@ -3,7 +3,7 @@ import { TaskCard } from './TaskCard';
 import React from 'react';
 
 const meta = {
-  title: 'Molecules/TaskCard',
+  title: 'Moteur — Micro-Tâche/Carte action',
   component: TaskCard,
   tags: ['autodocs'],
   argTypes: {

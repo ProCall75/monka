@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { ThemeSelector } from './ThemeSelector';
 
 const meta = {
-    title: 'Molecules/ThemeSelector',
+    title: 'Moteur — Vulnérabilité/Sélecteur de thèmes',
     component: ThemeSelector,
     tags: ['autodocs'],
     argTypes: {

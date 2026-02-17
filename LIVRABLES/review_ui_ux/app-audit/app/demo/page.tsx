@@ -2,10 +2,11 @@
 
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import { ArrowLeft, PaperPlaneRight, Smiley, Heart, Users as UsersIcon, ChatCircle, BookOpen, Phone, Star, ShieldCheck, MoonStars, Translate, Info, SignOut, HandHeart, FirstAid, ClipboardText, Lock, Check, MagnifyingGlass, MapPin, CaretDown, CaretUp, FileText, Lightbulb, PhoneCall, CheckCircle, Circle, ArrowSquareOut } from '@phosphor-icons/react';
+import { ArrowLeft, ArrowRight, ArrowsClockwise, PaperPlaneRight, Smiley, Heart, Users as UsersIcon, ChatCircle, BookOpen, Phone, Star, ShieldCheck, MoonStars, Translate, Info, SignOut, HandHeart, FirstAid, ClipboardText, Lock, Check, MagnifyingGlass, MapPin, CaretDown, CaretUp, FileText, Lightbulb, PhoneCall, CheckCircle, Circle, ArrowSquareOut, List, CalendarCheck, CalendarPlus, User, Bell, Question, Moon, Sun, Lightning } from '@phosphor-icons/react';
 import { professionals, PRO_CATEGORIES, type Professional } from '../data/pro-finder-data';
 import { actionableAdvices, type ActionableAdvice } from '../data/actionable-advice-data';
 import { ProductTour } from '../components/molecules/ProductTour';
+import { PricingCard, MONKA_PLANS } from '../components/molecules/PricingCard';
 
 // Dynamic import for Leaflet map (SSR-safe)
 const ProMap = dynamic(() => import('./ProMap'), { ssr: false, loading: () => <div className="w-full h-[280px] rounded-[20px] bg-[#F3F4F6] animate-pulse" /> });
@@ -26,10 +27,11 @@ import { StatCard } from '../components/molecules/StatCard';
 import { TimelineStep } from '../components/molecules/TimelineStep';
 import { BottomNavPill } from '../components/nav/BottomNavPill';
 import { ScoreRing } from '../components/atoms/ScoreRing';
+import { ThemeButton } from '../components/atoms/ThemeButton';
 
 // ── Data ──
 import { kernelMock, mockVulnerabilities, mockUser } from '../data/kernel-mock';
-import { ThemeColors, type VulnerabilityDomain, type Vulnerability, type MicroParcours } from '../data/kernel-types';
+import { ThemeColors, UrgencyConfig, type VulnerabilityDomain, type Vulnerability, type MicroParcours, type Recommendation, type RecoCategory, type Criticality } from '../data/kernel-types';
 
 // Dark mode context
 const DarkModeContext = React.createContext<{ isDark: boolean; toggle: () => void }>({ isDark: false, toggle: () => { } });
@@ -37,12 +39,13 @@ const DarkModeContext = React.createContext<{ isDark: boolean; toggle: () => voi
 /* ═══════════════════════════════════════════════════════
    TYPES
 ═══════════════════════════════════════════════════════ */
-type TabId = 'home' | 'calendar' | 'community' | 'resources' | 'settings';
+type TabId = 'home' | 'monsuivi' | 'chat' | 'community' | 'resources';
 
 type Screen =
     | { type: 'tab'; tab: TabId }
     | { type: 'themeDetail'; vulnerability: Vulnerability }
     | { type: 'programDetail'; vulnerability: Vulnerability; program: MicroParcours }
+    | { type: 'recoDetail'; vulnerability: Vulnerability; program: MicroParcours; recommendation: Recommendation; category: RecoCategory }
     | { type: 'articleReader'; article: Article }
     | { type: 'guideDetail'; guide: ActionableAdvice };
 
@@ -664,12 +667,14 @@ const HomeScreen = ({
     onSelectGuide,
     toggledTasks = {},
     onAvatarPress,
+    onMenuPress,
 }: {
     onSelectTheme: (v: Vulnerability) => void;
     onSelectArticle?: (article: Article) => void;
     onSelectGuide?: (guide: ActionableAdvice) => void;
     toggledTasks?: Record<string, boolean>;
     onAvatarPress?: () => void;
+    onMenuPress?: () => void;
 }) => {
 
     const [showNotifToast, setShowNotifToast] = useState(false);
@@ -716,6 +721,7 @@ const HomeScreen = ({
             <div className="mb-6" data-tour="dashboard-header">
                 <Header
                     name={mockUser.name}
+                    avatar={mockUser.avatar}
                     variant="design2"
                     notificationCount={mockUser.notificationCount}
                     onNotificationPress={() => {
@@ -723,21 +729,22 @@ const HomeScreen = ({
                         setTimeout(() => setShowNotifToast(false), 2500);
                     }}
                     onAvatarPress={onAvatarPress}
+                    onMenuPress={onMenuPress}
                 />
             </div>
 
             {/* Daily contextual phrase */}
-            <div className="mb-6 px-1">
+            <div className="mb-4 px-1" data-tour="dashboard-context">
                 <p className="text-[15px] text-[#6B7280] leading-relaxed" style={{ fontFamily: "'Outfit', sans-serif" }}>
                     {(() => {
                         const phrases = [
-                            "Chaque petit pas compte. Voici vos actions du jour pour Francine.",
-                            "Prendre soin de votre proche commence par prendre soin de vous.",
-                            "Vous n'êtes pas seul·e. Votre cercle d'aidants est là pour vous.",
-                            "Un jour à la fois. Voici ce qui vous attend aujourd'hui.",
-                            "Votre engagement fait la différence. Continuez, vous êtes formidable.",
-                            "Chaque action accomplie est une victoire. Avançons ensemble.",
-                            "Aujourd'hui est un nouveau jour pour accompagner avec sérénité.",
+                            "Comment vous sentez-vous aujourd'hui ? Monka est là.",
+                            "Prenez un moment pour vous. Vous le méritez.",
+                            "Bonne journée. On avance à votre rythme.",
+                            "Nouvelle semaine, nouveau souffle. On est là.",
+                            "Pensez à vous aussi. Votre bien-être compte.",
+                            "Francine a de la chance de vous avoir. Voici la suite.",
+                            "Un pas après l'autre. À votre rythme, toujours.",
                         ];
                         const dayIndex = new Date().getDay();
                         return phrases[dayIndex % phrases.length];
@@ -745,54 +752,76 @@ const HomeScreen = ({
                 </p>
             </div>
 
-            {/* ═══ NEXT ACTION HUB (§3.4) ═══ */}
-            {nextAction && (
-                <div data-tour="next-action" className="mb-6">
-                    <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-3">
-                        Votre prochaine action
-                    </h3>
-                    <button
-                        onClick={() => onSelectTheme(nextAction.vulnerability)}
-                        className="w-full rounded-[20px] p-5 text-left transition-all hover:shadow-lg active:scale-[0.98] relative overflow-hidden"
+            {/* ── Update Situation Card — premium standalone component ── */}
+            <button
+                onClick={() => {
+                    const toast = document.createElement('div');
+                    toast.className = "fixed top-20 left-1/2 -translate-x-1/2 z-[100] bg-[#2C8C99] text-white px-6 py-3 rounded-full shadow-lg text-[13px] font-medium animate-bounce";
+                    toast.innerText = "Ouverture du questionnaire…";
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 2500);
+                }}
+                className="w-full mb-6 text-left group active:scale-[0.98] transition-all duration-200"
+                data-tour="dashboard-update"
+            >
+                <div
+                    className="relative overflow-hidden rounded-[20px] p-[1px]"
+                    style={{
+                        background: 'linear-gradient(135deg, #2C8C99, #1A6B5A, #2C8C99)',
+                    }}
+                >
+                    <div
+                        className="rounded-[19px] px-5 py-4 flex items-center gap-4"
                         style={{
-                            background: 'linear-gradient(135deg, #2C8C99 0%, #1A6B75 100%)',
-                            boxShadow: '0 8px 24px rgba(44,140,153,0.25)',
+                            background: 'linear-gradient(135deg, #E8F4F8, #F0FDF4)',
                         }}
                     >
-                        {/* Decorative circle */}
-                        <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/10" />
-                        <div className="relative z-10">
-                            <div className="flex items-center gap-2 mb-2">
-                                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-white/20 text-white">
-                                    Prioritaire
-                                </span>
-                                <span className="text-[11px] text-white/70">
-                                    {nextAction.program.title}
-                                </span>
-                            </div>
-                            <p className="text-[15px] font-semibold text-white leading-snug mb-3">
-                                {nextAction.task.text}
-                            </p>
-                            <div className="flex items-center gap-2">
-                                <span className="text-[12px] text-white/80 font-medium">
-                                    Commencer →
-                                </span>
-                            </div>
+                        {/* Icon */}
+                        <div
+                            className="w-11 h-11 rounded-[14px] flex items-center justify-center flex-shrink-0"
+                            style={{
+                                background: 'linear-gradient(135deg, #2C8C99, #1A6B5A)',
+                                boxShadow: '0 4px 12px -2px rgba(44, 140, 153, 0.4)',
+                            }}
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                <path d="m15 5 4 4" />
+                            </svg>
                         </div>
-                    </button>
+
+                        {/* Text */}
+                        <div className="flex-1 min-w-0">
+                            <p className="text-[14px] font-bold text-[#1A1A2E] leading-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                                Quelque chose a changé ?
+                            </p>
+                            <p className="text-[12px] text-[#6B7280] mt-0.5 leading-snug">
+                                Mettez à jour votre situation pour affiner vos recommandations
+                            </p>
+                        </div>
+
+                        {/* Arrow */}
+                        <div className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center flex-shrink-0 group-hover:bg-white transition-colors shadow-sm">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2C8C99" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="m12 5 7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-            )}
+            </button>
 
             {/* Progress Card — Dynamic */}
-            <div className="mb-6">
+            <div className="mb-6" data-tour="dashboard-progress">
                 <ProgressCard percentage={dynamicProgress} />
             </div>
 
 
             {/* Hero Card — filtered by selected theme */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4 mb-8" data-tour="dashboard-hero-first">
                 {mockVulnerabilities.map(v => {
-                    const totalTasks = v.microParcours.flatMap(mp => mp.categories.flatMap(c => c.recommendations.flatMap(r => r.microTasks))).length;
+                    const activeMPs = v.microParcours.filter(mp => mp.criticality !== 'prevention').length;
+                    const totalMPs = v.microParcours.length;
                     // S = Santé de l'aidant ("Vous"), others = proche ("Francine")
                     const target = v.domain === 'S' ? 'Vous' : 'Francine';
                     return (
@@ -802,7 +831,8 @@ const HomeScreen = ({
                             title={v.userTitle}
                             subtitle={v.description}
                             targetPerson={target}
-                            taskCount={totalTasks}
+                            activeMP={activeMPs}
+                            totalMP={totalMPs}
                             onPress={() => onSelectTheme(v)}
                         />
                     );
@@ -810,7 +840,7 @@ const HomeScreen = ({
             </div>
 
             {/* ═══ GUIDES PRATIQUES (§6) ═══ */}
-            <div className="mb-6">
+            <div className="mb-6" data-tour="dashboard-guides">
                 <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-4">
                     Guides pratiques
                 </h3>
@@ -889,81 +919,51 @@ const ThemeDetailScreen = ({
     onSelectProgram: (mp: MicroParcours) => void;
     toggledTasks?: Record<string, boolean>;
 }) => {
-    const theme = ThemeColors[vulnerability.domain];
-    const totalTasks = vulnerability.microParcours.flatMap(mp =>
-        mp.categories.flatMap(c => c.recommendations.flatMap(r => r.microTasks))
-    );
-    const completedCount = totalTasks.filter(t => {
-        if (toggledTasks[t.id] !== undefined) return toggledTasks[t.id];
-        return t.isCompleted;
-    }).length;
-    const progress = totalTasks.length ? Math.round((completedCount / totalTasks.length) * 100) : 0;
-
     return (
         <>
             <BackButton onBack={onBack} />
 
-            {/* Theme header */}
-            <div
-                className="rounded-[24px] p-6 mb-6"
-                style={{
-                    background: `linear-gradient(135deg, ${theme.color}15 0%, ${theme.color}08 100%)`,
-                    border: `1px solid ${theme.color}20`,
-                }}
-            >
-                <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold text-white" style={{ backgroundColor: theme.color }}>
-                        {vulnerability.domain === 'R' && <UsersIcon size={20} weight="bold" />}
-                        {vulnerability.domain === 'A' && <ClipboardText size={20} weight="bold" />}
-                        {vulnerability.domain === 'S' && <Heart size={20} weight="bold" />}
-                        {vulnerability.domain === 'F' && <HandHeart size={20} weight="bold" />}
-                        {vulnerability.domain === 'M' && <FirstAid size={20} weight="bold" />}
-                    </div>
-                    <div>
-                        <h1 className="text-xl font-bold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                            {vulnerability.userTitle}
-                        </h1>
-                        <p className="text-[13px] text-[#8E8E93]">{vulnerability.description}</p>
-                    </div>
-                </div>
-                <div className="flex items-center gap-4 mt-4">
-                    <ScoreRing score={progress} size={64} color={theme.color} showLabel={false} />
-                    <div className="flex-1">
-                        <p className="text-[14px] font-semibold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                            {completedCount}/{totalTasks.length} actions
-                        </p>
-                        <div className="flex items-center gap-2 mt-1.5">
-                            <div className="flex-1 h-[4px] rounded-full bg-[#F0F0F3] overflow-hidden">
-                                <div
-                                    className="h-full rounded-full transition-all duration-700"
-                                    style={{
-                                        width: `${progress}%`,
-                                        background: `linear-gradient(90deg, ${theme.color}, ${theme.color}CC)`,
-                                    }}
-                                />
-                            </div>
-                            <span className="text-[11px] font-semibold" style={{ color: theme.color }}>{progress}%</span>
-                        </div>
-                        <p className="text-[11px] text-[#B0B5BD] mt-1">du parcours complété</p>
-                    </div>
-                </div>
+            {/* Simple header — no custom component, just title */}
+            <div className="mb-6">
+                <h1 className="text-xl font-bold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    {vulnerability.userTitle}
+                </h1>
+                <p className="text-[14px] text-[#8E8E93] mt-1">{vulnerability.description}</p>
             </div>
 
-            {/* Programs list */}
+            {/* C2 — TaskCards for each micro-parcours */}
             <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-4">
                 Vos programmes
             </h3>
-            <div className="space-y-3 mb-8">
-                {vulnerability.microParcours.map(mp => (
-                    <TaskCard
-                        key={mp.id}
-                        title={mp.title}
-                        description={mp.description}
-                        criticality={mp.criticality}
-                        domain={vulnerability.domain as VulnerabilityDomain}
-                        onPress={() => onSelectProgram(mp)}
-                    />
-                ))}
+            <div className="space-y-3 mb-8" data-tour="theme-programs">
+                {vulnerability.microParcours.map(mp => {
+                    // ASR calculation
+                    const contributiveTasks = mp.categories.flatMap(cat =>
+                        cat.recommendations.flatMap(reco =>
+                            reco.microTasks.filter(t => t.isContributive)
+                        )
+                    );
+                    const asrTotal = contributiveTasks.length;
+                    const asrDone = contributiveTasks.filter(t =>
+                        toggledTasks[t.id] !== undefined ? toggledTasks[t.id] : t.isCompleted
+                    ).length;
+                    const asrProgress = asrTotal > 0 ? Math.round((asrDone / asrTotal) * 100) : 0;
+
+                    return (
+                        <TaskCard
+                            key={mp.id}
+                            title={mp.title}
+                            description={mp.description}
+                            criticality={mp.criticality}
+                            domain={vulnerability.domain as VulnerabilityDomain}
+                            asrProgress={asrProgress}
+                            asrDone={asrDone}
+                            asrTotal={asrTotal}
+                            isActivated={mp.criticality !== 'prevention'}
+                            onPress={() => onSelectProgram(mp)}
+                        />
+                    );
+                })}
             </div>
 
             {/* Timeline */}
@@ -972,14 +972,14 @@ const ThemeDetailScreen = ({
             </h3>
             <div className="bg-white rounded-[24px] p-5 mb-6" style={{ boxShadow: '0 4px 20px -6px rgba(0,0,0,0.06)' }}>
                 {vulnerability.microParcours.map((mp, i) => {
-                    const mpTasks = mp.categories.flatMap(c => c.recommendations.flatMap(r => r.microTasks));
-                    const done = mpTasks.filter(t => t.isCompleted).length;
-                    const status = done === mpTasks.length ? 'done' : done > 0 ? 'active' : 'pending';
+                    const mpRecos = mp.categories.flatMap(c => c.recommendations);
+                    const mpRecosDone = mpRecos.filter(r => r.microTasks.every(t => toggledTasks[t.id] !== undefined ? toggledTasks[t.id] : t.isCompleted)).length;
+                    const status = mpRecosDone === mpRecos.length ? 'done' : mpRecosDone > 0 ? 'active' : 'pending';
                     return (
                         <TimelineStep
                             key={mp.id}
                             label={mp.title}
-                            description={`${done}/${mpTasks.length} actions`}
+                            description={`${mpRecosDone}/${mpRecos.length} recommandations`}
                             status={status as 'done' | 'active' | 'pending'}
                             isLast={i === vulnerability.microParcours.length - 1}
                         />
@@ -1265,160 +1265,140 @@ const CelebrationModal = ({
 };
 
 /* ═══════════════════════════════════════════════════════
-   PROGRAM DETAIL SCREEN
+   PROGRAM DETAIL SCREEN — Couche 3 : liste de RecoCards
+   Clic RecoCard → push recoDetail (couche 4)
 ═══════════════════════════════════════════════════════ */
 const ProgramDetailScreen = ({
     vulnerability,
     program,
     onBack,
     toggledTasks,
-    onToggleTask,
-    guidedActionsByTaskId,
-    onNavigateToGuide,
-    onNavigateToProCategory,
+    onSelectReco,
 }: {
     vulnerability: Vulnerability;
     program: MicroParcours;
     onBack: () => void;
     toggledTasks: Record<string, boolean>;
-    onToggleTask: (taskId: string) => void;
-    guidedActionsByTaskId: Record<string, ActionableAdvice>;
-    onNavigateToGuide: (guide: ActionableAdvice) => void;
-    onNavigateToProCategory: (contactName?: string) => void;
+    onSelectReco: (reco: Recommendation, cat: RecoCategory) => void;
 }) => {
-    const theme = ThemeColors[vulnerability.domain];
-    const allTasks = program.categories.flatMap(c => c.recommendations.flatMap(r => r.microTasks));
-    const tasksWithState = allTasks.map(t => ({
-        ...t,
-        isCompleted: toggledTasks[t.id] !== undefined ? toggledTasks[t.id] : t.isCompleted,
-    }));
-    const completedCount = tasksWithState.filter(t => t.isCompleted).length;
-    const progress = allTasks.length ? Math.round((completedCount / allTasks.length) * 100) : 0;
-    const allDone = completedCount === allTasks.length && allTasks.length > 0;
-
-    // Track the transition moment — when the last task is checked
-    const [showCelebration, setShowCelebration] = useState(false);
-    const [celebrationDismissed, setCelebrationDismissed] = useState(false);
-    const prevCompletedRef = useRef(completedCount);
-
-    useEffect(() => {
-        // Detect when we just hit 100% (transition from not-all-done to all-done)
-        if (allDone && prevCompletedRef.current < allTasks.length && !celebrationDismissed) {
-            setShowCelebration(true);
-        }
-        prevCompletedRef.current = completedCount;
-    }, [completedCount, allDone, allTasks.length, celebrationDismissed]);
+    const allRecos = program.categories.flatMap(c => c.recommendations);
 
     return (
         <>
-            {/* Celebration modal */}
-            {showCelebration && (
-                <CelebrationModal
-                    vulnerability={vulnerability}
-                    program={program}
-                    completedCount={completedCount}
-                    themeColor={theme.color}
-                    onClose={() => {
-                        setShowCelebration(false);
-                        setCelebrationDismissed(true);
-                    }}
-                />
-            )}
-
             <BackButton onBack={onBack} label={vulnerability.userTitle} />
 
-            {/* Program header */}
+            {/* Simple header — title + description only */}
             <div className="mb-6">
                 <h1 className="text-xl font-bold text-[#1A1A2E] mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
                     {program.title}
                 </h1>
-                <p className="text-[14px] text-[#8E8E93] mb-4">{program.description}</p>
-
-                {/* Progress bar */}
-                <div className="bg-white rounded-[20px] p-4" style={{ boxShadow: '0 4px 20px -6px rgba(0,0,0,0.06)' }}>
-                    <div className="flex items-center justify-between mb-2">
-                        <span className="text-[13px] font-semibold text-[#1A1A2E]">Votre objectif</span>
-                        <span className="text-[13px] font-bold" style={{ color: theme.color }}>{progress}%</span>
-                    </div>
-                    <p className="text-[12px] text-[#8E8E93] mb-3">{program.asrObjective}</p>
-                    <div className="w-full h-2 rounded-full bg-[#E5E5EA]">
-                        <div
-                            className="h-full rounded-full transition-all duration-500"
-                            style={{ width: `${progress}%`, backgroundColor: theme.color }}
-                        />
-                    </div>
-                    <p className="text-[11px] text-[#C8CCD0] mt-2">{completedCount}/{allTasks.length} actions complétées</p>
-                </div>
-
-                {/* Inline completion badge — always visible when done */}
-                {allDone && (
-                    <div
-                        className="mt-4 flex items-center gap-3 bg-white rounded-[16px] p-4 border-2 transition-all"
-                        style={{
-                            borderColor: `${theme.color}40`,
-                            background: `linear-gradient(135deg, ${theme.color}08, ${theme.color}04)`,
-                        }}
-                    >
-                        <div
-                            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                            style={{ backgroundColor: `${theme.color}15` }}
-                        >
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M6 10.5L9 13.5L14 7.5" stroke={theme.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <p className="text-[14px] font-bold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                                Parcours complété
-                            </p>
-                            <p className="text-[12px] text-[#8E8E93]">
-                                {completedCount} actions • {completionImpacts[vulnerability.domain]?.headline || 'Objectif atteint'}
-                            </p>
-                        </div>
-                        <button
-                            onClick={() => { setCelebrationDismissed(false); setShowCelebration(true); }}
-                            className="text-[12px] font-semibold px-3 py-1.5 rounded-full transition-all active:scale-95"
-                            style={{ backgroundColor: `${theme.color}15`, color: theme.color }}
-                        >
-                            Revoir
-                        </button>
-                    </div>
-                )}
+                <p className="text-[14px] text-[#8E8E93]">{program.description}</p>
             </div>
 
-            {/* Categories & Tasks */}
-            {program.categories.map(cat => (
-                <div key={cat.id} className="mb-6">
-                    <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-3">
-                        {cat.name}
-                    </h3>
-                    {cat.recommendations.map(reco => (
-                        <div key={reco.id} className="mb-4">
-                            <h4 className="text-[15px] font-semibold text-[#1A1A2E] mb-3" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                                {reco.title}
-                            </h4>
-                            <div className="space-y-2">
-                                {reco.microTasks.map(task => {
-                                    const taskWithState = {
-                                        ...task,
-                                        isCompleted: toggledTasks[task.id] !== undefined ? toggledTasks[task.id] : task.isCompleted,
-                                    };
-                                    return (
-                                        <MicroTaskItem
-                                            key={task.id}
-                                            task={taskWithState}
-                                            onToggle={onToggleTask}
-                                            guidedAction={guidedActionsByTaskId[task.id]}
-                                            onNavigateToGuide={onNavigateToGuide}
-                                            onNavigateToResources={onNavigateToProCategory}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    ))}
+            {/* C3 — Flat list of RecoCards (no category grouping) */}
+            <div className="space-y-2.5" data-tour="program-recos">
+                {allRecos.map(reco => {
+                    // Find the category this reco belongs to
+                    const cat = program.categories.find(c => c.recommendations.some(r => r.id === reco.id))!;
+                    return (
+                        <RecoCard
+                            key={reco.id}
+                            title={reco.title}
+                            domain={vulnerability.domain as VulnerabilityDomain}
+                            urgency={reco.criticality}
+                            onClick={() => onSelectReco(reco, cat)}
+                        />
+                    );
+                })}
+            </div>
+        </>
+    );
+};
+
+/* ═══════════════════════════════════════════════════════
+   RECO DETAIL SCREEN — Couche 4 : MicroTaskItem storybook
+   Chaque MT = composant MicroTaskItem du storybook
+═══════════════════════════════════════════════════════ */
+const RecoDetailScreen = ({
+    vulnerability,
+    program,
+    recommendation,
+    category,
+    onBack,
+    toggledTasks,
+    onToggleTask,
+    guidedActionsByTaskId,
+    onNavigateToProCategory,
+}: {
+    vulnerability: Vulnerability;
+    program: MicroParcours;
+    recommendation: Recommendation;
+    category: RecoCategory;
+    onBack: () => void;
+    toggledTasks: Record<string, boolean>;
+    onToggleTask: (taskId: string) => void;
+    guidedActionsByTaskId: Record<string, ActionableAdvice>;
+    onNavigateToProCategory: (contactName?: string) => void;
+}) => {
+    const theme = ThemeColors[vulnerability.domain];
+    const urgency = UrgencyConfig[recommendation.criticality];
+
+    const tasksWithState = recommendation.microTasks.map(t => ({
+        ...t,
+        isCompleted: toggledTasks[t.id] !== undefined ? toggledTasks[t.id] : t.isCompleted,
+    }));
+    const completedCount = tasksWithState.filter(t => t.isCompleted).length;
+
+    return (
+        <>
+            <BackButton onBack={onBack} label={program.title} />
+
+            {/* Reco header */}
+            <div
+                className="rounded-[20px] p-5 mb-6"
+                style={{
+                    background: `linear-gradient(135deg, ${theme.color}12 0%, ${theme.color}06 100%)`,
+                    border: `1px solid ${theme.color}20`,
+                }}
+            >
+                <div className="flex items-center gap-2 mb-2">
+                    <span
+                        className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider"
+                        style={{ backgroundColor: urgency.softColor, color: urgency.color }}
+                    >
+                        {urgency.userLabel}
+                    </span>
+                    <span className="text-[11px] text-[#8E8E93]">{category.name}</span>
                 </div>
-            ))}
+                <h1 className="text-[18px] font-bold text-[#1A1A2E] mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    {recommendation.title}
+                </h1>
+                <p className="text-[12px] text-[#8E8E93]">
+                    {completedCount}/{recommendation.microTasks.length} actions complétées
+                </p>
+            </div>
+
+            {/* Micro-tasks — MicroTaskItem storybook components */}
+            <h3 className="font-bold text-[13px] uppercase tracking-[0.08em] text-[#C8CCD0] mb-3">
+                Actions à faire
+            </h3>
+            <div className="space-y-2.5 mb-8" data-tour="reco-tasks">
+                {[...tasksWithState]
+                    .sort((a, b) => {
+                        if (a.isContributive !== b.isContributive) return a.isContributive ? -1 : 1;
+                        if (a.isCompleted !== b.isCompleted) return a.isCompleted ? 1 : -1;
+                        return 0;
+                    })
+                    .map(task => (
+                        <MicroTaskItem
+                            key={task.id}
+                            task={task}
+                            onToggle={onToggleTask}
+                            guidedAction={guidedActionsByTaskId[task.id]}
+                            onNavigateToResources={onNavigateToProCategory}
+                        />
+                    ))}
+            </div>
         </>
     );
 };
@@ -1623,6 +1603,372 @@ const CalendarScreen = () => {
 };
 
 /* ═══════════════════════════════════════════════════════
+   MON SUIVI — Refonte : Onglets Actions / Agenda+Cercle
+═══════════════════════════════════════════════════════ */
+const MonSuiviScreen = ({
+    toggledTasks,
+    onToggleTask,
+    onSelectTheme,
+    onSelectProgram,
+}: {
+    toggledTasks: Record<string, boolean>;
+    onToggleTask: (taskId: string) => void;
+    onSelectTheme: (v: Vulnerability) => void;
+    onSelectProgram: (v: Vulnerability, mp: MicroParcours) => void;
+}) => {
+    const [activeTab, setActiveTab] = useState<'actions' | 'agenda'>('actions');
+    const [vulnFilter, setVulnFilter] = useState<string | null>(null);
+    const [selectedDay, setSelectedDay] = useState(0);
+    const [showMockToast, setShowMockToast] = useState('');
+
+    const showToast = (msg: string) => {
+        setShowMockToast(msg);
+        setTimeout(() => setShowMockToast(''), 2500);
+    };
+
+    // ── Urgency sort order (critical first) ──
+    const urgencyOrder: Record<string, number> = { critical: 0, ccc: 1, standard: 2, prevention: 3 };
+
+    // ── DATA: Group by MicroParcours with ASR calculation ──
+    type FlatMP = {
+        id: string;
+        title: string;
+        description: string;
+        domain: VulnerabilityDomain;
+        criticality: Criticality;
+        asrDone: number;
+        asrTotal: number;
+        asrProgress: number;
+        isActivated: boolean;
+        vulnerability: Vulnerability;
+        program: MicroParcours;
+    };
+
+    const allMPs: FlatMP[] = mockVulnerabilities.flatMap(v =>
+        v.microParcours.map(mp => {
+            // Collect all contributive micro-tasks across all recos
+            const allContributiveTasks = mp.categories.flatMap(cat =>
+                cat.recommendations.flatMap(reco =>
+                    reco.microTasks.filter(t => t.isContributive)
+                )
+            );
+            const asrTotal = allContributiveTasks.length;
+            const asrDone = allContributiveTasks.filter(t =>
+                toggledTasks[t.id] !== undefined ? toggledTasks[t.id] : t.isCompleted
+            ).length;
+            const asrProgress = asrTotal > 0 ? Math.round((asrDone / asrTotal) * 100) : 0;
+
+            // Determine highest criticality across recommendations
+            const allCriticalities = mp.categories.flatMap(cat =>
+                cat.recommendations.map(r => r.criticality)
+            );
+            const highestCrit: Criticality = allCriticalities.includes('critical')
+                ? 'critical'
+                : allCriticalities.includes('ccc')
+                    ? 'ccc'
+                    : allCriticalities.includes('standard')
+                        ? 'standard'
+                        : 'prevention';
+
+            return {
+                id: `${v.id}-${mp.id}`,
+                title: mp.title,
+                description: mp.description || '',
+                domain: v.domain as VulnerabilityDomain,
+                criticality: highestCrit,
+                asrDone,
+                asrTotal,
+                asrProgress,
+                isActivated: highestCrit !== 'prevention',
+                vulnerability: v,
+                program: mp,
+            };
+        })
+    );
+
+    // Sort by urgency (critical first)
+    const sortedMPs = [...allMPs].sort((a, b) => urgencyOrder[a.criticality] - urgencyOrder[b.criticality]);
+
+    // Filter by vulnerability
+    const filteredMPs = vulnFilter
+        ? sortedMPs.filter(m => m.vulnerability.id === vulnFilter)
+        : sortedMPs;
+
+    // Build vulnerability filter list
+    const vulnsWithPending = mockVulnerabilities.filter(v =>
+        allMPs.some(m => m.vulnerability.id === v.id)
+    );
+
+    const totalPendingCount = filteredMPs.reduce((acc, m) => acc + (m.asrTotal - m.asrDone), 0);
+
+    // ── AGENDA DATA ──
+    const today = new Date();
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - today.getDay() + 1);
+    const weekDays = Array.from({ length: 7 }, (_, i) => {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        return {
+            dayLabel: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'][i],
+            dateNum: d.getDate(),
+            isToday: d.toDateString() === today.toDateString(),
+        };
+    });
+    const dayEvents = weekEvents.filter(e => e.day === selectedDay);
+
+    return (
+        <>
+            {/* Toast */}
+            {showMockToast && (
+                <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[100] bg-[#2C8C99] text-white px-6 py-3 rounded-full shadow-lg text-[13px] font-medium animate-bounce">
+                    {showMockToast}
+                </div>
+            )}
+
+            {/* ── HEADER ── */}
+            <div data-tour="monsuivi-header">
+                <h1 className="text-2xl font-bold text-[#1A1A2E] mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    Mon suivi
+                </h1>
+                <p className="text-[14px] text-[#8E8E93] mb-5">Votre quotidien, vos actions, votre rythme.</p>
+            </div>
+
+            {/* ── TAB PILLS ── */}
+            <div className="flex gap-1 bg-[#F0F0F3] rounded-[14px] p-1 mb-6" data-tour="monsuivi-tabs">
+                <button
+                    onClick={() => setActiveTab('actions')}
+                    className={`flex-1 py-2.5 rounded-[11px] text-[13px] font-semibold transition-all duration-200 ${activeTab === 'actions'
+                        ? 'bg-white text-[#1A1A2E] shadow-sm'
+                        : 'text-[#8E8E93] hover:text-[#6B7280]'
+                        }`}
+                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                >
+                    <span className="flex items-center justify-center gap-1.5">
+                        <Lightning size={16} weight={activeTab === 'actions' ? 'fill' : 'regular'} />
+                        Mes actions
+                    </span>
+                </button>
+                <button
+                    onClick={() => setActiveTab('agenda')}
+                    className={`flex-1 py-2.5 rounded-[11px] text-[13px] font-semibold transition-all duration-200 ${activeTab === 'agenda'
+                        ? 'bg-white text-[#1A1A2E] shadow-sm'
+                        : 'text-[#8E8E93] hover:text-[#6B7280]'
+                        }`}
+                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                >
+                    <span className="flex items-center justify-center gap-1.5">
+                        <CalendarCheck size={16} weight={activeTab === 'agenda' ? 'fill' : 'regular'} />
+                        Agenda & Cercle
+                    </span>
+                </button>
+            </div>
+
+            {/* ══════════════════════════════════════════════
+                TAB 1: MES ACTIONS — RecoCards par urgence
+            ══════════════════════════════════════════════ */}
+            {activeTab === 'actions' && (
+                <>
+                    {/* ── VULNERABILITY FILTERS — Circular theme icons ── */}
+                    <div className="flex gap-4 overflow-x-auto no-scrollbar mb-5 pb-1 justify-center">
+                        {/* "Tous" circle */}
+                        <button
+                            onClick={() => setVulnFilter(null)}
+                            className="flex-shrink-0 flex flex-col items-center gap-1.5 transition-all duration-200"
+                        >
+                            <div
+                                className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200 ${!vulnFilter ? 'ring-[2.5px] ring-offset-2 ring-offset-[#F8F4EF] shadow-md' : 'shadow-sm hover:shadow-md hover:scale-105'}`}
+                                style={{
+                                    backgroundColor: !vulnFilter ? '#1A1A2E' : '#F0F0F3',
+                                    ...(!vulnFilter ? { boxShadow: '0 0 0 2.5px #1A1A2E' } : {}),
+                                }}
+                            >
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={!vulnFilter ? 'white' : '#8E8E93'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="8" cy="8" r="3" />
+                                    <circle cx="16" cy="8" r="3" />
+                                    <circle cx="8" cy="16" r="3" />
+                                    <circle cx="16" cy="16" r="3" />
+                                </svg>
+                            </div>
+                            <span className={`text-[11px] font-semibold leading-tight text-center ${!vulnFilter ? 'text-[#2D2A26]' : 'text-[#8A857E]'}`}>
+                                Tous
+                            </span>
+                        </button>
+
+                        {/* Theme circles */}
+                        {vulnsWithPending.map(v => (
+                            <ThemeButton
+                                key={v.id}
+                                domain={v.domain}
+                                isSelected={vulnFilter === v.id}
+                                showLabel
+                                size="md"
+                                onClick={() => setVulnFilter(vulnFilter === v.id ? null : v.id)}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Header count */}
+                    <p className="text-[13px] text-[#8E8E93] mb-3">
+                        <span className="font-semibold text-[#1A1A2E]">{filteredMPs.length}</span> programme{filteredMPs.length > 1 ? 's' : ''} · <span className="font-semibold text-[#1A1A2E]">{totalPendingCount}</span> action{totalPendingCount > 1 ? 's' : ''} en attente
+                    </p>
+
+                    {/* ── TASK CARDS LIST (grouped by MicroParcours) ── */}
+                    {filteredMPs.length === 0 ? (
+                        <div className="bg-white rounded-[16px] p-6 text-center border border-[#E5E5EA] mb-8">
+                            <CheckCircle size={32} weight="fill" className="text-[#10B981] mx-auto mb-2" />
+                            <p className="text-[14px] font-semibold text-[#1A1A2E]">Tout est fait !</p>
+                            <p className="text-[12px] text-[#8E8E93] mt-1">Bravo, vous êtes à jour.</p>
+                        </div>
+                    ) : (
+                        <div className="space-y-2.5 mb-8">
+                            {filteredMPs.map(m => (
+                                <TaskCard
+                                    key={m.id}
+                                    title={m.title}
+                                    description={m.description}
+                                    criticality={m.criticality}
+                                    domain={m.domain}
+                                    asrProgress={m.asrProgress}
+                                    asrDone={m.asrDone}
+                                    asrTotal={m.asrTotal}
+                                    isActivated={m.isActivated}
+                                    onPress={() => onSelectProgram(m.vulnerability, m.program)}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </>
+            )}
+
+
+
+
+
+
+
+            {/* ══════════════════════════════════════════════
+                TAB 2: AGENDA & CERCLE AIDANT
+            ══════════════════════════════════════════════ */}
+            {
+                activeTab === 'agenda' && (
+                    <>
+                        {/* ── AGENDA SECTION ── */}
+                        <div className="bg-white rounded-[20px] p-4 mb-6" style={{ boxShadow: '0 4px 20px -6px rgba(0,0,0,0.06)' }}>
+                            <div className="flex items-center gap-2 mb-3">
+                                <CalendarCheck size={18} weight="bold" className="text-[#2C8C99]" />
+                                <h3 className="text-[14px] font-bold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>Agenda de la semaine</h3>
+                            </div>
+
+                            {/* Week strip */}
+                            <div className="flex gap-1 mb-4">
+                                {weekDays.map((d, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => setSelectedDay(i)}
+                                        className={`flex-1 min-w-[36px] py-1.5 rounded-[12px] flex flex-col items-center gap-0 transition-all active:scale-95 ${selectedDay === i
+                                            ? 'bg-[#1A1A2E] text-white'
+                                            : d.isToday
+                                                ? 'bg-[#E8F4F8] text-[#2C8C99]'
+                                                : 'text-[#8E8E93]'
+                                            }`}
+                                    >
+                                        <span className="text-[9px] font-semibold uppercase">{d.dayLabel}</span>
+                                        <span className={`text-[14px] font-bold ${selectedDay === i ? 'text-white' : ''}`}>{d.dateNum}</span>
+                                        {weekEvents.some(e => e.day === i) && selectedDay !== i && (
+                                            <div className="w-1 h-1 rounded-full bg-[#2C8C99] mt-0.5" />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Day events */}
+                            {dayEvents.length === 0 ? (
+                                <p className="text-[12px] text-[#C8CCD0] text-center py-4">Aucun événement ce jour</p>
+                            ) : (
+                                <div className="space-y-1.5">
+                                    {dayEvents.map(ev => {
+                                        const evTheme = ThemeColors[ev.domain];
+                                        return (
+                                            <div
+                                                key={ev.id}
+                                                className="flex items-center gap-2.5 py-2.5 px-3 rounded-[12px] bg-[#FAFAFA] hover:bg-[#F5F5F5] transition-colors"
+                                                style={{ borderLeft: `3px solid ${evTheme.color}` }}
+                                            >
+                                                <span className="text-[11px] font-bold text-[#8E8E93] w-[42px] flex-shrink-0">{ev.time.split('–')[0].trim()}</span>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-[13px] text-[#1A1A2E] font-medium truncate">{ev.title}</p>
+                                                    <p className="text-[10px] text-[#B0B5BD]">{ev.time}</p>
+                                                </div>
+                                                <img src={ev.assigneeAvatar} alt={ev.assignee} className="w-6 h-6 rounded-full border-2 border-white shadow-sm" />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* ── CERCLE AIDANT ── */}
+                        <div className="bg-white rounded-[20px] p-5 mb-6" style={{ boxShadow: '0 4px 20px -6px rgba(0,0,0,0.06)' }}>
+                            <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center gap-2">
+                                    <UsersIcon size={18} weight="bold" className="text-[#7C3AED]" />
+                                    <h3 className="text-[14px] font-bold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>Mon cercle aidant</h3>
+                                </div>
+                                <span className="text-[11px] font-semibold text-[#7C3AED] bg-[#F3E8FF] px-2.5 py-1 rounded-full">3 membres</span>
+                            </div>
+
+                            {/* Cercle members */}
+                            <div className="space-y-2.5">
+                                {[
+                                    { name: 'Sophie M.', role: 'Aidante principale', avatar: 'https://i.pravatar.cc/150?img=1', color: '#7C3AED' },
+                                    { name: 'Pierre D.', role: 'Frère — soutien logistique', avatar: 'https://i.pravatar.cc/150?img=3', color: '#2563EB' },
+                                    { name: 'Dr. Martin', role: 'Médecin traitant', avatar: 'https://i.pravatar.cc/150?img=12', color: '#059669' },
+                                ].map((member, i) => (
+                                    <div key={i} className="flex items-center gap-3 p-3 rounded-[14px] bg-[#FAFAFA] hover:bg-[#F5F5F5] transition-colors">
+                                        <img src={member.avatar} alt={member.name} className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-[13px] font-semibold text-[#1A1A2E]">{member.name}</p>
+                                            <p className="text-[11px] text-[#8E8E93]">{member.role}</p>
+                                        </div>
+                                        <div className="flex gap-1.5">
+                                            <button className="w-8 h-8 rounded-full bg-white border border-[#E5E5EA] flex items-center justify-center hover:border-[#7C3AED] transition-colors">
+                                                <ChatCircle size={14} weight="bold" className="text-[#8E8E93]" />
+                                            </button>
+                                            <button className="w-8 h-8 rounded-full bg-white border border-[#E5E5EA] flex items-center justify-center hover:border-[#7C3AED] transition-colors">
+                                                <Phone size={14} weight="bold" className="text-[#8E8E93]" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Add member CTA */}
+                            <button className="w-full mt-3 py-2.5 rounded-[12px] border-2 border-dashed border-[#E5E5EA] text-[12px] font-semibold text-[#8E8E93] hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all">
+                                + Ajouter un membre
+                            </button>
+
+                            {/* Share agenda link */}
+                            <button
+                                onClick={() => { showToast('📅 Lien de partage copié !'); }}
+                                className="w-full mt-3 bg-white rounded-[12px] py-2.5 font-semibold text-[13px] text-[#1A1A2E] border border-[#E5E5EA] hover:border-[#7C3AED] transition-colors active:scale-[0.98] flex items-center justify-center gap-2"
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
+                                </svg>
+                                Partager l&apos;agenda
+                            </button>
+                        </div>
+                    </>
+                )
+            }
+        </>
+    );
+};
+
+/* ═══════════════════════════════════════════════════════
    CHAT SCREEN
 ═══════════════════════════════════════════════════════ */
 const ChatScreen = () => {
@@ -1633,6 +1979,7 @@ const ChatScreen = () => {
         { id: '4', from: 'bot', text: "Souhaitez-vous que je vous aide à constituer votre dossier ?", time: '10:32' },
     ]);
     const [showPaywall, setShowPaywall] = useState(true);
+    const [showPricingScreen, setShowPricingScreen] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState<'decouverte' | 'essentiel' | 'serenite'>('essentiel');
     const [input, setInput] = useState('');
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -1835,10 +2182,84 @@ const ChatScreen = () => {
                             </p>
                         )}
 
-                        {/* "Voir les abonnements" link — matches original Monka */}
-                        <button className="w-full text-center text-[13px] text-[#1A6B5A] font-medium mt-2 py-2">
+                        {/* "Voir les abonnements" link — opens pricing screen */}
+                        <button
+                            onClick={() => setShowPricingScreen(true)}
+                            className="w-full text-center text-[13px] text-[#1A6B5A] font-medium mt-2 py-2"
+                        >
                             Voir le détail des offres
                         </button>
+                    </div>
+                </div>
+            )}
+
+            {/* ─── PRICING SCREEN OVERLAY ─── */}
+            {showPricingScreen && (
+                <div
+                    className="absolute inset-0 z-30 flex flex-col bg-[#E8F4F8]"
+                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                >
+                    {/* Header */}
+                    <div className="flex items-center gap-3 px-5 pt-14 pb-3">
+                        <button
+                            onClick={() => setShowPricingScreen(false)}
+                            className="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+                            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+                        >
+                            <ArrowLeft size={16} weight="bold" className="text-[#1A1A2E]" />
+                        </button>
+                        <h2 className="text-[18px] font-bold text-[#1A1A2E]">Nos offres</h2>
+                    </div>
+
+                    {/* Subtitle */}
+                    <div className="px-5 mb-2">
+                        <p className="text-[13px] text-[#6B8A8E] leading-relaxed">
+                            Choisissez l&apos;accompagnement qui vous correspond.
+                            <br />Changez de formule à tout moment.
+                        </p>
+                    </div>
+
+                    {/* Center zone — cards + dots */}
+                    <div className="flex-1 flex flex-col justify-center">
+                        {/* Pricing Cards — horizontal swipe */}
+                        <div
+                            className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pl-5 pr-5 pt-4 pb-3 no-scrollbar"
+                            onWheel={(e) => {
+                                if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+                                    e.currentTarget.scrollLeft += e.deltaY;
+                                }
+                            }}
+                        >
+                            {MONKA_PLANS.map((plan, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => {
+                                        const planId = ['decouverte', 'essentiel', 'serenite'][i] as typeof selectedPlan;
+                                        setSelectedPlan(planId);
+                                        setShowPaywall(false);
+                                        setShowPricingScreen(false);
+                                    }}
+                                    className="snap-center flex-shrink-0 text-left"
+                                    style={{ width: '65%' }}
+                                >
+                                    <PricingCard plan={plan} />
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Scroll indicator dots */}
+                        <div className="flex justify-center gap-1.5 py-2">
+                            <div className="w-5 h-1 rounded-full bg-[#1A1A2E]" />
+                            <div className="w-1.5 h-1 rounded-full bg-[#C8CCD0]" />
+                            <div className="w-1.5 h-1 rounded-full bg-[#C8CCD0]" />
+                        </div>
+                    </div>
+
+                    {/* Footer note */}
+                    <div className="px-5 pb-6 text-center">
+                        <p className="text-[11px] text-[#8A9EA2]">
+                            Sans engagement · Annulation en 1 clic
+                        </p>
                     </div>
                 </div>
             )}
@@ -1875,7 +2296,7 @@ const ResourcesScreen = ({ onSelectArticle, onSelectGuide }: { onSelectArticle: 
     return (
         <>
             {/* Header */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4" data-tour="resources-header">
                 <div>
                     <h1 className="text-[22px] font-bold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>
                         Mes ressources
@@ -2099,7 +2520,7 @@ const CommunityScreen = ({ initialProCategory }: { initialProCategory?: string }
 
     return (
         <>
-            <h1 className="text-2xl font-bold text-[#1A1A2E] mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <h1 className="text-2xl font-bold text-[#1A1A2E] mb-1" data-tour="community-header" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 Mes professionnels
             </h1>
             <p className="text-[14px] text-[#8E8E93] mb-4">Les professionnels de votre territoire, sélectionnés pour vous.</p>
@@ -2224,42 +2645,171 @@ const CommunityScreen = ({ initialProCategory }: { initialProCategory?: string }
 };
 
 /* ═══════════════════════════════════════════════════════
-   SETTINGS SCREEN
+   CHAT IDEC SCREEN — with Paywall
 ═══════════════════════════════════════════════════════ */
-const SettingsScreen = () => {
-    const { isDark, toggle: toggleDarkMode } = React.useContext(DarkModeContext);
-    const [notifications, setNotifications] = useState(true);
+const ChatIDECScreen = () => {
+    const [showPricingScreen, setShowPricingScreen] = useState(false);
+    const fakeMessages = [
+        { id: 1, from: 'idec', text: 'Bonjour Marie ! Comment allez-vous aujourd\'hui ?', time: '09:12' },
+        { id: 2, from: 'user', text: 'Bonjour, j\'ai une question sur le renouvellement de l\'APA...', time: '09:14' },
+        { id: 3, from: 'idec', text: 'Bien sûr ! Le renouvellement de l\'APA se fait automatiquement, mais vous devez signaler tout changement de situation. Voulez-vous que je vous guide ?', time: '09:15' },
+        { id: 4, from: 'user', text: 'Oui, l\'état de santé de mon père s\'est dégradé depuis l\'évaluation.', time: '09:17' },
+        { id: 5, from: 'idec', text: 'Je comprends. Dans ce cas, vous pouvez demander une réévaluation du plan d\'aide. Je vous prépare la démarche étape par étape.', time: '09:18' },
+    ];
 
     return (
-        <>
-            <h1 className="text-2xl font-bold text-[#1A1A2E] mb-6" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                Réglages
-            </h1>
-
-            {/* Profile */}
-            <div className="mb-6">
-                <ProfileCard name="Marie Dupont" email="marie.dupont@gmail.com" />
+        <div className="relative">
+            {/* Header */}
+            <div className="flex items-center gap-3 mb-5" data-tour="chat-header">
+                <div className="relative">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#2C8C99] to-[#1A6B75] flex items-center justify-center">
+                        <FirstAid size={22} weight="fill" className="text-white" />
+                    </div>
+                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-[#10B981] rounded-full border-2 border-[#E8F4F8]" />
+                </div>
+                <div>
+                    <h1 className="text-[18px] font-bold text-[#1A1A2E]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                        Chat IDEC
+                    </h1>
+                    <p className="text-[12px] text-[#10B981] font-medium">En ligne • Temps de réponse ~5 min</p>
+                </div>
             </div>
 
-            {/* Preferences */}
-            <div className="space-y-6">
-                <SettingsSection title="Préférences">
-                    <SettingsRow icon={<MoonStars size={20} weight="bold" color="#6366F1" />} iconBg="#EEF2FF" label="Mode sombre" action="toggle" checked={isDark} onCheckedChange={toggleDarkMode} isFirst />
-                    <SettingsRow icon={<ShieldCheck size={20} weight="bold" color="#10B981" />} iconBg="#ECFDF5" label="Notifications" action="toggle" checked={notifications} onCheckedChange={setNotifications} />
-                    <SettingsRow icon={<Translate size={20} weight="bold" color="#F59E0B" />} iconBg="#FFFBEB" label="Langue" action="label" actionLabel="Français" isLast />
-                </SettingsSection>
+            {/* Chat messages — blurred behind paywall */}
+            <div className="relative">
+                <div style={{ filter: 'blur(4px)', pointerEvents: 'none', userSelect: 'none' }}>
+                    <div className="space-y-3 mb-4">
+                        {fakeMessages.map(msg => (
+                            <div key={msg.id} className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                <div
+                                    className={`max-w-[75%] px-4 py-2.5 rounded-[18px] ${msg.from === 'user'
+                                        ? 'bg-[#2C8C99] text-white rounded-br-[6px]'
+                                        : 'bg-white text-[#1A1A2E] border border-[#E5E5EA] rounded-bl-[6px]'
+                                        }`}
+                                    style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}
+                                >
+                                    <p className="text-[14px] leading-relaxed">{msg.text}</p>
+                                    <p className={`text-[10px] mt-1 ${msg.from === 'user' ? 'text-white/60' : 'text-[#8E8E93]'} text-right`}>{msg.time}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-                <SettingsSection title="Aide">
-                    <SettingsRow icon={<Info size={20} weight="bold" color="#3B82F6" />} iconBg="#EFF6FF" label="À propos de Monka" isFirst />
-                    <SettingsRow icon={<Star size={20} weight="bold" color="#F59E0B" />} iconBg="#FFFBEB" label="Évaluer l'application" />
-                    <SettingsRow icon={<ChatCircle size={20} weight="bold" color="#8B5CF6" />} iconBg="#F5F3FF" label="Contacter le support" isLast />
-                </SettingsSection>
+                    {/* Fake input bar */}
+                    <div className="flex items-center gap-2 bg-white rounded-full px-4 py-3 border border-[#E5E5EA]">
+                        <Smiley size={22} className="text-[#C8CCD0]" />
+                        <span className="flex-1 text-[14px] text-[#C8CCD0]">Écrire un message…</span>
+                        <PaperPlaneRight size={22} className="text-[#C8CCD0]" />
+                    </div>
+                </div>
 
-                <SettingsSection>
-                    <SettingsRow icon={<SignOut size={20} weight="bold" color="#EF4444" />} iconBg="#FEF2F2" label="Se déconnecter" isFirst isLast />
-                </SettingsSection>
+                {/* ═══ PAYWALL OVERLAY ═══ */}
+                <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'linear-gradient(180deg, rgba(232,244,248,0.3) 0%, rgba(232,244,248,0.95) 40%, rgba(232,244,248,1) 100%)' }}>
+                    <div className="text-center px-6 py-8 max-w-[300px]">
+                        {/* Lock icon */}
+                        <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#2C8C99] to-[#1A6B75] flex items-center justify-center mb-5" style={{ boxShadow: '0 8px 32px rgba(44,140,153,0.25)' }}>
+                            <Lock size={28} weight="bold" className="text-white" />
+                        </div>
+
+                        <h2 className="text-[20px] font-bold text-[#1A1A2E] mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                            Accès Premium
+                        </h2>
+                        <p className="text-[14px] text-[#6B7280] leading-relaxed mb-6">
+                            Échangez directement avec un·e <strong className="text-[#2C8C99]">Infirmier·e De Coordination</strong> pour toutes vos questions sur le parcours de soins de votre proche.
+                        </p>
+
+                        {/* Benefits chips */}
+                        <div className="space-y-2 mb-6">
+                            {[
+                                { icon: '💬', text: 'Réponses personnalisées en ~5 min' },
+                                { icon: '🩺', text: 'Expertise médicale et administrative' },
+                                { icon: '📋', text: 'Suivi de vos démarches' },
+                            ].map((b, i) => (
+                                <div key={i} className="flex items-center gap-3 bg-white rounded-[12px] px-4 py-2.5 border border-[#E5E5EA] text-left" style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.03)' }}>
+                                    <span className="text-[16px]">{b.icon}</span>
+                                    <span className="text-[13px] text-[#1A1A2E] font-medium">{b.text}</span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* CTA Button */}
+                        <button
+                            onClick={() => setShowPricingScreen(true)}
+                            className="w-full py-3.5 rounded-[14px] text-[15px] font-bold text-white transition-all active:scale-[0.97]"
+                            style={{
+                                background: 'linear-gradient(135deg, #2C8C99 0%, #1A6B75 100%)',
+                                boxShadow: '0 6px 24px rgba(44,140,153,0.3)',
+                            }}
+                        >
+                            Débloquer le Chat IDEC
+                        </button>
+                        <button
+                            onClick={() => setShowPricingScreen(true)}
+                            className="text-[12px] text-[#2C8C99] font-medium mt-2.5 py-1"
+                        >
+                            Voir les offres
+                        </button>
+                    </div>
+                </div>
             </div>
-        </>
+
+            {/* ─── PRICING SCREEN ─── */}
+            {showPricingScreen && (
+                <div
+                    className="absolute inset-0 z-30 flex flex-col bg-[#E8F4F8] rounded-[20px]"
+                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                >
+                    {/* Header */}
+                    <div className="flex items-center gap-3 px-5 pt-5 pb-3">
+                        <button
+                            onClick={() => setShowPricingScreen(false)}
+                            className="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+                            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+                        >
+                            <ArrowLeft size={16} weight="bold" className="text-[#1A1A2E]" />
+                        </button>
+                        <h2 className="text-[18px] font-bold text-[#1A1A2E]">Nos offres</h2>
+                    </div>
+
+                    <div className="px-5 mb-2">
+                        <p className="text-[13px] text-[#6B8A8E] leading-relaxed">
+                            Le Chat IDEC est inclus dans le pack Sérénité.
+                        </p>
+                    </div>
+
+                    {/* Center zone — cards + dots */}
+                    <div className="flex-1 flex flex-col justify-center">
+                        <div
+                            className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pl-5 pr-5 pt-4 pb-3 no-scrollbar"
+                            onWheel={(e) => {
+                                if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+                                    e.currentTarget.scrollLeft += e.deltaY;
+                                }
+                            }}
+                        >
+                            {MONKA_PLANS.map((plan, i) => (
+                                <div key={i} className="snap-center flex-shrink-0" style={{ width: '65%' }}>
+                                    <PricingCard plan={plan} />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Scroll indicator dots */}
+                        <div className="flex justify-center gap-1.5 py-2">
+                            <div className="w-5 h-1 rounded-full bg-[#1A1A2E]" />
+                            <div className="w-1.5 h-1 rounded-full bg-[#C8CCD0]" />
+                            <div className="w-1.5 h-1 rounded-full bg-[#C8CCD0]" />
+                        </div>
+                    </div>
+
+                    <div className="px-5 pb-6 text-center">
+                        <p className="text-[11px] text-[#8A9EA2]">
+                            Sans engagement · Annulation en 1 clic
+                        </p>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 
@@ -2307,7 +2857,256 @@ const ONBOARDING_SLIDES = [
         description: 'Avant de commencer, nous allons vous poser quelques questions sur votre situation et celle de votre proche. C\'est grâce à vos réponses que Monka peut créer un parcours vraiment adapté à vos besoins.',
         highlight: 'Vos réponses restent strictement confidentielles.',
     },
+    {
+        type: 'radar' as const,
+        image: '',
+        title: 'On a appris à vous connaître',
+        subtitle: 'Votre parcours est prêt',
+        description: '',
+        highlight: 'Monka s\'adapte à votre situation.',
+    },
 ];
+
+/* ── Profile Analysis — spider chart premium ── */
+const SPIDER_DOMAINS = [
+    { label: 'Santé', target: 72 },
+    { label: 'Vie sociale', target: 45 },
+    { label: 'Famille', target: 88 },
+    { label: 'Administratif', target: 35 },
+    { label: 'Suivi médical', target: 60 },
+];
+const SPIDER_TEAL = '#2C8C99';
+
+const ProfileAnalysisView = ({ active }: { active: boolean }) => {
+    const [values, setValues] = useState(SPIDER_DOMAINS.map(() => 0));
+    const [phase, setPhase] = useState<'scanning' | 'building' | 'done'>('scanning');
+    const [revealedAxes, setRevealedAxes] = useState(0);
+    const [revealedDots, setRevealedDots] = useState(0);
+    const [glowPulse, setGlowPulse] = useState(false);
+
+    useEffect(() => {
+        if (!active) {
+            setValues(SPIDER_DOMAINS.map(() => 0));
+            setPhase('scanning');
+            setRevealedAxes(0);
+            setRevealedDots(0);
+            setGlowPulse(false);
+            return;
+        }
+
+        // Phase 1: scanning (1.2s) — spinner + glow
+        // Phase 2: building — axes reveal one by one, then polygon grows
+        const buildStart = setTimeout(() => {
+            setPhase('building');
+
+            // Stagger axis reveals (one every 300ms)
+            SPIDER_DOMAINS.forEach((_, i) => {
+                setTimeout(() => setRevealedAxes(prev => Math.max(prev, i + 1)), i * 300);
+            });
+
+            // Start polygon animation after axes are settled
+            setTimeout(() => {
+                const startTime = Date.now();
+                const duration = 2000;
+                const animate = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Smooth ease-out quartic
+                    const eased = 1 - Math.pow(1 - progress, 4);
+                    setValues(SPIDER_DOMAINS.map(d => d.target * eased));
+                    if (progress < 1) requestAnimationFrame(animate);
+                };
+                requestAnimationFrame(animate);
+
+                // Stagger dot reveals as polygon grows
+                SPIDER_DOMAINS.forEach((_, i) => {
+                    setTimeout(() => setRevealedDots(prev => Math.max(prev, i + 1)), 400 + i * 350);
+                });
+            }, SPIDER_DOMAINS.length * 300 + 200);
+        }, 1200);
+
+        // Phase 3: done — glow pulse
+        const doneTimer = setTimeout(() => {
+            setPhase('done');
+            setGlowPulse(true);
+        }, 1200 + SPIDER_DOMAINS.length * 300 + 200 + 2200);
+
+        return () => {
+            clearTimeout(buildStart);
+            clearTimeout(doneTimer);
+        };
+    }, [active]);
+
+    // Spider chart geometry — BIG
+    const svgSize = 340;
+    const cx = svgSize / 2, cy = svgSize / 2;
+    const maxR = 110;
+    const n = SPIDER_DOMAINS.length;
+    const angleStep = (2 * Math.PI) / n;
+    const startAngle = -Math.PI / 2;
+
+    const getPoint = (i: number, pct: number) => {
+        const angle = startAngle + i * angleStep;
+        const r = (pct / 100) * maxR;
+        return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+    };
+
+    const polyPoints = (pct: number) =>
+        SPIDER_DOMAINS.map((_, i) => {
+            const pt = getPoint(i, pct);
+            return `${pt.x},${pt.y}`;
+        }).join(' ');
+
+    const dataPoints = values.map((v, i) => getPoint(i, v));
+    const dataPolygon = dataPoints.map(p => `${p.x},${p.y}`).join(' ');
+
+    // Label positions — pushed further out
+    const labelPoints = SPIDER_DOMAINS.map((_, i) => getPoint(i, 125));
+
+    return (
+        <div className="flex flex-col items-center" style={{ marginTop: -8 }}>
+            {/* Status */}
+            <div className="flex items-center gap-2 mb-2">
+                {phase === 'scanning' ? (
+                    <>
+                        <div
+                            className="w-4 h-4 rounded-full border-2 border-[#2C8C99] border-t-transparent"
+                            style={{ animation: 'spin 0.8s linear infinite' }}
+                        />
+                        <span className="text-[13px] text-[#8E8E93] font-medium">
+                            Analyse en cours…
+                        </span>
+                    </>
+                ) : phase === 'done' ? (
+                    <>
+                        <CheckCircle size={18} weight="fill" color={SPIDER_TEAL} />
+                        <span className="text-[13px] font-semibold text-[#2C8C99]" style={{ animation: 'fadeIn 0.5s ease' }}>
+                            Profil analysé
+                        </span>
+                    </>
+                ) : (
+                    <>
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#2C8C99] animate-pulse" />
+                        <span className="text-[12px] text-[#8E8E93] font-medium animate-pulse">
+                            Construction du profil…
+                        </span>
+                    </>
+                )}
+            </div>
+
+            {/* Spider SVG — large */}
+            <svg
+                width="100%"
+                height="auto"
+                viewBox={`0 0 ${svgSize} ${svgSize}`}
+                style={{ maxWidth: 340, aspectRatio: '1/1' }}
+            >
+                <defs>
+                    {/* Soft teal gradient fill */}
+                    <radialGradient id="spiderFill" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor={SPIDER_TEAL} stopOpacity="0.30" />
+                        <stop offset="100%" stopColor={SPIDER_TEAL} stopOpacity="0.06" />
+                    </radialGradient>
+                    {/* Glow filter — stronger */}
+                    <filter id="spiderGlow" x="-40%" y="-40%" width="180%" height="180%">
+                        <feGaussianBlur stdDeviation={glowPulse ? 12 : 6} result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    {/* Dot glow */}
+                    <filter id="dotGlow" x="-100%" y="-100%" width="300%" height="300%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                {/* Subtle guide pentagons — 3 levels for depth */}
+                {[33, 66, 100].map(level => (
+                    <polygon
+                        key={level}
+                        points={polyPoints(level)}
+                        fill="none"
+                        stroke="#C8CCD0"
+                        strokeWidth="0.7"
+                        opacity={revealedAxes > 0 ? 0.35 : 0.1}
+                        style={{ transition: 'opacity 0.8s ease' }}
+                    />
+                ))}
+
+                {/* Axis lines — fade in one by one */}
+                {SPIDER_DOMAINS.map((_, i) => {
+                    const pt = getPoint(i, 100);
+                    const isRevealed = revealedAxes > i;
+                    return (
+                        <line
+                            key={i}
+                            x1={cx} y1={cy} x2={pt.x} y2={pt.y}
+                            stroke={isRevealed ? '#A0AEC0' : '#E2E8F0'}
+                            strokeWidth={isRevealed ? 0.8 : 0.4}
+                            opacity={isRevealed ? 0.5 : 0.15}
+                            style={{ transition: 'all 0.6s ease' }}
+                        />
+                    );
+                })}
+
+                {/* Data polygon — glow + fill + stroke */}
+                <polygon
+                    points={dataPolygon}
+                    fill="url(#spiderFill)"
+                    stroke={SPIDER_TEAL}
+                    strokeWidth="2.5"
+                    strokeLinejoin="round"
+                    filter="url(#spiderGlow)"
+                    opacity={phase === 'scanning' ? 0 : 0.9}
+                    style={{ transition: 'opacity 0.5s ease' }}
+                />
+
+                {/* Data points — pop in one by one */}
+                {dataPoints.map((pt, i) => {
+                    const isRevealed = revealedDots > i;
+                    return (
+                        <circle
+                            key={i}
+                            cx={pt.x} cy={pt.y}
+                            r={isRevealed ? (phase === 'done' ? 6 : 4) : 0}
+                            fill="white"
+                            stroke={SPIDER_TEAL}
+                            strokeWidth="2.5"
+                            filter={phase === 'done' ? 'url(#dotGlow)' : undefined}
+                            style={{ transition: 'r 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+                        />
+                    );
+                })}
+
+                {/* Labels — fade in with axes */}
+                {SPIDER_DOMAINS.map((d, i) => {
+                    const isRevealed = revealedAxes > i;
+                    return (
+                        <text
+                            key={i}
+                            x={labelPoints[i].x}
+                            y={labelPoints[i].y}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            fill={isRevealed ? '#374151' : '#D1D5DB'}
+                            fontSize="12"
+                            fontWeight="600"
+                            fontFamily="'Outfit', sans-serif"
+                            style={{ transition: 'fill 0.5s ease, opacity 0.5s ease', opacity: isRevealed ? 1 : 0.2 }}
+                        >
+                            {d.label}
+                        </text>
+                    );
+                })}
+            </svg>
+        </div>
+    );
+};
 
 const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
     const [step, setStep] = useState(0);
@@ -2319,13 +3118,8 @@ const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
             {/* Top bar: Logo + Skip */}
             <div className="flex items-center justify-between px-6 pt-14">
                 {/* Monka logo */}
-                <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-[10px] bg-[#2C8C99] flex items-center justify-center">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 17V7L7 12L12 4L17 12L21 7V17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </div>
-                    <span className="text-[16px] font-bold text-[#1A1A2E]">Monka</span>
+                <div className="flex items-center">
+                    <img src="/monka-logo.png" alt="Monka" className="h-8 object-contain" />
                 </div>
                 {!isLast && (
                     <button
@@ -2339,45 +3133,63 @@ const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
 
             {/* Content */}
             <div className="flex-1 flex flex-col items-center justify-center px-8 text-center" key={step} style={{ animation: 'fadeIn 0.35s ease-out' }}>
-                {/* Illustration */}
-                <div className="w-[160px] h-[160px] rounded-[32px] bg-white flex items-center justify-center mb-8 overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(44,140,153,0.10)' }}>
-                    <img
-                        src={slide.image}
-                        alt={slide.title}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
+                {/* Radar analysis slide */}
+                {('type' in slide && slide.type === 'radar') ? (
+                    <>
+                        <ProfileAnalysisView active={true} />
+                        <h1 className="text-[22px] font-bold text-[#1A1A2E] mb-1 mt-4 leading-tight">
+                            {slide.title}
+                        </h1>
+                        <p className="text-[14px] font-semibold text-[#2C8C99] mb-3">
+                            {slide.subtitle}
+                        </p>
+                        <p className="text-[14px] font-semibold text-[#2C8C99] mt-1">
+                            {slide.highlight}
+                        </p>
+                    </>
+                ) : (
+                    <>
+                        {/* Illustration */}
+                        <div className="w-[160px] h-[160px] rounded-[32px] bg-white flex items-center justify-center mb-8 overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(44,140,153,0.10)' }}>
+                            <img
+                                src={slide.image}
+                                alt={slide.title}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
 
-                {/* Title */}
-                <h1 className="text-[24px] font-bold text-[#1A1A2E] mb-1 leading-tight">
-                    {slide.title}
-                </h1>
-                <p className="text-[14px] font-semibold text-[#2C8C99] mb-5">
-                    {slide.subtitle}
-                </p>
+                        {/* Title */}
+                        <h1 className="text-[24px] font-bold text-[#1A1A2E] mb-1 leading-tight">
+                            {slide.title}
+                        </h1>
+                        <p className="text-[14px] font-semibold text-[#2C8C99] mb-5">
+                            {slide.subtitle}
+                        </p>
 
-                {/* Description or Benefits */}
-                {slide.description ? (
-                    <p className="text-[15px] text-[#4A4A5A] leading-relaxed max-w-[300px] mb-4">
-                        {slide.description}
-                    </p>
-                ) : null}
+                        {/* Description or Benefits */}
+                        {slide.description ? (
+                            <p className="text-[15px] text-[#4A4A5A] leading-relaxed max-w-[300px] mb-4">
+                                {slide.description}
+                            </p>
+                        ) : null}
 
-                {slide.benefits && (
-                    <div className="space-y-3 mb-4 w-full max-w-[300px]">
-                        {slide.benefits.map((b, i) => (
-                            <div key={i} className="flex items-start gap-3 bg-white rounded-[16px] p-4 text-left" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-                                <div className="mt-0.5 flex-shrink-0">{b.icon}</div>
-                                <p className="text-[13px] text-[#1A1A2E] font-medium leading-snug">{b.text}</p>
+                        {slide.benefits && (
+                            <div className="space-y-3 mb-4 w-full max-w-[300px]">
+                                {slide.benefits.map((b, i) => (
+                                    <div key={i} className="flex items-start gap-3 bg-white rounded-[16px] p-4 text-left" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                                        <div className="mt-0.5 flex-shrink-0">{b.icon}</div>
+                                        <p className="text-[13px] text-[#1A1A2E] font-medium leading-snug">{b.text}</p>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                )}
+                        )}
 
-                {/* Highlight */}
-                <p className="text-[14px] font-semibold text-[#2C8C99] mt-2">
-                    {slide.highlight}
-                </p>
+                        {/* Highlight */}
+                        <p className="text-[14px] font-semibold text-[#2C8C99] mt-2">
+                            {slide.highlight}
+                        </p>
+                    </>
+                )}
             </div>
 
             {/* Bottom: dots + button */}
@@ -2423,13 +3235,16 @@ export default function DemoApp() {
     const [screenStack, setScreenStack] = useState<Screen[]>([{ type: 'tab', tab: 'home' }]);
     const [toggledTasks, setToggledTasks] = useState<Record<string, boolean>>({});
     const [pendingProCategory, setPendingProCategory] = useState<string | undefined>(undefined);
+    const [showSidebar, setShowSidebar] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
     // Build lookup: micro-task ID → linked ActionableAdvice
     const guidedActionsByTaskId = useMemo(() => {
         const map: Record<string, ActionableAdvice> = {};
         actionableAdvices.forEach(a => {
-            a.linkedMicroTaskIds?.forEach(tid => { map[tid] = a; });
+            // Only assign guide to the FIRST linked micro-task to avoid duplication
+            const firstId = a.linkedMicroTaskIds?.[0];
+            if (firstId) { map[firstId] = a; }
         });
         return map;
     }, []);
@@ -2463,19 +3278,29 @@ export default function DemoApp() {
     const renderScreen = () => {
         const openArticle = (art: Article) => pushScreen({ type: 'articleReader', article: art });
 
+        const resolveProCategory = (contactName?: string) => {
+            const cn = contactName?.toLowerCase() || '';
+            let cat = 'social';
+            if (cn.includes('médecin') || cn.includes('psychologue') || cn.includes('infirm') || cn.includes('kiné')) cat = 'sante';
+            else if (cn.includes('mairie') || cn.includes('cpam') || cn.includes('caf') || cn.includes('mdph') || cn.includes('retraite') || cn.includes('autonomie')) cat = 'administratif';
+            else if (cn.includes('admr') || cn.includes('ergo') || cn.includes('accueil de jour') || cn.includes('domicile')) cat = 'domicile';
+            setPendingProCategory(cat);
+            switchTab('community');
+        };
+
         switch (currentScreen.type) {
             case 'tab':
                 switch (currentScreen.tab) {
                     case 'home':
-                        return <HomeScreen onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectArticle={openArticle} onSelectGuide={(guide) => pushScreen({ type: 'guideDetail', guide })} toggledTasks={toggledTasks} onAvatarPress={() => setActiveTab('settings')} />;
-                    case 'calendar':
-                        return <CalendarScreen />;
+                        return <HomeScreen onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectArticle={openArticle} onSelectGuide={(guide) => pushScreen({ type: 'guideDetail', guide })} toggledTasks={toggledTasks} onAvatarPress={() => setActiveTab('home')} onMenuPress={() => setShowSidebar(true)} />;
+                    case 'monsuivi':
+                        return <MonSuiviScreen toggledTasks={toggledTasks} onToggleTask={handleToggleTask} onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectProgram={(v, mp) => pushScreen({ type: 'programDetail', vulnerability: v, program: mp })} />;
+                    case 'chat':
+                        return <ChatIDECScreen />;
                     case 'community':
                         return <CommunityScreen initialProCategory={pendingProCategory} />;
                     case 'resources':
                         return <ResourcesScreen onSelectArticle={openArticle} onSelectGuide={(guide) => pushScreen({ type: 'guideDetail', guide })} />;
-                    case 'settings':
-                        return <SettingsScreen />;
                 }
                 break;
             case 'themeDetail':
@@ -2494,25 +3319,27 @@ export default function DemoApp() {
                         program={currentScreen.program}
                         onBack={popScreen}
                         toggledTasks={toggledTasks}
+                        onSelectReco={(reco, cat) => pushScreen({
+                            type: 'recoDetail',
+                            vulnerability: currentScreen.vulnerability,
+                            program: currentScreen.program,
+                            recommendation: reco,
+                            category: cat,
+                        })}
+                    />
+                );
+            case 'recoDetail':
+                return (
+                    <RecoDetailScreen
+                        vulnerability={currentScreen.vulnerability}
+                        program={currentScreen.program}
+                        recommendation={currentScreen.recommendation}
+                        category={currentScreen.category}
+                        onBack={popScreen}
+                        toggledTasks={toggledTasks}
                         onToggleTask={handleToggleTask}
                         guidedActionsByTaskId={guidedActionsByTaskId}
-                        onNavigateToGuide={(guide) => pushScreen({ type: 'guideDetail', guide })}
-                        onNavigateToProCategory={(contactName) => {
-                            // Resolve contact name to pro category
-                            const contactNameLower = contactName?.toLowerCase() || '';
-                            let targetCategory = 'social'; // default
-                            if (contactNameLower.includes('médecin') || contactNameLower.includes('psychologue') || contactNameLower.includes('infirm') || contactNameLower.includes('kiné')) {
-                                targetCategory = 'sante';
-                            } else if (contactNameLower.includes('mairie') || contactNameLower.includes('cpam') || contactNameLower.includes('caf') || contactNameLower.includes('mdph') || contactNameLower.includes('retraite') || contactNameLower.includes('autonomie')) {
-                                targetCategory = 'administratif';
-                            } else if (contactNameLower.includes('admr') || contactNameLower.includes('ergo') || contactNameLower.includes('accueil de jour') || contactNameLower.includes('domicile')) {
-                                targetCategory = 'domicile';
-                            } else {
-                                targetCategory = 'social'; // CCAS, CLIC, Plateforme de répit, France Alzheimer, etc.
-                            }
-                            setPendingProCategory(targetCategory);
-                            switchTab('community');
-                        }}
+                        onNavigateToProCategory={resolveProCategory}
                     />
                 );
             case 'articleReader':
@@ -2527,15 +3354,7 @@ export default function DemoApp() {
                     <GuideDetailScreen
                         guide={currentScreen.guide}
                         onBack={popScreen}
-                        onNavigateToProCategory={(contactName) => {
-                            const cn = contactName?.toLowerCase() || '';
-                            let cat = 'social';
-                            if (cn.includes('médecin') || cn.includes('psychologue') || cn.includes('infirm') || cn.includes('kiné')) cat = 'sante';
-                            else if (cn.includes('mairie') || cn.includes('cpam') || cn.includes('caf') || cn.includes('mdph') || cn.includes('retraite') || cn.includes('autonomie')) cat = 'administratif';
-                            else if (cn.includes('admr') || cn.includes('ergo') || cn.includes('accueil de jour') || cn.includes('domicile')) cat = 'domicile';
-                            setPendingProCategory(cat);
-                            switchTab('community');
-                        }}
+                        onNavigateToProCategory={resolveProCategory}
                     />
                 );
         }
@@ -2593,13 +3412,104 @@ export default function DemoApp() {
 
                         {/* Product Tour (driver.js) — launches after onboarding */}
                         {showProductTour && (
-                            <ProductTour onComplete={() => setShowProductTour(false)} />
+                            <ProductTour onComplete={() => setShowProductTour(false)} switchTab={switchTab} />
                         )}
 
                         {/* Bottom Nav — always visible */}
                         <div className="absolute bottom-0 left-0 right-0 z-30">
                             <BottomNavPill activeTab={activeTab} onTabChange={switchTab} />
                         </div>
+
+                        {/* Sidebar Drawer */}
+                        {showSidebar && (
+                            <>
+                                {/* Backdrop */}
+                                <div
+                                    className="absolute inset-0 z-[70] bg-black/40"
+                                    style={{ backdropFilter: 'blur(4px)' }}
+                                    onClick={() => setShowSidebar(false)}
+                                />
+                                {/* Drawer */}
+                                <div
+                                    className="absolute top-0 left-0 bottom-0 z-[80] w-[75%] max-w-[280px]"
+                                    style={{
+                                        background: 'rgba(255,255,255,0.92)',
+                                        backdropFilter: 'blur(20px)',
+                                        boxShadow: '8px 0 40px rgba(0,0,0,0.12)',
+                                        animation: 'slideInLeft 0.3s ease-out',
+                                    }}
+                                >
+                                    <div className="p-6 pt-16 flex flex-col h-full" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                                        {/* Profile */}
+                                        <div className="flex items-center gap-3 mb-8">
+                                            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#2C8C99] shadow-md">
+                                                <img src={mockUser.avatar || ''} alt="Profile" className="w-full h-full object-cover" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[15px] font-bold text-[#1A1A2E]">{mockUser.name}</p>
+                                                <p className="text-[11px] text-[#8E8E93]">{mockUser.role}</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Menu items */}
+                                        <div className="space-y-1 flex-1">
+                                            {[
+                                                { icon: <User size={20} weight="bold" />, label: 'Mon profil', desc: 'Informations personnelles' },
+                                                { icon: <FileText size={20} weight="bold" />, label: 'Mes documents', desc: 'Fichiers et justificatifs' },
+                                                { icon: <Bell size={20} weight="bold" />, label: 'Notifications', desc: 'Gérer les alertes' },
+                                                { icon: <ShieldCheck size={20} weight="bold" />, label: 'Confidentialité', desc: 'Vie privée et données' },
+                                                { icon: <Question size={20} weight="bold" />, label: 'Aide & FAQ', desc: 'Centre d\'aide' },
+                                            ].map((item, i) => (
+                                                <button
+                                                    key={i}
+                                                    className="w-full flex items-center gap-3 py-3 px-3 rounded-[12px] hover:bg-[#E8F4F8] transition-colors text-left"
+                                                >
+                                                    <div className="w-8 h-8 rounded-[10px] bg-[#E8F4F8] flex items-center justify-center text-[#2C8C99] flex-shrink-0">
+                                                        {item.icon}
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-[13px] font-semibold text-[#1A1A2E]">{item.label}</p>
+                                                        <p className="text-[10px] text-[#8E8E93]">{item.desc}</p>
+                                                    </div>
+                                                </button>
+                                            ))}
+
+                                            {/* Dark mode toggle */}
+                                            <div className="flex items-center justify-between py-3 px-3 rounded-[12px]">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-8 h-8 rounded-[10px] bg-[#E8F4F8] flex items-center justify-center text-[#2C8C99] flex-shrink-0">
+                                                        {isDark ? <Moon size={20} weight="bold" /> : <Sun size={20} weight="bold" />}
+                                                    </div>
+                                                    <p className="text-[13px] font-semibold text-[#1A1A2E]">Mode sombre</p>
+                                                </div>
+                                                <button
+                                                    onClick={() => setIsDark(d => !d)}
+                                                    className={`w-10 h-6 rounded-full transition-colors relative ${isDark ? 'bg-[#2C8C99]' : 'bg-[#D1D5DB]'}`}
+                                                >
+                                                    <div
+                                                        className="w-4 h-4 bg-white rounded-full absolute top-1 transition-all shadow-sm"
+                                                        style={{ left: isDark ? 22 : 4 }}
+                                                    />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Footer */}
+                                        <div className="pt-4 border-t border-[#E5E5EA]">
+                                            <p className="text-[10px] text-[#C8CCD0] text-center">Monka v2.0 — Démo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {/* Sidebar slide-in animation */}
+                        <style>{`
+                            @keyframes slideInLeft {
+                                from { transform: translateX(-100%); }
+                                to { transform: translateX(0); }
+                            }
+                        `}</style>
 
                         {/* Home indicator — desktop only */}
                         <div className="hidden sm:block absolute bottom-2 left-1/2 -translate-x-1/2 z-50 w-[134px] h-[5px] bg-[#1A1A1A] rounded-full opacity-30" />

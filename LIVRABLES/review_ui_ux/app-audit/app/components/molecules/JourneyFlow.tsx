@@ -25,8 +25,8 @@ interface PhoneNodeData {
     label: string;
     screenshot: string;
     stepNumber: number;
-    annotation: AnnotationType;
-    annotationText: string;
+    annotation?: AnnotationType;
+    annotationText?: string;
 }
 
 /* ─────────────────────────────────────────────
@@ -60,7 +60,7 @@ const ANNOTATION_CONFIG: Record<AnnotationType, { bg: string; border: string; te
    Custom Phone Node
 ───────────────────────────────────────────── */
 const PhoneNode = ({ data }: NodeProps<PhoneNodeData>) => {
-    const cfg = ANNOTATION_CONFIG[data.annotation];
+    const cfg = data.annotation ? ANNOTATION_CONFIG[data.annotation] : null;
 
     return (
         <div style={{ cursor: 'grab' }}>
@@ -150,22 +150,24 @@ const PhoneNode = ({ data }: NodeProps<PhoneNodeData>) => {
                 }}>{data.label}</p>
 
                 {/* Annotation badge */}
-                <div style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 4,
-                    padding: '3px 8px',
-                    borderRadius: 20,
-                    background: cfg.bg,
-                    border: `1px solid ${cfg.border}`,
-                    fontSize: 10,
-                    fontWeight: 600,
-                    color: cfg.text,
-                    fontFamily: "'Outfit', sans-serif",
-                }}>
-                    {cfg.icon}
-                    {cfg.label}
-                </div>
+                {cfg && (
+                    <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 4,
+                        padding: '3px 8px',
+                        borderRadius: 20,
+                        background: cfg.bg,
+                        border: `1px solid ${cfg.border}`,
+                        fontSize: 10,
+                        fontWeight: 600,
+                        color: cfg.text,
+                        fontFamily: "'Outfit', sans-serif",
+                    }}>
+                        {cfg.icon}
+                        {cfg.label}
+                    </div>
+                )}
             </div>
 
 
@@ -182,7 +184,7 @@ const X_SPACING = 250;
 const Y_BASE = 60;
 
 function makeNodes(
-    screens: { img: string; label: string; annotation: AnnotationType; annotationText: string }[],
+    screens: { img: string; label: string; annotation?: AnnotationType; annotationText?: string }[],
     perRow: number = 5
 ): Node<PhoneNodeData>[] {
     return screens.map((s, i) => ({
@@ -218,39 +220,34 @@ function makeEdges(count: number, color: string): Edge[] {
     return edges;
 }
 
-/* ── Parcours 1 : Onboarding ── */
+/* ── Parcours 1 : Questionnaire initial ── */
 const JOURNEY_1_SCREENS = [
-    { img: 'IMG_3689', label: 'Questionnaire — Sexe', annotation: 'positive' as const, annotationText: 'Début OK' },
-    { img: 'IMG_3691', label: 'Questionnaire — Âge', annotation: 'warning' as const, annotationText: 'Faute' },
-    { img: 'IMG_3698', label: 'Services domicile', annotation: 'warning' as const, annotationText: 'Incompréhensible' },
-    { img: 'IMG_3760', label: 'Humeur du proche', annotation: 'positive' as const, annotationText: 'Trop restrictif' },
-    { img: 'IMG_3700', label: 'Analyse en cours', annotation: 'warning' as const, annotationText: 'Attente' },
-    { img: 'IMG_3701', label: 'Paywall — Essai 7j', annotation: 'critical' as const, annotationText: 'Friction' },
-    { img: 'IMG_3702', label: 'Dashboard À la une', annotation: 'warning' as const, annotationText: 'Perdue' },
-    { img: 'IMG_3703', label: "Plan d'action", annotation: 'warning' as const, annotationText: 'Surchargée' },
-    { img: 'IMG_3704', label: 'Articles & Services', annotation: 'positive' as const, annotationText: 'Utile' },
-    { img: 'IMG_3762', label: 'Post-bilan (0/66)', annotation: 'critical' as const, annotationText: 'Abandon' },
+    { img: 'question_1', label: 'Q1 — Activité professionnelle' },
+    { img: 'question_2', label: 'Q2 — Lien de parenté' },
+    { img: 'question_3', label: 'Q3 — Sexe biologique de l\'aidé' },
+    { img: 'question_4', label: 'Q4 — Lieu de vie de l\'aidé' },
+    { img: 'question_5', label: 'Q5 — Prise en charge spécialisée' },
+    { img: 'question_6', label: 'Q6 — Besoins complémentaires' },
+    { img: 'question_7', label: 'Q7 — Priorité principale' },
+    { img: 'question_8', label: 'Q8 — Contact infirmière Monka' },
+    { img: 'question_9', label: 'Q9 — Durée d\'aide' },
+    { img: 'question_10', label: 'Essai 7 jours' },
+    { img: 'question_11', label: 'Pricing — Découverte' },
+    { img: 'question_12', label: 'Pricing — Essentiel' },
+    { img: 'question_13', label: 'Pricing — Sérénité' },
 ];
 
-/* ── Parcours 2 : Navigation Dashboard ── */
+/* ── Parcours 2 : Découverte de l'application ── */
 const JOURNEY_2_SCREENS = [
-    { img: 'IMG_3705', label: 'Onglet Santé', annotation: 'warning' as const, annotationText: 'Déjà vu' },
-    { img: 'IMG_3706', label: 'Santé — scroll', annotation: 'warning' as const, annotationText: 'Trop vague' },
-    { img: 'IMG_3707', label: 'Onglet Démarches', annotation: 'positive' as const, annotationText: 'Pertinent' },
-    { img: 'IMG_3708', label: 'Démarches — scroll', annotation: 'warning' as const, annotationText: 'Trop long' },
-    { img: 'IMG_3709', label: 'Onglet Services', annotation: 'positive' as const, annotationText: 'Clair' },
-    { img: 'IMG_3710', label: 'Services — scroll', annotation: 'warning' as const, annotationText: 'Mélangé' },
-    { img: 'IMG_3711', label: 'Ressources', annotation: 'warning' as const, annotationText: 'Générique' },
-    { img: 'IMG_3712', label: 'Messagerie IDEC', annotation: 'critical' as const, annotationText: 'Rejet' },
+    { img: 'decouverte_1', label: 'Dashboard — À la une' },
+    { img: 'decouverte_2', label: 'Dashboard — Scroll / Offres' },
+    { img: 'decouverte_3', label: 'Onglet Services' },
+    { img: 'decouverte_4', label: 'Onglet Démarches' },
+    { img: 'decouverte_5', label: 'Onglet Santé' },
+    { img: 'decouverte_6', label: 'Ressources' },
 ];
 
-/* ── Parcours 3 : Profil & Contacts ── */
-const JOURNEY_3_SCREENS = [
-    { img: 'IMG_3713', label: "Profil — Vue d'ensemble", annotation: 'warning' as const, annotationText: 'Vide' },
-    { img: 'IMG_3717', label: 'Mes soignants — "Modifer"', annotation: 'critical' as const, annotationText: 'Faute' },
-    { img: 'IMG_3718', label: 'Mes soignants', annotation: 'warning' as const, annotationText: 'Vide' },
-    { img: 'IMG_3719', label: 'Ajout interlocuteur', annotation: 'warning' as const, annotationText: 'Laborieux' },
-];
+
 
 /* ─────────────────────────────────────────────
    Journey Config
@@ -258,8 +255,8 @@ const JOURNEY_3_SCREENS = [
 interface ScreenData {
     img: string;
     label: string;
-    annotation: AnnotationType;
-    annotationText: string;
+    annotation?: AnnotationType;
+    annotationText?: string;
 }
 
 interface JourneyConfig {
@@ -274,31 +271,22 @@ interface JourneyConfig {
 
 const JOURNEYS: JourneyConfig[] = [
     {
-        id: 'onboarding',
-        title: 'Onboarding + Découverte',
-        subtitle: 'Marwane découvre Monka pour la première fois',
+        id: 'questionnaire',
+        title: 'Questionnaire initial',
+        subtitle: 'Amal répond au questionnaire pour la première fois',
         emoji: '🟢',
         color: '#059669',
         colorLight: '#ECFDF5',
         screens: JOURNEY_1_SCREENS,
     },
     {
-        id: 'dashboard',
-        title: 'Navigation Dashboard',
-        subtitle: 'Explorer les 4 catégories d\'actions',
+        id: 'decouverte',
+        title: 'Découverte de l\'application',
+        subtitle: 'Premier contact avec l\'app après le questionnaire',
         emoji: '🔵',
         color: '#2563EB',
         colorLight: '#EFF6FF',
         screens: JOURNEY_2_SCREENS,
-    },
-    {
-        id: 'profil',
-        title: 'Profil & Contacts',
-        subtitle: 'Gérer ses informations et soignants',
-        emoji: '🟠',
-        color: '#EA580C',
-        colorLight: '#FFF7ED',
-        screens: JOURNEY_3_SCREENS,
     },
 ];
 
@@ -319,7 +307,7 @@ export default function JourneyFlow() {
     // Stats
     const stats = useMemo(() => {
         const s = { positive: 0, warning: 0, critical: 0 };
-        journey.screens.forEach((sc) => s[sc.annotation]++);
+        journey.screens.forEach((sc) => { if (sc.annotation) s[sc.annotation]++; });
         return s;
     }, [activeJourney]);
 
@@ -551,52 +539,7 @@ export default function JourneyFlow() {
                     ))}
                 </div>
 
-                {/* ── Journey info panel ── */}
-                <div style={{
-                    position: 'absolute',
-                    top: 12,
-                    right: 12,
-                    background: 'rgba(30,41,59,0.95)',
-                    backdropFilter: 'blur(12px)',
-                    borderRadius: 14,
-                    padding: '12px 16px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    maxWidth: 240,
-                    zIndex: 10,
-                }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                        <div style={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: '50%',
-                            background: journey.color,
-                            boxShadow: `0 0 8px ${journey.color}88`,
-                        }} />
-                        <span style={{ color: '#F1F5F9', fontSize: 12, fontWeight: 700 }}>
-                            {journey.title}
-                        </span>
-                    </div>
-                    <p style={{
-                        color: '#94A3B8',
-                        fontSize: 10,
-                        lineHeight: 1.5,
-                        margin: 0,
-                    }}>
-                        {journey.subtitle}
-                        {' • '}
-                        <span style={{ color: journey.color, fontWeight: 600 }}>{journey.screens.length} écrans</span>
-                    </p>
-                    <div style={{
-                        marginTop: 8,
-                        display: 'flex',
-                        gap: 5,
-                    }}>
-                        <Eye size={12} color="#64748B" />
-                        <span style={{ color: '#64748B', fontSize: 9 }}>
-                            Scrollez ou zoomez pour explorer
-                        </span>
-                    </div>
-                </div>
+
             </div>
         </div>
     );

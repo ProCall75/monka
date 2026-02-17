@@ -11,6 +11,10 @@ export interface HeroCardProps {
   subtitle?: string;
   targetPerson?: string;
   taskCount?: number;
+  /** Nombre de micro-parcours actifs dans cette vulnérabilité */
+  activeMP?: number;
+  /** Nombre total de micro-parcours */
+  totalMP?: number;
   onPress?: () => void;
 }
 
@@ -20,6 +24,8 @@ export const HeroCard = ({
   subtitle,
   targetPerson,
   taskCount,
+  activeMP,
+  totalMP,
   onPress,
 }: HeroCardProps) => {
   const theme = ThemeColors[domain];
@@ -67,7 +73,23 @@ export const HeroCard = ({
                 Pour {targetPerson}
               </span>
             )}
-            {taskCount !== undefined && (
+            {activeMP !== undefined && totalMP !== undefined ? (
+              <span
+                className="text-[12px] font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5"
+                style={{
+                  color: theme.color,
+                  backgroundColor: `${theme.color}12`,
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14">
+                  <circle cx="7" cy="7" r="5.5" fill="none" stroke={`${theme.color}30`} strokeWidth="2" />
+                  <circle cx="7" cy="7" r="5.5" fill="none" stroke={theme.color} strokeWidth="2"
+                    strokeDasharray={`${(activeMP / totalMP) * 34.56} 34.56`}
+                    strokeLinecap="round" transform="rotate(-90 7 7)" />
+                </svg>
+                {activeMP}/{totalMP} programmes
+              </span>
+            ) : taskCount !== undefined ? (
               <span
                 className="text-[12px] font-semibold px-2 py-0.5 rounded-full"
                 style={{
@@ -77,7 +99,7 @@ export const HeroCard = ({
               >
                 {taskCount} action{taskCount > 1 ? 's' : ''}
               </span>
-            )}
+            ) : null}
           </div>
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center"

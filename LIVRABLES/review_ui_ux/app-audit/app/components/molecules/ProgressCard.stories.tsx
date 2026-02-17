@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { ProgressCard } from './ProgressCard';
 
 const meta = {
-    title: 'Molecules/ProgressCard',
+    title: 'Moteur — Micro-Parcours/Carte de progression',
     component: ProgressCard,
     tags: ['autodocs'],
     argTypes: {

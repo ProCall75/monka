@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { ScoreRing } from './ScoreRing';
 
 const meta = {
-    title: 'Atoms/ScoreRing',
+    title: 'Moteur — Questionnaire/Score Ring',
     component: ScoreRing,
     tags: ['autodocs'],
     argTypes: {

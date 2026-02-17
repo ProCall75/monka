@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, EyeSlash, Compass, PaintBrush, Lock, Robot, Package, ArrowSquareOut, DeviceMobile, CheckCircle, Warning, Lightbulb } from '@phosphor-icons/react';
+import { ArrowRight, ArrowDown, EyeSlash, Compass, PaintBrush, Lock, Robot, Package, ArrowSquareOut, DeviceMobile, CheckCircle, Warning, Lightbulb, House, ListChecks, ChatCircle, UsersThree, BookOpenText, ClipboardText } from '@phosphor-icons/react';
 import { QRCodeSVG } from 'qrcode.react';
 
 import JourneyFlow from './components/molecules/JourneyFlow';
@@ -15,6 +15,8 @@ import { ScoreRing } from './components/atoms/ScoreRing';
 import { TaskCard } from './components/molecules/TaskCard';
 import { MicroTaskItem } from './components/molecules/MicroTaskItem';
 import { RecoCard } from './components/molecules/RecoCard';
+import { actionableAdvices } from './data/actionable-advice-data';
+
 
 // ── Mock data ──
 import { mockVulnerabilities } from './data/kernel-mock';
@@ -422,21 +424,38 @@ export default function ReviewPage() {
                         </p>
                     </div>
 
-                    {/* ── 1a. Persona Amal — Card with gradient border ── */}
+                    {/* ── 1a. Persona Amal — Fiche profil ── */}
                     <div className="rounded-[32px] p-[2px] mb-10" style={{ background: 'linear-gradient(135deg, #E8D6FF 0%, #C4B5FD 50%, #A78BFA 100%)' }}>
-                        <div className="bg-white rounded-[30px] p-8 flex items-center gap-6">
-                            <div className="w-24 h-24 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #E8D6FF, #C4B5FD)' }}>
-                                <span className="text-[32px] font-bold" style={{ color: '#7C3AED' }}>A</span>
+                        <div className="bg-white rounded-[30px] p-8">
+                            <SectionTag color="#7C3AED">Test utilisateur réel</SectionTag>
+                            <div className="flex items-center gap-5 mb-5">
+                                <div className="w-20 h-20 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #E8D6FF, #C4B5FD)' }}>
+                                    <span className="text-[28px] font-bold" style={{ color: '#7C3AED' }}>A</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-[24px] font-extrabold mb-0.5" style={{ color: '#2D2A26' }}>Amal, 57 ans</h3>
+                                    <p className="text-[13px] font-medium" style={{ color: '#8A857E' }}>Aidante familiale</p>
+                                </div>
                             </div>
-                            <div>
-                                <SectionTag color="#7C3AED">Test utilisateur réel</SectionTag>
-                                <h3 className="text-[24px] font-extrabold mb-1" style={{ color: '#2D2A26' }}>Amal, 57 ans</h3>
-                                <p className="text-[14px] leading-relaxed" style={{ color: '#8A857E' }}>
-                                    Aidante de sa mère <strong style={{ color: '#2D2A26' }}>Fatima, 78 ans</strong> — handicap physique, autonomie réduite.
-                                    À l'aise avec son smartphone au quotidien, mais n'a pas de patience pour les interfaces mal pensées.
-                                    <br />Son angoisse principale : <strong style={{ color: '#2D2A26' }}>la sécurité de Fatima quand elle ne répond pas au téléphone</strong>.
-                                    <br />Elle cherche <strong style={{ color: '#2D2A26' }}>une app qui la soulage, pas qui lui donne des tâches en plus</strong>.
-                                </p>
+                            <div className="grid grid-cols-2 gap-4">
+                                {/* Profil */}
+                                <div className="rounded-[16px] p-4" style={{ backgroundColor: '#FAF8FF', border: '1px solid #EDE5FF' }}>
+                                    <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#7C3AED' }}>Profil</p>
+                                    <ul className="space-y-1.5">
+                                        <li className="text-[13px] leading-relaxed" style={{ color: '#2D2A26' }}>À l&apos;aise avec son smartphone</li>
+                                        <li className="text-[13px] leading-relaxed" style={{ color: '#2D2A26' }}>Coordonne le quotidien de sa mère avec ses frères et sœurs</li>
+                                        <li className="text-[13px] leading-relaxed" style={{ color: '#2D2A26' }}>Cherche <strong>un outil qui la soulage</strong></li>
+                                    </ul>
+                                </div>
+                                {/* Personne aidée */}
+                                <div className="rounded-[16px] p-4" style={{ backgroundColor: '#FBF9F7', border: '1px solid #EDE8E1' }}>
+                                    <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#B8B3AB' }}>Personne aidée</p>
+                                    <ul className="space-y-1.5">
+                                        <li className="text-[13px] leading-relaxed" style={{ color: '#2D2A26' }}><strong>Fatima, 78 ans</strong> — sa mère</li>
+                                        <li className="text-[13px] leading-relaxed" style={{ color: '#8A857E' }}>Handicap physique, autonomie réduite</li>
+                                        <li className="text-[13px] leading-relaxed" style={{ color: '#8A857E' }}>Préoccupation : sa sécurité au quotidien</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -456,27 +475,38 @@ export default function ReviewPage() {
                         </p>
                     </div>
 
-                    {/* ── Pédagogie UI / UX / Copywriting ── */}
-                    <div className="mb-12 rounded-[28px] p-8" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <SectionTag color="#8B5CF6">Avant de commencer</SectionTag>
-                        <h3 className="text-[22px] font-extrabold mb-2" style={{ color: '#2D2A26' }}>Trois axes, trois métiers</h3>
-                        <p className="text-[13px] mb-6" style={{ color: '#8A857E' }}>Pour chaque critique, on identifie si le problème relève de l'UI, de l'UX, ou du Copywriting.</p>
+                    {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                       COMPRENDRE LE CONSTAT — Disciplines + Faiblesses
+                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+                    <div className="mb-12">
+                        <SectionTag color="#8B5CF6">Comprendre le constat</SectionTag>
+                        <SectionTitle>
+                            Les trois piliers d'une application.
+                        </SectionTitle>
+                        <p className="text-[14px] leading-relaxed mb-8" style={{ color: '#8A857E', maxWidth: 680 }}>
+                            Ce qu&apos;Amal décrit — une charge supplémentaire au lieu d&apos;un soulagement — découle de manquements
+                            identifiables dans les trois piliers de toute application numérique.
+                        </p>
+
+                        {/* 3 discipline cards — definition + integrated weakness */}
                         <div className="grid grid-cols-3 gap-5">
                             {[
                                 {
                                     icon: '🎨',
-                                    title: 'UI — Interface',
-                                    def: 'L\'apparence visuelle : couleurs, typographie, espacement, icônes.',
-                                    impact: 'Première impression, crédibilité, confiance immédiate.',
+                                    title: 'Interface (UI)',
+                                    subtitle: 'Ce que l\'on voit',
+                                    weakness: 'Une hiérarchie visuelle absente',
+                                    detail: 'Les quatre onglets portent la même structure, les mêmes poids visuels. Rien ne guide le regard vers ce qui compte — tout semble identique, donc rien ne semble important.',
                                     color: '#3B82F6',
                                     bg: '#EFF6FF',
                                     borderColor: '#BFDBFE',
                                 },
                                 {
                                     icon: '🧭',
-                                    title: 'UX — Expérience',
-                                    def: 'Le parcours utilisateur : navigation, friction, fluidité, architecture.',
-                                    impact: 'Rétention, conversion, satisfaction à long terme.',
+                                    title: 'Expérience (UX)',
+                                    subtitle: 'Ce que l\'on ressent',
+                                    weakness: 'Aucune profondeur de navigation',
+                                    detail: 'Toutes les tâches, recommandations et services cohabitent sur un seul niveau. Sans système de priorité ni progression — l\'aidant fait face à une liste, pas à un parcours.',
                                     color: '#F59E0B',
                                     bg: '#FFFBEB',
                                     borderColor: '#FDE68A',
@@ -484,111 +514,53 @@ export default function ReviewPage() {
                                 {
                                     icon: '✍️',
                                     title: 'Copywriting',
-                                    def: 'Les mots utilisés : ton, clarté, jargon, cohérence éditoriale.',
-                                    impact: 'Compréhension, engagement, passage à l\'action.',
+                                    subtitle: 'Ce que l\'on comprend',
+                                    weakness: 'Un ton qui informe sans accompagner',
+                                    detail: 'Le vocabulaire reste clinique : « prescription de prévention », « micro-tâche », « vulnérabilité ». L\'aidant comprend qu\'on lui parle de sa situation, mais ne sent pas qu\'on s\'adresse à lui.',
                                     color: '#EC4899',
                                     bg: '#FDF2F8',
                                     borderColor: '#FBCFE8',
                                 },
                             ].map((p, i) => (
-                                <div key={i} className="rounded-[20px] p-5" style={{ backgroundColor: p.bg, border: `1px solid ${p.borderColor}` }}>
+                                <div key={i} className="rounded-[20px] p-6 flex flex-col" style={{ backgroundColor: p.bg, border: `1px solid ${p.borderColor}` }}>
                                     <span className="text-[28px] block mb-3">{p.icon}</span>
-                                    <h4 className="text-[15px] font-extrabold mb-2" style={{ color: p.color }}>{p.title}</h4>
-                                    <p className="text-[12px] leading-relaxed mb-3" style={{ color: '#2D2A26' }}>{p.def}</p>
-                                    <div className="rounded-xl px-3 py-2" style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}>
-                                        <p className="text-[11px] font-semibold" style={{ color: p.color }}>Impact business : {p.impact}</p>
+                                    <h4 className="text-[16px] font-extrabold mb-0.5" style={{ color: p.color }}>{p.title}</h4>
+                                    <p className="text-[11px] font-semibold uppercase tracking-wider mb-4" style={{ color: `${p.color}99` }}>{p.subtitle}</p>
+                                    <div className="rounded-xl px-4 py-3 flex-1" style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderLeft: `3px solid ${p.color}` }}>
+                                        <p className="text-[13px] font-bold mb-1.5" style={{ color: p.color }}>{p.weakness}</p>
+                                        <p className="text-[11px] leading-relaxed" style={{ color: '#8A857E' }}>{p.detail}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* ── 1c. Résumé des points critiques — par thème ── */}
-                    <SectionTag color="#EF4444">Le Constat</SectionTag>
-                    <SectionTitle>
-                        6 points critiques identifiés,<br />3 thèmes à travailler.
-                    </SectionTitle>
-                    <SectionSubtitle>
-                        Chaque constat pointe vers un axe de travail précis dans la construction de l&apos;application.
-                    </SectionSubtitle>
-
-                    {/* Theme legend */}
-                    <div className="flex gap-3 mb-6 flex-wrap">
-                        {[
-                            { emoji: '🎨', label: 'Interface (UI)', color: '#3B82F6', bg: '#EFF6FF' },
-                            { emoji: '✍️', label: 'Copywriting', color: '#EC4899', bg: '#FDF2F8' },
-                            { emoji: '🧭', label: 'Expérience (UX)', color: '#F59E0B', bg: '#FFFBEB' },
-                        ].map((t, i) => (
-                            <div key={i} className="flex items-center gap-2 px-3.5 py-2 rounded-full text-[12px] font-bold" style={{ color: t.color, backgroundColor: t.bg }}>
-                                <span>{t.emoji}</span> {t.label}
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Critique cards — compact with theme tags */}
-                    <div className="space-y-3 mb-16">
-                        {[
-                            { title: 'Navigation à un seul niveau', severity: 'bloquant' as const, theme: '🎨 UI', themeColor: '#3B82F6', themeBg: '#EFF6FF', desc: 'Les 4 onglets partagent la même structure — seule la couleur change.', proposal: 'Architecture en profondeur : Thèmes → Parcours → Actions' },
-                            { title: 'Séquence de découverte interrompue', severity: 'bloquant' as const, theme: '🧭 UX', themeColor: '#F59E0B', themeBg: '#FFFBEB', desc: 'Paywall après 30 min de questionnaire, avant de voir la valeur.', proposal: 'Montrer le profil personnalisé avant la conversion' },
-                            { title: 'Personnalisation à renforcer', severity: 'majeur' as const, theme: '🧭 UX', themeColor: '#F59E0B', themeBg: '#FFFBEB', desc: 'Hero cards génériques malgré les données du moteur.', proposal: 'Personnalisation systématique : « Pour Francine » partout' },
-                            { title: 'Contextualisation des recommandations', severity: 'majeur' as const, theme: '🎨 UI', themeColor: '#3B82F6', themeBg: '#EFF6FF', desc: 'Les recommandations n\'expliquent pas le « pourquoi ».', proposal: 'Ajouter un contexte sous chaque recommandation' },
-                            { title: 'Structure de navigation uniforme', severity: 'majeur' as const, theme: '🎨 UI', themeColor: '#3B82F6', themeBg: '#EFF6FF', desc: 'Expérience identique d\'un onglet à l\'autre, contenu perçu comme pauvre.', proposal: '5 thèmes distincts ouvrant 24 micro-parcours' },
-                            { title: 'Harmonisation éditoriale', severity: 'mineur' as const, theme: '✍️ Copy', themeColor: '#EC4899', themeBg: '#FDF2F8', desc: 'Coquilles, formules d\'adresse incohérentes, vocabulaire trop technique.', proposal: 'Charte copywriting unifiée, ton bienveillant' },
-                        ].map((item, i) => {
-                            const sev = SEVERITY_STYLES[item.severity];
-                            return (
-                                <div key={i} className="bg-white rounded-[20px] p-5 flex gap-4" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.04)' }}>
-                                    {/* Number */}
-                                    <span className="flex-shrink-0 text-[20px] font-extrabold mt-0.5" style={{ color: '#EDE8E1' }}>
-                                        {String(i + 1).padStart(2, '0')}
-                                    </span>
-                                    {/* Content */}
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                                            <h4 className="text-[14px] font-bold" style={{ color: '#2D2A26' }}>{item.title}</h4>
-                                            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider" style={{ color: sev.text, backgroundColor: sev.bg }}>
-                                                {sev.label}
-                                            </span>
-                                            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold" style={{ color: item.themeColor, backgroundColor: item.themeBg }}>
-                                                {item.theme}
-                                            </span>
-                                        </div>
-                                        <p className="text-[12px] leading-relaxed mb-2" style={{ color: '#8A857E' }}>{item.desc}</p>
-                                        <div className="flex items-start gap-2">
-                                            <ArrowRight size={12} weight="bold" className="flex-shrink-0 mt-0.5" style={{ color: '#059669' }} />
-                                            <p className="text-[11px] font-semibold" style={{ color: '#059669' }}>{item.proposal}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* ── 1d. Le Paradoxe — Visual split layout ── */}
-                    <SectionTag color="#10B981">Ce qu'on a observé</SectionTag>
-                    <SectionTitle gradient>Un moteur puissant,<br />une interface qui ne l'exploite pas encore.</SectionTitle>
-                    <div className="grid grid-cols-2 gap-0 rounded-[28px] overflow-hidden mb-6" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        {/* Left column header — Engine */}
-                        <div className="px-6 py-4" style={{ backgroundColor: '#ECFDF5' }}>
-                            <p className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#065F46' }}>🔬 Ce que le moteur sait</p>
+                    {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                       CONTRASTE — Le résultat ↔ La conviction
+                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+                    <div className="grid grid-cols-2 gap-5 mb-12">
+                        {/* Left — Problem */}
+                        <div className="rounded-[24px] p-7" style={{ backgroundColor: '#FEF2F2', border: '1px solid #FECACA' }}>
+                            <p className="text-[10px] font-bold uppercase tracking-[2px] mb-3" style={{ color: '#EF4444' }}>Aujourd&apos;hui</p>
+                            <h3 className="text-[18px] font-extrabold leading-snug mb-3" style={{ color: '#991B1B' }}>
+                                Une application perçue comme une charge.
+                            </h3>
+                            <p className="text-[12px] leading-relaxed" style={{ color: '#7F1D1D' }}>
+                                Sans personnalisation, sans profondeur, sans un langage qui rassure — l&apos;aidant ne retrouve pas
+                                <strong> sa</strong> situation dans l&apos;écran. Il voit une liste de tâches génériques là où il espérait un compagnon qui <em>comprend</em>.
+                            </p>
                         </div>
-                        {/* Right column header — User */}
-                        <div className="px-6 py-4" style={{ backgroundColor: '#FFFBEB' }}>
-                            <p className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#92400E' }}>👁️ Ce que l'aidant voit</p>
+                        {/* Right — Vision */}
+                        <div className="rounded-[24px] p-7" style={{ backgroundColor: '#ECFDF5', border: '1px solid #A7F3D0' }}>
+                            <p className="text-[10px] font-bold uppercase tracking-[2px] mb-3" style={{ color: '#059669' }}>La conviction</p>
+                            <h3 className="text-[18px] font-extrabold leading-snug mb-3" style={{ color: '#065F46' }}>
+                                L&apos;app doit refléter la richesse du moteur.
+                            </h3>
+                            <p className="text-[12px] leading-relaxed" style={{ color: '#047857' }}>
+                                Le moteur analyse, personnalise, priorise. L&apos;interface doit retranscrire cette intelligence avec
+                                <strong> intuitivité</strong>, <strong>lisibilité</strong> et <strong>bienveillance</strong> — sans effort cognitif supplémentaire.
+                            </p>
                         </div>
-                        {/* Rows */}
-                        {PARADOX_ROWS.map((row, i) => (
-                            <React.Fragment key={i}>
-                                <div className="px-6 py-4 flex items-center gap-3 bg-white" style={{ borderBottom: '1px solid #F3EAE3' }}>
-                                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#10B981' }} />
-                                    <p className="text-[14px] font-medium" style={{ color: '#2D2A26' }}>{row.engine}</p>
-                                </div>
-                                <div className="px-6 py-4 flex items-center gap-3 bg-white" style={{ borderBottom: '1px solid #F3EAE3', borderLeft: '2px solid #F59E0B' }}>
-                                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#F59E0B' }} />
-                                    <p className="text-[14px]" style={{ color: '#8A857E' }}>{row.user}</p>
-                                </div>
-                            </React.Fragment>
-                        ))}
                     </div>
 
 
@@ -652,7 +624,7 @@ export default function ReviewPage() {
                             <p className="text-[10px] font-bold uppercase tracking-[2px]" style={{ color: '#059669' }}>Composant</p>
                         </div>
 
-                        {/* Row 1: Vulnérabilité */}
+                        {/* Row 1: Vulnérabilité → HeroCard */}
                         <div className="grid grid-cols-[1fr_60px_1.2fr] items-stretch gap-0">
                             {/* Engine block */}
                             <div className="rounded-[20px] p-5 flex flex-col justify-center" style={{ backgroundColor: '#FBF9F7', border: '1px solid #EDE8E1', borderLeft: '4px solid #8B5CF6' }}>
@@ -663,7 +635,7 @@ export default function ReviewPage() {
                                 <p className="text-[11px] leading-relaxed" style={{ color: '#8A857E' }}>
                                     V1 → V5<br />
                                     5 domaines de risque<br />
-                                    <span className="font-semibold" style={{ color: '#8B5CF6' }}>Intensité par vulnérabilité</span>
+                                    <span className="font-semibold" style={{ color: '#8B5CF6' }}>Jauge : nb de micro-parcours</span>
                                 </p>
                                 <div className="flex gap-1 mt-3 flex-wrap">
                                     <MTag label="Social" domain="R" size="sm" />
@@ -684,11 +656,12 @@ export default function ReviewPage() {
                             {/* Component block */}
                             <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: '1px solid #E8F5E9' }}>
                                 <p className="text-[9px] font-bold uppercase tracking-wider mb-3" style={{ color: '#059669' }}>« Thème de vie »</p>
-                                <HeroCard domain="S" title="Prendre soin de votre santé" subtitle="3 actions personnalisées" taskCount={3} targetPerson="Francine" />
+                                <HeroCard domain="S" title="Prendre soin de votre santé" subtitle="Un parcours adapté à votre situation" activeMP={2} totalMP={4} targetPerson="Francine" />
+                                <p className="text-[10px] italic mt-2.5 leading-relaxed" style={{ color: '#8A857E' }}>La jauge se remplit quand l&apos;aidant avance dans ses micro-parcours.</p>
                             </div>
                         </div>
 
-                        {/* Row 2: Micro-Parcours */}
+                        {/* Row 2: Micro-Parcours → TaskCard (avec jauge ASR) */}
                         <div className="grid grid-cols-[1fr_60px_1.2fr] items-stretch gap-0">
                             {/* Engine block */}
                             <div className="rounded-[20px] p-5 flex flex-col justify-center" style={{ backgroundColor: '#FBF9F7', border: '1px solid #EDE8E1', borderLeft: '4px solid #3B82F6' }}>
@@ -699,7 +672,7 @@ export default function ReviewPage() {
                                 <p className="text-[11px] leading-relaxed" style={{ color: '#8A857E' }}>
                                     24 parcours (K9 : 1 MP = 1 ASR)<br />
                                     Objectifs mesurables<br />
-                                    <span className="font-semibold" style={{ color: '#3B82F6' }}>Progression par domaine</span>
+                                    <span className="font-semibold" style={{ color: '#3B82F6' }}>Jauge ASR = MT contributives</span>
                                 </p>
                             </div>
 
@@ -712,17 +685,16 @@ export default function ReviewPage() {
 
                             {/* Component block */}
                             <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: '1px solid #E8F5E9' }}>
-                                <p className="text-[9px] font-bold uppercase tracking-wider mb-3" style={{ color: '#059669' }}>« Parcours »</p>
-                                <div className="flex items-center gap-4">
-                                    <div className="flex-1">
-                                        <ProgressCard percentage={72} variant="compact" label="de votre parcours complété" />
-                                    </div>
-                                    <ScoreRing score={72} size={80} strokeWidth={7} color="#3B82F6" label="Objectif" />
+                                <p className="text-[9px] font-bold uppercase tracking-wider mb-3" style={{ color: '#059669' }}>« Programme »</p>
+                                <div className="space-y-3">
+                                    <TaskCard title="Retrouver du répit" description="Des pistes concrètes pour souffler un peu." criticality="ccc" domain="S" asrDone={1} asrTotal={3} asrProgress={33} isActivated={true} />
+                                    <TaskCard title="Anticiper les démarches" description="Se préparer sereinement." criticality="prevention" domain="A" isActivated={false} />
                                 </div>
+                                <p className="text-[10px] italic mt-2.5 leading-relaxed" style={{ color: '#8A857E' }}>La barre ASR avance quand l&apos;aidant coche des actions 📍 contributives. Variante prévention = objectif déjà atteint.</p>
                             </div>
                         </div>
 
-                        {/* Row 3: Recommandation */}
+                        {/* Row 3: Recommandation → RecoCard (badge + titre + chevron) */}
                         <div className="grid grid-cols-[1fr_60px_1.2fr] items-stretch gap-0">
                             {/* Engine block */}
                             <div className="rounded-[20px] p-5 flex flex-col justify-center" style={{ backgroundColor: '#FBF9F7', border: '1px solid #EDE8E1', borderLeft: '4px solid #EC4899' }}>
@@ -733,7 +705,7 @@ export default function ReviewPage() {
                                 <p className="text-[11px] leading-relaxed" style={{ color: '#8A857E' }}>
                                     Organisées par catégorie (K17)<br />
                                     3 niveaux de criticité (K2)<br />
-                                    <span className="font-semibold" style={{ color: '#EC4899' }}>🔴 Critique · 🟠 CCC · 🟢 Standard</span>
+                                    <span className="font-semibold" style={{ color: '#EC4899' }}>Pas de jauge — simple conteneur</span>
                                 </p>
                                 <div className="flex gap-1 mt-3 flex-wrap">
                                     <Badge variant="critique" />
@@ -753,13 +725,15 @@ export default function ReviewPage() {
                             <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: '1px solid #E8F5E9' }}>
                                 <p className="text-[9px] font-bold uppercase tracking-wider mb-3" style={{ color: '#059669' }}>« Conseil »</p>
                                 <div className="space-y-3">
-                                    <TaskCard title="Se faire accompagner" description="Évaluer votre situation et accéder aux aides disponibles." criticality="ccc" domain="R" targetPerson="Francine" />
-                                    <TaskCard title="Faire la demande d'APA" description="Rassembler les justificatifs et contacter le département." criticality="critical" domain="A" />
+                                    <RecoCard title="Se faire accompagner" domain="R" urgency="critical" />
+                                    <RecoCard title="Faire la demande d'APA" domain="A" urgency="ccc" />
+                                    <RecoCard title="Aménager votre temps" domain="S" urgency="standard" />
                                 </div>
+                                <p className="text-[10px] italic mt-2.5 leading-relaxed" style={{ color: '#8A857E' }}>Pas de jauge ici — la reco est un conteneur. Le badge de criticité indique l&apos;urgence.</p>
                             </div>
                         </div>
 
-                        {/* Row 4: Micro-Tâche */}
+                        {/* Row 4: Micro-Tâche → MicroTaskItem */}
                         <div className="grid grid-cols-[1fr_60px_1.2fr] items-stretch gap-0">
                             {/* Engine block */}
                             <div className="rounded-[20px] p-5 flex flex-col justify-center" style={{ backgroundColor: '#FBF9F7', border: '1px solid #EDE8E1', borderLeft: '4px solid #F59E0B' }}>
@@ -769,8 +743,8 @@ export default function ReviewPage() {
                                 </div>
                                 <p className="text-[11px] leading-relaxed" style={{ color: '#8A857E' }}>
                                     Actions concrètes (K20)<br />
-                                    📍 Contributives / 💡 Non-contributives<br />
-                                    <span className="font-semibold" style={{ color: '#F59E0B' }}>Cochables — font avancer l&apos;ASR</span>
+                                    📍 Sécurisation / 🌿 Bien-être<br />
+                                    <span className="font-semibold" style={{ color: '#F59E0B' }}>Cochables — les 📍 font avancer l&apos;ASR</span>
                                 </p>
                             </div>
 
@@ -789,6 +763,7 @@ export default function ReviewPage() {
                                         <MicroTaskItem key={task.id} task={task} onToggle={handleToggle} />
                                     ))}
                                 </div>
+                                <p className="text-[10px] italic mt-2.5 leading-relaxed" style={{ color: '#8A857E' }}>Cocher une action 📍 fait monter la barre ASR du programme parent. Les 🌿 sont utiles mais ne bloquent pas.</p>
                             </div>
                         </div>
                     </div>
@@ -800,85 +775,58 @@ export default function ReviewPage() {
                         <div className="w-10 h-10 rounded-full flex items-center justify-center text-[20px]" style={{ backgroundColor: '#FDF2F8' }}>✍️</div>
                         <div>
                             <h3 className="text-[20px] font-extrabold" style={{ color: '#2D2A26' }}>Copywriting</h3>
-                            <p className="text-[12px]" style={{ color: '#8A857E' }}>L&apos;aidant n&apos;est pas un patient — il est accompagné</p>
+                            <p className="text-[12px]" style={{ color: '#8A857E' }}>Comment on s&apos;adresse a l&apos;aidant dans chaque ecran</p>
                         </div>
                     </div>
 
-                    {/* ── Principes copywriting — Conseils actionnables ── */}
-                    <div className="bg-white rounded-[32px] p-8 space-y-5 mb-4" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-1" style={{ color: '#EC4899' }}>Charte éditoriale — 4 principes</p>
-                        <p className="text-[11px] mb-4" style={{ color: '#8A857E' }}>Chaque principe est illustré par un problème réel identifié dans l&apos;app Monka.</p>
+                    {/* ── Principes copywriting ── */}
+                    <div className="bg-white rounded-[32px] p-8 mb-4" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#EC4899' }}>Principes de redaction</p>
+                        <p className="text-[15px] leading-relaxed mb-8" style={{ color: '#8A857E', maxWidth: 600 }}>
+                            Chaque texte de l&apos;app passe par quatre questions simples avant d&apos;etre valide.
+                        </p>
 
-                        {/* Principe 1: Ton uniforme */}
-                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
-                            <div className="flex items-center gap-2 mb-3">
-                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>1</div>
-                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Ton uniforme sur toute l&apos;app</span>
-                            </div>
-                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
-                                Choisir <strong>un seul registre</strong> (vouvoiement bienveillant) et s&apos;y tenir. Actuellement, l&apos;app alterne entre tutoiement, vouvoiement, et ton impersonnel d&apos;un écran à l&apos;autre.
-                            </p>
-                            <div className="flex items-center gap-3 rounded-[12px] px-4 py-3" style={{ backgroundColor: '#fff', border: '1px solid #F3EAE3' }}>
-                                <span className="text-[11px]" style={{ color: '#EF4444' }}>❌</span>
-                                <span className="text-[12px] italic" style={{ color: '#8A857E' }}>« En 7 jours vous y voyez plus clair » / « Chaque mois on refait le point » / « On s&apos;en occupe »</span>
-                            </div>
-                        </div>
-
-                        {/* Principe 2: Vocabulaire accessible */}
-                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
-                            <div className="flex items-center gap-2 mb-3">
-                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>2</div>
-                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Vocabulaire accessible, zéro jargon</span>
-                            </div>
-                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
-                                Remplacer <strong>chaque acronyme et terme médical</strong> par son équivalent compréhensible. L&apos;aidant n&apos;est pas un professionnel de santé.
-                            </p>
-                            <div className="grid grid-cols-2 gap-2">
-                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA' }}>
-                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#EF4444' }}>Actuellement</p>
-                                    <p className="text-[12px]" style={{ color: '#991B1B' }}>« Solliciter la CARSAT » · « IDEC » · « Résidence sérieuse »</p>
+                        <div className="space-y-3">
+                            {[
+                                {
+                                    question: 'Est-ce que c\u0027est clair ?',
+                                    detail: 'L\u0027aidant comprend du premier coup, sans avoir a chercher. Pas d\u0027acronyme, pas de jargon clinique, pas de formulation ambigue.',
+                                    color: '#3B82F6',
+                                    bg: '#EFF6FF',
+                                    border: '#BFDBFE',
+                                },
+                                {
+                                    question: 'Est-ce que le ton est juste ?',
+                                    detail: 'On s\u0027adresse a quelqu\u0027un qui fait deja beaucoup. Le ton reconnait cet effort sans dramatiser ni infantiliser.',
+                                    color: '#EC4899',
+                                    bg: '#FDF2F8',
+                                    border: '#FBCFE8',
+                                },
+                                {
+                                    question: 'Est-ce que c\u0027est fiable ?',
+                                    detail: 'Zero faute, zero incoherence. Dans une app sante, chaque erreur de forme entame la confiance sur le fond.',
+                                    color: '#8B5CF6',
+                                    bg: '#F5F3FF',
+                                    border: '#DDD6FE',
+                                },
+                                {
+                                    question: 'Est-ce que ca aide a agir ?',
+                                    detail: 'Chaque ecran oriente vers une action concrete. Les boutons disent ce qu\u0027ils font. Les titres montrent la prochaine etape, pas un statut.',
+                                    color: '#10B981',
+                                    bg: '#ECFDF5',
+                                    border: '#A7F3D0',
+                                },
+                            ].map((p, i) => (
+                                <div key={i} className="rounded-[16px] px-5 py-4 flex items-start gap-4" style={{ backgroundColor: p.bg, border: `1px solid ${p.border}` }}>
+                                    <div className="w-6 h-6 rounded-full flex-shrink-0 mt-0.5 flex items-center justify-center" style={{ backgroundColor: `${p.color}18` }}>
+                                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
+                                    </div>
+                                    <div>
+                                        <p className="text-[13px] font-bold mb-1" style={{ color: '#2D2A26' }}>{p.question}</p>
+                                        <p className="text-[12px] leading-relaxed" style={{ color: '#8A857E' }}>{p.detail}</p>
+                                    </div>
                                 </div>
-                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#ECFDF5', border: '1px solid #A7F3D0' }}>
-                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#059669' }}>Recommandé</p>
-                                    <p className="text-[12px]" style={{ color: '#065F46' }}>« Vos droits retraite » · « Votre coordinateur santé » · « Résidence autonomie »</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Principe 3: Boutons actionnables */}
-                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
-                            <div className="flex items-center gap-2 mb-3">
-                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>3</div>
-                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Boutons et CTA explicites</span>
-                            </div>
-                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
-                                Chaque bouton doit dire <strong>exactement ce qu&apos;il fait</strong>. « C&apos;est fait » sur une page info ne veut rien dire — « J&apos;ai compris » ou « Étape suivante » donne le contrôle à l&apos;aidant.
-                            </p>
-                            <div className="grid grid-cols-2 gap-2">
-                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA' }}>
-                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#EF4444' }}>Actuellement</p>
-                                    <p className="text-[12px]" style={{ color: '#991B1B' }}>« C&apos;est fait » · « Faites-vous aider » · « C&apos;est parti »</p>
-                                </div>
-                                <div className="rounded-[12px] px-4 py-3" style={{ backgroundColor: '#ECFDF5', border: '1px solid #A7F3D0' }}>
-                                    <p className="text-[10px] font-bold mb-1" style={{ color: '#059669' }}>Recommandé</p>
-                                    <p className="text-[12px]" style={{ color: '#065F46' }}>« J&apos;ai compris » · « Voir les ressources » · « Commencer le questionnaire »</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Principe 4: Questions cohérentes */}
-                        <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
-                            <div className="flex items-center gap-2 mb-3">
-                                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-extrabold" style={{ backgroundColor: '#EC4899', color: '#fff' }}>4</div>
-                                <span className="text-[15px] font-extrabold" style={{ color: '#2D2A26' }}>Questions bien formulées</span>
-                            </div>
-                            <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#4B5563' }}>
-                                Cohérence sujet/verbe, orthographe vérifiée, et <strong>les réponses doivent correspondre à la question posée</strong>. « Quelle activité exercez-vous ? » avec des réponses qui sont des situations, pas des activités.
-                            </p>
-                            <div className="flex items-center gap-3 rounded-[12px] px-4 py-3" style={{ backgroundColor: '#fff', border: '1px solid #F3EAE3' }}>
-                                <span className="text-[11px]" style={{ color: '#EF4444' }}>❌</span>
-                                <span className="text-[12px] italic" style={{ color: '#8A857E' }}>« quel âge la personne » (manque « a ») · « Modifer » (manque « i ») · « anxieuxe »</span>
-                            </div>
+                            ))}
                         </div>
                     </div>
 
@@ -937,60 +885,6 @@ export default function ReviewPage() {
                         </div>
                     </div>
 
-                    {/* ── Profondeur d'app : 1 niveau → 4 niveaux ── */}
-                    <div className="bg-white rounded-[32px] p-8 mb-8" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-5" style={{ color: '#F59E0B' }}>Profondeur de navigation</p>
-                        <div className="grid grid-cols-2 gap-6">
-                            {/* Avant */}
-                            <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FDF6F0', border: '2px dashed #EDE8E1' }}>
-                                <p className="text-[11px] font-bold uppercase tracking-wider mb-4" style={{ color: '#EF4444' }}>Actuellement — 1 niveau</p>
-                                <div className="space-y-2">
-                                    {['À la une', 'Santé', 'Démarches', 'Services'].map((tab, i) => (
-                                        <div key={i} className="flex items-center gap-2 px-3 py-2.5 rounded-xl" style={{ backgroundColor: '#FFFFFF', border: '1px solid #EDE8E1' }}>
-                                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#D4D4D4' }} />
-                                            <span className="text-[12px]" style={{ color: '#8A857E' }}>{tab}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <p className="text-[10px] italic mt-3 text-center" style={{ color: '#B8B3AB' }}>Même structure partout, pas de hiérarchie</p>
-                            </div>
-                            {/* Après */}
-                            <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}>
-                                <p className="text-[11px] font-bold uppercase tracking-wider mb-4" style={{ color: '#059669' }}>Notre proposition — 4 niveaux</p>
-                                <div className="space-y-1.5">
-                                    <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl" style={{ backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE' }}>
-                                        <span className="text-[11px] font-bold" style={{ color: '#3B82F6' }}>1.</span>
-                                        <span className="text-[12px] font-bold" style={{ color: '#2D2A26' }}>Thèmes de vie</span>
-                                        <span className="text-[9px] ml-auto" style={{ color: '#8A857E' }}>Santé, Droits, Répit…</span>
-                                    </div>
-                                    <div className="flex items-center justify-center">
-                                        <ArrowRight size={12} weight="bold" style={{ color: '#D4D4D4', transform: 'rotate(90deg)' }} />
-                                    </div>
-                                    <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl" style={{ backgroundColor: '#F0FDF4', border: '1px solid #BBF7D0' }}>
-                                        <span className="text-[11px] font-bold" style={{ color: '#059669' }}>2.</span>
-                                        <span className="text-[12px] font-bold" style={{ color: '#2D2A26' }}>Micro-Parcours</span>
-                                        <span className="text-[9px] ml-auto" style={{ color: '#8A857E' }}>24 parcours guidés</span>
-                                    </div>
-                                    <div className="flex items-center justify-center">
-                                        <ArrowRight size={12} weight="bold" style={{ color: '#D4D4D4', transform: 'rotate(90deg)' }} />
-                                    </div>
-                                    <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl" style={{ backgroundColor: '#FDF2F8', border: '1px solid #FBCFE8' }}>
-                                        <span className="text-[11px] font-bold" style={{ color: '#EC4899' }}>3.</span>
-                                        <span className="text-[12px] font-bold" style={{ color: '#2D2A26' }}>Recommandations</span>
-                                        <span className="text-[9px] ml-auto" style={{ color: '#8A857E' }}>Conseils adaptés au profil</span>
-                                    </div>
-                                    <div className="flex items-center justify-center">
-                                        <ArrowRight size={12} weight="bold" style={{ color: '#D4D4D4', transform: 'rotate(90deg)' }} />
-                                    </div>
-                                    <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl" style={{ backgroundColor: '#FFFBEB', border: '1px solid #FDE68A' }}>
-                                        <span className="text-[11px] font-bold" style={{ color: '#F59E0B' }}>4.</span>
-                                        <span className="text-[12px] font-bold" style={{ color: '#2D2A26' }}>Micro-Tâches</span>
-                                        <span className="text-[9px] ml-auto" style={{ color: '#8A857E' }}>Actions cochables par parcours</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     {/* ── Use Cases principaux — Grille 3×2 ── */}
                     <div className="bg-white rounded-[32px] p-8 mb-8" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
@@ -1034,122 +928,197 @@ export default function ReviewPage() {
                         </div>
                     </div>
 
-                    {/* ── 2.1 Audit des écrans codés + 2.2 Arborescence ── */}
+                    {/* ── 2.1 L'architecture qui en découle ── */}
                     <div className="bg-white rounded-[32px] p-8 mb-8" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#F59E0B' }}>Arborescence du prototype</p>
-                        <p className="text-[13px] mb-6" style={{ color: '#8A857E' }}>Inventaire complet des écrans codés dans le prototype fonctionnel — 15 composants, navigation complète.</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[2px] mb-2" style={{ color: '#F59E0B' }}>L&apos;architecture qui en découle</p>
+                        <p className="text-[15px] leading-relaxed mb-8" style={{ color: '#8A857E', maxWidth: 640 }}>
+                            Personnalisation, profondeur, clarté — ces constats imposent naturellement cette structure.
+                        </p>
 
-                        {/* Arbre de parcours — top-down journey tree */}
-                        <div className="rounded-[20px] p-8 mb-6 flex flex-col items-center" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
+                        {/* ── PART 1: Page tree — faithful to actual app ── */}
+                        <div className="rounded-[20px] p-8 mb-8 flex flex-col items-center" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
+
                             {/* Root — Onboarding */}
-                            <div className="rounded-[14px] px-5 py-2.5 text-center font-bold text-[13px] text-white" style={{ backgroundColor: '#8B5CF6' }}>Onboarding · Questionnaire</div>
-                            <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
+                            <div className="rounded-[14px] px-6 py-3 text-center font-bold text-[13px] text-white flex items-center gap-2 justify-center" style={{ backgroundColor: '#8B5CF6', boxShadow: '0 4px 14px -2px rgba(139,92,246,0.35)' }}>
+                                <ClipboardText size={16} weight="bold" className="text-white/90" />
+                                Onboarding / Questionnaire
+                            </div>
+                            <div className="w-px h-6" style={{ backgroundColor: '#D4D4D4' }} />
 
                             {/* Dashboard */}
-                            <div className="rounded-[14px] px-5 py-2.5 text-center font-bold text-[13px] text-white" style={{ backgroundColor: '#3B82F6' }}>Dashboard</div>
-                            <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
-
-                            {/* Pages — horizontal branches from Dashboard */}
-                            <div className="relative w-full max-w-[750px] mb-6">
-                                <div className="absolute top-0 left-[8%] right-[8%] h-px" style={{ backgroundColor: '#D4D4D4' }} />
-                                <div className="grid grid-cols-5 gap-2">
-                                    {[
-                                        { label: 'Programme', icon: '📋', sub: 'Thèmes · Parcours' },
-                                        { label: 'Calendrier', icon: '📅', sub: 'Agenda semaine' },
-                                        { label: 'Ressources', icon: '📚', sub: 'Articles · Guides' },
-                                        { label: 'Communauté', icon: '👥', sub: 'Annuaire Pro' },
-                                        { label: 'Chat IDEC', icon: '💬', sub: 'Messagerie' },
-                                    ].map((p, i) => (
-                                        <div key={i} className="flex flex-col items-center">
-                                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
-                                            <div className="rounded-[12px] px-2 py-2.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
-                                                <p className="text-[14px] mb-0.5">{p.icon}</p>
-                                                <p className="text-[11px] font-bold" style={{ color: '#2D2A26' }}>{p.label}</p>
-                                                <p className="text-[9px] mt-0.5" style={{ color: '#B8B3AB' }}>{p.sub}</p>
-                                            </div>
-                                        </div>
-                                    ))}
+                            <div className="rounded-[14px] px-6 py-3 text-center font-bold text-[13px] text-white flex flex-col items-center justify-center" style={{ backgroundColor: '#3B82F6', boxShadow: '0 4px 14px -2px rgba(59,130,246,0.35)' }}>
+                                <div className="flex items-center gap-2">
+                                    <House size={16} weight="bold" className="text-white/90" />
+                                    <span>Dashboard</span>
                                 </div>
+                                <span className="text-[9px] font-normal text-white/70 mt-0.5">Hub central — vue d&apos;ensemble de la situation</span>
                             </div>
+                            <div className="w-px h-6" style={{ backgroundColor: '#D4D4D4' }} />
 
-                            {/* Focus on Programme branch — engine hierarchy */}
-                            <div className="rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider" style={{ backgroundColor: '#EFF6FF', color: '#3B82F6', border: '1px solid #BFDBFE' }}>Zoom : Programme → Parcours moteur</div>
-                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
-
-                            {/* Thèmes branch label */}
-                            <div className="rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider mb-2" style={{ backgroundColor: '#FFF7ED', color: '#F59E0B', border: '1px solid #FDE68A' }}>5 thèmes de vie identifiés</div>
-                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
-
-                            {/* Thèmes branches */}
-                            <div className="relative w-full max-w-[700px]">
-                                <div className="absolute top-0 left-[10%] right-[10%] h-px" style={{ backgroundColor: '#D4D4D4' }} />
-                                <div className="grid grid-cols-5 gap-2">
-                                    {[
-                                        { label: 'Votre vie sociale', color: '#8B5CF6', domain: 'R' },
-                                        { label: 'Votre santé', color: '#EC4899', domain: 'S' },
-                                        { label: 'Parcours de soins', color: '#10B981', domain: 'M' },
-                                        { label: 'Vos démarches', color: '#3B82F6', domain: 'A' },
-                                        { label: 'Votre proche', color: '#F59E0B', domain: 'F' },
-                                    ].map((t, i) => (
+                            {/* 5 tabs — horizontal branches from Dashboard */}
+                            <div className="relative w-full max-w-[780px] mb-2">
+                                <div className="absolute top-0 left-[8%] right-[8%] h-px" style={{ backgroundColor: '#D4D4D4' }} />
+                                <div className="grid grid-cols-5 gap-3">
+                                    {([
+                                        {
+                                            label: 'Accueil',
+                                            Icon: House,
+                                            sub: 'Vulnerabilites et micro-parcours',
+                                            color: '#3B82F6',
+                                            children: ['Detail d\u0027une vulnerabilite', 'Detail d\u0027un micro-parcours', 'Detail d\u0027une recommandation'],
+                                        },
+                                        {
+                                            label: 'Mon Suivi',
+                                            Icon: ListChecks,
+                                            sub: 'Micro-taches, agenda, cercle',
+                                            color: '#F59E0B',
+                                            children: ['Liste des micro-taches', 'Calendrier des rendez-vous', 'Notes de l\u0027entourage'],
+                                        },
+                                        {
+                                            label: 'Chat IDEC',
+                                            Icon: ChatCircle,
+                                            sub: 'Messagerie avec le coordinateur',
+                                            color: '#8B5CF6',
+                                            children: ['Fil de conversation'],
+                                        },
+                                        {
+                                            label: 'Mes Pros',
+                                            Icon: UsersThree,
+                                            sub: 'Professionnels autour de moi',
+                                            color: '#10B981',
+                                            children: ['Fiche d\u0027un professionnel', 'Carte des professionnels'],
+                                        },
+                                        {
+                                            label: 'Ressources',
+                                            Icon: BookOpenText,
+                                            sub: 'Articles et guides pratiques',
+                                            color: '#EC4899',
+                                            children: ['Lecture d\u0027un article', 'Guide etape par etape'],
+                                        },
+                                    ] as const).map((p, i) => (
                                         <div key={i} className="flex flex-col items-center">
                                             <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
-                                            <div className="rounded-[12px] px-3 py-2 text-center w-full" style={{ backgroundColor: `${t.color}10`, border: `1px solid ${t.color}30` }}>
-                                                <p className="text-[10px] font-bold" style={{ color: t.color }}>{t.domain}</p>
-                                                <p className="text-[11px] font-semibold mt-0.5" style={{ color: '#2D2A26' }}>{t.label}</p>
+                                            <div className="rounded-[14px] px-2.5 py-3 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                                                <div className="w-7 h-7 rounded-[10px] mx-auto mb-1.5 flex items-center justify-center" style={{ backgroundColor: `${p.color}10` }}>
+                                                    <p.Icon size={15} weight="bold" style={{ color: p.color }} />
+                                                </div>
+                                                <p className="text-[11px] font-bold leading-tight" style={{ color: '#2D2A26' }}>{p.label}</p>
+                                                <p className="text-[9px] mt-1 leading-snug" style={{ color: '#B8B3AB' }}>{p.sub}</p>
                                             </div>
-                                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
-                                            <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }}>
-                                                <p className="text-[9px]" style={{ color: '#8A857E' }}>Micro-Parcours</p>
-                                            </div>
-                                            <div className="w-px h-3" style={{ backgroundColor: '#D4D4D4' }} />
-                                            <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }}>
-                                                <p className="text-[9px]" style={{ color: '#8A857E' }}>Recommandations</p>
-                                            </div>
-                                            <div className="w-px h-3" style={{ backgroundColor: '#D4D4D4' }} />
-                                            <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }}>
-                                                <p className="text-[9px]" style={{ color: '#8A857E' }}>Micro-Tâches ✓</p>
-                                            </div>
+                                            {/* Sub-pages */}
+                                            {p.children.map((c, j) => (
+                                                <div key={j} className="flex flex-col items-center w-full">
+                                                    <div className="w-px h-3" style={{ backgroundColor: '#E5E5EA' }} />
+                                                    <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#F8F7F5', border: '1px dashed #E0DDD8' }}>
+                                                        <p className="text-[9px] font-medium" style={{ color: '#8A857E' }}>{c}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            {/* Convergence */}
-                            <div className="w-px h-5 mt-2" style={{ backgroundColor: '#D4D4D4' }} />
-                            <div className="rounded-[14px] px-5 py-2.5 text-center font-bold text-[12px]" style={{ backgroundColor: '#ECFDF5', color: '#059669', border: '1px solid #A7F3D0' }}>
-                                Progression globale • Célébration • Suivi
+                            {/* Legend */}
+                            <div className="flex items-center gap-6 mt-4 pt-4" style={{ borderTop: '1px solid #F0EDE8' }}>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 rounded-[4px]" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }} />
+                                    <span className="text-[9px] font-medium" style={{ color: '#B8B3AB' }}>Ecran principal</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 rounded-[4px]" style={{ backgroundColor: '#F8F7F5', border: '1px dashed #E0DDD8' }} />
+                                    <span className="text-[9px] font-medium" style={{ color: '#B8B3AB' }}>Sous-ecran accessible par drill-down</span>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Audit cards */}
-                        <div className="grid grid-cols-3 gap-3">
+                        {/* ── PART 2: Profondeur du moteur — 4 strates with real component replicas ── */}
+                        <div className="rounded-full px-5 py-2 text-[10px] font-bold uppercase tracking-[2px] text-center mb-6" style={{ background: 'linear-gradient(135deg, #F59E0B20, #EC489920)', color: '#D97706', border: '1px solid #FDE68A' }}>
+                            Profondeur du moteur — 4 strates de navigation
+                        </div>
+
+                        <div className="rounded-[20px] p-8 flex flex-col items-center" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
+
+                            {/* ─── Strate 1: Vulnérabilité → HeroCard ─── */}
+                            <div className="text-[9px] font-bold uppercase tracking-[2px] mb-2 px-3 py-1 rounded-full" style={{ backgroundColor: '#8B5CF610', color: '#8B5CF6' }}>Strate 1 · Vulnerabilite → HeroCard</div>
+                            <div className="w-full max-w-[380px]">
+                                <HeroCard domain="S" title="Sante de l'aidant" subtitle="Votre sante physique et mentale" activeMP={2} totalMP={4} targetPerson="Francine" />
+                            </div>
+
+                            {/* Arrow down */}
+                            <div className="flex flex-col items-center my-3">
+                                <div className="w-px h-6" style={{ backgroundColor: '#D4D4D4' }} />
+                                <svg width="12" height="8" viewBox="0 0 12 8"><path d="M6 8L0 0h12z" fill="#D4D4D4" /></svg>
+                            </div>
+
+                            {/* ─── Strate 2: Micro-parcours → TaskCard ─── */}
+                            <div className="text-[9px] font-bold uppercase tracking-[2px] mb-2 px-3 py-1 rounded-full" style={{ backgroundColor: '#3B82F610', color: '#3B82F6' }}>Strate 2 · Micro-parcours → TaskCard</div>
+                            <div className="w-full max-w-[380px] space-y-2">
+                                <TaskCard title="Prendre soin de votre corps" description="Des actions simples pour ne pas vous oublier." criticality="critical" domain="S" asrDone={1} asrTotal={3} asrProgress={33} isActivated={true} />
+                                <TaskCard title="Anticiper les demarches" description="Se preparer sereinement." criticality="prevention" domain="S" isActivated={false} />
+                            </div>
+
+                            {/* Arrow down */}
+                            <div className="flex flex-col items-center my-3">
+                                <div className="w-px h-6" style={{ backgroundColor: '#D4D4D4' }} />
+                                <svg width="12" height="8" viewBox="0 0 12 8"><path d="M6 8L0 0h12z" fill="#D4D4D4" /></svg>
+                            </div>
+
+                            {/* ─── Strate 3: Recommandation → RecoCard ─── */}
+                            <div className="text-[9px] font-bold uppercase tracking-[2px] mb-2 px-3 py-1 rounded-full" style={{ backgroundColor: '#EC489910', color: '#EC4899' }}>Strate 3 · Recommandation → RecoCard</div>
+                            <div className="w-full max-w-[380px] space-y-2">
+                                <RecoCard title="Faire le point avec votre medecin" domain="S" urgency="critical" />
+                                <RecoCard title="Amenager votre temps de repos" domain="S" urgency="ccc" />
+                            </div>
+
+                            {/* Arrow down */}
+                            <div className="flex flex-col items-center my-3">
+                                <div className="w-px h-6" style={{ backgroundColor: '#D4D4D4' }} />
+                                <svg width="12" height="8" viewBox="0 0 12 8"><path d="M6 8L0 0h12z" fill="#D4D4D4" /></svg>
+                            </div>
+
+                            {/* ─── Strate 4: Micro-tâche → MicroTaskItem ─── */}
+                            <div className="text-[9px] font-bold uppercase tracking-[2px] mb-2 px-3 py-1 rounded-full" style={{ backgroundColor: '#10B98110', color: '#10B981' }}>Strate 4 · Micro-tache → MicroTaskItem</div>
+                            <div className="w-full max-w-[380px] space-y-1">
+                                {tasksForDisplay.map(task => (
+                                    <MicroTaskItem key={task.id} task={task} onToggle={handleToggle} />
+                                ))}
+                                {/* Guide-enabled task */}
+                                <MicroTaskItem
+                                    task={{
+                                        id: 'demo-guided',
+                                        text: "Demander l'APA pour votre proche",
+                                        type: 'STRUC',
+                                        isContributive: true,
+                                        isCompleted: false,
+                                        actor: 'Aidant',
+                                    }}
+                                    guidedAction={actionableAdvices[0]}
+                                />
+                            </div>
+
+                            {/* Convergence — bottom */}
+                            <div className="flex flex-col items-center mt-4">
+                                <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
+                                <svg width="12" height="8" viewBox="0 0 12 8"><path d="M6 8L0 0h12z" fill="#10B981" /></svg>
+                            </div>
+                            <div className="mt-1 rounded-[14px] px-5 py-2.5 text-center font-bold text-[12px]" style={{ backgroundColor: '#ECFDF5', color: '#059669', border: '1px solid #A7F3D0' }}>
+                                Action completee · Progression visible · Celebration
+                            </div>
+                        </div>
+
+                        {/* Summary bar */}
+                        <div className="mt-6 grid grid-cols-3 gap-3">
                             {[
-                                { name: 'Onboarding', count: '4 slides', status: 'done' },
-                                { name: 'Dashboard', count: '1 écran', status: 'done' },
-                                { name: 'ThemeDetail', count: '5 thèmes', status: 'done' },
-                                { name: 'ProgramDetail', count: 'template', status: 'done' },
-                                { name: 'Calendrier', count: '1 écran', status: 'done' },
-                                { name: 'Chat', count: '1 écran', status: 'done' },
-                                { name: 'Ressources', count: '3 sous-tabs', status: 'done' },
-                                { name: 'Communauté', count: 'Annuaire Pro', status: 'done' },
-                                { name: 'Réglages', count: '1 écran', status: 'done' },
-                                { name: 'Article Reader', count: 'template', status: 'done' },
-                                { name: 'Guide Detail', count: 'template', status: 'done' },
-                                { name: 'Celebration', count: 'overlay', status: 'done' },
-                            ].map((page, i) => (
-                                <div key={i} className="flex items-center gap-3 rounded-[14px] px-4 py-3" style={{ backgroundColor: '#FAFAF8', border: '1px solid #F0EDE8' }}>
-                                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#10B981' }} />
-                                    <div>
-                                        <p className="text-[12px] font-bold" style={{ color: '#2D2A26' }}>{page.name}</p>
-                                        <p className="text-[10px]" style={{ color: '#B8B3AB' }}>{page.count}</p>
-                                    </div>
+                                { value: '15', label: 'ecrans fonctionnels', color: '#3B82F6' },
+                                { value: '4', label: 'niveaux de profondeur', color: '#8B5CF6' },
+                                { value: '12', label: 'composants reutilisables', color: '#10B981' },
+                            ].map((s, i) => (
+                                <div key={i} className="rounded-[14px] px-4 py-3 text-center" style={{ backgroundColor: `${s.color}08`, border: `1px solid ${s.color}20` }}>
+                                    <p className="text-[20px] font-extrabold" style={{ color: s.color }}>{s.value}</p>
+                                    <p className="text-[10px] font-medium" style={{ color: '#8A857E' }}>{s.label}</p>
                                 </div>
                             ))}
-                        </div>
-                        <div className="mt-5 rounded-[16px] px-5 py-3.5 text-center" style={{ backgroundColor: '#ECFDF5', border: '1px solid #A7F3D0' }}>
-                            <p className="text-[13px] font-bold" style={{ color: '#059669' }}>
-                                15 écrans fonctionnels codés • Navigation complète • Composants réutilisables
-                            </p>
                         </div>
                     </div>
 

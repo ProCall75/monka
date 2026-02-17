@@ -327,7 +327,7 @@ export const kernelMock: KernelState = {
     user: {
         name: 'Marie',
         role: 'Aidante',
-        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Marie',
+        avatar: 'https://randomuser.me/api/portraits/women/65.jpg',
         notificationCount: 2,
     },
     vulnerabilities: [vieSociale, votreSante, parcoursSoins, vosDemarches, votreProche],

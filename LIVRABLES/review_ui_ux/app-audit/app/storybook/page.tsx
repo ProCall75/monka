@@ -14,20 +14,27 @@ import { ReflectionInput } from '../components/atoms/ReflectionInput';
 import { ScoreRing } from '../components/atoms/ScoreRing';
 import { ToggleSwitch } from '../components/atoms/ToggleSwitch';
 import { DangerAction } from '../components/atoms/DangerAction';
+import { ThemeButton } from '../components/atoms/ThemeButton';
+import type { VulnerabilityDomain } from '../data/kernel-types';
 
 // ── Molecules ──
 import { Header } from '../components/molecules/Header';
 import { MoodRow } from '../components/molecules/MoodRow';
 import { ProgressCard } from '../components/molecules/ProgressCard';
-import { VulnerabilityCard } from '../components/molecules/VulnerabilityCard';
+import { HeroCard } from '../components/molecules/HeroCard';
 import { TabPills } from '../components/molecules/TabPills';
 import { StatsBubbles } from '../components/molecules/StatsBubbles';
 import { WeekChart } from '../components/molecules/WeekChart';
 import { StatCard } from '../components/molecules/StatCard';
 import { RecoCard } from '../components/molecules/RecoCard';
+import { TaskCard } from '../components/molecules/TaskCard';
+import { MicroTaskItem } from '../components/molecules/MicroTaskItem';
+import { actionableAdvices } from '../data/actionable-advice-data';
 import { SettingsRow, SettingsSection } from '../components/molecules/SettingsRow';
 import { ProfileCard } from '../components/molecules/ProfileCard';
 import { PageHeader } from '../components/molecules/PageHeader';
+import { PricingCard, PricingSection, MONKA_PLANS } from '../components/molecules/PricingCard';
+import type { Criticality } from '../data/kernel-types';
 
 // ── Nav ──
 import { BottomNavDark, BottomNavGlass } from '../components/nav/BottomNav';
@@ -39,39 +46,63 @@ import { BottomNavPill } from '../components/nav/BottomNavPill';
 
 const COMPONENT_GROUPS = [
     {
-        id: 'atoms',
-        label: 'Atomes',
+        id: 'kernel',
+        label: '🏗️ Architecture Kernel',
         items: [
-            { id: 'badge', label: 'Badge' },
-            { id: 'mood-button', label: 'MoodButton' },
-            { id: 'dot-grid', label: 'DotGrid' },
-            { id: 'reflection-input', label: 'ReflectionInput' },
-            { id: 'score-ring', label: 'ScoreRing' },
-            { id: 'toggle-switch', label: 'ToggleSwitch' },
-            { id: 'danger-action', label: 'DangerAction' },
+            { id: 'k-c1-herocard', label: 'C1 — Thème de vie' },
+            { id: 'k-c2-taskcard', label: 'C2 — Programme' },
+            { id: 'k-c3-recocard', label: 'C3 — Recommandation' },
+            { id: 'k-c4-microtask', label: 'C4 — Micro-Tâche' },
         ],
     },
     {
-        id: 'molecules',
-        label: 'Molécules',
+        id: 'questionnaire',
+        label: '📋 Questionnaire',
         items: [
+            { id: 'mood-row', label: 'Humeur (MoodRow)' },
+            { id: 'mood-button', label: 'Bouton humeur' },
+            { id: 'score-ring', label: 'Score Ring' },
+            { id: 'reflection-input', label: 'Saisie réflexion' },
+        ],
+    },
+    {
+        id: 'dashboard',
+        label: '📊 Dashboard',
+        items: [
+            { id: 'hero-card', label: 'Carte thème (HeroCard)' },
+            { id: 'theme-button', label: 'Bouton thème' },
+            { id: 'progress-card', label: 'Progression' },
+            { id: 'reco-card', label: 'Carte reco' },
             { id: 'header', label: 'Header' },
-            { id: 'mood-row', label: 'MoodRow' },
-            { id: 'progress-card', label: 'ProgressCard' },
-            { id: 'vulnerability-card', label: 'VulnerabilityCard' },
+            { id: 'page-header', label: 'PageHeader' },
             { id: 'tab-pills', label: 'TabPills' },
             { id: 'stats-bubbles', label: 'StatsBubbles' },
             { id: 'week-chart', label: 'WeekChart' },
             { id: 'stat-card', label: 'StatCard' },
-            { id: 'reco-card', label: 'RecoCard' },
-            { id: 'settings-row', label: 'SettingsRow' },
+        ],
+    },
+    {
+        id: 'settings',
+        label: '⚙️ Réglages & Profil',
+        items: [
             { id: 'profile-card', label: 'ProfileCard' },
-            { id: 'page-header', label: 'PageHeader' },
+            { id: 'settings-row', label: 'SettingsRow' },
+            { id: 'toggle-switch', label: 'ToggleSwitch' },
+            { id: 'danger-action', label: 'DangerAction' },
+            { id: 'pricing-card', label: 'PricingCard' },
+        ],
+    },
+    {
+        id: 'ui',
+        label: '🧩 Atomes UI',
+        items: [
+            { id: 'badge', label: 'Badge' },
+            { id: 'dot-grid', label: 'DotGrid' },
         ],
     },
     {
         id: 'nav',
-        label: 'Navigation',
+        label: '🧭 Navigation',
         items: [
             { id: 'bottom-nav-dark', label: 'BottomNavDark' },
             { id: 'bottom-nav-glass', label: 'BottomNavGlass' },
@@ -176,13 +207,21 @@ export default function StorybookPage() {
     const [ringColor, setRingColor] = useState('#8F6B22');
     const [headerVariant, setHeaderVariant] = useState<'design1' | 'design2'>('design2');
     const [progressVariant, setProgressVariant] = useState<'hero' | 'compact'>('hero');
-    const [vulnVariant, setVulnVariant] = useState<'design1' | 'design2'>('design2');
-    const [vulnScheme, setVulnScheme] = useState<string>('critique');
+    const [heroDomain, setHeroDomain] = useState<VulnerabilityDomain>('S');
     const [activeTab, setActiveTab] = useState(0);
     const [activeNavTab, setActiveNavTab] = useState('home');
     const [inputVariant, setInputVariant] = useState<'warm' | 'cream'>('warm');
     const [darkModeDemo, setDarkModeDemo] = useState(false);
     const [dotFilled, setDotFilled] = useState(16);
+    const [themeSize, setThemeSize] = useState<'sm' | 'md' | 'lg'>('md');
+    const [selectedDomain, setSelectedDomain] = useState<VulnerabilityDomain>('R');
+    const [themeShowLabel, setThemeShowLabel] = useState(true);
+
+    // ── Kernel Architecture states ──
+    const [kDomain, setKDomain] = useState<VulnerabilityDomain>('R');
+    const [kCriticality, setKCriticality] = useState<Criticality>('ccc');
+    const [kActivated, setKActivated] = useState(true);
+    const [kMtCompleted, setKMtCompleted] = useState(false);
 
     const ringSizes = { sm: 96, md: 160, lg: 208 };
 
@@ -235,7 +274,7 @@ export default function StorybookPage() {
                 {/* Footer */}
                 <div className="p-4 border-t border-[#EBE0D6]">
                     <p className="text-[10px] text-[#D4D4D4] text-center uppercase tracking-wide">
-                        24 composants · Monka
+                        25 composants · Monka
                     </p>
                 </div>
             </aside>
@@ -259,7 +298,7 @@ export default function StorybookPage() {
                         <span className="bg-[#C8E6C9] text-[#1B5E20] px-2 py-0.5 rounded-full font-bold text-[10px]">
                             LIVE
                         </span>
-                        <span>24 composants</span>
+                        <span>25 composants</span>
                     </div>
                 </div>
 
@@ -438,10 +477,78 @@ export default function StorybookPage() {
                         </div>
                     </ComponentDoc>
 
+                    {/* ThemeButton */}
+                    <ComponentDoc
+                        id="theme-button"
+                        name="ThemeButton"
+                        description="Cercle thème de vie avec icône Phosphor duotone. Représente les 5 domaines de vulnérabilité (Réseau social, Administratif, Santé, Famille/Proche, Médical). 3 tailles, label optionnel, ring de sélection coloré."
+                        props={[
+                            { name: 'domain', type: "'R' | 'A' | 'S' | 'F' | 'M'", description: 'Domaine de vulnérabilité du kernel' },
+                            { name: 'isSelected', type: 'boolean', default: 'false', description: 'Affiche le ring coloré de sélection' },
+                            { name: 'showLabel', type: 'boolean', default: 'false', description: 'Affiche le label sous le cercle' },
+                            { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Taille du bouton (44px / 56px / 72px)' },
+                            { name: 'onClick', type: '() => void', description: 'Handler de clic' },
+                        ]}
+                    >
+                        <div className="space-y-6">
+                            {/* Controls */}
+                            <ControlRow label="Taille">
+                                <ControlButton active={themeSize === 'sm'} onClick={() => setThemeSize('sm')}>S (44)</ControlButton>
+                                <ControlButton active={themeSize === 'md'} onClick={() => setThemeSize('md')}>M (56)</ControlButton>
+                                <ControlButton active={themeSize === 'lg'} onClick={() => setThemeSize('lg')}>L (72)</ControlButton>
+                            </ControlRow>
+                            <ControlRow label="Label">
+                                <ControlButton active={themeShowLabel} onClick={() => setThemeShowLabel(true)}>Visible</ControlButton>
+                                <ControlButton active={!themeShowLabel} onClick={() => setThemeShowLabel(false)}>Masqué</ControlButton>
+                            </ControlRow>
+
+                            {/* All 5 domains */}
+                            <div>
+                                <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-3">5 domaines — Cliquez pour sélectionner</p>
+                                <div className="flex gap-4 items-end">
+                                    {(['R', 'A', 'S', 'F', 'M'] as VulnerabilityDomain[]).map((d) => (
+                                        <ThemeButton
+                                            key={d}
+                                            domain={d}
+                                            size={themeSize}
+                                            showLabel={themeShowLabel}
+                                            isSelected={selectedDomain === d}
+                                            onClick={() => setSelectedDomain(d)}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Composition: ThemeButton + ScoreRing */}
+                            <div>
+                                <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-3">Composition — Cercle thème + anneau de progression</p>
+                                <div className="flex gap-6 items-center">
+                                    {(['R', 'S', 'M'] as VulnerabilityDomain[]).map((d, i) => {
+                                        const scores = [72, 45, 88];
+                                        const colors = ['#8B5CF6', '#EF4444', '#10B981'];
+                                        return (
+                                            <div key={d} className="flex flex-col items-center gap-2">
+                                                <div className="relative">
+                                                    <ScoreRing score={scores[i]} size={64} color={colors[i]} showLabel={false} />
+                                                    <div className="absolute inset-0 flex items-center justify-center">
+                                                        <ThemeButton domain={d} size="sm" />
+                                                    </div>
+                                                </div>
+                                                <span className="text-[10px] font-semibold text-[#8A857E]">
+                                                    {d === 'R' ? 'Réseau' : d === 'S' ? 'Santé' : 'Médical'}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </ComponentDoc>
+
                     {/* ═══════ MOLECULES ═══════ */}
 
                     {/* Header */}
-                    <ComponentDoc
+                    < ComponentDoc
                         id="header"
                         name="Header"
                         description="En-tête de page d'accueil avec salutation personnalisée. 2 variantes : design1 (avatar inline) et design2 (bell + avatar empilé)."
@@ -493,37 +600,45 @@ export default function StorybookPage() {
                         </div>
                     </ComponentDoc>
 
-                    {/* VulnerabilityCard */}
+                    {/* HeroCard — Carte thème de vie (le vrai composant du dashboard) */}
                     <ComponentDoc
-                        id="vulnerability-card"
-                        name="VulnerabilityCard"
-                        description="Carte de vulnérabilité richement stylisée. 6 schémas couleur × 2 layouts = 12 combinaisons. Design1 : large + blobs + score. Design2 : compact + progress bar."
+                        id="hero-card"
+                        name="HeroCard"
+                        description="La carte thème de vie utilisée sur le dashboard. Chaque domaine de vulnérabilité (Santé, Social, Famille, Administratif, Médical) est représenté par une carte avec couleur, tag, titre, description courte, cible et nombre d'actions."
                         props={[
-                            { name: 'title', type: 'string', description: 'Nom du thème' },
-                            { name: 'description', type: 'string', description: 'Description courte' },
-                            { name: 'score', type: 'number', description: 'Score 0-100' },
-                            { name: 'scheme', type: 'string', description: 'Schéma couleur (critique, vigilance, standard, vigilance-blue, critique-salmon, standard-mint)' },
-                            { name: 'variant', type: "'design1' | 'design2'", description: 'Layout' },
+                            { name: 'domain', type: 'VulnerabilityDomain', description: 'Domaine : R (Social), A (Administratif), S (Santé), F (Famille), M (Médical)' },
+                            { name: 'title', type: 'string', description: 'Titre du thème de vie' },
+                            { name: 'subtitle', type: 'string', description: 'Description courte' },
+                            { name: 'targetPerson', type: 'string', description: 'Pour qui (ex: Francine, Vous)' },
+                            { name: 'taskCount', type: 'number', description: 'Nombre d\'actions dans ce thème' },
                         ]}
                     >
                         <div className="space-y-4">
-                            <ControlRow label="Layout">
-                                <ControlButton active={vulnVariant === 'design2'} onClick={() => setVulnVariant('design2')}>Compact</ControlButton>
-                                <ControlButton active={vulnVariant === 'design1'} onClick={() => setVulnVariant('design1')}>Large</ControlButton>
-                            </ControlRow>
-                            <ControlRow label="Couleur">
-                                {['critique', 'vigilance', 'standard', 'vigilance-blue', 'critique-salmon', 'standard-mint'].map((s) => (
-                                    <ControlButton key={s} active={vulnScheme === s} onClick={() => setVulnScheme(s)}>
-                                        {s.split('-')[0]}
+                            <ControlRow label="Domaine">
+                                {(['S', 'R', 'F', 'A', 'M'] as VulnerabilityDomain[]).map(d => (
+                                    <ControlButton key={d} active={heroDomain === d} onClick={() => setHeroDomain(d)}>
+                                        {d}
                                     </ControlButton>
                                 ))}
                             </ControlRow>
-                            <VulnerabilityCard
-                                title="Santé de l'aidant"
-                                description="Votre santé physique et mentale face à la charge quotidienne."
-                                score={scoreValue}
-                                scheme={vulnScheme}
-                                variant={vulnVariant}
+                            <HeroCard
+                                domain={heroDomain}
+                                title={{
+                                    S: 'Prendre soin de vous',
+                                    R: 'Votre vie sociale',
+                                    F: 'Vie familiale & proche',
+                                    A: 'Vos démarches',
+                                    M: 'Parcours de soins',
+                                }[heroDomain]}
+                                subtitle={{
+                                    S: 'Votre santé physique et mentale face à la charge quotidienne.',
+                                    R: 'Maintenir le lien social malgré la charge d\'aidant.',
+                                    F: 'Équilibre familial et relation avec votre proche.',
+                                    A: 'Démarches administratives, droits et aides.',
+                                    M: 'Suivi médical et coordination des soins.',
+                                }[heroDomain]}
+                                targetPerson={heroDomain === 'S' ? 'Vous' : 'Francine'}
+                                taskCount={{ S: 15, R: 8, F: 12, A: 6, M: 9 }[heroDomain]}
                             />
                         </div>
                     </ComponentDoc>
@@ -596,29 +711,23 @@ export default function StorybookPage() {
                     <ComponentDoc
                         id="reco-card"
                         name="RecoCard"
-                        description="Carte de recommandation avec icône colorée, texte explicatif, et bouton toggle ✓/+. Feedback tactile (active:scale)."
+                        description="Carte de recommandation simplifiée. Bord gauche = couleur du domaine. Affiche badge d'urgence, label thème, titre, et chevron. Pas de jauge — l'ASR vit au niveau du MP (TaskCard)."
                         props={[
-                            { name: 'icon', type: 'ReactNode', description: 'Icône dans le cercle coloré' },
-                            { name: 'iconBg', type: 'string', default: "'#FDF3D8'", description: 'Couleur fond icône' },
                             { name: 'title', type: 'string', description: 'Titre de la recommandation' },
-                            { name: 'description', type: 'string', description: 'Description' },
-                            { name: 'defaultAdded', type: 'boolean', default: 'false', description: 'État initial' },
+                            { name: 'domain', type: "'R'|'A'|'S'|'F'|'M'", description: 'Domaine de vulnérabilité — détermine la couleur' },
+                            { name: 'urgency', type: "'critical'|'ccc'|'standard'|'prevention'", description: 'Niveau de criticité — badge affiché' },
+                            { name: 'onClick', type: '() => void', description: 'Navigation vers le détail' },
                         ]}
                     >
                         <div className="space-y-3">
-                            <RecoCard
-                                icon={<Coffee size={24} weight="fill" className="text-[#8F6B22]" />}
-                                iconBg="#FDF3D8"
-                                title="Micro-pause sociale"
-                                description="Appelez un ami pendant 10 minutes aujourd'hui pour rompre l'isolement."
-                            />
-                            <RecoCard
-                                icon={<Leaf size={24} weight="fill" className="text-[#165C38]" />}
-                                iconBg="#E0F5E9"
-                                title="Sortie au grand air"
-                                description="Une promenade de 20 min dans un lieu fréquenté stimule le moral."
-                                defaultAdded
-                            />
+                            <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-2">Vie sociale — Urgent</p>
+                            <RecoCard title="Se faire accompagner" domain="R" urgency="critical" />
+                            <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-2 mt-4">Démarches — Important</p>
+                            <RecoCard title="Faire la demande d'APA" domain="A" urgency="ccc" />
+                            <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-2 mt-4">Santé — Standard</p>
+                            <RecoCard title="Faire le point avec votre médecin" domain="S" urgency="standard" />
+                            <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-2 mt-4">Proche — Prévention</p>
+                            <RecoCard title="Trouver un médecin référent" domain="F" urgency="prevention" />
                         </div>
                     </ComponentDoc>
 
@@ -696,6 +805,39 @@ export default function StorybookPage() {
                         </div>
                     </ComponentDoc>
 
+                    {/* PricingCard */}
+                    <ComponentDoc
+                        id="pricing-card"
+                        name="PricingCard"
+                        description="Carte de pricing pour les offres Monka. Variante standard (fond blanc) et populaire (fond dark #1A1A2E). Aligné sur les packs de la landing page."
+                        props={[
+                            { name: 'plan', type: 'PricingPlan', description: 'Objet plan complet' },
+                            { name: 'plan.name', type: 'string', description: 'Nom du pack (Découverte, Essentiel, Sérénité)' },
+                            { name: 'plan.price', type: 'string', description: 'Prix affiché (0€, 6,99€…)' },
+                            { name: 'plan.period', type: 'string', description: 'Période (mois)' },
+                            { name: 'plan.subtitle', type: 'string', description: 'Ligne de description sous le prix' },
+                            { name: 'plan.features', type: 'string[]', description: 'Liste des features incluses' },
+                            { name: 'plan.popular', type: 'boolean', default: 'false', description: 'Variante dark avec pill "Populaire"' },
+                            { name: 'plan.cta', type: 'string', description: 'Label du bouton CTA' },
+                        ]}
+                    >
+                        <div className="space-y-6">
+                            {/* Full Section — 3 cards */}
+                            <div>
+                                <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-3">3 packs — Section complète</p>
+                                <PricingSection />
+                            </div>
+
+                            {/* Single card — popular */}
+                            <div>
+                                <p className="text-xs font-bold text-[#8C8C8C] uppercase tracking-wide mb-3">Carte isolée — Popular</p>
+                                <div className="max-w-[200px]">
+                                    <PricingCard plan={MONKA_PLANS[1]} />
+                                </div>
+                            </div>
+                        </div>
+                    </ComponentDoc>
+
                     {/* ═══════ NAVIGATION ═══════ */}
 
                     {/* BottomNavDark */}
@@ -744,13 +886,240 @@ export default function StorybookPage() {
                         </div>
                     </ComponentDoc>
 
+                    {/* ═══════════════════════════════════════════
+                       🏗️ ARCHITECTURE KERNEL — 4 Couches
+                    ═══════════════════════════════════════════ */}
+
+                    {/* ── C1 — Thème de vie (HeroCard) ── */}
+                    <ComponentDoc
+                        id="k-c1-herocard"
+                        name="C1 — Thème de vie (HeroCard)"
+                        description="Couche 1 du kernel. Chaque vulnérabilité = un thème de vie. Sa jauge affiche le nombre de micro-parcours actifs / total (pas le nombre d'actions)."
+                        props={[
+                            { name: 'domain', type: 'VulnerabilityDomain', description: 'R | A | S | F | M' },
+                            { name: 'title', type: 'string', description: 'Titre du thème' },
+                            { name: 'subtitle', type: 'string', description: 'Description courte' },
+                            { name: 'activeMP', type: 'number', description: '🆕 Nb de MP actifs' },
+                            { name: 'totalMP', type: 'number', description: '🆕 Nb total de MP' },
+                            { name: 'taskCount', type: 'number', description: 'Ancien: nb d\'actions (rétrocompat)' },
+                        ]}
+                    >
+                        <div className="space-y-4">
+                            <ControlRow label="Domaine">
+                                {(['R', 'S', 'F', 'A', 'M'] as VulnerabilityDomain[]).map(d => (
+                                    <ControlButton key={d} active={kDomain === d} onClick={() => setKDomain(d)}>{d}</ControlButton>
+                                ))}
+                            </ControlRow>
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide">Avec jauge MP (nouveau) :</p>
+                            <HeroCard
+                                domain={kDomain}
+                                title={{
+                                    R: 'Votre vie sociale',
+                                    S: 'Prendre soin de vous',
+                                    F: 'Vie familiale & proche',
+                                    A: 'Vos démarches',
+                                    M: 'Parcours de soins',
+                                }[kDomain]}
+                                subtitle={{
+                                    R: 'Maintenir le lien social malgré la charge.',
+                                    S: 'Votre santé physique et mentale.',
+                                    F: 'Équilibre familial et relation avec votre proche.',
+                                    A: 'Démarches administratives, droits et aides.',
+                                    M: 'Suivi médical et coordination des soins.',
+                                }[kDomain]}
+                                targetPerson={kDomain === 'S' ? 'Vous' : 'Francine'}
+                                activeMP={{ R: 2, S: 1, F: 2, A: 1, M: 1 }[kDomain]}
+                                totalMP={{ R: 4, S: 4, F: 6, A: 4, M: 6 }[kDomain]}
+                            />
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide mt-4">Ancien (taskCount, rétrocompat) :</p>
+                            <HeroCard
+                                domain={kDomain}
+                                title={{
+                                    R: 'Votre vie sociale',
+                                    S: 'Prendre soin de vous',
+                                    F: 'Vie familiale & proche',
+                                    A: 'Vos démarches',
+                                    M: 'Parcours de soins',
+                                }[kDomain]}
+                                taskCount={{ R: 8, S: 15, F: 12, A: 6, M: 9 }[kDomain]}
+                            />
+                        </div>
+                    </ComponentDoc>
+
+                    {/* ── C2 — Programme (TaskCard) ── */}
+                    <ComponentDoc
+                        id="k-c2-taskcard"
+                        name="C2 — Programme (TaskCard)"
+                        description="Couche 2 du kernel. Chaque micro-parcours = un programme. Sa jauge affiche le nombre de MT contributives (asrDone/asrTotal) + la barre ASR. Variante prévention : MP non activé = grisé, non cliquable, 'Objectif atteint — parcours sécurisé'."
+                        props={[
+                            { name: 'criticality', type: 'Criticality', description: 'critical | ccc | standard | prevention' },
+                            { name: 'recoCount', type: 'number', description: '🆕 Nb de recos actives' },
+                            { name: 'recoTotal', type: 'number', description: '🆕 Nb total de recos' },
+                            { name: 'asrProgress', type: 'number', description: '🆕 Progression ASR (0-100)' },
+                            { name: 'isActivated', type: 'boolean', default: 'true', description: '🆕 false = variante prévention' },
+                        ]}
+                    >
+                        <div className="space-y-4">
+                            <ControlRow label="Criticité">
+                                {(['critical', 'ccc', 'standard'] as Criticality[]).map(c => (
+                                    <ControlButton key={c} active={kCriticality === c} onClick={() => setKCriticality(c)}>
+                                        {c === 'critical' ? '🔴' : c === 'ccc' ? '🟠' : '🟢'} {c}
+                                    </ControlButton>
+                                ))}
+                            </ControlRow>
+                            <ControlRow label="Domaine">
+                                {(['R', 'S', 'F', 'A', 'M'] as VulnerabilityDomain[]).map(d => (
+                                    <ControlButton key={d} active={kDomain === d} onClick={() => setKDomain(d)}>{d}</ControlButton>
+                                ))}
+                            </ControlRow>
+                            <ControlRow label="État">
+                                <ControlButton active={kActivated} onClick={() => setKActivated(true)}>Activé</ControlButton>
+                                <ControlButton active={!kActivated} onClick={() => setKActivated(false)}>Prévention ⚪</ControlButton>
+                            </ControlRow>
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide">Carte programme {kActivated ? '(activé)' : '(prévention)'} :</p>
+                            <TaskCard
+                                title={kActivated ? 'Retrouver du répit' : 'Anticiper les démarches futures'}
+                                description={kActivated ? 'Des pistes concrètes pour souffler un peu au quotidien.' : 'Se préparer à d\'éventuelles évolutions.'}
+                                criticality={kActivated ? kCriticality : 'prevention'}
+                                domain={kDomain}
+                                asrDone={kActivated ? 1 : undefined}
+                                asrTotal={kActivated ? 3 : undefined}
+                                asrProgress={kActivated ? 33 : undefined}
+                                isActivated={kActivated}
+                            />
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide mt-4">Comparaison activé vs prévention :</p>
+                            <div className="space-y-3">
+                                <TaskCard
+                                    title="Retrouver du répit"
+                                    description="Des pistes concrètes pour souffler un peu."
+                                    criticality="ccc"
+                                    domain={kDomain}
+                                    asrDone={1}
+                                    asrTotal={3}
+                                    asrProgress={33}
+                                    isActivated={true}
+                                />
+                                <TaskCard
+                                    title="Anticiper les démarches futures"
+                                    description="Se préparer à d'éventuelles évolutions."
+                                    criticality="prevention"
+                                    domain={kDomain}
+                                    isActivated={false}
+                                />
+                            </div>
+                        </div>
+                    </ComponentDoc>
+
+                    <ComponentDoc
+                        id="k-c3-recocard"
+                        name="C3 — Recommandation (RecoCard)"
+                        description="Couche 3 du kernel. Pas de jauge — l'ASR vit au niveau du MP (C2). La RecoCard est un conteneur simple : badge de criticité + titre + chevron. Au clic, elle déplie la liste des MT triées (contributives d'abord)."
+                        props={[
+                            { name: 'title', type: 'string', description: 'Titre de la recommandation' },
+                            { name: 'domain', type: 'VulnerabilityDomain', description: 'Domaine — couleur du bord gauche' },
+                            { name: 'urgency', type: 'Criticality', description: 'critical | ccc | standard | prevention' },
+                            { name: 'onClick', type: '() => void', description: 'Déplie / navigue' },
+                        ]}
+                    >
+                        <div className="space-y-4">
+                            <ControlRow label="Criticité">
+                                {(['critical', 'ccc', 'standard', 'prevention'] as Criticality[]).map(c => (
+                                    <ControlButton key={c} active={kCriticality === c} onClick={() => setKCriticality(c)}>
+                                        {c === 'critical' ? '🔴' : c === 'ccc' ? '🟠' : c === 'standard' ? '🟢' : '⚪'} {c}
+                                    </ControlButton>
+                                ))}
+                            </ControlRow>
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide">Badge + titre + chevron (pas de jauge) :</p>
+                            <RecoCard
+                                title="Se faire accompagner"
+                                domain={kDomain}
+                                urgency={kCriticality}
+                            />
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide mt-4">Toutes les criticités :</p>
+                            <div className="space-y-3">
+                                <RecoCard title="Faire le point avec votre médecin" domain={kDomain} urgency="critical" />
+                                <RecoCard title="Se faire accompagner" domain={kDomain} urgency="ccc" />
+                                <RecoCard title="Aménager votre temps" domain={kDomain} urgency="standard" />
+                                <RecoCard title="Anticiper les démarches" domain={kDomain} urgency="prevention" />
+                            </div>
+                        </div>
+                    </ComponentDoc>
+
+                    <ComponentDoc
+                        id="k-c4-microtask"
+                        name="C4 — Micro-Tâche (MicroTaskItem)"
+                        description="Couche 4 du kernel. Action concrète. Deux catégories : 📍 'Pour sécuriser votre situation' (contributive = remplit la jauge ASR du MP parent) et 🌿 'Pour votre bien-être' (non-contributive = info utile, ne bloque pas l'ASR). Couleurs légèrement distinctes."
+                        props={[
+                            { name: 'task.isContributive', type: 'boolean', description: 'true = 📍 sécurisation (STRUC/SEC/MED), false = 🌿 bien-être (INFO/ORGA)' },
+                            { name: 'task.isCompleted', type: 'boolean', description: 'Checkbox état' },
+                            { name: 'task.type', type: 'MicroTaskType', description: 'STRUC | SEC | MED | INFO | ORGA' },
+                        ]}
+                    >
+                        <div className="space-y-4">
+                            <ControlRow label="État checkbox">
+                                <ControlButton active={!kMtCompleted} onClick={() => setKMtCompleted(false)}>À faire</ControlButton>
+                                <ControlButton active={kMtCompleted} onClick={() => setKMtCompleted(true)}>Fait ✅</ControlButton>
+                            </ControlRow>
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide">📍 Pour sécuriser votre situation (contributive → remplit ASR) :</p>
+                            <MicroTaskItem
+                                task={{
+                                    id: 'demo-1',
+                                    text: 'Contacter l\'assistante sociale de votre secteur',
+                                    type: 'SEC',
+                                    isContributive: true,
+                                    isCompleted: kMtCompleted,
+                                    actor: 'Aidant',
+                                }}
+                                onToggle={() => setKMtCompleted(p => !p)}
+                            />
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide mt-4">🌿 Pour votre bien-être (non-contributive → info utile) :</p>
+                            <MicroTaskItem
+                                task={{
+                                    id: 'demo-2',
+                                    text: 'Se renseigner sur les aides disponibles près de chez vous',
+                                    type: 'INFO',
+                                    isContributive: false,
+                                    isCompleted: false,
+                                    actor: 'Aidant',
+                                }}
+                            />
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide mt-4">Tous les états :</p>
+                            <div className="space-y-2">
+                                <MicroTaskItem task={{ id: 'd3', text: 'Préparer les documents pour votre dossier', type: 'STRUC', isContributive: true, isCompleted: false }} />
+                                <MicroTaskItem task={{ id: 'd4', text: 'Contacter l\'AS de votre secteur', type: 'SEC', isContributive: true, isCompleted: true }} />
+                                <MicroTaskItem task={{ id: 'd5', text: 'Découvrir le congé de proche aidant', type: 'INFO', isContributive: false, isCompleted: false }} />
+                                <MicroTaskItem task={{ id: 'd6', text: 'Repérer les signaux quand vous avez besoin de souffler', type: 'ORGA', isContributive: false, isCompleted: true }} />
+                            </div>
+
+                            <p className="text-[10px] font-bold text-[#8C8C8C] uppercase tracking-wide mt-6">📋 Avec guide intégré (cliquez &quot;Voir le guide&quot; pour déplier) :</p>
+                            <MicroTaskItem
+                                task={{
+                                    id: 'demo-guide',
+                                    text: "Demander l'APA pour votre proche",
+                                    type: 'STRUC',
+                                    isContributive: true,
+                                    isCompleted: false,
+                                    actor: 'Aidant',
+                                }}
+                                guidedAction={actionableAdvices[0]}
+                            />
+                        </div>
+                    </ComponentDoc>
+
                     {/* ── End ── */}
                     <div className="text-center py-16">
                         <p className="text-sm text-[#8C8C8C]">Fin du storybook</p>
-                        <p className="text-[10px] text-[#D4D4D4] mt-2 uppercase tracking-[0.15em]">Monka Design System · v2.0 · 24 composants</p>
+                        <p className="text-[10px] text-[#D4D4D4] mt-2 uppercase tracking-[0.15em]">Monka Design System · v2.0 · 28 composants</p>
                     </div>
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }

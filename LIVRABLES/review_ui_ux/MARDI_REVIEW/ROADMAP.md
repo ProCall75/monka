@@ -129,6 +129,10 @@
 3. ✅ ~~**Dashboard & Routing** (hub, timeline, suppressions, guide→pro)~~
 4. 🟡 **Parcours** (verbatims reconstitués — screenshots manquants à prendre)
 5. 🟡 **Design System** (badges, copywriting avant/après)
+   - 5.1 🔴 **Captures copywriting** — Trouver les screens réels dans l'app Monka pour chaque problème de copy listé dans la présentation :
+     - Jargon : « Solliciter la CARSAT », « IDEC », « Résidence sérieuse »
+     - CTA ambigus : « C'est fait » sur page info, « C'est parti »
+     - Fautes : « quel âge la personne », « Modifer », « anxieuxe », question activité/réponses incohérentes
 6. ⚪ **Onboarding Tour** (`driver.js`)
 7. ⚪ **Planification Tâches** (bouton + date picker)
 8. ⚪ **Dark Mode** (pass global)

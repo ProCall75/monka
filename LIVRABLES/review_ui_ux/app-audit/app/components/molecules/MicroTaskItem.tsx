@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Check, MapPin, Lightbulb, ArrowSquareOut, CalendarBlank } from '@phosphor-icons/react';
+import { Check, MapPin, Lightbulb, ArrowSquareOut, CalendarBlank, CaretDown, CaretUp, Phone, FileText, Star } from '@phosphor-icons/react';
 import type { MicroTask } from '../../data/kernel-types';
 import type { ActionableAdvice } from '../../data/actionable-advice-data';
 
@@ -17,10 +17,12 @@ export interface MicroTaskItemProps {
 export const MicroTaskItem = ({ task, onToggle, guidedAction, onNavigateToGuide, onNavigateToResources, onPlanTask }: MicroTaskItemProps) => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [plannedDate, setPlannedDate] = useState<string | null>(null);
+    const [guideExpanded, setGuideExpanded] = useState(false);
+    const [expandedSteps, setExpandedSteps] = useState<Set<number>>(new Set());
 
     const badge = task.isContributive
-        ? { icon: MapPin, label: 'Action prioritaire', color: '#2D2A26', bg: '#2D2A26' }
-        : { icon: Lightbulb, label: 'Bon à savoir', color: '#8A857E', bg: '#8A857E' };
+        ? { icon: MapPin, label: 'Pour sécuriser votre situation', color: '#2D2A26', bg: '#2D2A26' }
+        : { icon: Lightbulb, label: 'Pour votre bien-être', color: '#6B7A5A', bg: '#6B7A5A' };
 
     const BadgeIcon = badge.icon;
     const hasGuide = !!guidedAction;
@@ -40,6 +42,15 @@ export const MicroTaskItem = ({ task, onToggle, guidedAction, onNavigateToGuide,
             setShowDatePicker(false);
             onPlanTask?.(task.id, date);
         }
+    };
+
+    const toggleStep = (order: number) => {
+        setExpandedSteps(prev => {
+            const next = new Set(prev);
+            if (next.has(order)) next.delete(order);
+            else next.add(order);
+            return next;
+        });
     };
 
     return (
@@ -134,12 +145,15 @@ export const MicroTaskItem = ({ task, onToggle, guidedAction, onNavigateToGuide,
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        onNavigateToGuide?.(guidedAction);
+                                        setGuideExpanded(!guideExpanded);
                                     }}
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#E8F4F8] text-[#1A6B5A] rounded-full text-[11px] font-semibold hover:bg-[#D6EDF0] active:scale-95 transition-all"
+                                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold active:scale-95 transition-all ${guideExpanded
+                                            ? 'bg-[#1A6B5A] text-white'
+                                            : 'bg-[#E8F4F8] text-[#1A6B5A] hover:bg-[#D6EDF0]'
+                                        }`}
                                 >
-                                    📋 Voir le guide
-                                    <ArrowSquareOut size={11} weight="bold" />
+                                    📋 {guideExpanded ? 'Fermer le guide' : 'Voir le guide'}
+                                    {guideExpanded ? <CaretUp size={11} weight="bold" /> : <CaretDown size={11} weight="bold" />}
                                 </button>
 
                                 {firstContact && (
@@ -184,6 +198,104 @@ export const MicroTaskItem = ({ task, onToggle, guidedAction, onNavigateToGuide,
                     )}
                 </div>
             </button>
+
+            {/* ═══ INLINE GUIDE EXPANSION ═══ */}
+            {guideExpanded && guidedAction && (
+                <div
+                    className="border-t border-[#E8F4F8] bg-gradient-to-b from-[#F0FAF8] to-[#FAFAF8] px-4 py-4"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {/* Guide header */}
+                    <div className="flex items-center gap-2 mb-3">
+                        <div className="w-6 h-6 rounded-full bg-[#1A6B5A] flex items-center justify-center">
+                            <FileText size={12} weight="bold" className="text-white" />
+                        </div>
+                        <div>
+                            <p className="text-[13px] font-bold text-[#2D2A26]">{guidedAction.title}</p>
+                            <p className="text-[10px] text-[#8A857E]">{guidedAction.estimatedTime} · {guidedAction.steps.length} étapes</p>
+                        </div>
+                    </div>
+
+                    {/* Steps */}
+                    <div className="space-y-2 mb-3">
+                        {guidedAction.steps.map((step) => (
+                            <button
+                                key={step.order}
+                                onClick={() => toggleStep(step.order)}
+                                className="w-full text-left"
+                            >
+                                <div className={`rounded-[12px] px-3 py-2.5 transition-all duration-200 ${step.isDone ? 'bg-[#ECFDF5] border border-[#A7F3D0]' : 'bg-white border border-[#EDE8E1] hover:border-[#1A6B5A]/30'
+                                    }`}>
+                                    <div className="flex items-center gap-2">
+                                        <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold ${step.isDone
+                                                ? 'bg-[#10B981] text-white'
+                                                : 'bg-[#F3F4F6] text-[#6B7280] border border-[#E5E7EB]'
+                                            }`}>
+                                            {step.isDone ? <Check size={10} weight="bold" /> : step.order}
+                                        </div>
+                                        <span className={`text-[12px] font-semibold flex-1 ${step.isDone ? 'text-[#059669] line-through' : 'text-[#2D2A26]'}`}>
+                                            {step.text}
+                                        </span>
+                                        {step.detail && (
+                                            expandedSteps.has(step.order)
+                                                ? <CaretUp size={10} className="text-[#B8B3AB] flex-shrink-0" />
+                                                : <CaretDown size={10} className="text-[#B8B3AB] flex-shrink-0" />
+                                        )}
+                                    </div>
+                                    {step.detail && expandedSteps.has(step.order) && (
+                                        <p className="text-[11px] text-[#6B7280] leading-relaxed mt-2 pl-7">
+                                            {step.detail}
+                                        </p>
+                                    )}
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Contacts */}
+                    {guidedAction.contacts.length > 0 && (
+                        <div className="mb-3">
+                            <p className="text-[9px] font-bold uppercase tracking-wider text-[#8A857E] mb-1.5">Contacts utiles</p>
+                            <div className="space-y-1">
+                                {guidedAction.contacts.map((c, i) => (
+                                    <div key={i} className="flex items-center gap-2 bg-white rounded-[10px] px-3 py-2 border border-[#EDE8E1]">
+                                        <Phone size={12} weight="bold" className="text-[#1A6B5A] flex-shrink-0" />
+                                        <span className="text-[11px] font-semibold text-[#2D2A26]">{c.name}</span>
+                                        <span className="text-[10px] text-[#B8B3AB]">·</span>
+                                        <span className="text-[11px] text-[#1A6B5A] font-bold">{c.phone}</span>
+                                        <span className="text-[10px] text-[#8A857E] ml-auto">{c.role}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Documents */}
+                    {guidedAction.documents.length > 0 && (
+                        <div className="mb-3">
+                            <p className="text-[9px] font-bold uppercase tracking-wider text-[#8A857E] mb-1.5">Documents à préparer</p>
+                            <div className="flex flex-wrap gap-1.5">
+                                {guidedAction.documents.map((doc, i) => (
+                                    <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-[#EDE8E1] rounded-lg text-[10px] text-[#4B5563]">
+                                        <FileText size={10} weight="bold" className="text-[#B8B3AB]" />
+                                        {doc}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Tip */}
+                    {guidedAction.tip && (
+                        <div className="rounded-[12px] px-3 py-2.5 bg-[#FFFBEB] border border-[#FDE68A]">
+                            <div className="flex items-start gap-2">
+                                <Star size={12} weight="fill" className="text-[#F59E0B] flex-shrink-0 mt-0.5" />
+                                <p className="text-[11px] text-[#92400E] leading-relaxed">{guidedAction.tip}</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

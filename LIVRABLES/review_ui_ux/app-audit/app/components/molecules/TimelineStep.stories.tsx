@@ -3,7 +3,7 @@ import { TimelineStep } from './TimelineStep';
 import React from 'react';
 
 const meta = {
-  title: 'Molecules/TimelineStep',
+  title: 'Moteur — Micro-Parcours/Étape timeline',
   component: TimelineStep,
   tags: ['autodocs'],
   argTypes: {
