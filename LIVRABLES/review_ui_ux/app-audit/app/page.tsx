@@ -331,12 +331,11 @@ export default function ReviewPage() {
     const chapters = [
         { id: 'constat' as const, label: 'Constat' },
         { id: 'mapping' as const, label: 'Défi' },
-        { id: 'preuve' as const, label: 'Preuve' },
     ];
 
     // ── IntersectionObserver: highlight active chapter on scroll ──
     useEffect(() => {
-        const sectionIds = ['constat', 'mapping', 'preuve'];
+        const sectionIds = ['constat', 'mapping'];
         const observers: IntersectionObserver[] = [];
         sectionIds.forEach(id => {
             const el = document.getElementById(id);
@@ -1160,24 +1159,11 @@ export default function ReviewPage() {
 
                 </section>
 
-                {/* ── Section divider ── */}
-                <div className="my-20 flex items-center gap-6">
-                    <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, #DDD5CC)' }} />
-                    <div className="flex items-center gap-3 px-5 py-2.5 rounded-full" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 2px 10px rgba(0,0,0,0.04)' }}>
-                        <span className="text-[16px]">🎯</span>
-                        <span className="text-[11px] font-bold tracking-[3px] uppercase" style={{ color: '#B8B3AB' }}>Chapitre final</span>
-                    </div>
-                    <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, #DDD5CC, transparent)' }} />
-                </div>
+                {/* ── Section prototype & démo ── */}
+                <section id="demo-prototype" className="scroll-mt-20 mt-12">
 
-                {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                   ACTE 3 — LA PREUVE
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-                <section id="preuve" className="scroll-mt-20">
-
-                    <SectionTag color="#10B981">La Preuve</SectionTag>
                     <SectionTitle gradient>
-                        On l'a prototypé.<br />Voyez par vous-même.
+                        On l&apos;a prototypé.<br />Voyez par vous-même.
                     </SectionTitle>
 
                     {/* ── 3b. QR Code Démo ── */}
