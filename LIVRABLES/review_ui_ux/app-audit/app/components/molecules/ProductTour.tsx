@@ -229,12 +229,16 @@ export const ProductTour = ({ onComplete, switchTab }: ProductTourProps) => {
         if (phase !== "guide") return;
         const currentGuide = GUIDE_STEPS[guideStep];
 
-        // Wait for element to appear then add pulse class
+        // Wait for element to appear then add pulse class + scroll into view
         const applyPulse = () => {
             const el = document.querySelector(currentGuide.pulseSelector) as HTMLElement;
             if (el) {
                 el.style.animation = "monka-guide-pulse 2s ease-out infinite";
                 el.style.borderRadius = "20px";
+                // Scroll the element into view so the instruction card doesn't cover it
+                setTimeout(() => {
+                    el.scrollIntoView({ behavior: "smooth", block: "center" });
+                }, 150);
                 return el;
             }
             return null;
