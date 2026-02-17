@@ -147,9 +147,10 @@ export const MicroTaskItem = ({ task, onToggle, guidedAction, onNavigateToGuide,
                                         e.stopPropagation();
                                         setGuideExpanded(!guideExpanded);
                                     }}
+                                    data-tour="guide-button"
                                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold active:scale-95 transition-all ${guideExpanded
-                                            ? 'bg-[#1A6B5A] text-white'
-                                            : 'bg-[#E8F4F8] text-[#1A6B5A] hover:bg-[#D6EDF0]'
+                                        ? 'bg-[#1A6B5A] text-white'
+                                        : 'bg-[#E8F4F8] text-[#1A6B5A] hover:bg-[#D6EDF0]'
                                         }`}
                                 >
                                     📋 {guideExpanded ? 'Fermer le guide' : 'Voir le guide'}
@@ -162,6 +163,7 @@ export const MicroTaskItem = ({ task, onToggle, guidedAction, onNavigateToGuide,
                                             e.stopPropagation();
                                             onNavigateToResources?.(firstContact.name);
                                         }}
+                                        data-tour="contact-location"
                                         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FFF7ED] text-[#EA580C] rounded-full text-[11px] font-semibold hover:bg-[#FFEDD5] active:scale-95 transition-all"
                                     >
                                         📍 {firstContact.name}
@@ -228,8 +230,8 @@ export const MicroTaskItem = ({ task, onToggle, guidedAction, onNavigateToGuide,
                                     }`}>
                                     <div className="flex items-center gap-2">
                                         <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold ${step.isDone
-                                                ? 'bg-[#10B981] text-white'
-                                                : 'bg-[#F3F4F6] text-[#6B7280] border border-[#E5E7EB]'
+                                            ? 'bg-[#10B981] text-white'
+                                            : 'bg-[#F3F4F6] text-[#6B7280] border border-[#E5E7EB]'
                                             }`}>
                                             {step.isDone ? <Check size={10} weight="bold" /> : step.order}
                                         </div>

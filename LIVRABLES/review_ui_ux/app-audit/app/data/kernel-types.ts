@@ -81,7 +81,7 @@ export const ThemeColors: Record<string, ThemeConfig> = {
         softBg: 'rgba(236,72,153,0.06)',
     },
     F: {
-        label: 'Votre proche',
+        label: 'Francine',
         icon: 'hand-heart',
         gradient: 'from-amber-400 to-orange-600',
         color: '#F59E0B',

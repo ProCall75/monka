@@ -609,7 +609,7 @@ export default function StorybookPage() {
                             { name: 'domain', type: 'VulnerabilityDomain', description: 'Domaine : R (Social), A (Administratif), S (Santé), F (Famille), M (Médical)' },
                             { name: 'title', type: 'string', description: 'Titre du thème de vie' },
                             { name: 'subtitle', type: 'string', description: 'Description courte' },
-                            { name: 'targetPerson', type: 'string', description: 'Pour qui (ex: Francine, Vous)' },
+                            { name: 'targetPerson', type: 'string', description: 'Pour qui (ex: votre proche, Vous)' },
                             { name: 'taskCount', type: 'number', description: 'Nombre d\'actions dans ce thème' },
                         ]}
                     >
@@ -637,7 +637,7 @@ export default function StorybookPage() {
                                     A: 'Démarches administratives, droits et aides.',
                                     M: 'Suivi médical et coordination des soins.',
                                 }[heroDomain]}
-                                targetPerson={heroDomain === 'S' ? 'Vous' : 'Francine'}
+                                targetPerson={heroDomain === 'S' ? 'Vous' : 'votre proche'}
                                 taskCount={{ S: 15, R: 8, F: 12, A: 6, M: 9 }[heroDomain]}
                             />
                         </div>
@@ -927,7 +927,7 @@ export default function StorybookPage() {
                                     A: 'Démarches administratives, droits et aides.',
                                     M: 'Suivi médical et coordination des soins.',
                                 }[kDomain]}
-                                targetPerson={kDomain === 'S' ? 'Vous' : 'Francine'}
+                                targetPerson={kDomain === 'S' ? 'Vous' : 'votre proche'}
                                 activeMP={{ R: 2, S: 1, F: 2, A: 1, M: 1 }[kDomain]}
                                 totalMP={{ R: 4, S: 4, F: 6, A: 4, M: 6 }[kDomain]}
                             />

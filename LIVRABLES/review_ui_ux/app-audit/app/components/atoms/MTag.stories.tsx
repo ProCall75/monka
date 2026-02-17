@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Social: Story = { args: { label: 'Vie sociale', domain: 'R' } };
 export const Demarches: Story = { args: { label: 'Démarches', domain: 'A' } };
 export const Sante: Story = { args: { label: 'Santé', domain: 'S' } };
-export const Proche: Story = { args: { label: 'Votre proche', domain: 'F' } };
+export const Proche: Story = { args: { label: 'Francine', domain: 'F' } };
 export const Soins: Story = { args: { label: 'Parcours soins', domain: 'M' } };
 export const Custom: Story = { args: { label: 'CCAS', color: '#6B7280', bgColor: 'rgba(107,114,128,0.08)' } };
 export const AllDomains: Story = {
@@ -28,7 +28,7 @@ export const AllDomains: Story = {
             <MTag label="Vie sociale" domain="R" />
             <MTag label="Démarches" domain="A" />
             <MTag label="Santé" domain="S" />
-            <MTag label="Votre proche" domain="F" />
+            <MTag label="Francine" domain="F" />
             <MTag label="Parcours soins" domain="M" />
         </div>
     ),

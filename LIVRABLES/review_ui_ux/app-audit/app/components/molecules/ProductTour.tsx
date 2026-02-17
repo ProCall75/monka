@@ -117,7 +117,7 @@ const GUIDE_STEPS: GuideStep[] = [
         description:
             "Vous voyez le bouton « Voir le guide » ? Appuyez dessus. On vous a tout préparé, étape par étape.",
         accent: "#1A6B5A",
-        pulseSelector: '[data-tour="reco-tasks"] > *:first-child button:has(> svg)',
+        pulseSelector: '[data-tour="guide-button"]',
         completionMarker: "__GUIDE_EXPANDED__",
     },
     {
@@ -128,6 +128,15 @@ const GUIDE_STEPS: GuideStep[] = [
         accent: "#059669",
         pulseSelector: '[data-tour="reco-tasks"] > *:first-child > button:first-child',
         completionMarker: "__TASK_TOGGLED__",
+    },
+    {
+        id: "tap-location",
+        title: "Localisez vos interlocuteurs",
+        description:
+            "Vous voyez le bouton 📍 ? Appuyez dessus pour repérer où se trouve l'assistante sociale sur la carte.",
+        accent: "#EA580C",
+        pulseSelector: '[data-tour="contact-location"]',
+        completionMarker: "__TAB_COMMUNITY__",
     },
 ];
 
@@ -197,13 +206,34 @@ export const ProductTour = ({ onComplete, switchTab }: ProductTourProps) => {
                     observer.disconnect();
                     setCardVisible(false);
                     setTimeout(() => {
-                        setPhase("celebration");
-                        setCardVisible(true);
+                        if (guideStep < GUIDE_STEPS.length - 1) {
+                            setGuideStep(s => s + 1);
+                            setCardVisible(true);
+                        } else {
+                            setPhase("celebration");
+                            setCardVisible(true);
+                        }
                     }, 400);
                 }
             });
             observer.observe(taskContainer, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style', 'data-completed'] });
             return () => observer.disconnect();
+        }
+
+        // Special case: tab community detection (location step)
+        if (currentGuide.completionMarker === "__TAB_COMMUNITY__") {
+            pollRef.current = setInterval(() => {
+                const communityHeader = document.querySelector('[data-tour="community-header"]');
+                if (communityHeader) {
+                    clearInterval(pollRef.current!);
+                    setCardVisible(false);
+                    setTimeout(() => {
+                        setPhase("celebration");
+                        setCardVisible(true);
+                    }, 400);
+                }
+            }, 300);
+            return () => { if (pollRef.current) clearInterval(pollRef.current); };
         }
 
         // Normal case: poll for completion marker element
@@ -233,8 +263,12 @@ export const ProductTour = ({ onComplete, switchTab }: ProductTourProps) => {
         const applyPulse = () => {
             const el = document.querySelector(currentGuide.pulseSelector) as HTMLElement;
             if (el) {
-                el.style.animation = "monka-guide-pulse 2s ease-out infinite";
+                el.style.animation = "monka-guide-pulse 1.5s ease-in-out infinite";
                 el.style.borderRadius = "20px";
+                el.style.outline = "3px solid rgba(44,140,153,0.6)";
+                el.style.outlineOffset = "4px";
+                el.style.position = "relative";
+                el.style.zIndex = "50";
                 // Scroll the element into view so the instruction card doesn't cover it
                 setTimeout(() => {
                     el.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -254,6 +288,9 @@ export const ProductTour = ({ onComplete, switchTab }: ProductTourProps) => {
             if (retryInterval) clearInterval(retryInterval);
             if (el) {
                 el.style.animation = "";
+                el.style.outline = "";
+                el.style.outlineOffset = "";
+                el.style.zIndex = "";
             }
         };
     }, [phase, guideStep]);
@@ -380,9 +417,9 @@ export const ProductTour = ({ onComplete, switchTab }: ProductTourProps) => {
             <>
                 <style>{`
                     @keyframes monka-guide-pulse {
-                        0% { box-shadow: 0 0 0 0 rgba(44,140,153,0.30); }
-                        70% { box-shadow: 0 0 0 8px rgba(44,140,153,0); }
-                        100% { box-shadow: 0 0 0 0 rgba(44,140,153,0); }
+                        0% { box-shadow: 0 0 0 0 rgba(44,140,153,0.50), 0 0 20px 0 rgba(44,140,153,0.15); transform: scale(1); }
+                        50% { box-shadow: 0 0 0 12px rgba(44,140,153,0.25), 0 0 30px 8px rgba(44,140,153,0.10); transform: scale(1.03); }
+                        100% { box-shadow: 0 0 0 0 rgba(44,140,153,0.50), 0 0 20px 0 rgba(44,140,153,0.15); transform: scale(1); }
                     }
                 `}</style>
                 <GuideCard>

@@ -83,16 +83,16 @@ const articles: Article[] = [
     {
         id: 'art-1',
         title: "Comprendre la maladie d'Alzheimer",
-        description: "Les bases pour mieux accompagner votre proche au quotidien.",
+        description: "Les bases pour mieux accompagner Francine au quotidien.",
         category: 'Comprendre',
         domain: 'S' as VulnerabilityDomain,
         readingTime: 8,
         imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=200&fit=crop',
-        content: `La maladie d'Alzheimer touche environ 900 000 personnes en France. En tant qu'aidant, comprendre les mécanismes de cette maladie vous permet de mieux anticiper les comportements de votre proche et d'adapter votre accompagnement.
+        content: `La maladie d'Alzheimer touche environ 900 000 personnes en France. En tant qu'aidant, comprendre les mécanismes de cette maladie vous permet de mieux anticiper les comportements de Francine et d'adapter votre accompagnement.
 
     ** Les 3 stades principaux:**
 
-        1. ** Stade léger ** — Oublis fréquents, difficulté à trouver les mots.Votre proche reste autonome pour la plupart des activités.C'est le moment idéal pour mettre en place une routine rassurante.
+        1. ** Stade léger ** — Oublis fréquents, difficulté à trouver les mots.Francine reste autonome pour la plupart des activités.C'est le moment idéal pour mettre en place une routine rassurante.
 
 2. ** Stade modéré ** — Besoin d'aide pour les tâches complexes (finances, cuisine). La communication devient plus difficile. Privilégiez les phrases courtes et le contact visuel.
 
@@ -118,7 +118,7 @@ const articles: Article[] = [
 
 ** Les symptômes principaux:**
 - ** Tremblements au repos ** — Souvent un seul côté au début.Ils diminuent pendant le mouvement.
-- ** Rigidité musculaire ** — Raideurs dans les bras, les jambes, le cou.Votre proche peut sembler « figé ».
+- ** Rigidité musculaire ** — Raideurs dans les bras, les jambes, le cou.Francine peut sembler « figé ».
 - ** Lenteur des mouvements(bradykinésie) ** — Les gestes du quotidien deviennent plus longs: boutonner une chemise, se lever d'une chaise.
     - ** Troubles de l'équilibre** — Risque de chutes accru, surtout dans les espaces encombrés.
 
@@ -163,7 +163,7 @@ const articles: Article[] = [
 
 **Que faire si vous repérez ces signes ?**
 - Ne pas paniquer : la perte d'autonomie est progressive et des solutions existent
-- En parler avec le médecin traitant de votre proche (avec son accord)
+- En parler avec le médecin traitant de Francine (avec son accord)
 - Contacter le CLIC ou la MAIA de votre département pour un bilan
 - Demander une évaluation GIR si besoin d'aide structurée
 
@@ -196,7 +196,7 @@ Une courte marche, même autour du pâté de maisons, libère des endorphines. S
 **5. Le scan corporel**
 Allongez-vous et portez attention à chaque partie de votre corps, des pieds à la tête. Relâchez consciemment chaque tension. 5 minutes suffisent.
 
-> Prendre soin de vous n'est pas un luxe — c'est une nécessité pour bien accompagner votre proche.`,
+> Prendre soin de vous n'est pas un luxe — c'est une nécessité pour bien accompagner Francine.`,
     },
     {
         id: 'art-7',
@@ -206,12 +206,12 @@ Allongez-vous et portez attention à chaque partie de votre corps, des pieds à 
         domain: 'R' as VulnerabilityDomain,
         readingTime: 6,
         imageUrl: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=200&fit=crop',
-        content: `72% des aidants déclarent mal dormir. Les réveils nocturnes de votre proche, l'anxiété et la charge mentale transforment vos nuits en épreuves. Pourtant, un mauvais sommeil empire tout : patience, humeur, santé.
+        content: `72% des aidants déclarent mal dormir. Les réveils nocturnes de Francine, l'anxiété et la charge mentale transforment vos nuits en épreuves. Pourtant, un mauvais sommeil empire tout : patience, humeur, santé.
 
 **Pourquoi votre sommeil est perturbé :**
-- **L'hyper-vigilance** — Même endormi, votre cerveau « surveille » votre proche
+- **L'hyper-vigilance** — Même endormi, votre cerveau « surveille » Francine
 - **La charge mentale** — Votre esprit continue de planifier (rendez-vous, courses, traitements)
-- **Les réveils nocturnes** — Si votre proche se lève ou vous appelle la nuit
+- **Les réveils nocturnes** — Si Francine se lève ou vous appelle la nuit
 - **Le cortisol élevé** — Le stress chronique dérègle votre horloge biologique
 
 **7 stratégies qui fonctionnent :**
@@ -224,7 +224,7 @@ Allongez-vous et portez attention à chaque partie de votre corps, des pieds à 
 
 4. **La micro-sieste** — Si la nuit a été courte : 15-20 minutes max, avant 15h. Pas plus, sinon vous casserez le cycle.
 
-5. **Le soutien nocturne** — Si votre proche se réveille souvent : organisez un roulement avec la famille ou un service d'aide de nuit (finançable par l'APA).
+5. **Le soutien nocturne** — Si Francine se réveille souvent : organisez un roulement avec la famille ou un service d'aide de nuit (finançable par l'APA).
 
 6. **L'activité physique** — 30 min de mouvement dans la journée améliore le sommeil de 65%. Pas après 19h.
 
@@ -248,13 +248,13 @@ Les études sont formelles : 10 minutes d'activité physique modérée par jour 
 **Intégrer le mouvement à votre routine d'aidant :**
 
 - **Pendant les courses** — Garez-vous plus loin, prenez les escaliers au lieu de l'ascenseur
-- **Avec votre proche** — Une marche de 10 min autour du pâté de maisons fait du bien aux deux
+- **Avec Francine** — Une marche de 10 min autour du pâté de maisons fait du bien aux deux
 - **Pendant les temps d'attente** — Étirements dans la salle d'attente du médecin, squats pendant que le café chauffe
 - **Le matin** — 5 min d'étirements doux avant que la journée ne commence. YouTube regorge de vidéos « morning stretch 5 min »
 
 **Les 3 exercices de l'aidant :**
 
-1. **Le mur** — Appuyez votre dos contre un mur, descendez en position assise pendant 30 secondes. Renforce les jambes (utile pour les transferts de votre proche).
+1. **Le mur** — Appuyez votre dos contre un mur, descendez en position assise pendant 30 secondes. Renforce les jambes (utile pour les transferts de Francine).
 
 2. **Les épaules** — Montez vos épaules jusqu'aux oreilles, maintenez 5 secondes, relâchez d'un coup. Répétez 5 fois. Libère la tension du cou et des épaules.
 
@@ -275,10 +275,10 @@ Les études sont formelles : 10 minutes d'activité physique modérée par jour 
         content: `La loi française reconnaît le statut d'aidant depuis 2015. Voici un guide complet de vos droits et des aides disponibles.
 
 **Le congé de proche aidant**
-Vous pouvez cesser temporairement votre activité professionnelle pour accompagner votre proche. Durée : jusqu'à 3 mois, renouvelable dans la limite d'1 an. Depuis 2020, ce congé est indemnisé à hauteur de ~60€/jour.
+Vous pouvez cesser temporairement votre activité professionnelle pour accompagner Francine. Durée : jusqu'à 3 mois, renouvelable dans la limite d'1 an. Depuis 2020, ce congé est indemnisé à hauteur de ~60€/jour.
 
 **L'APA (Allocation Personnalisée d'Autonomie)**
-Votre proche peut bénéficier de l'APA pour financer une aide à domicile, des fournitures, ou un accueil de jour. Montant : jusqu'à 1 800€/mois selon le degré de dépendance (GIR 1 à 4).
+Francine peut bénéficier de l'APA pour financer une aide à domicile, des fournitures, ou un accueil de jour. Montant : jusqu'à 1 800€/mois selon le degré de dépendance (GIR 1 à 4).
 
 **Le droit au répit**
 Depuis 2016, les aidants peuvent bénéficier d'une aide pouvant aller jusqu'à 509€/an pour financer un hébergement temporaire ou un accueil de jour pour leur proche, afin de prendre du temps pour eux.
@@ -298,7 +298,7 @@ Depuis 2016, les aidants peuvent bénéficier d'une aide pouvant aller jusqu'à 
     {
         id: 'art-9',
         title: "APA et MDPH : le guide complet",
-        description: 'Deux dispositifs essentiels pour financer l\'aide à votre proche.',
+        description: 'Deux dispositifs essentiels pour financer l\'aide à Francine.',
         category: 'Démarches',
         domain: 'A' as VulnerabilityDomain,
         readingTime: 10,
@@ -307,7 +307,7 @@ Depuis 2016, les aidants peuvent bénéficier d'une aide pouvant aller jusqu'à 
 
 **APA (Allocation Personnalisée d'Autonomie)**
 Pour les personnes de 60 ans et plus en perte d'autonomie.
-- **Qui la demande ?** Votre proche (ou vous, en son nom avec son accord)
+- **Qui la demande ?** Francine (ou vous, en son nom avec son accord)
 - **À qui ?** Au Conseil départemental de son lieu de résidence
 - **Montant ?** De 700€ à 1 800€/mois selon le degré de dépendance (GIR)
 - **Délai ?** 2 mois en moyenne pour l'évaluation + la décision
@@ -320,9 +320,9 @@ Pour les personnes de moins de 60 ans en situation de handicap — OU pour la PC
 - **L'AAH** — Allocation adulte handicapé, sous conditions de ressources
 
 **Comment choisir ?**
-- Votre proche a **+ de 60 ans** → APA en priorité
-- Votre proche a **- de 60 ans** → MDPH obligatoire
-- Votre proche a **+ de 60 ans ET un handicap reconnu avant 60 ans** → Il peut choisir entre APA et PCH
+- Francine a **+ de 60 ans** → APA en priorité
+- Francine a **- de 60 ans** → MDPH obligatoire
+- Francine a **+ de 60 ans ET un handicap reconnu avant 60 ans** → Il peut choisir entre APA et PCH
 
 **Astuce Monka :** Vous pouvez cumuler l'APA avec le droit au répit et le crédit d'impôt emploi à domicile. Contactez votre CCAS pour un accompagnement personnalisé.
 
@@ -354,7 +354,7 @@ Pour les personnes de moins de 60 ans en situation de handicap — OU pour la PC
 
 **Comment en faire la demande :**
 1. Informer votre employeur par courrier recommandé (1 mois avant)
-2. Joindre un justificatif de la situation de votre proche (notification MDPH ou évaluation GIR)
+2. Joindre un justificatif de la situation de Francine (notification MDPH ou évaluation GIR)
 3. Demander l'AJPA auprès de votre CAF (formulaire cerfa n°16108*01)
 
 **Vos protections :**
@@ -411,7 +411,7 @@ L'ANAH (Agence Nationale de l'Habitat) peut financer jusqu'à 50% des travaux d'
         domain: 'F' as VulnerabilityDomain,
         readingTime: 7,
         imageUrl: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=200&fit=crop',
-        content: `La dénutrition touche 1 personne âgée sur 3 vivant à domicile. Quand on est aidant, préparer des repas adaptés peut devenir un vrai casse-tête — surtout si votre proche a des troubles de la déglutition ou peu d'appétit.
+        content: `La dénutrition touche 1 personne âgée sur 3 vivant à domicile. Quand on est aidant, préparer des repas adaptés peut devenir un vrai casse-tête — surtout si Francine a des troubles de la déglutition ou peu d'appétit.
 
 **Les signaux de dénutrition à surveiller :**
 - Perte de poids ≥ 5% en 1 mois ou ≥ 10% en 6 mois
@@ -447,30 +447,30 @@ L'ANAH (Agence Nationale de l'Habitat) peut financer jusqu'à 50% des travaux d'
         domain: 'F' as VulnerabilityDomain,
         readingTime: 5,
         imageUrl: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=200&fit=crop',
-        content: `Quand votre proche perd la mémoire, la communication change — mais elle ne disparaît pas. Elle demande simplement un autre langage. Voici comment maintenir le lien, même quand les mots manquent.
+        content: `Quand Francine perd la mémoire, la communication change — mais elle ne disparaît pas. Elle demande simplement un autre langage. Voici comment maintenir le lien, même quand les mots manquent.
 
 **Ce qui ne fonctionne plus :**
 - « Tu ne te souviens pas ? On en a parlé hier. » → Crée de la frustration et de la honte
 - « Non, ce n'est pas comme ça ! » → Provoque de l'agitation
-- « Pourquoi tu fais ça ? » → Votre proche ne sait pas pourquoi. La question l'angoisse.
+- « Pourquoi tu fais ça ? » → Francine ne sait pas pourquoi. La question l'angoisse.
 - Parler entre adultes devant lui/elle comme s'il/elle n'était pas là
 
 **Ce qui fonctionne :**
 
-1. **Entrer dans son monde** — Si votre proche croit être chez ses parents, ne corrigez pas. Demandez plutôt : « Et comment c'est, chez tes parents ? ». C'est ce qu'on appelle la validation.
+1. **Entrer dans son monde** — Si Francine croit être chez ses parents, ne corrigez pas. Demandez plutôt : « Et comment c'est, chez tes parents ? ». C'est ce qu'on appelle la validation.
 
 2. **Les phrases simples** — Une idée par phrase. « On va manger. » Pas : « Allez, viens, on va aller manger parce qu'après on a le médecin et il ne faut pas être en retard. »
 
-3. **Le toucher** — Avant de parler, un contact doux (main, épaule) aide votre proche à se concentrer sur vous. Le toucher reste compris très tard dans la maladie.
+3. **Le toucher** — Avant de parler, un contact doux (main, épaule) aide Francine à se concentrer sur vous. Le toucher reste compris très tard dans la maladie.
 
 4. **Les yeux** — Mettez-vous à la même hauteur. Le contact visuel rassure et capte l'attention.
 
 5. **La musique** — Les souvenirs musicaux résistent plus longtemps que les autres. Chantez ensemble, passez les musiques de sa jeunesse. C'est souvent magique.
 
-6. **Les photos** — Pas « qui est-ce ? » (trop de pression) mais « regarde cette photo, elle est belle ». Laissez votre proche raconter ce qu'il voit.
+6. **Les photos** — Pas « qui est-ce ? » (trop de pression) mais « regarde cette photo, elle est belle ». Laissez Francine raconter ce qu'il voit.
 
 **Ce qu'il faut se rappeler :**
-Votre proche ne « fait pas exprès ». Ses comportements sont des symptômes, pas des choix. Et même quand les mots partent, les émotions restent. Votre présence, votre voix, votre chaleur — il/elle les ressent toujours.
+Francine ne « fait pas exprès ». Ses comportements sont des symptômes, pas des choix. Et même quand les mots partent, les émotions restent. Votre présence, votre voix, votre chaleur — il/elle les ressent toujours.
 
 > La communication n'est pas que des mots. Un regard, une main serrée, une chanson fredonnée — c'est ça, rester connecté.`,
     },
@@ -1001,7 +1001,7 @@ const completionImpacts: Record<string, {
 }> = {
     R: {
         headline: 'Vous avez retrouvé du répit',
-        narrative: "Ces actions vous ont permis de poser les bases d'un équilibre durable. Le répit n'est pas un luxe — c'est ce qui vous permet de continuer à accompagner votre proche.",
+        narrative: "Ces actions vous ont permis de poser les bases d'un équilibre durable. Le répit n'est pas un luxe — c'est ce qui vous permet de continuer à accompagner Francine.",
         unlocks: [
             'Accès au programme « Répit renforcé » avec des solutions de relais',
             'Notification à votre cercle d\'aidants pour prendre le relais',
@@ -1011,7 +1011,7 @@ const completionImpacts: Record<string, {
     },
     S: {
         headline: 'Votre santé est mieux protégée',
-        narrative: "En prenant soin de vous, vous prenez soin de votre proche. Ces actions réduisent votre risque d'épuisement et renforcent votre capacité d'accompagnement.",
+        narrative: "En prenant soin de vous, vous prenez soin de Francine. Ces actions réduisent votre risque d'épuisement et renforcent votre capacité d'accompagnement.",
         unlocks: [
             'Bilan santé aidant personnalisé à planifier',
             'Rappels automatiques pour vos propres rendez-vous médicaux',
@@ -1021,7 +1021,7 @@ const completionImpacts: Record<string, {
     },
     M: {
         headline: 'Le suivi médical est organisé',
-        narrative: "Le parcours de soins de votre proche est maintenant structuré. Chaque rendez-vous, chaque traitement est suivi — vous n'avez plus besoin de tout garder en tête.",
+        narrative: "Le parcours de soins de Francine est maintenant structuré. Chaque rendez-vous, chaque traitement est suivi — vous n'avez plus besoin de tout garder en tête.",
         unlocks: [
             'Calendrier médical synchronisé avec votre cercle d\'aidants',
             'Rappels de renouvellement d\'ordonnances',
@@ -1040,10 +1040,10 @@ const completionImpacts: Record<string, {
         nextStep: 'Le suivi de vos dossiers en cours sera automatisé.',
     },
     F: {
-        headline: 'La relation avec votre proche est renforcée',
-        narrative: "Comprendre votre proche, adapter la communication, aménager son quotidien — ces actions transforment votre relation et améliorent sa qualité de vie.",
+        headline: 'La relation avec Francine est renforcée',
+        narrative: "Comprendre Francine, adapter la communication, aménager son quotidien — ces actions transforment votre relation et améliorent sa qualité de vie.",
         unlocks: [
-            'Conseils personnalisés selon l\'évolution de votre proche',
+            'Conseils personnalisés selon l\'évolution de Francine',
             'Guide d\'aménagement du domicile adapté',
             'Mise en relation avec des familles dans la même situation',
         ],
@@ -1384,11 +1384,6 @@ const RecoDetailScreen = ({
             </h3>
             <div className="space-y-2.5 mb-8" data-tour="reco-tasks">
                 {[...tasksWithState]
-                    .sort((a, b) => {
-                        if (a.isContributive !== b.isContributive) return a.isContributive ? -1 : 1;
-                        if (a.isCompleted !== b.isCompleted) return a.isCompleted ? 1 : -1;
-                        return 0;
-                    })
                     .map(task => (
                         <MicroTaskItem
                             key={task.id}
@@ -2715,7 +2710,7 @@ const ChatIDECScreen = () => {
                             Accès Premium
                         </h2>
                         <p className="text-[14px] text-[#6B7280] leading-relaxed mb-6">
-                            Échangez directement avec un·e <strong className="text-[#2C8C99]">Infirmier·e De Coordination</strong> pour toutes vos questions sur le parcours de soins de votre proche.
+                            Échangez directement avec un·e <strong className="text-[#2C8C99]">Infirmier·e De Coordination</strong> pour toutes vos questions sur le parcours de soins de Francine.
                         </p>
 
                         {/* Benefits chips */}

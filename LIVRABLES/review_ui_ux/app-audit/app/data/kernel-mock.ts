@@ -111,6 +111,46 @@ const vieSociale: Vulnerability = {
                 },
             ],
         },
+        {
+            id: 'R3',
+            title: "Anticiper les démarches futures",
+            description: "Se préparer à d'éventuelles évolutions.",
+            asrObjective: "Avoir identifié les démarches clés en cas de changement",
+            asrProgress: 100,
+            criticality: 'prevention',
+            categories: [
+                {
+                    id: 'CAT_R3_PREV',
+                    name: 'Anticipation',
+                    recommendations: [
+                        reco('RECO_R3_01', "Connaître les démarches en cas d'évolution", 'prevention', [
+                            mt('MT_R3_01', "Se renseigner sur la tutelle et la curatelle", 'INFO', false, true),
+                            mt('MT_R3_02', "Identifier un notaire si besoin", 'SEC', true, true),
+                        ]),
+                    ],
+                },
+            ],
+        },
+        {
+            id: 'R4',
+            title: "Entretenir vos liens familiaux",
+            description: "Maintenir la communication au sein de la famille.",
+            asrObjective: "Garder un dialogue ouvert avec l'entourage",
+            asrProgress: 100,
+            criticality: 'prevention',
+            categories: [
+                {
+                    id: 'CAT_R4_PREV',
+                    name: 'Communication',
+                    recommendations: [
+                        reco('RECO_R4_01', "Maintenir le dialogue familial", 'prevention', [
+                            mt('MT_R4_01', "Organiser un temps d'échange avec la famille", 'ORGA', false, true),
+                            mt('MT_R4_02', "Partager les informations clés avec les proches", 'INFO', false, true),
+                        ]),
+                    ],
+                },
+            ],
+        },
     ],
 };
 
@@ -178,6 +218,46 @@ const votreSante: Vulnerability = {
                 },
             ],
         },
+        {
+            id: 'S3',
+            title: "Maintenir votre alimentation",
+            description: "Garder une alimentation équilibrée malgré le quotidien.",
+            asrObjective: "Conserver des repas réguliers et équilibrés",
+            asrProgress: 100,
+            criticality: 'prevention',
+            categories: [
+                {
+                    id: 'CAT_S3_PREV',
+                    name: 'Alimentation',
+                    recommendations: [
+                        reco('RECO_S3_01', "Garder de bonnes habitudes alimentaires", 'prevention', [
+                            mt('MT_S3_01', "Planifier vos repas de la semaine", 'ORGA', false, true),
+                            mt('MT_S3_02', "Identifier des solutions repas simples", 'INFO', false, true),
+                        ]),
+                    ],
+                },
+            ],
+        },
+        {
+            id: 'S4',
+            title: "Garder une activité physique",
+            description: "Bouger un peu chaque jour, même 15 minutes.",
+            asrObjective: "Maintenir une activité physique régulière",
+            asrProgress: 100,
+            criticality: 'prevention',
+            categories: [
+                {
+                    id: 'CAT_S4_PREV',
+                    name: 'Activité physique',
+                    recommendations: [
+                        reco('RECO_S4_01', "Intégrer du mouvement au quotidien", 'prevention', [
+                            mt('MT_S4_01', "Trouver une activité qui vous plaît", 'ORGA', false, true),
+                            mt('MT_S4_02', "Planifier 2-3 créneaux par semaine", 'ORGA', false, true),
+                        ]),
+                    ],
+                },
+            ],
+        },
     ],
 };
 
@@ -189,7 +269,7 @@ const parcoursSoins: Vulnerability = {
     domain: 'M',
     title: 'Parcours médical',
     userTitle: 'Parcours de soins',
-    description: "Organiser les soins de votre proche, sans vous y perdre.",
+    description: "Organiser les soins de Francine, sans vous y perdre.",
     score: 85,
     microParcours: [
         {
@@ -260,21 +340,21 @@ const vosDemarches: Vulnerability = {
 };
 
 // ═══════════════════════════════════════════════════════
-// THÈME : Votre proche (domain F)
+// THÈME : Francine (domain F)
 // Kernel V4 — Fragilité du proche (F1–F6)
 // ═══════════════════════════════════════════════════════
 const votreProche: Vulnerability = {
     id: 'V4',
     domain: 'F',
     title: 'Fragilité du proche',
-    userTitle: 'Votre proche',
-    description: "Accompagner votre proche en toute sécurité au quotidien.",
+    userTitle: 'Francine',
+    description: "Accompagner Francine en toute sécurité au quotidien.",
     score: 70,
     microParcours: [
         {
             id: 'F1',
             title: "Sécuriser le quotidien",
-            description: "Des actions concrètes pour adapter l'environnement de votre proche.",
+            description: "Des actions concrètes pour adapter l'environnement de Francine.",
             asrObjective: "Identifier et réduire les risques au domicile du proche",
             asrProgress: 50,
             criticality: 'ccc',
@@ -289,7 +369,7 @@ const votreProche: Vulnerability = {
                             mt('MT_F1_03', "Contacter un ergothérapeute pour un bilan à domicile", 'SEC', true, false),
                         ]),
                         reco('RECO_F1_02', "Organiser l'aide professionnelle", 'standard', [
-                            mt('MT_F1_04', "Évaluer les besoins en aide à domicile de votre proche", 'STRUC', true, true),
+                            mt('MT_F1_04', "Évaluer les besoins en aide à domicile de Francine", 'STRUC', true, true),
                             mt('MT_F1_05', "Se renseigner sur les services d'aide à domicile du territoire", 'INFO', false, false),
                         ]),
                     ],
@@ -299,7 +379,7 @@ const votreProche: Vulnerability = {
         {
             id: 'F2',
             title: "Comprendre les changements",
-            description: "Mieux comprendre l'évolution de la situation de votre proche.",
+            description: "Mieux comprendre l'évolution de la situation de Francine.",
             asrObjective: "Avoir un suivi régulier des capacités et besoins du proche",
             asrProgress: 25,
             criticality: 'standard',
@@ -312,6 +392,26 @@ const votreProche: Vulnerability = {
                             mt('MT_F2_01', "Repérer les changements de comportement ou d'humeur", 'ORGA', false, true),
                             mt('MT_F2_02', "En parler au médecin traitant lors du prochain rendez-vous", 'MED', true, false),
                             mt('MT_F2_03', "Tenir un carnet de suivi simple pour noter les évolutions", 'STRUC', true, false),
+                        ]),
+                    ],
+                },
+            ],
+        },
+        {
+            id: 'F3',
+            title: "Préserver les liens sociaux du proche",
+            description: "Aider Francine à garder des interactions sociales.",
+            asrObjective: "Maintenir au moins une activité sociale régulière pour le proche",
+            asrProgress: 100,
+            criticality: 'prevention',
+            categories: [
+                {
+                    id: 'CAT_F3_PREV',
+                    name: 'Vie sociale du proche',
+                    recommendations: [
+                        reco('RECO_F3_01', "Garder des activités sociales pour Francine", 'prevention', [
+                            mt('MT_F3_01', "Identifier les activités adaptées dans votre quartier", 'INFO', false, true),
+                            mt('MT_F3_02', "Organiser des visites régulières de l'entourage", 'ORGA', false, true),
                         ]),
                     ],
                 },

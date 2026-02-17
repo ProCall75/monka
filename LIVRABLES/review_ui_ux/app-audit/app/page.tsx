@@ -70,9 +70,9 @@ const CRITIQUES: CritiqueItem[] = [
         title: 'Personnalisation à renforcer',
         severity: 'majeur',
         screenshots: ['/screenshots/IMG_3702.PNG', '/screenshots/IMG_3711.PNG'],
-        positive: '« Pour Francine » apparaît sur certaines task cards, montrant que le socle existe.',
+        positive: '« Pour votre proche » apparaît sur certaines task cards, montrant que le socle existe.',
         negative: 'Les hero cards restent génériques (« Renseignez-vous auprès de la CAF »). L\'aidant peut percevoir un décalage entre la promesse de personnalisation et ce qu\'il voit à l\'écran.',
-        proposal: 'Nous proposons une personnalisation systématique : « Réservez un RDV pour Francine » sur l\'ensemble des composants.',
+        proposal: 'Nous proposons une personnalisation systématique : « Réservez un RDV pour votre proche » sur l\'ensemble des composants.',
     },
     {
         id: 'C07',
@@ -98,7 +98,7 @@ const CRITIQUES: CritiqueItem[] = [
         severity: 'mineur',
         screenshots: ['/screenshots/IMG_3717.PNG', '/screenshots/IMG_3760.PNG'],
         positive: 'Le ton général est respectueux et bienveillant.',
-        negative: 'Quelques coquilles subsistent ("Modifer", "anxieuxe") et les formules d\'adresse varient ("Pour vous", "Pour Moi", "Pour Francine"). Cette inconsistance peut altérer la perception de qualité.',
+        negative: 'Quelques coquilles subsistent ("Modifer", "anxieuxe") et les formules d\'adresse varient ("Pour vous", "Pour Moi", "Pour votre proche"). Cette inconsistance peut altérer la perception de qualité.',
         proposal: 'Nous proposons une charte copywriting unifiée avec un ton bienveillant et cohérent sur l\'ensemble de l\'application.',
     },
 ];
@@ -656,7 +656,7 @@ export default function ReviewPage() {
                             {/* Component block */}
                             <div className="rounded-[20px] p-5" style={{ backgroundColor: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: '1px solid #E8F5E9' }}>
                                 <p className="text-[9px] font-bold uppercase tracking-wider mb-3" style={{ color: '#059669' }}>« Thème de vie »</p>
-                                <HeroCard domain="S" title="Prendre soin de votre santé" subtitle="Un parcours adapté à votre situation" activeMP={2} totalMP={4} targetPerson="Francine" />
+                                <HeroCard domain="S" title="Prendre soin de votre santé" subtitle="Un parcours adapté à votre situation" activeMP={2} totalMP={4} targetPerson="votre proche" />
                                 <p className="text-[10px] italic mt-2.5 leading-relaxed" style={{ color: '#8A857E' }}>La jauge se remplit quand l&apos;aidant avance dans ses micro-parcours.</p>
                             </div>
                         </div>
@@ -1042,7 +1042,7 @@ export default function ReviewPage() {
                             {/* ─── Strate 1: Vulnérabilité → HeroCard ─── */}
                             <div className="text-[9px] font-bold uppercase tracking-[2px] mb-2 px-3 py-1 rounded-full" style={{ backgroundColor: '#8B5CF610', color: '#8B5CF6' }}>Strate 1 · Vulnerabilite → HeroCard</div>
                             <div className="w-full max-w-[380px]">
-                                <HeroCard domain="S" title="Sante de l'aidant" subtitle="Votre sante physique et mentale" activeMP={2} totalMP={4} targetPerson="Francine" />
+                                <HeroCard domain="S" title="Sante de l'aidant" subtitle="Votre sante physique et mentale" activeMP={2} totalMP={4} targetPerson="votre proche" />
                             </div>
 
                             {/* Arrow down */}
@@ -1178,7 +1178,7 @@ export default function ReviewPage() {
                             {[
                                 { step: '01', title: 'Navigation', desc: '5 thèmes de vie comme points d\'entrée, pas des onglets génériques', color: '#8B5CF6', bg: '#F5F3FF' },
                                 { step: '02', title: 'Profondeur', desc: '4 niveaux : Thème → Parcours → Conseil → Action', color: '#3B82F6', bg: '#EFF6FF' },
-                                { step: '03', title: 'Contexte', desc: 'Criticité visible, personnalisation « Pour Francine », pourquoi affiché', color: '#10B981', bg: '#ECFDF5' },
+                                { step: '03', title: 'Contexte', desc: 'Criticité visible, personnalisation « Pour votre proche », pourquoi affiché', color: '#10B981', bg: '#ECFDF5' },
                                 { step: '04', title: 'Ton', desc: 'Wording adapté aidant vs IDEC, vocabulaire humain, zéro jargon', color: '#F59E0B', bg: '#FFFBEB' },
                             ].map((s, i) => (
                                 <div key={i} className="rounded-[16px] p-4" style={{ backgroundColor: s.bg }}>

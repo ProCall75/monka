@@ -33,6 +33,48 @@ export interface ActionableAdvice {
 
 export const actionableAdvices: ActionableAdvice[] = [
     {
+        id: 'ACT_00',
+        title: "Contacter l'assistante sociale de votre secteur",
+        subtitle: "Premier contact gratuit — elle vous oriente dans toutes vos démarches",
+        domain: 'R',
+        priority: 'urgent',
+        estimatedTime: '15 minutes',
+        steps: [
+            {
+                order: 1,
+                text: 'Trouver votre assistante sociale',
+                detail: "Appelez votre mairie ou votre CCAS (Centre Communal d'Action Sociale). Demandez les coordonnées de l'assistante sociale de votre secteur. Vous pouvez aussi passer directement au CCAS sans rendez-vous.",
+                isDone: true,
+            },
+            {
+                order: 2,
+                text: 'Prendre rendez-vous',
+                detail: "Appelez et précisez que vous êtes aidant(e). Les assistantes sociales ont des créneaux dédiés. Délai habituel : 1 à 2 semaines. En urgence, demandez un créneau rapide.",
+            },
+            {
+                order: 3,
+                text: 'Préparer votre rendez-vous',
+                detail: "Apportez : pièce d'identité, justificatif de domicile, dernier avis d'imposition, et si possible un certificat médical du médecin de Francine. Notez vos questions à l'avance.",
+            },
+            {
+                order: 4,
+                text: 'Lors du rendez-vous',
+                detail: "L'assistante sociale évaluera votre situation globale et vous orientera : APA, aides financières, répit, adaptation du logement. Elle peut aussi remplir les dossiers avec vous.",
+            },
+        ],
+        contacts: [
+            { name: 'CCAS de votre commune', phone: '3966', role: 'Accueil social de proximité' },
+            { name: 'Mairie (standard)', phone: '3966', role: 'Orientation vers le CCAS' },
+        ],
+        documents: [
+            "Pièce d'identité",
+            "Justificatif de domicile récent",
+            "Dernier avis d'imposition",
+        ],
+        tip: "Astuce Monka : L'assistante sociale est votre meilleure alliée. Elle connaît toutes les aides de votre territoire et peut accélérer les démarches. N'hésitez pas à tout lui dire — c'est confidentiel.",
+        linkedMicroTaskIds: ['MT_R1_01'],
+    },
+    {
         id: 'ACT_01',
         title: "Demander l'APA (Allocation Personnalisée d'Autonomie)",
         subtitle: "Allocation Personnalisée d'Autonomie — jusqu'à 1 914€/mois",
@@ -59,7 +101,7 @@ export const actionableAdvices: ActionableAdvice[] = [
             {
                 order: 4,
                 text: "Préparer la visite d'évaluation à domicile",
-                detail: "Un professionnel viendra évaluer le degré d'autonomie (grille AGGIR). Notez les difficultés quotidiennes de votre proche à l'avance. Cela prend environ 1h.",
+                detail: "Un professionnel viendra évaluer le degré d'autonomie (grille AGGIR). Notez les difficultés quotidiennes de Francine à l'avance. Cela prend environ 1h.",
             },
             {
                 order: 5,
@@ -139,12 +181,12 @@ export const actionableAdvices: ActionableAdvice[] = [
             {
                 order: 2,
                 text: 'Visiter un accueil de jour proche de chez vous',
-                detail: "Activités thérapeutiques, art-thérapie. Votre proche pourrait y aller 1-2 jours/semaine. Coût souvent pris en charge par l'APA.",
+                detail: "Activités thérapeutiques, art-thérapie. Francine pourrait y aller 1-2 jours/semaine. Coût souvent pris en charge par l'APA.",
             },
             {
                 order: 3,
                 text: 'Se renseigner sur le relais à domicile',
-                detail: "Des services comme l'ADMR proposent une garde à domicile : un intervenant reste avec votre proche pendant que vous vous absentez. De 2h à une journée entière.",
+                detail: "Des services comme l'ADMR proposent une garde à domicile : un intervenant reste avec Francine pendant que vous vous absentez. De 2h à une journée entière.",
             },
             {
                 order: 4,
@@ -160,7 +202,7 @@ export const actionableAdvices: ActionableAdvice[] = [
             "Notification APA (si déjà obtenue)",
             "Ordonnance du médecin traitant (pour l'accueil de jour)",
         ],
-        tip: "Astuce Monka : Commencez par 1 demi-journée d'accueil de jour. Votre proche s'y habituera progressivement, et vous constaterez vite les bénéfices pour vous deux.",
+        tip: "Astuce Monka : Commencez par 1 demi-journée d'accueil de jour. Francine s'y habituera progressivement, et vous constaterez vite les bénéfices pour vous deux.",
         linkedMicroTaskIds: ['MT_R1_07', 'MT_R1_08', 'MT_R1_09'],
     },
     {
@@ -205,7 +247,7 @@ export const actionableAdvices: ActionableAdvice[] = [
     },
     {
         id: 'ACT_05',
-        title: "Adapter le logement de votre proche",
+        title: "Adapter le logement de Francine",
         subtitle: "Aides techniques + subventions jusqu'à 5 000€",
         domain: 'F',
         priority: 'recommended',
@@ -278,7 +320,7 @@ export const actionableAdvices: ActionableAdvice[] = [
     },
     {
         id: 'ACT_07',
-        title: "Obtenir l'aide à domicile pour votre proche",
+        title: "Obtenir l'aide à domicile pour Francine",
         subtitle: "Aide ménagère, repas, toilette — financé par l'APA",
         domain: 'F',
         priority: 'recommended',
@@ -337,7 +379,7 @@ export const actionableAdvices: ActionableAdvice[] = [
             {
                 order: 3,
                 text: 'Envisager la personne de confiance',
-                detail: "Devenez officiellement « personne de confiance » de votre proche auprès de l'hôpital. Formulaire simple disponible à l'accueil de tout établissement de santé.",
+                detail: "Devenez officiellement « personne de confiance » de Francine auprès de l'hôpital. Formulaire simple disponible à l'accueil de tout établissement de santé.",
             },
         ],
         contacts: [
