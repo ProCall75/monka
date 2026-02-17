@@ -941,79 +941,111 @@ export default function ReviewPage() {
                             {/* Root — Onboarding */}
                             <div className="rounded-[14px] px-6 py-3 text-center font-bold text-[13px] text-white flex items-center gap-2 justify-center" style={{ backgroundColor: '#8B5CF6', boxShadow: '0 4px 14px -2px rgba(139,92,246,0.35)' }}>
                                 <ClipboardText size={16} weight="bold" className="text-white/90" />
-                                Onboarding / Questionnaire
+                                Onboarding
                             </div>
-                            <div className="w-px h-6" style={{ backgroundColor: '#D4D4D4' }} />
+                            <div className="flex flex-col items-center">
+                                <div className="w-px h-3" style={{ backgroundColor: '#D4D4D4' }} />
+                                <div className="flex gap-2 flex-wrap justify-center mb-1">
+                                    {['Welcome slides', 'Présentation IDEC', 'Questionnaire'].map((t, i) => (
+                                        <span key={i} className="text-[8px] font-medium px-2 py-0.5 rounded-full" style={{ backgroundColor: '#8B5CF610', color: '#8B5CF6' }}>{t}</span>
+                                    ))}
+                                </div>
+                                <div className="w-px h-3" style={{ backgroundColor: '#D4D4D4' }} />
+                            </div>
 
                             {/* Dashboard */}
-                            <div className="rounded-[14px] px-6 py-3 text-center font-bold text-[13px] text-white flex flex-col items-center justify-center" style={{ backgroundColor: '#3B82F6', boxShadow: '0 4px 14px -2px rgba(59,130,246,0.35)' }}>
+                            <div className="rounded-[14px] px-6 py-3 text-center font-bold text-[13px] text-white flex flex-col items-center justify-center mb-1" style={{ backgroundColor: '#3B82F6', boxShadow: '0 4px 14px -2px rgba(59,130,246,0.35)' }}>
                                 <div className="flex items-center gap-2">
                                     <House size={16} weight="bold" className="text-white/90" />
                                     <span>Dashboard</span>
                                 </div>
-                                <span className="text-[9px] font-normal text-white/70 mt-0.5">Hub central — vue d&apos;ensemble de la situation</span>
+                                <span className="text-[9px] font-normal text-white/70 mt-0.5">Hub central — 5 onglets</span>
                             </div>
-                            <div className="w-px h-6" style={{ backgroundColor: '#D4D4D4' }} />
+                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
 
-                            {/* 5 tabs — horizontal branches from Dashboard */}
-                            <div className="relative w-full max-w-[780px] mb-2">
+                            {/* 5 tabs */}
+                            <div className="relative w-full max-w-[800px] mb-2">
                                 <div className="absolute top-0 left-[8%] right-[8%] h-px" style={{ backgroundColor: '#D4D4D4' }} />
-                                <div className="grid grid-cols-5 gap-3">
+                                <div className="grid grid-cols-5 gap-2">
                                     {([
                                         {
                                             label: 'Accueil',
                                             Icon: House,
-                                            sub: 'Vulnerabilites et micro-parcours',
-                                            color: '#3B82F6',
-                                            children: ['Detail d\u0027une vulnerabilite', 'Detail d\u0027un micro-parcours', 'Detail d\u0027une recommandation'],
+                                            sub: 'Vue d\'ensemble personnalisée',
+                                            color: '#2C8C99',
+                                            features: ['Score & phrase du jour', 'Thématiques (HeroCards)', 'Articles recommandés', 'Guides d\'action rapide'],
+                                            drillDown: [
+                                                { label: 'Détail thème', desc: 'Programmes par vulnérabilité' },
+                                                { label: 'Détail programme', desc: 'Recommandations cochables' },
+                                                { label: 'Détail recommandation', desc: 'Micro-tâches + guide pas-à-pas' },
+                                            ],
                                         },
                                         {
                                             label: 'Mon Suivi',
                                             Icon: ListChecks,
-                                            sub: 'Micro-taches, agenda, cercle',
+                                            sub: 'Progression globale',
                                             color: '#F59E0B',
-                                            children: ['Liste des micro-taches', 'Calendrier des rendez-vous', 'Notes de l\u0027entourage'],
+                                            features: ['Vue par thème', 'Vue chronologique', 'Tâches cochées / restantes'],
+                                            drillDown: [],
                                         },
                                         {
                                             label: 'Chat IDEC',
                                             Icon: ChatCircle,
-                                            sub: 'Messagerie avec le coordinateur',
+                                            sub: 'Messagerie coordinateur',
                                             color: '#8B5CF6',
-                                            children: ['Fil de conversation'],
+                                            features: ['Fil de conversation', 'Réponses contextuelles'],
+                                            drillDown: [],
                                         },
                                         {
-                                            label: 'Mes Pros',
+                                            label: 'Communauté',
                                             Icon: UsersThree,
-                                            sub: 'Professionnels autour de moi',
+                                            sub: 'Annuaire & carte',
                                             color: '#10B981',
-                                            children: ['Fiche d\u0027un professionnel', 'Carte des professionnels'],
+                                            features: ['Carte interactive', 'Filtres : social, santé, admin, domicile', 'Fiches professionnels'],
+                                            drillDown: [],
                                         },
                                         {
                                             label: 'Ressources',
                                             Icon: BookOpenText,
-                                            sub: 'Articles et guides pratiques',
+                                            sub: 'Contenus & guides',
                                             color: '#EC4899',
-                                            children: ['Lecture d\u0027un article', 'Guide etape par etape'],
+                                            features: ['Articles éditoriaux', 'Annuaire pro', 'Mes actions (guides)'],
+                                            drillDown: [
+                                                { label: 'Lecture article', desc: 'Contenu personnalisé' },
+                                                { label: 'Guide détaillé', desc: 'Étapes, contacts, documents' },
+                                            ],
                                         },
                                     ] as const).map((p, i) => (
                                         <div key={i} className="flex flex-col items-center">
-                                            <div className="w-px h-5" style={{ backgroundColor: '#D4D4D4' }} />
-                                            <div className="rounded-[14px] px-2.5 py-3 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                                                <div className="w-7 h-7 rounded-[10px] mx-auto mb-1.5 flex items-center justify-center" style={{ backgroundColor: `${p.color}10` }}>
+                                            <div className="w-px h-4" style={{ backgroundColor: '#D4D4D4' }} />
+                                            {/* Tab card */}
+                                            <div className="rounded-[14px] px-2 py-2.5 text-center w-full" style={{ backgroundColor: '#FFFFFF', border: `1.5px solid ${p.color}30`, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                                                <div className="w-7 h-7 rounded-[10px] mx-auto mb-1 flex items-center justify-center" style={{ backgroundColor: `${p.color}12` }}>
                                                     <p.Icon size={15} weight="bold" style={{ color: p.color }} />
                                                 </div>
                                                 <p className="text-[11px] font-bold leading-tight" style={{ color: '#2D2A26' }}>{p.label}</p>
-                                                <p className="text-[9px] mt-1 leading-snug" style={{ color: '#B8B3AB' }}>{p.sub}</p>
+                                                <p className="text-[8px] mt-0.5 leading-snug" style={{ color: '#B8B3AB' }}>{p.sub}</p>
                                             </div>
-                                            {/* Sub-pages */}
-                                            {p.children.map((c, j) => (
-                                                <div key={j} className="flex flex-col items-center w-full">
-                                                    <div className="w-px h-3" style={{ backgroundColor: '#E5E5EA' }} />
-                                                    <div className="rounded-[10px] px-2 py-1.5 text-center w-full" style={{ backgroundColor: '#F8F7F5', border: '1px dashed #E0DDD8' }}>
-                                                        <p className="text-[9px] font-medium" style={{ color: '#8A857E' }}>{c}</p>
+                                            {/* Features */}
+                                            <div className="w-full mt-1.5 space-y-1">
+                                                {p.features.map((f, j) => (
+                                                    <div key={j} className="rounded-[8px] px-2 py-1 text-center" style={{ backgroundColor: `${p.color}08`, border: `1px solid ${p.color}15` }}>
+                                                        <p className="text-[8px] font-medium" style={{ color: p.color }}>{f}</p>
                                                     </div>
+                                                ))}
+                                            </div>
+                                            {/* Drill-down sub-screens */}
+                                            {p.drillDown.length > 0 && (
+                                                <div className="w-full mt-2 space-y-1">
+                                                    <div className="w-px h-2 mx-auto" style={{ backgroundColor: '#E5E5EA' }} />
+                                                    {p.drillDown.map((d, k) => (
+                                                        <div key={k} className="rounded-[8px] px-2 py-1.5 text-center" style={{ backgroundColor: '#F8F7F5', border: '1px dashed #E0DDD8' }}>
+                                                            <p className="text-[9px] font-semibold" style={{ color: '#6B6560' }}>{d.label}</p>
+                                                            <p className="text-[7px] mt-0.5" style={{ color: '#B8B3AB' }}>{d.desc}</p>
+                                                        </div>
+                                                    ))}
                                                 </div>
-                                            ))}
+                                            )}
                                         </div>
                                     ))}
                                 </div>
@@ -1022,12 +1054,16 @@ export default function ReviewPage() {
                             {/* Legend */}
                             <div className="flex items-center gap-6 mt-4 pt-4" style={{ borderTop: '1px solid #F0EDE8' }}>
                                 <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 rounded-[4px]" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5EA' }} />
-                                    <span className="text-[9px] font-medium" style={{ color: '#B8B3AB' }}>Ecran principal</span>
+                                    <div className="w-3 h-3 rounded-[4px]" style={{ backgroundColor: '#FFFFFF', border: '1.5px solid #2C8C9930' }} />
+                                    <span className="text-[9px] font-medium" style={{ color: '#B8B3AB' }}>Onglet principal</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 rounded-[4px]" style={{ backgroundColor: '#2C8C9908', border: '1px solid #2C8C9915' }} />
+                                    <span className="text-[9px] font-medium" style={{ color: '#B8B3AB' }}>Feature intégrée</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 rounded-[4px]" style={{ backgroundColor: '#F8F7F5', border: '1px dashed #E0DDD8' }} />
-                                    <span className="text-[9px] font-medium" style={{ color: '#B8B3AB' }}>Sous-ecran accessible par drill-down</span>
+                                    <span className="text-[9px] font-medium" style={{ color: '#B8B3AB' }}>Sous-écran (drill-down)</span>
                                 </div>
                             </div>
                         </div>
