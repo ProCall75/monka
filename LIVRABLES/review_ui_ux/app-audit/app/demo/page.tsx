@@ -3150,7 +3150,7 @@ const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
                 ) : (
                     <>
                         {/* Illustration */}
-                        <div className="w-[160px] h-[160px] rounded-[32px] bg-white flex items-center justify-center mb-8 overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(44,140,153,0.10)' }}>
+                        <div className="w-[120px] h-[120px] rounded-[28px] bg-white flex items-center justify-center mb-6 overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(44,140,153,0.10)' }}>
                             <img
                                 src={slide.image}
                                 alt={slide.title}
@@ -3193,7 +3193,7 @@ const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
             </div>
 
             {/* Bottom: dots + button */}
-            <div className="pb-12 px-8 flex flex-col items-center gap-6">
+            <div className="pb-6 px-8 flex flex-col items-center gap-4">
                 {/* Dots */}
                 <div className="flex gap-2">
                     {ONBOARDING_SLIDES.map((_, i) => (
