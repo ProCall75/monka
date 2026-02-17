@@ -2,10 +2,6 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Shield,
-    Users,
-    Heart,
-    Stethoscope,
-    Scale,
     Activity,
     CheckCircle2,
     AlertTriangle,
@@ -16,64 +12,14 @@ import {
     List,
     BarChart3,
     Layers,
-    Trophy,
     ListChecks,
 } from 'lucide-react'
 import { useMonkaData } from '../engine/useMonkaData'
-import type { MonkaData } from '../engine/supabaseData'
+import { buildMPVulnMap, type MonkaData } from '../engine/supabaseData'
+import { VULN_META, VULN_IDS } from '../engine/constants'
 
-// Vulnerability metadata
-const VULN_META: Record<string, {
-    label: string
-    fullName: string
-    icon: typeof Heart
-    color: string
-    gradient: string
-    description: string
-}> = {
-    V1: {
-        label: 'V1',
-        fullName: 'Social et relationnel',
-        icon: Users,
-        color: '#58BF94',
-        gradient: 'from-emerald-400 to-emerald-600',
-        description: 'Impact de l\'aidance sur la vie sociale, professionnelle et familiale de l\'aidant.'
-    },
-    V2: {
-        label: 'V2',
-        fullName: 'Administrative',
-        icon: Scale,
-        color: '#86C0CF',
-        gradient: 'from-cyan-400 to-cyan-600',
-        description: 'Évaluation de la situation administrative, financière et des droits.'
-    },
-    V3: {
-        label: 'V3',
-        fullName: 'Santé physique et psychologique',
-        icon: Heart,
-        color: '#F5A623',
-        gradient: 'from-amber-400 to-amber-600',
-        description: 'Fatigue, stress, sommeil, état psychologique et physique de l\'aidant.'
-    },
-    V4: {
-        label: 'V4',
-        fullName: 'Fragilité du proche',
-        icon: Stethoscope,
-        color: '#EF4444',
-        gradient: 'from-red-400 to-red-600',
-        description: 'Pathologies, traitements, autonomie et parcours de soins du proche aidé.'
-    },
-    V5: {
-        label: 'V5',
-        fullName: 'Parcours médical du proche',
-        icon: Target,
-        color: '#7748F6',
-        gradient: 'from-violet-400 to-violet-600',
-        description: 'Démarches, droits, coordination des intervenants et organisation des soins.'
-    },
-}
 
-type TabId = 'overview' | 'questions' | 'scoring' | 'mps' | 'rules' | 'recos' | 'mts' | 'asr'
+type TabId = 'overview' | 'questions' | 'scoring' | 'mps' | 'rules' | 'recos' | 'mts'
 
 function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
     const [activeTab, setActiveTab] = useState<TabId>('overview')
@@ -81,15 +27,17 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
     const Icon = meta.icon
 
     // Compute stats
+    const mpVulnMap = useMemo(() => buildMPVulnMap(data), [data])
+
     const stats = useMemo(() => {
         const questions = data.questions.filter(q => q.vulnerability_id === vulnId)
         const mps = data.microParcours.filter(mp => mp.vulnerability_id === vulnId)
-        const rules = data.activationRules.filter(r => r.vulnerability_id === vulnId)
+        const mpIds = new Set(mps.map(mp => mp.id))
+        const rules = data.activationRules.filter(r => mpIds.has(r.mp_id))
         const scoring = data.scoringQuestions.filter(s => s.vulnerability_id === vulnId)
         const thresholds = data.scoringThresholds.filter(t => t.vulnerability_id === vulnId)
-        const recos = data.recommendations.filter(r => r.vulnerability_id === vulnId)
-        const mts = data.microTaches.filter(mt => mt.vulnerability_id === vulnId)
-        const asrs = data.asrs.filter(a => a.vulnerability_id === vulnId)
+        const recos = data.recommendations.filter(r => mpVulnMap[r.mp_id] === vulnId)
+        const mts = data.microTaches.filter(mt => mpVulnMap[mt.mp_id] === vulnId)
 
         const questionsByClassification = questions.reduce((acc, q) => {
             const cls = q.classification || 'non classé'
@@ -104,8 +52,8 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
 
         const maxScore = scoring.length > 0 ? Math.max(...scoring.map(s => s.max_score_vulnerability || 0)) : 0
 
-        return { questions, mps, rules, scoring, thresholds, recos, mts, asrs, questionsByClassification, rulesByNiveau, maxScore }
-    }, [vulnId, data])
+        return { questions, mps, rules, scoring, thresholds, recos, mts, questionsByClassification, rulesByNiveau, maxScore }
+    }, [vulnId, data, mpVulnMap])
 
     const tabs: { id: TabId; label: string; icon: typeof Activity; count?: number }[] = [
         { id: 'overview', label: 'Vue d\'ensemble', icon: BarChart3 },
@@ -115,7 +63,6 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
         { id: 'rules', label: 'Règles', icon: Zap, count: stats.rules.length },
         { id: 'recos', label: 'Recommandations', icon: Target, count: stats.recos.length },
         { id: 'mts', label: 'Micro-Tâches', icon: ListChecks, count: stats.mts.length },
-        { id: 'asr', label: 'ASR', icon: Trophy, count: stats.asrs.length },
     ]
 
     return (
@@ -131,7 +78,7 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                         <div className="flex items-center gap-2 mb-1">
                             <span className="text-xs font-bold text-white px-2 py-0.5 rounded-md"
                                 style={{ backgroundColor: meta.color }}>{meta.label}</span>
-                            <h2 className="text-xl font-bold text-monka-heading">{meta.fullName}</h2>
+                            <h2 className="text-xl font-bold text-monka-heading">{meta.name}</h2>
                         </div>
                         <p className="text-sm text-monka-muted">{meta.description}</p>
                     </div>
@@ -320,7 +267,7 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                     <div className="space-y-3">
                         {stats.mps.map(mp => {
                             const mpRecos = stats.recos.filter(r => r.mp_id === mp.id)
-                            const mpMTs = stats.mts.filter(mt => mt.reco_id && mpRecos.some(r => r.id === mt.reco_id))
+                            const mpMTs = stats.mts.filter(mt => mt.mp_id === mp.id)
                             const mpRules = stats.rules.filter(r => r.mp_id === mp.id)
                             return (
                                 <div key={mp.id} className="glass-card p-4">
@@ -392,9 +339,13 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                         ccc: 'bg-amber-50 text-amber-600',
                                         standard: 'bg-emerald-50 text-emerald-600',
                                     }
-                                    // Parse condition_logic to show human-readable conditions
-                                    const logic = rule.condition_logic as { operator?: string; conditions?: Array<{ question_id?: string; operator?: string; value?: string; values?: string[] }> }
-                                    const conditions = logic?.conditions || []
+                                    // condition_logic is an array of {q, op, val/vals}
+                                    const conditions = (Array.isArray(rule.condition_logic) ? rule.condition_logic : []) as Array<{ q?: string; op?: string; val?: string; vals?: string[] }>
+                                    // Helper: get question text by ID
+                                    const getQText = (qId: string) => {
+                                        const q = data.questions.find(qq => qq.id === qId)
+                                        return q ? q.question_text : qId
+                                    }
                                     return (
                                         <tr key={rule.id} className="border-b border-monka-border/50 hover:bg-gray-50/50 align-top">
                                             <td className="px-3 py-2 font-mono text-monka-muted">{rule.id}</td>
@@ -404,29 +355,34 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                                     {rule.niveau}
                                                 </span>
                                             </td>
-                                            <td className="px-3 py-2 max-w-[350px]">
+                                            <td className="px-3 py-2 max-w-[450px]">
                                                 {conditions.length > 0 ? (
-                                                    <div className="space-y-1">
-                                                        {conditions.map((cond, i) => (
-                                                            <div key={i} className="flex items-baseline gap-1 flex-wrap">
-                                                                {i > 0 && <span className="text-[9px] text-monka-muted font-bold uppercase">{logic.operator || 'ET'}</span>}
-                                                                <span className="font-mono font-bold" style={{ color: meta.color }}>{cond.question_id}</span>
-                                                                <span className="text-monka-muted">=</span>
-                                                                {cond.values ? (
-                                                                    cond.values.map((v, j) => (
-                                                                        <span key={j}>
-                                                                            {j > 0 && <span className="text-monka-muted mx-0.5">ou</span>}
-                                                                            <span className="px-1 py-0.5 rounded bg-gray-100 text-[10px]">{v}</span>
-                                                                        </span>
-                                                                    ))
-                                                                ) : (
-                                                                    <span className="px-1 py-0.5 rounded bg-gray-100 text-[10px]">{cond.value}</span>
-                                                                )}
-                                                            </div>
-                                                        ))}
+                                                    <div className="space-y-1.5">
+                                                        {conditions.map((cond, i) => {
+                                                            const qId = cond.q || ''
+                                                            const qText = getQText(qId)
+                                                            const values = cond.vals || (cond.val ? [cond.val] : [])
+                                                            return (
+                                                                <div key={i}>
+                                                                    {i > 0 && <span className="text-[9px] text-monka-muted font-bold uppercase block mb-0.5">ET</span>}
+                                                                    <div className="text-[11px] text-monka-text leading-snug">
+                                                                        <span className="text-monka-muted">Quand </span>
+                                                                        <span className="font-mono font-bold text-[10px] px-1 py-0.5 rounded bg-gray-100" style={{ color: meta.color }}>{qId}</span>
+                                                                        <span className="text-monka-muted italic text-[10px] ml-1">« {qText.length > 60 ? qText.slice(0, 57) + '…' : qText} »</span>
+                                                                        <span className="text-monka-muted"> = </span>
+                                                                        {values.map((v, j) => (
+                                                                            <span key={j}>
+                                                                                {j > 0 && <span className="text-monka-muted mx-0.5">ou</span>}
+                                                                                <span className="px-1.5 py-0.5 rounded bg-monka-primary/10 text-monka-primary text-[10px] font-medium">{v}</span>
+                                                                            </span>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })}
                                                     </div>
                                                 ) : (
-                                                    <span className="text-monka-muted">{rule.question_ids?.join(', ')}</span>
+                                                    <span className="text-monka-muted">—</span>
                                                 )}
                                             </td>
                                             <td className="px-3 py-2 text-monka-text max-w-[200px]">{rule.sens_clinique || '—'}</td>
@@ -441,9 +397,9 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                 {activeTab === 'recos' && (
                     <div className="space-y-2">
                         {stats.recos.map(reco => {
-                            const recoMTs = stats.mts.filter(mt => mt.reco_id === reco.id)
-                            const contributiveMTs = recoMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type))
-                            const nonContributiveMTs = recoMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type))
+                            const recoMTs = stats.mts.filter(mt => mt.category_id === reco.category_id)
+                            const contributiveMTs = recoMTs.filter(mt => mt.is_contributive)
+                            const nonContributiveMTs = recoMTs.filter(mt => !mt.is_contributive)
                             const niveauCls = reco.niveau === 'critique'
                                 ? 'bg-red-50 text-red-600 border-red-200'
                                 : reco.niveau === 'ccc'
@@ -451,10 +407,8 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                     : reco.niveau === 'standard'
                                         ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
                                         : 'bg-gray-50 text-gray-500 border-gray-200'
-                            // Find the associated activation rule
-                            const linkedRule = reco.activation_rule_id
-                                ? stats.rules.find(r => r.id === reco.activation_rule_id)
-                                : null
+                            // Find associated activation rules for same category
+                            const linkedRule = stats.rules.find(r => r.category_id === reco.category_id) || null
                             return (
                                 <div key={reco.id} className="glass-card p-3">
                                     <div className="flex items-start gap-3">
@@ -474,7 +428,7 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                                     </span>
                                                 )}
                                             </div>
-                                            <p className="text-xs text-monka-text leading-relaxed">{reco.texte_utilisateur}</p>
+                                            <p className="text-xs text-monka-text leading-relaxed">{reco.wording_utilisateur}</p>
                                             {contributiveMTs.length > 0 && (
                                                 <div className="mt-2 pl-3 border-l-2 border-emerald-200 space-y-1">
                                                     <span className="text-[9px] font-bold text-emerald-600 uppercase">📍 Sécurisation ({contributiveMTs.length})</span>
@@ -572,7 +526,7 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                             INFO: 'bg-green-50 text-green-600',
                                             ORGA: 'bg-purple-50 text-purple-600',
                                         }
-                                        const reco = stats.recos.find(r => r.id === mt.reco_id)
+                                        const reco = stats.recos.find(r => r.category_id === mt.category_id)
                                         return (
                                             <tr key={mt.id} className="border-b border-monka-border/50 hover:bg-gray-50/50">
                                                 <td className="px-3 py-2 font-mono text-monka-muted">{mt.id}</td>
@@ -595,11 +549,11 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                                                 <td className="px-3 py-2 text-monka-muted">
                                                     {mt.acteur && (
                                                         <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 font-medium text-monka-text">
-                                                            {mt.acteur}
+                                                            {Array.isArray(mt.acteur) ? mt.acteur.join(', ') : mt.acteur}
                                                         </span>
                                                     )}
                                                 </td>
-                                                <td className="px-3 py-2 font-mono text-monka-muted">{mt.reco_id || '—'}</td>
+                                                <td className="px-3 py-2 font-mono text-monka-muted">{mt.category_id || '—'}</td>
                                                 <td className="px-3 py-2">
                                                     {reco?.mp_id && (
                                                         <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 font-medium" style={{ color: meta.color }}>
@@ -616,172 +570,6 @@ function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
                     </div>
                 )}
 
-                {activeTab === 'asr' && (
-                    <div className="space-y-4">
-                        {/* ASR header */}
-                        <div className="glass-card p-4">
-                            <h4 className="text-sm font-bold text-monka-heading mb-1">Actions Structurantes de Référence</h4>
-                            <p className="text-xs text-monka-muted">
-                                Chaque MP a un objectif (ASR) validé quand 100% des MT contributives (STRUC/SEC/MED) sont complétées.
-                                Les MT INFO/ORGA améliorent la qualité de vie mais ne contribuent pas à l'ASR.
-                            </p>
-                            <div className="flex gap-3 mt-3">
-                                <div className="flex items-center gap-1.5">
-                                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                                    <span className="text-[10px] text-monka-muted">Contributive (STRUC/SEC/MED)</span>
-                                </div>
-                                <div className="flex items-center gap-1.5">
-                                    <span className="w-2 h-2 rounded-full bg-gray-300" />
-                                    <span className="text-[10px] text-monka-muted">Non-contributive (INFO/ORGA)</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Per-MP ASR cards */}
-                        {stats.mps.map(mp => {
-                            const mpRecos = stats.recos.filter(r => r.mp_id === mp.id)
-                            const mpRecoIds = mpRecos.map(r => r.id)
-                            const mpMTs = stats.mts.filter(mt => mpRecoIds.includes(mt.reco_id))
-                            const contributive = mpMTs.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type))
-                            const nonContributive = mpMTs.filter(mt => ['INFO', 'ORGA'].includes(mt.type))
-                            const contribByType = contributive.reduce((acc, mt) => {
-                                acc[mt.type] = (acc[mt.type] || 0) + 1
-                                return acc
-                            }, {} as Record<string, number>)
-                            const nonContribByType = nonContributive.reduce((acc, mt) => {
-                                acc[mt.type] = (acc[mt.type] || 0) + 1
-                                return acc
-                            }, {} as Record<string, number>)
-
-                            // Get ASR for this MP from the dedicated table
-                            const asr = stats.asrs.find(a => a.mp_id === mp.id)
-
-                            // Get highest activation level for this MP
-                            const mpRules = stats.rules.filter(r => r.mp_id === mp.id)
-                            const hasCritique = mpRules.some(r => r.niveau === 'critique')
-                            const hasCCC = mpRules.some(r => r.niveau === 'ccc')
-                            const highest = hasCritique ? 'critique' : hasCCC ? 'ccc' : mpRules.length > 0 ? 'standard' : null
-                            const niveauBadge = highest === 'critique'
-                                ? 'bg-red-50 text-red-600 border-red-200'
-                                : highest === 'ccc'
-                                    ? 'bg-amber-50 text-amber-600 border-amber-200'
-                                    : highest === 'standard'
-                                        ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
-                                        : 'bg-gray-50 text-gray-400 border-gray-200'
-
-                            return (
-                                <div key={mp.id} className="glass-card p-4">
-                                    <div className="flex items-center justify-between mb-3">
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-xs font-bold px-2 py-0.5 rounded-md text-white" style={{ backgroundColor: meta.color }}>
-                                                {mp.id}
-                                            </span>
-                                            <span className="text-sm font-semibold text-monka-heading">{mp.nom}</span>
-                                            {highest && (
-                                                <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold ${niveauBadge}`}>
-                                                    {highest}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <div className="text-right">
-                                            <span className="text-xs font-bold" style={{ color: meta.color }}>
-                                                {contributive.length} contributives
-                                            </span>
-                                            <span className="text-xs text-monka-muted ml-2">
-                                                {nonContributive.length} amélioration
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {/* ASR Signature + Objectif from dedicated table */}
-                                    {asr && (
-                                        <div className="mb-3 p-2.5 rounded-lg border border-blue-100 bg-blue-50/50">
-                                            <div className="flex items-start gap-2">
-                                                <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">🎯 ASR</span>
-                                                <div>
-                                                    <div className="text-xs font-semibold text-blue-800">{asr.signature}</div>
-                                                    {asr.objectif && (
-                                                        <div className="text-[10px] text-blue-600 mt-0.5">{asr.objectif}</div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {/* ASR progress bar */}
-                                    {contributive.length > 0 ? (
-                                        <div className="mb-3">
-                                            <div className="flex items-center gap-2 mb-1.5">
-                                                <span className="text-[10px] font-bold text-monka-muted uppercase">📍 Sécurisation — MT contributives</span>
-                                            </div>
-                                            <div className="w-full h-4 bg-gray-100 rounded-full overflow-hidden flex">
-                                                {['STRUC', 'SEC', 'MED'].map(type => {
-                                                    const count = contribByType[type] || 0
-                                                    if (count === 0) return null
-                                                    const pct = (count / contributive.length) * 100
-                                                    const colors: Record<string, string> = {
-                                                        STRUC: '#3B82F6',
-                                                        SEC: '#F97316',
-                                                        MED: '#EF4444',
-                                                    }
-                                                    return (
-                                                        <div
-                                                            key={type}
-                                                            className="h-full flex items-center justify-center text-[9px] font-bold text-white"
-                                                            style={{ width: `${pct}%`, backgroundColor: colors[type] }}
-                                                            title={`${type}: ${count}`}
-                                                        >
-                                                            {count > 0 && `${type} ${count}`}
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
-                                            <div className="flex gap-2 mt-1.5">
-                                                {Object.entries(contribByType).map(([type, count]) => (
-                                                    <span key={type} className="text-[10px] text-monka-muted">
-                                                        {type}: <strong>{count}</strong>
-                                                    </span>
-                                                ))}
-                                                <span className="text-[10px] text-monka-muted ml-auto">Total: <strong>{contributive.length}</strong></span>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="mb-3 text-[10px] text-amber-500 bg-amber-50 rounded px-2 py-1">
-                                            ⚠️ Aucune MT contributive — l'ASR ne peut pas être validée
-                                        </div>
-                                    )}
-
-                                    {/* Non-contributive summary */}
-                                    {nonContributive.length > 0 && (
-                                        <div>
-                                            <div className="flex items-center gap-2 mb-1.5">
-                                                <span className="text-[10px] font-bold text-monka-muted uppercase">💡 Amélioration — MT non-contributives</span>
-                                            </div>
-                                            <div className="flex gap-2">
-                                                {Object.entries(nonContribByType).map(([type, count]) => (
-                                                    <span key={type} className={`text-[10px] px-2 py-1 rounded ${type === 'INFO' ? 'bg-green-50 text-green-600' : 'bg-purple-50 text-purple-600'}`}>
-                                                        {type}: <strong>{count}</strong>
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            )
-                        })}
-
-                        {/* Summary footer */}
-                        <div className="glass-card p-3 text-center">
-                            <span className="text-xs text-monka-muted">
-                                {stats.asrs.length} ASR ({stats.mps.length} MPs)
-                                {' · '}
-                                {stats.mts.filter(mt => ['STRUC', 'SEC', 'MED'].includes(mt.type)).length} MT contributives total
-                                {' · '}
-                                {stats.mts.filter(mt => ['INFO', 'ORGA'].includes(mt.type)).length} MT d'amélioration
-                            </span>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     )

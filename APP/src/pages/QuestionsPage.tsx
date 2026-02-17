@@ -14,22 +14,11 @@ import {
 } from 'lucide-react'
 import { useMonkaData } from '../engine/useMonkaData'
 import type { MonkaData, DBQuestion } from '../engine/supabaseData'
+import { VULN_COLORS, VULN_META, VULN_IDS } from '../engine/constants'
 
-const VULN_COLORS: Record<string, string> = {
-    V1: '#58BF94',
-    V2: '#86C0CF',
-    V3: '#F5A623',
-    V4: '#EF4444',
-    V5: '#7748F6',
-}
-
-const VULN_NAMES: Record<string, string> = {
-    V1: 'Social et relationnel',
-    V2: 'Administrative',
-    V3: 'Santé physique et psychologique',
-    V4: 'Fragilité du proche',
-    V5: 'Parcours médical du proche',
-}
+const VULN_NAMES: Record<string, string> = Object.fromEntries(
+    VULN_IDS.map(v => [v, VULN_META[v].name])
+)
 
 function QuestionCard({ question, data, expanded, onToggle }: {
     question: DBQuestion
@@ -55,7 +44,11 @@ function QuestionCard({ question, data, expanded, onToggle }: {
     )
 
     const relatedRules = useMemo(() =>
-        data.activationRules.filter(r => r.question_ids?.includes(question.id)),
+        data.activationRules.filter(r => {
+            const conditions = r.condition_logic as Array<{ q?: string; question_id?: string }>
+            if (!Array.isArray(conditions)) return false
+            return conditions.some(c => (c.q || c.question_id) === question.id)
+        }),
         [question.id, data]
     )
 
@@ -240,7 +233,7 @@ function QuestionCard({ question, data, expanded, onToggle }: {
                                                             {conditions.map((cond, i) => (
                                                                 <div key={i} className="flex items-baseline gap-1 flex-wrap text-[11px]">
                                                                     {i > 0 && <span className="text-[9px] text-monka-muted font-bold uppercase">{logic.operator || 'ET'}</span>}
-                                                                    <span className="font-mono font-bold" style={{ color: VULN_COLORS[rule.vulnerability_id] || color }}>{cond.question_id}</span>
+                                                                    <span className="font-mono font-bold" style={{ color }}>{cond.question_id}</span>
                                                                     <span className="text-monka-muted">=</span>
                                                                     {cond.values ? (
                                                                         cond.values.map((v, j) => (

@@ -1,12 +1,13 @@
 /* =============================================
    Supabase Data Layer — Loads ALL Monka data
    from the Supabase Monka project.
+   Aligned with v2 DB schema (Feb 2026)
    ============================================= */
 
 import { supabase } from '../lib/supabase'
 import type { VulnerabilityId } from './types'
 
-// === Raw DB Types (match Supabase columns) ===
+// === Raw DB Types (match Supabase v2 columns) ===
 
 export interface DBVulnerability {
     id: string
@@ -48,15 +49,23 @@ export interface DBQuestionMPMapping {
     source: string
 }
 
+export interface DBCategory {
+    id: string
+    mp_id: string
+    nom: string
+    description: string | null
+    ordre: number
+}
+
 export interface DBActivationRule {
     id: string
-    vulnerability_id: string
+    category_id: string
     mp_id: string
     niveau: 'critique' | 'ccc' | 'standard'
-    question_ids: string[]
-    condition_logic: Record<string, unknown>
+    condition_logic: Record<string, unknown>[]
     sens_clinique: string | null
-    source: string
+    delai_jours: number
+    rule_group: string | null
 }
 
 export interface DBScoringQuestion {
@@ -79,30 +88,31 @@ export interface DBScoringThreshold {
 
 export interface DBRecommendation {
     id: string
+    category_id: string
     mp_id: string
-    vulnerability_id: string
-    activation_rule_id: string | null
-    niveau: string | null
-    texte_utilisateur: string
-    acteurs: string[] | null
-    idec_actions: string | null
-    questions_source: string[] | null
-    legacy_count: number | null
-    rule_assignment: string | null
-    merged_texts: string[] | null
+    niveau: 'standard' | 'ccc' | 'critique' | 'prevention'
+    wording_utilisateur: string
+    wording_idec: string
 }
 
 export interface DBMicroTache {
     id: string
-    vulnerability_id: string
-    question_id: string | null
-    response_context: string | null
+    category_id: string
+    mp_id: string
     libelle: string
     type: 'STRUC' | 'SEC' | 'MED' | 'INFO' | 'ORGA'
-    justification: string | null
-    reco_id: string | null
-    domaine: string | null
-    acteur: string | null
+    acteur: string[]
+    domaine: 'medical' | 'medico_social'
+    is_contributive: boolean
+    is_prevention: boolean
+    is_parametric: boolean
+    parametric_mapping: Record<string, unknown> | null
+    ordre: number
+    wording_idec: string
+    wording_utilisateur: string
+    wording_std: string | null
+    wording_ccc: string | null
+    wording_crit: string | null
 }
 
 export interface DBSuiviQuestion {
@@ -116,14 +126,6 @@ export interface DBSuiviQuestion {
     questions_reouvertes: string[] | null
 }
 
-export interface DBASR {
-    id: string
-    mp_id: string
-    vulnerability_id: string
-    signature: string
-    objectif: string | null
-}
-
 // === Cached data store ===
 
 export interface MonkaData {
@@ -131,13 +133,13 @@ export interface MonkaData {
     questions: DBQuestion[]
     microParcours: DBMicroParcours[]
     questionMPMapping: DBQuestionMPMapping[]
+    categories: DBCategory[]
     activationRules: DBActivationRule[]
     scoringQuestions: DBScoringQuestion[]
     scoringThresholds: DBScoringThreshold[]
     recommendations: DBRecommendation[]
     microTaches: DBMicroTache[]
     suiviQuestions: DBSuiviQuestion[]
-    asrs: DBASR[]
     loaded: boolean
     loading: boolean
     error: string | null
@@ -155,37 +157,39 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         questRes,
         mpRes,
         mappingRes,
+        catRes,
         rulesRes,
         scorQRes,
         threshRes,
         recoRes,
         mtRes,
         suiviRes,
-        asrRes,
     ] = await Promise.all([
         supabase.from('vulnerabilities').select('*').order('id'),
         supabase.from('questions').select('*').order('vulnerability_id').order('ordre_global'),
         supabase.from('micro_parcours').select('*').order('vulnerability_id').order('id'),
         supabase.from('question_mp_mapping').select('*'),
-        supabase.from('activation_rules').select('*').order('vulnerability_id').order('mp_id'),
+        supabase.from('categories').select('*').order('mp_id').order('ordre'),
+        supabase.from('activation_rules').select('*').order('mp_id').order('id'),
         supabase.from('scoring_questions').select('*').order('vulnerability_id').order('question_id'),
         supabase.from('scoring_thresholds').select('*').order('vulnerability_id').order('min_score'),
-        supabase.from('recommendations').select('*').order('vulnerability_id').order('mp_id'),
-        supabase.from('micro_taches').select('*').order('vulnerability_id'),
+        supabase.from('recommendations').select('*').order('mp_id').order('id'),
+        supabase.from('micro_taches').select('*').order('mp_id').order('ordre'),
         supabase.from('suivi_questions').select('*').order('vulnerability_id').order('mp_id'),
-        supabase.from('asr').select('*').order('vulnerability_id').order('id'),
     ])
 
     // Check for errors
-    const errors = [vulnRes, questRes, mpRes, mappingRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes, asrRes]
-        .map((r, i) => r.error ? `Table ${i}: ${r.error.message}` : null)
+    const tableNames = ['vulnerabilities', 'questions', 'micro_parcours', 'question_mp_mapping', 'categories', 'activation_rules', 'scoring_questions', 'scoring_thresholds', 'recommendations', 'micro_taches', 'suivi_questions']
+    const results = [vulnRes, questRes, mpRes, mappingRes, catRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes]
+    const errors = results
+        .map((r, i) => r.error ? `${tableNames[i]}: ${r.error.message}` : null)
         .filter(Boolean)
 
     if (errors.length > 0) {
         const errorData: MonkaData = {
             vulnerabilities: [], questions: [], microParcours: [], questionMPMapping: [],
-            activationRules: [], scoringQuestions: [], scoringThresholds: [],
-            recommendations: [], microTaches: [], suiviQuestions: [], asrs: [],
+            categories: [], activationRules: [], scoringQuestions: [], scoringThresholds: [],
+            recommendations: [], microTaches: [], suiviQuestions: [],
             loaded: false, loading: false, error: errors.join('; '),
         }
         return errorData
@@ -196,13 +200,13 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         questions: (questRes.data || []) as DBQuestion[],
         microParcours: (mpRes.data || []) as DBMicroParcours[],
         questionMPMapping: (mappingRes.data || []) as DBQuestionMPMapping[],
+        categories: (catRes.data || []) as DBCategory[],
         activationRules: (rulesRes.data || []) as DBActivationRule[],
         scoringQuestions: (scorQRes.data || []) as DBScoringQuestion[],
         scoringThresholds: (threshRes.data || []) as DBScoringThreshold[],
         recommendations: (recoRes.data || []) as DBRecommendation[],
         microTaches: (mtRes.data || []) as DBMicroTache[],
         suiviQuestions: (suiviRes.data || []) as DBSuiviQuestion[],
-        asrs: (asrRes.data || []) as DBASR[],
         loaded: true,
         loading: false,
         error: null,
@@ -226,11 +230,6 @@ export function getAllQuestions(data: MonkaData): DBQuestion[] {
 /** Get micro-parcours for a vulnerability */
 export function getMPsForVuln(data: MonkaData, v: VulnerabilityId): DBMicroParcours[] {
     return data.microParcours.filter(mp => mp.vulnerability_id === v)
-}
-
-/** Get ASRs for a vulnerability */
-export function getASRsForVuln(data: MonkaData, v: VulnerabilityId): DBASR[] {
-    return data.asrs.filter(a => a.vulnerability_id === v)
 }
 
 /** Get all MP IDs mapped to a question */
@@ -257,6 +256,70 @@ export function buildMPMap(data: MonkaData): Record<string, DBMicroParcours> {
     return map
 }
 
+/** Get categories for a micro-parcours */
+export function getCategoriesForMP(data: MonkaData, mpId: string): DBCategory[] {
+    return data.categories.filter(c => c.mp_id === mpId)
+}
+
+/** Get categories for a vulnerability (via MP) */
+export function getCategoriesForVuln(data: MonkaData, v: VulnerabilityId): DBCategory[] {
+    const mpIds = new Set(getMPsForVuln(data, v).map(mp => mp.id))
+    return data.categories.filter(c => mpIds.has(c.mp_id))
+}
+
+/** Get activation rules for a micro-parcours */
+export function getRulesForMP(data: MonkaData, mpId: string): DBActivationRule[] {
+    return data.activationRules.filter(r => r.mp_id === mpId)
+}
+
+/** Get activation rules for a category */
+export function getRulesForCategory(data: MonkaData, categoryId: string): DBActivationRule[] {
+    return data.activationRules.filter(r => r.category_id === categoryId)
+}
+
+/** Get activation rules for a vulnerability (via MP) */
+export function getRulesForVuln(data: MonkaData, v: VulnerabilityId): DBActivationRule[] {
+    const mpIds = new Set(getMPsForVuln(data, v).map(mp => mp.id))
+    return data.activationRules.filter(r => mpIds.has(r.mp_id))
+}
+
+/** Get recommendations for a category */
+export function getRecosForCategory(data: MonkaData, categoryId: string): DBRecommendation[] {
+    return data.recommendations.filter(r => r.category_id === categoryId)
+}
+
+/** Get recommendations for a MP */
+export function getRecosForMP(data: MonkaData, mpId: string): DBRecommendation[] {
+    return data.recommendations.filter(r => r.mp_id === mpId)
+}
+
+/** Get recommendations for a vulnerability (via MP) */
+export function getRecosForVuln(data: MonkaData, v: VulnerabilityId): DBRecommendation[] {
+    const mpIds = new Set(getMPsForVuln(data, v).map(mp => mp.id))
+    return data.recommendations.filter(r => mpIds.has(r.mp_id))
+}
+
+/** Get micro-taches for a category */
+export function getMTsForCategory(data: MonkaData, categoryId: string): DBMicroTache[] {
+    return data.microTaches.filter(mt => mt.category_id === categoryId)
+}
+
+/** Get micro-taches for a MP */
+export function getMTsForMP(data: MonkaData, mpId: string): DBMicroTache[] {
+    return data.microTaches.filter(mt => mt.mp_id === mpId)
+}
+
+/** Get micro-taches for a vulnerability (via MP) */
+export function getMTsForVuln(data: MonkaData, v: VulnerabilityId): DBMicroTache[] {
+    const mpIds = new Set(getMPsForVuln(data, v).map(mp => mp.id))
+    return data.microTaches.filter(mt => mpIds.has(mt.mp_id))
+}
+
+/** Get suivi questions for a vulnerability */
+export function getSuiviForVuln(data: MonkaData, v: VulnerabilityId): DBSuiviQuestion[] {
+    return data.suiviQuestions.filter(sq => sq.vulnerability_id === v)
+}
+
 /** Get scoring questions for a vulnerability */
 export function getScoringForVuln(data: MonkaData, v: VulnerabilityId): DBScoringQuestion[] {
     return data.scoringQuestions.filter(sq => sq.vulnerability_id === v)
@@ -265,26 +328,6 @@ export function getScoringForVuln(data: MonkaData, v: VulnerabilityId): DBScorin
 /** Get thresholds for a vulnerability */
 export function getThresholdsForVuln(data: MonkaData, v: VulnerabilityId): DBScoringThreshold[] {
     return data.scoringThresholds.filter(t => t.vulnerability_id === v)
-}
-
-/** Get activation rules for a vulnerability */
-export function getActivationRulesForVuln(data: MonkaData, v: VulnerabilityId): DBActivationRule[] {
-    return data.activationRules.filter(r => r.vulnerability_id === v)
-}
-
-/** Get recommendations for a vulnerability */
-export function getRecommendationsForVuln(data: MonkaData, v: VulnerabilityId): DBRecommendation[] {
-    return data.recommendations.filter(r => r.vulnerability_id === v)
-}
-
-/** Get micro-taches for a vulnerability */
-export function getMicroTachesForVuln(data: MonkaData, v: VulnerabilityId): DBMicroTache[] {
-    return data.microTaches.filter(mt => mt.vulnerability_id === v)
-}
-
-/** Get suivi questions for a vulnerability */
-export function getSuiviForVuln(data: MonkaData, v: VulnerabilityId): DBSuiviQuestion[] {
-    return data.suiviQuestions.filter(sq => sq.vulnerability_id === v)
 }
 
 /** Determine if a question is scoring based on scoring_questions table */
@@ -306,6 +349,15 @@ export function buildScoringMap(data: MonkaData): Record<string, Record<string, 
 export function getMaxScoreForVuln(data: MonkaData, v: VulnerabilityId): number {
     const sq = data.scoringQuestions.find(s => s.vulnerability_id === v)
     return sq?.max_score_vulnerability || 0
+}
+
+
+
+/** Build a map of mp_id -> vulnerability_id */
+export function buildMPVulnMap(data: MonkaData): Record<string, string> {
+    const map: Record<string, string> = {}
+    data.microParcours.forEach(mp => { map[mp.id] = mp.vulnerability_id })
+    return map
 }
 
 /** Invalidate cache (for dev/refresh) */

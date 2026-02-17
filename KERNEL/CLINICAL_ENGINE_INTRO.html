@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Engine — Introduction Monka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #58BF94;
+            --primary-light: #7CD4AD;
+            --primary-dark: #3FA87A;
+            --accent: #86C0CF;
+            --accent-2: #CFFF92;
+            --bg: #0A1F16;
+            --bg-card: #112B1F;
+            --bg-card-hover: #1A3D2C;
+            --bg-elevated: #0E2519;
+            --text: #E8F0EC;
+            --text-muted: #9BB5A8;
+            --text-dim: #6B8578;
+            --border: #1E3D2D;
+            --success: #00DC82;
+            --warning: #F5A623;
+            --danger: #EF4444;
+            --critical: #D63031;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --slide-w: 1280px;
+            --slide-h: 720px;
+        }
+
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .slide {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .slide:last-child {
+                page-break-after: auto;
+            }
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #1a1a2e;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 20px auto;
+            background: var(--bg);
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        .slide-body {
+            padding: 48px 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-footer {
+            padding: 12px 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .slide-footer .brand {
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        /* ════ HERO ════ */
+        .slide.hero-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .slide.hero-slide::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(88, 191, 148, 0.15) 0%, transparent 70%);
+            top: -150px;
+            right: -80px;
+            border-radius: 50%;
+        }
+
+        .slide.hero-slide::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(207, 255, 146, 0.1) 0%, transparent 70%);
+            bottom: -80px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(88, 191, 148, 0.15);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .hero-meta-item strong {
+            color: var(--text);
+        }
+
+        /* ════ COMPARISON / BEFORE-AFTER ════ */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 0;
+            flex: 1;
+            align-items: center;
+        }
+
+        .comparison-side {
+            padding: 28px;
+            border-radius: var(--radius);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .comparison-side.before {
+            background: rgba(239, 68, 68, 0.06);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+        }
+
+        .comparison-side.after {
+            background: rgba(0, 220, 130, 0.06);
+            border: 1px solid rgba(0, 220, 130, 0.15);
+        }
+
+        .comparison-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-light);
+        }
+
+        .comparison-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 14px;
+        }
+
+        .comparison-side.before .comparison-label {
+            color: var(--danger);
+        }
+
+        .comparison-side.after .comparison-label {
+            color: var(--success);
+        }
+
+        .comparison-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .comparison-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ════ EVOLUTION STEPS ════ */
+        .evolution-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .evo-step {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .evo-marker {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .evo-marker.fail {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .evo-marker.partial {
+            background: rgba(245, 166, 35, 0.15);
+            color: var(--warning);
+        }
+
+        .evo-marker.success {
+            background: rgba(0, 220, 130, 0.15);
+            color: var(--success);
+        }
+
+        .evo-content {
+            padding-top: 4px;
+        }
+
+        .evo-content h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .evo-content p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .evo-content p strong {
+            color: var(--text);
+        }
+
+        .evo-result {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .evo-result.red {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+        }
+
+        .evo-result.orange {
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--warning);
+        }
+
+        .evo-result.green {
+            background: rgba(0, 220, 130, 0.12);
+            color: var(--success);
+        }
+
+        /* ════ STATS ════ */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .stat-card .status {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--success);
+            margin-top: 6px;
+        }
+
+        /* ════ ARCHITECTURE DIAGRAM ════ */
+        .arch-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .arch-layer {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .arch-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-light);
+            text-align: right;
+        }
+
+        .arch-boxes {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .arch-box.highlight {
+            border-color: var(--primary);
+            background: rgba(88, 191, 148, 0.08);
+        }
+
+        .arch-connector {
+            grid-column: 2;
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-dim);
+        }
+
+        /* ════ DELIVERABLES ════ */
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .deliverable-card {
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .deliverable-icon {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .deliverable-card h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .deliverable-card p {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .deliverable-card .tag {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(88, 191, 148, 0.12);
+            color: var(--primary-light);
+        }
+
+        /* ════ QUOTE SLIDE ════ */
+        .slide.quote-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .quote-slide blockquote {
+            font-size: 1.6rem;
+            font-weight: 300;
+            max-width: 750px;
+            line-height: 1.5;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-slide blockquote em {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .quote-author {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ════ FOOTER LOCK ════ */
+        .footer-lock {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+        }
+
+        /* ════ PIPELINE FLOW ════ */
+        .pipeline-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin: 20px 0;
+        }
+
+        .pipeline-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            text-align: center;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .pipeline-box.active {
+            border-color: var(--primary);
+            background: rgba(88, 191, 148, 0.08);
+        }
+
+        .pipeline-box h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .pipeline-box p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        .pipeline-arrow {
+            font-size: 1.3rem;
+            color: var(--primary-light);
+            padding: 0 10px;
+        }
+
+        /* ════ BEFORE TABLE ════ */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .data-table th {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table td {
+            font-size: 0.8rem;
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(30, 61, 45, 0.5);
+            color: var(--text-muted);
+        }
+
+        .data-table td strong {
+            color: var(--text);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(88, 191, 148, 0.03);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge.green {
+            background: rgba(0, 220, 130, 0.12);
+            color: var(--success);
+        }
+
+        .badge.red {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 1 — HERO
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide hero-slide">
+        <div class="hero-badge">⚙️ PRAGMA × Monka — Février 2026</div>
+        <h1>Structurer le savoir clinique :<br>le <span>Clinical Engine</span></h1>
+        <p class="hero-sub">Comment nous avons formalisé l'expertise clinique de Monka en un moteur algorithmique
+            structuré, testable et validable — en 2 semaines.</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">📋 <strong>165</strong>&nbsp;questions</div>
+            <div class="hero-meta-item">🧩 <strong>24</strong>&nbsp;micro-parcours</div>
+            <div class="hero-meta-item">🎯 <strong>369</strong>&nbsp;micro-tâches</div>
+            <div class="hero-meta-item">📊 <strong>5</strong>&nbsp;vulnérabilités scorées</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 2 — LE POINT DE DÉPART
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body" style="padding: 36px 64px;">
+            <div class="section-label">📍 Point de départ</div>
+            <h2 style="margin-bottom: 4px;">Ce qu'on a reçu</h2>
+            <p class="section-desc" style="margin-bottom: 16px;">Le savoir clinique de Monka existait — mais dispersé,
+                non structuré, inexploitable par un algorithme.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-side before" style="padding: 20px;">
+                    <div class="comparison-label">❌ Situation initiale</div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">📄</span>
+                        <span>Des documents Word & Excel sans hiérarchie ni versionnement</span>
+                    </div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">🔀</span>
+                        <span>Chaque option de réponse → 1 reco directe. <strong>Aucun groupement</strong></span>
+                    </div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">🤯</span>
+                        <span>Des centaines de recommandations <strong>sans lien entre elles</strong>, impossibles à
+                            prioriser</span>
+                    </div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">🧠</span>
+                        <span>La logique clinique était <strong>dans les têtes</strong> — pas exécutable par une
+                            machine</span>
+                    </div>
+                </div>
+
+                <div class="comparison-arrow">→</div>
+
+                <div class="comparison-side after" style="padding: 20px;">
+                    <div class="comparison-label">✅ Aujourd'hui</div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">🏗️</span>
+                        <span>Un <strong>KERNEL clinique versionné</strong> (V5), documenté et validable par Dr.
+                            Monka</span>
+                    </div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">🎯</span>
+                        <span><strong>24 Micro-Parcours</strong> structurés avec règles d'activation et
+                            catégories</span>
+                    </div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">⚡</span>
+                        <span><strong>369 micro-tâches</strong> concrètes avec acteurs et domaines identifiés</span>
+                    </div>
+                    <div class="comparison-item" style="padding: 5px 0;">
+                        <span class="comparison-icon">🧪</span>
+                        <span>Un <strong>simulateur fonctionnel</strong> qui teste le moteur en temps réel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Clinical Engine — Introduction</span>
+            <span>2 / 8</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 3 — LE PROBLÈME INITIAL DÉTAILLÉ
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔍 Le problème</div>
+            <h2>Pourquoi l'approche initiale ne pouvait pas tenir</h2>
+            <p class="section-desc">1 option de réponse = 1 recommandation. Une logique simple en apparence, mais
+                intenable à l'échelle.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; align-content: center;">
+                <div
+                    style="padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.9rem; color: var(--danger); margin-bottom: 14px;">⛔ L'approche « 1 réponse →
+                        1 reco »</h4>
+                    <div class="comparison-item"><span class="comparison-icon">📈</span><span>150 questions × ~4 options
+                            = <strong>~600 recommandations potentielles</strong></span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🔁</span><span>Énormément de
+                            <strong>doublons</strong> : la même reco apparaît dans 15 questions différentes</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">❌</span><span>Impossible de
+                            <strong>prioriser</strong> : tout est au même niveau</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🧩</span><span>Pas de <strong>parcours
+                                cohérent</strong> pour l'IDEC : une liste plate, sans fil conducteur</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🚫</span><span>Aucun
+                            <strong>score</strong>, aucun seuil, aucune mesure de l'avancement</span></div>
+                </div>
+
+                <div
+                    style="padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.9rem; color: var(--warning); margin-bottom: 14px;">🤔 Les conséquences
+                        concrètes</h4>
+                    <div class="comparison-item"><span class="comparison-icon">👩‍⚕️</span><span>L'IDEC recevait
+                            <strong>une longue liste sans structure</strong> — impossible à suivre sur le terrain</span>
+                    </div>
+                    <div class="comparison-item"><span class="comparison-icon">📉</span><span>Pas de mesure de
+                            <strong>progression</strong> : on ne sait pas si la situation s'améliore</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🔒</span><span>Le système ne pouvait pas
+                            <strong>évoluer</strong> sans tout recâbler</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🧪</span><span>Impossible de
+                            <strong>tester ou valider</strong> cliniquement : pas de référentiel structuré</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🔬</span><span>Aucune base solide pour
+                            une <strong>expérimentation scientifique</strong> reproductible</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Clinical Engine — Introduction</span>
+            <span>3 / 8</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 4 — L'ÉVOLUTION MÉTHODOLOGIQUE
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔬 Itérations</div>
+            <h2>L'évolution de notre raisonnement</h2>
+            <p class="section-desc">Trois hypothèses testées et itérées jusqu'à trouver la bonne architecture clinique.
+            </p>
+
+            <div class="evolution-flow">
+                <div class="evo-step">
+                    <div class="evo-marker fail">H1</div>
+                    <div class="evo-content">
+                        <h4>Hypothèse 1 — Rattacher chaque question à un Micro-Parcours</h4>
+                        <p>On part du constat : les recommandations sont liées à des <strong>thématiques</strong>, pas à
+                            des réponses isolées. On regroupe les questions par MP (ex: "Isolement social", "Charge
+                            administrative"). Un MP activé → une recommandation globale.</p>
+                        <span class="evo-result orange">⚠️ Problème : perte de finesse clinique — un MP = 1 reco, trop
+                            générique</span>
+                    </div>
+                </div>
+
+                <div class="evo-step">
+                    <div class="evo-marker partial">H2</div>
+                    <div class="evo-content">
+                        <h4>Hypothèse 2 — Ajouter des catégories au sein du MP</h4>
+                        <p>On introduit la notion de <strong>catégorie</strong> : au sein d'un même MP, on distingue les
+                            actions cliniques distinctes. Par ex. dans S3 "Santé physique" : catégorie A = "Dépistage",
+                            catégorie B = "Suivi médical existant". Chaque catégorie a sa propre règle d'activation.</p>
+                        <span class="evo-result orange">⚠️ Mieux — mais quid de la prévention quand aucune règle ne
+                            s'active ?</span>
+                    </div>
+                </div>
+
+                <div class="evo-step">
+                    <div class="evo-marker success">H3</div>
+                    <div class="evo-content">
+                        <h4>Hypothèse 3 — Centraliser la prévention + scoring continu</h4>
+                        <p>On ajoute un mécanisme de <strong>prévention systématique</strong> : si aucune règle n'active
+                            de reco dans un MP, le système propose un socle de prévention. On introduit le
+                            <strong>scoring par vulnérabilité</strong> (V1→V5) avec des seuils
+                            (faible/modéré/élevé/critique) pour mesurer objectivement le niveau de fragilité.
+                        </p>
+                        <span class="evo-result green">✅ Architecture finale du KERNEL V5 — validée cliniquement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Clinical Engine — Introduction</span>
+            <span>4 / 8</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 5 — L'ARCHITECTURE FINALE
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🏗️ Architecture</div>
+            <h2>Le pipeline du moteur clinique</h2>
+            <p class="section-desc">De la question posée à l'action concrète pour l'IDEC — un flux simple, déterministe
+                et reproductible.</p>
+
+            <div class="pipeline-flow" style="margin: 30px 0;">
+                <div class="pipeline-box">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">📋</div>
+                    <h4>Questionnaire</h4>
+                    <p>165 questions<br>15 triggers</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">⚡</div>
+                    <h4>Règles</h4>
+                    <p>~188 règles<br>d'activation</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box active">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🧩</div>
+                    <h4>24 MPs</h4>
+                    <p>Micro-Parcours<br>catégorisés</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box active">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🎯</div>
+                    <h4>369 MTs</h4>
+                    <p>Micro-Tâches<br>actionnables</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; align-content: center;">
+                <div
+                    style="padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.9rem; color: var(--primary-light); margin-bottom: 12px;">🎯 Chaque MT est
+                        associée à ses acteurs</h4>
+                    <div class="comparison-item"><span class="comparison-icon">👥</span><span>Chaque micro-tâche est
+                            rattachée à un ou plusieurs <strong>acteurs spécifiques</strong> de l'écosystème (médecin
+                            traitant, psychologue, assistante sociale, CCAS…)</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">📋</span><span>Écosystème d'acteurs
+                            <strong>documenté par vulnérabilité</strong> (V1→V5), identifiant qui intervient et à quel
+                            moment</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🔗</span><span>L'IDEC sait
+                            <strong>exactement qui contacter</strong> pour chaque action à mener</span></div>
+                </div>
+                <div
+                    style="padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.9rem; color: var(--accent); margin-bottom: 12px;">⚕️ Répartition
+                        médico-social / médical</h4>
+                    <div class="comparison-item"><span class="comparison-icon">🏥</span><span>Les 369 MTs sont classées
+                            en <strong>domaine médical</strong> (consultations, prescriptions, bilans) et
+                            <strong>domaine médico-social</strong> (droits, aides, accompagnement)</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">📊</span><span>Répartition globale :
+                            <strong>80% médico-social</strong> · <strong>20% médical</strong></span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🎯</span><span>Permet de <strong>piloter
+                                les orientations</strong> et d'adapter le service selon les partenaires (mutuelles,
+                            structures médico-sociales)</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Clinical Engine — Introduction</span>
+            <span>5 / 8</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 6 — LES CHIFFRES CLÉS
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📊 Chiffres clés</div>
+            <h2>Le KERNEL en chiffres</h2>
+            <p class="section-desc">Tout ce qui était dans les têtes est maintenant dans un format structuré, versionné,
+                testable.</p>
+
+            <div class="stats-row" style="margin-bottom: 20px;">
+                <div class="stat-card">
+                    <div class="number">165</div>
+                    <div class="label">Questions cliniques</div>
+                    <div class="status">dont 15 triggers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">24</div>
+                    <div class="label">Micro-Parcours</div>
+                    <div class="status">validés Dr. Monka</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">369</div>
+                    <div class="label">Micro-Tâches</div>
+                    <div class="status">80% médico-social · 20% médical</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">93</div>
+                    <div class="label">Questions scorantes</div>
+                    <div class="status">5 grilles de seuils calibrées</div>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Vulnérabilité</th>
+                        <th>Questions</th>
+                        <th>MPs</th>
+                        <th>Micro-Tâches</th>
+                        <th>Score max</th>
+                        <th>Seuils</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>V1</strong> — Isolement social et affectif</td>
+                        <td>~30</td>
+                        <td>R1, R2, R3, R4</td>
+                        <td>56</td>
+                        <td>12</td>
+                        <td>0-3 / 4-6 / 7-9 / 10-12</td>
+                    </tr>
+                    <tr>
+                        <td><strong>V2</strong> — Vulnérabilité administrative</td>
+                        <td>~25</td>
+                        <td>A1, A2, A3, A4</td>
+                        <td>47</td>
+                        <td>8</td>
+                        <td>0-2 / 3-4 / 5-6 / 7-8</td>
+                    </tr>
+                    <tr>
+                        <td><strong>V3</strong> — Santé physique et psychologique</td>
+                        <td>~30</td>
+                        <td>S1, S2, S3, S4</td>
+                        <td>38</td>
+                        <td>19</td>
+                        <td>0-4 / 5-9 / 10-14 / 15-19</td>
+                    </tr>
+                    <tr>
+                        <td><strong>V4</strong> — Fragilité du proche</td>
+                        <td>~40</td>
+                        <td>F1→F6</td>
+                        <td>90</td>
+                        <td>44</td>
+                        <td>0-11 / 12-22 / 23-33 / 34-44</td>
+                    </tr>
+                    <tr>
+                        <td><strong>V5</strong> — Parcours médical du proche</td>
+                        <td>~35</td>
+                        <td>M1→M6</td>
+                        <td>138</td>
+                        <td>15</td>
+                        <td>0-3 / 4-7 / 8-11 / 12-15</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Clinical Engine — Introduction</span>
+            <span>6 / 8</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 7 — CE QU'ON A LIVRÉ
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🚀 Livrables</div>
+            <h2>Ce que PRAGMA a construit</h2>
+            <p class="section-desc">Un écosystème complet, prêt à être intégré dans l'app de production.</p>
+
+            <div class="deliverables-grid">
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">📘</div>
+                    <h4>KERNEL V5</h4>
+                    <p>Le moteur clinique complet : 5 vulnérabilités, 24 MPs, ~188 règles, personas, CCC. Documenté
+                        fiche par fiche.</p>
+                    <span class="tag">Prêt</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🧪</div>
+                    <h4>Simulateur</h4>
+                    <p>Application React/TS qui exécute le moteur en temps réel. Scoring, recommandations, personas —
+                        testable immédiatement.</p>
+                    <span class="tag">Fonctionnel</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">✅</div>
+                    <h4>App de Validation</h4>
+                    <p>Interface pour Dr. Monka : validation fiche par fiche, suivi de complétude, audit de cohérence,
+                        contrôles croisés.</p>
+                    <span class="tag">Déployée</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🗄️</div>
+                    <h4>Base de données</h4>
+                    <p>Supabase structurée : questions, scoring, MPs, MTs, personas, seuils. Tout est requêtable et
+                        synchronisé.</p>
+                    <span class="tag">En production</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">👥</div>
+                    <h4>Écosystème acteurs</h4>
+                    <p>Chaque MT associée à ses acteurs spécifiques. Répartition médical / médico-social documentée par
+                        vulnérabilité.</p>
+                    <span class="tag">Documenté</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🎨</div>
+                    <h4>Audit UI/UX</h4>
+                    <p>Analyse complète de l'app existante + propositions de refonte. Parcours utilisateur, ergonomie,
+                        design system.</p>
+                    <span class="tag">Livré</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Clinical Engine — Introduction</span>
+            <span>7 / 8</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 8 — CLOSING
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide quote-slide">
+        <div class="slide-body" style="justify-content: center; align-items: center;">
+            <blockquote>
+                <em>Le savoir clinique de Monka n'est plus dans les têtes.</em><br>
+                Il est structuré, versionné, testable.<br>
+                Prêt à être intégré dans votre produit.
+            </blockquote>
+            <p class="quote-author">Antonin Rimaud — PRAGMA · Février 2026</p>
+
+            <div style="margin-top: 40px;">
+                <div class="footer-lock">🔒 100% du code appartient à Monka</div>
+            </div>
+
+            <div class="hero-meta" style="margin-top: 30px;">
+                <div class="hero-meta-item">📧 pragmasolutions.contact@gmail.com</div>
+                <div class="hero-meta-item">📱 Présentation KERNEL V5 déjà partagée</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

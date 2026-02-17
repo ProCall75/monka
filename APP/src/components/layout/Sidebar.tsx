@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
     Activity,
     BookOpen,
-    ListTodo,
+
     ChevronLeft,
     ChevronRight,
     Stethoscope,
@@ -55,12 +55,7 @@ const navItems = [
         icon: BookOpen,
         description: 'Templates & Livrables',
     },
-    {
-        path: '/roadmap',
-        label: 'TODO',
-        icon: ListTodo,
-        description: 'Tâches & Validation',
-    },
+
 ]
 
 export default function Sidebar() {

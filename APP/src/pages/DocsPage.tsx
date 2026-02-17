@@ -7,46 +7,65 @@ import {
     ArrowLeft,
     ExternalLink,
     Search,
-    Zap,
-    Star,
-    CheckSquare,
+    Shield,
     BarChart3,
-    ClipboardList,
 } from 'lucide-react'
 
-// === Template definitions ===
+// === VALIDATION_MP Template definitions ===
 
-type TemplateId = 'A' | 'B' | 'C' | 'D' | 'E'
 type VKey = 'V1' | 'V2' | 'V3' | 'V4' | 'V5'
 
-interface TemplateInfo {
-    id: TemplateId
-    name: string
-    description: string
-    icon: typeof Zap
-    file: string // filename in KERNEL folder (e.g. A_activation.md)
-    availableV: VKey[]
+interface MPTemplate {
+    id: string        // e.g. 'R1', 'A1', 'S1'
+    nom: string       // Human-readable name
+    vulnId: VKey
+    file: string      // Path relative to KERNEL/VALIDATION_MP/Vx/
 }
 
-const templates: TemplateInfo[] = [
-    { id: 'A', name: 'Activation', description: "Règles d'activation des micro-parcours", icon: Zap, file: 'A_activation.md', availableV: ['V1', 'V2', 'V3', 'V4', 'V5'] },
-    { id: 'B', name: 'Recommandations', description: 'Variations par niveau et MP', icon: Star, file: 'B_recos_variations.md', availableV: ['V1', 'V2', 'V3', 'V4', 'V5'] },
-    { id: 'C', name: 'Micro-tâches / ASR', description: 'MT typées + signatures ASR', icon: CheckSquare, file: 'C_master_mt_asr.md', availableV: ['V1', 'V2', 'V3', 'V4', 'V5'] },
-    { id: 'D', name: 'Suivi', description: 'Questions de suivi dynamique', icon: ClipboardList, file: 'D_suivi.md', availableV: ['V1', 'V2', 'V3', 'V4', 'V5'] },
-    { id: 'E', name: 'Scoring', description: 'Barèmes, pondérations et seuils', icon: BarChart3, file: 'E_scoring.md', availableV: ['V1', 'V2', 'V3', 'V4', 'V5'] },
+const mpTemplates: MPTemplate[] = [
+    // V1 — Social et relationnel
+    { id: 'R1', nom: 'Impact sur la vie personnelle et professionnelle', vulnId: 'V1', file: 'R1.md' },
+    { id: 'R2', nom: "Soutien de l'entourage et partage de l'aide", vulnId: 'V1', file: 'R2.md' },
+    { id: 'R3', nom: 'Isolement social de la personne aidée', vulnId: 'V1', file: 'R3.md' },
+    { id: 'R4', nom: "Relation aidant / proche et acceptation de l'aide", vulnId: 'V1', file: 'R4.md' },
+    // V2 — Administrative
+    { id: 'A1', nom: 'Couverture santé et protections juridiques', vulnId: 'V2', file: 'A1.md' },
+    { id: 'A2', nom: 'Droits, aides et évaluation dépendance', vulnId: 'V2', file: 'A2.md' },
+    { id: 'A3', nom: 'Charge et complexité des démarches', vulnId: 'V2', file: 'A3.md' },
+    { id: 'A4', nom: 'Situation scolaire/professionnelle et budget', vulnId: 'V2', file: 'A4.md' },
+    // V3 — Santé physique et psychologique
+    { id: 'S1', nom: "Charge, fatigue et risque d'épuisement", vulnId: 'V3', file: 'S1.md' },
+    { id: 'S2', nom: 'Inquiétudes pour la sécurité', vulnId: 'V3', file: 'S2.md' },
+    { id: 'S3', nom: 'Santé physique et renoncement aux soins', vulnId: 'V3', file: 'S3.md' },
+    { id: 'S4', nom: 'Hygiène de vie (activité et sommeil)', vulnId: 'V3', file: 'S4.md' },
+    // V4 — Fragilité du proche
+    { id: 'F1', nom: 'Vie quotidienne, budget et entourage du proche', vulnId: 'V4', file: 'F1.md' },
+    { id: 'F2', nom: 'Autonomie, aide humaine et présence nécessaire', vulnId: 'V4', file: 'F2.md' },
+    { id: 'F3', nom: 'Mémoire, comportement et risques', vulnId: 'V4', file: 'F3.md' },
+    { id: 'F4', nom: 'Douleur, fatigue, sommeil et état général', vulnId: 'V4', file: 'F4.md' },
+    { id: 'F5', nom: 'Dépendance, handicap, addictions et épisodes aigus', vulnId: 'V4', file: 'F5.md' },
+    { id: 'F6', nom: 'Autonomie fonctionnelle, chutes et aides techniques', vulnId: 'V4', file: 'F6.md' },
+    // V5 — Parcours médical du proche
+    { id: 'M1', nom: 'Compréhension du diagnostic et de la maladie', vulnId: 'V5', file: 'M1.md' },
+    { id: 'M2', nom: 'Accès aux soins et aux professionnels', vulnId: 'V5', file: 'M2.md' },
+    { id: 'M3', nom: 'Urgences, hospitalisations et continuité', vulnId: 'V5', file: 'M3.md' },
+    { id: 'M4', nom: 'Troubles psychiques, addictions et suivi', vulnId: 'V5', file: 'M4.md' },
+    { id: 'M5', nom: 'Coordination des soins', vulnId: 'V5', file: 'M5.md' },
+    { id: 'M6', nom: 'Plan de soins, évaluations et inquiétudes', vulnId: 'V5', file: 'M6.md' },
 ]
 
-const deliverables = [
-    { id: 'todoValidation', name: '📋 TODO Validation Dr. Monka', file: 'TODO_VALIDATION_DR_MONKA.md', description: 'Checklist de validation V par V' },
-    { id: 'recapEvolutions', name: '🔄 Évolutions Post-Fondation', file: 'RECAP_EVOLUTIONS_POST_KERNEL.md', description: 'Tout ce qui a changé depuis le 07/02' },
-    { id: 'recapFondation', name: '📖 Récap Fondation Monka', file: 'RECAP_FONDATION_MONKA.md', description: 'Les 13 règles du KERNEL (K1-K13)' },
-    { id: 'globalScoring', name: '📊 Scoring Global', file: 'E_GLOBAL_scoring.md', description: 'Scoring inter-vulnérabilités' },
-    { id: 'triggers', name: '🎯 Triggers & Personas', file: 'TRIGGERS_ET_PERSONAS.md', description: '15 triggers + 10 personas' },
-    { id: 'raisonnement', name: '🤖 Raisonnement Enrichissements IA', file: 'RAISONNEMENT_ENRICHISSEMENT_IA.md', description: '621 propositions IA documentées' },
-    { id: 'guideValidation', name: '📝 Guide Validation Dr. Monka', file: 'GUIDE_VALIDATION_DR_MONKA.md', description: 'Mode d\'emploi par type de validation' },
-    { id: 'roadmapValid', name: '🗺️ Roadmap Validation', file: 'ROADMAP_VALIDATION.md', description: 'Plan de validation en 4 phases' },
-    { id: 'schema', name: '🗄️ Schéma Supabase', file: 'SCHEMA_SUPABASE.md', description: 'Architecture de la base de données' },
-    { id: 'understanding', name: '📚 Glossaire KERNEL', file: 'UNDERSTANDING.md', description: 'Glossaire aligné KERNEL v4' },
+// === SCORING docs ===
+const scoringDocs = [
+    { id: 'SCORING_V1', nom: 'Scoring V1 — Social et relationnel', file: 'SCORING/SCORING_V1.md' },
+    { id: 'SCORING_V2', nom: 'Scoring V2 — Administrative', file: 'SCORING/SCORING_V2.md' },
+    { id: 'SCORING_V3', nom: 'Scoring V3 — Santé physique et psychologique', file: 'SCORING/SCORING_V3.md' },
+    { id: 'SCORING_V4', nom: 'Scoring V4 — Fragilité du proche', file: 'SCORING/SCORING_V4.md' },
+    { id: 'SCORING_V5', nom: 'Scoring V5 — Parcours médical du proche', file: 'SCORING/SCORING_V5.md' },
+]
+
+const deliverables: { id: string; name: string; file: string; description: string }[] = [
+    { id: 'kernel_v5', name: 'KERNEL V5 — Référentiel Clinique Complet', file: 'KERNEL_V5.md', description: 'Document maître du référentiel clinique Monka — vulnérabilités, micro-parcours, catégories, recommandations et micro-tâches.' },
+    { id: 'methodologie_scoring', name: 'Méthodologie de Scoring', file: 'METHODOLOGIE_SCORING.md', description: 'Méthodologie complète du scoring de vulnérabilité — principes, pondération, seuils et interprétation des résultats.' },
 ]
 
 const vLabels: Record<VKey, string> = {
@@ -72,6 +91,14 @@ const vFolders: Record<VKey, string> = {
     V4: 'V4',
     V5: 'V5',
 }
+
+// Group templates by vulnerability
+const templatesByVuln = (['V1', 'V2', 'V3', 'V4', 'V5'] as VKey[]).map(v => ({
+    vulnId: v,
+    label: vLabels[v],
+    color: vColors[v],
+    mps: mpTemplates.filter(t => t.vulnId === v),
+}))
 
 // === Simple Markdown renderer ===
 
@@ -229,12 +256,16 @@ export default function DocsPage() {
     }
 
     // Filter templates / deliverables by search
-    const filteredTemplates = templates.filter(t =>
-        searchQuery === '' || t.name.toLowerCase().includes(searchQuery.toLowerCase()) || t.description.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    const filteredTemplatesByVuln = templatesByVuln.map(group => ({
+        ...group,
+        mps: group.mps.filter(mp =>
+            searchQuery === '' || mp.nom.toLowerCase().includes(searchQuery.toLowerCase()) || mp.id.toLowerCase().includes(searchQuery.toLowerCase())
+        ),
+    })).filter(group => group.mps.length > 0)
     const filteredDeliverables = deliverables.filter(d =>
         searchQuery === '' || d.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
+    const totalFilteredTemplates = filteredTemplatesByVuln.reduce((s, g) => s + g.mps.length, 0)
 
     return (
         <div className="max-w-[1200px] mx-auto">
@@ -264,7 +295,7 @@ export default function DocsPage() {
                 >
                     <BookOpen className="w-4 h-4" />
                     Templates
-                    <span className="ml-1 text-xs bg-white/20 px-1.5 py-0.5 rounded-full">{templates.length * 5}</span>
+                    <span className="ml-1 text-xs bg-white/20 px-1.5 py-0.5 rounded-full">{mpTemplates.length + scoringDocs.length}</span>
                 </button>
                 <button
                     onClick={() => setActiveTab('deliverables')}
@@ -287,54 +318,99 @@ export default function DocsPage() {
                         transition={{ duration: 0.15 }}
                         className="space-y-4"
                     >
-                        {filteredTemplates.map((template) => {
-                            const TIcon = template.icon
-                            return (
-                                <div key={template.id} className="glass-card p-5">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-10 h-10 rounded-xl gradient-monka flex items-center justify-center">
-                                            <TIcon className="w-5 h-5 text-white" />
+                        {totalFilteredTemplates === 0 ? (
+                            <div className="glass-card p-12 text-center">
+                                <BookOpen className="w-10 h-10 text-monka-muted/40 mx-auto mb-3" />
+                                <p className="text-sm text-monka-muted">Aucun template trouvé</p>
+                                <p className="text-xs text-monka-muted/60 mt-1">Essayez de modifier votre recherche.</p>
+                            </div>
+                        ) : (
+                            filteredTemplatesByVuln.map((group) => (
+                                <div key={group.vulnId} className="glass-card overflow-hidden">
+                                    {/* Vulnerability header */}
+                                    <div className="px-5 py-3 flex items-center gap-3 border-b border-monka-border/50" style={{ backgroundColor: `${group.color}08` }}>
+                                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: group.color }}>
+                                            <Shield className="w-4 h-4 text-white" />
                                         </div>
-                                        <div>
+                                        <div className="flex-1">
                                             <div className="flex items-center gap-2">
-                                                <span className="text-[10px] font-bold bg-monka-primary/10 text-monka-primary px-2 py-0.5 rounded-md">
-                                                    Template {template.id}
-                                                </span>
-                                                <h3 className="text-base font-bold text-monka-heading">{template.name}</h3>
+                                                <span className="text-xs font-bold text-white px-2 py-0.5 rounded" style={{ backgroundColor: group.color }}>{group.vulnId}</span>
+                                                <h3 className="text-sm font-bold text-monka-heading">{group.label}</h3>
                                             </div>
-                                            <p className="text-xs text-monka-muted">{template.description}</p>
                                         </div>
+                                        <span className="text-[10px] font-bold text-monka-muted bg-monka-dark/5 px-2 py-0.5 rounded-full">
+                                            {group.mps.length} MP{group.mps.length > 1 ? 's' : ''}
+                                        </span>
                                     </div>
 
-                                    <div className="grid grid-cols-5 gap-2">
-                                        {(['V1', 'V2', 'V3', 'V4', 'V5'] as VKey[]).map(v => {
-                                            const available = template.availableV.includes(v)
-                                            return (
-                                                <button
-                                                    key={v}
-                                                    disabled={!available}
-                                                    onClick={() => {
-                                                        const path = `/kernel/${vFolders[v]}/${template.file}`
-                                                        loadDocument(path, `Template ${template.id} — ${template.name} — ${v} ${vLabels[v]}`)
-                                                    }}
-                                                    className={`
-                            flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all duration-200
-                            ${available
-                                                            ? 'hover:shadow-md cursor-pointer'
-                                                            : 'opacity-30 cursor-not-allowed'
-                                                        }
-                          `}
-                                                    style={available ? { backgroundColor: `${vColors[v]}15`, color: vColors[v] } : {}}
-                                                >
-                                                    <span>{v}</span>
-                                                    {available && <ExternalLink className="w-3 h-3" />}
-                                                </button>
-                                            )
-                                        })}
+                                    {/* MP cards grid */}
+                                    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        {group.mps.map(mp => (
+                                            <button
+                                                key={mp.id}
+                                                onClick={() => {
+                                                    const path = `/kernel/VALIDATION_MP/${vFolders[mp.vulnId]}/${mp.file}`
+                                                    loadDocument(path, `${mp.id} — ${mp.nom}`)
+                                                }}
+                                                className="flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 hover:shadow-md group"
+                                                style={{ backgroundColor: `${group.color}08` }}
+                                            >
+                                                <span className="text-xs font-bold text-white px-2 py-1 rounded-lg flex-shrink-0" style={{ backgroundColor: group.color }}>
+                                                    {mp.id}
+                                                </span>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-xs font-semibold text-monka-heading truncate group-hover:text-monka-primary transition-colors">{mp.nom}</p>
+                                                    <p className="text-[10px] text-monka-muted font-mono mt-0.5">VALIDATION_MP/{vFolders[mp.vulnId]}/{mp.file}</p>
+                                                </div>
+                                                <ExternalLink className="w-3.5 h-3.5 text-monka-muted/40 group-hover:text-monka-primary transition-colors flex-shrink-0" />
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))
+                        )}
+
+                        {/* SCORING docs section */}
+                        {(() => {
+                            const filteredScoring = scoringDocs.filter(d =>
+                                searchQuery === '' || d.nom.toLowerCase().includes(searchQuery.toLowerCase()) || d.id.toLowerCase().includes(searchQuery.toLowerCase())
+                            )
+                            if (filteredScoring.length === 0) return null
+                            return (
+                                <div className="glass-card overflow-hidden">
+                                    <div className="px-5 py-3 flex items-center gap-3 border-b border-monka-border/50" style={{ backgroundColor: '#7748F608' }}>
+                                        <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
+                                            <BarChart3 className="w-4 h-4 text-white" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-sm font-bold text-monka-heading">Scoring</h3>
+                                            <p className="text-[10px] text-monka-muted">Matrices de scoring par vulnérabilité</p>
+                                        </div>
+                                        <span className="text-[10px] font-bold text-monka-muted bg-monka-dark/5 px-2 py-0.5 rounded-full">
+                                            {filteredScoring.length} doc{filteredScoring.length > 1 ? 's' : ''}
+                                        </span>
+                                    </div>
+                                    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        {filteredScoring.map(doc => (
+                                            <button
+                                                key={doc.id}
+                                                onClick={() => loadDocument(`/kernel/${doc.file}`, doc.nom)}
+                                                className="flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 hover:shadow-md group bg-indigo-50/50"
+                                            >
+                                                <span className="text-xs font-bold text-white px-2 py-1 rounded-lg flex-shrink-0 bg-gradient-to-br from-indigo-500 to-purple-600">
+                                                    {doc.id.replace('SCORING_', '')}
+                                                </span>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-xs font-semibold text-monka-heading truncate group-hover:text-monka-primary transition-colors">{doc.nom}</p>
+                                                    <p className="text-[10px] text-monka-muted font-mono mt-0.5">{doc.file}</p>
+                                                </div>
+                                                <ExternalLink className="w-3.5 h-3.5 text-monka-muted/40 group-hover:text-monka-primary transition-colors flex-shrink-0" />
+                                            </button>
+                                        ))}
                                     </div>
                                 </div>
                             )
-                        })}
+                        })()}
                     </motion.div>
                 )}
 
@@ -347,24 +423,32 @@ export default function DocsPage() {
                         transition={{ duration: 0.15 }}
                         className="space-y-2"
                     >
-                        {filteredDeliverables.map((d) => (
-                            <button
-                                key={d.id}
-                                onClick={() => {
-                                    loadDocument(`/kernel/${d.file}`, d.name)
-                                }}
-                                className="w-full glass-card px-5 py-4 flex items-center gap-3 text-left hover:bg-white/60 transition-all duration-200 group"
-                            >
-                                <div className="w-9 h-9 rounded-lg bg-monka-primary/10 flex items-center justify-center group-hover:bg-monka-primary/15 transition-colors">
-                                    <FileText className="w-4 h-4 text-monka-primary" />
-                                </div>
-                                <div className="flex-1">
-                                    <h4 className="text-sm font-semibold text-monka-heading">{d.name}</h4>
-                                    <p className="text-[10px] text-monka-muted">{d.description}</p>
-                                </div>
-                                <ExternalLink className="w-4 h-4 text-monka-muted group-hover:text-monka-primary transition-colors" />
-                            </button>
-                        ))}
+                        {filteredDeliverables.length === 0 ? (
+                            <div className="glass-card p-12 text-center">
+                                <Package className="w-10 h-10 text-monka-muted/40 mx-auto mb-3" />
+                                <p className="text-sm text-monka-muted">Aucun livrable disponible</p>
+                                <p className="text-xs text-monka-muted/60 mt-1">Les livrables d'audit clinique seront ajoutés prochainement.</p>
+                            </div>
+                        ) : (
+                            filteredDeliverables.map((d) => (
+                                <button
+                                    key={d.id}
+                                    onClick={() => {
+                                        loadDocument(`/kernel/${d.file}`, d.name)
+                                    }}
+                                    className="w-full glass-card px-5 py-4 flex items-center gap-3 text-left hover:bg-white/60 transition-all duration-200 group"
+                                >
+                                    <div className="w-9 h-9 rounded-lg bg-monka-primary/10 flex items-center justify-center group-hover:bg-monka-primary/15 transition-colors">
+                                        <FileText className="w-4 h-4 text-monka-primary" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className="text-sm font-semibold text-monka-heading">{d.name}</h4>
+                                        <p className="text-[10px] text-monka-muted">{d.description}</p>
+                                    </div>
+                                    <ExternalLink className="w-4 h-4 text-monka-muted group-hover:text-monka-primary transition-colors" />
+                                </button>
+                            ))
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>

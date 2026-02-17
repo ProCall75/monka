@@ -1,3 +1,4 @@
+
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import {
@@ -11,11 +12,6 @@ import {
     Activity,
     Database,
     Shield,
-    Users,
-    Heart,
-    Stethoscope,
-    Scale,
-    Target,
     AlertTriangle,
     CheckCircle2,
     Loader2,
@@ -24,25 +20,10 @@ import {
 } from 'lucide-react'
 import { useMonkaData } from '../engine/useMonkaData'
 import { invalidateCache, type MonkaData } from '../engine/supabaseData'
+import { VULN_META, VULN_IDS, type VulnMeta } from '../engine/constants'
 import type { VulnerabilityId } from '../engine/types'
 
-// === V Metadata (matches DB source of truth) ===
 
-const V_META: Record<string, {
-    label: string
-    name: string
-    icon: typeof Heart
-    color: string
-    gradient: string
-}> = {
-    V1: { label: 'V1', name: 'Social et relationnel', icon: Users, color: '#58BF94', gradient: 'from-emerald-400 to-emerald-600' },
-    V2: { label: 'V2', name: 'Administrative', icon: Scale, color: '#86C0CF', gradient: 'from-cyan-400 to-cyan-600' },
-    V3: { label: 'V3', name: 'Santé physique et psychologique', icon: Heart, color: '#F5A623', gradient: 'from-amber-400 to-amber-600' },
-    V4: { label: 'V4', name: 'Fragilité du proche', icon: Stethoscope, color: '#EF4444', gradient: 'from-red-400 to-red-600' },
-    V5: { label: 'V5', name: 'Parcours médical du proche', icon: Target, color: '#7748F6', gradient: 'from-violet-400 to-violet-600' },
-}
-
-const vIds: VulnerabilityId[] = ['V1', 'V2', 'V3', 'V4', 'V5']
 
 // === Component ===
 
@@ -87,6 +68,7 @@ export default function DashboardPage() {
 
 function DashboardContent({ data }: { data: MonkaData }) {
     // === Derived Stats ===
+
     const globalStats = useMemo(() => {
         const totalQ = data.questions.length
         const triggers = data.questions.filter(q => q.is_trigger).length
@@ -95,11 +77,11 @@ function DashboardContent({ data }: { data: MonkaData }) {
         const facteur = data.questions.filter(q => q.classification === 'facteur').length
         const scoringQIds = new Set(data.scoringQuestions.map(sq => sq.question_id))
         const scoringQ = scoringQIds.size
-        const maxScore = vIds.reduce((acc, v) => {
+        const maxScore = VULN_IDS.reduce((acc, v) => {
             const sq = data.scoringQuestions.find(s => s.vulnerability_id === v)
             return acc + (sq?.max_score_vulnerability || 0)
         }, 0)
-        const orphanMT = data.microTaches.filter(mt => !mt.reco_id).length
+        const orphanMT = data.microTaches.filter(mt => !mt.category_id).length
 
         return {
             totalQ, triggers, nonTriggers, etat, facteur,
@@ -115,23 +97,24 @@ function DashboardContent({ data }: { data: MonkaData }) {
     }, [data])
 
     const perVStats = useMemo(() => {
-        return vIds.map(v => {
+        return VULN_IDS.map(v => {
             const questions = data.questions.filter(q => q.vulnerability_id === v)
             const etat = questions.filter(q => q.classification === 'etat').length
             const facteur = questions.filter(q => q.classification === 'facteur').length
             const mps = data.microParcours.filter(mp => mp.vulnerability_id === v)
-            const rules = data.activationRules.filter(r => r.vulnerability_id === v)
+            const mpIds = new Set(mps.map(mp => mp.id))
+            const rules = data.activationRules.filter(r => mpIds.has(r.mp_id))
             const scoringQIds = new Set(data.scoringQuestions.filter(sq => sq.vulnerability_id === v).map(sq => sq.question_id))
             const maxScore = data.scoringQuestions.find(sq => sq.vulnerability_id === v)?.max_score_vulnerability || 0
             const thresholds = data.scoringThresholds.filter(t => t.vulnerability_id === v)
-            const recos = data.recommendations.filter(r => r.vulnerability_id === v)
-            const mts = data.microTaches.filter(mt => mt.vulnerability_id === v)
+            const recos = data.recommendations.filter(r => mpIds.has(r.mp_id))
+            const mts = data.microTaches.filter(mt => mpIds.has(mt.mp_id))
             const suivi = data.suiviQuestions.filter(sq => sq.vulnerability_id === v)
 
             return {
                 v,
-                meta: V_META[v],
-                dbName: data.vulnerabilities.find(vul => vul.id === v)?.name || V_META[v].name,
+                meta: VULN_META[v],
+                dbName: data.vulnerabilities.find(vul => vul.id === v)?.name || VULN_META[v].name,
                 blocLabel: data.vulnerabilities.find(vul => vul.id === v)?.bloc_label || '',
                 questions: questions.length,
                 etat, facteur,
@@ -264,7 +247,7 @@ function DashboardContent({ data }: { data: MonkaData }) {
                         {['STRUC', 'SEC', 'MED', 'INFO', 'ORGA'].map(t => {
                             const count = data.microTaches.filter(mt => mt.type === t).length
                             const colors: Record<string, string> = { STRUC: 'bg-blue-50 text-blue-600', SEC: 'bg-orange-50 text-orange-600', MED: 'bg-red-50 text-red-600', INFO: 'bg-green-50 text-green-600', ORGA: 'bg-purple-50 text-purple-600' }
-                            return <span key={t} className={`px-1 py-0.5 rounded font-medium ${colors[t]}`}>{count}</span>
+                            return <span key={t} className={`px - 1 py - 0.5 rounded font - medium ${colors[t]} `}>{count}</span>
                         })}
                     </div>
                 </motion.div>
@@ -332,7 +315,7 @@ function DashboardContent({ data }: { data: MonkaData }) {
                         </thead>
                         <tbody>
                             {perVStats.map(vs => {
-                                const meta = V_META[vs.v]
+                                const meta = VULN_META[vs.v]
                                 return (
                                     <tr key={vs.v} className="border-b border-monka-border/50 hover:bg-white/40 transition-colors">
                                         <td className="px-4 py-3">
@@ -417,7 +400,7 @@ function DashboardContent({ data }: { data: MonkaData }) {
                 </div>
                 <div className="p-5 space-y-4">
                     {perVStats.map(vs => {
-                        const meta = V_META[vs.v]
+                        const meta = VULN_META[vs.v]
                         const getColor = (level: string) => {
                             switch (level) {
                                 case 'faible': return '#00DC82'
@@ -443,8 +426,8 @@ function DashboardContent({ data }: { data: MonkaData }) {
                                             <div
                                                 key={t.level}
                                                 className="flex items-center justify-center text-[9px] font-bold text-white"
-                                                style={{ width: `${width}%`, backgroundColor: getColor(t.level) }}
-                                                title={`${t.level}: ${t.min_score}-${t.max_score}`}
+                                                style={{ width: `${width}% `, backgroundColor: getColor(t.level) }}
+                                                title={`${t.level}: ${t.min_score} -${t.max_score} `}
                                             >
                                                 {t.level} ({t.min_score}-{t.max_score})
                                             </div>
@@ -469,7 +452,7 @@ function DashboardContent({ data }: { data: MonkaData }) {
                 <div className="p-5">
                     <div className="grid grid-cols-5 gap-3">
                         {perVStats.map(vs => {
-                            const meta = V_META[vs.v]
+                            const meta = VULN_META[vs.v]
                             const types = [
                                 { label: 'STRUC', count: vs.mtStruc, color: 'bg-blue-100 text-blue-600' },
                                 { label: 'SEC', count: vs.mtSec, color: 'bg-orange-100 text-orange-600' },
@@ -488,12 +471,12 @@ function DashboardContent({ data }: { data: MonkaData }) {
                                     <div className="space-y-1">
                                         {types.map(t => (
                                             <div key={t.label} className="flex items-center justify-between">
-                                                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${t.color}`}>{t.label}</span>
+                                                <span className={`text - [9px] font - bold px - 1.5 py - 0.5 rounded ${t.color} `}>{t.label}</span>
                                                 <div className="flex-1 mx-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                                     <div
                                                         className="h-full rounded-full transition-all"
                                                         style={{
-                                                            width: vs.mts > 0 ? `${(t.count / vs.mts) * 100}%` : '0%',
+                                                            width: vs.mts > 0 ? `${(t.count / vs.mts) * 100}% ` : '0%',
                                                             backgroundColor: meta.color,
                                                         }}
                                                     />
