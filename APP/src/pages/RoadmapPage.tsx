@@ -109,7 +109,7 @@ const phaseGroups: PhaseGroup[] = [
         description: 'App connectée Supabase. Simulateur, Personas, Docs, Dashboard opérationnels',
         items: [
             { task: 'Setup Vite + React + Supabase', context: 'Projet APP/, client Supabase, couche data supabaseData.ts.', status: 'done' },
-            { task: 'Simulateur interactif (165 questions)', context: 'Moteur d\'activation temps réel, scoring, CCC, vues interne/externe.', status: 'done' },
+            { task: 'Simulateur interactif (150 questions)', context: 'Moteur d\'activation temps réel, scoring, CCC, vues interne/externe.', status: 'done' },
             { task: 'Pages Dashboard + Vulnérabilités + Questions', context: 'Stats par V, onglets Questions/Règles/Recos/MT/ASR, filtres.', status: 'done' },
             { task: 'Page Documentation (templates + livrables)', context: '25 templates V1-V5 + 10 livrables KERNEL accessibles.', status: 'done' },
             { task: 'Personas (5 profils aidants auto-fill)', context: 'A1-A5 avec pré-remplissage simulateur.', status: 'done' },

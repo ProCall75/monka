@@ -6,8 +6,7 @@ import {
     CheckCircle2,
     AlertTriangle,
     Zap,
-    ChevronDown,
-    ChevronRight,
+
     Target,
     List,
     BarChart3,
@@ -16,14 +15,15 @@ import {
 } from 'lucide-react'
 import { useMonkaData } from '../engine/useMonkaData'
 import { buildMPVulnMap, type MonkaData } from '../engine/supabaseData'
-import { VULN_META, VULN_IDS } from '../engine/constants'
+import { VULN_META } from '../engine/constants'
+import type { VulnerabilityId } from '../engine/types'
 
 
 type TabId = 'overview' | 'questions' | 'scoring' | 'mps' | 'rules' | 'recos' | 'mts'
 
 function VulnDetail({ vulnId, data }: { vulnId: string, data: MonkaData }) {
     const [activeTab, setActiveTab] = useState<TabId>('overview')
-    const meta = VULN_META[vulnId]
+    const meta = VULN_META[vulnId as VulnerabilityId]
     const Icon = meta.icon
 
     // Compute stats

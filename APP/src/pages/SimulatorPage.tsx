@@ -22,7 +22,18 @@ import {
 import type { VulnerabilityId } from '../engine/types'
 import { useMonkaData } from '../engine/useMonkaData'
 import { VULN_META, VULN_IDS, VULN_COLORS } from '../engine/constants'
-import { evaluateRule, getActivatedCategories, type Answers } from '../engine/clinicalEngine'
+import { evaluateRule, getActivatedCategories } from '../engine/clinicalEngine'
+import {
+    CR_VULN_LABELS,
+    CR_NIVEAU_DISPLAY,
+    CR_PHR_B2,
+    CR_PHR_B4_INITIAL,
+    getNiveauForScore,
+    generateConclusionPhrases,
+    mapObjectifClinique,
+    formatActeur,
+    type CRNiveau,
+} from '../engine/crMedecinPhrases'
 import {
     getQuestionsForVuln,
     getAllQuestions,
@@ -31,11 +42,7 @@ import {
     buildScoringMap,
 
     getThresholdsForVuln,
-    getRulesForVuln,
-    getRecosForVuln,
-    getMTsForVuln,
-    getMTsForMP,
-    getRecosForMP,
+
     buildMPVulnMap,
     invalidateCache,
     type MonkaData,
@@ -99,7 +106,7 @@ export default function SimulatorPage() {
                 <div className="text-center">
                     <Loader2 className="w-10 h-10 text-monka-primary animate-spin mx-auto mb-4" />
                     <h2 className="text-lg font-bold text-monka-heading mb-1">Chargement des données Supabase</h2>
-                    <p className="text-sm text-monka-muted">165 questions • 24 micro-parcours • 68 règles d'activation</p>
+                    <p className="text-sm text-monka-muted">150 questions • 24 micro-parcours • 68 règles d'activation</p>
                 </div>
             </div>
         )
@@ -1189,6 +1196,246 @@ function SimulatorContent({
                                                                 })}
                                                             </div>
                                                         )}
+
+                                                        {/* ═══════════════════════════════════════
+                                                            CR MÉDECIN TRAITANT — PROJECTION MOTEUR
+                                                            Visible uniquement si toutes les questions sont répondues
+                                                            ═══════════════════════════════════════ */}
+                                                        {(() => {
+                                                            const allQs = getAllQuestions(data)
+                                                            const globalAnswered = allQs.filter(q => answers[q.id]).length
+                                                            const isComplete = globalAnswered === allQs.length && allQs.length > 0
+
+                                                            if (!isComplete) {
+                                                                return (
+                                                                    <div className="mt-6 p-4 rounded-xl border-2 border-dashed border-gray-200 text-center">
+                                                                        <FileText className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                                                                        <p className="text-xs font-bold text-monka-muted">CR Médecin Traitant</p>
+                                                                        <p className="text-[10px] text-monka-muted mt-1">
+                                                                            Disponible quand l&apos;ensemble du questionnaire est répondu ({globalAnswered}/{allQs.length})
+                                                                        </p>
+                                                                        <div className="w-full h-1 bg-gray-100 rounded-full mt-2 overflow-hidden">
+                                                                            <div className="h-full bg-monka-primary/30 rounded-full transition-all" style={{ width: `${allQs.length > 0 ? (globalAnswered / allQs.length) * 100 : 0}%` }} />
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                            }
+
+                                                            // === Compute CR data ===
+                                                            const niveaux: Record<VulnerabilityId, CRNiveau> = {} as Record<VulnerabilityId, CRNiveau>
+                                                            VULN_IDS.forEach(vId => {
+                                                                const thresholds = getThresholdsForVuln(data, vId)
+                                                                const score = scoreByV[vId]?.score ?? 0
+                                                                niveaux[vId] = getNiveauForScore(score, thresholds)
+                                                            })
+
+                                                            // Top 3 activated MPs (by vulnerability order, then alphabetical)
+                                                            const vulnOrder: Record<string, number> = { V1: 1, V2: 2, V3: 3, V4: 4, V5: 5 }
+                                                            const top3MPs = [...activatedMPs]
+                                                                .sort((a, b) => (vulnOrder[mpVulnMap[a]] || 99) - (vulnOrder[mpVulnMap[b]] || 99))
+                                                                .slice(0, 3)
+                                                                .map(mpId => {
+                                                                    const mp = mpMap[mpId]
+                                                                    // Gather all actors from MTs of this MP
+                                                                    const mtsForMP = data.microTaches.filter(mt => mt.mp_id === mpId)
+                                                                    const acteurCounts: Record<string, number> = {}
+                                                                    mtsForMP.forEach(mt => {
+                                                                        (mt.acteur || []).forEach(a => {
+                                                                            acteurCounts[a] = (acteurCounts[a] || 0) + 1
+                                                                        })
+                                                                    })
+                                                                    const sortedActeurs = Object.entries(acteurCounts).sort((a, b) => b[1] - a[1])
+                                                                    const acteurPrincipal = sortedActeurs[0]?.[0] || '—'
+                                                                    const autresActeurs = sortedActeurs.slice(1).map(([a]) => a)
+                                                                    return {
+                                                                        mpId,
+                                                                        vulnId: mpVulnMap[mpId],
+                                                                        nom: mp?.nom || mpId,
+                                                                        objectif: mp?.objectif || '—',
+                                                                        objectifClinique: mapObjectifClinique(mp?.objectif || ''),
+                                                                        acteurPrincipal,
+                                                                        autresActeurs,
+                                                                    }
+                                                                })
+
+                                                            const conclusionPhrases = generateConclusionPhrases(niveaux, activatedMPs.length)
+
+                                                            return (
+                                                                <motion.div
+                                                                    initial={{ opacity: 0, y: 20 }}
+                                                                    animate={{ opacity: 1, y: 0 }}
+                                                                    transition={{ duration: 0.5 }}
+                                                                    className="mt-6"
+                                                                >
+                                                                    {/* CR Document Container */}
+                                                                    <div className="bg-white border border-gray-300 rounded-lg shadow-sm overflow-hidden" style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}>
+                                                                        {/* Document header bar */}
+                                                                        <div className="bg-gray-800 text-white px-5 py-2.5 flex items-center justify-between">
+                                                                            <div className="flex items-center gap-2">
+                                                                                <FileText className="w-4 h-4" />
+                                                                                <span className="text-xs font-bold tracking-wider uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                    Compte Rendu Médecin Traitant — Monka
+                                                                                </span>
+                                                                            </div>
+                                                                            <span className="text-[9px] text-gray-400" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                Projection moteur • Aucune valeur diagnostique
+                                                                            </span>
+                                                                        </div>
+
+                                                                        <div className="p-5 space-y-5">
+
+                                                                            {/* BLOC 1 — EN-TÊTE */}
+                                                                            <div className="border-b border-gray-200 pb-4">
+                                                                                <div className="grid grid-cols-2 gap-3 text-xs">
+                                                                                    <div>
+                                                                                        <span className="text-gray-400 text-[10px] uppercase tracking-wider">Aidant</span>
+                                                                                        <p className="font-bold text-gray-800 mt-0.5">{personaId ? `Persona ${personaId}` : 'Profil simulé'}</p>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <span className="text-gray-400 text-[10px] uppercase tracking-wider">Proche aidé</span>
+                                                                                        <p className="font-bold text-gray-800 mt-0.5">Proche simulé</p>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <span className="text-gray-400 text-[10px] uppercase tracking-wider">Date de génération</span>
+                                                                                        <p className="text-gray-700 mt-0.5">{new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <span className="text-gray-400 text-[10px] uppercase tracking-wider">Type d&apos;évaluation</span>
+                                                                                        <p className="text-gray-700 mt-0.5">Initiale</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            {/* BLOC 2 — SYNTHÈSE SITUATIONNELLE */}
+                                                                            <div>
+                                                                                <h4 className="text-[11px] font-bold text-gray-800 uppercase tracking-wider mb-3" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                    Synthèse situationnelle de la dyade
+                                                                                </h4>
+                                                                                <div className="space-y-2.5">
+                                                                                    {VULN_IDS.map(vId => {
+                                                                                        const niveau = niveaux[vId]
+                                                                                        const display = CR_NIVEAU_DISPLAY[niveau]
+                                                                                        const phrase = CR_PHR_B2[`${vId}_${niveau}`] || '—'
+                                                                                        return (
+                                                                                            <div key={vId} className="flex gap-3 items-start p-2.5 rounded-lg bg-gray-50/80">
+                                                                                                <div className="flex-shrink-0 flex items-center gap-1.5 min-w-[140px]">
+                                                                                                    <span className="text-sm">{display.emoji}</span>
+                                                                                                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: display.color }}>
+                                                                                                        {display.label}
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                                <div className="flex-1 min-w-0">
+                                                                                                    <p className="text-[10px] font-bold text-gray-700 mb-0.5" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                                        {CR_VULN_LABELS[vId]}
+                                                                                                    </p>
+                                                                                                    <p className="text-[10.5px] text-gray-600 leading-relaxed italic">
+                                                                                                        {phrase}
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        )
+                                                                                    })}
+                                                                                </div>
+                                                                            </div>
+
+                                                                            {/* BLOC 3 — AXES D'ACTION PRIORITAIRES */}
+                                                                            <div>
+                                                                                <h4 className="text-[11px] font-bold text-gray-800 uppercase tracking-wider mb-3" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                    Axes d&apos;action structurés prioritaires
+                                                                                </h4>
+                                                                                {top3MPs.length > 0 ? (
+                                                                                    <div className="space-y-3">
+                                                                                        {top3MPs.map((mp) => (
+                                                                                            <div key={mp.mpId} className="p-3 rounded-lg border border-gray-200 bg-white">
+                                                                                                <div className="flex items-start gap-2 mb-2">
+                                                                                                    <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded flex-shrink-0"
+                                                                                                        style={{ backgroundColor: vColorMap[mp.vulnId as VulnerabilityId] || '#666' }}>
+                                                                                                        {mp.vulnId}
+                                                                                                    </span>
+                                                                                                    <span className="text-[10px] font-bold text-white bg-gray-600 px-1.5 py-0.5 rounded flex-shrink-0">
+                                                                                                        {mp.mpId}
+                                                                                                    </span>
+                                                                                                    <span className="text-[11px] font-bold text-gray-800 leading-snug">
+                                                                                                        {mp.nom}
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                                <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 text-[10px] ml-[52px]">
+                                                                                                    <div>
+                                                                                                        <span className="text-gray-400">Acteur principal : </span>
+                                                                                                        <span className="font-bold text-gray-700">{formatActeur(mp.acteurPrincipal)}</span>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700">
+                                                                                                            {mp.objectifClinique}
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                    {mp.autresActeurs.length > 0 && (
+                                                                                                        <div className="col-span-2">
+                                                                                                            <span className="text-gray-400">Écosystème : </span>
+                                                                                                            <span className="text-gray-500">
+                                                                                                                {mp.autresActeurs.map(a => formatActeur(a)).join(', ')}
+                                                                                                            </span>
+                                                                                                        </div>
+                                                                                                    )}
+                                                                                                    <div className="col-span-2">
+                                                                                                        <span className="text-gray-400">Objectif : </span>
+                                                                                                        <span className="text-gray-600 italic">{mp.objectif}</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        ))}
+                                                                                        {activatedMPs.length > 3 && (
+                                                                                            <p className="text-[9px] text-gray-400 italic text-center">
+                                                                                                + {activatedMPs.length - 3} axe{activatedMPs.length - 3 > 1 ? 's' : ''} supplémentaire{activatedMPs.length - 3 > 1 ? 's' : ''} identifié{activatedMPs.length - 3 > 1 ? 's' : ''}
+                                                                                            </p>
+                                                                                        )}
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <p className="text-[10px] text-gray-400 italic p-3 bg-gray-50 rounded-lg">
+                                                                                        Aucun axe de structuration activé à ce stade.
+                                                                                    </p>
+                                                                                )}
+                                                                            </div>
+
+                                                                            {/* BLOC 4 — SUIVI LONGITUDINAL */}
+                                                                            <div className="opacity-50">
+                                                                                <h4 className="text-[11px] font-bold text-gray-800 uppercase tracking-wider mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                    Suivi longitudinal
+                                                                                </h4>
+                                                                                <div className="p-3 rounded-lg bg-gray-50 border border-dashed border-gray-200">
+                                                                                    <p className="text-[10px] text-gray-400 italic text-center">
+                                                                                        {CR_PHR_B4_INITIAL}
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            {/* BLOC 5 — CONCLUSION */}
+                                                                            <div className="border-t border-gray-200 pt-4">
+                                                                                <h4 className="text-[11px] font-bold text-gray-800 uppercase tracking-wider mb-3" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                    Conclusion
+                                                                                </h4>
+                                                                                <div className="space-y-2">
+                                                                                    {conclusionPhrases.map((phrase, i) => (
+                                                                                        <p key={i} className="text-[11px] text-gray-700 leading-relaxed">
+                                                                                            {phrase}
+                                                                                        </p>
+                                                                                    ))}
+                                                                                </div>
+                                                                            </div>
+
+                                                                            {/* Footer */}
+                                                                            <div className="border-t border-gray-100 pt-3 mt-4">
+                                                                                <p className="text-[8px] text-gray-300 text-center leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                                                                    Document généré automatiquement par le moteur Monka — Sans valeur diagnostique — Sans valeur prescriptive
+                                                                                    <br />
+                                                                                    Strictement conforme aux legacy Monka en vigueur
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </motion.div>
+                                                            )
+                                                        })()}
                                                     </div>
                                                 )}
                                             </motion.div>

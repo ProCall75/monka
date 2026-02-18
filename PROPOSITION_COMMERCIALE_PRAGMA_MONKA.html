@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAGMA × Monka — Proposition commerciale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #58BF94;
+            --primary-light: #7CD4AD;
+            --primary-dark: #3FA87A;
+            --accent: #86C0CF;
+            --accent-2: #CFFF92;
+            --bg: #0A1F16;
+            --bg-card: #112B1F;
+            --bg-card-hover: #1A3D2C;
+            --bg-elevated: #0E2519;
+            --text: #E8F0EC;
+            --text-muted: #9BB5A8;
+            --text-dim: #6B8578;
+            --border: #1E3D2D;
+            --success: #00DC82;
+            --warning: #F5A623;
+            --danger: #EF4444;
+            --critical: #D63031;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --slide-w: 1280px;
+            --slide-h: 720px;
+            --gold: #FFD700;
+            --gold-dim: rgba(255, 215, 0, 0.15);
+        }
+
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .slide {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .slide:last-child {
+                page-break-after: auto;
+            }
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #1a1a2e;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 20px auto;
+            background: var(--bg);
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        .slide-body {
+            padding: 40px 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-footer {
+            padding: 12px 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .slide-footer .brand {
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* ════ HERO ════ */
+        .slide.hero-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .slide.hero-slide::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(88, 191, 148, 0.15) 0%, transparent 70%);
+            top: -150px;
+            right: -80px;
+            border-radius: 50%;
+        }
+
+        .slide.hero-slide::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(207, 255, 146, 0.1) 0%, transparent 70%);
+            bottom: -80px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(88, 191, 148, 0.15);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .hero-meta-item strong {
+            color: var(--text);
+        }
+
+        /* ════ COMPARISON TABLE ════ */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .comparison-table th:last-child {
+            color: var(--primary-light);
+        }
+
+        .comparison-table td {
+            font-size: 0.8rem;
+            padding: 9px 14px;
+            border-bottom: 1px solid rgba(30, 61, 45, 0.5);
+            color: var(--text-muted);
+        }
+
+        .comparison-table td:last-child {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .comparison-table td strong {
+            color: var(--text);
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(88, 191, 148, 0.03);
+        }
+
+        /* ════ ITEMS ════ */
+        .comparison-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 5px 0;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .comparison-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ════ STATS ════ */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 22px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .stat-card .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--success);
+            margin-top: 4px;
+        }
+
+        /* ════ DELIVERABLES GRID ════ */
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .deliverable-card {
+            padding: 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .deliverable-icon {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+
+        .deliverable-card h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .deliverable-card p {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .deliverable-card .tag {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 0.66rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(88, 191, 148, 0.12);
+            color: var(--primary-light);
+        }
+
+        /* ════ TIMELINE ════ */
+        .timeline {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+            align-items: stretch;
+        }
+
+        .timeline-phase {
+            flex: 1;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timeline-phase.active {
+            border-color: var(--primary);
+            background: rgba(88, 191, 148, 0.06);
+        }
+
+        .timeline-weeks {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-light);
+            margin-bottom: 8px;
+        }
+
+        .timeline-phase h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .timeline-phase li {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+            list-style: none;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .timeline-phase li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-light);
+            font-size: 0.7rem;
+        }
+
+        /* ════ PRICING ════ */
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(88, 191, 148, 0.08), rgba(207, 255, 146, 0.04));
+            border: 2px solid var(--primary);
+            border-radius: var(--radius);
+            padding: 32px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card .price {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+
+        .pricing-card .price-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .pricing-includes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 20px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .pricing-includes li {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .pricing-includes li::before {
+            content: none;
+        }
+
+        /* ════ QUOTE SLIDE ════ */
+        .slide.quote-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .quote-slide blockquote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 750px;
+            line-height: 1.5;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-slide blockquote em {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .quote-author {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-lock {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+        }
+
+        /* ════ ADVANTAGE CARDS ════ */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .advantage-card {
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .advantage-card h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .advantage-card p {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .advantage-card p strong {
+            color: var(--text);
+        }
+
+        /* ════ BADGE ════ */
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge.green {
+            background: rgba(0, 220, 130, 0.12);
+            color: var(--success);
+        }
+
+        .badge.red {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+        }
+
+        .badge.gold {
+            background: rgba(255, 215, 0, 0.12);
+            color: var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 1 — HERO
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide hero-slide">
+        <div class="hero-badge">⚙️ PRAGMA × Monka — Février 2026</div>
+        <h1>Construisons ensemble<br>le <span>produit de demain</span></h1>
+        <p class="hero-sub">Proposition de collaboration pour le développement de la nouvelle application mobile, du CRM
+            et l'intégration complète du Clinical Engine dans le produit Monka.</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">🚀 <strong>Sprint 4-6 semaines</strong></div>
+            <div class="hero-meta-item">🤖 <strong>IA-native</strong>&nbsp;development</div>
+            <div class="hero-meta-item">💻 <strong>Disponibilité temps plein</strong></div>
+            <div class="hero-meta-item">🔒 <strong>100%</strong>&nbsp;propriété Monka</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 2 — CE QU'ON A DÉJÀ LIVRÉ
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">✅ Déjà livré</div>
+            <h2>Ce que nous avons construit en 2 semaines</h2>
+            <p class="section-desc">Avant même de parler de la suite, voici ce qui est déjà opérationnel — produit par
+                PRAGMA, propriété de Monka.</p>
+
+            <div class="stats-row" style="margin-bottom: 16px;">
+                <div class="stat-card">
+                    <div class="number">5</div>
+                    <div class="label">Vulnérabilités modélisées</div>
+                    <div class="status">100% du périmètre clinique</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">24</div>
+                    <div class="label">Micro-Parcours</div>
+                    <div class="status">documentés & validables</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">369</div>
+                    <div class="label">Micro-Tâches</div>
+                    <div class="status">acteurs & domaines identifiés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">~188</div>
+                    <div class="label">Règles d'activation</div>
+                    <div class="status">logique formalisée</div>
+                </div>
+            </div>
+
+            <div class="deliverables-grid" style="flex: 0; grid-template-columns: repeat(4, 1fr);">
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">📘</div>
+                    <h4>KERNEL V5</h4>
+                    <p>Moteur clinique complet, versionné, documenté fiche par fiche.</p>
+                    <span class="tag">Prêt</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🧪</div>
+                    <h4>Simulateur</h4>
+                    <p>React/TS, scoring temps réel, test de scénarios sans toucher la prod.</p>
+                    <span class="tag">Fonctionnel</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">✅</div>
+                    <h4>App Validation</h4>
+                    <p>Interface Dr. Monka : validation par fiche, complétude, cohérence.</p>
+                    <span class="tag">Déployée</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🔍</div>
+                    <h4>Audit UI/UX</h4>
+                    <p>80 screenshots analysés, 18 problèmes identifiés, maquettes V2 par Marwane.</p>
+                    <span class="tag">Livré</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>2 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 3 — POURQUOI PRAGMA
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🏆 Notre différence</div>
+            <h2>Pourquoi PRAGMA, pas un prestataire classique</h2>
+            <p class="section-desc">Ce n'est pas une question de code. C'est une question de compréhension produit, de
+                vitesse d'exécution, et de standards.</p>
+
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h4>🧠 Expertise métier acquise</h4>
+                    <p>PRAGMA est aujourd'hui <strong>l'équipe qui connaît le mieux le KERNEL</strong> — sa
+                        structure, ses règles, ses cas limites. Cette connaissance ne s'achète pas, elle se construit.
+                        <strong>Et elle est déjà construite.</strong>
+                    </p>
+                </div>
+                <div class="advantage-card">
+                    <h4>🤖 IA-native development</h4>
+                    <p>Notre stack intègre l'IA à chaque étape : <strong>génération de code assistée, tests
+                            automatiques, analyse de données</strong>. Ce qui prend 3 semaines ailleurs, on le fait en 3
+                        jours. Pas un buzzword — un avantage opérationnel réel.</p>
+                </div>
+                <div class="advantage-card">
+                    <h4>⚡ Vitesse d'itération</h4>
+                    <p><strong>2 semaines</strong> pour formaliser l'intégralité du KERNEL clinique. 3 outils livrés en
+                        parallèle. Disponibilité <strong>temps plein, 7j/7</strong> sur la période cadrée. Pas de
+                        réunions inutiles — que du résultat.</p>
+                </div>
+                <div class="advantage-card">
+                    <h4>📐 Standards production-grade</h4>
+                    <p>Framework de développement de <strong>22 chapitres</strong> : architecture imposée, sécurité dès
+                        le jour 1, CI/CD, tests > 80% coverage, monitoring, rollback planifié. <strong>Le code est
+                            auditable et transférable.</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>3 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 4 — PRESTATAIRE vs PRAGMA
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">⚖️ Comparaison</div>
+            <h2>PRAGMA vs. les alternatives</h2>
+            <p class="section-desc">Un nouveau prestataire devrait comprendre le domaine, décrypter la logique, tout
+                reconstruire. On l'a déjà fait.</p>
+
+            <table class="comparison-table" style="flex: 1;">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Critère</th>
+                        <th style="width: 25%;">Studio / ESN</th>
+                        <th style="width: 25%;">Embauche interne</th>
+                        <th style="width: 25%;">PRAGMA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Coût</strong></td>
+                        <td>170 000 – 300 000 €</td>
+                        <td>200 000 – 265 000 €/an</td>
+                        <td><strong>150 000 €</strong> <span class="badge green">one-shot</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Délai</strong></td>
+                        <td>6-12 mois</td>
+                        <td>3-6 mois onboarding + 12 mois dev</td>
+                        <td><strong>4-6 semaines</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Connaissance du KERNEL</strong></td>
+                        <td><span class="badge red">Aucune</span></td>
+                        <td><span class="badge red">Aucune</span></td>
+                        <td><span class="badge green">Complète</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Charges sociales</strong></td>
+                        <td>Non</td>
+                        <td>Oui (~42%)</td>
+                        <td><strong>Non</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Propriété du code</strong></td>
+                        <td><span class="badge red">Souvent verrouillé</span></td>
+                        <td>Oui</td>
+                        <td><span class="badge green">Oui, 100%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Risque recrutement</strong></td>
+                        <td>Non</td>
+                        <td><span class="badge red">Oui</span></td>
+                        <td><strong>Non</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maintenance après</strong></td>
+                        <td>Contrat séparé</td>
+                        <td>Salaires continus</td>
+                        <td><strong>Dev interne formé</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>4 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 5 — LA MISSION
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🎯 La mission</div>
+            <h2>Ce que nous proposons</h2>
+            <p class="section-desc">Un sprint intensif de 4 à 6 semaines. Immersion totale. Tout avance en parallèle. 8
+                semaines maximum, tout compris.</p>
+
+            <div class="timeline">
+                <div class="timeline-phase active">
+                    <div class="timeline-weeks">Semaines 1-2</div>
+                    <h4>KERNEL dans l'app</h4>
+                    <ul>
+                        <li>Intégration KERNEL V5 complet</li>
+                        <li>Scoring temps réel (5 vulnérabilités)</li>
+                        <li>Génération auto des micro-tâches</li>
+                        <li>CCC opérationnelles</li>
+                        <li>Estimation charge de travail</li>
+                    </ul>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-weeks">Semaines 2-4</div>
+                    <h4>App mobile v2</h4>
+                    <ul>
+                        <li>Refonte complète UX/UI</li>
+                        <li>Parcours utilisateur optimisé</li>
+                        <li>Interface moderne pour IDEC</li>
+                        <li>Performances optimisées</li>
+                        <li>Architecture zéro dette</li>
+                    </ul>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-weeks">Semaines 3-6</div>
+                    <h4>CRM & Dashboard</h4>
+                    <ul>
+                        <li>Pipeline suivi des aidants</li>
+                        <li>Dashboard performance IDEC</li>
+                        <li>Reporting partenaires</li>
+                        <li>Automatisations intelligentes</li>
+                        <li>Vision consolidée territoire</li>
+                    </ul>
+                </div>
+                <div class="timeline-phase active">
+                    <div class="timeline-weeks">En continu</div>
+                    <h4>Adaptation</h4>
+                    <ul>
+                        <li>Automatisations CRM avancées</li>
+                        <li>Données pour expé. CNRS</li>
+                        <li>Golden tests cliniques</li>
+                        <li>Formation dev interne</li>
+                        <li>Support et itérations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>5 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 6 — CE QUE MONKA OBTIENT
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📦 Livrables</div>
+            <h2>Ce que Monka obtient à la fin du sprint</h2>
+            <p class="section-desc">Un écosystème produit complet, prêt pour les expérimentations, transférable et
+                maintenable en interne.</p>
+
+            <div class="deliverables-grid">
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">📱</div>
+                    <h4>App mobile v2</h4>
+                    <p>Nouvelle application refondée avec le KERNEL intégré. UX moderne, performante, prête pour le
+                        terrain.</p>
+                    <span class="tag">Production-ready</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🖥️</div>
+                    <h4>CRM Monka</h4>
+                    <p>Outil de pilotage adapté au métier. Pipeline aidants, dashboards IDEC, reporting automatisé.</p>
+                    <span class="tag">Sur mesure</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🧠</div>
+                    <h4>Clinical Engine intégré</h4>
+                    <p>KERNEL V5 complet : scoring, règles, MTs, acteurs — le tout opérationnel dans l'app.</p>
+                    <span class="tag">Validé Dr. Monka</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🧪</div>
+                    <h4>Suite de test</h4>
+                    <p>Tests automatisés, golden tests cliniques, simulateur. Tout est vérifiable et reproductible.</p>
+                    <span class="tag">Coverage > 80%</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">📖</div>
+                    <h4>Documentation complète</h4>
+                    <p>Architecture, API, scoring, troubleshooting. Rien n'est dans les têtes, tout est écrit.</p>
+                    <span class="tag">Transférable</span>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">👨‍💻</div>
+                    <h4>Formation dev interne</h4>
+                    <p>Un développeur de votre équipe formé sur la base de code, le KERNEL et la stack technique.</p>
+                    <span class="tag">Autonomie garantie</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>6 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 7 — REFONTE vs REFACTOR
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔄 Philosophie technique</div>
+            <h2>Refonte complète, pas un refactor</h2>
+            <p class="section-desc">Reconstruire sur une base propre est un choix délibéré. Un refactor hérite des
+                compromis passés.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; align-content: center;">
+                <div
+                    style="padding: 24px; background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.15); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.9rem; color: var(--danger); margin-bottom: 12px;">❌ Refactor de l'existant
+                    </h4>
+                    <div class="comparison-item"><span class="comparison-icon">🔧</span><span>Modifier morceau par
+                            morceau = <strong>dette technique héritée</strong></span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🐛</span><span>Chaque changement doit
+                            <strong>composer avec les anciens bugs</strong></span></div>
+                    <div class="comparison-item"><span class="comparison-icon">⏳</span><span>Plus lent au final :
+                            <strong>chaque décision est contrainte</strong></span></div>
+                    <div class="comparison-item"><span class="comparison-icon">📉</span><span>Résultat : un produit
+                            <strong>bancal et difficile à maintenir</strong></span></div>
+                </div>
+                <div
+                    style="padding: 24px; background: rgba(0, 220, 130, 0.06); border: 1px solid rgba(0, 220, 130, 0.15); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.9rem; color: var(--success); margin-bottom: 12px;">✅ Refonte complète PRAGMA
+                    </h4>
+                    <div class="comparison-item"><span class="comparison-icon">🏗️</span><span>Architecture
+                            <strong>pensée pour le KERNEL</strong> dès le départ</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">✨</span><span><strong>Zéro dette
+                                technique</strong> — base propre et moderne</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">👥</span><span>Code lisible,
+                            <strong>n'importe quel dev peut le reprendre</strong></span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🎓</span><span>Base idéale pour
+                            <strong>former un dev interne</strong></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>7 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 8 — FRAMEWORK QUALITÉ
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🛡️ Garanties</div>
+            <h2>Un framework de développement en 22 chapitres</h2>
+            <p class="section-desc">Chaque ligne de code que PRAGMA livre respecte un standard forgé par des décennies
+                d'expérience senior. Pas du vibe coding — de l'ingénierie.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px;">
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🏗️</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">Architecture</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">Templates imposés, pas de freestyle.
+                        Structure choisie AVANT de coder.</p>
+                </div>
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🔐</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">Sécurité</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">12 points de sécurité : RLS, RBAC, HTTPS,
+                        validation Zod, secrets chiffrés.</p>
+                </div>
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🧪</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">Tests</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">Pyramide unit/intégration/E2E. Coverage >
+                        80%. Rien ne passe sans tests.</p>
+                </div>
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🚀</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">CI/CD</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">Pipeline complet. Staged rollout 10% → 50%
+                        → 100%. Rollback en 30 secondes.</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px;">
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">📊</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">Monitoring</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">Sentry, Uptime Robot, alerting. On sait
+                        AVANT les utilisateurs.</p>
+                </div>
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🛠️</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">Maintenance</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">SLA 99.5%, protocole incident P0-P3,
+                        post-mortem systématique.</p>
+                </div>
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">🔄</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">Rollback</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">PITR, snapshots, backup quotidien.
+                        Restauration < 1h, 0 perte de données.</p>
+                </div>
+                <div
+                    style="padding: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 4px;">📖</div>
+                    <h4 style="font-size: 0.78rem; margin-bottom: 3px;">Documentation</h4>
+                    <p style="font-size: 0.68rem; color: var(--text-muted);">Architecture, API, troubleshooting. Tout
+                        est écrit, rien dans les têtes.</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                <div
+                    style="padding: 14px 20px; background: rgba(88, 191, 148, 0.06); border: 1px solid rgba(88, 191, 148, 0.2); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 14px;">
+                    <div style="font-size: 1.3rem;">⚖️</div>
+                    <div>
+                        <h4 style="font-size: 0.78rem; margin-bottom: 2px;">RGPD & Legal</h4>
+                        <p style="font-size: 0.68rem; color: var(--text-muted);">Consentement opt-in, export données,
+                            droit à l'oubli, notification breach 72h.</p>
+                    </div>
+                </div>
+                <div
+                    style="padding: 14px 20px; background: rgba(88, 191, 148, 0.06); border: 1px solid rgba(88, 191, 148, 0.2); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 14px;">
+                    <div style="font-size: 1.3rem;">🤖</div>
+                    <div>
+                        <h4 style="font-size: 0.78rem; margin-bottom: 2px;">Boundaries IA</h4>
+                        <p style="font-size: 0.68rem; color: var(--text-muted);">L'IA exécute, le framework juge. Règles
+                            explicites, checklists, limites imposées.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>8 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 9 — PRICING
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">💰 Investissement</div>
+            <h2>Le full package</h2>
+            <p class="section-desc">Tout-en-un, sans surprise. Le KERNEL est déjà prêt — il ne reste qu'à construire le
+                produit autour.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; align-content: center;">
+                <div class="pricing-card">
+                    <div
+                        style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary-light); margin-bottom: 10px;">
+                        Full package — One-shot</div>
+                    <div class="price">150 000 €</div>
+                    <div class="price-sub">HT · 4-6 semaines · tout compris</div>
+
+                    <div class="pricing-includes">
+                        <li>✅ KERNEL clinique déjà livré</li>
+                        <li>✅ App mobile v2 complète</li>
+                        <li>✅ CRM & Dashboard sur mesure</li>
+                        <li>✅ Simulateur & tests</li>
+                        <li>✅ Documentation complète</li>
+                        <li>✅ Formation dev interne</li>
+                        <li>✅ 100% code propriété Monka</li>
+                        <li>✅ Pas de charges sociales</li>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center;">
+                    <div
+                        style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                        <div style="font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">⚡ vs. Studio / ESN</div>
+                        <div style="font-size: 0.74rem; color: var(--text-muted);">170K – 300K €, délai 6-12 mois,
+                            aucune connaissance KERNEL</div>
+                        <div style="font-size: 0.72rem; font-weight: 600; color: var(--success); margin-top: 4px;">→ 2×
+                            moins cher, 4× plus rapide</div>
+                    </div>
+                    <div
+                        style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                        <div style="font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">👥 vs. Embauche interne
+                        </div>
+                        <div style="font-size: 0.74rem; color: var(--text-muted);">200K – 265K €/an + charges sociales +
+                            3-6 mois d'onboarding</div>
+                        <div style="font-size: 0.72rem; font-weight: 600; color: var(--success); margin-top: 4px;">→ Pas
+                            de recrutement, pas de management, résultat immédiat</div>
+                    </div>
+                    <div
+                        style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                        <div style="font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">🎯 En résumé</div>
+                        <div style="font-size: 0.74rem; color: var(--text-muted);">En 6 semaines, Monka obtient ce
+                            qu'une équipe interne mettrait <strong style="color: var(--text);">12-18 mois</strong> à
+                            produire.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>9 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 9 — MODALITÉS & FLEXIBILITÉ
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🤝 Modalités</div>
+            <h2>Paiement flexible — on s'adapte à vous</h2>
+            <p class="section-desc">Notre priorité c'est de construire le meilleur produit possible. Le calendrier de
+                paiement s'adapte à votre réalité.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+                <div
+                    style="padding: 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.4rem; margin-bottom: 6px;">📦</div>
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px;">À la livraison</h4>
+                    <p style="font-size: 0.74rem; color: var(--text-muted);">Chaque phase facturée à la livraison. Vous
+                        ne payez que ce qui est validé.</p>
+                </div>
+                <div
+                    style="padding: 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.4rem; margin-bottom: 6px;">📅</div>
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px;">Échelonné</h4>
+                    <p style="font-size: 0.74rem; color: var(--text-muted);">Mensualités régulières sur 12-18 mois.
+                        Prévisible et confortable.</p>
+                </div>
+                <div
+                    style="padding: 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.4rem; margin-bottom: 6px;">🔄</div>
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px;">Différé</h4>
+                    <p style="font-size: 0.74rem; color: var(--text-muted);">Montant validé maintenant, paiement à 3, 6
+                        ou 12 mois.</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; align-content: center;">
+                <div
+                    style="padding: 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.4rem; margin-bottom: 6px;">🧩</div>
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px;">Hybride</h4>
+                    <p style="font-size: 0.74rem; color: var(--text-muted);">Combinaison libre des options ci-dessus. On
+                        construit ensemble le plan qui vous convient.</p>
+                </div>
+                <div
+                    style="padding: 22px; background: rgba(88, 191, 148, 0.06); border: 1px solid rgba(88, 191, 148, 0.3); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 1.4rem; margin-bottom: 6px;">📈</div>
+                    <h4 style="font-size: 0.85rem; margin-bottom: 4px; color: var(--primary-light);">Equity</h4>
+                    <p style="font-size: 0.74rem; color: var(--text-muted);">Conversion partielle ou totale en parts, si
+                        l'alignement stratégique le justifie. On croit au projet.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>10 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 11 — AUDIT UI/UX & VISION V2
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔍 Audit UI/UX</div>
+            <h2>L'app actuelle passée au peigne fin — la V2 est déjà pensée</h2>
+            <p class="section-desc">80 screenshots analysés par Marwane, 18 problèmes recensés, maquettes V2 en cours.
+                On ne reconstruit pas à l'aveugle.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
+                <div
+                    style="padding: 16px; background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.15); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 800; color: var(--danger);">3</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Bloquants</div>
+                    <div style="font-size: 0.68rem; color: var(--danger); font-weight: 600; margin-top: 2px;">Zéro
+                        profondeur, polypathologie, paywall</div>
+                </div>
+                <div
+                    style="padding: 16px; background: rgba(245, 166, 35, 0.06); border: 1px solid rgba(245, 166, 35, 0.15); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 800; color: var(--warning);">7</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Majeurs</div>
+                    <div style="font-size: 0.68rem; color: var(--warning); font-weight: 600; margin-top: 2px;">
+                        Personnalisation, pédagogie, onboarding</div>
+                </div>
+                <div
+                    style="padding: 16px; background: rgba(255, 215, 0, 0.06); border: 1px solid rgba(255, 215, 0, 0.15); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 800; color: var(--gold);">8</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Mineurs</div>
+                    <div style="font-size: 0.68rem; color: var(--gold); font-weight: 600; margin-top: 2px;">UX confuse,
+                        typos, feedback visuel</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; align-content: center;">
+                <div
+                    style="padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.82rem; font-weight: 700; margin-bottom: 8px; color: var(--danger);">🔴
+                        Problèmes critiques identifiés</h4>
+                    <div class="comparison-item"><span class="comparison-icon">📱</span><span>Dashboard =
+                            <strong>empilement plat</strong>, 4 onglets identiques</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🚧</span><span>Paywall <strong>immédiat
+                                après questionnaire</strong> — brise la confiance</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🤷</span><span>Aucune pédagogie : tâches
+                            imposées <strong>sans contexte</strong></span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🔄</span><span>Personnalisation
+                            <strong>superficielle et incohérente</strong></span></div>
+                </div>
+                <div
+                    style="padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                    <h4 style="font-size: 0.82rem; font-weight: 700; margin-bottom: 8px; color: var(--success);">✅
+                        Vision V2 par Marwane</h4>
+                    <div class="comparison-item"><span class="comparison-icon">🏗️</span><span>Navigation en
+                            <strong>profondeur</strong> : vulnérabilité → MPs → MTs</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">🎯</span><span>Chaque tâche
+                            <strong>contextualisée</strong> avec un « Pourquoi ? »</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">👤</span><span>Personnalisation
+                            <strong>systématique</strong> avec prénoms et données</span></div>
+                    <div class="comparison-item"><span class="comparison-icon">✨</span><span>UX moderne,
+                            <strong>hiérarchie visuelle</strong>, micro-animations</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Proposition commerciale — Confidentiel</span>
+            <span>11 / 12</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SLIDE 12 — CLOSING
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="slide quote-slide">
+        <div class="slide-body" style="justify-content: center; align-items: center;">
+            <blockquote>
+                <em>Le KERNEL est prêt. L'audit est fait.<br>La V2 est pensée. L'équipe est prête.</em><br>
+                Il ne manque plus que votre feu vert<br>
+                pour construire le produit que Monka mérite.
+            </blockquote>
+            <p class="quote-author">Antonin Rimaud & Marwane El Moutribi — PRAGMA · Février 2026</p>
+
+            <div style="margin-top: 30px;">
+                <div class="footer-lock">🔒 100% du code appartient à Monka</div>
+            </div>
+
+            <div style="display: flex; gap: 30px; margin-top: 24px; position: relative; z-index: 1;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                    <div style="font-size: 0.78rem; color: var(--text-dim);">📧 pragmasolutions.contact@gmail.com</div>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                    <div style="font-size: 0.78rem; color: var(--text-dim);">🚀 Sprint dès le feu vert</div>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                    <div style="font-size: 0.78rem; color: var(--text-dim);">💰 150 000 € HT · Full package</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

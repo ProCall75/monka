@@ -145,8 +145,8 @@ function renderInline(text: string) {
 // Group table rows together
 function renderMarkdown(content: string) {
     const lines = content.split('\n')
-    const elements: JSX.Element[] = []
-    let tableRows: JSX.Element[] = []
+    const elements: React.ReactElement[] = []
+    let tableRows: React.ReactElement[] = []
     let inTable = false
 
     lines.forEach((line, i) => {

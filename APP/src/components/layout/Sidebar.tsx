@@ -47,7 +47,7 @@ const navItems = [
         path: '/questions',
         label: 'Questions',
         icon: FileQuestion,
-        description: '165 questions détaillées',
+        description: '150 questions détaillées',
     },
     {
         path: '/docs',
@@ -203,7 +203,7 @@ export default function Sidebar() {
                             {!collapsed && (
                                 <div className="flex items-center gap-2 px-3 py-2 mb-2">
                                     <Stethoscope className="w-3.5 h-3.5 text-monka-primary/60" />
-                                    <span className="text-[11px] text-white/30">KERNEL v4 • 165 questions • Supabase live</span>
+                                    <span className="text-[11px] text-white/30">KERNEL v4 • 150 questions • Supabase live</span>
                                 </div>
                             )}
 

@@ -20,8 +20,7 @@ import {
 } from 'lucide-react'
 import { useMonkaData } from '../engine/useMonkaData'
 import { invalidateCache, type MonkaData } from '../engine/supabaseData'
-import { VULN_META, VULN_IDS, type VulnMeta } from '../engine/constants'
-import type { VulnerabilityId } from '../engine/types'
+import { VULN_META, VULN_IDS } from '../engine/constants'
 
 
 

@@ -8,8 +8,7 @@ import {
     AlertTriangle,
     ChevronDown,
     ChevronRight,
-    Zap,
-    Tag,
+
     FileQuestion,
 } from 'lucide-react'
 import { useMonkaData } from '../engine/useMonkaData'

@@ -686,7 +686,8 @@ export default function PersonasPage() {
             <div className="space-y-4">
                 {personas.map((persona) => {
                     const isExpanded = expanded === persona.id
-                    const answersCount = Object.keys(persona.answers).length
+                    const triggerIds = new Set(['O35', 'O36', 'N1', 'O46', 'O14', 'O1', 'O64', 'O63', 'O49', 'O2', 'N3', 'N31', 'N26', 'E71', 'E72'])
+                    const answersCount = Object.keys(persona.answers).filter(k => !triggerIds.has(k)).length
 
                     return (
                         <motion.div
@@ -807,21 +808,14 @@ export default function PersonasPage() {
                                             {/* Answer stats */}
                                             <div>
                                                 <p className="text-[10px] font-bold text-monka-muted uppercase tracking-wider mb-2">
-                                                    Réponses pré-remplies — {answersCount} / 165
+                                                    Réponses pré-remplies — {answersCount} / 150
                                                 </p>
                                                 <div className="flex gap-2 flex-wrap">
-                                                    {['Triggers', 'V1', 'V2', 'V3', 'V4', 'V5'].map((label) => {
-                                                        const count = label === 'Triggers'
-                                                            ? Object.keys(persona.answers).filter(k =>
-                                                                ['O35', 'O36', 'N1', 'O46', 'O14', 'O1', 'O64', 'O63', 'O49', 'O2', 'N3', 'N31', 'N26', 'E71', 'E72'].includes(k)
-                                                            ).length
-                                                            : 0 // Simplified — we show the total count
-                                                        return (
-                                                            <span key={label} className="text-[10px] px-2.5 py-1 rounded-lg bg-gray-100 text-monka-muted font-medium">
-                                                                {label} ✓
-                                                            </span>
-                                                        )
-                                                    })}
+                                                    {['Triggers', 'V1', 'V2', 'V3', 'V4', 'V5'].map((label) => (
+                                                        <span key={label} className="text-[10px] px-2.5 py-1 rounded-lg bg-gray-100 text-monka-muted font-medium">
+                                                            {label} ✓
+                                                        </span>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>
@@ -840,7 +834,7 @@ export default function PersonasPage() {
                     <div>
                         <h4 className="text-sm font-bold text-monka-heading mb-1">Comment ça fonctionne</h4>
                         <p className="text-xs text-monka-muted leading-relaxed">
-                            Cliquez sur <strong>"Simuler"</strong> pour charger automatiquement les 165 réponses du persona dans le simulateur.
+                            Cliquez sur <strong>"Simuler"</strong> pour charger automatiquement les 150 réponses du persona dans le simulateur.
                             Le moteur calculera les scores, détectera les vulnérabilités et activera les micro-parcours correspondants.
                             Chaque profil a été construit à partir d'une situation réelle d'aidance avec des réponses cohérentes sur les 5 vulnérabilités.
                         </p>

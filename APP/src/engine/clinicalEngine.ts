@@ -15,8 +15,6 @@
 import type {
     MonkaData,
     DBActivationRule,
-    DBRecommendation,
-    DBMicroTache,
 } from './supabaseData'
 import { getMPsForVuln } from './supabaseData'
 import type { VulnerabilityId } from './types'
