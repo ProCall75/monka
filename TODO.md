@@ -1,273 +1,323 @@
 # 📋 TODO — Monka Clinical Engine
 
-> **Mise à jour** : 11/02/2026  
-> **Priorité #1** : Valider la base (KERNEL + données sources) avant toute production  
-> **Source de vérité** : [`RECAP_FONDATION_MONKA.md`](KERNEL/RECAP_FONDATION_MONKA.md) (v4 FINALE — 13 règles K1→K13)
+> **Mise à jour** : 19/02/2026 — 21h40  
+> **Contexte** : Points à valider/produire suite au mail Dr. Monka du 19/02 + ajouts Antonin
 
 ---
 
-## 🧹 PHASE 0 — Nettoyage & Restructuration Repo ✅
+## ✅ PRIORITÉ 1 — Validation Clinique (Dr. Monka)
 
-- [x] Archiver legacy (`QUESTIONNAIRE/`, `Q-V3/`, `AUTRES/`, `SOURCES/`, `DEMO/`, `AUDIT/`, KERNEL intermédiaires)
-- [x] Renommer `QUESTIONNAIRE_V2/` → `KERNEL/`
-- [x] Réécrire `UNDERSTANDING.md` aligné KERNEL v4 (6 divergences corrigées)
-- [x] Réécrire `README.md` racine
-- [x] Nettoyage READMEs
-
----
-
-## ✅ PHASE 1 — Validation des Données Sources
-
-> **Objectif** : S'assurer que les données sont cohérentes et complètes.
-
-### 1.1 — Référentiel Questions ✅
-
-- [x] Extraire et mapper le référentiel état/facteur → 150/150 = 100% cohérence
-- [x] Rapport de cohérence → `LIVRABLES/Audit/rapport_coherence_etat_facteur.md`
-
-### 1.2 — Audit 150+15 vs 153 ✅
-
-- [x] Identifier l'écart → 3 triggers (O2, N31, O49) expliquent la différence
-- [x] Rapport → `LIVRABLES/Audit/rapport_audit_153_vs_150.md`
-- [x] ✅ **Confirmé par Dr. Monka** : 150 questions + 15 triggers
-
-### 1.3 — Export Excel du Questionnaire ✅
-
-- [x] Exporter questionnaire figé (150 + 15 triggers + 30 suivi + 24 MP) → `LIVRABLES/Questionnaire_Monka_Complet.xlsx`
-- [x] Ajouter colonne **Typage** (scorante/déclenchante/etc.) — vérification croisée 100%
-- [x] Retirer colonne "Aidance" (redondante)
-
-### 1.4 — Règles d'Activation ✅
-
-- [x] Créer table `activation_rules` → 68 règles (12 critiques + 28 CCC + 28 standard)
-- [x] Couvrir 24/24 MP (21 legacy + 3 proposés IA pour F6, M6, A4)
-- [x] Rédiger réflexion CCC inter-vulnérabilités → `LIVRABLES/Audit/reflexion_ccc_inter_vulnerabilites.md`
-- [x] Vérification KERNEL K1→K13 → 13/13 conforme
-
-### 1.5 — Architecture Recommandations ✅
-
-- [x] Valider le modèle MP→Recos (via activation_rule) → `LIVRABLES/Audit/architecture_recommandations_par_mp.md`
-- [x] Badge dynamique MP = MAX(niveaux recos incomplètes) → dé-escalade
-- [x] Délai figé à la date du questionnaire
-
----
-
-## 📝 PHASE 2 — Ingestion & Regroupement des Données
-
-> **Objectif** : Ingérer tout le legacy dans Supabase, regrouper les recos par MP, préparer le terrain pour les templates.
-
-### 2.1 — Ingestion Supabase ✅
-
-> 10 tables créées + données ingérées.
-
-- [x] **Ingérer `questions`** — 165 questions (150 + 15 triggers) ✅
-- [x] **Ingérer `vulnerabilities`** — 5 vulnérabilités ✅
-- [x] **Ingérer `micro_parcours`** — 24 MP ✅
-- [x] **Ingérer `question_mp_mapping`** — liens questions↔MP ✅
-- [x] **Ingérer `activation_rules`** — 68 règles (12 critiques + 28 CCC + 28 standard) ✅
-- [x] **Ingérer `recommendations`** — 103 recos regroupées ✅
-- [x] **Ingérer `micro_taches`** — 299 MT typées ✅
-- [x] **Ingérer `scoring_questions`** — 38 questions scorantes + pondérations ✅
-- [x] **Ingérer `scoring_thresholds`** — seuils par vulnérabilité ✅
-- [x] **Ingérer `suivi_questions`** — 30 questions de suivi ✅
-
-### 2.2 — Audit & Regroupement Recos par MP ✅
-
-> Audit complet → `LIVRABLES/Audit/audit_regroupement_recos_mt_par_mp.md`
-
-- [x] **Cartographier les recos legacy** par question → 24/24 MP couverts ✅
-- [x] **Doc d'audit recos** → 14/24 MP bien couverts, 5 faiblement documentés ✅
-- [x] **Regrouper les MT par MP** (V1 via question_id, V2-V5 par V) ✅
-- [x] **Contrôle qualité** : 0 reco perdue (707/707), 0 MT perdue (299/299) ✅
-
-### 2.3 — Points en attente Dr. Monka
-
-> Items issus des retours du 09/02 et des sessions de travail.
-
-- [ ] **Validation architecture recos** → envoyer `architecture_recommandations_par_mp.md`
-- [ ] **Décision multi-MP** : 5 questions liées à 2 MP (E21, O51, O53, O54, E46) → 1:1 ou 1:N ?
-- [ ] **Validation règles activation F6, M6, A4** (proposées par IA)
-- [ ] **Vérifier aidance** : 5 questions mentionnent "enfant" (E38, E59, E60, E64, E65) — faut-il filtrer par profil d'aidant ?
-
----
-
-## 🤖 PHASE 3 — Propositions IA & Enrichissement
-
-> L'IA propose, le médecin valide. Chaque livrable est un doc clair avec choix justifiés.
-
-### 3.1 — Regroupement Recos par MP + Dédoublonnage ✅
-
-- [x] Extraire 324 recos legacy par MP, dédoublonner → 238 recos structurées
-- [x] Regrouper par question → **103 recos regroupées** (modèle actif)
-- [x] Lier aux activation_rules (79/103 liées, 24 sans MT)
-- [x] Créer table `recommendations` + insérer 103 recos
-- [x] → Source de vérité : `LIVRABLES/recos_regroupees_par_mp.md`
-- [x] → Risques : `LIVRABLES/Audit/risques_regroupements_phase3.md`
-- [x] → Backup 238 : `_ARCHIVE/LIVRABLES/phase3_recos_238_detail.md`
-
-### 3.2 — Rattachement MT → Recos ✅
-
-- [x] Matcher 299 MT aux 103 recos regroupées (matching sémantique V1-V5)
-- [x] 299/299 MT rattachées, 0 orpheline
-- [x] Mis à jour `reco_id` + `matching_source` dans `micro_taches`
-
-### 3.3 — Règle de Scoring ⏳
-
-> **Scénario D** : reclassifier les questions mal classifiées → règle unique « état = scorant »
-> Voir : `LIVRABLES/Audit/scoring_vs_legacy_vs_toutes_etat.md` + `reflexion_methodologie_scoring.md`
-
-- [x] Analyse comparative : 38 legacy vs 55 toutes état
-- [x] Raisonnement méthodologique (5 axes) → doc réflexion
-- [ ] **Envoyer doc scoring à Dr. Monka** (pas encore envoyé)
-- [ ] **Reclassifier ~15 questions** (E1, E2, N20, E43 + ~11 V2)
-- [ ] **Valider pondération** (+1 standard / +2 critique)
-- [ ] Appliquer classification en base → scoring automatique
-
-### 3.4 — Validation Dr. Monka (batch) ⏳
-
-- [x] ✅ **CCC inter-vulnérabilités** : valide les 3 combos (1, 2, 4) + nouvelles règles F6, M6, A4 (11/02)
-- [x] ✅ **Architecture recos par MP** : valide le principe multi-recos par MP (11/02)
-- [ ] Validation 103 recos regroupées (doc envoyé)
-- [ ] Validation 20 cas à risque (doc envoyé)
-- [ ] Validation scoring (doc **pas encore envoyé**)
-
----
-
-## 📄 PHASE 4 — Production Templates KERNEL (A→E)
-
-> 25 fichiers templates produits (5 V × 5 templates A→E). Reste la **validation clinique** par Dr. Monka.
-
-### 4.1 — Pilote V1 (Social & Relationnel) ✅ PRODUIT
-
-- [x] **A** — `V1_social_relationnel/A_activation.md` (177 lignes — 14 règles, 4 MP)
-- [x] **B** — `V1_social_relationnel/B_recos_variations.md` (265 lignes — recos × niveaux)
-- [x] **C** — `V1_social_relationnel/C_master_mt_asr.md` (177 lignes — MT typées + ASR)
-- [x] **D** — `V1_social_relationnel/D_suivi.md` (124 lignes — questions de suivi)
-- [x] **E** — `V1_social_relationnel/E_scoring.md` (139 lignes — barèmes + seuils)
-- [ ] **Validation Dr. Monka** sur V1 complète
-
-### 4.2 — Déploiement V2→V5 ✅ PRODUIT
-
-- [x] V2 — Administrative (A1-A4) (A→E) — 5 fichiers remplis
-- [x] V3 — Santé Aidant (S1-S4) (A→E) — 5 fichiers remplis
-- [x] V4 — Fragilité du Proche (F1-F6) (A→E) — 5 fichiers remplis
-- [x] V5 — Parcours Médical (M1-M6) (A→E) — 5 fichiers remplis
-- [ ] **Validation Dr. Monka** sur V2→V5
-
-### 4.3 — Transversaux
-
-- [x] **E_GLOBAL** — `E_GLOBAL_scoring.md` — Scoring global inter-vulnérabilités
-- [ ] **Triggers** — `all/triggers.md`
-- [ ] **Fiches identité questions** — fiche complète par question (ID, V, MP, MT, typage, classification)
-
----
-
-## 🖥️ PHASE 5 — Simulateur KERNEL (Vite/React)
-
-> App React/Vite dans `APP/`. Connectée à Supabase en live. Remplace les simulateurs legacy HTML.
-
-### 5.1 — Setup ✅
-
-- [x] Créer le projet Vite + React + TypeScript dans `APP/`
-- [x] Configurer Tailwind CSS + design system (couleurs Monka, glass-card, gradients)
-- [x] Connecter Supabase (client singleton `src/lib/supabase.ts`)
-- [x] Créer la couche data (`src/engine/supabaseData.ts`) — fetch 10 tables en parallèle + cache
-- [x] Hook React `useMonkaData` pour chargement avec loading/error states
-
-### 5.2 — Fonctionnalités Core ✅
-
-- [x] Questionnaire interactif (165 questions groupées par sous-bloc)
-- [x] Moteur d'activation (évalue condition_logic en temps réel → MP actifs)
-- [x] Affichage Recos par MP + badge MP ACTIF
-- [x] Scoring temps réel (score par V + score total + seuils)
-- [x] Détection CCC (via activation_rules niveau 'ccc')
-- [x] Vue interne (6 onglets : Scoring, Activation, Recos, Règles, Tâches, Résumé)
-- [x] Vue externe — parcours utilisateur (MP → Recos → MT imbriqués)
-- [x] Labels Social / Médico-social sur les micro-tâches
-- [x] Sélection vulnérabilité (V1→V5 + ALL)
-
-### 5.3 — UX & Polish ✅
-
-- [x] Sidebar avec navigation (Simulateur, Personas, Docs, Roadmap)
-- [x] SidebarContext (margin dynamique open/pinned/collapsed)
-- [x] Design premium (glassmorphism, gradients, animations Framer Motion)
-- [x] Personas — 5 profils aidants (A1-A5) avec auto-fill simulator
-- [x] Page Docs (templates KERNEL)
-- [x] Page Roadmap (3 priorités, contexte vulgarisé)
-- [x] Délimiteurs visuels (borders, divide-y) dans toute l'app
-- [ ] Export résultats (PDF/JSON)
-- [ ] Suivi dynamique (entonnoir 3 niveaux)
-
----
-
-## 📊 PHASE 6 — Documentation Médecin
-
-- [ ] 26 documents remplis (5 templates × 5 V + E_GLOBAL)
-- [ ] Rapport d'audit global consolidé
-- [ ] Guide d'utilisation simulateur
-- [ ] Excels exportés
-
----
-
-## 🔮 BACKLOG — Évolutions Futures
-
-- [ ] **Recos désactivables par contexte** — si une reco est impossible (ex: aucun entourage familial mobilisable), pouvoir la désactiver pour ce profil. Déclenché par réponses aux questions triggers/facteur. *(Retour Dr. Monka 11/02)*
-- [ ] Scoring bi-dimensionnel (V2 scoring) — état + facteurs en deux dimensions séparées
-- [ ] Audit copywriting : wording recos vs MT IDEC
-- [ ] Personnalisation par persona (exploiter triggers)
-- [ ] Maquettes UI/UX app utilisateur finale
-- [ ] Intelligence Artificielle : plan CNRS Phase III, correspondance Legacy→IA
-- [ ] Glossaire acronymes (Dr. Monka, déjà sur Wimi)
-
----
-
-## 📨 RÉCAP — Docs à envoyer à Dr. Monka (10/02/2026)
-
-### Docs à transmettre
-
-| # | Doc | Contenu | Action demandée |
-|---|---|---|---|
-| 1 | `LIVRABLES/recos_regroupees_par_mp.md` | 103 recos structurées par MP, avec MT rattachées | Valider les regroupements |
-| 2 | `LIVRABLES/Audit/risques_regroupements_phase3.md` | 20 regroupements douteux à vérifier | Annoter ✅/❌/📝 |
-| 3 | `LIVRABLES/Audit/scoring_vs_legacy_vs_toutes_etat.md` | Comparaison scoring + 2 décisions à prendre | Reclassifier 15 questions + valider pondération |
-| 4 | `LIVRABLES/Audit/reflexion_methodologie_scoring.md` | Réflexion complète : 5 axes d'analyse du scoring | Lecture optionnelle — le raisonnement derrière |
-| 5 | `LIVRABLES/Audit/glossaire_reco_vs_mt.md` | Définitions Reco vs MT | Contexte |
-
-### Message à copier-coller
-
-> Voici les résultats du travail de structuration des recommandations et l'analyse du scoring.
+> **STATUT** : ✅ Phase 1 terminée côté PRAGMA — **⏳ En attente retour Dr. Monka** pour valider et trancher les décisions ouvertes.
 >
-> **Ce qu'on a fait** :
-> - On a pris les 324 textes de recos du CAT, supprimé les doublons, et regroupé par question pour arriver à **103 recommandations structurées** par Micro-Parcours. Les 299 micro-tâches ont été rattachées à ces recos.
-> - On a analysé en détail le scoring actuel (38 questions scorées) vs le scénario où toutes les questions "état" seraient scorantes (55 questions).
->
-> **Ce dont j'ai besoin** :
->
-> 1. **Valider les regroupements** — le doc principal (`recos_regroupees_par_mp.md`) montre chaque MP avec ses recos en tableau. Vérifie que ça fait sens cliniquement.
->
-> 2. **Vérifier les 20 cas à risque** — le doc risque (`risques_regroupements_phase3.md`) liste 20 cas où le regroupement est un peu forcing :
->    - **9 cas 🔴** mélangent médical + social + psycho → tu veux séparer ?
->    - **11 cas 🟡** même thème mais titres à reformuler
->    - Pour chaque cas, annote : ✅ (garder), ❌ (séparer), ou 📝 (reformuler)
->
-> 3. **Scoring — 6 décisions à prendre** (doc `scoring_vs_legacy_vs_toutes_etat.md`) :
->    - 4 questions "facteur" sont scorées dans le legacy → garder ou retirer ?
->    - V2 chute de 22 à 8 pts si on corrige → acceptable ?
->    - Pondération uniforme (+1) ou différenciée (+1/+2) par gravité clinique ?
->    - Seuils d'interprétation : uniformes ou par V ?
->    - Le doc détaille chaque cas avec mon raisonnement et ma recommandation.
->
-> 4. **Définir les activation_rules manquantes** — 3 MPs n'ont pas de règle d'activation : **A4**, **F6**, **M6**.
->
-> Les textes originaux sont tous conservés dans les sections dépliables des docs si besoin.
+> **Livrables produits** :
+> - [`audit_micro_taches_369.md`](LIVRABLES/Audit/audit_micro_taches_369.md) — Audit 369 MT
+> - [`METHODE_VERSIONING_PERSONAS.md`](METHODE_VERSIONING_PERSONAS.md) + [`VERSIONING_PERSONAS.xlsx`](VERSIONING_PERSONAS.xlsx) — Modèle personas
+> - [`audit_scoring_monka.md`](LIVRABLES/Audit/scoring/audit_scoring_monka.md) — Audit scoring (7 problèmes, 5 alternatives)
+> - [`audit_recos_categories_rules.md`](LIVRABLES/Audit/audit_recos_categories_rules.md) — Audit recos/catégories/rules (11 problèmes, 4 critiques)
 
-### Retours attendus
+### 1.1 — Validation des Micro-Tâches (MT)
 
-| # | Retour | Impact |
-|---|---|---|
-| 1 | Validation regroupements (✅/❌/📝 sur les 20 cas) | On ajuste les recos en base |
-| 2 | Scoring : 6 décisions (voir doc) | On peut produire les templates scoring |
-| 3 | Activation rules pour A4, F6, M6 | On peut compléter les niveaux manquants |
+> **Audit produit** : [`audit_micro_taches_369.md`](LIVRABLES/Audit/audit_micro_taches_369.md)
+
+- [x] Audit complet des 369 MT (placement, wording, cohérence) → 6 problèmes + 3 alertes wording
+- [ ] Valider les recommandations d'audit avec Dr. Monka
+- [ ] Appliquer les corrections (fusions, ajouts, réécriture wording)
+
+### 1.2 — Modèle de Pertinence par Type d'Aidance
+
+> Modèle ADDITIF validé : socle 130Q + blocs aidance empilables (N3 multi-choix) + overlay âge fixe (<18 / 60+).
+
+**Livrables produits** :
+- [`METHODE_VERSIONING_PERSONAS.md`](METHODE_VERSIONING_PERSONAS.md) — Document méthode complet
+- [`VERSIONING_PERSONAS.xlsx`](VERSIONING_PERSONAS.xlsx) — Excel 7 onglets (README + socle + blocs + overlays + 80 combinaisons + triggers)
+
+**Modifications à appliquer en base** :
+- [ ] Passer N3 en multi-réponse (Choix Unique → Choix Multiples)
+- [ ] Corriger tranches d'âge O1 : (-15, 15-20, 20-60, 60-75, +75) → (<18, 18-59, 60-75, 75+)
+
+**Travail terminé** :
+- [x] Définir le modèle additif (socle + blocs aidance + overlay âge)
+- [x] Documenter les 20 règles overlay <18 ans par type d'aidance
+- [x] Documenter les 28 règles overlay 60+ ans par type d'aidance
+- [x] Générer l'Excel avec toutes les combinaisons possibles (80)
+- [x] Ajouter un onglet README explicatif dans l'Excel
+
+**À valider avec Dr. Monka** :
+- [ ] Valider les règles overlay <18 et 60+ (acteurs, MTs, V renforcées)
+- [ ] Valider les modifications N3 et O1
+- [ ] Confirmer les combinaisons pertinentes vs non pertinentes
+
+### 1.3 — Validation du Scoring
+
+> **Livrable produit** : [`audit_scoring_monka.md`](LIVRABLES/Audit/scoring/audit_scoring_monka.md) — Audit complet (7 problèmes, 5 angles morts méthode, comparaison 5 alternatives psychométriques, simulations, plan validation 4 phases)
+
+- [x] Audit complet de la méthodologie de scoring (METHODOLOGIE_SCORING.md + SCORING_V1 à V5)
+- [x] Remise en question de la méthode à 2 critères (C1 Informativité + C2 Fiabilité)
+- [x] Comparaison avec alternatives : CVR Lawshe, Item-Total Correlation, EFA, IRT, scoring bi-dimensionnel
+- [x] Identification de 6 problèmes techniques (résolution inégale, métadonnées V4, conditionnelles, plateau +1)
+- [x] Simulations 3 profils types (léger/modéré/sévère) montrant le problème de sensibilité
+
+**⏳ En attente validation Dr. Monka** :
+- [ ] Valider la méthodologie C1+C2 comme méthode MVP retenue
+- [ ] Trancher les 7 décisions identifiées (seuils adaptatifs, +2 en V1, C2bis, scores max par profil...)
+- [ ] Appliquer le scoring validé en base Supabase
+
+### 1.4 — Audit des Recommandations, Catégories & Règles d'Activation
+
+> **Livrable produit** : [`audit_recos_categories_rules.md`](LIVRABLES/Audit/audit_recos_categories_rules.md) — 198 recos, 73 catégories, 235 rules auditées. **11 problèmes identifiés dont 4 critiques** (recos prévention inertes, chaînes cassées, trous critiques S2/F2, 32 questions muettes).
+
+- [x] Auditer les 198 recommandations (wordings ✅, 4 niveaux, cohérence par MP)
+- [x] Auditer les 73 catégories (0 orphelines, répartition 2-4 par MP, couverture par niveau)
+- [x] Auditer les 235 règles d'activation (condition_logic JSONB, 130 questions référencées, intégrité)
+- [x] Vérifier la criticité : **5 MPs sans règles critiques** (S2, F1, F2, S3, S4) 🔴
+- [x] Identifier les catégories orphelines → **0** ✅
+- [x] Deep audit : 0 rules prévention, 2 chaînes cassées, 32 questions muettes, escalade non doc
+- [x] Produire le livrable v2 : `audit_recos_categories_rules.md` ✅
+
+**⏳ En attente validation Dr. Monka** :
+- [ ] Trancher les 11 décisions (prévention fallback?, chaînes cassées F5/M4, S2/F2 critiques, questions muettes...)
+- [ ] Créer les rules critiques pour S2, F2, F1, S3
+- [ ] Créer les recos critiques pour F5_CAT_01, M4_CAT_03
+
+---
+
+## 🟠 PRIORITÉ 2 — Simulateur & Personas
+
+### 2A — Vue MP drill-down dans le simulateur ✅
+
+> **TERMINÉ** — Clic sur un MP dans l'onglet Activation → vue détaillée complète.
+
+- [x] Ajout état `selectedMP` + navigation MP liste ↔ MP détail
+- [x] Vue drill-down : catégories, règles (fired/unfired avec Q&A), recos (highlight active), MTs (ASR vs amélioration)
+- [x] Liste MP enrichie : nombre de catégories, ratio règles fired, chevron cliquable
+- [x] TypeScript compile sans erreurs, app tourne
+
+### 2B — Personas par type d'aidance (⏳ après retour Dr. Monka)
+
+> Type d'aidance (N3) = la catégorie. Personas = humains fictifs à l'intérieur, avec réponses pré-enregistrées cohérentes.
+
+- [x] Définir les catégories de personas (croisement aidance × âge) → 80 combinaisons identifiées
+- [ ] Regrouper les personas existants par N3 dans `PersonasPage.tsx`
+- [ ] Refaire les réponses pré-enregistrées cohérentes avec le profil aidance
+- [ ] Intégrer filtre profil aidance (N3 + overlay âge) dans le moteur
+
+### 2C — Arbre de décision interactif (~6-8h)
+
+> Composant standalone : Score Global → V → MP → Catégorie → Recos/MTs. Expand/collapse interactif avec animations.
+
+- [ ] Créer composant `DecisionTreeView.tsx`
+- [ ] Niveau 0-1 : Score global + Vulnérabilités (V1-V5) avec scores et jauges
+- [ ] Niveau 2 : MPs avec statut activé/inactif
+- [ ] Niveau 3 : Catégories + règles + recos + MTs
+- [ ] Ajouter comme nouvel onglet dans SimulatorPage
+- [ ] Tester avec personas existants
+
+---
+
+## 🟡 PRIORITÉ 3 — Klésia & Dispatch CM
+
+> Architecture de dispatch documentée dans [`ARCHITECTURE_DISPATCH_KLESIA.md`](ARCHITECTURE_DISPATCH_KLESIA.md). Dispatch au niveau MT (pas utilisateur). IDEC = gatekeeper. 82% medico-social → CM, 18% médical.
+
+- [x] Modéliser la logique de dispatch Klésia (CM vs Médical) → `ARCHITECTURE_DISPATCH_KLESIA.md`
+- [x] Analyser la répartition MT par domaine (82% médico-social / 18% médical)
+- [ ] Définir les critères de dispatch précis (seuils, questions déclenchantes)
+- [ ] Créer une simulation sur ce sujet pour valider les ratios
+- [ ] Valider avec Dr. Monka que le modèle est cliniquement cohérent
+
+---
+
+## 🔵 PRIORITÉ 4 — Validation App & Données
+
+### 4.1 — Vérification remontée des données
+
+- [ ] Vérifier que TOUTES les données remontent correctement dans l'app
+- [ ] Tester les 5 vulnérabilités avec des réponses complètes
+- [ ] Vérifier scoring temps réel vs attendu
+- [ ] Vérifier activation rules → MP actifs vs attendu
+- [ ] Vérifier recos et MT affichées vs base Supabase
+
+### 4.2 — 🔥 Refonte UX/Clinique du Moteur — 7 Phases
+
+> **Objectif global** : Aider au mieux le médecin à confronter et évaluer la pertinence de son moteur/questionnaire clinique. Rendre chaque élément compréhensible, actionable et professionnel pour tous les publics (créateurs, CEOP, investisseurs, utilisateurs finaux).
+
+---
+
+#### Phase A — Restructuration des Onglets du Simulateur
+
+> **Problème** : 6 onglets internes (Scoring, Activation, Recos, Règles, Tâches, Résumé) — trop granulaires, redondants, pas pertinents. On ne comprend pas ce qui est activé ou non, les contrastes sont faibles.
+
+**Nouvelle architecture proposée :**
+
+| Onglet | Contenu | Remplace |
+|--------|---------|----------|
+| **Micro-Parcours** | Activation + Recos + MTs combinés, drill-down par MP avec explications | Activation + Recos + Tâches |
+| **Scoring** | Scores V1-V5 + jauges + seuils (conservé) | Scoring |
+| **Règles** | Règles avec `sens_clinique` + statut fired/unfired visuellement net | Règles (enrichi) |
+| **CR Médecin** | Rapport complet promu en onglet dédié | Résumé (renommé + amélioré) |
+
+- [ ] Réduire de 6 à 4 onglets dans `SimulatorPage.tsx`
+- [ ] Fusionner Activation + Recos + Tâches → onglet unique **Micro-Parcours**
+- [ ] **Contraste activé/non activé** : bordure vive + badge coloré pour les éléments activés vs grisé net pour les inactifs — la distinction doit sauter aux yeux
+- [ ] Extraire les composants → `SimulatorMPTab.tsx`, `SimulatorRulesTab.tsx`, `SimulatorCRTab.tsx` (décomposer les 2044 lignes)
+
+---
+
+#### Phase B — Explications Cliniques & Kernel à Chaque Étape
+
+> **Problème** : On affiche des IDs techniques (N36, R_V2_S1_02) sans jamais expliquer pourquoi une règle s'active, quel est le sens clinique, ni la logique kernel derrière. On ne comprend rien si c'est pertinent ou non.
+
+- [ ] **Arrêter les IDs bruts** : partout dans l'app, remplacer N36 / O1 / etc. par la vraie question écrite en français complet
+- [ ] **Explication kernel par règle** : afficher en tooltip/inline sous chaque règle, pourquoi cette combinaison de conditions déclenche cette catégorie (basé sur `sens_clinique` existant en DB)
+- [ ] **Explication clinique par MP** : afficher l'`objectif` du MP + justification clinique de son existence
+- [ ] **"Pourquoi cette question ?"** : pour chaque question, expliquer à quels MPs elle contribue et pourquoi elle a été choisie — stocké en DB pour édition dynamique
+- [ ] Créer un champ `explication_clinique` sur les tables `questions`, `micro_parcours`, `activation_rules` si absent → migration Supabase
+- [ ] Stocker les explications enrichies en base proprement (pas en dur dans le code)
+
+---
+
+#### Phase C — Refonte Vue Externe (inspirée app Marwane)
+
+> **Problème** : La vue externe actuelle n'est pas assez actionable ni interactive. Il faut s'inspirer de la démo de Marwane avec niveaux visuels, drill-down interactif, prévention.
+
+- [ ] **Hiérarchie visuelle par urgence** : sections 🔴 Critique → 🟠 CCC → 🟢 Standard → 💡 Prévention — séparation nette avec couleurs distinctes
+- [ ] **Cards MP interactives** : chaque MP activé = card cliquable qui ouvre les recos + MTs associés
+- [ ] **Wording utilisateur** : afficher `wording_utilisateur` (pas `wording_idec`) pour les recos et MTs
+- [ ] **MTs de prévention** : section dédiée avec les MTs de MPs non activés (MTs `is_prevention = true`)
+- [ ] **Recos de prévention** : recos `niveau = prevention` affichées en bas avec un style subtil
+- [ ] **Acteurs identifiés** : chaque MT montre l'acteur (CM, IDEC, Médecin traitant...) avec badge coloré
+- [ ] Extraire → `SimulatorExternalView.tsx`
+
+---
+
+#### Phase D — CR Médecin Traitant Professionnel
+
+> **Problème** : Le CR actuel est basique, technique, pas assez professionnel. Il faut s'inspirer de `Legacy CR Médecin 030226.docx` et `CR MT Projection moteur 030226.docx`. Il faut que le CR soit personnalisé, stocké en DB, et exploite la finesse des données.
+
+- [ ] **En-tête professionnel** : date d'évaluation, type d'évaluation, profil aidant/aidé, persona chargé
+- [ ] **Rappel du persona** : afficher les réponses aux questions triggers (N3, O1...) **en français** avec le texte complet, pas les codes
+- [ ] **Par MP activé dans le CR** :
+  - Objectif clinique du MP
+  - Résumé des règles déclenchées avec `sens_clinique`
+  - Recommandations priorisées (critique > CCC > standard)
+  - Acteurs identifiés (signature_a / signature_b)
+- [ ] **Synthèse par V** : niveau de vulnérabilité (faible/modéré/élevé/critique) + phrase conclusive adaptée
+- [ ] **Mode progression** : aperçu partiel visible AVANT que toutes les questions soient répondues (avec indicateur % complétion)
+- [ ] **Stocker en DB** : templates CR, phrases types, éléments dynamiques → table `cr_templates` pour versions propres et personnalisées
+- [ ] S'inspirer de `Legacy CR Médecin 030226.docx` + `CR MT Projection moteur 030226.docx` pour le format et le ton
+
+---
+
+#### Phase E — Refonte Fiche Question & Page Questions
+
+> **Problème** : Le menu déroulant actuel des fiches questions est plat, pas de contraste, on ne met pas en valeur les bonnes données. Il faut se poser la question : quelles sont les données les plus intéressantes pour une fiche question ?
+
+**Données clés à mettre en avant (par ordre de priorité) :**
+1. Texte complet de la question (en français, lisible)
+2. Vulnérabilité associée (V1-V5) avec couleur
+3. MPs liés (avec statut activé/inactif si des réponses sont chargées)
+4. Si scorante → poids du score + réponses scorantes mises en avant
+5. Règles d'activation qui utilisent cette question → avec `sens_clinique`
+6. Classification (état / facteur) + type de réponse
+7. Aidance / sous-catégorie / bloc / sous-bloc
+
+- [ ] **Nouveau layout fiche question** : header fort (question + V badge), corps en sections collapsibles, pas un simple dropdown
+- [ ] **Filtres enrichis** : filtrer par vulnérabilité ET par MP directement dans le menu supérieur
+- [ ] **Vue hiérarchique optionnelle** : V → Bloc → Sous-bloc → Questions (au lieu d'une liste plate)
+- [ ] **Contraste scoring** : réponses scorantes en surbrillance avec le score affiché clairement
+- [ ] **Lien vers simulateur** : clic sur un MP lié ouvre le détail dans le simulateur
+
+---
+
+#### Phase F — Refonte Page Vulnérabilités
+
+> **Problème** : Les onglets actuels (overview, questions, scoring, MPs, rules, recos, MTs) avec les totaux sont pas pertinents et pas compréhensibles. Trop de tables brutes sans contexte.
+
+- [ ] **Vue générale avec filtre** : une seule vue d'ensemble où tu peux filtrer par V — pas besoin de naviguer entre 5 V distinctes
+- [ ] **Drill-down hiérarchique interactif** : V → MPs → Catégories → Règles + Recos + MTs — chaque niveau en blocs cliquables qui s'ouvrent
+- [ ] **Explications intégrées** : à chaque niveau, expliquer "pourquoi ces questions et pas d'autres", "pourquoi ce MP existe", avec du contenu pédagogique
+- [ ] **Stocker les explications en DB** : champ `explication` sur `vulnerabilities`, `micro_parcours`, `categories` pour contenu dynamique
+- [ ] **Supprimer les tables brutes** : remplacer par des visualisations interactives (cards, accordéons, badges)
+
+---
+
+#### Phase G — Documents Officiels & Navigation Cleanup
+
+> **Objectif** : Supprimer ce qui n'est pas pertinent, ajouter ce qui manque.
+
+**Navigation :**
+- [ ] **Supprimer l'onglet "Documentation"** de la Sidebar → le contenu migre vers les Documents Officiels
+- [ ] **Ajouter l'onglet "Documents Officiels"** dans la Sidebar → `OfficialDocsPage.tsx`
+
+**Documents officiels à produire** (pour tiers, investisseurs, CEOP, audits) :
+
+*Gouvernance & Méthodologie :*
+- [ ] 📄 **Dossier Méthodologique Clinique** — Méthodologie complète : 5V, scoring, 150 questions, activation, recos, MTs
+- [ ] 📄 **Référentiel de Validation** — Processus de validation clinique, phases de test, résultats des audits
+- [ ] 📄 **Architecture Technique du Moteur** — Schéma data, flux Supabase, clinicalEngine, sécurité
+
+*Audits & Qualité :*
+- [ ] 📄 **Rapport d'Audit 369 MT** — Formalisation de `audit_micro_taches_369.md`
+- [ ] 📄 **Rapport d'Audit Scoring** — Formalisation de `audit_scoring_monka.md`
+- [ ] 📄 **Rapport d'Audit Recos/Rules** — Formalisation de `audit_recos_categories_rules.md`
+- [ ] 📄 **Couverture Clinique** — Taux couverture par V, questions muettes, gaps
+
+*Data & Preuve :*
+- [ ] 📄 **Dictionnaire de Données** — Tables, champs, relations, types — généré depuis Supabase
+- [ ] 📄 **Matrice de Traçabilité** — Question → Règle → Catégorie → Reco → MT (chaîne complète)
+- [ ] 📄 **Statistiques du Moteur** — Totaux par V avec répartition
+
+*Présentation :*
+- [ ] 📄 **Executive Summary** — Résumé exécutif pour investisseurs (1-2 pages)
+- [ ] 📄 **Fiche Produit** — Description produit Monka, USP, différenciation marché
+
+**Implémentation app :**
+- [ ] Créer `OfficialDocsPage.tsx` — liste documents avec statut (✅ produit / 🔨 en cours / ❌ à faire)
+- [ ] Bouton téléchargement PDF/DOCX pour chaque document
+- [ ] Rendu professionnel et propre
+
+---
+
+## 🟣 PRIORITÉ 5 — Réflexion & Livrables
+
+### 5.1 — 🧠 Onglet « Réflexion » — Blog Articles Kernel
+
+> **Objectif** : Instruire et éduquer notre audience (Dr. Monka, CEOP, investisseurs, partenaires cliniques) sur les choix de conception du moteur clinique. Format = articles de blog, chacun répondant à une **question clé**. Ton subtil, pédagogique, orienté compréhension.
+
+**Articles à produire** (chacun = 1 page dans l'onglet Réflexion) :
+
+- [ ] 🎯 *Pourquoi 5 vulnérabilités et pas 3 ou 7 ?* — Justification clinique de la décomposition V1-V5
+- [ ] 📊 *Pourquoi cette méthode de scoring (C1 + C2) ?* — Choix psychométriques, alternatives écartées, simulations
+- [ ] 🔀 *Pourquoi des Micro-Parcours et pas des parcours linéaires ?* — Architecture modulaire, adaptabilité
+- [ ] ⚡ *Comment fonctionne l'activation des règles ?* — Logique AND, 9 opérateurs, niveaux critique/CCC/standard
+- [ ] 🧬 *Pourquoi le modèle additif pour les types d'aidance ?* — Socle 130Q + blocs empilables + overlays âge
+- [ ] 🎯 *Pourquoi distinguer MTs contributives vs amélioration ?* — ASR, sécurisation vs bien-être
+- [ ] 🏥 *Comment sont définis les acteurs par Micro-Tâche ?* — Écosystème STRUC/SEC/MED/INFO/ORGA
+- [ ] 📋 *Pourquoi des recommandations à 4 niveaux ?* — Prévention, standard, CCC, critique
+- [ ] 🔒 *Comment garantir la pertinence des questions ? (32 questions muettes)* — Audit, validation clinique
+- [ ] 🗺️ *Comment l'arbre de décision guide le parcours utilisateur ?* — Du score global au MT actionable
+
+**Implémentation app :**
+- [ ] Créer l'onglet "Réflexion" dans la Sidebar
+- [ ] Créer la page `ReflexionPage.tsx` — liste des articles avec preview
+- [ ] Stocker le contenu des articles en base Supabase (table `blog_articles` : titre, question, contenu, ordre)
+- [ ] Rendu Markdown → HTML propre dans l'app
+
+### 5.2 — Documents existants à améliorer / checker
+
+- [ ] Faire l'inventaire des documents existants dans les livrables
+- [ ] Identifier les documents à mettre à jour ou améliorer
+- [ ] Identifier les documents manquants à ajouter
+- [ ] Valider la liste des livrables finaux avec Dr. Monka
+
+---
+
+## 📅 PRIORITÉ 6 — Calendrier de Réalisation
+
+> Dr. Monka demande un calendrier pour sa vision personnelle.
+
+- [ ] Estimer les durées par bloc de tâches
+- [ ] Proposer un calendrier réaliste (semaine par semaine)
+- [ ] Partager avec Dr. Monka pour validation
 
 ---
 
@@ -275,9 +325,7 @@
 
 | Principe | Détail |
 |----------|--------|
-| **KERNEL = source de vérité** | Tout part du RECAP_FONDATION_MONKA.md |
-| **Questions figées** | 150 état/facteur + 15 triggers. Pas de modifications |
-| **Ordre strict** | Phase 0 → 1 → 2 → 3 → 4 → 5 → 6 |
-| **Validation incrémentale** | Chaque phase validée avant la suivante |
-| **IA propose, médecin valide** | Toute proposition IA est documentée avec justification |
-| **Data quality** | 0 reco perdue, 0 MT perdue pendant les opérations |
+| **Ordre de priorité** | 1. Validation clinique → 2. Simulateur/Personas → 3. Klésia → 4. App → 5. Docs → 6. Calendrier |
+| **Dr. Monka valide** | Toute décision clinique passe par validation Dr. Monka |
+| **Format exports** | Produire des docs lisibles (pas du MD brut) pour Dr. Monka |
+| **Klésia** | 90-95% vers CM sauf questions critiques médical |
