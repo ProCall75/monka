@@ -1,0 +1,56 @@
+/* =============================================
+   Print CSS — CR Médecin Export
+   
+   Applied via @media print for PDF export.
+   Hides UI chrome, forces white background,
+   and optimizes layout for A4 paper.
+   ============================================= */
+
+@media print {
+    /* Hide all UI chrome */
+    nav, aside, header, footer,
+    .sidebar, .no-print,
+    button:not(.print-keep) {
+        display: none !important;
+    }
+
+    /* Reset page for A4 */
+    @page {
+        size: A4;
+        margin: 15mm 12mm;
+    }
+
+    /* Force white background */
+    body, html, #root {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt !important;
+    }
+
+    /* CR document takes full width */
+    .cr-document {
+        width: 100% !important;
+        max-width: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Ensure page breaks work */
+    .cr-bloc {
+        page-break-inside: avoid;
+    }
+
+    /* Force colors in print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Remove animations */
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

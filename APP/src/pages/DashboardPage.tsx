@@ -18,9 +18,11 @@ import {
     RefreshCw,
     AlertCircle,
 } from 'lucide-react'
-import { useMonkaData } from '../engine/useMonkaData'
-import { invalidateCache, type MonkaData } from '../engine/supabaseData'
-import { VULN_META, VULN_IDS } from '../engine/constants'
+import {
+    useMonkaData, invalidateCache,
+    VULN_META, VULN_IDS,
+    type MonkaData,
+} from '../clinical/hooks'
 
 
 

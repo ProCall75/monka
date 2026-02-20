@@ -13,10 +13,10 @@ import {
     Layers,
     ListChecks,
 } from 'lucide-react'
-import { useMonkaData } from '../engine/useMonkaData'
-import { buildMPVulnMap, type MonkaData } from '../engine/supabaseData'
-import { VULN_META } from '../engine/constants'
-import type { VulnerabilityId } from '../engine/types'
+import {
+    useMonkaData, buildMPVulnMap, VULN_META,
+    type MonkaData, type VulnerabilityId,
+} from '../clinical/hooks'
 
 
 type TabId = 'overview' | 'questions' | 'scoring' | 'mps' | 'rules' | 'recos' | 'mts'

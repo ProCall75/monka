@@ -386,7 +386,7 @@ Créer un design system cohérent dans `components/ui/` avec variables CSS centr
 
 ---
 
-## Bloc 3 — Restructuration Onglets Simulateur
+## Bloc 3 — Restructuration Onglets Simulateur ✅
 
 ### Objectif
 6 onglets → 4 onglets clairs. Extraction en composants < 200 lignes chacun.
@@ -405,15 +405,14 @@ Créer un design system cohérent dans `components/ui/` avec variables CSS centr
 - Chaque tab < 250 lignes → si plus, extraire sous-composants
 - Logique métier dans `clinical/hooks/` → les tabs ne font que du rendu
 
-### 🔍 QG-3 — Restructuration Onglets
+### 🔍 QG-3 — Restructuration Onglets ✅
 
 > ```
-> /quality-agent checkpoint=after-architecture bloc=3
-> §1 Architecture — séparation UI/logique respectée ?
-> §2 Structure — SimulatorPage < 200L ? tabs < 250L ?
-> §10 Edge Cases — aucun onglet vide si données manquantes ?
-> §12 Cache — stratégie de cache pour les données onglets ?
-> Rapport → docs/certifications/YYYY-MM-DD_qg-03-onglets-simulateur.md
+> Rapport → docs/certifications/2026-02-20_qg-03-onglets-simulateur.md
+> §1 Architecture — ⚠️ (corrigé Bloc 4 → clinical/hooks/) 
+> §2 Structure — ⚠️ (prévu Blocs 5 et 7)
+> §10 Edge Cases — ✅ (empty-state guards ajoutés)
+> §12 Cache — ✅ (useMemo complet)
 > ```
 
 ---
@@ -429,6 +428,20 @@ Rendre le moteur **transparent** : remplacer les IDs par du texte, afficher le s
 3. **Objectif MP** : affiché dans le header de chaque MP dans `MPCard.tsx`
 4. **Composant `WhyThisQuestion.tsx`** : tooltip lookup `content_blocks`
 5. **Peupler `content_blocks`** depuis fiches KERNEL
+
+> [!NOTE]
+> **✅ Correction QG-3 §1 — Architecture imports — FAIT (20/02/2026)** : `clinical/hooks/` créé avec 4 fichiers (`useEvaluation.ts`, `useScoring.ts`, `useCR.ts`, `index.ts`). 42 imports directs `engine/` migrés → 0 violations. Build clean.
+
+### 📝 Bloc 4 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|-------------|--------|
+| `supabaseData.ts` | 546L > 300L max | **Bloc 8** (micro-phase 8a) | Découper en `queries.ts`, `helpers.ts`, `conditional-model.ts` |
+| `engine/` → `clinical/engine/` | Structure pas alignée target | **Bloc 8** (micro-phase 8a) | Déplacer physiquement + mettre à jour barrel |
+| `engine/hooks/useVulnStats.ts` | Doublon, re-exporté via barrel | **Bloc 8** (micro-phase 8a) | Supprimer et importer uniquement via `clinical/hooks/` |
+| `SimulatorPage.tsx` | 952L > 200L cible | **Bloc 5** (~200L Vue Externe) + **Bloc 7** (~300L Sidebar) | Extractions séquentielles |
+| `content_blocks` table | Vide (0 rows) | **Bloc 11** (micro-phase 11a) | Peupler depuis KERNEL/VALIDATION_MP |
+| `WhyThisQuestion.tsx` | Non créé, dépend de content_blocks | **Bloc 11** (micro-phase 11a) | Composant tooltip + lookup content_blocks |
 
 ### US couvertes : US-01, US-03
 
@@ -462,6 +475,11 @@ Vue patient/aidant premium, 4 niveaux visuels de criticité, wording empathique.
 - Ton empathique : "Nous vous recommandons de..." pas "Vous devez..."
 - Mobile-first, responsive
 - Design premium : glassmorphism, micro-animations, Inter font
+
+> [!IMPORTANT]
+> **Correction QG-3 §2 — Extraction Vue Externe** : La section "Vue Externe" est actuellement inline dans `SimulatorPage.tsx` (~200 lignes). Ce bloc DOIT extraire cette section dans un composant dédié `ExternalView.tsx` ou `SimulatorExternalView.tsx` pour réduire `SimulatorPage.tsx` de ~944L vers ~744L.
+>
+> **⚡ Signal faible Bloc 4** : `SimulatorPage.tsx` = 952L aujourd'hui. Cette extraction est prioritaire.
 
 ### US couvertes : US-07, US-19
 
@@ -526,6 +544,9 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 ### Vue alternative
 - Hiérarchique : V → Bloc → Sous-bloc → Questions (collapsible avec compteurs)
 
+> [!IMPORTANT]
+> **Correction QG-3 §2 — Extraction Sidebar Questions** : La sidebar de questions est actuellement inline dans `SimulatorPage.tsx` (~300 lignes). Ce bloc DOIT extraire cette sidebar dans un composant `QuestionsSidebar.tsx` pour réduire `SimulatorPage.tsx` de ~744L vers ~444L (cible finale < 200L avec les extractions complémentaires).
+
 ### US couvertes : US-16
 
 ### 🔍 QG-7 — Fiches Questions
@@ -561,6 +582,14 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 
 > [!WARNING]
 > **Jalon critique.** Ce QG est un `before-deploy` complet — vérification exhaustive avant de passer aux blocs d'intelligence clinique.
+
+### 🔧 Micro-Phase 8a — Nettoyage Architecture (dette Bloc 4)
+
+> Avant le QG-8, nettoyer la dette technique identifiée :
+> 1. **Découper `supabaseData.ts`** (546L) → `engine/queries.ts`, `engine/helpers.ts`, `engine/conditional-model.ts`
+> 2. **Déplacer `engine/` → `clinical/engine/`** — aligner la structure physique avec le barrel `clinical/hooks/`
+> 3. **Supprimer `engine/hooks/useVulnStats.ts`** — re-importer uniquement via `clinical/hooks/`
+> 4. **Mettre à jour le barrel `clinical/hooks/index.ts`** pour pointer vers les nouveaux chemins
 
 > ```
 > /quality-agent checkpoint=before-deploy bloc=8
@@ -636,6 +665,13 @@ Détecter quand un score élevé ne déclenche AUCUNE action. Faille critique du
 
 ### Objectif
 Afficher le chemin complet **Question → Règle → Catégorie → Reco → MT** pour chaque élément.
+
+### 🔧 Micro-Phase 11a — Données Cliniques & Tooltip (dette Bloc 4)
+
+> Prérequis pour le composant `ClinicalChain.tsx` :
+> 1. **Peupler `content_blocks`** depuis `KERNEL/VALIDATION_MP/V*/` — extraire les explications cliniques par question/règle/catégorie
+> 2. **Créer `WhyThisQuestion.tsx`** — composant tooltip qui lookup `content_blocks` pour afficher "Pourquoi cette question ?"
+> 3. **Intégrer `getQuestionText()`** dans les vues de chaîne pour remplacer les IDs par du texte lisible
 
 ### Composant `ClinicalChain.tsx`
 ```

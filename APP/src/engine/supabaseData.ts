@@ -126,6 +126,26 @@ export interface DBSuiviQuestion {
     questions_reouvertes: string[] | null
 }
 
+export interface DBContentBlock {
+    id: string
+    entity_type: string   // 'question' | 'micro_parcours' | 'activation_rule' | 'vulnerability' | 'category'
+    entity_id: string
+    block_type: string    // 'explication_clinique' | 'pourquoi_cette_question' | 'sens_kernel' | 'objectif'
+    content: string
+    ordre: number
+    created_at: string
+}
+
+export interface DBCRTemplate {
+    id: string
+    template_type: string  // 'header' | 'bloc_vuln' | 'bloc_mp' | 'conclusion' | 'prevention'
+    vulnerability_id: string | null
+    niveau: string | null  // 'faible' | 'modere' | 'eleve' | 'critique'
+    content: string
+    variables: string[] | null
+    created_at: string
+}
+
 // === Cached data store ===
 
 export interface MonkaData {
@@ -140,6 +160,8 @@ export interface MonkaData {
     recommendations: DBRecommendation[]
     microTaches: DBMicroTache[]
     suiviQuestions: DBSuiviQuestion[]
+    contentBlocks: DBContentBlock[]
+    crTemplates: DBCRTemplate[]
     loaded: boolean
     loading: boolean
     error: string | null
@@ -164,6 +186,8 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         recoRes,
         mtRes,
         suiviRes,
+        contentBlocksRes,
+        crTemplatesRes,
     ] = await Promise.all([
         supabase.from('vulnerabilities').select('*').order('id'),
         supabase.from('questions').select('*').order('vulnerability_id').order('ordre_global'),
@@ -176,11 +200,13 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         supabase.from('recommendations').select('*').order('mp_id').order('id'),
         supabase.from('micro_taches').select('*').order('mp_id').order('ordre'),
         supabase.from('suivi_questions').select('*').order('vulnerability_id').order('mp_id'),
+        supabase.from('content_blocks').select('*').order('entity_type').order('entity_id'),
+        supabase.from('cr_templates').select('*').order('template_type').order('vulnerability_id'),
     ])
 
     // Check for errors
-    const tableNames = ['vulnerabilities', 'questions', 'micro_parcours', 'question_mp_mapping', 'categories', 'activation_rules', 'scoring_questions', 'scoring_thresholds', 'recommendations', 'micro_taches', 'suivi_questions']
-    const results = [vulnRes, questRes, mpRes, mappingRes, catRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes]
+    const tableNames = ['vulnerabilities', 'questions', 'micro_parcours', 'question_mp_mapping', 'categories', 'activation_rules', 'scoring_questions', 'scoring_thresholds', 'recommendations', 'micro_taches', 'suivi_questions', 'content_blocks', 'cr_templates']
+    const results = [vulnRes, questRes, mpRes, mappingRes, catRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes, contentBlocksRes, crTemplatesRes]
     const errors = results
         .map((r, i) => r.error ? `${tableNames[i]}: ${r.error.message}` : null)
         .filter(Boolean)
@@ -190,6 +216,7 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
             vulnerabilities: [], questions: [], microParcours: [], questionMPMapping: [],
             categories: [], activationRules: [], scoringQuestions: [], scoringThresholds: [],
             recommendations: [], microTaches: [], suiviQuestions: [],
+            contentBlocks: [], crTemplates: [],
             loaded: false, loading: false, error: errors.join('; '),
         }
         return errorData
@@ -207,6 +234,8 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         recommendations: (recoRes.data || []) as DBRecommendation[],
         microTaches: (mtRes.data || []) as DBMicroTache[],
         suiviQuestions: (suiviRes.data || []) as DBSuiviQuestion[],
+        contentBlocks: (contentBlocksRes.data || []) as DBContentBlock[],
+        crTemplates: (crTemplatesRes.data || []) as DBCRTemplate[],
         loaded: true,
         loading: false,
         error: null,
@@ -358,6 +387,156 @@ export function buildMPVulnMap(data: MonkaData): Record<string, string> {
     const map: Record<string, string> = {}
     data.microParcours.forEach(mp => { map[mp.id] = mp.vulnerability_id })
     return map
+}
+
+// ══════════════════════════════════════════════════════
+//  ADDITIVE MODEL — Conditional question filtering
+//  Based on METHODE_VERSIONING_PERSONAS.md
+// ══════════════════════════════════════════════════════
+
+/**
+ * Maps N3 response text → aidance tag(s) that should be activated.
+ * Each N3 response maps to exactly ONE aidance block (1:1 mapping).
+ * "Maladie Chronique" has its own bloc (currently 0 conditional questions — covered by socle).
+ */
+const N3_TO_AIDANCE_BLOCKS: Record<string, string[]> = {
+    "J'aide une personne en perte d'autonomie liée au vieillissement ou à une maladie neurodégénérative": ['Personne Agée'],
+    "J'aide une personne en situation de handicap": ['Handicap'],
+    "J'aide une personne atteinte d'une ou plusieurs maladies chroniques (insuffisance cardiaque, diabète, cancer, BPCO…)": ['Maladie Chronique'],
+    "J'aide une personne souffrant de troubles psychiques (dépression sévère, troubles bipolaires, schizophrénie…)": ['Psy'],
+    "J'aide une personne souffrant d'une ou plusieurs addictions (alcool, drogues, jeux…)": ['Addiction'],
+}
+
+/** Age bracket values from O1 that trigger the "Enfant" block */
+const ENFANT_AGE_BRACKETS = ['- 15 ans', '15-20 ans']
+/** Age bracket values from O1 that indicate a senior (60+) — Enfant block NOT allowed */
+const SENIOR_AGE_BRACKETS = ['60-75 ans', '+75 ans']
+/** Aidance types that allow the Enfant block (all except "Personne Agée" = perte d'autonomie) */
+const ENFANT_ELIGIBLE_AIDANCE = ['Handicap', 'Maladie Chronique', 'Psy', 'Addiction']
+
+/**
+ * Given the current answers, determine which aidance blocks are active.
+ * Returns the set of aidance tags (e.g. ["Tous", "Handicap", "Enfant"]).
+ */
+export function getActiveAidanceBlocks(answers: Record<string, string>): Set<string> {
+    const blocks = new Set<string>(['Tous'])
+
+    const n3Answer = answers['N3']
+    if (n3Answer) {
+        // N3 can be multi-choice (future) — handle pipe-separated or single
+        const n3Values = n3Answer.includes('|') ? n3Answer.split('|').map(s => s.trim()) : [n3Answer]
+        for (const n3Val of n3Values) {
+            const aidanceTags = N3_TO_AIDANCE_BLOCKS[n3Val]
+            if (aidanceTags) {
+                aidanceTags.forEach(tag => blocks.add(tag))
+            }
+        }
+    }
+
+    const o1Answer = answers['O1']
+
+    // === Faux amis filter ===
+    // "Personne Agée" (perte d'autonomie liée au vieillissement) is meaningless for < 18 ans
+    if (o1Answer && ENFANT_AGE_BRACKETS.includes(o1Answer)) {
+        blocks.delete('Personne Agée')
+    }
+
+    // Enfant block: activated if O1 < 18 AND at least one eligible aidance is active
+    // NOT activated if O1 ≥ 60 (senior → no "Enfant" block)
+    if (o1Answer && ENFANT_AGE_BRACKETS.includes(o1Answer) && !SENIOR_AGE_BRACKETS.includes(o1Answer)) {
+        const activeNonTous = [...blocks].filter(b => b !== 'Tous')
+        if (activeNonTous.some(b => ENFANT_ELIGIBLE_AIDANCE.includes(b))) {
+            blocks.add('Enfant')
+        }
+    }
+
+    return blocks
+}
+
+/**
+ * Filter questions to only show those relevant for the current profile.
+ * Implements the additive model: socle (aidance=Tous) + activated blocks.
+ * Triggers are always excluded.
+ */
+export function getActiveQuestions(data: MonkaData, answers: Record<string, string>): DBQuestion[] {
+    const activeBlocks = getActiveAidanceBlocks(answers)
+    return data.questions.filter(q => {
+        if (q.is_trigger) return false
+        if (!q.aidance) return true // No aidance tag = always show
+        return activeBlocks.has(q.aidance)
+    })
+}
+
+/**
+ * Get only the trigger questions (N1, N3, O1, etc.).
+ * These are the profiling questions that determine aidance blocks.
+ */
+export function getTriggerQuestions(data: MonkaData): DBQuestion[] {
+    return data.questions.filter(q => q.is_trigger)
+}
+
+/**
+ * Get the expected question count for a given set of answers.
+ * Returns the number of active (non-trigger) questions.
+ */
+export function getActiveQuestionCount(data: MonkaData, answers: Record<string, string>): number {
+    return getActiveQuestions(data, answers).length
+}
+
+// ══════════════════════════════════════════════════════
+//  Content Blocks — Clinical explanations & tooltips
+// ══════════════════════════════════════════════════════
+
+/** Get a specific content block for an entity */
+export function getContentBlock(
+    data: MonkaData,
+    entityType: string,
+    entityId: string,
+    blockType: string,
+): DBContentBlock | null {
+    return data.contentBlocks.find(
+        cb => cb.entity_type === entityType && cb.entity_id === entityId && cb.block_type === blockType
+    ) || null
+}
+
+/** Get all content blocks for a given entity */
+export function getContentBlocksForEntity(
+    data: MonkaData,
+    entityType: string,
+    entityId: string,
+): DBContentBlock[] {
+    return data.contentBlocks.filter(
+        cb => cb.entity_type === entityType && cb.entity_id === entityId
+    )
+}
+
+/** Resolve a question ID to its full French text */
+export function getQuestionText(data: MonkaData, questionId: string): string {
+    const q = data.questions.find(q => q.id === questionId)
+    return q?.question_text || questionId
+}
+
+// ══════════════════════════════════════════════════════
+//  CR Templates — Professional report content
+// ══════════════════════════════════════════════════════
+
+/** Get a specific CR template */
+export function getCRTemplate(
+    data: MonkaData,
+    templateType: string,
+    vulnerabilityId?: string | null,
+    niveau?: string | null,
+): DBCRTemplate | null {
+    return data.crTemplates.find(t =>
+        t.template_type === templateType &&
+        (vulnerabilityId ? t.vulnerability_id === vulnerabilityId : !t.vulnerability_id) &&
+        (niveau ? t.niveau === niveau : !t.niveau)
+    ) || null
+}
+
+/** Get all CR templates for a given type */
+export function getCRTemplatesForType(data: MonkaData, templateType: string): DBCRTemplate[] {
+    return data.crTemplates.filter(t => t.template_type === templateType)
 }
 
 /** Invalidate cache (for dev/refresh) */

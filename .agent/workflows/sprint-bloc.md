@@ -27,6 +27,11 @@ description: Workflow de collaboration Antonin ↔ Agent pour chaque bloc du spr
 │    Feedback loop structuré          │
 │    → Récap complet                  │
 ├─────────────────────────────────────┤
+│ 3b. 📋 REPLANIFICATION DETTE        │
+│     Idées + signaux → micro-phases  │
+│     dans SPRINT.md aux bons blocs   │
+│     → 0 dette flottante             │
+├─────────────────────────────────────┤
 │ 4. 🔍 QG (Agent → Antonin)         │
 │    Quality Gate du bloc             │
 │    → Verdict + rapport              │
@@ -147,6 +152,54 @@ Après chaque bloc terminé, l'agent DOIT fournir ce rapport :
 
 ---
 
+## Étape 3b — 📋 REPLANIFICATION DETTE (0 dette flottante)
+
+> [!CAUTION]
+> **OBLIGATOIRE. Chaque idée non-exécutée, chaque signal faible, chaque dette technique identifiée dans le debrief DOIT être planifiée dans un bloc futur spécifique de SPRINT.md.**
+> 
+> **Objectif : 0 dette flottante.** Rien ne reste en l'air. Tout est planifié, tracé, et rattaché à un bloc.
+
+Après le debrief, l'agent DOIT :
+
+1. **Lister** chaque élément du debrief (idées non-exécutées, signaux faibles, dette technique)
+2. **Identifier** le bloc futur le plus pertinent pour chaque élément
+3. **Créer une micro-phase** dans ce bloc dans SPRINT.md (ex: `Micro-Phase 8a — Nettoyage Architecture`)
+4. **Mettre à jour le tableau de synthèse** dans le bloc courant
+
+### Format obligatoire dans SPRINT.md (bloc courant)
+
+```markdown
+### 📝 Bloc N — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| `fichier.ts` | 546L > 300L max | **Bloc X** (micro-phase Xa) | Découper en modules |
+| `ComposantY.tsx` | Pas créé, dépend de Z | **Bloc Y** (micro-phase Ya) | Créer après Z |
+```
+
+### Format obligatoire dans SPRINT.md (bloc cible)
+
+```markdown
+### 🔧 Micro-Phase Na — [Nom descriptif] (dette Bloc X)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **[Action 1]** — description
+> 2. **[Action 2]** — description
+```
+
+### Règles
+- **Jamais de liste vague** : chaque item a un bloc-cible, une micro-phase, et une action concrète
+- **Signal faible → bloc précis** : un fichier qui approche 250L → planifier l'extraction dans le bloc qui le touche
+- **Pattern qui se répète** → planifier l'abstraction dans le prochain bloc qui pourrait en bénéficier
+- **Dépendance manquante** (table vide, composant pas créé) → planifier le populate/create dans le bloc qui en a besoin en premier
+
+> [!TIP]
+> **Test de qualité** : à la fin de cette étape, si quelqu'un lit le debrief et demande "et ça, c'est prévu quand ?", la réponse est toujours dans SPRINT.md avec un numéro de bloc et une micro-phase.
+
+```
+
+---
+
 ## Étape 4 — 🔍 Quality Gate
 
 Exécuter le QG tel que défini dans SPRINT.md pour ce bloc :
@@ -188,7 +241,8 @@ Antonin valide :
 | Token Guard stop | Agent | Quand nécessaire |
 | "continue" | Antonin | Après un token guard |
 | Debrief + idées | Agent | Après implémentation |
-| Quality Gate | Agent | Après le debrief |
+| **Replanification dette** | **Agent** | **Après le debrief — OBLIGATOIRE** |
+| Quality Gate | Agent | Après la replanification |
 | Validation QG | Antonin | Après le QG |
 | GO bloc suivant | Antonin | Après validation |
 
@@ -203,6 +257,8 @@ Antonin valide :
 ❌ L'agent fait le QG en même temps que le code (le QG est une étape SÉPARÉE)
 ❌ L'agent modifie le SPRINT.md sans demander
 ❌ L'agent commence un bloc sans briefing + GO
+❌ L'agent note des idées/signaux faibles sans les planifier dans un bloc précis de SPRINT.md
+❌ L'agent laisse de la dette "flottante" — tout doit avoir un bloc-cible et une micro-phase
 ```
 
 ---

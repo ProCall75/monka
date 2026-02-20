@@ -1,0 +1,2184 @@
+[
+  {
+    "id": "O47",
+    "text": "À combien de temps habitez-vous du domicile de la personne aidée ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Moins de 30 min",
+      "Entre 30 min et 1h30",
+      "Plus de 1h30"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "O48",
+    "text": "Quelle est la fréquence de vos visites ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Tous les jours",
+      "Au moins 1 fois par semaine",
+      "Au moins 1 fois par mois",
+      "Au moins 1 fois tous les 3 mois",
+      "Au moins 1 fois tous les 6 mois",
+      "Au moins 1 fois par an",
+      "Autre"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "N4",
+    "text": "Au sein de votre famille, êtes vous seul(e) à vous occuper de la personne aidée?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "E1",
+    "text": "Comment se passe la répartition de l’aide dans votre entourage (famille, proches",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Plutôt équilibrée et satisfaisante",
+      "Je fais la plus grande partie mais cela reste acceptable",
+      "Je fais presque tout et cela crée des tensions ou un sentiment d’injustice",
+      "Je suis totalement seul·e"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "E2",
+    "text": "En cas de coup dur, avez-vous autour de vous des personnes sur qui vous pouvez v",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, plusieurs personnes",
+      "Oui, une personne",
+      "Très peu / presque personne",
+      "Personne"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "E3",
+    "text": "Quelles sont les autres personnes à charge autour de vous que vous devez aider?",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Aucun",
+      "Enfant(s) mineurs",
+      "Autre(s) proche(s) dépendant(s)"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "N20",
+    "text": "A-t-elle  des difficultés à maintenir des relations sociales stables ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "O27",
+    "text": "Vous occuper de la personne aidée entraine-t-il des difficultés dans votre vie f",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "O28",
+    "text": "Vous occuper de la personne aidée entraîne-t-il des difficultés dans vos relatio",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "N7",
+    "text": "Avez-vous dû aménager votre activité professionnelle pour faire face à votre rôl",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Non",
+      "Oui j'ai dû aménager mes horaires",
+      "Oui j'ai dû prendre des jours de congé"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "O30",
+    "text": "Avez-vous le sentiment de ne plus reconnaître la personne aidée ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "E4",
+    "text": "Depuis que vous aidez votre proche, comment a évolué votre relation avec lui/ell",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Plutôt renforcée / plus proche",
+      "Globalement similaire",
+      "Plus tendue / plus compliquée",
+      "Difficile à dire"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "O31",
+    "text": "Avez-vous peur pour l'avenir de la personne aidée ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "E5",
+    "text": "Existe-t-il des tensions ou des désaccords au sein de la famille concernant la p",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "E6",
+    "text": "Votre proche accepte-t-il l’aide de personnes extérieures (aide à domicile, infi",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, facilement",
+      "Oui, mais avec des réticences",
+      "Non, il/elle refuse la plupart du temps",
+      "Je ne sais pas / nous n’avons pas encore essayé"
+    ],
+    "aidance": "Tous",
+    "vuln": "V1",
+    "bloc": "Bloc 3 – Votre quotidien d’aidant et vos relations"
+  },
+  {
+    "id": "O45",
+    "text": "Quelle couverture de santé avez-vous ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Régime général (ou spécial) et Mutuelle",
+      "Régime général (ou spécial)",
+      "CMU"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "O23",
+    "text": "Quelle couverture de santé protège la personne aidée ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Régime général (ou spécial) et Mutuelle",
+      "Régime général (ou spécial)",
+      "CMU"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "N6",
+    "text": "Une mesure de protection a-t-elle été mise en place ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Habilitation familiale",
+      "Tutelle",
+      "Curatelle simple",
+      "Curatelle renforcée",
+      "Sauvegarde de justice",
+      "Mandat de protection future"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E61",
+    "text": "otre proche a-t-il déjà rédigé des directives anticipées concernant ses souhaits",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "N42",
+    "text": "Bénéficie-t-elle déjà d'une aide pour obtenir des prestations sociales en lien a",
+    "type": "Obligatoire / Choix Unique / Conditionnel N41(1)",
+    "options": [
+      "Oui",
+      "Non",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "N29",
+    "text": "De quels droits/ aides bénéficiez-vous actuellement? (plusieurs réponses possibl",
+    "type": "Obligatoire / Choix multiple",
+    "options": [
+      "Allocation personnalisée d'autonomie (APA)",
+      "Aide personnalisée au logement (APL)",
+      "MaPrimeAdapt' (ANAH)",
+      "Allocation aux adultes handicapés (AAH)",
+      "Prestation de compensation du handicap (PCH)",
+      "Reconnaissance de la qualité de travailleur handicapé (RQTH)",
+      "Orientation vers un établissement ou service médico-social adapté",
+      "Carte mobilité inclusion (invalidité, priorité, stationnement)",
+      "Complément de ressources (en complément de l'AAH)",
+      "Orientation professionnelle (milieu ordinaire ou protégé)",
+      "Allocation d'éducation de l'enfant handicapé (AEEH)",
+      "la prestation de compensation du handicap (PCH)",
+      "Orientation vers des établissements ou services médico-sociaux adaptés (IME, SESSAD, …)",
+      "Mise en place d'un projet personnalisé de scolarisation (PPS)",
+      "Attribution d'une auxiliaire de vie scolaire (AVS) ou d'un accompagnant des élèves en situation de handicap (AESH)",
+      "Aménagement de la scolarité et des examens (tiers temps, matériel adapté,…)",
+      "Orientation vers des dispositifs spécifiques comme les ULIS (Unités Localisées pour l'Inclusion Scolaire)",
+      "Affiliation gratuite à l'assurance vieillesse des parents au foyer (AVPF)",
+      "Orientation vers un service d'accompagnement (SAVS, SAMSAH)",
+      "Aides pour l'aménagement du logement ou du véhicule",
+      "Aménagements pour les études supérieures",
+      "Aucun",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E62",
+    "text": "Pour quels droits/ aides avez-vous effectuer une demande qui est actuellement en",
+    "type": "Obligatoire / Choix multiple",
+    "options": [
+      "Allocation personnalisée d'autonomie (APA)",
+      "Aide personnalisée au logement (APL)",
+      "MaPrimeAdapt' (ANAH)",
+      "Allocation aux adultes handicapés (AAH)",
+      "Prestation de compensation du handicap (PCH)",
+      "Reconnaissance de la qualité de travailleur handicapé (RQTH)",
+      "Orientation vers un établissement ou service médico-social adapté",
+      "Carte mobilité inclusion (invalidité, priorité, stationnement)",
+      "Complément de ressources (en complément de l'AAH)",
+      "Orientation professionnelle (milieu ordinaire ou protégé)",
+      "Allocation d'éducation de l'enfant handicapé (AEEH)",
+      "la prestation de compensation du handicap (PCH)",
+      "Orientation vers des établissements ou services médico-sociaux adaptés (IME, SESSAD, …)",
+      "Mise en place d'un projet personnalisé de scolarisation (PPS)",
+      "Attribution d'une auxiliaire de vie scolaire (AVS) ou d'un accompagnant des élèves en situation de handicap (AESH)",
+      "Aménagement de la scolarité et des examens (tiers temps, matériel adapté,…)",
+      "Orientation vers des dispositifs spécifiques comme les ULIS (Unités Localisées pour l'Inclusion Scolaire)",
+      "Affiliation gratuite à l'assurance vieillesse des parents au foyer (AVPF)",
+      "Orientation vers un service d'accompagnement (SAVS, SAMSAH)",
+      "Aides pour l'aménagement du logement ou du véhicule",
+      "Aménagements pour les études supérieures",
+      "Aucun",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": null
+  },
+  {
+    "id": "N43",
+    "text": "Dans votre rôle d'aidant avez-vous déjà bénéficié des services des accompagnemen",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Assistante sociale",
+      "Maison départementale des Personnes Handicapées (MDPH)",
+      "Maison de l'autonomie (MDA)",
+      "Centres communaux d'action sociale (CCAS)",
+      "Mutuelles et assurances complémentaires",
+      "Associations de patients",
+      "Plateformes d'accompagnement et de répit",
+      "Service social de l'assurance maladie",
+      "Espace Autonomie Sénior (EAS)",
+      "Aucun"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "N5",
+    "text": "Avez-vous  déjà eu recours aux aides suivantes ?   (plusieurs réponses possibles",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Solutions de répit",
+      "Formations dédiées aux aidants",
+      "Accompagnement psychologique",
+      "Aucune",
+      "Autre"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "O61",
+    "text": "Pensez-vous avoir les moyens financiers suffisants pour faire face à cette situa",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E63",
+    "text": "Quelles démarches vous préoccupent le plus en ce moment pour votre proche ?",
+    "type": "Obligatoire / Choix multiple",
+    "options": [
+      "Dossier de dépendance (ex. APA, PCH…)",
+      "Dossier MDPH / handicap",
+      "Démarches de retraite / pension",
+      "Aides au logement / adaptation du domicile",
+      "Aides financières ponctuelles",
+      "Renouvellement de droits (ALD, mutuelle, CMU, etc.)",
+      "Autre",
+      "Aucune en particulier"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E64",
+    "text": "Votre enfant peut-il fréquenter une école ou une structure adaptée (crèche, IME,",
+    "type": "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1",
+    "options": [
+      "Oui, sans difficulté particulière",
+      "Oui, mais avec des aménagements ou accompagnement (AESH, AVS, éducateur…)",
+      "Très difficile, il manque souvent / la structure n’est pas adaptée",
+      "Non, il ne fréquente pas d’école ou de structure adaptée"
+    ],
+    "aidance": "Enfant",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E65",
+    "text": "Votre enfant a-t-il besoin d’un accompagnant spécialisé (AESH, AVS, éducateur, a",
+    "type": "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 réponse 1",
+    "options": [
+      "Non",
+      "Oui, déjà en place",
+      "Oui, besoin identifié mais pas encore en place"
+    ],
+    "aidance": "Enfant",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E66",
+    "text": "Les démarches administratives liées à votre proche vous paraissent-elles complex",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E67",
+    "text": "Actuellement, votre proche a-t-il une activité (travail, ESAT, atelier protégé, ",
+    "type": "Obligatoire / Choix Unique/ Conditionnelle N3 (tout sauf réponse 1) ou  et O1 (tout sauf réponse 1 ou 3 ou 4)",
+    "options": [
+      "Oui, activité adaptée",
+      "Oui, mais elle devient difficile à tenir",
+      "Non, il est sans activité mais cela ne pose pas de problème particulier",
+      "Non, et cela crée des difficultés (isolement, repli, perte de repères)"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E68",
+    "text": "Combien de temps consacrez-vous chaque mois aux démarches administratives pour v",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Moins de 1h",
+      "Entre 1h et 5h",
+      "Plus de 5h"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E69",
+    "text": "Vous sentez-vous à l’aise avec les démarches administratives en ligne (assurance",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, tout à fait",
+      "Oui, mais cela me prend beaucoup de temps",
+      "Non, je suis souvent perdu·e",
+      "Je n’ai pas facilement accès à un ordinateur / internet"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "E70",
+    "text": "Vous arrive-t-il de devoir gérer des démarches administratives dans l’urgence (d",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non, jamais",
+      "Parfois",
+      "Souvent, je suis toujours en retard",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V2",
+    "bloc": "Bloc 7 – Droits, démarches, administratif & finances"
+  },
+  {
+    "id": "O29",
+    "text": "Vous occuper de la personne aidée a-t-il un retentissement sur vote santé (physi",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O33",
+    "text": "Ressentez-vous une charge en vous occupant de cette personne ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O50",
+    "text": "Combien de temps lui consacrez-vous ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Je n’ai malheureusement pas le temps",
+      "Entre 1h et 5h par semaine",
+      "Entre 6h et 10h par semaine",
+      "Plus de 10h par semaine"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E7",
+    "text": "À quel point vous sentez-vous épuisé·e par votre rôle d’aidant actuellement",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout fatigué·e",
+      "Un peu fatigué·e",
+      "Très fatigué·e",
+      "Épuisé·e / au bord de craquer"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E8",
+    "text": "Avez-vous le sentiment d’être seul(e) émotionnellement face à votre rôle d’aidan",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Jamais",
+      "parfois",
+      "souvent",
+      "tout le temps"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E9",
+    "text": "Parvenez-vous à avoir du temps pour vous au cours d’une semaine habituelle ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E10",
+    "text": "Sur le plan moral (stress, inquiétude), où vous situez-vous en ce moment ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Ça va globalement",
+      "e suis parfois tendu·e ou inquiet·ète",
+      "Je suis souvent tendu·e ou inquiet·ète",
+      "Je me sens débordé·e / au bord de craquer"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E11",
+    "text": "Si rien ne change, pensez-vous pouvoir continuer à vous occuper de votre proche ",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, sans difficulté particulière",
+      "Oui, mais ce sera difficile",
+      "Je ne suis pas sûr·e",
+      "Non, je risque de ne plus y arriver"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E12",
+    "text": "Êtes-vous inquiet·ète à l’idée que votre proche puisse se faire du mal (parole, ",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois, selon les périodes",
+      "Oui, souvent"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E13",
+    "text": "Êtes-vous inquiet·ète à l’idée que votre proche puisse mettre d’autres personnes",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O32",
+    "text": "Souhaitez-vous être davantage aidé(e) pour vous en occuper ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "N8",
+    "text": "Votre rôle d'aidant vous a-t-il conduit à être en arrêt de travail (maladie) lor",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "J'ai dû m'arrêter moins de 5 jours",
+      "J'ai dû m'arrêter entre 5 jours et 1 mois",
+      "J'ai dû m'arrêter entre 1 mois et 3 mois",
+      "J'ai dû m'arrêter entre 3 mois et 6 mois",
+      "J'ai dû m'arrêter plus de 6 mois"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E14",
+    "text": "Et au cours des 30 derniers jours?",
+    "type": "Obligatoire / Choix Unique / Conditionnel N8 (tout sauf réponse 1)",
+    "options": [
+      "Moins de 3 jours",
+      "Entre 4 et 7 jours",
+      "Plus de 7 jours"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O37",
+    "text": "Avez-vous un médecin traitant ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O38",
+    "text": "Avez-vous d'autres médecins spécialistes qui vous suivent actuellement  ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O39",
+    "text": "Lesquels ? (plusieurs réponses possibles)",
+    "type": "Obligatoire / Choix Unique / Conditionnel O38 (1)",
+    "options": [
+      "Cardiologue",
+      "Oncologue",
+      "Neurologue",
+      "Pneumologue",
+      "Ophtalmologue",
+      "Psychiatre",
+      "Chirurgien-Dentiste",
+      "Gastro-entérologue",
+      "Endocrinologue / Diabetologue",
+      "ORL",
+      "Gynecologue",
+      "Nephrologue",
+      "Gériatre",
+      "Dermatologue",
+      "Autre"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O40",
+    "text": "Avez-vous déjà réalisé des rendez-vous médicaux cette année ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O41",
+    "text": "Lesquels ? (plusieurs réponses possibles)",
+    "type": "Obligatoire / Choix Multiples/ Conditionnel O40(1)",
+    "options": [
+      "Bilan de santé général (prise de sang…)",
+      "Audition",
+      "Vue",
+      "Contrôle dentaire",
+      "Suivi cardiovasculaire",
+      "Ostéodensitométrie",
+      "Vaccination",
+      "Examen gynécologique",
+      "Suivi dermatologique",
+      "Suivi psychologique",
+      "Dépistage des cancers"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E15",
+    "text": "Rencontrez-vous des difficultés à obtenir des rendez-vous médicaux pour vous-mêm",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E16",
+    "text": "Depuis que vous êtes aidant, vos propres rendez-vous médicaux…",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Je les gère normalement",
+      "J'ai du mal à les prendre ou à les garder",
+      "Je les reporte ou les annule souvent",
+      "Je ne sais pas",
+      "Je préfère ne pas répondre"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O42",
+    "text": "Êtes-vous concerné ou avez-vous été concerné par une ou plusieurs de ces maladie",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, troubles du déficit de l'attention avec ou sans hyperactivité TDAH…)",
+      "Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...)",
+      "Dermatologique (dermatite atopique, psoriasis, acné…)",
+      "Respiratoire (asthme, maladie pulmonaire obstructive chronique…)",
+      "Génito-urinaire (infections urinaires à répétition, hypertrophie bénigne de la prostate, endométriose…)",
+      "Endocrinienne (hyper ou hypo thyroidie, obésité sévère…)",
+      "Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…)",
+      "Métabolique (diabète, cholesterol…)",
+      "Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…)",
+      "Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…)",
+      "Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…)",
+      "Maladies génétiques (muchovicidose, trisomie…)",
+      "Troubles visuels sévères (DMLA, cécité…)",
+      "Troubles auditifs sévères",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O43",
+    "text": "Combien de médicaments différents prenez-vous chaque jour ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "1 à 3 médicaments",
+      "4 à 6 médicaments",
+      "7 médicaments et plus",
+      "Je ne prends pas de traitement actuellement"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "O44",
+    "text": "Selon vous et par rapport à une personne du même âge, diriez-vous que votre sant",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Meilleure",
+      "Identique",
+      "Moins bonne"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E17",
+    "text": "Pratiquez-vous une activité physique régulière (au moins 30 minutes, 3 fois par ",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E18",
+    "text": "Globalement, comment évalueriez-vous la qualité de votre sommeil ces dernières s",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Bonne",
+      "Correcte",
+      "Mauvaise (je dors mal ou pas assez)",
+      "Très mauvaise (je me réveille épuisé.e)"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "E19",
+    "text": "Quels sont aujourd’hui vos principaux soucis de santé ?",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Fatigue",
+      "Sommeil",
+      "Douleurs",
+      "Moral (anxiété, idées noires, découragement)",
+      "Alimentation / poids",
+      "Problèmes de tension, de cœur, de diabète",
+      "Autre problème de santé",
+      "Aucun en particulier"
+    ],
+    "aidance": "Tous",
+    "vuln": "V3",
+    "bloc": "Bloc 4 – Votre santé physique et psychologique"
+  },
+  {
+    "id": "N10",
+    "text": "Quelle est la nature de l’aide que vous apportez ? (plusieurs réponses possibles",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Tâches de la vie quotidienne (ménage, repas, habillage...)",
+      "Gestion administrative et budgétaire",
+      "Soutien moral, présence ou compagnie sur le lieu de vie",
+      "Accompagnement à des rendez-vous",
+      "Autre"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N9",
+    "text": "La personne aidée rencontre-t-elle des problèmes pour gérer son budget ou ses af",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Elle se fait aider",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N21",
+    "text": "Rencontre-t-elle des problèmes financiers ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N23",
+    "text": "La personne aidée a-t-elle des difficultés à maintenir une activité professionne",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N27",
+    "text": "Estimez-vous que la personne aidée est socialement isolée (peu ou pas de contact",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "un peu",
+      "beaucoup",
+      "totalement"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O7",
+    "text": "Avez-vous constaté des changements dans la manière dont elle se nourrit ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Oui",
+      "Oui et elle est dénutrie"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E20",
+    "text": "Si vous pensez aux 6–12 prochains mois, où souhaiteriez-vous idéalement que vive",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "À son domicile actuel",
+      "À mon domicile",
+      "En établissement (EHPAD, résidence, foyer…)",
+      "Je ne sais pas / nous n’en avons pas parlé"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E21",
+    "text": "Pensez-vous qu’il sera possible de maintenir cette situation de vie sans changem",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, probablement",
+      "Oui, mais cela risque d’être difficile",
+      "Non, un changement sera nécessaire",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E22",
+    "text": "Globalement, combien d’heures d’aide humaine (aide à domicile, infirmier·e, etc.",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Moins de 5 heures",
+      "Entre 5 et 14 heures",
+      "15 à 30 heures",
+      "Plus de 30 heures",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O8",
+    "text": "Au quotidien a-t-elle besoin d'une aide humaine pour se déplacer en dehors de so",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 (1 ou 3)",
+    "options": [
+      "Non, elle est indépendante",
+      "Oui, de temps en temps",
+      "Oui, tout le temps"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O9",
+    "text": "Au quotidien a-t-elle besoin d'une aide humaine pour se déplacer à l'interieur d",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 (1 ou 2 ou 3)",
+    "options": [
+      "Non, elle est indépendante",
+      "Oui, de temps en temps",
+      "Oui, tout le temps"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E23",
+    "text": "Combien de temps votre proche peut-il rester seul à son domicile sans risque par",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Il peut rester seul sans difficulté",
+      "Quelques heures, mais pas une journée entière",
+      "Pas plus d’1 heure",
+      "Il ne peut pas rester seul"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E24",
+    "text": "La nuit, votre proche a-t-il besoin que quelqu’un soit présent ou reste vigilant",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non, il est autonome la nuit",
+      "Parfois, en fonction de son état",
+      "Oui, il a souvent besoin d’aide ou de surveillance",
+      "Oui, une présence est nécessaire en permanence"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O13",
+    "text": "Selon vous, y-a-t-il une détérioration notable dans ses fonctions cognitives ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Oui, diminution de certaines fonctions",
+      "Oui, elles sont totalement altérées"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N24",
+    "text": "La personne aidée at-telle des troubles de la mémoire ou de la concentration ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N19",
+    "text": "Ressentez-vous souvent des changements d'humeur ou de comportement chez elle ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Jamais",
+      "Parfois",
+      "Souvent"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E25",
+    "text": "La personne aidée confond-elle parfois le jour et la nuit (ex : sommeil inversé,",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E26",
+    "text": "La personne aidée se perd-elle ou semble-t-elle désorientée dans des lieux famil",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E27",
+    "text": "A-t-elle des comportements potentiellement dangereux (laisser le gaz ouvert, por",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N22",
+    "text": "A-t-elle des comportements à risque (automutilation, comportements dangereux) ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Jamais",
+      "Parfois",
+      "Souvent"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N25",
+    "text": "Exprime-t-elle des idées suicidaires ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Jamais",
+      "Parfois",
+      "Souvent"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O4",
+    "text": "Selon vous, en ce moment, diriez-vous de la personne aidée qu'elle est :",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "D'humeur normale",
+      "Parfois anxieuxe ou triste",
+      "Déprimée"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O5",
+    "text": "Selon vous et par rapport à une personne du même âge, diriez-vous que la personn",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "En meilleure santé",
+      "Santé équivalente",
+      "En moins bonne santé"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N11",
+    "text": "La personne aidée est-elle sujette à des douleurs chroniques liées à son état de",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Occasionnellement",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N12",
+    "text": "Ressentez-vous souvent de la fatigue ou un manque d'énergie chez la personne aid",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N13",
+    "text": "La personne aidée a-t-elle des troubles du sommeil ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N34",
+    "text": "A-t-elle des difficultés à s'alimenter correctement (sous-alimentation, suralime",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N44",
+    "text": "Avez-vous constaté un changement de poids ?",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 (réponse 1,2,",
+    "options": [
+      "Non",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O3",
+    "text": "Combien de médicaments différents prend-elle chaque jour ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Elle ne prend pas de traitement actuellement",
+      "1 à 3 médicaments",
+      "4 à 6 médicaments",
+      "7 médicament et plus"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O15",
+    "text": "La personne aidée consomme-t-elle de manière habituelle :  (plusieurs réponses p",
+    "type": "Obligatoire / Choix Multipples",
+    "options": [
+      "Alcool (plus de 3 verres par jour)",
+      "Tabac",
+      "Aucun des deux"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O26",
+    "text": "Avez-vous constaté une diminution de sa taille habituelle ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O22",
+    "text": "Quels ont été les principaux constats suite aux derniers examens de vue et d'aud",
+    "type": "Obligatoire / Choix multiples",
+    "options": [
+      "Correct",
+      "Correct avec le port de lunettes ou de lentilles",
+      "Correct avec appareillage auditif",
+      "Mauvais malgré le port de lunettes ou de lentilles",
+      "Mauvais malgré l'appareillage auditif",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O53",
+    "text": "La dépendance de la personne aidée a-t-elle été évaluée par les services sociaux",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non",
+      "Je ne sais pas"
+    ],
+    "aidance": "Personne Agée",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O54",
+    "text": "Quel est son niveau de dépendance selon cette grille AGGIR ?",
+    "type": "Obligatoire / Choix Unique / Contionnel O53(1)",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "Je ne sais pas"
+    ],
+    "aidance": "Personne Agée",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N16",
+    "text": "Quelle est l'origine du handicap de la personne aidée ?",
+    "type": "Obligatoire / Choix Unique Conditionnel N3 réponse 2",
+    "options": [
+      "Situation de handicap depuis la naissance",
+      "Situation de handicap suite à une maladie",
+      "Situation de handicap suite à un accident"
+    ],
+    "aidance": "Handicap",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N30",
+    "text": "Quel est le taux d'incapacité reconnu ?",
+    "type": "Obligatoire / Choix Unique Conditionnel N3 réponse 2",
+    "options": [
+      "Inférieur à 50%",
+      "Compris entre 50% et 79%",
+      "Supérieur ou égal à 80%",
+      "Je ne sais pas"
+    ],
+    "aidance": "Handicap",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N37",
+    "text": "Quel type d'addiction la personne aidée présente-t-elle ?  (plusieurs réponses p",
+    "type": "Obligatoire / Choix Multiples / conditionnel N3 (5)",
+    "options": [
+      "Alcool",
+      "Tabac",
+      "Produits stupéfiants",
+      "Médicaments",
+      "Jeux d'argent",
+      "Jeux vidéo",
+      "Autre"
+    ],
+    "aidance": "Addiction",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N38",
+    "text": "La personne aidée a-t-elle des difficultés à contrôler sa consommation ou son co",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 (5)",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Addiction",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N39",
+    "text": "Observez-vous, chez la personne aidée, des problèmes de santé physique liés à l'",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 (5)",
+    "options": [
+      "Non",
+      "Je ne sais pas",
+      "Oui"
+    ],
+    "aidance": "Addiction",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N40",
+    "text": "La personne aidée a-t-elle déjà tenté de se sevrer ou de suivre un traitement po",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 (5)",
+    "options": [
+      "Non",
+      "Je ne sais pas",
+      "Oui"
+    ],
+    "aidance": "Addiction",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E28",
+    "text": "Au cours des 3 derniers mois, combien de fois votre proche a-t-il été hospitalis",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Aucune",
+      "1 fois",
+      "2 fois",
+      "3 fois",
+      "4 fois ou plus",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E29",
+    "text": "Parmi ces hospitalisations, combien étaient programmées (prévue à l’avance) ?",
+    "type": "Obligatoire / Choix Unique / conditionnel EXX (tout sauf 1 ou 6)",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4 ou plus",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E30",
+    "text": "Parmi les hospitalisations non programmées, combien ont commencé par un passage ",
+    "type": "Obligatoire / Choix Unique / conditionnel EXX (1 ou6)",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4 ou plus",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E31",
+    "text": "Quelle a été la durée de la dernière hospitalisation (la plus récente) ?",
+    "type": "Obligatoire / Choix Unique / condtionnel EXX1 (tout sauf 1 ou 6)",
+    "options": [
+      "Moins d'une journée",
+      "1 à 3 jours",
+      "4 à 7 jours",
+      "Plus de 7 jours",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N18",
+    "text": "La personne aidée peut-elle réaliser seule ses activités de la vie quotidienne (",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non elle a besoin d'aide"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E32",
+    "text": "A-t-elle des difficultés à se lever d’un lit, s’asseoir ou se lever d’un fauteui",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O12",
+    "text": "Peut-elle se nourrir par elle-même ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Parfois",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O11",
+    "text": "Est-elle incontinente ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "E33",
+    "text": "A-t-elle des difficultés à utiliser le téléphone ou des appareils simples (téléc",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N32",
+    "text": "Y-a-t-il des aides techniques en place ?  (plusieurs réponses possibles)",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Aucune",
+      "Aides à la mobilité (fauteuil roulant, prothèse, canne,…)",
+      "Aides à la communication (synthèse vocale, tablette, amplificateur de voix,…)",
+      "Aides aux soins personnels (lève-personne, siège de douche, barres d'appui, lit médicalisé)",
+      "Aides sensorielles (appareil auditif, lunettes adaptées, système de guidage pour malvoyants)",
+      "Aides à l'aménagement du domicile (rampes d'accès, monte escalier, portes élargies)",
+      "Aides technologiques (commande à distance, domotique, ordinateur adapté)",
+      "Aides à l'apprentissage et à la cognition (logiciels spécialisés, agendas électroniques)"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O6",
+    "text": "A-t-elle malheureusement chuté dans les 6 derniers mois ?",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 (1 ou 2 ou 3)",
+    "options": [
+      "Non",
+      "Oui, mais sans gravité",
+      "Oui avec complication, ou, Oui plusieurs fois"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N14",
+    "text": "La personne aidée éprouve-t-elle des difficultés à suivre son traitement médical",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O16",
+    "text": "La personne aidée est-elle ou a-t-elle été concernée par : (plusieurs réponses p",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Troubles neurologiques (accident vasculaire cérébral, épilepsie, maladie neuro-dégénérative, Troubles du déficit de l'attention avec ou sans hyperactivité TDAH…)",
+      "Troubles psychiques (dépression, anxiété, troubles bi-polaires, schizophrénie...)",
+      "Dermatologique (dermatite atopique, psoriasis, acné…)",
+      "Respiratoire (asthme, maladie pulmonaire obstructive chronique…)",
+      "Génito-urinaire (infections urinaires à répétition, hypertrophie benigne de la prostate, endométriose…)",
+      "Endocrinienne (hyper ou hypo thyroidie, obésité sévère…)",
+      "Cancer (cancer du sein, prostate, colo-rectal, poumon, mélanome…)",
+      "Métabolique (diabète, cholesterol…)",
+      "Maladie cardiovaculaire (insuffisance cardiaque, hypertension artérielle, artériopathie…)",
+      "Musculo-squelettique (arthrose, lombalgie, cervicalgie, ostéoporose…)",
+      "Gastro-intestinale (reflux gastro oesophagien, maladie inflammatoire chronique des intestins, hépatopathie…)",
+      "Maladie génétique (muchovicidose, trisomie…)",
+      "Troubles visuels sévères (DMLA, cécité…)",
+      "Troubles auditifs sévères",
+      "Aucun",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N36",
+    "text": "A-t-elle besoin d'aide pour organiser et planifier ses journées ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Parfois",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "O51",
+    "text": "Songez-vous à adapter son lieu de vie son quotidien?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V4",
+    "bloc": "Bloc 5 – Vie quotidienne et fragilités de votre proche"
+  },
+  {
+    "id": "N17",
+    "text": "Quel est son type de handicap ? (plusieurs réponses possibles)",
+    "type": "Obligatoire / Choix multiples / Conditionnel N3 réponse 2",
+    "options": [
+      "Handicap cognitif",
+      "Handicap psychique",
+      "Handicap visuel",
+      "Handicap auditif",
+      "Handicap intellectuel",
+      "Handicap moteur",
+      "Traumatisme cranien",
+      "Autisme ou autres troubles envahissant du développement",
+      "Troubles majeurs du comportement",
+      "Maladie invalidante"
+    ],
+    "aidance": "Handicap",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "N41",
+    "text": "Bénéficie-t-elle d'une reconnaissance officielle d'une maladie chronique (Affect",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E34",
+    "text": "Comprenez-vous bien la maladie, l’état de santé et les besoins médicaux de votre",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Partiellement",
+      "Pas du tout"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E35",
+    "text": "Avez-vous l’impression que le diagnostic de votre proche est clair et bien établ",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, le diagnostic est clair",
+      "On m’a évoqué plusieurs hypothèses, mais rien de vraiment tranché",
+      "Non, personne ne nous a vraiment donné de diagnostic",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E36",
+    "text": "Depuis le début des problèmes de santé de votre proche, avez-vous le sentiment d",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non, pas particulièrement",
+      "Oui, un peu",
+      "Oui, beaucoup (impression de tourn­er en rond)"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E37",
+    "text": "Avez-vous déjà reçu des avis médicaux contradictoires sur la situation de votre ",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Oui, parfois",
+      "Oui, souvent"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E38",
+    "text": "Si votre proche est passé ou va passer de services ‘enfant’ à des services ‘adul",
+    "type": "Obligatoire / Choix Unique / conditonnel N3 réponse 2,3,4 et 5 ET conditionnel O1 réponse 1",
+    "options": [
+      "Oui, bien préparé",
+      "Un peu, mais cela reste flou",
+      "Non, pas du tout",
+      "Pas concerné"
+    ],
+    "aidance": "Enfant",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "O17",
+    "text": "A-t-elle un médecin traitant ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "O18",
+    "text": "- A-t-elle d'autres médecins spécialistes qui la suivent actuellement ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "O19",
+    "text": "Lesquels ? (plusieurs réponses possibles)",
+    "type": "Obligatoire / Choix Multiples /Conditionnel O18(1)",
+    "options": [
+      "Cardiologue",
+      "Oncologue",
+      "Neurologue",
+      "Pneumologue",
+      "Ophtalmologue",
+      "Psychiatre",
+      "Chirurgien-Dentiste",
+      "Gastro-entérologue",
+      "Endocrinologue / Diabetologue",
+      "ORL",
+      "Gynecologue",
+      "Nephrologue",
+      "Gériatre",
+      "Dermatologue",
+      "Autre"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "O20",
+    "text": "La personne aidée a-t-elle déjà réalisé des rendez-vous médicaux cette année ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "O21",
+    "text": "Lesquels ? (plusieurs réponses possibles)",
+    "type": "Obligatoire / Choix Multiples/ Conditionnel O21(1)",
+    "options": [
+      "Bilan de santé général (prise de sang…)",
+      "Audition",
+      "Vue",
+      "Contrôle dentaire",
+      "Suivi cardiovasculaire",
+      "Ostéodensitométrie",
+      "Vaccination",
+      "Examen gynécologique",
+      "Suivi dermatologique",
+      "Suivi psychologique",
+      "Dépistage des cancers"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E39",
+    "text": "Le premier professionnel de santé (médecin, infirmier, spécialiste) est-il situé",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui",
+      "Non"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "O24",
+    "text": "Éprouvez-vous des difficultés à prendre rendez-vous chez des spécialistes autour",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Pas du tout",
+      "Un peu",
+      "Oui"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E40",
+    "text": "Quelles sont les principales difficultés pour accéder aux soins dont votre proch",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Délais pour obtenir un rendez-vous",
+      "Peu ou pas de médecins disponibles à proximité",
+      "Difficultés de transport / mobilité",
+      "Difficultés à utiliser les outils de prise de rendez-vous en ligne",
+      "Organisation avec mon travail / ma vie personnelle",
+      "Coût des soins",
+      "Autre",
+      "Je ne rencontre pas de difficultés particulières"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E41",
+    "text": "Votre proche a-t-il déjà participé à un programme d’éducation thérapeutique (ETP",
+    "type": "Obligatoire / Choix Unique / conditonnel N3 réponse 1 ou 3",
+    "options": [
+      "Oui",
+      "Non, on ne nous en a jamais parlé",
+      "Non, mais on nous l’a proposé",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E42",
+    "text": "Parmi les rendez-vous médicaux réalisés ce mois-ci, combien étaient non prévus à",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Aucun",
+      "1 seul",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E43",
+    "text": "Au cours des 12 derniers mois, y a-t-il eu des périodes de plusieurs mois sans a",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non",
+      "Oui, une période de 3 à 6 mois",
+      "Oui, plusieurs périodes ou plus de 6 mois",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E44",
+    "text": "Votre proche a-t-il déjà bénéficié d’une consultation ou d’un bilan de synthèse ",
+    "type": "Obligatoire / Choix Unique/ Conditionnel N3 réponse 1 ou 3",
+    "options": [
+      "Oui, récemment",
+      "Oui, mais il y a plus d’un an",
+      "Non, jamais",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E45",
+    "text": "Votre proche est-il suivi dans un service ou une consultation spécialisée en add",
+    "type": "Obligatoire / Choix Unique / conditionnel N3 réponse 5",
+    "options": [
+      "Oui, de façon régulière",
+      "Oui, mais il/elle n’y va plus",
+      "Non",
+      "Je ne sais pas"
+    ],
+    "aidance": "Addiction",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E46",
+    "text": "Après la dernière hospitalisation de votre proche, un suivi médical a-t-il été o",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, clairement organisé",
+      "Partiellement",
+      "Non, nous avons dû tout organiser seuls",
+      "Il n’a pas été hospitalisé récemment"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E47",
+    "text": "Quand l’état de santé de votre proche se dégrade brusquement (crise, aggravation",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, on sait quoi faire et qui appeler",
+      "On a quelques repères, mais ce n’est pas très clair",
+      "Non, on improvise systématiquement / on va souvent aux urgences"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E48",
+    "text": "Actuellement, votre proche est-il suivi pour ses troubles psychiques dans l’un d",
+    "type": "Obligatoire / Choix Unique / Conditionnel N3 réponse 4",
+    "options": [
+      "Médecin généraliste",
+      "Psychiatre en libéral",
+      "Centre médico-psychologique (CMP / CMPP)",
+      "Hôpital de jour / centre de crise",
+      "Psychologue",
+      "Aucun suivi actuellement"
+    ],
+    "aidance": "Psy",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E49",
+    "text": "Dans le suivi de l’addiction, quels types de professionnels sont impliqués ? (pl",
+    "type": "Obligatoire / Choix Unique / Conditionnel N3 réponse 5",
+    "options": [
+      "Médecin (généraliste ou addictologue)",
+      "Psychiatre / psychologue",
+      "Travailleur social / éducateur spécialisé",
+      "Infirmier (CSAPA, hôpital, ville)",
+      "Association de patients / groupe de parole",
+      "Aucun suivi structuré"
+    ],
+    "aidance": "Addiction",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E50",
+    "text": "Votre proche est-il actuellement suivi pour ses troubles psychiques (psychiatre,",
+    "type": "Obligatoire / Choix Unique / Conditionnel N3 réponse 4",
+    "options": [
+      "Oui, suivi régulier et traitement bien pris",
+      "Oui, mais suivi ou traitement irrégulier",
+      "Non, pas de suivi / pas de traitement",
+      "Je ne sais pas"
+    ],
+    "aidance": "Psy",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E51",
+    "text": "Votre proche est-il prêt à être aidé pour son addiction (parler à un professionn",
+    "type": "Obligatoire / Choix Unique/ Conditionnel N3 réponse 5",
+    "options": [
+      "Oui",
+      "Peut-être / selon les conditions",
+      "Non",
+      "Je ne sais pas"
+    ],
+    "aidance": "Addiction",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "O59",
+    "text": "Quels sont les professionnels, ou services qui interviennent déjà au domicile de",
+    "type": "Obligatoire / Choix Multiples",
+    "options": [
+      "Service à domicile (SAD) / auxiliaire de vie",
+      "Service à domicile (SAD) / aide ménagère",
+      "Service de soins infirmiers à domicile (SSIAD)",
+      "Infirmier libéral",
+      "Masseur-kinésithérapeute",
+      "Aide physique adaptée (APA)",
+      "Télé-assistance",
+      "Portage des repas",
+      "Educateur spécialisé",
+      "Pédicure-podologue",
+      "Ergothérapeute",
+      "Aucun",
+      "Autre"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E52",
+    "text": "Aujourd’hui, avez-vous une personne de référence qui coordonne les soins de votr",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, clairement identifiée",
+      "Oui, mais je ne suis pas sûr·e de son rôle",
+      "Non, personne ne coordonne vraiment",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E53",
+    "text": "Pour vous, qui est aujourd’hui le professionnel ‘référent’ pour la santé de votr",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Médecin traitant",
+      "Spécialiste hospitalier",
+      "Spécialiste libéral",
+      "Aucune personne vraiment référente",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E54",
+    "text": "Comment décririez-vous l’organisation des soins de votre proche ?",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Plutôt simple et bien organisée",
+      "Gérable mais parfois compliquée",
+      "Souvent très compliquée",
+      "Je la trouve ingérable"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E55",
+    "text": "Avez-vous le sentiment qu’une meilleure coordination entre les professionnels am",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Non, pas vraiment",
+      "Oui, un peu",
+      "Oui, énormément"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E56",
+    "text": "Qu’est-ce qui vous inquiète le plus pour la santé de votre proche dans les proch",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Les chutes",
+      "La mémoire, le comportement",
+      "L’alimentation / le poids",
+      "Les allers-retours aux urgences",
+      "Le risque qu’il/elle ne puisse plus rester à domicile",
+      "Autre",
+      "Je ne sais pas"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E57",
+    "text": "Avez-vous l’impression qu’il existe un ‘plan de route’ clair pour la suite des s",
+    "type": "Obligatoire / Choix Unique",
+    "options": [
+      "Oui, c’est clair",
+      "Partiellement",
+      "Non, on avance au jour le jour"
+    ],
+    "aidance": "Tous",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E58",
+    "text": "Votre proche a-t-il bénéficié d’une évaluation spécialisée liée à l’âge (consult",
+    "type": "Obligatoire / Choix Multiples / conditionnel N3 reponse 1 ou 3",
+    "options": [
+      "Oui, consultation mémoire",
+      "Oui, consultation gériatrique / bilan gériatrique",
+      "Oui, bilan de chutes",
+      "Oui, autre évaluation spécialisée",
+      "Non, aucune"
+    ],
+    "aidance": "Personne Agée",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E59",
+    "text": "Votre enfant a-t-il été orienté vers une équipe ou une structure spécialisée dan",
+    "type": "Obligatoire / Choix Unique/ Conditionnel N3 réponse 2 ou 4 et O1 réponse 1",
+    "options": [
+      "Oui, et une évaluation est en cours / réalisée",
+      "Oui, mais nous sommes en attente depuis longtemps",
+      "Non, personne ne nous en a parlé",
+      "Je ne sais pas"
+    ],
+    "aidance": "Enfant",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  },
+  {
+    "id": "E60",
+    "text": "Pour l’évaluation de votre enfant, quels professionnels sont déjà intervenus ? (",
+    "type": "Obligatoire / Choix Multiples / Conditionnel N3 réponse 2 ou 4 et O1 réponse 1",
+    "options": [
+      "Pédiatre / généraliste",
+      "Neuropédiatre",
+      "Pédopsychiatre",
+      "Psychologue",
+      "Orthophoniste",
+      "Psychomotricien / ergothérapeute",
+      "CAMSP / CMPP / autre centre spécialisé",
+      "Aucun de ces professionnels"
+    ],
+    "aidance": "Enfant",
+    "vuln": "V5",
+    "bloc": "Bloc 6 – Parcours de soins de votre proche"
+  }
+]

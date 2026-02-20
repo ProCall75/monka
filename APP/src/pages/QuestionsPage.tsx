@@ -11,9 +11,10 @@ import {
 
     FileQuestion,
 } from 'lucide-react'
-import { useMonkaData } from '../engine/useMonkaData'
-import type { MonkaData, DBQuestion } from '../engine/supabaseData'
-import { VULN_COLORS, VULN_META, VULN_IDS } from '../engine/constants'
+import {
+    useMonkaData, VULN_COLORS, VULN_META, VULN_IDS,
+    type MonkaData, type DBQuestion,
+} from '../clinical/hooks'
 
 const VULN_NAMES: Record<string, string> = Object.fromEntries(
     VULN_IDS.map(v => [v, VULN_META[v].name])
