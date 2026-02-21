@@ -802,8 +802,8 @@ Décomposition visuelle du score : quelles questions contribuent le plus.
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| Micro-phase 12a | `supabaseData.ts` 545L non splité — refactor lourd (~15 fichiers impactés) | **Commit dédié** (prochaine session) | Exécuter split queries/helpers/conditional-model |
-| Tests unitaires scoring | Logique ScoreBreakdown pure non testée | **Bloc 14** (micro-phase 14b) | Ajouter tests contribution calcul |
+| Micro-phase 12a | `supabaseData.ts` 545L non splité — refactor lourd (~15 fichiers impactés) | **Bloc 16** (micro-phase 16a) | Exécuter split queries/helpers/conditional-model |
+| Tests unitaires scoring | Logique ScoreBreakdown pure non testée | **Bloc 17** (micro-phase 17a) | Ajouter tests contribution calcul |
 
 ---
 
@@ -845,7 +845,7 @@ Matrice Questions × MPs montrant quelles questions sont utilisées par quelles 
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| Micro-phase 13a | `SimulatorPage.tsx` 448L > 200L — useSimulatorState non extrait | **Commit dédié** (session refactor) | Extraire ~130L de logique useMemo dans custom hook |
+| Micro-phase 13a | `SimulatorPage.tsx` 448L > 200L — useSimulatorState non extrait | **Bloc 16** (micro-phase 16b) | Extraire ~130L de logique useMemo dans custom hook |
 
 ---
 
@@ -896,8 +896,8 @@ Modifier une réponse → recalcul immédiat en temps réel.
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| Micro-phase 14a | content_blocks populate depuis KERNEL — chantier data engineering | **Task data dédié** (hors sprint UI) | Script de parsing KERNEL markdown → Supabase |
-| Micro-phase 14b | Tests unitaires — pas de framework configuré | **Session test setup** | Configurer Vitest + tests fonctions pures |
+| Micro-phase 14a | content_blocks populate depuis KERNEL — chantier data engineering | **Bloc 17** (micro-phase 17b) | Script de parsing KERNEL markdown → Supabase + WhyThisQuestion.tsx |
+| Micro-phase 14b | Tests unitaires — pas de framework configuré | **Bloc 17** (micro-phase 17a) | Configurer Vitest + tests fonctions pures |
 
 ---
 
@@ -956,6 +956,20 @@ Comparer 2-3 personas côte à côte.
 
 ### US couvertes : US-06, US-09, US-21
 
+### 🔧 Micro-Phase 16a — Split supabaseData.ts (dette Blocs 8/12)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Découper `supabaseData.ts`** (545L) → `engine/queries.ts`, `engine/helpers.ts`, `engine/conditional-model.ts`
+> 2. **Mettre à jour le barrel** `clinical/hooks/index.ts`
+> 3. **Vérifier** tous les imports downstream (~15 fichiers)
+
+### 🔧 Micro-Phase 16b — Extraction useSimulatorState (dette Blocs 7-9/13)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Extraire `useSimulatorState.ts`** — custom hook regroupant ~130L de logique useMemo
+> 2. **Réduire `SimulatorPage.tsx`** de 455L vers ~300L
+> 3. **Évaluer virtualisation** `react-window` si tables > 100 lignes
+
 ### 🔍 QG-16 — Score Confiance
 
 > ```
@@ -986,6 +1000,21 @@ Script automatisé vérifiant la cohérence des données cliniques.
 - Exécutable aussi via `npm run check-data`
 
 ### US couvertes : US-13
+
+### 🔧 Micro-Phase 17a — Tests unitaires fonctions pures (dette Blocs 10/12/14)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Configurer Vitest** dans le projet APP
+> 2. **Tester `detectScoreActionGaps()`** — cas: gap détecté, pas de gap, score=0
+> 3. **Tester `evaluateRule()`** — cas: condition simple, CCC, multi-conditions
+> 4. **Tester `buildCoverageMatrix()`** — orphelines, couverture 100%
+
+### 🔧 Micro-Phase 17b — Populate content_blocks + WhyThisQuestion (dette Bloc 11/14)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Script de populate** `content_blocks` depuis `KERNEL/VALIDATION_MP/V*/`
+> 2. **Créer `WhyThisQuestion.tsx`** — tooltip lookup content_blocks
+> 3. **Intégrer** dans ClinicalChain et QuestionsSidebar
 
 ### 🔍 QG-17 — Intégrité Données
 
