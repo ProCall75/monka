@@ -794,6 +794,17 @@ Décomposition visuelle du score : quelles questions contribuent le plus.
 > Rapport → docs/certifications/YYYY-MM-DD_qg-12-scoring-enrichi.md
 > ```
 
+### ✅ Bloc 12 — Résultat
+
+> `ScoreBreakdown.tsx` (111L) créé — barres de contribution par question + mini what-if hover. Intégré dans ScoringTab per-V. `scoringMap` ajouté à `SimulatorTabProps`. Build clean. Micro-phase 12a (split supabaseData.ts) reportée à commit dédié (refactor lourd, token guard).
+
+### 📝 Bloc 12 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| Micro-phase 12a | `supabaseData.ts` 545L non splité — refactor lourd (~15 fichiers impactés) | **Commit dédié** (prochaine session) | Exécuter split queries/helpers/conditional-model |
+| Tests unitaires scoring | Logique ScoreBreakdown pure non testée | **Bloc 14** (micro-phase 14b) | Ajouter tests contribution calcul |
+
 ---
 
 ## Bloc 13 — Heatmap Couverture Clinique

@@ -59,6 +59,8 @@ export interface SimulatorTabProps {
     activatedCats: Map<string, ActivatedCategory>
     /** Current threshold info */
     currentThreshold: { level: string; description: string; min_score: number; max_score: number } | null
+    /** Scoring map: questionId → answer → score */
+    scoringMap: Record<string, Record<string, number>>
 }
 
 /**

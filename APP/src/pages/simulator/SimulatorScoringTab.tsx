@@ -12,6 +12,7 @@ import {
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
 import { detectScoreActionGaps } from './scoreActionGap'
+import { ScoreBreakdown } from './ScoreBreakdown'
 import { AlertTriangle } from 'lucide-react'
 
 const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
@@ -38,7 +39,7 @@ import { useMemo } from 'react'
 /**
  * ScoringTab — Displays scores per vulnerability with circular gauge + gap alerts.
  */
-export function SimulatorScoringTab({ data, activeV, scoreByV, displayScore, activatedMPs }: SimulatorTabProps) {
+export function SimulatorScoringTab({ data, activeV, scoreByV, displayScore, activatedMPs, answers, scoringMap }: SimulatorTabProps) {
     // Defensive guard — empty data fallback
     if (!data.scoringThresholds?.length || !data.vulnerabilities?.length) {
         return <div className="text-center text-monka-muted py-12 text-sm">Aucune donnée de scoring disponible.</div>
@@ -135,6 +136,8 @@ export function SimulatorScoringTab({ data, activeV, scoreByV, displayScore, act
                             {threshold && (
                                 <p className="text-[10px] text-monka-muted mt-1">{threshold.description}</p>
                             )}
+                            {/* Score Breakdown — per-question contribution (Bloc 12) */}
+                            <ScoreBreakdown data={data} vulnId={v.id} answers={answers} scoringMap={scoringMap} />
                         </div>
                     )
                 })}

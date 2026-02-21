@@ -376,7 +376,7 @@ function SimulatorContent({
                                                         data={data} activeV={activeV} answers={answers}
                                                         activatedMPs={activatedMPs} activatedCats={activatedCats}
                                                         scoreByV={scoreByV} displayScore={displayScore}
-                                                        currentThreshold={currentThreshold}
+                                                        currentThreshold={currentThreshold} scoringMap={scoringMap}
                                                     />
                                                 )}
 
@@ -386,7 +386,7 @@ function SimulatorContent({
                                                         data={data} activeV={activeV} answers={answers}
                                                         activatedMPs={activatedMPs} activatedCats={activatedCats}
                                                         scoreByV={scoreByV} displayScore={displayScore}
-                                                        currentThreshold={currentThreshold}
+                                                        currentThreshold={currentThreshold} scoringMap={scoringMap}
                                                         selectedMP={selectedMP} setSelectedMP={setSelectedMP}
                                                     />
                                                 )}
@@ -397,7 +397,7 @@ function SimulatorContent({
                                                         data={data} activeV={activeV} answers={answers}
                                                         activatedMPs={activatedMPs} activatedCats={activatedCats}
                                                         scoreByV={scoreByV} displayScore={displayScore}
-                                                        currentThreshold={currentThreshold}
+                                                        currentThreshold={currentThreshold} scoringMap={scoringMap}
                                                     />
                                                 )}
 
@@ -407,7 +407,7 @@ function SimulatorContent({
                                                         data={data} activeV={activeV} answers={answers}
                                                         activatedMPs={activatedMPs} activatedCats={activatedCats}
                                                         scoreByV={scoreByV} displayScore={displayScore}
-                                                        currentThreshold={currentThreshold}
+                                                        currentThreshold={currentThreshold} scoringMap={scoringMap}
                                                         answeredCount={answeredCount} totalCount={totalCount}
                                                         totalActiveQuestions={totalActiveQuestions}
                                                         personaId={personaId}
