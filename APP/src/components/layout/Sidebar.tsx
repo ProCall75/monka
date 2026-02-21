@@ -51,9 +51,9 @@ const navItems = [
     },
     {
         path: '/docs',
-        label: 'Documentation',
+        label: 'Documents Officiels',
         icon: BookOpen,
-        description: 'Templates & Livrables',
+        description: 'Templates & Livrables cliniques',
     },
 
 ]

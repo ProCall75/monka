@@ -6,18 +6,15 @@ import {
     Zap,
     Eye,
     Cog,
-    CheckCircle2,
     FileText,
-    Layers,
     Loader2,
     AlertCircle,
     RefreshCw,
-    Fingerprint,
 } from 'lucide-react'
 import type { VulnerabilityId } from '../clinical/hooks'
 import {
     useMonkaData,
-    VULN_META, VULN_IDS, VULN_COLORS,
+    VULN_META, VULN_IDS,
     evaluateRule, getActivatedCategories,
     getQuestionsForVuln, getAllQuestions, getActiveQuestions,
     getActiveAidanceBlocks, getTriggerQuestions,
@@ -32,6 +29,7 @@ import { SimulatorRulesTab } from './simulator/SimulatorRulesTab'
 import { SimulatorCRTab } from './simulator/SimulatorCRTab'
 import { SimulatorExternalView } from './simulator/SimulatorExternalView'
 import { QuestionsSidebar } from './simulator/QuestionsSidebar'
+import { SimulatorHeader } from './simulator/SimulatorHeader'
 
 // === Types ===
 type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary'
@@ -45,9 +43,8 @@ const vulnerabilities = VULN_IDS.map(id => ({
     icon: VULN_META[id].icon,
 }))
 
-const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
-const internalTabs: { id: InternalTab; label: string; icon: typeof Activity }[] = [
+const internalTabs: { id: InternalTab; label: string; icon: typeof Shield }[] = [
     { id: 'scoring', label: 'Scoring', icon: BarChart3 },
     { id: 'mp', label: 'Micro-Parcours', icon: Zap },
     { id: 'rules', label: 'Règles', icon: Shield },
@@ -283,101 +280,24 @@ function SimulatorContent({
 
     return (
         <div className="h-[calc(100vh-48px)]">
-            {/* Top Bar */}
-            <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                    <h1 className="text-xl font-bold text-monka-heading">Simulateur</h1>
-                    {personaId && (
-                        <span className="text-[10px] font-bold text-white bg-indigo-500 px-2 py-0.5 rounded-lg">Persona {personaId}</span>
-                    )}
-                    <div className="flex gap-1.5">
-                        <motion.button
-                            onClick={() => setActiveV('ALL')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200
-                ${activeV === 'ALL' ? 'bg-monka-dark text-white shadow-md' : 'bg-white/60 text-monka-text/60 hover:bg-white/80'}`}
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                        >
-                            <Layers className="w-3 h-3 inline-block mr-1 -mt-0.5" />
-                            ALL
-                        </motion.button>
-                        <motion.button
-                            onClick={() => setActiveV('TRIGGERS')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200
-                ${activeV === 'TRIGGERS' ? 'bg-violet-600 text-white shadow-md' : 'bg-white/60 text-monka-text/60 hover:bg-white/80'}`}
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                        >
-                            <Fingerprint className="w-3 h-3 inline-block mr-1 -mt-0.5" />
-                            Triggers
-                        </motion.button>
-                        {vulnerabilities.map((v) => (
-                            <motion.button
-                                key={v.id}
-                                onClick={() => setActiveV(v.id)}
-                                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200
-                  ${activeV === v.id ? 'text-white shadow-md' : 'bg-white/60 text-monka-text/60 hover:bg-white/80'}`}
-                                style={activeV === v.id ? { backgroundColor: v.color } : {}}
-                                whileHover={{ scale: 1.03 }}
-                                whileTap={{ scale: 0.97 }}
-                            >
-                                {v.id}
-                            </motion.button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Stats */}
-                <div className="flex items-center gap-3 text-xs">
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 glass rounded-lg border border-monka-border">
-                        <BarChart3 className="w-3.5 h-3.5 text-monka-primary" />
-                        <span className="text-monka-muted">Score:</span>
-                        <span className="font-bold text-monka-heading">{displayScore.score}/{displayScore.max}</span>
-                    </div>
-                    {currentThreshold && (
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ backgroundColor: `${getThresholdColor(currentThreshold.level)}15`, borderColor: `${getThresholdColor(currentThreshold.level)}30` }}>
-                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: getThresholdColor(currentThreshold.level) }} />
-                            <span className="font-bold" style={{ color: getThresholdColor(currentThreshold.level) }}>{currentThreshold.description}</span>
-                        </div>
-                    )}
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 glass rounded-lg border border-monka-border">
-                        <Zap className="w-3.5 h-3.5 text-amber-500" />
-                        <span className="text-monka-muted">MP actifs:</span>
-                        <span className="font-bold text-monka-heading">{activatedMPs.length}/{data.microParcours.length}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 glass rounded-lg border border-monka-border">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
-                        <span className="text-monka-muted">Réponses:</span>
-                        <span className="font-bold text-monka-heading">{answeredCount}/{totalCount}</span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Subtitle — V info or Triggers info */}
-            {activeV === 'TRIGGERS' && (
-                <div className="mb-3 flex items-center gap-2 text-xs text-monka-muted">
-                    <span className="font-bold text-white px-2 py-0.5 rounded bg-violet-600">
-                        Triggers
-                    </span>
-                    <span>Questions de profilage</span>
-                    <span>•</span>
-                    <span>{triggerQuestions.length} questions</span>
-                    <span>•</span>
-                    <span>Blocs actifs : {[...activeBlocks].join(', ')}</span>
-                </div>
-            )}
-            {activeV !== 'ALL' && activeV !== 'TRIGGERS' && data.vulnerabilities.find(v => v.id === activeV) && (
-                <div className="mb-3 flex items-center gap-2 text-xs text-monka-muted">
-                    <span className="font-bold text-white px-2 py-0.5 rounded" style={{ backgroundColor: vColorMap[activeV as VulnerabilityId] }}>
-                        {activeV}
-                    </span>
-                    <span>{data.vulnerabilities.find(v => v.id === activeV)!.name}</span>
-                    <span>•</span>
-                    <span>{data.vulnerabilities.find(v => v.id === activeV)!.bloc_label}</span>
-                    <span>•</span>
-                    <span>{totalCount} questions ({currentScoringCount} scorantes, {answeredScoringCount} répondues)</span>
-                </div>
-            )}
+            <SimulatorHeader
+                activeV={activeV}
+                setActiveV={setActiveV}
+                personaId={personaId}
+                vulnerabilities={vulnerabilities}
+                displayScore={displayScore}
+                currentThreshold={currentThreshold}
+                getThresholdColor={getThresholdColor}
+                activatedMPs={activatedMPs}
+                totalMPs={data.microParcours.length}
+                answeredCount={answeredCount}
+                totalCount={totalCount}
+                answeredScoringCount={answeredScoringCount}
+                currentScoringCount={currentScoringCount}
+                triggerQuestions={triggerQuestions}
+                activeBlocks={activeBlocks}
+                vulnInfo={data.vulnerabilities.find(v => v.id === activeV) as { name: string; bloc_label: string } | undefined}
+            />
 
             {/* Split Screen */}
             <div className="flex gap-4 h-[calc(100%-80px)]">

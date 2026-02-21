@@ -664,6 +664,17 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 > 2. **Réduire `SimulatorPage.tsx`** de ~515L vers ~415L
 > 3. **Évaluer virtualisation** `react-window` si > 200 questions chargées
 
+### ✅ Bloc 9 — Résultat
+
+> Navigation : Documentation → Documents Officiels dans Sidebar. Micro-phase 9b : `SimulatorHeader.tsx` (116L) extrait. `SimulatorPage.tsx` réduit 515L → 435L (-80L). Build clean.
+
+### 📝 Bloc 9 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| `SimulatorPage.tsx` | 435L > 200L cible (logique useMemo + orchestrateur restant) | **Passe future** | Extraire hooks dans custom hook `useSimulatorState` |
+| Virtualisation | Non évaluée (perf suffisante) | **Feature client** | Implémenter si nécessaire |
+
 ---
 
 ## Bloc 10 — Score-Action Gap
