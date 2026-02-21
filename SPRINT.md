@@ -626,8 +626,8 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| `supabaseData.ts` | 545L > 300L max (micro-phase 8a) | **Bloc 8 passe 2** | Découper en `queries.ts`, `helpers.ts`, `conditional-model.ts` |
-| Virtualisation tables | Tables MTs/Rules > 100 lignes sans virtualisation | **Bloc 9** (si perf) | Ajouter `react-window` si nécessaire |
+| `supabaseData.ts` | 545L > 300L max (micro-phase 8a) | **Bloc 12** (micro-phase 12a) | Découper en `queries.ts`, `helpers.ts`, `conditional-model.ts` |
+| Virtualisation tables | Tables MTs/Rules > 100 lignes sans virtualisation | **Bloc 13** (si perf) | Ajouter `react-window` si nécessaire |
 
 ---
 
@@ -672,10 +672,10 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| `SimulatorPage.tsx` | 435L > 200L cible (logique useMemo restante) | **Passe future** | Extraire `useSimulatorState` custom hook |
-| Virtualisation | Non évaluée (perf suffisante) | **Feature client** | Implémenter si nécessaire |
-| `OfficialDocsPage.tsx` | Prévu dans SPRINT mais non créé (rename sidebar suffit pour l'instant) | **Feature client** | Créer page dédiée si nouveau contenu |
-| Page Réflexion | "💭 Réflexion → articles blog kernel" — non implémenté | **Feature client** | Créer si besoin éditorial |
+| `SimulatorPage.tsx` | 435L > 200L cible (logique useMemo restante) | **Bloc 13** (micro-phase 13a) | Extraire `useSimulatorState` custom hook |
+| Virtualisation | Non évaluée (perf suffisante) | **Bloc 13** (micro-phase 13a) | Implémenter si nécessaire |
+| `OfficialDocsPage.tsx` | Prévu dans SPRINT mais non créé (rename sidebar suffit) | **Bloc 15** (micro-phase 15a) | Créer page dédiée si nouveau contenu |
+| Page Réflexion | "💭 Réflexion → articles blog kernel" — non implémenté | **Bloc 15** (micro-phase 15a) | Créer si besoin éditorial |
 
 ---
 
@@ -710,8 +710,8 @@ Détecter quand un score élevé ne déclenche AUCUNE action. Faille critique du
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| Dashboard dédié Gap | SPRINT prévoit un dashboard séparé — intégré dans ScoringTab à la place | **Si demande client** | Créer `ScoreActionGapPage.tsx` si visualisation dédiée requise |
-| Tests unitaires | `detectScoreActionGaps()` est pure et testable — pas de tests écrits | **Pre-deploy** | Ajouter tests si CI activée |
+| Dashboard dédié Gap | SPRINT prévoit un dashboard séparé — intégré dans ScoringTab à la place | **Bloc 15** (micro-phase 15b) | Créer `ScoreActionGapPage.tsx` si visualisation dédiée requise |
+| Tests unitaires gap | `detectScoreActionGaps()` pure et testable — pas de tests | **Bloc 14** (micro-phase 14b) | Ajouter tests unitaires |
 
 ---
 
@@ -761,8 +761,8 @@ MT_S1_02_02 — Identifier relais (acteur: IDEC)
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| Micro-phase 11a | `content_blocks` non peuplé depuis KERNEL → tooltips "Pourquoi cette question ?" inactifs | **Chantier data dédié** | Script de populate à créer |
-| `WhyThisQuestion.tsx` | Composant tooltip non créé — dépend du populate | **Après populate** | Créer après alimentation content_blocks |
+| Micro-phase 11a | `content_blocks` non peuplé depuis KERNEL | **Bloc 14** (micro-phase 14a) | Script de populate à créer |
+| `WhyThisQuestion.tsx` | Composant tooltip non créé — dépend du populate | **Bloc 14** (micro-phase 14a) | Créer après alimentation content_blocks |
 
 ---
 
@@ -775,6 +775,13 @@ Décomposition visuelle du score : quelles questions contribuent le plus.
 - Barres empilées montrant la contribution de chaque réponse
 - Seuils visuels avec code couleur (faible/modéré/élevé/critique)
 - Mini what-if inline : "Si cette réponse changeait, le score passerait de 32 à 24"
+
+### 🔧 Micro-Phase 12a — Split supabaseData.ts (dette Bloc 8)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Découper `supabaseData.ts`** (545L) → `engine/queries.ts`, `engine/helpers.ts`, `engine/conditional-model.ts`
+> 2. **Mettre à jour le barrel** `clinical/hooks/index.ts` pour pointer vers les nouveaux modules
+> 3. **Vérifier** tous les imports downstream
 
 ### 🔍 QG-12 — Scoring Enrichi
 
@@ -801,6 +808,13 @@ Matrice Questions × MPs montrant quelles questions sont utilisées par quelles 
 - Stats : % questions couvertes, questions orphelines
 
 ### US couvertes : US-17, US-21
+
+### 🔧 Micro-Phase 13a — Extraction useSimulatorState + Virtualisation (dette Blocs 7-9)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Extraire `useSimulatorState.ts`** — custom hook regroupant ~150L de logique useMemo de `SimulatorPage.tsx`
+> 2. **Réduire `SimulatorPage.tsx`** de 435L vers ~285L (cible < 200L)
+> 3. **Évaluer virtualisation** `react-window` si tables MTs/Rules > 100 lignes
 
 ### 🔍 QG-13 — Heatmap Couverture
 
@@ -829,6 +843,19 @@ Modifier une réponse → recalcul immédiat en temps réel.
 
 ### US couvertes : US-04
 
+### 🔧 Micro-Phase 14a — Populate content_blocks + WhyThisQuestion (dette Bloc 11)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Script de populate** `content_blocks` depuis `KERNEL/VALIDATION_MP/V*/`
+> 2. **Créer `WhyThisQuestion.tsx`** — tooltip qui lookup `content_blocks` pour afficher "Pourquoi cette question ?"
+> 3. **Intégrer** dans ClinicalChain et QuestionsSidebar
+
+### 🔧 Micro-Phase 14b — Tests unitaires fonctions pures (dette Bloc 10)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Tester `detectScoreActionGaps()`** — cas: gap détecté, pas de gap, score=0, tous MPs actifs
+> 2. **Tester `evaluateRule()`** — cas: condition simple, CCC, multi-conditions
+
 ### 🔍 QG-14 — Mode What-If
 
 > ```
@@ -853,6 +880,18 @@ Comparer 2-3 personas côte à côte.
 - Section "Delta Analysis" : quelles réponses causent le plus de divergence
 
 ### US couvertes : US-05
+
+### 🔧 Micro-Phase 15a — Pages Docs Officiels + Réflexion (dette Bloc 9)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Créer `OfficialDocsPage.tsx`** — page dédiée listant templates MP, grille scoring, écosystème acteurs
+> 2. **Créer page Réflexion** — articles blog kernel si besoin éditorial
+
+### 🔧 Micro-Phase 15b — Dashboard Score-Action Gap (dette Bloc 10)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Évaluer besoin** d'un dashboard dédié Gap vs intégration ScoringTab
+> 2. **Créer `ScoreActionGapPage.tsx`** si visualisation dédiée requise
 
 ### 🔍 QG-15 — Comparaison Personas
 

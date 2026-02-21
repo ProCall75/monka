@@ -21,11 +21,11 @@
 ### Micro-Phase 11a — content_blocks (⏳)
 **Constat** : Le populate de `content_blocks` depuis `KERNEL/VALIDATION_MP/V*/` n'a pas été exécuté. Le composant fait un lookup `contentBlocks` avec fallback gracieux (n'affiche rien si pas de content block trouvé).  
 **Impact** : Les tooltips "Pourquoi cette question ?" ne s'affichent pas tant que content_blocks n'est pas peuplé.  
-**Résolution** : Chantier data dédié (hors scope sprint architecture UI).
+**Résolution** : Planifié en **Bloc 14** (micro-phase 14a).
 
 ### WhyThisQuestion.tsx (⏳)
 **Constat** : Composant tooltip non créé. Dépend du populate content_blocks.  
-**Résolution** : À créer après le populate data.
+**Résolution** : Planifié en **Bloc 14** (micro-phase 14a) après le populate.
 
 ---
 
