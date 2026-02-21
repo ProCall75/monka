@@ -7,6 +7,7 @@ import {
     Eye,
     Cog,
     FileText,
+    Grid3x3,
     Loader2,
     AlertCircle,
     RefreshCw,
@@ -31,9 +32,10 @@ import { SimulatorExternalView } from './simulator/SimulatorExternalView'
 import { QuestionsSidebar } from './simulator/QuestionsSidebar'
 import { SimulatorHeader } from './simulator/SimulatorHeader'
 import { detectScoreActionGaps } from './simulator/scoreActionGap'
+import { CoverageHeatmap } from './simulator/CoverageHeatmap'
 
 // === Types ===
-type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary'
+type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary' | 'coverage'
 type ViewMode = 'internal' | 'external'
 type VFilter = VulnerabilityId | 'ALL' | 'TRIGGERS'
 
@@ -49,6 +51,7 @@ const internalTabs: { id: InternalTab; label: string; icon: typeof Shield }[] = 
     { id: 'scoring', label: 'Scoring', icon: BarChart3 },
     { id: 'mp', label: 'Micro-Parcours', icon: Zap },
     { id: 'rules', label: 'Règles', icon: Shield },
+    { id: 'coverage', label: 'Couverture', icon: Grid3x3 },
     { id: 'summary', label: 'Résumé', icon: FileText },
 ]
 
@@ -399,6 +402,11 @@ function SimulatorContent({
                                                         scoreByV={scoreByV} displayScore={displayScore}
                                                         currentThreshold={currentThreshold} scoringMap={scoringMap}
                                                     />
+                                                )}
+
+                                                {/* COVERAGE HEATMAP TAB (Bloc 13) */}
+                                                {activeInternalTab === 'coverage' && (
+                                                    <CoverageHeatmap data={data} />
                                                 )}
 
                                                 {/* SUMMARY / CR TAB */}

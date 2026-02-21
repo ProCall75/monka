@@ -837,6 +837,16 @@ Matrice Questions × MPs montrant quelles questions sont utilisées par quelles 
 > Rapport → docs/certifications/YYYY-MM-DD_qg-13-heatmap-couverture.md
 > ```
 
+### ✅ Bloc 13 — Résultat
+
+> `buildCoverageMatrix.ts` (76L, engine pure) + `CoverageHeatmap.tsx` (126L) créés. Matrice Q×MP groupée par V, intensité par règle, détection orphelines. Nouvel onglet "Couverture" dans simulator. Build clean. Micro-phase 13a (useSimulatorState) reportée.
+
+### 📝 Bloc 13 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| Micro-phase 13a | `SimulatorPage.tsx` 448L > 200L — useSimulatorState non extrait | **Commit dédié** (session refactor) | Extraire ~130L de logique useMemo dans custom hook |
+
 ---
 
 ## Bloc 14 — Mode What-If

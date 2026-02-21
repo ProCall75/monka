@@ -120,3 +120,7 @@ export {
 // === Engine output types ===
 export type { EngineOutput } from '../../engine/clinicalEngine'
 export { runEngine } from '../../engine/clinicalEngine'
+
+// === Coverage Matrix (Bloc 13) ===
+export { buildCoverageMatrix } from '../../engine/buildCoverageMatrix'
+export type { CoverageMatrix, CoverageCell, CoverageStats } from '../../engine/buildCoverageMatrix'
