@@ -700,6 +700,10 @@ Détecter quand un score élevé ne déclenche AUCUNE action. Faille critique du
 > Rapport → docs/certifications/YYYY-MM-DD_qg-10-score-action-gap.md
 > ```
 
+### ✅ Bloc 10 — Résultat
+
+> `scoreActionGap.ts` (63L) créé. Détection Score-Action Gap intégrée dans ScoringTab (banners d'alerte) et Header (badge compteur). Build clean.
+
 ---
 
 ## Bloc 11 — Chaîne Clinique Traçable

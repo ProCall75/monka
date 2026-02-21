@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion'
 import {
-    BarChart3, Zap, CheckCircle2, Layers, Fingerprint,
+    BarChart3, Zap, CheckCircle2, Layers, Fingerprint, AlertTriangle,
 } from 'lucide-react'
 import { VULN_COLORS, type VulnerabilityId } from '../../clinical/hooks'
 import type { VFilter } from './types'
@@ -27,6 +27,7 @@ interface SimulatorHeaderProps {
     triggerQuestions: Array<{ id: string }>
     activeBlocks: Set<string>
     vulnInfo: { name: string; bloc_label: string } | undefined
+    gapCount: number
 }
 
 export function SimulatorHeader({
@@ -34,7 +35,7 @@ export function SimulatorHeader({
     displayScore, currentThreshold, getThresholdColor,
     activatedMPs, totalMPs, answeredCount, totalCount,
     answeredScoringCount, currentScoringCount,
-    triggerQuestions, activeBlocks, vulnInfo,
+    triggerQuestions, activeBlocks, vulnInfo, gapCount,
 }: SimulatorHeaderProps) {
     return (
         <>
@@ -91,6 +92,12 @@ export function SimulatorHeader({
                         <span className="text-monka-muted">Réponses:</span>
                         <span className="font-bold text-monka-heading">{answeredCount}/{totalCount}</span>
                     </div>
+                    {gapCount > 0 && (
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 border-amber-300 bg-amber-50">
+                            <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+                            <span className="font-bold text-amber-700 text-[11px]">{gapCount} Gap{gapCount > 1 ? 's' : ''}</span>
+                        </div>
+                    )}
                 </div>
             </div>
 

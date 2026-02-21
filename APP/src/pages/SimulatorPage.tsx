@@ -30,6 +30,7 @@ import { SimulatorCRTab } from './simulator/SimulatorCRTab'
 import { SimulatorExternalView } from './simulator/SimulatorExternalView'
 import { QuestionsSidebar } from './simulator/QuestionsSidebar'
 import { SimulatorHeader } from './simulator/SimulatorHeader'
+import { detectScoreActionGaps } from './simulator/scoreActionGap'
 
 // === Types ===
 type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary'
@@ -256,6 +257,9 @@ function SimulatorContent({
         return Array.from(activated)
     }, [activatedCats])
 
+    // Score-Action Gap detection (Bloc 10 — US-12)
+    const gaps = useMemo(() => detectScoreActionGaps(data, scoreByV, activatedMPs, mpVulnMap), [data, scoreByV, activatedMPs, mpVulnMap])
+
     // Threshold info for current V
     const currentThreshold = useMemo(() => {
         if (activeV === 'ALL') return null
@@ -297,6 +301,7 @@ function SimulatorContent({
                 triggerQuestions={triggerQuestions}
                 activeBlocks={activeBlocks}
                 vulnInfo={data.vulnerabilities.find(v => v.id === activeV) as { name: string; bloc_label: string } | undefined}
+                gapCount={gaps.length}
             />
 
             {/* Split Screen */}

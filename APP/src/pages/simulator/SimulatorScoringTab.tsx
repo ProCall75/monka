@@ -5,13 +5,14 @@
    threshold levels. Extracted from SimulatorPage.
    ============================================= */
 
-import { motion } from 'framer-motion'
 import {
     VULN_IDS, VULN_META, VULN_COLORS,
-    getThresholdsForVuln,
+    getThresholdsForVuln, buildMPVulnMap,
     type VulnerabilityId,
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
+import { detectScoreActionGaps } from './scoreActionGap'
+import { AlertTriangle } from 'lucide-react'
 
 const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
@@ -31,14 +32,20 @@ function getThresholdColor(level: string): string {
     }
 }
 
+import { motion } from 'framer-motion'
+import { useMemo } from 'react'
+
 /**
- * ScoringTab — Displays scores per vulnerability with circular gauge.
+ * ScoringTab — Displays scores per vulnerability with circular gauge + gap alerts.
  */
-export function SimulatorScoringTab({ data, activeV, scoreByV, displayScore }: SimulatorTabProps) {
+export function SimulatorScoringTab({ data, activeV, scoreByV, displayScore, activatedMPs }: SimulatorTabProps) {
     // Defensive guard — empty data fallback
     if (!data.scoringThresholds?.length || !data.vulnerabilities?.length) {
         return <div className="text-center text-monka-muted py-12 text-sm">Aucune donnée de scoring disponible.</div>
     }
+
+    const mpVulnMap = useMemo(() => buildMPVulnMap(data), [data])
+    const gaps = useMemo(() => detectScoreActionGaps(data, scoreByV, activatedMPs, mpVulnMap), [data, scoreByV, activatedMPs, mpVulnMap])
 
     const s = displayScore
     const pct = s.max > 0 ? (s.score / s.max) * 100 : 0
@@ -53,6 +60,24 @@ export function SimulatorScoringTab({ data, activeV, scoreByV, displayScore }: S
             <h3 className="text-sm font-bold text-monka-heading mb-4">
                 Scoring {activeV === 'ALL' ? '— Vue Globale' : `— ${activeV}`}
             </h3>
+
+            {/* Score-Action Gap Alerts */}
+            {gaps.length > 0 && (
+                <div className="mb-4 space-y-2">
+                    {gaps.map(gap => (
+                        <div key={gap.vulnId} className="flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-amber-300 bg-amber-50">
+                            <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                            <div className="flex-1">
+                                <div className="text-xs font-bold text-amber-700">⚠️ Score-Action Gap — {gap.vulnId}</div>
+                                <p className="text-[11px] text-amber-600 mt-0.5">
+                                    Score <strong>{gap.score}/{gap.max}</strong> (niveau <strong>{gap.thresholdLevel}</strong>) mais <strong>0 micro-parcours activé</strong>. Vérifiez les règles d&apos;activation.
+                                </p>
+                            </div>
+                            <span className="text-[10px] px-2 py-1 rounded-lg bg-amber-200 text-amber-800 font-bold">{gap.thresholdLevel}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
 
             {/* Circular gauge hero */}
             <div className="flex justify-center mb-5">
