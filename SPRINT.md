@@ -888,6 +888,17 @@ Modifier une réponse → recalcul immédiat en temps réel.
 > Rapport → docs/certifications/YYYY-MM-DD_qg-14-what-if.md
 > ```
 
+### ✅ Bloc 14 — Résultat
+
+> `WhatIfDiff.tsx` (119L) créé — diff per-V scores et MPs par rapport aux réponses originales + bouton Reset. Intégré au-dessus du Header dans SimulatorPage. Le simulateur recalculait déjà en temps réel — le What-If ajoute la comparaison visuelle. Build clean.
+
+### 📝 Bloc 14 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| Micro-phase 14a | content_blocks populate depuis KERNEL — chantier data engineering | **Task data dédié** (hors sprint UI) | Script de parsing KERNEL markdown → Supabase |
+| Micro-phase 14b | Tests unitaires — pas de framework configuré | **Session test setup** | Configurer Vitest + tests fonctions pures |
+
 ---
 
 ## Bloc 15 — Comparaison Personas

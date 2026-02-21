@@ -33,6 +33,7 @@ import { QuestionsSidebar } from './simulator/QuestionsSidebar'
 import { SimulatorHeader } from './simulator/SimulatorHeader'
 import { detectScoreActionGaps } from './simulator/scoreActionGap'
 import { CoverageHeatmap } from './simulator/CoverageHeatmap'
+import { WhatIfDiff } from './simulator/WhatIfDiff'
 
 // === Types ===
 type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary' | 'coverage'
@@ -65,6 +66,7 @@ export default function SimulatorPage() {
     const [activeInternalTab, setActiveInternalTab] = useState<InternalTab>('scoring')
     const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({})
     const [personaId, setPersonaId] = useState<string | null>(null)
+    const [originalAnswers, setOriginalAnswers] = useState<Record<string, string>>({})
 
     // Load persona answers from sessionStorage (set by PersonasPage)
     useEffect(() => {
@@ -74,6 +76,7 @@ export default function SimulatorPage() {
             try {
                 const parsed = JSON.parse(stored)
                 setAnswers(parsed)
+                setOriginalAnswers(parsed)
                 setPersonaId(storedId)
                 // Clear after loading
                 sessionStorage.removeItem('monka_persona_answers')
@@ -114,13 +117,13 @@ export default function SimulatorPage() {
         )
     }
 
-    return <SimulatorContent data={data} activeV={activeV} setActiveV={setActiveV} answers={answers} setAnswers={setAnswers} viewMode={viewMode} setViewMode={setViewMode} activeInternalTab={activeInternalTab} setActiveInternalTab={setActiveInternalTab} expandedCategories={expandedCategories} setExpandedCategories={setExpandedCategories} personaId={personaId} />
+    return <SimulatorContent data={data} activeV={activeV} setActiveV={setActiveV} answers={answers} setAnswers={setAnswers} originalAnswers={originalAnswers} viewMode={viewMode} setViewMode={setViewMode} activeInternalTab={activeInternalTab} setActiveInternalTab={setActiveInternalTab} expandedCategories={expandedCategories} setExpandedCategories={setExpandedCategories} personaId={personaId} />
 }
 
 // === Inner component with data loaded ===
 
 function SimulatorContent({
-    data, activeV, setActiveV, answers, setAnswers,
+    data, activeV, setActiveV, answers, setAnswers, originalAnswers,
     viewMode, setViewMode, activeInternalTab, setActiveInternalTab,
     expandedCategories, setExpandedCategories, personaId,
 }: {
@@ -129,6 +132,7 @@ function SimulatorContent({
     setActiveV: (v: VFilter) => void
     answers: Record<string, string>
     setAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>
+    originalAnswers: Record<string, string>
     viewMode: ViewMode
     setViewMode: (m: ViewMode) => void
     activeInternalTab: InternalTab
@@ -287,6 +291,9 @@ function SimulatorContent({
 
     return (
         <div className="h-[calc(100vh-48px)]">
+            {/* What-If Diff banner (Bloc 14) */}
+            <WhatIfDiff data={data} originalAnswers={originalAnswers} currentAnswers={answers}
+                onReset={() => setAnswers(originalAnswers)} />
             <SimulatorHeader
                 activeV={activeV}
                 setActiveV={setActiveV}
