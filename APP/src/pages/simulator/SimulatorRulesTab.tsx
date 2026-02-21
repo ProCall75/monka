@@ -11,7 +11,9 @@ import {
     buildMPMap, buildMPVulnMap,
     type VulnerabilityId,
 } from '../../clinical/hooks'
+import type { MonkaData } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
+import { ClinicalChain } from './ClinicalChain'
 import { useMemo } from 'react'
 
 const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
@@ -52,7 +54,7 @@ export function SimulatorRulesTab({ data, activeV, answers }: SimulatorTabProps)
             ) : (
                 <div className="divide-y divide-monka-border rounded-xl border border-green-200 overflow-hidden mb-4">
                     {triggeredRules.map(r => (
-                        <RuleRow key={r.id} rule={r} isTriggered answers={answers} mpVulnMap={mpVulnMap} mpMap={mpMap} />
+                        <RuleRow key={r.id} rule={r} isTriggered answers={answers} mpVulnMap={mpVulnMap} mpMap={mpMap} data={data} />
                     ))}
                 </div>
             )}
@@ -68,7 +70,7 @@ export function SimulatorRulesTab({ data, activeV, answers }: SimulatorTabProps)
                     </summary>
                     <div className="divide-y divide-monka-border rounded-xl border border-monka-border overflow-hidden">
                         {untriggeredRules.map(r => (
-                            <RuleRow key={r.id} rule={r} isTriggered={false} answers={answers} mpVulnMap={mpVulnMap} mpMap={mpMap} />
+                            <RuleRow key={r.id} rule={r} isTriggered={false} answers={answers} mpVulnMap={mpVulnMap} mpMap={mpMap} data={data} />
                         ))}
                     </div>
                 </details>
@@ -85,11 +87,12 @@ function RuleRow({
     mpVulnMap,
     mpMap,
 }: {
-    rule: { id: string; mp_id: string; niveau: string; sens_clinique?: string | null; condition_logic: unknown }
+    rule: { id: string; mp_id: string; category_id: string; niveau: string; sens_clinique?: string | null; condition_logic: unknown }
     isTriggered: boolean
     answers: Record<string, string>
     mpVulnMap: Record<string, string>
     mpMap: Record<string, { nom: string }>
+    data: MonkaData
 }) {
     const ruleVuln = mpVulnMap[rule.mp_id] || ''
     const ruleColor = vColorMap[ruleVuln as VulnerabilityId] || '#999'
@@ -132,9 +135,7 @@ function RuleRow({
                 </div>
             )}
             {isTriggered && (
-                <div className="mt-1.5 text-green-600 text-[10px] font-bold">
-                    → Contribue à activer MP {rule.mp_id} ({mpMap[rule.mp_id]?.nom || rule.mp_id})
-                </div>
+                <ClinicalChain rule={rule} data={data} answers={answers} color={ruleColor} />
             )}
         </div>
     )

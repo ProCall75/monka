@@ -672,8 +672,10 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 
 | Élément | Problème | Planifié dans | Action |
 |---------|----------|---------------|--------|
-| `SimulatorPage.tsx` | 435L > 200L cible (logique useMemo + orchestrateur restant) | **Passe future** | Extraire hooks dans custom hook `useSimulatorState` |
+| `SimulatorPage.tsx` | 435L > 200L cible (logique useMemo restante) | **Passe future** | Extraire `useSimulatorState` custom hook |
 | Virtualisation | Non évaluée (perf suffisante) | **Feature client** | Implémenter si nécessaire |
+| `OfficialDocsPage.tsx` | Prévu dans SPRINT mais non créé (rename sidebar suffit pour l'instant) | **Feature client** | Créer page dédiée si nouveau contenu |
+| Page Réflexion | "💭 Réflexion → articles blog kernel" — non implémenté | **Feature client** | Créer si besoin éditorial |
 
 ---
 
@@ -703,6 +705,13 @@ Détecter quand un score élevé ne déclenche AUCUNE action. Faille critique du
 ### ✅ Bloc 10 — Résultat
 
 > `scoreActionGap.ts` (63L) créé. Détection Score-Action Gap intégrée dans ScoringTab (banners d'alerte) et Header (badge compteur). Build clean.
+
+### 📝 Bloc 10 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| Dashboard dédié Gap | SPRINT prévoit un dashboard séparé — intégré dans ScoringTab à la place | **Si demande client** | Créer `ScoreActionGapPage.tsx` si visualisation dédiée requise |
+| Tests unitaires | `detectScoreActionGaps()` est pure et testable — pas de tests écrits | **Pre-deploy** | Ajouter tests si CI activée |
 
 ---
 
@@ -743,6 +752,17 @@ MT_S1_02_02 — Identifier relais (acteur: IDEC)
 > §17 Perf — rendu performant si 50+ chaînes affichées ?
 > Rapport → docs/certifications/YYYY-MM-DD_qg-11-chaine-clinique.md
 > ```
+
+### ✅ Bloc 11 — Résultat
+
+> `ClinicalChain.tsx` (102L) créé. Intégré dans `SimulatorRulesTab.tsx` — les règles déclenchées affichent maintenant la chaîne complète Q → Rule → Cat → Reco → MT. Build clean.
+
+### 📝 Bloc 11 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| Micro-phase 11a | `content_blocks` non peuplé depuis KERNEL → tooltips "Pourquoi cette question ?" inactifs | **Chantier data dédié** | Script de populate à créer |
+| `WhyThisQuestion.tsx` | Composant tooltip non créé — dépend du populate | **Après populate** | Créer après alimentation content_blocks |
 
 ---
 
