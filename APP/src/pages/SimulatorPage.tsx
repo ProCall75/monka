@@ -1,14 +1,11 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-    Activity,
     Shield,
     BarChart3,
     Zap,
     Eye,
     Cog,
-    ChevronDown,
-    ChevronRight,
     CheckCircle2,
     FileText,
     Layers,
@@ -34,6 +31,7 @@ import { SimulatorMPTab } from './simulator/SimulatorMPTab'
 import { SimulatorRulesTab } from './simulator/SimulatorRulesTab'
 import { SimulatorCRTab } from './simulator/SimulatorCRTab'
 import { SimulatorExternalView } from './simulator/SimulatorExternalView'
+import { QuestionsSidebar } from './simulator/QuestionsSidebar'
 
 // === Types ===
 type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary'
@@ -384,179 +382,23 @@ function SimulatorContent({
             {/* Split Screen */}
             <div className="flex gap-4 h-[calc(100%-80px)]">
 
-                {/* LEFT — Questionnaire */}
-                <div className="w-[45%] flex flex-col min-w-0">
-                    <div className="glass-card flex-1 flex flex-col overflow-hidden">
-                        <div className="px-5 py-3 border-b border-monka-border flex items-center justify-between">
-                            <div>
-                                <h2 className="text-sm font-bold text-monka-heading">
-                                    {activeV === 'TRIGGERS'
-                                        ? 'Triggers — Questions de profilage'
-                                        : activeV === 'ALL'
-                                            ? 'Questionnaire — Toutes vulnérabilités'
-                                            : `Questionnaire — ${data.vulnerabilities.find(v => v.id === activeV)?.name || activeV}`
-                                    }
-                                </h2>
-                                <p className="text-[11px] text-monka-muted mt-0.5">
-                                    {activeV === 'TRIGGERS'
-                                        ? `${answeredCount}/${totalCount} triggers répondus`
-                                        : `${answeredScoringCount}/${currentScoringCount} scorantes • ${answeredCount}/${totalCount} total`
-                                    }
-                                </p>
-                            </div>
-                            <div className="h-1.5 w-24 bg-gray-100 rounded-full overflow-hidden">
-                                <motion.div
-                                    className="h-full bg-monka-primary rounded-full"
-                                    animate={{ width: `${totalCount > 0 ? (answeredCount / totalCount) * 100 : 0}%` }}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex-1 overflow-y-auto px-5 py-3 space-y-3">
-                            {Object.entries(groupedQuestions).map(([groupKey, questions]) => {
-                                if (questions.length === 0) return null
-                                const isExpanded = expandedCategories[groupKey] !== false
-                                const groupAnswered = questions.filter(q => answers[q.id]).length
-
-                                // For V groups (ALL mode) get color from vulnerability map
-                                const isVGroup = groupKey.startsWith('V') && groupKey.length === 2
-                                const groupColor = isVGroup ? vColorMap[groupKey as VulnerabilityId] : '#58BF94'
-                                const groupLabel = isVGroup
-                                    ? `${groupKey} — ${vulnerabilities.find(v => v.id === groupKey)?.label || groupKey} (${questions.length})`
-                                    : `${groupKey} (${questions.length})`
-
-                                return (
-                                    <div key={groupKey}>
-                                        <button
-                                            onClick={() => toggleCategory(groupKey)}
-                                            className="flex items-center gap-2 w-full py-2 text-left"
-                                        >
-                                            <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ backgroundColor: `${groupColor}20` }}>
-                                                <Activity className="w-3.5 h-3.5" style={{ color: groupColor }} />
-                                            </div>
-                                            <span className="text-xs font-bold text-monka-heading uppercase tracking-wider flex-1 truncate">
-                                                {groupLabel}
-                                            </span>
-                                            <span className="text-[10px] text-monka-muted mr-1">{groupAnswered}/{questions.length}</span>
-                                            {isExpanded ? <ChevronDown className="w-3.5 h-3.5 text-monka-muted" /> : <ChevronRight className="w-3.5 h-3.5 text-monka-muted" />}
-                                        </button>
-
-                                        <AnimatePresence>
-                                            {isExpanded && (
-                                                <motion.div
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: 'auto', opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    transition={{ duration: 0.2 }}
-                                                    className="overflow-hidden"
-                                                >
-                                                    <div className="divide-y divide-monka-border pb-2">
-                                                        {questions.map((q) => {
-                                                            const isAnswered = !!answers[q.id]
-                                                            const isScoring = scoringQIds.has(q.id)
-                                                            const qMPs = questionMPMap[q.id] || []
-                                                            const qVColor = q.vulnerability_id ? vColorMap[q.vulnerability_id as VulnerabilityId] || '#999' : '#999'
-
-                                                            return (
-                                                                <div
-                                                                    key={q.id}
-                                                                    className={`p-3 rounded-xl border transition-all duration-200
-                                    ${isAnswered
-                                                                            ? 'bg-monka-primary/5 border-monka-primary/20'
-                                                                            : 'bg-white/40 border-monka-border/30 hover:border-monka-border'
-                                                                        }`}
-                                                                >
-                                                                    <div className="flex items-start gap-2 mb-2">
-                                                                        {/* Question ID badge */}
-                                                                        <span
-                                                                            className="text-[10px] font-bold px-1.5 py-0.5 rounded-md flex-shrink-0 mt-0.5"
-                                                                            style={{
-                                                                                backgroundColor: isScoring ? `${qVColor}20` : '#f3f4f6',
-                                                                                color: isScoring ? qVColor : '#9ca3af',
-                                                                            }}
-                                                                        >
-                                                                            {q.id}
-                                                                        </span>
-                                                                        {/* V badge in ALL mode */}
-                                                                        {activeV === 'ALL' && q.vulnerability_id && (
-                                                                            <span
-                                                                                className="text-[9px] font-bold px-1 py-0.5 rounded text-white flex-shrink-0 mt-0.5"
-                                                                                style={{ backgroundColor: qVColor }}
-                                                                            >
-                                                                                {q.vulnerability_id}
-                                                                            </span>
-                                                                        )}
-                                                                        {/* Classification badge */}
-                                                                        {q.classification && (
-                                                                            <span className="text-[9px] px-1 py-0.5 rounded bg-gray-100 text-gray-500 flex-shrink-0 mt-0.5">
-                                                                                {q.classification}
-                                                                            </span>
-                                                                        )}
-                                                                        {isScoring && (
-                                                                            <span className="text-[9px] px-1 py-0.5 rounded bg-amber-50 text-amber-600 flex-shrink-0 mt-0.5">
-                                                                                scorante
-                                                                            </span>
-                                                                        )}
-                                                                        <p className="text-sm text-monka-text leading-snug">{q.question_text}</p>
-                                                                    </div>
-
-                                                                    {/* MP tags */}
-                                                                    {qMPs.length > 0 && (
-                                                                        <div className="mb-2 flex flex-wrap gap-1">
-                                                                            {qMPs.map(mpId => (
-                                                                                <span key={mpId} className="text-[10px] text-monka-muted bg-monka-dark/5 px-1.5 py-0.5 rounded">
-                                                                                    MP: {mpId} — {mpMap[mpId]?.nom || mpId}
-                                                                                </span>
-                                                                            ))}
-                                                                        </div>
-                                                                    )}
-
-                                                                    {/* Response type indicator */}
-                                                                    {q.response_type && (
-                                                                        <div className="mb-2">
-                                                                            <span className="text-[9px] text-monka-muted italic">{q.response_type}</span>
-                                                                        </div>
-                                                                    )}
-
-                                                                    {/* Options */}
-                                                                    <div className="flex flex-wrap gap-1.5">
-                                                                        {(q.response_options || []).map((opt) => (
-                                                                            <button
-                                                                                key={opt}
-                                                                                onClick={() => {
-                                                                                    setAnswers(prev => {
-                                                                                        const next = { ...prev }
-                                                                                        if (next[q.id] === opt) delete next[q.id]
-                                                                                        else next[q.id] = opt
-                                                                                        return next
-                                                                                    })
-                                                                                }}
-                                                                                className={`
-                                          px-3 py-1 rounded-lg text-xs font-medium transition-all duration-150
-                                          ${answers[q.id] === opt
-                                                                                        ? 'text-white shadow-sm'
-                                                                                        : 'bg-white/60 text-monka-text/70 hover:bg-white hover:text-monka-text border border-transparent hover:border-monka-border'
-                                                                                    }
-                                        `}
-                                                                                style={answers[q.id] === opt ? { backgroundColor: qVColor } : {}}
-                                                                            >
-                                                                                {opt}
-                                                                            </button>
-                                                                        ))}
-                                                                    </div>
-                                                                </div>
-                                                            )
-                                                        })}
-                                                    </div>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
+                <QuestionsSidebar
+                    activeV={activeV}
+                    vulnName={data.vulnerabilities.find(v => v.id === activeV)?.name}
+                    answers={answers}
+                    setAnswers={setAnswers}
+                    groupedQuestions={groupedQuestions}
+                    expandedCategories={expandedCategories}
+                    toggleCategory={toggleCategory}
+                    scoringQIds={scoringQIds}
+                    questionMPMap={questionMPMap}
+                    mpMap={mpMap}
+                    vulnerabilities={vulnerabilities}
+                    answeredCount={answeredCount}
+                    totalCount={totalCount}
+                    answeredScoringCount={answeredScoringCount}
+                    currentScoringCount={currentScoringCount}
+                />
 
                 {/* RIGHT — Engine View */}
                 <div className="w-[55%] flex flex-col min-w-0">

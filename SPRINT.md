@@ -560,6 +560,18 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 > Rapport → docs/certifications/YYYY-MM-DD_qg-07-fiches-questions.md
 > ```
 
+### ✅ Bloc 7 — Résultat
+
+> `SimulatorPage.tsx` réduit de 673L → 515L (-158L). `QuestionsSidebar.tsx` créé (198L, 3 sous-composants). Build clean.
+
+### 📝 Bloc 7 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| `SimulatorPage.tsx` | 515L > 200L cible (header V-filter + stats inline) | **Bloc 9** (micro-phase 9b) | Extraire `SimulatorHeader.tsx` |
+| Virtualisation | 165 questions sans `react-window` | **Bloc 9** (si perf future) | Ajouter si > 200 questions |
+| Filtres avancés | Recherche texte, slider score non implémentés | **Feature client** | Implémenter à la demande |
+
 ---
 
 ## Bloc 8 — Page Vulnérabilités Drill-Down
@@ -606,6 +618,17 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 > Rapport → docs/certifications/YYYY-MM-DD_qg-08-before-deploy.md
 > ```
 
+### ✅ Bloc 8 — Résultat (Passe 1)
+
+> `VulnerabilitiesPage.tsx` réduit de 657L → 85L. `VulnDetail.tsx` (249L) et `VulnDetailTabs.tsx` (253L) créés. Build clean. Micro-Phase 8a (split supabaseData.ts) reportée en passe 2.
+
+### 📝 Bloc 8 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| `supabaseData.ts` | 545L > 300L max (micro-phase 8a) | **Bloc 8 passe 2** | Découper en `queries.ts`, `helpers.ts`, `conditional-model.ts` |
+| Virtualisation tables | Tables MTs/Rules > 100 lignes sans virtualisation | **Bloc 9** (si perf) | Ajouter `react-window` si nécessaire |
+
 ---
 
 ## Bloc 9 — Navigation + Documents Officiels
@@ -633,6 +656,13 @@ Cards structurées avec filtres avancés au lieu de la liste plate actuelle.
 > §19 Docs — docs officiels référencés dans README ?
 > Rapport → docs/certifications/YYYY-MM-DD_qg-09-navigation-docs.md
 > ```
+
+### 🔧 Micro-Phase 9b — Extraction SimulatorHeader (dette Bloc 7)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Extraire `SimulatorHeader.tsx`** — header V-filter + stats (~100L) de `SimulatorPage.tsx`
+> 2. **Réduire `SimulatorPage.tsx`** de ~515L vers ~415L
+> 3. **Évaluer virtualisation** `react-window` si > 200 questions chargées
 
 ---
 
