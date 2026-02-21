@@ -936,6 +936,17 @@ Comparer 2-3 personas côte à côte.
 > Rapport → docs/certifications/YYYY-MM-DD_qg-15-comparaison-personas.md
 > ```
 
+### ✅ Bloc 15 — Résultat
+
+> `PersonaComparison.tsx` (183L) créé — multi-select 2-3 personas, tableau per-V scores+MPs, highest score highlighted, Delta Analysis top 15 réponses divergentes. Nouvel onglet "Personas" (GitCompare icon). Build clean. 15b évalué → non nécessaire (gap déjà visible en ScoringTab).
+
+### 📝 Bloc 15 — Dette planifiée
+
+| Élément | Problème | Planifié dans | Action |
+|---------|----------|---------------|--------|
+| Micro-phase 15a | OfficialDocsPage & page Réflexion — pages secondaires | **Bloc 18+** ou hors sprint | Créer pages docs/réflexion si besoin éditorial |
+| Micro-phase 15b | Dashboard Gap dédié | **Résolu** ✅ | Non nécessaire — gap visible en ScoringTab (Bloc 10) |
+
 ---
 
 ## Bloc 16 — Score de Confiance Moteur

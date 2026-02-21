@@ -8,6 +8,7 @@ import {
     Cog,
     FileText,
     Grid3x3,
+    GitCompare,
     Loader2,
     AlertCircle,
     RefreshCw,
@@ -34,9 +35,10 @@ import { SimulatorHeader } from './simulator/SimulatorHeader'
 import { detectScoreActionGaps } from './simulator/scoreActionGap'
 import { CoverageHeatmap } from './simulator/CoverageHeatmap'
 import { WhatIfDiff } from './simulator/WhatIfDiff'
+import { PersonaComparison } from './simulator/PersonaComparison'
 
 // === Types ===
-type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary' | 'coverage'
+type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary' | 'coverage' | 'personas'
 type ViewMode = 'internal' | 'external'
 type VFilter = VulnerabilityId | 'ALL' | 'TRIGGERS'
 
@@ -53,6 +55,7 @@ const internalTabs: { id: InternalTab; label: string; icon: typeof Shield }[] = 
     { id: 'mp', label: 'Micro-Parcours', icon: Zap },
     { id: 'rules', label: 'Règles', icon: Shield },
     { id: 'coverage', label: 'Couverture', icon: Grid3x3 },
+    { id: 'personas', label: 'Personas', icon: GitCompare },
     { id: 'summary', label: 'Résumé', icon: FileText },
 ]
 
@@ -414,6 +417,11 @@ function SimulatorContent({
                                                 {/* COVERAGE HEATMAP TAB (Bloc 13) */}
                                                 {activeInternalTab === 'coverage' && (
                                                     <CoverageHeatmap data={data} />
+                                                )}
+
+                                                {/* PERSONA COMPARISON TAB (Bloc 15) */}
+                                                {activeInternalTab === 'personas' && (
+                                                    <PersonaComparison data={data} />
                                                 )}
 
                                                 {/* SUMMARY / CR TAB */}
