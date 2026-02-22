@@ -54,7 +54,8 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
         const qText = getQuestionText(data, c.q)
         const answer = answers[c.q]
         const valStr = c.vals ? c.vals.join(' ou ') : String(c.val ?? c.min ?? '')
-        return { questionId: c.q, questionText: qText, op: c.op, expectedValue: valStr, currentAnswer: answer || null }
+        const opFR = c.op === '==' || c.op === 'eq' ? '=' : c.op === 'in' ? 'parmi' : c.op === '>=' ? '≥' : c.op === '>' ? '>' : c.op === '<' ? '<' : c.op
+        return { questionId: c.q, questionText: qText, op: opFR, expectedValue: valStr, currentAnswer: answer || null }
     }
 
     const niveauStyle = (niveau: string) =>
@@ -218,7 +219,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                                                 <div key={i} className={`text-[11px] p-2 rounded-lg ${isFired ? 'bg-green-100/60' : 'bg-gray-100/50'}`}>
                                                     <p className="font-medium text-monka-heading">« {c.questionText} »</p>
                                                     <p className="text-monka-muted mt-0.5">
-                                                        Condition : réponse {c.op === '==' ? '=' : c.op} <strong className="text-monka-text">{c.expectedValue}</strong>
+                                                    Condition : réponse {c.op} <strong className="text-monka-text">{c.expectedValue}</strong>
                                                         {c.currentAnswer && (
                                                             <span className={`ml-2 ${isFired ? 'text-green-600 font-bold' : 'text-orange-500'}`}>
                                                                 → {c.currentAnswer} {isFired ? '✅' : '✗'}
