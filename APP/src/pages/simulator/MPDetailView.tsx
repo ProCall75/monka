@@ -180,7 +180,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                 <div className="space-y-1.5 mb-2">
                     {resolved.map((c, i) => (
                         <div key={i} className={`text-[11px] p-2 rounded-lg ${isFired ? 'bg-green-100/60' : 'bg-gray-100/50'}`}>
-                            <p className="font-medium text-monka-heading">« {c.questionText} »</p>
+                            <p className="font-medium text-monka-heading"><span className="text-[9px] font-bold text-indigo-500 bg-indigo-50 px-1 py-0.5 rounded mr-1.5">{c.questionId}</span>« {c.questionText} »</p>
                             <p className="text-monka-muted mt-0.5">
                                 Condition : réponse {c.op} <strong className="text-monka-text">{c.expectedValue}</strong>
                                 {c.currentAnswer && (
