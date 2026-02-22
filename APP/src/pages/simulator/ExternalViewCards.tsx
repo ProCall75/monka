@@ -188,7 +188,7 @@ export function PreventionSection({ data, preventionRecosByMP, preventionMPIds, 
                     if (!mp) return null
                     const recos = preventionRecosByMP[mpId]
                     // Get prevention MTs for this MP
-                    const preventionMTs = data.microTaches.filter(mt => mt.mp_id === mpId && mt.is_prevention)
+                    const preventionMTs = data.microTaches.filter(mt => mt.mp_id === mpId)
                     return (
                         <div key={mpId} className="rounded-2xl overflow-hidden" style={{ border: '2px solid rgba(124,58,237,0.2)', boxShadow: '0 4px 24px rgba(124,58,237,0.08)' }}>
                             <div className="px-5 py-3 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' }}>
