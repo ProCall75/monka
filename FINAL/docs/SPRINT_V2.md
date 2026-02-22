@@ -160,6 +160,7 @@ Verdict requis : ✅ ou ⚠️ pour continuer. 🔴 = STOP.
 | V2-09 | [Score de Confiance Moteur](#bloc-v2-09--score-de-confiance-moteur) | Feature | Bloc 16 orig. | ⬜ |
 | V2-10 | [Intégrité Données + Tests](#bloc-v2-10--intégrité-données--tests) | Quality | Bloc 17 orig. | ⬜ |
 | V2-11 | [Workflow Itération + Certification](#bloc-v2-11--workflow-itération--certification) | Process | Iter 7 | ⬜ |
+| V2-11bis | [ITERATION (Bloc Libre)](#bloc-v2-11bis--iteration-bloc-libre) | Feedback | — | ⬜ |
 | V2-12 | [Certification Finale](#bloc-v2-12--certification-finale) | Certification | Blocs 18-19 orig. | ⬜ |
 
 ---
@@ -907,6 +908,12 @@ Bloc 17 original. Checks identiques + ajout vérification content_blocks coverag
 > 1. **Vitest** — Configurer `vitest.config.ts`
 > 2. **Tests** — Tester `evaluateRule`, `scoreActionGap`, `coverageMatrix` (≥ 15 tests pures)
 
+### 🤖 Micro-Phase 10b — Tests E2E Agent Browser (User Stories PRD)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Agent Web / Browser Tool** — Validation de bout en bout de l'application via navigation simulée.
+> 2. **Couverture PRD** — S'assurer que chaque User Story principale du PRD est testée fonctionnellement dans le navigateur.
+
 ### 🔍 QG-V2-10 — **JALON CRITIQUE — Intégrité Données**
 
 > [!WARNING]
@@ -943,6 +950,27 @@ Finaliser le workflow itération et exécuter la première certification complè
 > §19 Docs — iteration.md complet ? Sprint V2 à jour ?
 > §22 Checklists — checklist itération fonctionnelle ? Dry-run exécuté ?
 > Rapport → FINAL/docs/certifications/YYYY-MM-DD_qg-v2-11-workflow.md
+> ```
+
+---
+
+## Bloc V2-11bis — ITERATION (Bloc Libre)
+
+### Objectif
+Sprint d'itération pure. Validation visuelle, ajustements UI/UX et intégration des feedbacks marginaux d'Antonin **avant** la certification finale.
+
+### Livrables
+- [ ] Retours UI intégrés
+- [ ] Ajustements UX validés
+- [ ] Zéro régression induite par ces ajustements
+
+### 🔍 QG-V2-11bis — Itération & Feedbacks
+
+> ```
+> /quality-agent checkpoint=after-architecture bloc=V2-11bis
+> §18 A11y — Modifications UI impactent-elles le score WCAG ?
+> §10 Edge cases — Les ajustements couvrent-ils tous les cas limites identifiés ?
+> Rapport → FINAL/docs/certifications/YYYY-MM-DD_qg-v2-11bis-iteration.md
 > ```
 
 ---
@@ -1021,7 +1049,8 @@ graph TD
     V209 --> V210[V2-10 Intégrité]
     V210 --> QG{{"🔍 QG JALON"}}
     QG --> V211[V2-11 Workflow]
-    V211 --> V212[V2-12 Certification]
+    V211 --> V211b[V2-11bis ITERATION Libre]
+    V211b --> V212[V2-12 Certification]
     V212 --> FINAL{{"🔍 CERTIFICATION FINALE"}}
 
     style QG fill:#DC2626,color:#fff
@@ -1036,7 +1065,7 @@ graph TD
 | **Phase B** — Pages de contenu | V2-02, V2-03, V2-04 | 2-3 sessions |
 | **Phase C** — Documents | V2-05, V2-06, V2-07 | 2 sessions |
 | **Phase D** — Qualité | V2-08, V2-09, V2-10 | 1-2 sessions |
-| **Phase E** — Certification | V2-11, V2-12 | 1 session |
+| **Phase E** — Certification | V2-11, V2-11bis, V2-12 | 1-2 sessions |
 
 ---
 
@@ -1051,4 +1080,4 @@ graph TD
 
 *PRAGMA Studio — Senior Dev Framework v2.1 — Sprint V2*
 *Monka Clinical Engine — Supabase `mbxeqrvofrmhqlwlefff`*
-*12 blocs × 12 Quality Gates — Zéro dette technique — Zéro hardcode clinique*
+*13 blocs × 13 Quality Gates — Zéro dette technique — Zéro hardcode clinique*
