@@ -158,7 +158,7 @@ Verdict requis : ✅ ou ⚠️ pour continuer. 🔴 = STOP.
 | V2-07 | [Vue Externe Patient Premium](#bloc-v2-07--vue-externe-patient-premium) | Feature | Bloc 5 orig. | ✅ |
 | V2-08 | [Refactor & Dette Technique](#bloc-v2-08--refactor--dette-technique) | Refactor | Blocs 16a/16b/17a/17b | ✅ |
 | V2-09 | [Score de Confiance Moteur](#bloc-v2-09--score-de-confiance-moteur) | Feature | Bloc 16 orig. | ✅ |
-| V2-10 | [Intégrité Données + Tests](#bloc-v2-10--intégrité-données--tests) | Quality | Bloc 17 orig. | ⬜ |
+| V2-10 | [Intégrité Données + Tests](#bloc-v2-10--intégrité-données--tests) | Quality | Bloc 17 orig. | ✅ |
 | V2-11 | [Workflow Itération + Certification](#bloc-v2-11--workflow-itération--certification) | Process | Iter 7 | ⬜ |
 | V2-11bis | [ITERATION (Bloc Libre)](#bloc-v2-11bis--iteration-bloc-libre) | Feedback | — | ⬜ |
 | V2-12 | [Certification Finale](#bloc-v2-12--certification-finale) | Certification | Blocs 18-19 orig. | ⬜ |
