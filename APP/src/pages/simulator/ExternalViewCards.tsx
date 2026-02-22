@@ -138,7 +138,7 @@ function RecoCard({ reco, data, critBg }: {
 // ── MT List ────────────────────────────────────────────
 
 function MTList({ mts, label, icon, borderColor, labelColor }: {
-    mts: Array<{ id: string; type: string; libelle: string; acteur?: string[] | null; is_contributive?: boolean }>
+    mts: Array<{ id: string; type: string; wording_utilisateur: string; libelle: string; acteur?: string[] | null; is_contributive?: boolean }>
     label: string
     icon: React.ReactNode
     borderColor: string
@@ -149,15 +149,15 @@ function MTList({ mts, label, icon, borderColor, labelColor }: {
         <div className={`ml-6 mt-2 space-y-1 border-l-2 ${borderColor} pl-3`}>
             <span className={`text-[9px] font-bold ${labelColor} uppercase flex items-center gap-1`}>{icon} {label}</span>
             {mts.map(mt => {
-                const acteur = mt.acteur?.filter(a => !a.toLowerCase().includes('aidant') && !a.toLowerCase().includes('autonome')).join(', ') || null
+                const acteurStr = mt.acteur?.join(', ') || null
                 return (
                     <div key={mt.id} className="flex items-center gap-2 text-xs py-1">
                         <span className={`px-1 py-0.5 rounded text-[9px] font-bold shrink-0 ${mt.type === 'MED' ? 'bg-red-100 text-red-600' : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600'
                             : mt.type === 'INFO' ? 'bg-green-100 text-green-600' : mt.type === 'ORGA' ? 'bg-purple-100 text-purple-600'
                                 : mt.type === 'STRUC' ? 'bg-cyan-100 text-cyan-600' : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
-                        <span className="text-gray-700 flex-1">{mt.libelle}</span>
+                        <span className="text-gray-700 flex-1">{mt.wording_utilisateur || mt.libelle}</span>
                         {mt.is_contributive && <span className="text-[8px] font-bold text-amber-600 bg-amber-50 px-1 py-0.5 rounded">ASR</span>}
-                        {acteur && <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-indigo-50 text-indigo-600">{acteur}</span>}
+                        {acteurStr && <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-indigo-50 text-indigo-600">{acteurStr}</span>}
                     </div>
                 )
             })}
@@ -211,16 +211,18 @@ export function PreventionSection({ data, preventionRecosByMP, preventionMPIds, 
                                                     <span className="text-[9px] font-bold text-purple-400 uppercase flex items-center gap-1">
                                                         <Sparkles className="w-3 h-3" /> Actions concrètes
                                                     </span>
-                                                    {recoMTs.map(mt => (
-                                                        <div key={mt.id} className="flex items-center gap-2 text-xs py-1">
-                                                            <span className="text-gray-700">{mt.libelle}</span>
-                                                            {mt.acteur?.length && (
-                                                                <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-purple-50 text-purple-600">
-                                                                    {mt.acteur.filter(a => !a.toLowerCase().includes('aidant')).join(', ') || mt.acteur[0]}
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    ))}
+                                                    {recoMTs.map(mt => {
+                                                        const acteurStr = mt.acteur?.join(', ') || null
+                                                        return (
+                                                            <div key={mt.id} className="flex items-center gap-2 text-xs py-1">
+                                                                <span className={`px-1 py-0.5 rounded text-[9px] font-bold shrink-0 ${mt.type === 'MED' ? 'bg-red-100 text-red-600' : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600'
+                                                                    : mt.type === 'INFO' ? 'bg-green-100 text-green-600' : mt.type === 'ORGA' ? 'bg-purple-100 text-purple-600'
+                                                                        : mt.type === 'STRUC' ? 'bg-cyan-100 text-cyan-600' : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
+                                                                <span className="text-gray-700 flex-1">{mt.wording_utilisateur || mt.libelle}</span>
+                                                                {acteurStr && <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-purple-50 text-purple-600">{acteurStr}</span>}
+                                                            </div>
+                                                        )
+                                                    })}
                                                 </div>
                                             )}
                                         </div>

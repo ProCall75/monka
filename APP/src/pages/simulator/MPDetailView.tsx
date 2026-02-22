@@ -1,6 +1,4 @@
-/* MPDetailView — Pipeline drill-down for a single MP.
-   Category filter + ASR block + strong fired/non-fired visual distinction.
-   Architecture: <300L. */
+/* MPDetailView — Fired rules first, non-fired collapsed. <300L. */
 
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -34,6 +32,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
     const firedRuleIds = useMemo(() => new Set(mpRules.filter(r => evaluateRule(r, answers)).map(r => r.id)), [mpRules, answers])
     const [showInactive, setShowInactive] = useState(false)
     const [filterCat, setFilterCat] = useState<string | 'ALL'>('ALL')
+    const [expandedNonFired, setExpandedNonFired] = useState<string | null>(null)
 
     const activeCatNiveau = useMemo(() => {
         const m = new Map<string, string>()
@@ -45,7 +44,6 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
 
     const activatedCategories = mpCategories.filter(c => activeCatNiveau.has(c.id))
     const inactiveCategories = mpCategories.filter(c => !activeCatNiveau.has(c.id))
-
     // Apply filter
     const filteredActivated = filterCat === 'ALL' ? activatedCategories : activatedCategories.filter(c => c.id === filterCat)
     const filteredInactive = filterCat === 'ALL' ? inactiveCategories : inactiveCategories.filter(c => c.id === filterCat)
@@ -58,11 +56,14 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
         return { questionId: c.q, questionText: qText, op: opFR, expectedValue: valStr, currentAnswer: answer || null }
     }
 
-    const niveauStyle = (niveau: string) =>
-        niveau === 'critique' ? { bg: 'bg-red-50', text: 'text-red-600', border: 'border-red-200', badge: 'bg-red-100 text-red-600' }
-            : niveau === 'ccc' ? { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-200', badge: 'bg-amber-100 text-amber-600' }
-                : niveau === 'standard' ? { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-200', badge: 'bg-emerald-100 text-emerald-600' }
-                    : { bg: 'bg-gray-50', text: 'text-gray-500', border: 'border-gray-200', badge: 'bg-gray-100 text-gray-500' }
+    const niveauStyle = (niveau: string) => {
+        const MAP: Record<string, { bg: string; text: string; border: string; badge: string }> = {
+            critique: { bg: 'bg-red-50', text: 'text-red-600', border: 'border-red-200', badge: 'bg-red-100 text-red-600' },
+            ccc: { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-200', badge: 'bg-amber-100 text-amber-600' },
+            standard: { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-200', badge: 'bg-emerald-100 text-emerald-600' },
+        }
+        return MAP[niveau] || { bg: 'bg-gray-50', text: 'text-gray-500', border: 'border-gray-200', badge: 'bg-gray-100 text-gray-500' }
+    }
 
     return (
         <div>
@@ -83,8 +84,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     ? <span className="text-[10px] font-bold px-2.5 py-1 rounded-full text-white" style={{ backgroundColor: mpColor }}>ACTIF</span>
                     : <span className="text-[10px] text-monka-muted bg-gray-100 px-2.5 py-1 rounded-full">Inactif</span>}
             </div>
-
-            {/* ═══ ASR BLOCK ═══ */}
+            {/* ASR BLOCK */}}
             {mp?.asr_wording && (
                 <div className="mb-4 p-3.5 rounded-xl border-2 border-dashed" style={{ borderColor: mpColor + '60', backgroundColor: mpColor + '08' }}>
                     <div className="flex items-center gap-2 mb-1.5">
@@ -97,8 +97,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     )}
                 </div>
             )}
-
-            {/* Stats bar */}
+            {/* Stats bar */}}
             <div className="flex gap-3 mb-4">
                 {[
                     { val: activatedCategories.length, total: mpCategories.length, label: 'Catégories activées' },
@@ -112,8 +111,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 ))}
             </div>
-
-            {/* ═══ CATEGORY FILTER ═══ */}
+            {/* CATEGORY FILTER */}}
             {mpCategories.length > 1 && (
                 <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
                     <Filter className="w-3.5 h-3.5 text-monka-muted flex-shrink-0" />
@@ -134,8 +132,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     })}
                 </div>
             )}
-
-            {/* ═══ ACTIVATED CATEGORIES ═══ */}
+            {/* ACTIVATED CATEGORIES */}}
             {filteredActivated.length > 0 && (
                 <div className="mb-5">
                     <h4 className="text-[10px] font-bold text-monka-heading uppercase tracking-wider mb-3 flex items-center gap-1.5">
@@ -146,8 +143,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 </div>
             )}
-
-            {/* ═══ INACTIVE CATEGORIES ═══ */}
+            {/* INACTIVE CATEGORIES */}}
             {filteredInactive.length > 0 && (
                 <div>
                     <button onClick={() => setShowInactive(!showInactive)}
@@ -167,11 +163,51 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
             )}
         </div>
     )
+    function renderRule(rule: ReturnType<typeof getRulesForMP>[0], isFired: boolean) {
+        const conditions = (rule.condition_logic as unknown as { q: string; op: string; val?: string; vals?: string[]; min?: number }[]) || []
+        const resolved = conditions.map(resolveCondition)
+        return (
+            <div key={rule.id}
+                className={`p-3 rounded-lg transition-all ${isFired
+                    ? 'bg-green-50 border-2 border-green-400 shadow-sm shadow-green-100'
+                    : 'bg-gray-50/30 border border-gray-200/50 opacity-50'}`}>
+                <div className="flex items-center gap-2 mb-2">
+                    {isFired ? <span className="text-sm font-bold text-green-600">✅</span> : <span className="text-sm text-gray-300">○</span>}
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${niveauStyle(rule.niveau).badge}`}>{rule.niveau}</span>
+                    <span className="text-[10px] text-monka-muted">{rule.delai_jours}j</span>
+                    {isFired && <span className="text-[10px] font-bold text-green-600 bg-green-100 px-1.5 py-0.5 rounded">FIRED</span>}
+                </div>
+                <div className="space-y-1.5 mb-2">
+                    {resolved.map((c, i) => (
+                        <div key={i} className={`text-[11px] p-2 rounded-lg ${isFired ? 'bg-green-100/60' : 'bg-gray-100/50'}`}>
+                            <p className="font-medium text-monka-heading">« {c.questionText} »</p>
+                            <p className="text-monka-muted mt-0.5">
+                                Condition : réponse {c.op} <strong className="text-monka-text">{c.expectedValue}</strong>
+                                {c.currentAnswer && (
+                                    <span className={`ml-2 ${isFired ? 'text-green-600 font-bold' : 'text-orange-500'}`}>
+                                        → {c.currentAnswer} {isFired ? '✅' : '✗'}
+                                    </span>
+                                )}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                {rule.sens_clinique && (
+                    <div className="flex gap-2 items-start p-2 rounded-lg bg-blue-50/50 border border-blue-100">
+                        <Lightbulb className="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0" />
+                        <p className="text-[11px] text-blue-800 leading-snug italic">{rule.sens_clinique}</p>
+                    </div>
+                )}
+            </div>
+        )
+    }
 
     function renderCategory(cat: typeof mpCategories[0], isActivated: boolean) {
         const niveau = activeCatNiveau.get(cat.id)
         const ns = niveau ? niveauStyle(niveau) : niveauStyle('')
         const catRules = mpRules.filter(r => r.category_id === cat.id)
+        const catFiredRules = catRules.filter(r => firedRuleIds.has(r.id))
+        const catNonFiredRules = catRules.filter(r => !firedRuleIds.has(r.id))
         const catRecos = mpRecos.filter(r => r.category_id === cat.id)
         const activeReco = catRecos.find(r => r.niveau === niveau)
         const catMTs = mpMTs.filter(mt => mt.category_id === cat.id)
@@ -189,56 +225,37 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 </div>
 
-                {/* Rules with STRONG fired/non-fired difference */}
+                {/* Rules — fired first, non-fired collapsed */}
                 {catRules.length > 0 && (
                     <div className="px-4 py-3 border-t border-monka-border/30">
                         <div className="flex items-center gap-1.5 mb-2">
                             <HelpCircle className="w-3 h-3 text-monka-muted" />
                             <span className="text-[10px] font-bold text-monka-muted uppercase">Comment ça s&apos;active</span>
                         </div>
-                        <div className="space-y-2">
-                            {catRules.map(rule => {
-                                const isFired = firedRuleIds.has(rule.id)
-                                const conditions = (rule.condition_logic as unknown as { q: string; op: string; val?: string; vals?: string[]; min?: number }[]) || []
-                                const resolved = conditions.map(resolveCondition)
-                                return (
-                                    <div key={rule.id}
-                                        className={`p-3 rounded-lg transition-all ${isFired
-                                            ? 'bg-green-50 border-2 border-green-400 shadow-sm shadow-green-100'
-                                            : 'bg-gray-50/30 border border-gray-200/50 opacity-50'}`}>
-                                        <div className="flex items-center gap-2 mb-2">
-                                            {isFired
-                                                ? <span className="text-sm font-bold text-green-600">✅</span>
-                                                : <span className="text-sm text-gray-300">○</span>}
-                                            <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${niveauStyle(rule.niveau).badge}`}>{rule.niveau}</span>
-                                            <span className="text-[10px] text-monka-muted">{rule.delai_jours}j</span>
-                                            {isFired && <span className="text-[10px] font-bold text-green-600 bg-green-100 px-1.5 py-0.5 rounded">FIRED</span>}
-                                        </div>
-                                        <div className="space-y-1.5 mb-2">
-                                            {resolved.map((c, i) => (
-                                                <div key={i} className={`text-[11px] p-2 rounded-lg ${isFired ? 'bg-green-100/60' : 'bg-gray-100/50'}`}>
-                                                    <p className="font-medium text-monka-heading">« {c.questionText} »</p>
-                                                    <p className="text-monka-muted mt-0.5">
-                                                    Condition : réponse {c.op} <strong className="text-monka-text">{c.expectedValue}</strong>
-                                                        {c.currentAnswer && (
-                                                            <span className={`ml-2 ${isFired ? 'text-green-600 font-bold' : 'text-orange-500'}`}>
-                                                                → {c.currentAnswer} {isFired ? '✅' : '✗'}
-                                                            </span>
-                                                        )}
-                                                    </p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        {rule.sens_clinique && (
-                                            <div className="flex gap-2 items-start p-2 rounded-lg bg-blue-50/50 border border-blue-100">
-                                                <Lightbulb className="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0" />
-                                                <p className="text-[11px] text-blue-800 leading-snug italic">{rule.sens_clinique}</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        {/* FIRED RULES — shown first, prominent */}
+                        {catFiredRules.length > 0 && (
+                            <div className="space-y-2 mb-2">
+                                {catFiredRules.map(rule => renderRule(rule, true))}
+                            </div>
+                        )}
+                        {/* NON-FIRED RULES — collapsed */}
+                        {catNonFiredRules.length > 0 && (
+                            <div>
+                                <button onClick={() => setExpandedNonFired(prev => prev === cat.id ? null : cat.id)}
+                                    className="flex items-center gap-1.5 text-[10px] font-bold text-monka-muted hover:text-monka-text transition-colors mt-1">
+                                    <ChevronDown className={`w-3 h-3 transition-transform ${expandedNonFired === cat.id ? 'rotate-180' : ''}`} />
+                                    Autres règles ({catNonFiredRules.length})
+                                </button>
+                                <AnimatePresence>
+                                    {expandedNonFired === cat.id && (
+                                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+                                            className="space-y-2 mt-2 overflow-hidden">
+                                            {catNonFiredRules.map(rule => renderRule(rule, false))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        )}
                     </div>
                 )}
 
