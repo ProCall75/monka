@@ -68,6 +68,7 @@ export default function SimulatorPage() {
     const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({})
     const [personaId, setPersonaId] = useState<string | null>(null)
     const [originalAnswers, setOriginalAnswers] = useState<Record<string, string>>({})
+    const [whatIfEnabled, setWhatIfEnabled] = useState(true)
 
     // Load persona answers from sessionStorage (set by PersonasPage)
     useEffect(() => {
@@ -118,7 +119,7 @@ export default function SimulatorPage() {
         )
     }
 
-    return <SimulatorContent data={data} activeV={activeV} setActiveV={setActiveV} answers={answers} setAnswers={setAnswers} originalAnswers={originalAnswers} viewMode={viewMode} setViewMode={setViewMode} activeInternalTab={activeInternalTab} setActiveInternalTab={setActiveInternalTab} expandedCategories={expandedCategories} setExpandedCategories={setExpandedCategories} personaId={personaId} />
+    return <SimulatorContent data={data} activeV={activeV} setActiveV={setActiveV} answers={answers} setAnswers={setAnswers} originalAnswers={originalAnswers} viewMode={viewMode} setViewMode={setViewMode} activeInternalTab={activeInternalTab} setActiveInternalTab={setActiveInternalTab} expandedCategories={expandedCategories} setExpandedCategories={setExpandedCategories} personaId={personaId} whatIfEnabled={whatIfEnabled} setWhatIfEnabled={setWhatIfEnabled} />
 }
 
 // === Inner component with data loaded ===
@@ -127,6 +128,7 @@ function SimulatorContent({
     data, activeV, setActiveV, answers, setAnswers, originalAnswers,
     viewMode, setViewMode, activeInternalTab, setActiveInternalTab,
     expandedCategories, setExpandedCategories, personaId,
+    whatIfEnabled, setWhatIfEnabled,
 }: {
     data: MonkaData
     activeV: VFilter
@@ -141,6 +143,8 @@ function SimulatorContent({
     expandedCategories: Record<string, boolean>
     setExpandedCategories: React.Dispatch<React.SetStateAction<Record<string, boolean>>>
     personaId: string | null
+    whatIfEnabled: boolean
+    setWhatIfEnabled: (v: boolean) => void
 }) {
     // === Derived data ===
     const questionMPMap = useMemo(() => buildQuestionMPMap(data), [data])
@@ -294,7 +298,7 @@ function SimulatorContent({
         <div className="h-[calc(100vh-48px)]">
             {/* What-If Diff banner (Bloc 14) */}
             <WhatIfDiff data={data} originalAnswers={originalAnswers} currentAnswers={answers}
-                onReset={() => setAnswers(originalAnswers)} />
+                onReset={() => setAnswers(originalAnswers)} enabled={whatIfEnabled} onToggle={() => setWhatIfEnabled(!whatIfEnabled)} />
             <SimulatorHeader
                 activeV={activeV}
                 setActiveV={setActiveV}

@@ -19,6 +19,7 @@ import {
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
 import { CRMedecinDocument } from './CRMedecinDocument'
+import { ProfileRecap } from './ProfileRecap'
 
 const vulnerabilities = VULN_IDS.map(id => ({ id, label: VULN_META[id].name, color: VULN_META[id].color }))
 
@@ -55,7 +56,10 @@ export function SimulatorCRTab({
 
     return (
         <div>
-            <h3 className="text-sm font-bold text-monka-heading mb-4">
+            {/* Profile recap from triggers */}
+            <ProfileRecap data={data} answers={answers} />
+
+            <h3 className="text-sm font-bold text-monka-heading mb-4 mt-4">
                 Résumé {activeV === 'ALL' ? '— Toutes vulnérabilités' : `— ${activeV}`}
             </h3>
 
