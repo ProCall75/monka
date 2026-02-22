@@ -1,7 +1,5 @@
-/* MPDrilldown — Standalone drill-down view for a single MP.
-   Shows categories → rules (in French) → recommendations → MTs.
-   Content blocks integrated at each level. No persona/answers needed (data reference).
-   Architecture: component < 250L, uses helpers from clinical/hooks. */
+/* MPDrilldown — Categories → rules → recommendations → MTs.
+   Content blocks at each level. Architecture: <300L, uses hooks barrel. */
 
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
@@ -39,8 +37,9 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
     const allRecos = useMemo(() => getRecosForMP(data, mpId), [data, mpId])
     const allMTs = useMemo(() => getMTsForMP(data, mpId), [data, mpId])
     const prevMTs = useMemo(() => allMTs.filter(mt => mt.id.includes('_PREV_')), [allMTs])
+    const prevRecos = useMemo(() => allRecos.filter(r => r.niveau === 'prevention'), [allRecos])
     const mpCBs = useMemo(() => getContentBlocksForEntity(data, 'mp', mpId), [data, mpId])
-    const hasPrevention = prevMTs.length > 0
+    const hasPrevention = prevMTs.length > 0 || prevRecos.length > 0
 
     // Build filter options: Tous + each category + Prévention
     const filterOptions = useMemo(() => {
@@ -95,22 +94,8 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                 </div>
             )}
 
-            {/* Category filter bar */}
-            <div className="flex items-center gap-1.5 mb-4 flex-wrap">
-                <Filter className="w-3.5 h-3.5 text-monka-muted mr-1" />
-                {filterOptions.map(opt => (
-                    <button key={opt.id} onClick={() => setCatFilter(opt.id)}
-                        className={`text-[10px] font-medium px-2.5 py-1.5 rounded-lg transition-all ${catFilter === opt.id
-                                ? opt.id === 'PREV' ? 'bg-purple-100 text-purple-700 shadow-sm' : 'bg-monka-primary/10 text-monka-primary shadow-sm'
-                                : 'bg-white/60 text-monka-muted hover:bg-white border border-monka-border/50'
-                            }`}>
-                        {opt.label}
-                    </button>
-                ))}
-            </div>
-
             {/* Stats bar */}
-            <div className="flex gap-3 mb-5">
+            <div className="flex gap-3 mb-4">
                 {[
                     { val: categories.length, label: 'Catégories', icon: ChevronDown },
                     { val: allRules.length, label: 'Règles', icon: Shield },
@@ -121,6 +106,24 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                         <div className="text-lg font-bold text-monka-heading">{s.val}</div>
                         <div className="text-[10px] text-monka-muted">{s.label}</div>
                     </div>
+                ))}
+            </div>
+
+            {/* Category filter bar — below stats */}
+            <div className="glass-card px-4 py-3 mb-5 flex items-center gap-2 flex-wrap">
+                <Filter className="w-4 h-4 text-monka-muted" />
+                <span className="text-[10px] font-bold text-monka-muted uppercase mr-1">Filtrer :</span>
+                {filterOptions.map(opt => (
+                    <button key={opt.id} onClick={() => setCatFilter(opt.id)}
+                        className={`text-[11px] font-semibold px-3 py-2 rounded-xl transition-all border ${
+                            catFilter === opt.id
+                                ? opt.id === 'PREV'
+                                    ? 'bg-purple-100 text-purple-700 border-purple-200 shadow-sm'
+                                    : 'bg-monka-primary/10 text-monka-primary border-monka-primary/20 shadow-sm'
+                                : 'bg-white/80 text-monka-text/70 border-monka-border hover:bg-white hover:shadow-sm'
+                        }`}>
+                        {opt.label}
+                    </button>
                 ))}
             </div>
 
@@ -228,25 +231,56 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                 })}
 
                 {/* Dedicated Prévention filter view */}
-                {catFilter === 'PREV' && prevMTs.length > 0 && (
+                {catFilter === 'PREV' && (prevRecos.length > 0 || prevMTs.length > 0) && (
                     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                         className="glass-card overflow-hidden bg-purple-50/30">
                         <div className="px-4 py-3 border-b border-purple-200/60">
                             <div className="flex items-center gap-2">
                                 <Shield className="w-4 h-4 text-purple-500" />
-                                <span className="text-xs font-bold text-purple-700">Prévention — Micro-Tâches dédiées</span>
-                                <span className="text-[10px] text-purple-400 ml-auto">{prevMTs.length} MT</span>
+                                <span className="text-xs font-bold text-purple-700">Prévention</span>
+                                <span className="text-[10px] text-purple-400 ml-auto">{prevRecos.length} Reco · {prevMTs.length} MT</span>
                             </div>
                         </div>
-                        <div className="px-4 py-3 space-y-1">
-                            {prevMTs.map(mt => (
-                                <div key={mt.id} className="flex items-center gap-2 text-[11px] py-1">
-                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-100 text-purple-600">PREV</span>
-                                    <span className="text-monka-text flex-1">{mt.libelle}</span>
-                                    {mt.acteur && <span className="text-[9px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{mt.acteur}</span>}
+
+                        {/* Prevention Recommendations */}
+                        {prevRecos.length > 0 && (
+                            <div className="px-4 py-3 border-b border-purple-200/40">
+                                <div className="flex items-center gap-1.5 mb-2">
+                                    <Target className="w-3 h-3 text-purple-500" />
+                                    <span className="text-[10px] font-bold text-purple-600 uppercase">Recommandations ({prevRecos.length})</span>
                                 </div>
-                            ))}
-                        </div>
+                                <div className="space-y-1.5">
+                                    {prevRecos.map(reco => (
+                                        <div key={reco.id} className="p-2.5 rounded-lg border border-purple-200/50 bg-white/50">
+                                            <div className="flex items-center gap-1.5 mb-1">
+                                                <NiveauBadge niveau={reco.niveau} />
+                                            </div>
+                                            <p className="text-xs text-monka-text leading-snug mb-1">{reco.wording_utilisateur}</p>
+                                            <p className="text-[10px] text-monka-muted italic">IDEC : {reco.wording_idec}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Prevention MTs */}
+                        {prevMTs.length > 0 && (
+                            <div className="px-4 py-3">
+                                <div className="flex items-center gap-1.5 mb-2">
+                                    <ListChecks className="w-3 h-3 text-purple-500" />
+                                    <span className="text-[10px] font-bold text-purple-600 uppercase">Micro-Tâches ({prevMTs.length})</span>
+                                </div>
+                                <div className="space-y-1">
+                                    {prevMTs.map(mt => (
+                                        <div key={mt.id} className="flex items-center gap-2 text-[11px] py-1">
+                                            <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-100 text-purple-600">PREV</span>
+                                            <span className="text-monka-text flex-1">{mt.libelle}</span>
+                                            {mt.acteur && <span className="text-[9px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{mt.acteur}</span>}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </motion.div>
                 )}
             </div>

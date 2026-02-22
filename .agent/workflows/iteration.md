@@ -29,11 +29,15 @@ Avant de modifier quoi que ce soit, scanner les impacts :
 - [ ] Types explicites sur tout le nouveau code ?
 
 ### Checklist Senior Dev Framework
-- [ ] §2 Structure — taille fichier respectée ?
+- [ ] §2 Structure — taille fichier respectée (page <200L, composant <250L, fichier <300L) ?
 - [ ] §3 Tests — tests ajoutés EN MÊME TEMPS ?
+- [ ] §4 Types — explicites sur tout le nouveau code ?
 - [ ] §10 Edge Cases — cas limites identifiés ?
-- [ ] §17 Perf — pas de régression perf ?
-- [ ] §18 A11y — accessibilité maintenue ?
+- [ ] §11 Error Handling — erreurs loggées avec contexte ?
+- [ ] §15 Git — format commit respecté (type(scope): description) ?
+- [ ] §17 Perf — pas de régression perf (memoization, lazy loading) ?
+- [ ] §18 A11y — accessibilité maintenue (labels, keyboard nav) ?
+- [ ] §19 Docs — documentation mise à jour si changement structurel ?
 
 ### Seuil d'impact
 Si ≥ 3 fichiers en impact 🔴 → PAUSE + replanification avant de coder.
@@ -52,6 +56,7 @@ Si ≥ 3 fichiers en impact 🔴 → PAUSE + replanification avant de coder.
 2. **Tester immédiatement** chaque modification
 3. **Si un fichier dépasse 300L** → split AVANT de continuer
 4. **Si un composant dépasse 250L** → extraire sous-composant
+5. **Si une page dépasse 200L** → extraire logique dans hooks/composants
 
 ### Token Guard (identique au sprint-bloc)
 Si approche de la limite → sauvegarder l'état et revenir.
@@ -70,36 +75,35 @@ Après chaque modification UI :
 ### Scan complet obligatoire
 
 ```bash
-# 1. Build clean
-npm run build 2>&1 | tail -5
+# 1. Type check
+npx tsc --noEmit 2>&1 | wc -l
 
-# 2. Type check
-npx tsc --noEmit 2>&1 | tail -10
-
-# 3. Scan fichiers > 300L
+# 2. Scan fichiers > 300L
 find APP/src -name '*.tsx' -o -name '*.ts' | xargs wc -l | sort -rn | head -20
 
-# 4. Scan imports directs engine (violation architecture)
+# 3. Scan imports directs engine (violation architecture)
 grep -r "from.*engine/" APP/src/pages/ --include='*.tsx' --include='*.ts' | grep -v hooks
 
-# 5. Scan console.log
+# 4. Scan console.log
 grep -rn "console.log" APP/src/ --include='*.tsx' --include='*.ts' | grep -v node_modules
+
+# 5. Scan any
+grep -rn ": any" APP/src/ --include='*.tsx' --include='*.ts' | grep -v node_modules | grep -v .d.ts
 ```
 
 ### Checklist post-itération
-- [ ] Build clean (0 erreurs)
 - [ ] Type check clean (0 erreurs TS)
 - [ ] Aucun fichier > 300L
 - [ ] Aucune violation d'architecture (imports directs)
 - [ ] Aucun console.log
-- [ ] Tests passent (si configurés)
+- [ ] Aucun `any` non justifié
 - [ ] Content blocks utilisés (pas de hardcode clinique)
 
 ---
 
-## Étape 4 — 📄 CERTIFICATION ITÉRATION
+## Étape 4 — 📄 CERTIFICATION ITÉRATION (QG)
 
-Générer un rapport de certification (Quality Gate itération) :
+Générer un rapport de certification dans `FINAL/docs/certifications/iterations/` :
 
 ```markdown
 ## 🔍 QG Itération — [Nom de l'itération]
@@ -108,32 +112,82 @@ Générer un rapport de certification (Quality Gate itération) :
 **Fichiers modifiés :** X
 **Lignes ajoutées/supprimées :** +Y / -Z
 
-### Vérifications
+### Vérifications techniques
 | Check | Résultat |
 |---|---|
-| Build clean | ✅/❌ |
-| Types clean | ✅/❌ |
+| tsc --noEmit | ✅/❌ |
 | Fichiers < 300L | ✅/❌ |
-| Architecture respectée | ✅/❌ |
-| Pas de console.log | ✅/❌ |
+| Architecture (hooks barrier) | ✅/❌ |
+| console.log = 0 | ✅/❌ |
+| any = 0 | ✅/❌ |
 | Hardcode audit | ✅/❌ |
-| Tests ajoutés | ✅/❌ |
+
+### Conformité Senior Dev Framework
+| § | Règle | Conforme |
+|---|---|---|
+| §2 | Structure fichier | ✅/❌ |
+| §4 | Types explicites | ✅/❌ |
+| §11 | Error handling | ✅/❌ |
+| §15 | Format commit | ✅/❌ |
+| §17 | Performance | ✅/❌ |
+| §19 | Documentation | ✅/❌ |
 
 ### Verdict
 ✅ Conforme / ⚠️ Réserves / 🔴 Non conforme
-
-### Rapport
-→ `docs/certifications/YYYY-MM-DD_iter-description.md`
 ```
 
 ---
 
-## Étape 5 — 📝 MISE À JOUR SPRINT
+## Étape 5 — 📝 AUDIT PAGE (Documentation vivante)
 
-Si l'itération crée de la dette ou des idées non-exécutées :
-1. **Documenter** dans `SPRINT.md` au bloc approprié
-2. **Créer une micro-phase** si nécessaire
-3. **Objectif : 0 dette flottante**
+Après chaque itération sur une page, mettre à jour sa fiche dans `APP/docs/pages/` :
+
+```markdown
+# [NomPage] — Fiche Audit
+
+## Rôle
+Description de ce que fait la page.
+
+## Données consommées
+| Source | Hook / Getter | Données |
+|---|---|---|
+| Supabase table X | useMonkaData → getXForY() | Description |
+
+## Composants utilisés
+- `ComposantA` — Description
+- `ComposantB` — Description
+
+## Connexions DB vérifiées
+- [ ] Toutes les données affichées proviennent de la DB
+- [ ] Aucun texte clinique hardcodé
+- [ ] Content blocks utilisés là où applicable
+
+## Métriques
+| Métrique | Valeur |
+|---|---|
+| Lignes | XL |
+| Imports hooks | X |
+| Composants enfants | X |
+```
+
+---
+
+## Étape 6 — 🏗️ REPLANIFICATION DETTE TECHNIQUE
+
+Après chaque itération, vérifier et replanifier :
+
+1. **Scanner la dette existante** : fichiers > 250L, violations archi, `any` utilisés
+2. **Comparer au Senior Dev Framework** : identifier les écarts (§2-§19)
+3. **Prioriser** : classer par criticité (🔴 immédiat / 🟠 prochain sprint / 🟢 backlog)
+4. **Documenter** dans `TODO.md` ou `SPRINT.md` au bloc approprié
+5. **Objectif : 0 dette flottante** — toute dette identifiée doit être planifiée
+
+### Matrice de priorisation dette
+```
+🔴 Critique (immédiat) : fichier > 300L, violation archi, any non justifié, console.log
+🟠 Moyen (prochain sprint) : fichier > 250L, tests manquants, docs obsolètes
+🟢 Faible (backlog) : refactor esthétique, optimisation perf non-bloquante
+```
 
 ---
 
@@ -146,6 +200,8 @@ Si l'itération crée de la dette ou des idées non-exécutées :
 ❌ Skipper l'analyse d'impact et coder directement
 ❌ Oublier la certification post-itération
 ❌ Laisser de la dette sans la planifier dans un bloc SPRINT
+❌ Pousser sans vérifier la conformité Senior Dev Framework
+❌ Oublier de produire ou mettre à jour la fiche audit page
 ```
 
 ---
