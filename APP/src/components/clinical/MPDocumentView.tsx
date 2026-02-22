@@ -60,12 +60,6 @@ export function MPDocumentView({ data, mpId, onBack }: MPDocumentProps) {
                     <div className="border-b border-gray-200 pb-4">
                         <h1 className="text-lg font-bold text-gray-800 mb-1">{mp.nom}</h1>
                         {mp.objectif && <p className="text-sm text-gray-600 italic">{mp.objectif}</p>}
-                        {mp.signature_a && (
-                            <div className="flex gap-2 mt-2 text-[10px]">
-                                <span className="bg-green-50 text-green-600 px-2 py-0.5 rounded border border-green-200">🎯 {mp.signature_a}</span>
-                                {mp.signature_b && <span className="bg-red-50 text-red-500 px-2 py-0.5 rounded border border-red-200">⚠️ {mp.signature_b}</span>}
-                            </div>
-                        )}
                     </div>
 
                     {/* 1. Objectif clinique (content blocks) */}

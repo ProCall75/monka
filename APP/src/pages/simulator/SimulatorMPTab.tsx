@@ -106,7 +106,6 @@ function MPCard({ mp, data, answers, isActive, color, onClick }: MPCardProps) {
                             {mpFiredCount}/{mpRuleCount} règles
                         </span>
                     )}
-                    {isActive && mp.signature_a && <span className="text-[9px] bg-green-50 text-green-600 px-1.5 py-0.5 rounded">{mp.signature_a}</span>}
                 </div>
             </div>
             <div className="flex flex-col items-end gap-1">

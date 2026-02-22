@@ -81,14 +81,6 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     : <span className="text-[10px] text-monka-muted bg-gray-100 px-2.5 py-1 rounded-full">Inactif</span>}
             </div>
 
-            {/* Signatures */}
-            {mp?.signature_a && (
-                <div className="flex gap-2 mb-4">
-                    <span className="text-[10px] bg-green-50 text-green-600 px-2 py-1 rounded border border-green-200">🎯 {mp.signature_a}</span>
-                    {mp.signature_b && <span className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded border border-red-200">⚠️ {mp.signature_b}</span>}
-                </div>
-            )}
-
             {/* Stats bar */}
             <div className="flex gap-3 mb-5">
                 {[
@@ -234,8 +226,8 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                             {catMTs.map(mt => (
                                 <div key={mt.id} className="flex items-center gap-2 text-[11px] py-1">
                                     <span className={`px-1 py-0.5 rounded text-[9px] font-bold ${mt.type === 'MED' ? 'bg-red-100 text-red-600' : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600'
-                                            : mt.type === 'INFO' ? 'bg-green-100 text-green-600' : mt.type === 'ORGA' ? 'bg-purple-100 text-purple-600'
-                                                : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
+                                        : mt.type === 'INFO' ? 'bg-green-100 text-green-600' : mt.type === 'ORGA' ? 'bg-purple-100 text-purple-600'
+                                            : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
                                     <span className="text-monka-text flex-1">{mt.libelle}</span>
                                     {mt.acteur && <span className="text-[9px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{mt.acteur}</span>}
                                 </div>
