@@ -13,7 +13,7 @@ import {
     useMonkaData, invalidateCache, VULN_META, VULN_IDS,
     type MonkaData,
 } from '../clinical/hooks'
-import { EngineHealthCard } from '../components/clinical/EngineHealthCard'
+
 import { IntegrityReportCard } from '../components/clinical/IntegrityReportCard'
 
 export default function DashboardPage() {
@@ -136,9 +136,8 @@ function DashboardContent({ data }: { data: MonkaData }) {
                     onClick={() => nav('/personas')} anim={anim} delay={0.4} />
             </div>
 
-            {/* Engine Health + Integrity */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-                <EngineHealthCard data={data} />
+            {/* Integrity Report */}
+            <div className="mb-6">
                 <IntegrityReportCard data={data} />
             </div>
 
