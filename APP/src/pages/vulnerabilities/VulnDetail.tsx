@@ -3,18 +3,18 @@
 
 import { useState, useMemo } from 'react'
 import {
-    Activity, BarChart3, List, Layers, Zap, Target, ListChecks,
+    Activity, BarChart3, List, Layers,
 } from 'lucide-react'
 import {
     VULN_META, buildMPVulnMap,
     type MonkaData, type VulnerabilityId,
 } from '../../clinical/hooks'
-import { VulnMPsTab, VulnRulesTab, VulnRecosTab, VulnMTsTab } from './VulnDetailTabs'
+import { VulnMPsTab } from './VulnDetailTabs'
 import { OverviewTab, QuestionsTab, ScoringTab } from './VulnOverviewTabs'
 import { ExportButton } from '../../components/clinical/ExportButton'
 import { ScoringDocumentView } from '../../components/clinical/ScoringDocumentView'
 
-type TabId = 'overview' | 'questions' | 'scoring' | 'mps' | 'rules' | 'recos' | 'mts'
+type TabId = 'overview' | 'questions' | 'scoring' | 'mps'
 
 interface VulnDetailProps {
     vulnId: string
@@ -55,9 +55,6 @@ export function VulnDetail({ vulnId, data }: VulnDetailProps) {
         { id: 'questions', label: 'Questions', icon: List, count: stats.questions.length },
         { id: 'scoring', label: 'Scoring', icon: Activity, count: stats.scoring.length },
         { id: 'mps', label: 'Micro-Parcours', icon: Layers, count: stats.mps.length },
-        { id: 'rules', label: 'Règles', icon: Zap, count: stats.rules.length },
-        { id: 'recos', label: 'Recommandations', icon: Target, count: stats.recos.length },
-        { id: 'mts', label: 'Micro-Tâches', icon: ListChecks, count: stats.mts.length },
     ]
 
     if (showDoc) return <ScoringDocumentView data={data} vulnId={vulnId as VulnerabilityId} onBack={() => setShowDoc(false)} />
@@ -125,9 +122,6 @@ export function VulnDetail({ vulnId, data }: VulnDetailProps) {
                 {activeTab === 'questions' && <QuestionsTab questions={stats.questions} />}
                 {activeTab === 'scoring' && <ScoringTab stats={stats} color={meta.color} data={data} vulnId={vulnId} />}
                 {activeTab === 'mps' && <VulnMPsTab mps={stats.mps} rules={stats.rules} recos={stats.recos} mts={stats.mts} color={meta.color} />}
-                {activeTab === 'rules' && <VulnRulesTab rules={stats.rules} data={data} color={meta.color} />}
-                {activeTab === 'recos' && <VulnRecosTab recos={stats.recos} rules={stats.rules} mts={stats.mts} color={meta.color} />}
-                {activeTab === 'mts' && <VulnMTsTab mts={stats.mts} recos={stats.recos} color={meta.color} />}
             </div>
         </div>
     )

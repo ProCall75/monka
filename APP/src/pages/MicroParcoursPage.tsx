@@ -2,7 +2,8 @@
    Delegates drill-down rendering to MPDrilldown component.
    Architecture: page < 200L, uses hooks only. */
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FolderTree, Activity, AlertTriangle, ChevronRight, Layers } from 'lucide-react'
 import {
@@ -19,6 +20,16 @@ export default function MicroParcoursPage() {
     const { data, loading, error } = useMonkaData()
     const [vFilter, setVFilter] = useState<VFilter>('ALL')
     const [selectedMP, setSelectedMP] = useState<string | null>(null)
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    // Auto-select MP from URL param (?mp=R1)
+    useEffect(() => {
+        const mpParam = searchParams.get('mp')
+        if (mpParam && data?.microParcours.some(mp => mp.id === mpParam)) {
+            setSelectedMP(mpParam)
+            setSearchParams({}, { replace: true })
+        }
+    }, [searchParams, data, setSearchParams])
 
     if (loading) {
         return (

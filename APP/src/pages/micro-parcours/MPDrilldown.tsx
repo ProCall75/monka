@@ -11,10 +11,11 @@ import {
 import {
     VULN_META, getCategoriesForMP, getRulesForMP,
     getRecosForMP, getMTsForMP, getContentBlocksForEntity,
-    getQuestionText, type MonkaData, type VulnerabilityId,
+    type MonkaData, type VulnerabilityId,
 } from '../../clinical/hooks'
 import { ExportButton } from '../../components/clinical/ExportButton'
 import { MPDocumentView } from '../../components/clinical/MPDocumentView'
+import { RuleExplainerFR } from '../../components/clinical/RuleExplainerFR'
 
 interface MPDrilldownProps {
     data: MonkaData
@@ -30,6 +31,7 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
     const allRules = useMemo(() => getRulesForMP(data, mpId), [data, mpId])
     const allRecos = useMemo(() => getRecosForMP(data, mpId), [data, mpId])
     const allMTs = useMemo(() => getMTsForMP(data, mpId), [data, mpId])
+    const prevMTs = useMemo(() => allMTs.filter(mt => mt.id.includes('_PREV_')), [allMTs])
     const mpCBs = useMemo(() => getContentBlocksForEntity(data, 'mp', mpId), [data, mpId])
 
     if (!mp) return null
@@ -94,7 +96,8 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                 {categories.map(cat => {
                     const catRules = allRules.filter(r => r.category_id === cat.id)
                     const catRecos = allRecos.filter(r => r.category_id === cat.id)
-                    const catMTs = allMTs.filter(mt => mt.category_id === cat.id)
+                    const catMTs = allMTs.filter(mt => mt.category_id === cat.id && !mt.id.includes('_PREV_'))
+                    const catPrevMTs = prevMTs.filter(mt => mt.category_id === cat.id)
 
                     return (
                         <motion.div key={cat.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
@@ -118,7 +121,7 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                                     </div>
                                     <div className="space-y-2">
                                         {catRules.map(rule => (
-                                            <RuleCardFR key={rule.id} rule={rule} data={data} />
+                                            <RuleExplainerFR key={rule.id} rule={rule} data={data} />
                                         ))}
                                     </div>
                                 </div>
@@ -156,10 +159,29 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                                         {catMTs.map(mt => (
                                             <div key={mt.id} className="flex items-center gap-2 text-[11px] py-1">
                                                 <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${mt.type === 'MED' ? 'bg-red-100 text-red-600'
-                                                        : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600'
-                                                            : mt.type === 'INFO' ? 'bg-green-100 text-green-600'
-                                                                : 'bg-blue-100 text-blue-600'
+                                                    : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600'
+                                                        : mt.type === 'INFO' ? 'bg-green-100 text-green-600'
+                                                            : 'bg-blue-100 text-blue-600'
                                                     }`}>{mt.type}</span>
+                                                <span className="text-monka-text flex-1">{mt.libelle}</span>
+                                                {mt.acteur && <span className="text-[9px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{mt.acteur}</span>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Prevention MTs — separate block */}
+                            {catPrevMTs.length > 0 && (
+                                <div className="px-4 py-3 bg-purple-50/30">
+                                    <div className="flex items-center gap-1.5 mb-2">
+                                        <Shield className="w-3 h-3 text-purple-500" />
+                                        <span className="text-[10px] font-bold text-purple-600 uppercase">Prévention ({catPrevMTs.length})</span>
+                                    </div>
+                                    <div className="space-y-1">
+                                        {catPrevMTs.map(mt => (
+                                            <div key={mt.id} className="flex items-center gap-2 text-[11px] py-1">
+                                                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-100 text-purple-600">PREV</span>
                                                 <span className="text-monka-text flex-1">{mt.libelle}</span>
                                                 {mt.acteur && <span className="text-[9px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{mt.acteur}</span>}
                                             </div>
@@ -176,44 +198,6 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
 }
 
 // ── Sub-components ─────────────────────────────────────
-
-/** Rule card with conditions explained in French */
-function RuleCardFR({ rule, data }: { rule: MonkaData['activationRules'][0]; data: MonkaData }) {
-    const conditions = rule.condition_logic as unknown as { q: string; op: string; val?: string; vals?: string[]; min?: number }[]
-
-    return (
-        <div className="p-2.5 rounded-lg border border-monka-border bg-white/50">
-            <div className="flex items-center gap-1.5 mb-1.5">
-                <NiveauBadge niveau={rule.niveau} />
-                <span className="text-[10px] text-monka-muted">{rule.delai_jours}j</span>
-                {rule.sens_clinique && (
-                    <span className="text-[11px] text-monka-text flex-1 italic">{rule.sens_clinique}</span>
-                )}
-            </div>
-            {/* Conditions in French */}
-            {Array.isArray(conditions) && conditions.length > 0 && (
-                <div className="space-y-1 mt-1">
-                    {conditions.map((c, i) => {
-                        const questionText = getQuestionText(data, c.q)
-                        const valDisplay = c.vals ? c.vals.join(' ou ') : String(c.val ?? c.min ?? '')
-                        return (
-                            <div key={i} className="text-[11px] text-monka-text pl-3 border-l-2 border-monka-primary/20">
-                                <span className="font-medium">« {questionText} »</span>
-                                <span className="text-monka-muted ml-1">
-                                    {c.op === 'in' ? `répondu ${valDisplay}`
-                                        : c.op === 'eq' ? `= ${valDisplay}`
-                                            : c.op === 'gte' ? `≥ ${valDisplay}`
-                                                : c.op === 'contains' ? `contient ${valDisplay}`
-                                                    : `${c.op} ${valDisplay}`}
-                                </span>
-                            </div>
-                        )
-                    })}
-                </div>
-            )}
-        </div>
-    )
-}
 
 function NiveauBadge({ niveau }: { niveau: string }) {
     const cls = niveau === 'critique' ? 'bg-red-100 text-red-600'
