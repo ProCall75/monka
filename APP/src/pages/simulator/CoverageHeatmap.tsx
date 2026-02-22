@@ -14,6 +14,21 @@ interface CoverageHeatmapProps {
 }
 
 export function CoverageHeatmap({ data, activeV }: CoverageHeatmapProps) {
+    // ALL/TRIGGERS → matrix is unreadable with 24 MPs, show message
+    if (activeV === 'ALL' || activeV === 'TRIGGERS') {
+        return (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3">
+                    <span className="text-xl">🔍</span>
+                </div>
+                <p className="text-sm font-bold text-monka-heading mb-1">Sélectionnez une vulnérabilité</p>
+                <p className="text-xs text-monka-muted max-w-xs">
+                    La matrice de couverture est plus lisible filtrée par vulnérabilité. Utilisez les boutons V1 à V5 ci-dessus.
+                </p>
+            </div>
+        )
+    }
+
     const matrix = useMemo(() => buildCoverageMatrix(data), [data])
     const { stats } = matrix
 

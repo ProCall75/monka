@@ -1,10 +1,10 @@
 /* MPDetailView — Pipeline drill-down for a single MP.
-   Activated categories first with rule explanations in FR,
-   then inactive categories (collapsed). Architecture: <300L. */
+   Category filter + ASR block + strong fired/non-fired visual distinction.
+   Architecture: <300L. */
 
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, Shield, TrendingUp, ListChecks, ChevronDown, Lightbulb, HelpCircle } from 'lucide-react'
+import { ArrowLeft, Shield, TrendingUp, ListChecks, ChevronDown, Lightbulb, HelpCircle, Target, Filter } from 'lucide-react'
 import {
     evaluateRule, getCategoriesForMP, getRulesForMP, getQuestionText,
     VULN_COLORS, type VulnerabilityId,
@@ -20,7 +20,7 @@ interface MPDetailProps {
     activatedCats: Map<string, { mpId: string; niveau: string; firedRules?: unknown[] }>
     selectedMP: string
     setSelectedMP: (mp: string | null) => void
-    mpMap: Record<string, { nom: string; objectif?: string | null; vulnerability_id?: string; signature_a?: string | null; signature_b?: string | null }>
+    mpMap: Record<string, { nom: string; objectif?: string | null; vulnerability_id?: string; asr_wording?: string | null; asr_criteres_validation?: string | null }>
 }
 
 export function MPDetailView({ data, answers, activatedMPs, activatedCats, selectedMP, setSelectedMP, mpMap }: MPDetailProps) {
@@ -33,6 +33,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
     const mpMTs = useMemo(() => data.microTaches.filter(mt => mt.mp_id === selectedMP), [data, selectedMP])
     const firedRuleIds = useMemo(() => new Set(mpRules.filter(r => evaluateRule(r, answers)).map(r => r.id)), [mpRules, answers])
     const [showInactive, setShowInactive] = useState(false)
+    const [filterCat, setFilterCat] = useState<string | 'ALL'>('ALL')
 
     const activeCatNiveau = useMemo(() => {
         const m = new Map<string, string>()
@@ -42,17 +43,18 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
         return m
     }, [activatedCats, selectedMP])
 
-    // Separate activated vs inactive categories
     const activatedCategories = mpCategories.filter(c => activeCatNiveau.has(c.id))
     const inactiveCategories = mpCategories.filter(c => !activeCatNiveau.has(c.id))
 
-    // Resolve question text for a condition
+    // Apply filter
+    const filteredActivated = filterCat === 'ALL' ? activatedCategories : activatedCategories.filter(c => c.id === filterCat)
+    const filteredInactive = filterCat === 'ALL' ? inactiveCategories : inactiveCategories.filter(c => c.id === filterCat)
+
     const resolveCondition = (c: { q: string; op: string; val?: string; vals?: string[]; min?: number }) => {
         const qText = getQuestionText(data, c.q)
         const answer = answers[c.q]
-        const question = data.questions.find(q => q.id === c.q)
         const valStr = c.vals ? c.vals.join(' ou ') : String(c.val ?? c.min ?? '')
-        return { questionId: c.q, questionText: qText, op: c.op, expectedValue: valStr, currentAnswer: answer || null, responseOptions: question?.response_options }
+        return { questionId: c.q, questionText: qText, op: c.op, expectedValue: valStr, currentAnswer: answer || null }
     }
 
     const niveauStyle = (niveau: string) =>
@@ -64,7 +66,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
     return (
         <div>
             {/* Back + header */}
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-3">
                 <motion.button onClick={() => setSelectedMP(null)}
                     className="w-8 h-8 rounded-lg bg-white/60 hover:bg-white border border-monka-border flex items-center justify-center transition-colors"
                     whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -81,8 +83,22 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     : <span className="text-[10px] text-monka-muted bg-gray-100 px-2.5 py-1 rounded-full">Inactif</span>}
             </div>
 
+            {/* ═══ ASR BLOCK ═══ */}
+            {mp?.asr_wording && (
+                <div className="mb-4 p-3.5 rounded-xl border-2 border-dashed" style={{ borderColor: mpColor + '60', backgroundColor: mpColor + '08' }}>
+                    <div className="flex items-center gap-2 mb-1.5">
+                        <Target className="w-4 h-4" style={{ color: mpColor }} />
+                        <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: mpColor }}>Objectif ASR — Atteinte de Seuil de Résultat</span>
+                    </div>
+                    <p className="text-xs font-medium text-monka-heading leading-snug">{mp.asr_wording}</p>
+                    {mp.asr_criteres_validation && (
+                        <p className="text-[10px] text-monka-muted mt-1.5 italic">Critères : {mp.asr_criteres_validation}</p>
+                    )}
+                </div>
+            )}
+
             {/* Stats bar */}
-            <div className="flex gap-3 mb-5">
+            <div className="flex gap-3 mb-4">
                 {[
                     { val: activatedCategories.length, total: mpCategories.length, label: 'Catégories activées' },
                     { val: firedRuleIds.size, total: mpRules.length, label: 'Règles fired' },
@@ -96,31 +112,53 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                 ))}
             </div>
 
+            {/* ═══ CATEGORY FILTER ═══ */}
+            {mpCategories.length > 1 && (
+                <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
+                    <Filter className="w-3.5 h-3.5 text-monka-muted flex-shrink-0" />
+                    <button onClick={() => setFilterCat('ALL')}
+                        className={`text-[10px] px-2.5 py-1 rounded-full font-bold whitespace-nowrap transition-colors ${filterCat === 'ALL' ? 'text-white' : 'text-monka-muted bg-gray-100 hover:bg-gray-200'}`}
+                        style={filterCat === 'ALL' ? { backgroundColor: mpColor } : undefined}>
+                        Toutes ({mpCategories.length})
+                    </button>
+                    {mpCategories.map(cat => {
+                        const isActiveCat = activeCatNiveau.has(cat.id)
+                        return (
+                            <button key={cat.id} onClick={() => setFilterCat(cat.id === filterCat ? 'ALL' : cat.id)}
+                                className={`text-[10px] px-2.5 py-1 rounded-full font-bold whitespace-nowrap transition-colors ${filterCat === cat.id ? 'text-white' : isActiveCat ? 'text-green-700 bg-green-50 hover:bg-green-100' : 'text-monka-muted bg-gray-100 hover:bg-gray-200'}`}
+                                style={filterCat === cat.id ? { backgroundColor: mpColor } : undefined}>
+                                {cat.id} {isActiveCat ? '✓' : ''}
+                            </button>
+                        )
+                    })}
+                </div>
+            )}
+
             {/* ═══ ACTIVATED CATEGORIES ═══ */}
-            {activatedCategories.length > 0 && (
+            {filteredActivated.length > 0 && (
                 <div className="mb-5">
                     <h4 className="text-[10px] font-bold text-monka-heading uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                        <Shield className="w-3.5 h-3.5 text-green-500" /> Catégories Activées ({activatedCategories.length})
+                        <Shield className="w-3.5 h-3.5 text-green-500" /> Catégories Activées ({filteredActivated.length})
                     </h4>
                     <div className="space-y-3">
-                        {activatedCategories.map(cat => renderCategory(cat, true))}
+                        {filteredActivated.map(cat => renderCategory(cat, true))}
                     </div>
                 </div>
             )}
 
             {/* ═══ INACTIVE CATEGORIES ═══ */}
-            {inactiveCategories.length > 0 && (
+            {filteredInactive.length > 0 && (
                 <div>
                     <button onClick={() => setShowInactive(!showInactive)}
                         className="w-full flex items-center gap-2 text-[10px] font-bold text-monka-muted uppercase tracking-wider mb-3 hover:text-monka-text transition-colors">
                         <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showInactive ? 'rotate-180' : ''}`} />
-                        Catégories Inactives ({inactiveCategories.length})
+                        Catégories Inactives ({filteredInactive.length})
                     </button>
                     <AnimatePresence>
                         {showInactive && (
                             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
                                 className="space-y-2 overflow-hidden">
-                                {inactiveCategories.map(cat => renderCategory(cat, false))}
+                                {filteredInactive.map(cat => renderCategory(cat, false))}
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -129,12 +167,10 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
         </div>
     )
 
-    // ── Render a single category ──
     function renderCategory(cat: typeof mpCategories[0], isActivated: boolean) {
         const niveau = activeCatNiveau.get(cat.id)
         const ns = niveau ? niveauStyle(niveau) : niveauStyle('')
         const catRules = mpRules.filter(r => r.category_id === cat.id)
-        const catFiredRules = catRules.filter(r => firedRuleIds.has(r.id))
         const catRecos = mpRecos.filter(r => r.category_id === cat.id)
         const activeReco = catRecos.find(r => r.niveau === niveau)
         const catMTs = mpMTs.filter(mt => mt.category_id === cat.id)
@@ -152,7 +188,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 </div>
 
-                {/* ── HOW IT ACTIVATES — rules with question FR ── */}
+                {/* Rules with STRONG fired/non-fired difference */}
                 {catRules.length > 0 && (
                     <div className="px-4 py-3 border-t border-monka-border/30">
                         <div className="flex items-center gap-1.5 mb-2">
@@ -165,29 +201,33 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                                 const conditions = (rule.condition_logic as unknown as { q: string; op: string; val?: string; vals?: string[]; min?: number }[]) || []
                                 const resolved = conditions.map(resolveCondition)
                                 return (
-                                    <div key={rule.id} className={`p-3 rounded-lg ${isFired ? 'bg-green-50/80 border border-green-200' : 'bg-gray-50/50 border border-gray-100'}`}>
+                                    <div key={rule.id}
+                                        className={`p-3 rounded-lg transition-all ${isFired
+                                            ? 'bg-green-50 border-2 border-green-400 shadow-sm shadow-green-100'
+                                            : 'bg-gray-50/30 border border-gray-200/50 opacity-50'}`}>
                                         <div className="flex items-center gap-2 mb-2">
+                                            {isFired
+                                                ? <span className="text-sm font-bold text-green-600">✅</span>
+                                                : <span className="text-sm text-gray-300">○</span>}
                                             <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${niveauStyle(rule.niveau).badge}`}>{rule.niveau}</span>
                                             <span className="text-[10px] text-monka-muted">{rule.delai_jours}j</span>
-                                            {isFired && <span className="text-[10px] font-bold text-green-600">✓ Fired</span>}
+                                            {isFired && <span className="text-[10px] font-bold text-green-600 bg-green-100 px-1.5 py-0.5 rounded">FIRED</span>}
                                         </div>
-                                        {/* Conditions in French */}
                                         <div className="space-y-1.5 mb-2">
                                             {resolved.map((c, i) => (
-                                                <div key={i} className={`text-[11px] p-2 rounded-lg ${c.currentAnswer ? (isFired ? 'bg-green-100/50' : 'bg-orange-50') : 'bg-gray-50'}`}>
+                                                <div key={i} className={`text-[11px] p-2 rounded-lg ${isFired ? 'bg-green-100/60' : 'bg-gray-100/50'}`}>
                                                     <p className="font-medium text-monka-heading">« {c.questionText} »</p>
                                                     <p className="text-monka-muted mt-0.5">
                                                         Condition : réponse {c.op === '==' ? '=' : c.op} <strong className="text-monka-text">{c.expectedValue}</strong>
                                                         {c.currentAnswer && (
-                                                            <span className={`ml-2 ${isFired ? 'text-green-600' : 'text-orange-500'}`}>
-                                                                → Réponse actuelle : <strong>{c.currentAnswer}</strong> {isFired ? '✓' : '✗'}
+                                                            <span className={`ml-2 ${isFired ? 'text-green-600 font-bold' : 'text-orange-500'}`}>
+                                                                → {c.currentAnswer} {isFired ? '✅' : '✗'}
                                                             </span>
                                                         )}
                                                     </p>
                                                 </div>
                                             ))}
                                         </div>
-                                        {/* Sens clinique */}
                                         {rule.sens_clinique && (
                                             <div className="flex gap-2 items-start p-2 rounded-lg bg-blue-50/50 border border-blue-100">
                                                 <Lightbulb className="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0" />
@@ -201,7 +241,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 )}
 
-                {/* ── ACTIVE RECOMMENDATION ── */}
+                {/* Active recommendation */}
                 {activeReco && isActivated && (
                     <div className="px-4 py-3 border-t border-monka-border/30">
                         <div className="flex items-center gap-1.5 mb-2">
@@ -215,7 +255,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 )}
 
-                {/* ── MICRO-TÂCHES ── */}
+                {/* Micro-Tâches */}
                 {catMTs.length > 0 && isActivated && (
                     <div className="px-4 py-3 border-t border-monka-border/30">
                         <div className="flex items-center gap-1.5 mb-2">
@@ -229,6 +269,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                                         : mt.type === 'INFO' ? 'bg-green-100 text-green-600' : mt.type === 'ORGA' ? 'bg-purple-100 text-purple-600'
                                             : 'bg-blue-100 text-blue-600'}`}>{mt.type}</span>
                                     <span className="text-monka-text flex-1">{mt.libelle}</span>
+                                    {mt.is_contributive && <span className="text-[8px] font-bold text-amber-600 bg-amber-50 px-1 py-0.5 rounded">ASR</span>}
                                     {mt.acteur && <span className="text-[9px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{mt.acteur}</span>}
                                 </div>
                             ))}

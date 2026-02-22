@@ -122,17 +122,19 @@ export function PersonaComparison({ data }: PersonaComparisonProps) {
                                         <span key={t} className="text-[9px] px-1.5 py-0.5 rounded border" style={{ backgroundColor: `${r.persona.color}10`, borderColor: `${r.persona.color}25`, color: r.persona.color }}>{t}</span>
                                     ))}
                                 </div>
-                                {/* Trigger Summary */}
+                                {/* Trigger Profile — all triggers with labels */}
                                 <div className="mt-3 pt-3 border-t border-monka-border/30">
-                                    <p className="text-[9px] font-bold text-monka-muted uppercase mb-1">Profil Triggers</p>
+                                    <p className="text-[9px] font-bold text-monka-muted uppercase mb-1.5">Profil d&apos;aidance (triggers)</p>
                                     <div className="space-y-1">
-                                        {triggerQs.slice(0, 5).map(tq => {
+                                        {triggerQs.map(tq => {
                                             const answer = r.persona.answers[tq.id]
                                             if (!answer) return null
+                                            const label = getQuestionText(data, tq.id)
                                             return (
-                                                <div key={tq.id} className="text-[10px]">
-                                                    <span className="text-monka-muted">{tq.id}:</span>{' '}
-                                                    <span className="font-medium text-monka-heading">{answer}</span>
+                                                <div key={tq.id} className="text-[10px] flex gap-1">
+                                                    <span className="text-monka-muted font-mono shrink-0 w-7">{tq.id}</span>
+                                                    <span className="text-monka-muted truncate flex-1" title={label}>{label}</span>
+                                                    <span className="font-medium text-monka-heading shrink-0 max-w-[120px] truncate text-right" title={answer}>{answer}</span>
                                                 </div>
                                             )
                                         })}

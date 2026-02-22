@@ -1,15 +1,13 @@
 /* ExternalViewCards — Patient-facing sub-components.
-   V2-07: Premium glassmorphism design, empathetic wording.
-   Extracted from SimulatorExternalView for §2 compliance.
-   Architecture: < 250L. */
+   V2-08: Premium glassmorphism design, empathetic wording.
+   + V tag, ASR wording, contributive gauge, prevention MTs.
+   Architecture: < 280L. */
 
-import { CheckCircle2, Heart, Shield, Sparkles } from 'lucide-react'
+import { CheckCircle2, Heart, Shield, Sparkles, Target } from 'lucide-react'
 import type { SimulatorTabProps } from './types'
 
-/** Niveau ordering for determining MP alert level */
 const NIVEAU_ORDER: Record<string, number> = { critique: 3, ccc: 2, standard: 1 }
 
-/** Color map for criticality levels */
 export const CRIT_COLORS: Record<string, { bg: string; text: string; border: string; gradient: string; glow: string }> = {
     critique: { bg: '#EF4444', text: '#FECACA', border: '#EF444440', gradient: 'linear-gradient(135deg, #DC2626, #991B1B)', glow: '0 8px 32px rgba(239,68,68,0.15)' },
     ccc: { bg: '#F59E0B', text: '#FEF3C7', border: '#F59E0B40', gradient: 'linear-gradient(135deg, #D97706, #92400E)', glow: '0 8px 32px rgba(245,158,11,0.15)' },
@@ -17,7 +15,7 @@ export const CRIT_COLORS: Record<string, { bg: string; text: string; border: str
 }
 
 export interface ExternalViewProps extends Pick<SimulatorTabProps, 'data' | 'activeV' | 'activatedMPs' | 'activatedCats'> {
-    mpMap: Record<string, { nom: string; vulnerability_id: string; objectif?: string | null; signature_a?: string | null; signature_b?: string | null }>
+    mpMap: Record<string, { nom: string; vulnerability_id: string; objectif?: string | null; asr_wording?: string | null }>
     mpVulnMap: Record<string, string>
 }
 
@@ -55,6 +53,7 @@ export function ActivatedMPCard({ mpId, data, activatedCats, mpMap }: {
     const mpMTs = data.microTaches.filter(mt => mt.mp_id === mpId && activeCatIdsForMP.has(mt.category_id))
     const contributiveMTs = mpMTs.filter(mt => mt.is_contributive)
     const nonContributiveMTs = mpMTs.filter(mt => !mt.is_contributive)
+    const contribPct = contributiveMTs.length > 0 ? Math.round((0 / contributiveMTs.length) * 100) : 0
 
     return (
         <div className="rounded-2xl overflow-hidden transition-all hover:shadow-lg"
@@ -66,15 +65,32 @@ export function ActivatedMPCard({ mpId, data, activatedCats, mpMap }: {
                     <div className="flex items-center gap-2 mb-2">
                         <Shield className="w-4 h-4 text-white/80" />
                         <span className="text-white/90 text-[10px] font-bold bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full">{niveauLabel}</span>
+                        <span className="text-white/90 text-[10px] font-bold bg-white/30 backdrop-blur-sm px-2 py-0.5 rounded-full">{mp.vulnerability_id}</span>
                     </div>
                     <h4 className="text-white font-bold text-base leading-snug mb-1">{mp.nom}</h4>
-                    {mp.objectif && (
-                        <p className="text-white/80 text-xs leading-relaxed">🎯 {mp.objectif}</p>
+                    {mp.asr_wording && (
+                        <div className="flex items-start gap-1.5 mt-1.5 mb-1">
+                            <Target className="w-3.5 h-3.5 text-white/70 mt-0.5 flex-shrink-0" />
+                            <p className="text-white/85 text-[11px] leading-snug font-medium">{mp.asr_wording}</p>
+                        </div>
                     )}
-                    <div className="flex gap-3 mt-2.5">
+                    <div className="flex gap-3 mt-2">
                         <span className="text-white/70 text-[10px] bg-white/10 px-2 py-0.5 rounded-full">📍 {contributiveMTs.length} actions essentielles</span>
                         <span className="text-white/70 text-[10px] bg-white/10 px-2 py-0.5 rounded-full">💡 {nonContributiveMTs.length} pistes d&apos;amélioration</span>
                     </div>
+                    {/* Contributive gauge */}
+                    {contributiveMTs.length > 0 && (
+                        <div className="mt-2.5">
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="text-white/60 text-[9px]">Progression ASR</span>
+                                <span className="text-white/90 text-[10px] font-bold">{contribPct}%</span>
+                            </div>
+                            <div className="h-1.5 bg-white/20 rounded-full overflow-hidden">
+                                <div className="h-full bg-white/70 rounded-full transition-all" style={{ width: `${contribPct}%` }} />
+                            </div>
+                            <p className="text-white/50 text-[9px] mt-0.5">0/{contributiveMTs.length} tâches contributives validées</p>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -122,7 +138,7 @@ function RecoCard({ reco, data, critBg }: {
 // ── MT List ────────────────────────────────────────────
 
 function MTList({ mts, label, icon, borderColor, labelColor }: {
-    mts: Array<{ id: string; type: string; libelle: string; acteur?: string[] | null }>
+    mts: Array<{ id: string; type: string; libelle: string; acteur?: string[] | null; is_contributive?: boolean }>
     label: string
     icon: React.ReactNode
     borderColor: string
@@ -137,6 +153,7 @@ function MTList({ mts, label, icon, borderColor, labelColor }: {
                 return (
                     <div key={mt.id} className="flex items-center gap-2 text-xs py-1">
                         <span className="text-gray-700">{mt.libelle}</span>
+                        {mt.is_contributive && <span className="text-[8px] font-bold text-amber-600 bg-amber-50 px-1 py-0.5 rounded">ASR</span>}
                         {acteur && <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-indigo-50 text-indigo-600">{acteur}</span>}
                     </div>
                 )
@@ -167,20 +184,45 @@ export function PreventionSection({ data, preventionRecosByMP, preventionMPIds, 
                     const mp = mpMap[mpId]
                     if (!mp) return null
                     const recos = preventionRecosByMP[mpId]
+                    // Get prevention MTs for this MP
+                    const preventionMTs = data.microTaches.filter(mt => mt.mp_id === mpId && mt.is_prevention)
                     return (
                         <div key={mpId} className="rounded-2xl overflow-hidden" style={{ border: '2px solid rgba(124,58,237,0.2)', boxShadow: '0 4px 24px rgba(124,58,237,0.08)' }}>
-                            <div className="px-5 py-3" style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' }}>
+                            <div className="px-5 py-3 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' }}>
                                 <h4 className="text-white font-bold text-sm">{mp.nom}</h4>
+                                <span className="text-white/80 text-[10px] font-bold bg-white/20 px-2 py-0.5 rounded-full">{mp.vulnerability_id}</span>
                             </div>
                             <div className="divide-y divide-gray-100">
-                                {recos.map(reco => (
-                                    <div key={reco.id} className="px-5 py-3 bg-white/80">
-                                        <div className="flex items-start gap-2">
-                                            <Heart className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-purple-400" />
-                                            <p className="text-sm text-gray-700 leading-snug">{reco.wording_utilisateur}</p>
+                                {recos.map(reco => {
+                                    // MTs for this category
+                                    const recoMTs = preventionMTs.filter(mt => mt.category_id === reco.category_id)
+                                    return (
+                                        <div key={reco.id} className="px-5 py-3 bg-white/80">
+                                            <div className="flex items-start gap-2">
+                                                <Heart className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-purple-400" />
+                                                <p className="text-sm text-gray-700 leading-snug">{reco.wording_utilisateur}</p>
+                                            </div>
+                                            {/* Prevention MTs under reco */}
+                                            {recoMTs.length > 0 && (
+                                                <div className="ml-6 mt-2 space-y-1 border-l-2 border-purple-200 pl-3">
+                                                    <span className="text-[9px] font-bold text-purple-400 uppercase flex items-center gap-1">
+                                                        <Sparkles className="w-3 h-3" /> Actions concrètes
+                                                    </span>
+                                                    {recoMTs.map(mt => (
+                                                        <div key={mt.id} className="flex items-center gap-2 text-xs py-1">
+                                                            <span className="text-gray-700">{mt.libelle}</span>
+                                                            {mt.acteur?.length && (
+                                                                <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-purple-50 text-purple-600">
+                                                                    {mt.acteur.filter(a => !a.toLowerCase().includes('aidant')).join(', ') || mt.acteur[0]}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
-                                    </div>
-                                ))}
+                                    )
+                                })}
                             </div>
                         </div>
                     )
