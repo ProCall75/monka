@@ -901,6 +901,12 @@ Bloc 17 original. Checks identiques + ajout vérification content_blocks coverag
 - Pas d'acteur vide dans les MTs
 - **NOUVEAU** : % content_blocks coverage par entity_type
 
+### 🔧 Micro-Phase 10a — Configuration Vitest & Tests Unitaires (dette V2-08)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Vitest** — Configurer `vitest.config.ts`
+> 2. **Tests** — Tester `evaluateRule`, `scoreActionGap`, `coverageMatrix` (≥ 15 tests pures)
+
 ### 🔍 QG-V2-10 — **JALON CRITIQUE — Intégrité Données**
 
 > [!WARNING]
@@ -945,6 +951,33 @@ Finaliser le workflow itération et exécuter la première certification complè
 
 ### Objectif
 QG FINAL — vérification exhaustive de TOUTES les sections du framework.
+
+### 🔧 Micro-Phase 12a — Intégration Guides DB (dette V2-08)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Types et Fetch** — Ajouter DBGuide types et fetch quand les tables seront populées.
+
+### 🔧 Micro-Phase 12b — Unification Rule Explainer (dette V2-08)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **Refactor RuleCardFR** — Remplacer le composant dans MPDrilldown par un mode unifié de `RuleExplainerFR`.
+
+### 🔧 Micro-Phase 12c — Extraction Composants Oversized (dette V2-08bis)
+
+> Actions concrètes à exécuter pour resoudre les violations §2 (fichiers > 300L) :
+> 1. **`PersonasPage.tsx` (697L)** — Extraire `PersonaCard` + `PersonaCompare`
+> 2. **`DashboardPage.tsx` (504L)** — Extraire `DashboardCards` + `DashboardCharts`
+> 3. **`SimulatorPage.tsx` (463L)** — Extraire tab orchestration
+> 4. **`DocsPage.tsx` (457L)** — Extraire composants `DocSection`
+> 5. **`RoadmapPage.tsx` (323L)** — Extraire phase rendering
+> 6. **`clinicalEngine.ts` (319L)** — Extraire `evaluateRule` + `coverage`
+
+### 🔧 Micro-Phase 12d — Certification UI / Content (dette V2-07)
+
+> Actions concrètes à exécuter dans ce bloc :
+> 1. **WCAG AA** — Audit Lighthouse (contraste, touch targets, heading hierarchy) + corrections
+> 2. **Responsive Mobile** — Vérification mobile-first via device réel/viewport
+> 3. **Content Blocks Patient** — Créer des CB `entity_type=patient` si un wording empathique custom est requis
 
 ### 🔍 QG-V2-12 — **CERTIFICATION FINALE**
 
