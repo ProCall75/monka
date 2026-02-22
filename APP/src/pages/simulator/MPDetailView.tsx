@@ -84,7 +84,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     ? <span className="text-[10px] font-bold px-2.5 py-1 rounded-full text-white" style={{ backgroundColor: mpColor }}>ACTIF</span>
                     : <span className="text-[10px] text-monka-muted bg-gray-100 px-2.5 py-1 rounded-full">Inactif</span>}
             </div>
-            {/* ASR BLOCK */}}
+            {/* ASR BLOCK */}
             {mp?.asr_wording && (
                 <div className="mb-4 p-3.5 rounded-xl border-2 border-dashed" style={{ borderColor: mpColor + '60', backgroundColor: mpColor + '08' }}>
                     <div className="flex items-center gap-2 mb-1.5">
@@ -97,7 +97,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     )}
                 </div>
             )}
-            {/* Stats bar */}}
+            {/* Stats bar */}
             <div className="flex gap-3 mb-4">
                 {[
                     { val: activatedCategories.length, total: mpCategories.length, label: 'Catégories activées' },
@@ -111,7 +111,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 ))}
             </div>
-            {/* CATEGORY FILTER */}}
+            {/* CATEGORY FILTER */}
             {mpCategories.length > 1 && (
                 <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
                     <Filter className="w-3.5 h-3.5 text-monka-muted flex-shrink-0" />
@@ -132,7 +132,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     })}
                 </div>
             )}
-            {/* ACTIVATED CATEGORIES */}}
+            {/* ACTIVATED CATEGORIES */}
             {filteredActivated.length > 0 && (
                 <div className="mb-5">
                     <h4 className="text-[10px] font-bold text-monka-heading uppercase tracking-wider mb-3 flex items-center gap-1.5">
@@ -143,7 +143,7 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     </div>
                 </div>
             )}
-            {/* INACTIVE CATEGORIES */}}
+            {/* INACTIVE CATEGORIES */}
             {filteredInactive.length > 0 && (
                 <div>
                     <button onClick={() => setShowInactive(!showInactive)}

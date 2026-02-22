@@ -34,7 +34,6 @@ export function CoverageHeatmap({ data, activeV }: CoverageHeatmapProps) {
 
     // Filter MPs by active V
     const filteredMPIds = useMemo(() => {
-        if (activeV === 'ALL' || activeV === 'TRIGGERS') return matrix.mpIds
         return matrix.mpIds.filter(mpId => {
             const mp = data.microParcours.find(m => m.id === mpId)
             return mp?.vulnerability_id === activeV
@@ -44,7 +43,7 @@ export function CoverageHeatmap({ data, activeV }: CoverageHeatmapProps) {
     // Group questions by vulnerability, filter by activeV
     const questionsByV = useMemo(() => {
         const groups: Record<string, string[]> = {}
-        const vFilter = (activeV === 'ALL' || activeV === 'TRIGGERS') ? null : activeV
+        const vFilter = activeV
         for (const qId of matrix.questionIds) {
             const q = data.questions.find(qu => qu.id === qId)
             const vId = q?.vulnerability_id || 'unknown'
