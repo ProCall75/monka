@@ -40,7 +40,6 @@ export function CoverageHeatmap({ data, activeV }: CoverageHeatmapProps) {
         return groups
     }, [matrix, data, activeV])
 
-    const orphanSet = useMemo(() => new Set(stats.orphanQuestions), [stats])
 
     return (
         <div>
@@ -54,11 +53,6 @@ export function CoverageHeatmap({ data, activeV }: CoverageHeatmapProps) {
                 <div>
                     <span className="font-bold text-monka-heading">{stats.coveredQuestions}</span>
                     <span className="text-monka-muted ml-1">/ {stats.totalQuestions} questions couvertes</span>
-                </div>
-                <div className="h-4 w-px bg-monka-border" />
-                <div>
-                    <span className="font-bold text-red-500">{stats.orphanQuestions.length}</span>
-                    <span className="text-monka-muted ml-1">orphelines</span>
                 </div>
             </div>
 
@@ -86,53 +80,29 @@ export function CoverageHeatmap({ data, activeV }: CoverageHeatmapProps) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {qIds.map(qId => {
-                                        const isOrphan = orphanSet.has(qId)
-                                        return (
-                                            <tr key={qId} className={isOrphan ? 'bg-red-50' : ''}>
-                                                <td className={`px-1 py-0.5 font-mono sticky left-0 z-10 ${isOrphan ? 'text-red-500 font-bold bg-red-50' : 'text-monka-text bg-white'
-                                                    }`}>{qId}</td>
-                                                {filteredMPIds.map(mpId => {
-                                                    const cell = matrix.cells.get(`${qId}::${mpId}`)
-                                                    if (!cell) return <td key={mpId} className="px-1 py-0.5 text-center text-gray-200">·</td>
-                                                    const intensity = Math.min(cell.ruleCount / 3, 1)
-                                                    return (
-                                                        <td key={mpId} className="px-1 py-0.5 text-center"
-                                                            title={`${cell.ruleCount} règle(s): ${cell.ruleIds.join(', ')}`}>
-                                                            <span className="inline-block w-3 h-3 rounded-sm"
-                                                                style={{ backgroundColor: vColor, opacity: 0.3 + intensity * 0.7 }} />
-                                                        </td>
-                                                    )
-                                                })}
-                                            </tr>
-                                        )
-                                    })}
+                                    {qIds.map(qId => (
+                                        <tr key={qId}>
+                                            <td className="px-1 py-0.5 font-mono sticky left-0 z-10 text-monka-text bg-white">{qId}</td>
+                                            {filteredMPIds.map(mpId => {
+                                                const cell = matrix.cells.get(`${qId}::${mpId}`)
+                                                if (!cell) return <td key={mpId} className="px-1 py-0.5 text-center text-gray-200">·</td>
+                                                const intensity = Math.min(cell.ruleCount / 3, 1)
+                                                return (
+                                                    <td key={mpId} className="px-1 py-0.5 text-center"
+                                                        title={`${cell.ruleCount} règle(s): ${cell.ruleIds.join(', ')}`}>
+                                                        <span className="inline-block w-3 h-3 rounded-sm"
+                                                            style={{ backgroundColor: vColor, opacity: 0.3 + intensity * 0.7 }} />
+                                                    </td>
+                                                )
+                                            })}
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 )
             })}
-
-            {/* Orphan list */}
-            {stats.orphanQuestions.length > 0 && (
-                <div className="mt-4 p-3 bg-red-50 rounded-xl">
-                    <h4 className="text-xs font-bold text-red-600 mb-1">
-                        ⚠️ Questions orphelines ({stats.orphanQuestions.length})
-                    </h4>
-                    <p className="text-[10px] text-red-500 mb-2">
-                        Ces questions ne sont référencées dans aucune règle d&apos;activation :
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                        {stats.orphanQuestions.slice(0, 30).map(qId => (
-                            <span key={qId} className="px-1.5 py-0.5 bg-red-100 text-red-700 rounded text-[9px] font-mono">{qId}</span>
-                        ))}
-                        {stats.orphanQuestions.length > 30 && (
-                            <span className="text-[9px] text-red-400">+{stats.orphanQuestions.length - 30} autres</span>
-                        )}
-                    </div>
-                </div>
-            )}
         </div>
     )
 }
