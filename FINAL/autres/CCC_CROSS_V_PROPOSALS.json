@@ -1,0 +1,245 @@
+{
+  "ccc_propositions_completes": {
+    "metadata": {
+      "version": "2.0",
+      "date": "2026-02-22",
+      "total_ccc_existantes": 85,
+      "total_ccc_proposees": 16,
+      "impact_kernel": "aucun",
+      "impact_db_schema": "aucun",
+      "impact_moteur": "aucun"
+    },
+
+    "mono_severes_urgentes": [
+      {
+        "id": "V4_MONO_N25",
+        "mp_id": "F4",
+        "category_id": "F4_CAT_04",
+        "niveau": "ccc",
+        "delai_jours": 0,
+        "condition_logic": [{"q": "N25", "op": "eq", "val": "Oui"}],
+        "sens_clinique": "Idées suicidaires exprimées par le proche. URGENCE VITALE — orientation 3114 et CMP immédiat. Pas de délai.",
+        "justification_ccc": "CCC mono-condition sévère URGENTE. N25='Oui' est la réponse la plus critique du questionnaire."
+      },
+      {
+        "id": "V4_MONO_E27",
+        "mp_id": "F6",
+        "category_id": "F6_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 7,
+        "condition_logic": [{"q": "E27", "op": "eq", "val": "Oui"}],
+        "sens_clinique": "Comportements dangereux (gaz, feu). Risque d'incendie/accident domestique grave. Sécurisation domicile + évaluation cognitive en urgence.",
+        "justification_ccc": "CCC mono-condition sévère. E27='Oui' signale un danger immédiat."
+      },
+      {
+        "id": "V4_MONO_N22",
+        "mp_id": "F4",
+        "category_id": "F4_CAT_04",
+        "niveau": "ccc",
+        "delai_jours": 7,
+        "condition_logic": [{"q": "N22", "op": "eq", "val": "Oui"}],
+        "sens_clinique": "Automutilation ou comportements à risque. Souffrance psychique sévère. Orientation psy en urgence.",
+        "justification_ccc": "CCC mono-condition sévère. N22='Oui' indique un passage à l'acte possible."
+      },
+      {
+        "id": "V5_MONO_O17",
+        "mp_id": "M2",
+        "category_id": "M2_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [{"q": "O17", "op": "eq", "val": "Non"}],
+        "sens_clinique": "Pas de médecin traitant. Sans MT : pas de prescription, pas de parcours coordonné, pas d'ALD. Point d'entrée de TOUT le système de soins.",
+        "justification_ccc": "CCC mono-condition sévère. O17='Non' = proche hors du système de soins."
+      }
+    ],
+
+    "intra_v_gap": [
+      {
+        "id": "V3_S4_CCC_02",
+        "mp_id": "S4",
+        "category_id": "S4_CAT_02",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "E16", "op": "eq", "val": "Je les reporte ou les annule souvent"},
+          {"q": "O39", "op": "eq", "val": "Aucun"}
+        ],
+        "sens_clinique": "L'aidant reporte/annule ses RDV ET n'a aucun suivi spécialisé. Pas seulement du renoncement — AUCUN contact médical actif pour lui-même.",
+        "justification_ccc": "CCC par croisement (AND). Seule catégorie sans CCC sur 73."
+      }
+    ],
+
+    "inter_mp": [
+      {
+        "id": "V3_S3_CCC_05_INTERMP",
+        "mp_id": "S3",
+        "category_id": "S3_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "E7", "op": "in", "vals": ["Très fatigué·e", "Épuisé·e / au bord de craquer"]},
+          {"q": "O44", "op": "eq", "val": "Moins bonne"}
+        ],
+        "sens_clinique": "Fatigue extrême (S1) + dégradation santé perçue (S3) = spirale descendante. L'aidant ne récupère plus physiquement — le corps lâche.",
+        "justification_ccc": "CCC inter-MP V3 (S1→S3). E7 est native S1, utilisée ici pour S3."
+      },
+      {
+        "id": "V1_R3_CCC_02_INTERMP",
+        "mp_id": "R3",
+        "category_id": "R3_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "E2", "op": "in", "vals": ["Très peu / presque personne", "Personne"]},
+          {"q": "O48", "op": "in", "vals": ["1x/3 mois", "1x/6 mois", "1x/an", "Autre"]}
+        ],
+        "sens_clinique": "Aucun entourage (R2) + visites très rares (R3). Double isolement : ni l'aidant ni personne n'est présent. Délaissement objectif.",
+        "justification_ccc": "CCC inter-MP V1 (R2→R3). E2 est native R2, utilisée ici pour R3."
+      },
+      {
+        "id": "V4_F4_CCC_04_INTERMP",
+        "mp_id": "F4",
+        "category_id": "F4_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "O7", "op": "in", "vals": ["Oui et elle est dénutrie", "Oui mais elle se nourrit suffisamment"]},
+          {"q": "E24", "op": "in", "vals": ["Oui, souvent", "Oui, en permanence"]}
+        ],
+        "sens_clinique": "Problème nutritionnel (F4) + surveillance permanente (F2). Le proche ne mange pas bien ET nécessite une présence constante — dégradation rapide si l'aidant défaille.",
+        "justification_ccc": "CCC inter-MP V4 (F2→F4). E24 est native F2, utilisée ici pour F4."
+      }
+    ],
+
+    "cross_v": [
+      {
+        "id": "CCC_XV_01",
+        "priority": 1,
+        "cross": "V1×V3",
+        "mp_cible": "S2",
+        "category_cible": "S2_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 7,
+        "condition_logic": [
+          {"q": "E7", "op": "in", "vals": ["Très fatigué·e", "Épuisé·e / au bord de craquer"]},
+          {"q": "E1", "op": "in", "vals": ["Je fais presque tout et cela crée des tensions", "Je suis totalement seul·e"]},
+          {"q": "E12", "op": "in", "vals": ["Parfois, selon les périodes", "Souvent"]}
+        ],
+        "sens_clinique": "Aidant épuisé + seul + proche en danger = risque de maltraitance passive par défaillance de surveillance.",
+        "justification_ccc": "CCC inter-V (V1×V3). La fatigue (V3) + isolement (V1) + inquiétude sécurité (V3) produit un signal que ni V1 ni V3 ne captent isolément."
+      },
+      {
+        "id": "CCC_XV_02",
+        "priority": 2,
+        "cross": "V5×V1",
+        "mp_cible": "M1",
+        "category_cible": "M1_CAT_02",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "E36", "op": "eq", "val": "Oui, beaucoup (impression de tourner en rond)"},
+          {"q": "E37", "op": "eq", "val": "Oui, souvent"},
+          {"q": "N4", "op": "eq", "val": "Oui"}
+        ],
+        "sens_clinique": "Errance médicale SANS aide familiale. Charge cognitive explosive — risque de rupture de parcours et d'abandon des soins.",
+        "justification_ccc": "CCC inter-V (V5×V1). L'errance (V5) aggravée par l'isolement familial (V1)."
+      },
+      {
+        "id": "CCC_XV_03",
+        "priority": 1,
+        "cross": "V4×V2",
+        "mp_cible": "A2",
+        "category_cible": "A2_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "E23", "op": "eq", "val": "Ne peut pas rester seul"},
+          {"q": "E62", "op": "eq", "val": "Aucun"},
+          {"q": "O53", "op": "in", "vals": ["Non", "Je ne sais pas"]}
+        ],
+        "sens_clinique": "Perte d'autonomie totale + 0 démarche admin. Bombe à retardement — le jour où l'aidant défaille, rien n'est en place.",
+        "justification_ccc": "CCC inter-V (V4×V2). La dépendance (V4) + absence de droits (V2) = vide médico-social."
+      },
+      {
+        "id": "CCC_XV_04",
+        "priority": 1,
+        "cross": "V3×V4",
+        "mp_cible": "S1",
+        "category_cible": "S1_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 7,
+        "condition_logic": [
+          {"q": "O38", "op": "eq", "val": "Mauvais"},
+          {"q": "O44", "op": "eq", "val": "Moins bonne"},
+          {"q": "E24", "op": "eq", "val": "Oui, en permanence"}
+        ],
+        "sens_clinique": "Santé aidant en berne + surveillance permanente. Spirale descendante irréversible sans intervention.",
+        "justification_ccc": "CCC inter-V (V3×V4). Dégradation santé (V3) + charge (V4) = risque de rupture imminente."
+      },
+      {
+        "id": "CCC_XV_05",
+        "priority": 2,
+        "cross": "V4×V5",
+        "mp_cible": "M5",
+        "category_cible": "M5_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "O13", "op": "eq", "val": "Altération totale"},
+          {"q": "E34", "op": "eq", "val": "Pas du tout"},
+          {"q": "E52", "op": "eq", "val": "Non, personne ne coordonne vraiment"}
+        ],
+        "sens_clinique": "Altération cognitive sévère + incompréhension maladie + vide de coordination. Profil 'diagnostic errant' → urgences répétées.",
+        "justification_ccc": "CCC inter-V (V4×V5). Dégradation cognitive (V4) + vide de pilotage (V5)."
+      },
+      {
+        "id": "CCC_XV_06",
+        "priority": 3,
+        "cross": "V2×V1",
+        "mp_cible": "A4",
+        "category_cible": "A4_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "E64", "op": "eq", "val": "Non, il ne fréquente pas"},
+          {"q": "N7", "op": "in", "vals": ["Arrêt", "Congés"]},
+          {"q": "O27", "op": "eq", "val": "Oui"}
+        ],
+        "sens_clinique": "Déscolarisation enfant + arrêt pro aidant. Double décrochage social + économique. Overlay enfant.",
+        "justification_ccc": "CCC inter-V (V2×V1). Overlay enfant uniquement."
+      },
+      {
+        "id": "CCC_XV_07",
+        "priority": 2,
+        "cross": "V1×V5",
+        "mp_cible": "M3",
+        "category_cible": "M3_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 7,
+        "condition_logic": [
+          {"q": "E6", "op": "eq", "val": "Non, refuse la plupart du temps"},
+          {"q": "E42", "op": "gte", "val": "3"},
+          {"q": "E43", "op": "eq", "val": "Oui, plusieurs périodes ou plus de 6 mois"}
+        ],
+        "sens_clinique": "Refus d'aide + urgences répétées. Profil récidiviste — chaque hospitalisation est un échec de prévention.",
+        "justification_ccc": "CCC inter-V (V1×V5). Refus d'aide (V1) + instabilité médicale (V5) = cycle vicieux."
+      },
+      {
+        "id": "CCC_XV_08",
+        "priority": 1,
+        "cross": "V3×V1",
+        "mp_cible": "S3",
+        "category_cible": "S3_CAT_01",
+        "niveau": "ccc",
+        "delai_jours": 30,
+        "condition_logic": [
+          {"q": "O37", "op": "eq", "val": "Oui, fréquemment"},
+          {"q": "E16", "op": "eq", "val": "Je les reporte ou les annule souvent"},
+          {"q": "E2", "op": "in", "vals": ["Très peu / presque personne", "Personne"]}
+        ],
+        "sens_clinique": "Renoncement soins aidant par absence de relais. Auto-sacrifice → maladie → proche sans aide → urgence.",
+        "justification_ccc": "CCC inter-V (V3×V1). Renoncement (V3) causé par absence de relais (V1)."
+      }
+    ]
+  }
+}

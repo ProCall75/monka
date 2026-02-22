@@ -1,10 +1,10 @@
 # 🔬 AUDIT — Scoring Monka : Méthodologie, Angles Morts et Recommandations
 
-> **Date** : 19/02/2026  
+> **Date** : 21/02/2026 (v1.1 — intégration retours Dr. Monka)  
 > **Auteur** : Antonin Rimaud — PRAGMA Studio  
 > **Scope** : `METHODOLOGIE_SCORING.md` + `SCORING_V1.md` à `SCORING_V5.md`  
 > **Benchmark** : Zarit ZBI-22, SEGA volet A, Caregiver Burden Scale (CBS), Item Response Theory (IRT), Content Validity Ratio (CVR — Lawshe)  
-> **Statut** : 🔓 À valider avec Dr. Monka
+> **Statut** : � Partiellement validé — décisions D4/D5/D8/D9 actées, D1/D2/D3/D6/D10 en attente
 
 ---
 
@@ -89,13 +89,13 @@ La question « La réponse informe-t-elle sur l'intensité ? » semble objective
 
 Le critère de fiabilité exclut systématiquement les **listes à cocher** (24 questions). Or certaines contiennent de l'information d'intensité exploitable :
 
-| Question exclue | Information perdue | Alternative |
+| Question exclue | Information perdue | Décision |
 |---|---|---|
-| **E19** — Soucis de santé (8 options) | Le **nombre** de soucis cochés est un signal : 0 → +0, 1-2 → +1, 3+ → +1 | Scorer par comptage |
-| **N29** — Droits/aides bénéficiés (22 options) | Le **nombre** de dispositifs activés pourrait indiquer la complexité | Trop ambigu — justement exclu |
-| **O16** — Maladies du proche (16 pathologies) | Le nombre de pathologies = polypathologie = intensité SEGA | Scorer par comptage (≥3 = +1) |
+| **E19** — Soucis de santé (8 options) | Le **nombre** de soucis cochés est un signal : 0 → +0, 1-2 → +1, 3+ → +1 | ✅ **Scorer par comptage** |
+| **O16** — Maladies du proche (16 pathologies) | Le nombre de pathologies = polypathologie = intensité SEGA | ✅ **Scorer par comptage** (≥3 = +1) |
+| **N29** — Droits/aides bénéficiés (22 options) | Le **nombre** de dispositifs activés pourrait indiquer la complexité | ❌ **Exclu** — trop ambigu, pas de corrélation claire entre nombre de droits et intensité de vulnérabilité |
 
-> **Verdict** : C2 est trop strict sur les listes à cocher. Un sous-critère **C2bis — Scorable par comptage** permettrait de récupérer 3-5 questions sans compromettre la reproductibilité.
+> **Verdict** : C2 est trop strict sur les listes à cocher. Un sous-critère **C2bis — Scorable par comptage** permet de récupérer **2 questions** (E19, O16) sans compromettre la reproductibilité. N29 reste exclu (validé).
 
 #### Angle mort 3 — Pas de critère de couverture dimensionnelle
 
@@ -106,7 +106,7 @@ Exemple concret V2 (Administratif) :
 - **Aucune** ne porte sur les droits (N29, E62, N42 toutes exclues)
 - Résultat : le score V2 ne mesure **aucunement** si l'aidant accède à ses droits, alors que c'est un pilier de la vulnérabilité administrative
 
-> **Verdict** : Ajouter un **C3 — Couverture** : après le passage C1+C2, vérifier que chaque sous-dimension de la vulnérabilité a au moins une question scorante. Si un sous-bloc entier est exclu, c'est un signal d'alerte.
+> **Verdict** : Constat noté mais **pas d'action MVP**. Ajouter un critère C3 formel serait trop lourd à scorer et pas suffisamment pertinent au stade actuel. La couverture sera naturellement améliorée lors de la validation empirique (Phase 3 — corrélation item-total). **C1 + C2 + C2bis suffisent.**
 
 #### Angle mort 4 — Absence de pondération entre sous-blocs
 
@@ -187,9 +187,8 @@ Voici les **5 méthodes alternatives** utilisées en psychométrie pour sélecti
 
 **Améliorations recommandées pour passer de 3/5 à 4/5 :**
 
-1. **Ajouter C2bis** (scoring par comptage pour listes à cocher sélectionnées)
-2. **Ajouter C3** (vérification de couverture dimensionnelle post-sélection)
-3. **Formaliser les scores max par profil** (résolution du problème conditionnel)
+1. **Ajouter C2bis** (scoring par comptage pour E19 et O16 uniquement)
+2. **Formaliser les scores max par profil** (résolution du problème conditionnel)
 
 **La prochaine étape de validation** (phase pilote) sera la corrélation item-total (Méthode B) : vérifier que les items choisis par C1+C2 corrèlent effectivement avec le score total sur des données réelles. Si un item choisi ne corrèle pas, c'est que C1 l'a mal évalué. Si un item exclu corrèle, c'est que C1 ou C2 l'a injustement éliminé.
 
@@ -219,15 +218,16 @@ Voici les **5 méthodes alternatives** utilisées en psychométrie pour sélecti
 
 ### Ce qu'on ajoute ⚙️
 
-- **C2bis** — scoring par comptage sur listes à cocher sélectionnées (3-5 questions récupérables)
-- **C3** — check de couverture dimensionnelle (chaque sous-bloc a ≥ 1 question scorante)
+- **C2bis** — scoring par comptage sur E19 et O16 (2 questions récupérées)
 - **Tableau scores max par profil** — pour les 8 questions conditionnelles
+- **Pondération par vulnérabilité** — pour le score général normalisé (cf. §7)
+- **E2="Personne" → +2** — isolement total scoré comme risque vital en V1
 
 ### Ce qu'on repousse à la V2 ⏳
 
 - Scoring bi-dimensionnel (état + risque)
-- Enrichissement échelle +0/+1/+2 → +0/+1/+2/+3 sur les 4-niveaux
-- Pondération par sous-bloc ou par pertinence clinique
+- Enrichissement échelle +0/+1/+2 → +0/+1/+2/+3 sur les questions 4-niveaux (cf. analyse §5.5)
+- Pondération par sous-bloc (intra-V)
 - Corrélation item-total empirique
 - Factor analysis (EFA/CFA)
 
@@ -279,13 +279,13 @@ Conséquence concrète avec les seuils 20/40/60 uniformes :
 
 ### 🟠 P4 — Absence de +2 sur V1, V2 et V5
 
-| V | Questions +2 | Analyse |
-|---|---|---|
-| **V1** | 0 | L'isolement total (E2="Personne") est un facteur de risque de mortalité reconnu (HAS, Zarit). Mérite discussion. |
-| **V2** | 0 | Cohérent — la vulnérabilité administrative ne relève pas du risque vital. |
-| **V5** | 0 | Les ruptures de parcours médical peuvent être dangereuses mais le risque vital direct est capté en V3/V4. |
+| V | Questions +2 | Analyse | Décision |
+|---|---|---|---|
+| **V1** | 0 → **1** | L'isolement total (E2="Personne") est un facteur de risque de mortalité reconnu (HAS, Zarit). | ✅ **E2="Personne" → +2** |
+| **V2** | 0 | Cohérent — la vulnérabilité administrative ne relève pas du risque vital. | Pas de changement |
+| **V5** | 0 | Les ruptures de parcours médical peuvent être dangereuses mais le risque vital direct est capté en V3/V4. | Pas de changement |
 
-> Seule V1 mérite une discussion : faut-il coder E2="Personne" à +2 ?
+> **Décision validée** : E2="Personne" passe à +2 en V1. Impact : score max V1 passe de 14 à **15 pts**. Les seuils adaptatifs V1 seront recalculés en conséquence.
 
 ### 🟡 P5 — Plateau d'insensibilité (+1 pour "Parfois" ET "Toujours")
 
@@ -302,7 +302,19 @@ E8 — Solitude émotionnelle :
 On perd la capacité à distinguer "un peu touché" de "très touché" **au sein d'une même question**. L'information existe dans les réponses (4 niveaux) mais le scoring en élimine la nuance (2 niveaux effectifs).
 
 > **Référence** : Zarit utilise 5 niveaux (0-4), CBS utilise 4 niveaux (1-4). Monka avec 2 niveaux effectifs est en dessous des standards.
-> **Phase** : V2 (enrichir à +0/+1/+2 sur les 4-niveaux, ou +0/+1/+2/+3).
+
+#### Analyse d'impact : enrichir à 4 niveaux maintenant vs V2
+
+| Critère | Maintenant (MVP) | V2 (post-pilote) |
+|---|---|---|
+| **Gain de discrimination** | +30 questions passent de 2 à 4 niveaux effectifs → forte amélioration | Idem |
+| **Impact sur scores max** | Score max de chaque V augmente (~×2 pour les questions 4-niveaux) → **tous les seuils à recalibrer** | Calibration basée sur données réelles |
+| **Risque** | Les seuils recalibrés seraient des estimations sans validation empirique (même problème qu'aujourd'hui mais amplifié) | Les données pilote permettent de calibrer les seuils de manière empirique |
+| **Cohérence de l'échelle** | ⚠️ Si on enrichit, il faut enrichir **toutes** les questions uniformément (pas question par question) — sinon l'échelle perd sa cohérence | ✅ Application uniforme vérifiée par données |
+| **Effort** | ~4h (revoir 30+ questions, recalculer tous les score max, recalibrer seuils) | ~4h + validation empirique |
+| **Le +3 pour le vital ?** | Un score +3 sur "Tout le temps" créerait un signal d'urgence fort, mais serait réservé aux ~5 questions déjà identifiées risque vital. Problème : ça dédouble le système +2=vital et +3=vital aggravé sans donnée pour valider la distinction | La distinction +2/+3 ne serait pertinente que si les données montrent une différence clinique mesurable |
+
+> **Verdict** : Reporter à V2. L'enrichissement est pertinent mais doit s'appliquer **uniformément sur toutes les questions** pour maintenir la cohérence de l'échelle. Sans données empiriques, les nouveaux seuils seraient aussi arbitraires que les actuels. Le +3 "vital" n'apporte pas de gain clair par rapport au +2 existant à ce stade.
 
 ### 🟡 P6 — "Je ne sais pas" = +0 systématique
 
@@ -356,41 +368,83 @@ Réponse "oui" / "souvent" à 80% + 2 réponses +2 :
 
 → V2 en "Élevé" quand tout le reste est "Critique". Artefact : 80% de 8 questions = 6 réponses +, et 6/11 = 55% → sous le seuil 60%. **C'est un vrai problème** : un aidant en détresse totale avec 6/8 symptômes administratifs n'est classé que "Élevé". ⚠️⚠️
 
+### 6.4 — Problème du score général : la pondération inter-vulnérabilités
+
+Pour produire un **score général de vulnérabilité** (0-100) à partir des 5 scores V, il faut une pondération par vulnérabilité. Sans pondération, un simple moyenne des scores % donnerait un poids égal à chaque V, ce qui n'est pas cliniquement justifié.
+
+#### Pourquoi une pondération est nécessaire
+
+- V4 (Fragilité proche) a 38 questions scorantes → le score V4 a intrinsèquement plus de "résolution" que V2 (8 questions)
+- Cliniquement, un isolement social sévère (V1) n'a pas le même poids qu'un parcours médical désorganisé (V5)
+- Sans pondération explicite, le nombre de questions **crée** implicitement une pondération (V4 et V3 dominent)
+
+#### Proposition de pondération par vulnérabilité
+
+| V | Thème | Poids proposé | Justification clinique |
+|---|---|---|---|
+| **V1** | Social / relationnel | **15%** | L'isolement social est un facteur de risque majeur (mortalité +26% — Holt-Lunstad 2015) mais l'impact est indirect et à moyen terme |
+| **V2** | Administratif | **10%** | Impact réel mais le moins cliniquement urgent — pas de risque vital direct |
+| **V3** | Santé aidant | **25%** | L'épuisement de l'aidant est le prédicteur #1 d'institutionnalisation (Zarit). Impact direct et immédiat |
+| **V4** | Fragilité proche | **30%** | La fragilité du proche détermine directement la charge d'aide. C'est le facteur le plus lourd cliniquement |
+| **V5** | Parcours médical | **20%** | Le parcours médical conditionne la qualité de la prise en charge — impact indirect mais structurant |
+| | | **100%** | |
+
+#### Formule du score général pondéré
+
+```
+Score_Général = (V1% × 0.15) + (V2% × 0.10) + (V3% × 0.25) + (V4% × 0.30) + (V5% × 0.20)
+```
+
+#### Simulation sur les 3 cas types
+
+| Cas | V1% | V2% | V3% | V4% | V5% | **Moyenne simple** | **Score pondéré** | Δ |
+|---|---|---|---|---|---|---|---|---|
+| Léger (20%) | 14% | 18% | 14% | 18% | 21% | **17%** 🟢 | **17.3%** 🟢 | ~0 |
+| Modéré (50%) | 43% | 36% | 43% | 43% | 47% | **42%** 🟠 | **42.5%** 🟠 | ~0 |
+| Détresse (80%) | 71% | 55% | 86% | 82% | 74% | **74%** 🔴 | **76.9%** 🔴 | +3 |
+
+> **Observation** : Sur ces cas "uniformes", la pondération change peu. Mais sur des **profils asymétriques** (V4 très élevé, V1 faible), l'écart devient significatif et la pondération reflète mieux la réalité clinique.
+
+> **Décision attendue Dr. Monka** : Valider ou ajuster les pourcentages proposés (15/10/25/30/20).
+
 ---
 
 ## 7. RECOMMANDATIONS D'AMÉLIORATION
 
-### Option A — Seuils adaptatifs par V (⭐ RECOMMANDÉ MVP)
+### 7.1 — Seuils adaptatifs par V (⭐ RECOMMANDÉ MVP)
 
 Principe : ajuster les seuils en points bruts pour que chaque V ait la même sensibilité proportionnelle.
 
-| V | Score max | Faible | Modéré | Élevé | Critique |
+| V | Score max* | Faible | Modéré | Élevé | Critique |
 |---|---|---|---|---|---|
-| V1 | 14 pts | 0-3 | 4-6 | 7-9 | 10-14 |
+| V1 | **15 pts** | 0-3 | 4-6 | 7-10 | 11-15 |
 | V2 | 11 pts | 0-2 | 3-4 | 5-7 | 8-11 |
 | V3 | 21 pts | 0-4 | 5-9 | 10-13 | 14-21 |
 | V4 | 44 pts | 0-9 | 10-18 | 19-27 | 28-44 |
 | V5 | 19 pts | 0-4 | 5-8 | 9-12 | 13-19 |
 
+*\*V1 passe à 15 pts suite à la décision E2="Personne" → +2.*
+
 **Logique** : ~20% / ~40% / ~60% appliqués au score max de chaque V. Pas les mêmes points bruts mais la même **proportion de symptômes positifs** pour atteindre chaque seuil.
 
 **Effort** : 1 heure. Changement de configuration, pas d'algorithme.
 
-### Option B — Ajouter C2bis (comptage listes à cocher)
+### 7.2 — C2bis : scoring par comptage (2 questions récupérées)
 
-Récupérer 3-5 questions riches actuellement exclues via un critère de comptage :
+| Question | V | Règle de scoring | Impact |
+|---|---|---|---|
+| **E19** — Soucis de santé (8 options) | V3 | 0 coché = +0, 1-2 = +1, 3+ = +1 | V3 max : 21 → **22 pts** |
+| **O16** — Maladies du proche (16 pathologies) | V4 | 0-1 = +0, 2-3 = +1, 4+ = +1 | V4 max : 44 → **45 pts** |
 
-| Question | V | Règle de scoring proposée |
-|---|---|---|
-| **E19** — Soucis de santé | V3 | 0 coché = +0, 1-2 = +1, 3+ = +1 |
-| **O16** — Maladies du proche | V4 | 0-1 = +0, 2-3 = +1, 4+ = +1 |
-| **O42** — Maladies de l'aidant | V3 | 0-1 = +0, 2-3 = +1, 4+ = +1 |
+**Effort** : 1 heure. Impact : meilleure couverture santé.
 
-**Effort** : 2 heures. Impact : meilleure couverture V3.
+### 7.3 — Pondération inter-vulnérabilités pour le score général
 
-### Option C — Enrichir l'échelle (Phase V2)
+Cf. §6.4 — Système de pondération par vulnérabilité pour le calcul du score général normalisé (15/10/25/30/20). **Indispensable** dès que l'on affiche un score global à l'utilisateur.
 
-Pour les ~30 questions ayant 4 options de réponse, utiliser +0/+1/+2 (3 niveaux au lieu de 2 effectifs) :
+### 7.4 — Enrichissement de l'échelle (Phase V2)
+
+Pour les ~30 questions ayant 4 options de réponse, utiliser 4 niveaux effectifs au lieu de 2 :
 
 ```diff
  E8 — Solitude émotionnelle :
@@ -399,11 +453,12 @@ Pour les ~30 questions ayant 4 options de réponse, utiliser +0/+1/+2 (3 niveaux
 -  Souvent        = +1
 +  Souvent        = +2
 -  Tout le temps  = +1
-+  Tout le temps  = +2
++  Tout le temps  = +3
 ```
 
-**Impact** : Score max de chaque V augmente, seuils à recalibrer. Plus discriminant.  
-**Phase** : V2 post-pilote, quand on aura des données pour vérifier que la discrimination ajoutée est cliniquement pertinente.
+> **⚠️ Règle fondamentale** : si on enrichit l'échelle, les niveaux doivent s'appliquer **uniformément sur l'ensemble des questions**. Modifier l'échelle question par question rendrait le scoring incohérent et non comparable entre vulnérabilités.
+
+**Phase** : V2 post-pilote. Les données réelles permettront de valider si la discrimination ajoutée est cliniquement pertinente (cf. analyse d'impact détaillée §5.5).
 
 ---
 
@@ -474,17 +529,26 @@ Sur les premières données réelles :
 
 ## 10. DÉCISIONS ATTENDUES DE DR. MONKA
 
+### Décisions validées ✅
+
+| # | Décision | Statut |
+|---|---|---|
+| **D4** | C2bis : E19 et O16 scorées par comptage | ✅ Validé — implémenté en DB |
+| **D5** | E2="Personne" → +2 en V1 (isolement total = risque vital) | ✅ Validé — implémenté en DB |
+| **D8** | Pas de C3 (couverture dimensionnelle) — C1+C2 suffisent | ✅ Validé |
+| **D9** | Enrichissement échelle → V2 uniquement, application uniforme | ✅ Validé |
+| **D10** | Pondération inter-V (15/10/25/30/20) pour le score général | ✅ Validé par Dr. Monka |
+
+### Décisions en attente 🔲
+
 | # | Décision | Impact | Urgence |
 |---|---|---|---|
 | **D1** | Corriger les métadonnées V4 (recompter) | Cohérence du document | 🔴 Avant validation |
 | **D2** | Seuils uniformes 20/40/60 ou adaptatifs par V ? | Sensibilité du scoring | 🔴 Avant implém. |
 | **D3** | Formaliser le tableau scores max par profil aidance | Scoring correct multi-aidance | 🟠 Avant multi-aidance |
-| **D4** | Ajouter C2bis (comptage listes à cocher) ? | +3-5 questions, meilleure couverture | 🟠 Quick win |
-| **D5** | +2 pour l'isolement total V1 (E2="Personne") ? | Cohérence risque vital | 🟡 Discussion |
 | **D6** | Flag JNSP (alerte si ≥3 JNSP) ? | Détection "aidant aveugle" | 🟡 V2 |
-| **D7** | Enrichir l'échelle +1 → +2 pour les 4-niveaux ? | Meilleure discrimination | 🟡 V2 post-pilote |
 
 ---
 
-> 🔬 **AUDIT_SCORING v1 — Document cadre pour la validation du scoring avec Dr. Monka.**  
-> **La méthode C1+C2 est solide pour le MVP. Les améliorations prioritaires sont les seuils adaptatifs (P2) et la formalisation des scores conditionnels (P3).**
+> 🔬 **AUDIT_SCORING v1.1 — Intégration des retours Dr. Monka (21/02/2026).**  
+> **Méthode C1+C2+C2bis validée pour le MVP. Priorités restantes : seuils adaptatifs (P2), pondération inter-V pour le score général, et formalisation des scores conditionnels (P3).**

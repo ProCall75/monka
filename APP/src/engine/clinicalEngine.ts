@@ -189,7 +189,19 @@ export interface ScoreResult {
 }
 
 /**
+ * Per-question score cap for counting-based questions (C2bis).
+ * Multi-choice list questions (E19, O16) can match many responses
+ * but their total contribution is capped at 1 point per question.
+ */
+const QUESTION_SCORE_CAP: Record<string, number> = {
+    E19: 1, // Soucis de santé — ≥1 coché → +1 max
+    O16: 1, // Maladies du proche — ≥2 cochés → +1 max (threshold handled by DB score=0 for 'Aucun'/'JNSP')
+}
+
+/**
  * Compute the score for a vulnerability based on answers.
+ * Handles both single-choice and multi-choice (array) answers.
+ * Multi-choice questions with a cap (C2bis) are limited per question.
  */
 export function computeScore(
     data: MonkaData,
@@ -199,12 +211,44 @@ export function computeScore(
     const scoringQs = data.scoringQuestions.filter(sq => sq.vulnerability_id === vulnId)
     const maxScore = scoringQs[0]?.max_score_vulnerability || 0
 
-    let score = 0
+    // Group scoring entries by question_id for per-question cap logic
+    const byQuestion = new Map<string, typeof scoringQs>()
     for (const sq of scoringQs) {
-        const answer = answers[sq.question_id]
-        if (answer && !Array.isArray(answer) && answer === sq.response_text) {
-            score += sq.score
+        const list = byQuestion.get(sq.question_id) || []
+        list.push(sq)
+        byQuestion.set(sq.question_id, list)
+    }
+
+    let score = 0
+    for (const [qId, entries] of byQuestion) {
+        const answer = answers[qId]
+        if (answer === undefined || answer === null) continue
+
+        let questionScore = 0
+
+        if (Array.isArray(answer)) {
+            // Multi-choice: sum scores for all selected responses
+            for (const sq of entries) {
+                if (answer.includes(sq.response_text)) {
+                    questionScore += sq.score
+                }
+            }
+        } else {
+            // Single-choice: match exact response
+            for (const sq of entries) {
+                if (answer === sq.response_text) {
+                    questionScore += sq.score
+                }
+            }
         }
+
+        // Apply per-question cap if defined (C2bis counting logic)
+        const cap = QUESTION_SCORE_CAP[qId]
+        if (cap !== undefined && questionScore > cap) {
+            questionScore = cap
+        }
+
+        score += questionScore
     }
 
     const percentage = maxScore > 0 ? (score / maxScore) * 100 : 0
@@ -231,6 +275,8 @@ export interface EngineOutput {
     scores: ScoreResult[]
     totalScore: number
     totalMaxScore: number
+    /** Weighted global score (0-100) using per-V weights from DB */
+    weightedScore: number
 }
 
 /**
@@ -254,11 +300,20 @@ export function runEngine(
     const totalScore = scores.reduce((acc, s) => acc + s.score, 0)
     const totalMaxScore = scores.reduce((acc, s) => acc + s.maxScore, 0)
 
+    // Weighted global score: sum(V_percentage × V_weight) for each vulnerability
+    // Weights come from vulnerabilities.weight in DB (validated: 15/10/25/30/20)
+    const vulnWeightMap = new Map(data.vulnerabilities.map(v => [v.id, v.weight]))
+    const weightedScore = scores.reduce((acc, s) => {
+        const weight = vulnWeightMap.get(s.vulnId) || 0.20
+        return acc + (s.percentage * weight)
+    }, 0)
+
     return {
         activatedCategories,
         activatedMPIds,
         scores,
         totalScore,
         totalMaxScore,
+        weightedScore,
     }
 }

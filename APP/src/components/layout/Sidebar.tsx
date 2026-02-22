@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
     Activity,
     BookOpen,
-
     ChevronLeft,
     ChevronRight,
     Stethoscope,
@@ -13,7 +12,7 @@ import {
     Menu,
     Users,
     Shield,
-    FileQuestion,
+    FolderTree,
     LayoutDashboard,
 } from 'lucide-react'
 import { useSidebar } from './SidebarContext'
@@ -44,16 +43,16 @@ const navItems = [
         description: '5 dimensions cliniques',
     },
     {
-        path: '/questions',
-        label: 'Questions',
-        icon: FileQuestion,
-        description: '150 questions détaillées',
+        path: '/micro-parcours',
+        label: 'Micro-Parcours',
+        icon: FolderTree,
+        description: '24 parcours × drill-down',
     },
     {
         path: '/docs',
-        label: 'Documents Officiels',
+        label: 'Documentation',
         icon: BookOpen,
-        description: 'Templates & Livrables cliniques',
+        description: 'Documents officiels & livrables',
     },
 
 ]
@@ -203,7 +202,7 @@ export default function Sidebar() {
                             {!collapsed && (
                                 <div className="flex items-center gap-2 px-3 py-2 mb-2">
                                     <Stethoscope className="w-3.5 h-3.5 text-monka-primary/60" />
-                                    <span className="text-[11px] text-white/30">KERNEL v4 • 150 questions • Supabase live</span>
+                                    <span className="text-[11px] text-white/30">KERNEL v6 • 165 questions • Supabase live</span>
                                 </div>
                             )}
 

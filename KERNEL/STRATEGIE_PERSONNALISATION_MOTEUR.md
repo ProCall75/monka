@@ -9,7 +9,7 @@
 
 ## Résumé exécutif
 
-Le moteur clinique Monka exploite **150 questions** pour produire un parcours personnalisé pour chaque aidant. Aujourd'hui, cette personnalisation opère sur **2 axes** (type d'aidance × âge) avec une granularité limitée. Ce document démontre que le moteur peut atteindre une personnalisation **quasi-unitaire** (chaque utilisateur reçoit un parcours unique) en exploitant progressivement les données collectées.
+Le moteur clinique Monka exploite **165 questions** pour produire un parcours personnalisé pour chaque aidant. Aujourd'hui, cette personnalisation opère sur **2 axes** (type d'aidance × âge) avec une granularité limitée. Ce document démontre que le moteur peut atteindre une personnalisation **quasi-unitaire** (chaque utilisateur reçoit un parcours unique) en exploitant progressivement les données collectées.
 
 **Le plafond n'est pas technique. Il est clinique** — combien de contenu personnalisé Dr. Monka peut produire et valider.
 
@@ -23,11 +23,11 @@ Ce document propose **3 versions du moteur** (M1 → M2 → M3), une roadmap cal
 
 ```mermaid
 graph TD
-    Q["150 Questions<br />(130 socle + 20 conditionnelles)"] --> S["Scoring V1-V5<br />5 scores indépendants"]
-    Q --> R["Activation Rules<br />~90 règles"]
+    Q["165 Questions<br />(130 socle + 20 conditionnelles + 15 triggers)"] --> S["Scoring V1-V5<br />321 questions scorantes"]
+    Q --> R["Activation Rules<br />235 règles"]
     S --> N["Niveau vulnérabilité<br />Faible → Critique"]
-    R --> MP["MPs activés<br />~50 micro-parcours"]
-    MP --> REC["Recommandations<br />~200 recos"]
+    R --> MP["MPs activés<br />24 micro-parcours"]
+    MP --> REC["Recommandations<br />198 recos"]
     REC --> MT["Micro-Tâches<br />369 MTs"]
     MT --> ACT["Acteurs identifiés"]
     
@@ -46,10 +46,10 @@ graph TD
 
 | Source | Volume | Exploité aujourd'hui | Potentiel inexploité |
 |---|---|---|---|
-| **Réponses questionnaire** | ~500 data points (150 Q × options) | Scoring + activation rules | Personnalisation MTs, wording, CR |
+| **Réponses questionnaire** | ~500 data points (165 Q × options) | Scoring + activation rules | Personnalisation MTs, wording, CR |
 | **N3 (aidance)** | 5 catégories × multi-choix | Blocs de questions | Wording contextualisé par aidance |
 | **O1 (âge)** | 4 tranches | Overlay acteurs | Adaptation profondeur MTs |
-| **Questions scorantes** | ~80 questions avec poids | Score par V | Sous-scores, radar fin |
+| **Questions scorantes** | 321 questions avec poids C1/C2 | Score par V | Sous-scores, radar fin |
 | **Combinaisons CCC** | ∞ (toutes paires/triplets possibles) | ~30 règles CCC | Détection patterns cliniques complexes |
 | **Questions non-scorantes** | ~70 questions "contexte" | Peu exploité | Personnalisation MTs et recos |
 
@@ -62,7 +62,7 @@ graph TD
 **Ce qui est en place :**
 
 L'utilisateur est classé dans 1 des 73 combinaisons possibles. Cela détermine :
-- Quelles **questions** il voit (130 à 150)
+- Quelles **questions** il voit (130 à 165)
 - Quels **acteurs** sont priorisés (overlay âge)
 - Quels **blocs aidance** sont actifs
 
@@ -77,7 +77,7 @@ L'utilisateur est classé dans 1 des 73 combinaisons possibles. Cela détermine 
 
 **Ce qui est en place :**
 
-5 scores indépendants (V1-V5) avec 4 niveaux (faible → critique). Environ 80 questions contribuent au scoring avec des poids C1/C2.
+5 scores indépendants (V1-V5) avec 4 niveaux (faible → critique). **321 questions scorantes** contribuent au scoring avec des poids C1/C2. 20 seuils définissent les niveaux.
 
 **Ce qui n'est PAS exploité :**
 
@@ -111,26 +111,28 @@ Ce score ne vient pas d'UN questionnaire mais de la **convergence** de signaux f
 
 ---
 
-### Couche 3 — Activation des Micro-Parcours — ⚡ Partiellement, fort potentiel
+### Couche 3 — Activation des Micro-Parcours — ✅ FAIT, extensible
 
 **Ce qui est en place :**
 
-~90 règles d'activation déterminent quels MPs sont activés. Certaines règles utilisent des conditions simples (1 question), d'autres des CCC (combinaisons).
+**235 règles d'activation** réparties dans **73 catégories** à travers **24 MPs** déterminent quels parcours sont activés. Les règles utilisent des conditions simples (1 question) ou des CCC (combinaisons).
 
-**Ce qui manque cruellement :**
+#### 3a. Graduation de l'urgence par MP — ✅ DÉJÀ EN PLACE
 
-#### 3a. Graduation de l'urgence par MP
+Le moteur possède déjà **4 niveaux** de personnalisation par catégorie :
 
-Aujourd'hui : un MP est activé (oui/non). Demain :
-
-| Niveau | Déclencheur | Conséquence |
+| Niveau | Mécanisme | Effet |
 |---|---|---|
-| 🔴 **Critique** | Règle individuelle à seuil haut (ex: idées suicidaires) | Alerte immédiate IDEC, MTs prioritaires |
-| 🟠 **CCC** | Combinaison de conditions convergentes | MPs activés avec flag "combinaison à risque" |
-| 🟢 **Standard** | Règle simple activée | MTs normales |
-| 💡 **Prévention** | MP non activé mais profil à risque | MTs de prévention affichées en "recommandé" |
+| 🔴 **Critique** | Règle individuelle à seuil haut (ex: idées suicidaires) | Wording `critique` des recos et MTs activé |
+| 🟠 **CCC** | Combinaison de conditions convergentes | Wording `ccc` des recos et MTs activé |
+| 🟢 **Standard** | Règle simple activée | Wording `standard` des recos et MTs activé |
+| 💡 **Prévention** | Aucune règle de la catégorie ne fire | Reco de prévention activée par défaut (fallback) |
 
-**L'impact est majeur** : le médecin ne reçoit plus une liste plate de 15 MPs activés. Il reçoit "3 critiques à traiter d'urgence, 5 à surveiller, 7 en prévention".
+Chaque catégorie d'un MP a ses règles aux 3 niveaux. Les recos ET les MTs ont déjà 3 variantes de wording (`wording_std`, `wording_ccc`, `wording_critique`). Le médecin reçoit déjà un parcours gradué, pas une liste plate.
+
+> **Ce qui reste à exploiter :** rendre cette graduation plus visible dans le CR Médecin et la vue externe (couleurs, tri par urgence, sections séparées critique/CCC/standard/prévention).
+
+**Ce qui n'est PAS encore exploité :**
 
 #### 3b. Combinaisons cliniques non encore exploitées
 
@@ -147,13 +149,13 @@ Le questionnaire contient des **signaux faibles** qui, individuellement, ne déc
 > Ce sont des **détections que le médecin traitant seul ne fait pas** parce qu'il n'a pas toutes ces informations en même temps. C'est la valeur unique de Monka.
 
 > [!CAUTION]
-> **Argument de vente décisif** : "Notre moteur croise 150 data points simultanément pour détecter des patterns cliniques que même un médecin expérimenté ne verrait pas en consultation de 20 minutes. C'est de l'aide à la décision clinique, pas un simple questionnaire."
+> **Argument de vente décisif** : "Notre moteur croise 165 data points simultanément pour détecter des patterns cliniques que même un médecin expérimenté ne verrait pas en consultation de 20 minutes. C'est de l'aide à la décision clinique, pas un simple questionnaire."
 
 ---
 
 ### Couche 4 — Personnalisation des Micro-Tâches — ❌ Plus grand potentiel
 
-C'est le **bout de la chaîne** — ce que l'utilisateur voit et fait. Aujourd'hui les 369 MTs sont identiques quel que soit le profil.
+C'est le **bout de la chaîne** — ce que l'utilisateur voit et fait. Aujourd'hui les **369 MTs** (liées à **198 recommandations**) ont 3 variantes de wording par niveau mais sont identiques quel que soit le profil N3×O1.
 
 #### 4a. Variantes d'action par profil
 
@@ -171,16 +173,15 @@ Chaque MT générique peut être déclinée en **variante actionable** selon N3 
 
 **Volume** : 369 MTs × ~10 profils pertinents = ~3700 variantes théoriques. MAIS en pratique, beaucoup de MTs ne changent pas selon le profil. On estime **~800-1200 variantes réellement distinctes** à rédiger.
 
-#### 4b. Adaptation du niveau de détail
+#### 4b. Wording adaptatif des MTs — ✅ DÉJÀ EN PLACE
 
-Selon le **score de vulnérabilité**, on peut adapter la profondeur de chaque MT :
+Le niveau de détail des MTs s'adapte déjà automatiquement via le système de niveaux de règles :
+- Une règle **standard** fire → la MT affiche le `wording_std` (concis)
+- Une règle **CCC** fire → la MT affiche le `wording_ccc` (plus détaillé, combinaison expliquée)
+- Une règle **critique** fire → la MT affiche le `wording_critique` (action urgente, acteurs identifiés)
+- **Aucune** règle ne fire → la reco de **prévention** prend le relais automatiquement
 
-| Score V | Profondeur MT | Exemple |
-|---|---|---|
-| **Faible** | "Recommandé" — 1 ligne | "Pensez à vérifier l'accès APA" |
-| **Modéré** | "Conseillé" — 3-5 lignes avec acteurs | "Contacter le CLIC pour demander une évaluation APA. Acteur : assistant social du Conseil Départemental." |
-| **Élevé** | "Prioritaire" — guide complet avec étapes | Guide 10 lignes avec numéros, étapes, acteurs, délais |
-| **Critique** | "Urgent" — action immédiate + alerte IDEC | Guide + flag "IDEC doit contacter dans les 48h" |
+Pas besoin d'un mécanisme supplémentaire basé sur le score V — le niveau de la règle qui active la catégorie détermine déjà la profondeur du wording.
 
 #### 4c. Acteurs contextualisés
 
@@ -257,11 +258,11 @@ Le moteur doit être **validé et opérationnel** pour les premières expérimen
 
 | Composant | État | Ce qui reste |
 |---|---|---|
-| Questionnaire 150Q adaptatif | ✅ Fait | Valider blocs + faux amis avec Dr. Monka |
+| Questionnaire 165Q adaptatif | ✅ Fait | Valider blocs + faux amis avec Dr. Monka |
 | Scoring V1-V5 (C1+C2) | ✅ Fait | Audit final des poids |
 | 73 combinaisons profil | ✅ Fait | Valider dans simulateur |
-| ~90 activation rules | ✅ Fait | Vérifier cohérence avec Dr. Monka |
-| MPs → Recos → MTs (chaîne complète) | ✅ Fait | Audit complétude |
+| 235 activation rules | ✅ Fait | Vérifier cohérence avec Dr. Monka |
+| 24 MPs → 198 Recos → 369 MTs (chaîne complète) | ✅ Fait | Audit complétude |
 | CR Médecin basique | ⚡ En cours | Finaliser template |
 | Overlays âge (acteurs) | ✅ Fait | Valider avec Dr. Monka |
 | Routage IDEC/Care Manager | ✅ Fait | Tester scénarios Klésia |
@@ -284,7 +285,7 @@ Le moteur doit être **validé et opérationnel** pour les premières expérimen
 
 | Composant | Description | Effort |
 |---|---|---|
-| **Graduation des MPs** | Critique / CCC / Standard / Prévention | 1 semaine dev + 2 semaines contenu |
+| **Graduation des MPs** | ✅ Déjà en place (4 niveaux). Reste : rendre visible dans CR et vue externe | Faible (affichage seulement) |
 | **Règles CCC enrichies** | 20-30 combinaisons cliniques nouvelles | 2 semaines (Dr. Monka pilote) |
 | **Sous-scores par sous-bloc** | Radar V4 par axe (cognition, autonomie, etc.) | 3 jours dev |
 | **CR contextualisé** | Phrases adaptées au profil N3 × niveau V | 2 semaines contenu |
@@ -315,7 +316,7 @@ Le moteur doit être **validé et opérationnel** pour les premières expérimen
 | **Scoring temporel** | Comparer T0 vs T+3 mois | 1 semaine dev |
 | **Mode patient** | Questionnaire simplifié pour le patient lui-même | 1 mois dev |
 
-**Personnalisation M3** : Quasi-unitaire. Chaque utilisateur reçoit un parcours, un CR et des MTs uniques basés sur ses 150 réponses.
+**Personnalisation M3** : Quasi-unitaire. Chaque utilisateur reçoit un parcours, un CR et des MTs uniques basés sur ses 165 réponses.
 
 **Délai** : **4-6 mois après M2** (livraison ~septembre 2026)
 
@@ -334,7 +335,7 @@ Le moteur doit être **validé et opérationnel** pour les premières expérimen
 |---|---|---|
 | Parser les réponses questionnaire | ✅ | 0 |
 | Calculer des scores par sous-bloc | ⚡ | 3 jours |
-| Activer des MPs avec graduation | ⚡ | 1 semaine |
+| Activer des MPs avec graduation | ✅ | 0 (déjà 4 niveaux : critique/CCC/standard/prévention) |
 | Afficher des variantes de MTs | ❌ | 2 semaines |
 | Générer un CR contextualisé | ❌ | 3 semaines |
 | Stocker le contenu en base | ✅ | 0 (tables prêtes) |
@@ -344,7 +345,7 @@ Le moteur doit être **validé et opérationnel** pour les premières expérimen
 | Contenu à produire | Volume | Producteur | Cadence estimée |
 |---|---|---|---|
 | Règles CCC supplémentaires | ~30-50 règles | Dr. Monka | ~5/jour |
-| Sens clinique par règle existante | ~90 textes | Dr. Monka | ~10/jour |
+| Sens clinique par règle existante | 235 textes | Dr. Monka | ~10/jour |
 | Variantes MTs par profil | ~800-1200 textes | Dr. Monka + équipe | ~20/jour |
 | Wording recos contextualisé | ~300-500 textes | Dr. Monka | ~15/jour |
 | Phrases CR par situation | ~100 templates | Rédacteur médical | ~10/jour |
@@ -375,7 +376,7 @@ Ne pas essayer de tout personnaliser d'un coup. Commencer par :
 ### R2 — Exploiter les CCC comme argument de vente #1
 
 Les combinaisons de conditions cliniques sont le **différenciateur absolu** de Monka :
-- Aucun concurrent ne croise 150 data points
+- Aucun concurrent ne croise 165 data points
 - Le médecin traitant en consultation de 20 min ne peut pas faire cette analyse
 - C'est de l'**aide à la décision clinique** — pas un simple scoring
 
@@ -393,9 +394,9 @@ Communiquer sur les versions du moteur comme argument de professionnalisme :
 
 | Version | Titre public | Message |
 |---|---|---|
-| **M1** | "Moteur Clinique certifié" | "150 questions validées, 5 vulnérabilités, parcours personnalisé par type d'aidance" |
+| **M1** | "Moteur Clinique certifié" | "165 questions validées, 5 vulnérabilités, parcours personnalisé par type d'aidance" |
 | **M2** | "Aide à la décision intelligente" | "Détection de patterns cliniques complexes, graduation d'urgence, CR contextualisé" |
-| **M3** | "Parcours personnalisé unitaire" | "Chaque aidant reçoit un parcours unique basé sur ses 150 réponses — micro-tâches, acteurs et CR adaptés à sa situation exacte" |
+| **M3** | "Parcours personnalisé unitaire" | "Chaque aidant reçoit un parcours unique basé sur ses 165 réponses — micro-tâches, acteurs et CR adaptés à sa situation exacte" |
 
 → Chaque version est un **communiqué de presse**, un **argument investisseur**, un **palier de crédibilité**.
 
@@ -473,4 +474,4 @@ Juillet                     Août                     Septembre
 | **Combien de contenu à produire ?** | ~370 variantes MTs pour les 3 profils prioritaires (M2), ~1500 pour M3 |
 | **Combien de temps ?** | M1 = 4 semaines, M2 = +6 semaines, M3 = +4 mois |
 
-> **Le moteur Monka n'est pas un questionnaire. C'est un système d'aide à la décision clinique qui exploite 150 data points pour produire un parcours personnalisé unique. La question n'est pas "peut-on personnaliser plus" mais "quel niveau de finesse déployer à quel moment".**
+> **Le moteur Monka n'est pas un questionnaire. C'est un système d'aide à la décision clinique qui exploite 165 data points pour produire un parcours personnalisé unique. La question n'est pas "peut-on personnaliser plus" mais "quel niveau de finesse déployer à quel moment".**

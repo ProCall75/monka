@@ -13,14 +13,13 @@
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import {
-    VULN_IDS, VULN_META, VULN_COLORS,
+    VULN_IDS, VULN_META,
     buildMPMap, buildMPVulnMap,
     type VulnerabilityId,
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
 import { CRMedecinDocument } from './CRMedecinDocument'
 
-const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 const vulnerabilities = VULN_IDS.map(id => ({ id, label: VULN_META[id].name, color: VULN_META[id].color }))
 
 interface CRTabProps extends SimulatorTabProps {
