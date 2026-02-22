@@ -6,7 +6,7 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-    ArrowLeft, Shield, Target, ListChecks, BookOpen, Layers, ChevronDown,
+    ArrowLeft, Shield, Target, ListChecks, BookOpen, Layers, ChevronDown, Filter,
 } from 'lucide-react'
 import {
     VULN_META, getCategoriesForMP, getRulesForMP,
@@ -23,8 +23,15 @@ interface MPDrilldownProps {
     onBack: () => void
 }
 
+// Subtle pastel backgrounds to distinguish categories visually
+const CAT_COLORS = [
+    'bg-blue-50/40', 'bg-emerald-50/40', 'bg-amber-50/40', 'bg-rose-50/40',
+    'bg-cyan-50/40', 'bg-violet-50/40', 'bg-orange-50/40', 'bg-teal-50/40',
+]
+
 export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
     const [showDoc, setShowDoc] = useState(false)
+    const [catFilter, setCatFilter] = useState<string>('ALL')
     const mp = data.microParcours.find(m => m.id === mpId)
     const meta = VULN_META[(mp?.vulnerability_id || 'V1') as VulnerabilityId]
     const categories = useMemo(() => getCategoriesForMP(data, mpId), [data, mpId])
@@ -33,9 +40,21 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
     const allMTs = useMemo(() => getMTsForMP(data, mpId), [data, mpId])
     const prevMTs = useMemo(() => allMTs.filter(mt => mt.id.includes('_PREV_')), [allMTs])
     const mpCBs = useMemo(() => getContentBlocksForEntity(data, 'mp', mpId), [data, mpId])
+    const hasPrevention = prevMTs.length > 0
+
+    // Build filter options: Tous + each category + Prévention
+    const filterOptions = useMemo(() => {
+        const opts: { id: string; label: string }[] = [{ id: 'ALL', label: 'Tous' }]
+        categories.forEach(c => opts.push({ id: c.id, label: c.nom }))
+        if (hasPrevention) opts.push({ id: 'PREV', label: 'Prévention' })
+        return opts
+    }, [categories, hasPrevention])
+
+    const filteredCategories = catFilter === 'ALL' ? categories
+        : catFilter === 'PREV' ? []
+            : categories.filter(c => c.id === catFilter)
 
     if (!mp) return null
-
     if (showDoc) return <MPDocumentView data={data} mpId={mpId} onBack={() => setShowDoc(false)} />
 
     return (
@@ -76,6 +95,20 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                 </div>
             )}
 
+            {/* Category filter bar */}
+            <div className="flex items-center gap-1.5 mb-4 flex-wrap">
+                <Filter className="w-3.5 h-3.5 text-monka-muted mr-1" />
+                {filterOptions.map(opt => (
+                    <button key={opt.id} onClick={() => setCatFilter(opt.id)}
+                        className={`text-[10px] font-medium px-2.5 py-1.5 rounded-lg transition-all ${catFilter === opt.id
+                                ? opt.id === 'PREV' ? 'bg-purple-100 text-purple-700 shadow-sm' : 'bg-monka-primary/10 text-monka-primary shadow-sm'
+                                : 'bg-white/60 text-monka-muted hover:bg-white border border-monka-border/50'
+                            }`}>
+                        {opt.label}
+                    </button>
+                ))}
+            </div>
+
             {/* Stats bar */}
             <div className="flex gap-3 mb-5">
                 {[
@@ -93,17 +126,18 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
 
             {/* Categories drill-down */}
             <div className="space-y-4">
-                {categories.map(cat => {
+                {filteredCategories.map((cat, catIdx) => {
                     const catRules = allRules.filter(r => r.category_id === cat.id)
                     const catRecos = allRecos.filter(r => r.category_id === cat.id)
                     const catMTs = allMTs.filter(mt => mt.category_id === cat.id && !mt.id.includes('_PREV_'))
-                    const catPrevMTs = prevMTs.filter(mt => mt.category_id === cat.id)
+                    const catPrevMTs = (catFilter === 'ALL') ? prevMTs.filter(mt => mt.category_id === cat.id) : []
+                    const bgColor = CAT_COLORS[catIdx % CAT_COLORS.length]
 
                     return (
                         <motion.div key={cat.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-                            className="glass-card overflow-hidden">
+                            className={`glass-card overflow-hidden ${bgColor}`}>
                             {/* Category header */}
-                            <div className="px-4 py-3 bg-gray-50/50 border-b border-monka-border">
+                            <div className="px-4 py-3 border-b border-monka-border/60">
                                 <div className="flex items-center gap-2">
                                     <span className="text-[10px] font-mono font-bold text-monka-muted">{cat.id}</span>
                                     <span className="text-xs font-bold text-monka-heading flex-1">{cat.nom}</span>
@@ -192,6 +226,29 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                         </motion.div>
                     )
                 })}
+
+                {/* Dedicated Prévention filter view */}
+                {catFilter === 'PREV' && prevMTs.length > 0 && (
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                        className="glass-card overflow-hidden bg-purple-50/30">
+                        <div className="px-4 py-3 border-b border-purple-200/60">
+                            <div className="flex items-center gap-2">
+                                <Shield className="w-4 h-4 text-purple-500" />
+                                <span className="text-xs font-bold text-purple-700">Prévention — Micro-Tâches dédiées</span>
+                                <span className="text-[10px] text-purple-400 ml-auto">{prevMTs.length} MT</span>
+                            </div>
+                        </div>
+                        <div className="px-4 py-3 space-y-1">
+                            {prevMTs.map(mt => (
+                                <div key={mt.id} className="flex items-center gap-2 text-[11px] py-1">
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-100 text-purple-600">PREV</span>
+                                    <span className="text-monka-text flex-1">{mt.libelle}</span>
+                                    {mt.acteur && <span className="text-[9px] text-monka-muted bg-gray-100 px-1.5 py-0.5 rounded">{mt.acteur}</span>}
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
             </div>
         </div>
     )

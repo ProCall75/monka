@@ -53,4 +53,43 @@
         animation: none !important;
         transition: none !important;
     }
+
+    /* Fix scoring document layout — avoid large white sheets */
+    .cr-document table {
+        width: 100% !important;
+        font-size: 9pt !important;
+        table-layout: fixed !important;
+    }
+
+    .cr-document table th,
+    .cr-document table td {
+        padding: 4px 6px !important;
+        word-wrap: break-word !important;
+    }
+
+    .cr-document .grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
+    .cr-document .grid > div {
+        flex: 1 1 22% !important;
+    }
+
+    /* Force scoring document to fill page */
+    .max-w-\[900px\] {
+        max-width: 100% !important;
+    }
+
+    /* Prevent page breaks inside scoring sections */
+    .cr-document .cr-bloc,
+    .cr-document table tbody tr {
+        page-break-inside: avoid !important;
+    }
+
+    /* Reduce spacing in print to avoid wasted white space */
+    .cr-document .space-y-5 > * + * {
+        margin-top: 12px !important;
+    }
 }
