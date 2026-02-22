@@ -8,6 +8,7 @@ import {
     VULN_COLORS, type VulnerabilityId,
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
+import { MPContextPanel } from './MPContextPanel'
 
 const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
@@ -97,7 +98,8 @@ export function MPDetailView({ data, answers, activatedMPs, activatedCats, selec
                     )}
                 </div>
             )}
-            {/* Stats bar */}
+            {/* Content Blocks Documentation */}
+            <MPContextPanel mpId={selectedMP} contentBlocks={data.contentBlocks || []} accentColor={mpColor} />
             <div className="flex gap-3 mb-4">
                 {[
                     { val: activatedCategories.length, total: mpCategories.length, label: 'Catégories activées' },
