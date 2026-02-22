@@ -12,14 +12,13 @@ Page d'accueil de l'application. Affiche les métriques globales de la base Supa
 | `activation_rules` | `useMonkaData()` → `data.activationRules` | Count total, critique/ccc |
 | `recommendations` | `useMonkaData()` → `data.recommendations` | Count total, per-V |
 | `micro_taches` | `useMonkaData()` → `data.microTaches` | Count per-V |
-| Toutes tables | `EngineHealthCard` + `IntegrityReportCard` | Health score, integrity checks |
+| Toutes tables | `IntegrityReportCard` | FK validity, orphelins, nulls |
 
 ## Composants utilisés
 
-- `EngineHealthCard` — Score santé moteur /100
-- `IntegrityReportCard` — Rapport d'intégrité données
+- `IntegrityReportCard` — Rapport d'intégrité données (FK, orphelins)
 - `StatCard` (local) — Card stat globale avec icône + badge
-- `NavButton` (local) — Bouton navigation vers page
+- `NavButton` (local) — Bouton navigation vers page clé
 - `Badge` (local) — Badge coloré texte
 
 ## Connexions DB vérifiées
@@ -33,7 +32,14 @@ Page d'accueil de l'application. Affiche les métriques globales de la base Supa
 
 | Métrique | Valeur |
 |---|---|
-| Lignes | 201L |
+| Lignes | 200L |
 | Imports hooks | 1 (`useMonkaData` via barrel) |
-| Composants enfants | 5 (StatCard, Badge, NavButton, EngineHealthCard, IntegrityReportCard) |
+| Composants enfants | 4 (StatCard, Badge, NavButton, IntegrityReportCard) |
 | Architecture | ✅ page → hooks → engine |
+
+## Historique modifications
+
+| Date | Changement |
+|---|---|
+| 2026-02-22 | Création : 513L → 201L, retiré table per-V, scoring seuils, MT breakdown |
+| 2026-02-22 | Retiré EngineHealthCard (score confiance moteur metrics non pertinentes vs KERNEL K6/K7) |

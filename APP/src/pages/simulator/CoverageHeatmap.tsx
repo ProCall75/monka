@@ -10,23 +10,35 @@ const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
 interface CoverageHeatmapProps {
     data: MonkaData
+    activeV: VulnerabilityId | 'ALL' | 'TRIGGERS'
 }
 
-export function CoverageHeatmap({ data }: CoverageHeatmapProps) {
+export function CoverageHeatmap({ data, activeV }: CoverageHeatmapProps) {
     const matrix = useMemo(() => buildCoverageMatrix(data), [data])
     const { stats } = matrix
 
-    // Group questions by vulnerability for better visual coherence
+    // Filter MPs by active V
+    const filteredMPIds = useMemo(() => {
+        if (activeV === 'ALL' || activeV === 'TRIGGERS') return matrix.mpIds
+        return matrix.mpIds.filter(mpId => {
+            const mp = data.microParcours.find(m => m.id === mpId)
+            return mp?.vulnerability_id === activeV
+        })
+    }, [matrix, data, activeV])
+
+    // Group questions by vulnerability, filter by activeV
     const questionsByV = useMemo(() => {
         const groups: Record<string, string[]> = {}
+        const vFilter = (activeV === 'ALL' || activeV === 'TRIGGERS') ? null : activeV
         for (const qId of matrix.questionIds) {
             const q = data.questions.find(qu => qu.id === qId)
             const vId = q?.vulnerability_id || 'unknown'
+            if (vFilter && vId !== vFilter) continue
             if (!groups[vId]) groups[vId] = []
             groups[vId].push(qId)
         }
         return groups
-    }, [matrix, data])
+    }, [matrix, data, activeV])
 
     const orphanSet = useMemo(() => new Set(stats.orphanQuestions), [stats])
 
@@ -67,7 +79,7 @@ export function CoverageHeatmap({ data }: CoverageHeatmapProps) {
                                 <thead>
                                     <tr>
                                         <th className="px-1 py-0.5 text-left text-monka-muted font-normal sticky left-0 bg-white z-10">Q</th>
-                                        {matrix.mpIds.map(mpId => (
+                                        {filteredMPIds.map(mpId => (
                                             <th key={mpId} className="px-1 py-0.5 text-monka-muted font-normal text-center whitespace-nowrap"
                                                 title={mpId}>{mpId.replace(/^MP_/, '')}</th>
                                         ))}
@@ -80,7 +92,7 @@ export function CoverageHeatmap({ data }: CoverageHeatmapProps) {
                                             <tr key={qId} className={isOrphan ? 'bg-red-50' : ''}>
                                                 <td className={`px-1 py-0.5 font-mono sticky left-0 z-10 ${isOrphan ? 'text-red-500 font-bold bg-red-50' : 'text-monka-text bg-white'
                                                     }`}>{qId}</td>
-                                                {matrix.mpIds.map(mpId => {
+                                                {filteredMPIds.map(mpId => {
                                                     const cell = matrix.cells.get(`${qId}::${mpId}`)
                                                     if (!cell) return <td key={mpId} className="px-1 py-0.5 text-center text-gray-200">·</td>
                                                     const intensity = Math.min(cell.ruleCount / 3, 1)

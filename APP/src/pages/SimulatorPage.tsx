@@ -27,7 +27,6 @@ import {
 } from '../clinical/hooks'
 import { SimulatorScoringTab } from './simulator/SimulatorScoringTab'
 import { SimulatorMPTab } from './simulator/SimulatorMPTab'
-import { SimulatorRulesTab } from './simulator/SimulatorRulesTab'
 import { SimulatorCRTab } from './simulator/SimulatorCRTab'
 import { SimulatorExternalView } from './simulator/SimulatorExternalView'
 import { QuestionsSidebar } from './simulator/QuestionsSidebar'
@@ -38,7 +37,7 @@ import { WhatIfDiff } from './simulator/WhatIfDiff'
 import { PersonaComparison } from './simulator/PersonaComparison'
 
 // === Types ===
-type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary' | 'coverage' | 'personas'
+type InternalTab = 'scoring' | 'mp' | 'summary' | 'coverage' | 'personas'
 type ViewMode = 'internal' | 'external'
 type VFilter = VulnerabilityId | 'ALL' | 'TRIGGERS'
 
@@ -53,7 +52,6 @@ const vulnerabilities = VULN_IDS.map(id => ({
 const internalTabs: { id: InternalTab; label: string; icon: typeof Shield }[] = [
     { id: 'scoring', label: 'Scoring', icon: BarChart3 },
     { id: 'mp', label: 'Micro-Parcours', icon: Zap },
-    { id: 'rules', label: 'Règles', icon: Shield },
     { id: 'coverage', label: 'Couverture', icon: Grid3x3 },
     { id: 'personas', label: 'Personas', icon: GitCompare },
     { id: 'summary', label: 'Résumé', icon: FileText },
@@ -404,19 +402,11 @@ function SimulatorContent({
                                                     />
                                                 )}
 
-                                                {/* RULES TAB */}
-                                                {activeInternalTab === 'rules' && (
-                                                    <SimulatorRulesTab
-                                                        data={data} activeV={activeV} answers={answers}
-                                                        activatedMPs={activatedMPs} activatedCats={activatedCats}
-                                                        scoreByV={scoreByV} displayScore={displayScore}
-                                                        currentThreshold={currentThreshold} scoringMap={scoringMap}
-                                                    />
-                                                )}
+
 
                                                 {/* COVERAGE HEATMAP TAB (Bloc 13) */}
                                                 {activeInternalTab === 'coverage' && (
-                                                    <CoverageHeatmap data={data} />
+                                                    <CoverageHeatmap data={data} activeV={activeV} />
                                                 )}
 
                                                 {/* PERSONA COMPARISON TAB (Bloc 15) */}
