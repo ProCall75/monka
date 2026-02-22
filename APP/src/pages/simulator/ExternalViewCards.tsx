@@ -51,6 +51,16 @@ export function ActivatedMPCard({ mpId, data, activatedCats, mpMap }: {
         if (cat.mpId === mpId) activeCatIdsForMP.add(catId)
     }
     const mpMTs = data.microTaches.filter(mt => mt.mp_id === mpId && activeCatIdsForMP.has(mt.category_id))
+
+    // Group recos by category for display
+    const catMap = new Map<string, { nom: string; recos: typeof mpRecos }>()
+    for (const reco of mpRecos) {
+        if (!catMap.has(reco.category_id)) {
+            const cat = data.categories.find(c => c.id === reco.category_id)
+            catMap.set(reco.category_id, { nom: cat?.nom || reco.category_id, recos: [] })
+        }
+        catMap.get(reco.category_id)!.recos.push(reco)
+    }
     const contributiveMTs = mpMTs.filter(mt => mt.is_contributive)
     const nonContributiveMTs = mpMTs.filter(mt => !mt.is_contributive)
     const contribPct = contributiveMTs.length > 0 ? Math.round((0 / contributiveMTs.length) * 100) : 0
@@ -94,11 +104,20 @@ export function ActivatedMPCard({ mpId, data, activatedCats, mpMap }: {
                 </div>
             </div>
 
-            {/* Recommendations */}
-            {mpRecos.length > 0 ? (
+            {/* Recommendations grouped by category */}
+            {catMap.size > 0 ? (
                 <div className="divide-y divide-gray-100">
-                    {mpRecos.map(reco => (
-                        <RecoCard key={reco.id} reco={reco} data={data} critBg={critColors.bg} />
+                    {[...catMap.entries()].map(([catId, { nom, recos }]) => (
+                        <div key={catId}>
+                            {catMap.size > 1 && (
+                                <div className="px-5 py-2 bg-gray-50/80 border-b border-gray-100">
+                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">{nom}</span>
+                                </div>
+                            )}
+                            {recos.map(reco => (
+                                <RecoCard key={reco.id} reco={reco} data={data} critBg={critColors.bg} />
+                            ))}
+                        </div>
                     ))}
                 </div>
             ) : (
@@ -121,11 +140,18 @@ function RecoCard({ reco, data, critBg }: {
     const recoContrib = recoMTs.filter(mt => mt.is_contributive)
     const recoNonContrib = recoMTs.filter(mt => !mt.is_contributive)
 
+    const niveauBadge = reco.niveau === 'critique' ? { label: 'Critique', cls: 'bg-red-100 text-red-600' }
+        : reco.niveau === 'ccc' ? { label: 'CCC', cls: 'bg-amber-100 text-amber-600' }
+            : { label: 'Standard', cls: 'bg-emerald-100 text-emerald-600' }
+
     return (
         <div className="px-5 py-4 bg-white/80 hover:bg-white/95 transition-colors">
             <div className="flex items-start gap-2.5 mb-2">
                 <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: critBg }} />
                 <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-0.5">
+                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded-full ${niveauBadge.cls}`}>{niveauBadge.label}</span>
+                    </div>
                     <p className="text-sm text-gray-800 font-medium leading-snug">{reco.wording_utilisateur}</p>
                 </div>
             </div>

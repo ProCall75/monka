@@ -21,6 +21,8 @@ interface QuestionContrib {
     currentScore: number
     maxScore: number
     bestAlt: { answer: string; score: number } | null
+    classification: string | null
+    justification: string | null
 }
 
 export function ScoreBreakdown({ data, vulnId, answers, scoringMap }: ScoreBreakdownProps) {
@@ -38,6 +40,9 @@ export function ScoreBreakdown({ data, vulnId, answers, scoringMap }: ScoreBreak
         const bestAlt = qScores
             .filter(sq => sq.response_text !== answer)
             .sort((a, b) => b.score - a.score)[0] || null
+        const justBlock = data.contentBlocks?.find(
+            cb => cb.entity_type === 'question' && cb.entity_id === qId && cb.block_type === 'scoring_justification'
+        )
 
         return {
             qId,
@@ -46,6 +51,8 @@ export function ScoreBreakdown({ data, vulnId, answers, scoringMap }: ScoreBreak
             currentScore,
             maxScore,
             bestAlt: bestAlt ? { answer: bestAlt.response_text, score: bestAlt.score } : null,
+            classification: q?.classification || null,
+            justification: justBlock?.content || null,
         }
     }).sort((a, b) => b.currentScore - a.currentScore)
 
@@ -77,11 +84,25 @@ export function ScoreBreakdown({ data, vulnId, answers, scoringMap }: ScoreBreak
                                     {c.currentScore}/{c.maxScore}
                                 </span>
                             </div>
-                            {/* Hover detail with what-if */}
+                            {/* Hover detail with what-if + content blocks */}
                             <div className="hidden group-hover:block ml-14 mt-0.5 mb-1">
                                 <p className="text-[9px] text-monka-muted line-clamp-1">
                                     {c.qText}
                                 </p>
+                                {/* Classification badge */}
+                                {c.classification && c.classification !== 'aucun' && (
+                                    <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block mt-0.5 mb-0.5 ${c.classification === 'facteur' ? 'bg-blue-100 text-blue-600'
+                                            : c.classification === 'etat' ? 'bg-purple-100 text-purple-600'
+                                                : 'bg-indigo-100 text-indigo-600'}`}>
+                                        {c.classification === 'facteur' ? '⚡ Facteur' : c.classification === 'etat' ? '📊 État' : '⚡📊 Facteur + État'}
+                                    </span>
+                                )}
+                                {/* Scoring justification from content_blocks */}
+                                {c.justification && (
+                                    <p className="text-[9px] text-gray-600 mt-0.5 leading-snug bg-amber-50/50 px-1.5 py-1 rounded">
+                                        {c.justification}
+                                    </p>
+                                )}
                                 {c.currentAnswer && (
                                     <p className="text-[9px] text-monka-text">
                                         Réponse : <strong>{c.currentAnswer}</strong>
