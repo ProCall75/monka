@@ -86,6 +86,20 @@ export interface DBCRTemplate {
     created_at: string
 }
 
+export interface DBPersona {
+    id: string; name: string; age: number; emoji: string; color: string
+    short_desc: string; story: string
+    profile_situation: string; profile_activite: string
+    profile_lien_parente: string; profile_duree_aidance: string; profile_proche: string
+    traits: string[]; aidance_types: string[]; age_aide: string
+    is_combo: boolean; created_at: string
+}
+
+export interface DBPersonaAnswer {
+    id: string; persona_id: string; question_id: string; answer: string
+    created_at: string
+}
+
 // === Aggregate data store ===
 
 export interface MonkaData {
@@ -102,6 +116,8 @@ export interface MonkaData {
     suiviQuestions: DBSuiviQuestion[]
     contentBlocks: DBContentBlock[]
     crTemplates: DBCRTemplate[]
+    personas: DBPersona[]
+    personaAnswers: DBPersonaAnswer[]
     loaded: boolean
     loading: boolean
     error: string | null

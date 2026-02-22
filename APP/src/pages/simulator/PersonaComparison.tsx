@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from 'react'
 import { Users, User, Briefcase, Clock, MapPin, Heart } from 'lucide-react'
-import { personas, type Persona } from '../PersonasPage'
+import { usePersonas, type Persona } from '../PersonasPage'
 import {
     VULN_IDS, VULN_META, VULN_COLORS,
     getActivatedCategories, buildScoringMap, getTriggerQuestions, getQuestionText,
@@ -45,6 +45,7 @@ function computePersonaResult(data: MonkaData, persona: Persona, scoringMap: Rec
 
 export function PersonaComparison({ data }: PersonaComparisonProps) {
     const [selectedIds, setSelectedIds] = useState<string[]>(['P1', 'P2'])
+    const personas = usePersonas()
     const scoringMap = useMemo(() => buildScoringMap(data), [data])
     const availablePersonas = personas.filter(p => Object.keys(p.answers).length > 0)
     const triggerQs = useMemo(() => getTriggerQuestions(data), [data])

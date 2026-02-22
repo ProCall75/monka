@@ -10,6 +10,7 @@ import type {
     DBQuestionMPMapping, DBCategory, DBActivationRule,
     DBScoringQuestion, DBScoringThreshold, DBRecommendation,
     DBMicroTache, DBSuiviQuestion, DBContentBlock, DBCRTemplate,
+    DBPersona, DBPersonaAnswer,
 } from './dbTypes'
 
 // === Cached data store ===
@@ -24,7 +25,7 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
     const [
         vulnRes, questRes, mpRes, mappingRes, catRes, rulesRes,
         scorQRes, threshRes, recoRes, mtRes, suiviRes,
-        contentBlocksRes, crTemplatesRes,
+        contentBlocksRes, crTemplatesRes, personasRes, personaAnswersRes,
     ] = await Promise.all([
         supabase.from('vulnerabilities').select('*').order('id'),
         supabase.from('questions').select('*').order('vulnerability_id').order('ordre_global'),
@@ -39,11 +40,13 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         supabase.from('suivi_questions').select('*').order('vulnerability_id').order('mp_id'),
         supabase.from('content_blocks').select('*').order('entity_type').order('entity_id'),
         supabase.from('cr_templates').select('*').order('template_type').order('vulnerability_id'),
+        supabase.from('personas').select('*').order('id'),
+        supabase.from('persona_answers').select('*').order('persona_id').order('question_id'),
     ])
 
     // Check for errors
-    const tableNames = ['vulnerabilities', 'questions', 'micro_parcours', 'question_mp_mapping', 'categories', 'activation_rules', 'scoring_questions', 'scoring_thresholds', 'recommendations', 'micro_taches', 'suivi_questions', 'content_blocks', 'cr_templates']
-    const results = [vulnRes, questRes, mpRes, mappingRes, catRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes, contentBlocksRes, crTemplatesRes]
+    const tableNames = ['vulnerabilities', 'questions', 'micro_parcours', 'question_mp_mapping', 'categories', 'activation_rules', 'scoring_questions', 'scoring_thresholds', 'recommendations', 'micro_taches', 'suivi_questions', 'content_blocks', 'cr_templates', 'personas', 'persona_answers']
+    const results = [vulnRes, questRes, mpRes, mappingRes, catRes, rulesRes, scorQRes, threshRes, recoRes, mtRes, suiviRes, contentBlocksRes, crTemplatesRes, personasRes, personaAnswersRes]
     const errors = results
         .map((r, i) => r.error ? `${tableNames[i]}: ${r.error.message}` : null)
         .filter(Boolean)
@@ -53,9 +56,9 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
             vulnerabilities: [], questions: [], microParcours: [], questionMPMapping: [],
             categories: [], activationRules: [], scoringQuestions: [], scoringThresholds: [],
             recommendations: [], microTaches: [], suiviQuestions: [],
-            contentBlocks: [], crTemplates: [],
+            contentBlocks: [], crTemplates: [], personas: [], personaAnswers: [],
             loaded: false, loading: false, error: errors.join('; '),
-        }
+        } as MonkaData
     }
 
     cachedData = {
@@ -72,6 +75,8 @@ export async function fetchAllMonkaData(): Promise<MonkaData> {
         suiviQuestions: (suiviRes.data || []) as DBSuiviQuestion[],
         contentBlocks: (contentBlocksRes.data || []) as DBContentBlock[],
         crTemplates: (crTemplatesRes.data || []) as DBCRTemplate[],
+        personas: (personasRes.data || []) as DBPersona[],
+        personaAnswers: (personaAnswersRes.data || []) as DBPersonaAnswer[],
         loaded: true, loading: false, error: null,
     }
 

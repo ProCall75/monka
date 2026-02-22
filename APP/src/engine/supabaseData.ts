@@ -16,6 +16,7 @@ export type {
     DBQuestionMPMapping, DBCategory, DBActivationRule,
     DBScoringQuestion, DBScoringThreshold, DBRecommendation,
     DBMicroTache, DBSuiviQuestion, DBContentBlock, DBCRTemplate,
+    DBPersona, DBPersonaAnswer,
     MonkaData,
 } from './dbTypes'
 

@@ -23,6 +23,8 @@ function mockData(overrides: Partial<MonkaData> = {}): MonkaData {
         suiviQuestions: [],
         contentBlocks: [],
         crTemplates: [],
+        personas: [],
+        personaAnswers: [],
         loaded: true,
         loading: false,
         error: null,
