@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Shield,
+    BarChart3,
     Zap,
     Eye,
     Cog,
@@ -25,6 +26,7 @@ import {
     type MonkaData, type DBQuestion,
 } from '../clinical/hooks'
 
+import { SimulatorScoringTab } from './simulator/SimulatorScoringTab'
 import { SimulatorMPTab } from './simulator/SimulatorMPTab'
 import { SimulatorCRTab } from './simulator/SimulatorCRTab'
 import { SimulatorExternalView } from './simulator/SimulatorExternalView'
@@ -36,7 +38,7 @@ import { WhatIfDiff } from './simulator/WhatIfDiff'
 import { PersonaComparison } from './simulator/PersonaComparison'
 
 // === Types ===
-type InternalTab = 'mp' | 'summary' | 'coverage' | 'personas'
+type InternalTab = 'scoring' | 'mp' | 'summary' | 'coverage' | 'personas'
 type ViewMode = 'internal' | 'external'
 type VFilter = VulnerabilityId | 'ALL' | 'TRIGGERS'
 
@@ -49,6 +51,7 @@ const vulnerabilities = VULN_IDS.map(id => ({
 
 
 const internalTabs: { id: InternalTab; label: string; icon: typeof Shield }[] = [
+    { id: 'scoring', label: 'Scoring', icon: BarChart3 },
     { id: 'mp', label: 'Micro-Parcours', icon: Zap },
     { id: 'coverage', label: 'Couverture', icon: Grid3x3 },
     { id: 'personas', label: 'Personas', icon: GitCompare },
@@ -62,7 +65,7 @@ export default function SimulatorPage() {
     const [activeV, setActiveV] = useState<VFilter>('V1')
     const [answers, setAnswers] = useState<Record<string, string>>({})
     const [viewMode, setViewMode] = useState<ViewMode>('internal')
-    const [activeInternalTab, setActiveInternalTab] = useState<InternalTab>('mp')
+    const [activeInternalTab, setActiveInternalTab] = useState<InternalTab>('scoring')
     const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({})
     const [personaId, setPersonaId] = useState<string | null>(null)
     const [originalAnswers, setOriginalAnswers] = useState<Record<string, string>>({})
@@ -384,6 +387,15 @@ function SimulatorContent({
                                             <motion.div key={activeInternalTab} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }}>
 
 
+                                                {/* SCORING TAB */}
+                                                {activeInternalTab === 'scoring' && (
+                                                    <SimulatorScoringTab
+                                                        data={data} activeV={activeV} answers={answers}
+                                                        activatedMPs={activatedMPs} activatedCats={activatedCats}
+                                                        scoreByV={scoreByV} displayScore={displayScore}
+                                                        currentThreshold={currentThreshold} scoringMap={scoringMap}
+                                                    />
+                                                )}
 
                                                 {/* MICRO-PARCOURS TAB (activation + recos + tasks sub-tabs) */}
                                                 {activeInternalTab === 'mp' && (

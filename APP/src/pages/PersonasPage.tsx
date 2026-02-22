@@ -11,7 +11,6 @@ import {
     Zap,
     Heart,
     Shield,
-    Sparkles,
     Brain,
     Wine,
     Layers,
@@ -115,7 +114,7 @@ function getCategoryLabels(persona: Persona): string[] {
 export function usePersonas() {
     const { data } = useMonkaData()
     return useMemo(() => {
-        if (!data.loaded) return []
+        if (!data?.loaded) return []
         const answersMap = buildAnswersMap(data.personaAnswers)
         return data.personas.map(p => dbToPersona(p, answersMap))
     }, [data])
