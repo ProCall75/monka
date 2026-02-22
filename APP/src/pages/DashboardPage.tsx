@@ -23,6 +23,7 @@ import {
     VULN_META, VULN_IDS,
     type MonkaData,
 } from '../clinical/hooks'
+import { EngineHealthCard } from '../components/clinical/EngineHealthCard'
 
 
 
@@ -289,6 +290,10 @@ function DashboardContent({ data }: { data: MonkaData }) {
                     <p className="text-[10px] text-monka-muted mt-2">{globalStats.orphanMT} MT orpheline • {globalStats.totalMappings} mappings</p>
                 </motion.div>
             </div>
+
+            {/* === ENGINE HEALTH SCORE === */}
+            <EngineHealthCard data={data} />
+            <div className="mb-6" />
 
             {/* === PER-V BREAKDOWN TABLE === */}
             <motion.div {...cardAnim} transition={{ ...cardAnim.transition, delay: 0.4 }} className="glass-card mb-6 overflow-hidden">
