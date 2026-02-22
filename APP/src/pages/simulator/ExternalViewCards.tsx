@@ -188,7 +188,7 @@ export function PreventionSection({ data, preventionRecosByMP, preventionMPIds, 
                     if (!mp) return null
                     const recos = preventionRecosByMP[mpId]
                     // Get prevention MTs for this MP
-                    const preventionMTs = data.microTaches.filter(mt => mt.mp_id === mpId)
+                    const preventionMTs = data.microTaches.filter(mt => mt.mp_id === mpId && mt.is_prevention)
                     return (
                         <div key={mpId} className="rounded-2xl overflow-hidden" style={{ border: '2px solid rgba(124,58,237,0.2)', boxShadow: '0 4px 24px rgba(124,58,237,0.08)' }}>
                             <div className="px-5 py-3 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' }}>
@@ -196,9 +196,9 @@ export function PreventionSection({ data, preventionRecosByMP, preventionMPIds, 
                                 <span className="text-white/80 text-[10px] font-bold bg-white/20 px-2 py-0.5 rounded-full">{mp.vulnerability_id}</span>
                             </div>
                             <div className="divide-y divide-gray-100">
-                                {recos.map(reco => {
-                                    // MTs for this category
-                                    const recoMTs = preventionMTs.filter(mt => mt.category_id === reco.category_id)
+                                {recos.map((reco, idx) => {
+                                    // Show all prevention MTs for the MP under their reco (category_id mismatch is common)
+                                    const recoMTs = idx === 0 ? preventionMTs : []
                                     return (
                                         <div key={reco.id} className="px-5 py-3 bg-white/80">
                                             <div className="flex items-start gap-2">

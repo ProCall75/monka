@@ -117,7 +117,7 @@ L'aidant remplit le questionnaire :
 - **130 questions socle** communes à tous les profils, explorent les 5 domaines de vulnérabilité
 - **20 questions spécifiques** selon le type d'aidance (enfant, personne âgée, handicap, addiction, troubles psy)
 - **15 triggers** définissent le profil (âge aidant, âge proche, type d'aidance, situation professionnelle, lieu de vie)
-- Les triggers conditionnent l'affichage de certaines questions (ex : questions AGGIR uniquement si le proche est une personne âgée)
+- Les triggers conditionnent l'affichage de certaines questions (ex : questions AGGIR niquement si le proche est une personne âgée)
 
 > Le questionnaire est figé pour le moment — les questions ne sont pas modifiées en cours d'exploitation.
 
