@@ -1,9 +1,9 @@
 /* VulnOverviewTabs — Sub-tab components for VulnDetail.
    Extracted from VulnDetail.tsx for §2 compliance (<250L per component).
-   Contains: OverviewTab, QuestionsTab, ScoringTab (enriched with question_text FR + content_blocks). */
+   Contains: OverviewTab, QuestionsTab (enriched with inline scoring details + content blocks). */
 
-import { useMemo } from 'react'
-import { BookOpen } from 'lucide-react'
+import { useState, useMemo, Fragment } from 'react'
+import { ChevronDown, ChevronRight, Zap, BookOpen, Info } from 'lucide-react'
 import type { MonkaData } from '../../clinical/hooks'
 import { getContentBlocksForEntity } from '../../engine/supabaseData'
 
@@ -30,6 +30,24 @@ const THRESHOLD_COLORS: Record<string, string> = {
     green: '#22C55E', yellow: '#EAB308', orange: '#F97316', red: '#EF4444',
     vert: '#22C55E', jaune: '#EAB308', faible: '#22C55E',
     modéré: '#EAB308', élevé: '#F97316', critique: '#EF4444',
+}
+
+const CLASSIFICATION_INFO: Record<string, { label: string; desc: string; bg: string; text: string }> = {
+    etat: {
+        label: 'État',
+        desc: 'Mesure un état actuel du patient — indicateur de sa condition présente',
+        bg: 'bg-blue-50', text: 'text-blue-600',
+    },
+    facteur: {
+        label: 'Facteur',
+        desc: 'Identifie un facteur de risque — prédicteur d\'une évolution potentielle',
+        bg: 'bg-amber-50', text: 'text-amber-600',
+    },
+}
+
+const BLOCK_TYPE_META: Record<string, { label: string; icon: typeof BookOpen; color: string }> = {
+    scoring_justification: { label: 'Justification clinique', icon: BookOpen, color: '#6366F1' },
+    scoring_ponderation: { label: 'Pondération', icon: Zap, color: '#F59E0B' },
 }
 
 // ── OverviewTab ────────────────────────────────────────
@@ -83,139 +101,171 @@ export function OverviewTab({ stats, meta }: OverviewProps) {
     )
 }
 
-// ── QuestionsTab ───────────────────────────────────────
+// ── QuestionsTab (enriched: scoring details + content blocks) ──
 
 interface QuestionsProps {
     questions: MonkaData['questions']
+    data: MonkaData
+    vulnId: string
+    color: string
 }
 
-export function QuestionsTab({ questions }: QuestionsProps) {
+export function QuestionsTab({ questions, data, vulnId, color }: QuestionsProps) {
+    const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
+
+    // Build question_id → scoring entries lookup
+    const scoringByQuestion = useMemo(() => {
+        const map = new Map<string, MonkaData['scoringQuestions']>()
+        for (const sq of data.scoringQuestions.filter(s => s.vulnerability_id === vulnId)) {
+            const list = map.get(sq.question_id) || []
+            list.push(sq)
+            map.set(sq.question_id, list)
+        }
+        return map
+    }, [data.scoringQuestions, vulnId])
+
+    const scoringQuestionIds = useMemo(
+        () => new Set(scoringByQuestion.keys()),
+        [scoringByQuestion],
+    )
+
+    const toggle = (qId: string) => {
+        setExpandedIds(prev => {
+            const next = new Set(prev)
+            next.has(qId) ? next.delete(qId) : next.add(qId)
+            return next
+        })
+    }
+
     return (
         <div className="glass-card overflow-hidden">
             <table className="w-full text-xs">
                 <thead>
                     <tr className="border-b border-monka-border bg-gray-50/80">
+                        <th className="w-8"></th>
                         <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase tracking-wider w-16">ID</th>
                         <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase tracking-wider">Question</th>
                         <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase tracking-wider w-20">Type</th>
+                        <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase tracking-wider w-20">Scoring</th>
                         <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase tracking-wider w-16">Options</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {questions.map(q => (
-                        <tr key={q.id} className="border-b border-monka-border/50 hover:bg-gray-50/50">
-                            <td className="px-4 py-2">
-                                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-500">{q.id}</span>
-                            </td>
-                            <td className="px-4 py-2 text-monka-text font-medium">{q.question_text}</td>
-                            <td className="px-4 py-2">
-                                <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${q.classification === 'etat' ? 'bg-blue-50 text-blue-600'
-                                    : q.classification === 'facteur' ? 'bg-amber-50 text-amber-600'
-                                        : 'bg-gray-50 text-gray-500'
-                                    }`}>
-                                    {q.classification || '—'}
-                                </span>
-                            </td>
-                            <td className="px-4 py-2 text-monka-muted text-center">{q.response_options?.length || 0}</td>
-                        </tr>
-                    ))}
+                    {questions.map(q => {
+                        const isScoring = scoringQuestionIds.has(q.id)
+                        const isExpanded = expandedIds.has(q.id)
+                        const scoringEntries = scoringByQuestion.get(q.id) || []
+                        const classInfo = CLASSIFICATION_INFO[q.classification || '']
+                        const contentBlocks = getContentBlocksForEntity(data, 'question', q.id)
+
+                        return (
+                            <Fragment key={q.id}>
+                                <tr
+                                    className={`border-b border-monka-border/50 cursor-pointer transition-colors hover:bg-gray-50/80 ${isExpanded ? 'bg-gray-50/60' : ''}`}
+                                    onClick={() => toggle(q.id)}
+                                >
+                                    <td className="pl-2 py-2 text-center">
+                                        {isExpanded
+                                            ? <ChevronDown className="w-3.5 h-3.5 text-monka-muted mx-auto" />
+                                            : <ChevronRight className="w-3.5 h-3.5 text-monka-muted mx-auto" />
+                                        }
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-500">{q.id}</span>
+                                    </td>
+                                    <td className="px-4 py-2 text-monka-text font-medium">{q.question_text}</td>
+                                    <td className="px-4 py-2">
+                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${classInfo ? `${classInfo.bg} ${classInfo.text}` : 'bg-gray-50 text-gray-500'}`}>
+                                            {classInfo?.label || q.classification || '—'}
+                                        </span>
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {isScoring ? (
+                                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-600">
+                                                <Zap className="w-2.5 h-2.5" />
+                                                Scorante
+                                            </span>
+                                        ) : (
+                                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-50 text-gray-400">
+                                                Non scorante
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td className="px-4 py-2 text-monka-muted text-center">{q.response_options?.length || 0}</td>
+                                </tr>
+
+                                {/* Expanded detail row */}
+                                {isExpanded && (
+                                    <tr key={`${q.id}-detail`} className="border-b border-monka-border/50">
+                                        <td colSpan={6} className="px-6 py-3 bg-gradient-to-r from-gray-50/80 to-white">
+                                            <div className="space-y-3">
+                                                {/* Content blocks — clinical justification */}
+                                                {contentBlocks.length > 0 && (
+                                                    <div className="space-y-2">
+                                                        {contentBlocks
+                                                            .sort((a, b) => a.ordre - b.ordre)
+                                                            .map(cb => {
+                                                                const meta = BLOCK_TYPE_META[cb.block_type]
+                                                                const BlockIcon = meta?.icon || Info
+                                                                return (
+                                                                    <div key={cb.id} className="flex items-start gap-2.5 p-3 rounded-lg border border-monka-border bg-white/70">
+                                                                        <div className="flex items-center gap-1.5 flex-shrink-0 mt-0.5">
+                                                                            <BlockIcon className="w-3.5 h-3.5" style={{ color: meta?.color || '#888' }} />
+                                                                            <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: meta?.color || '#888' }}>
+                                                                                {meta?.label || cb.block_type}
+                                                                            </span>
+                                                                        </div>
+                                                                        <p className="text-[11px] text-monka-text leading-relaxed">{cb.content}</p>
+                                                                    </div>
+                                                                )
+                                                            })}
+                                                    </div>
+                                                )}
+
+                                                {/* Classification explanation */}
+                                                {classInfo && (
+                                                    <div className="flex items-start gap-2 p-2.5 rounded-lg border border-monka-border bg-white/50">
+                                                        <div className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${classInfo.bg} ${classInfo.text} flex-shrink-0 mt-0.5`}>
+                                                            {classInfo.label}
+                                                        </div>
+                                                        <p className="text-[11px] text-monka-muted leading-relaxed">{classInfo.desc}</p>
+                                                    </div>
+                                                )}
+
+                                                {/* Scoring responses table — only for scoring questions */}
+                                                {isScoring && scoringEntries.length > 0 && (
+                                                    <div>
+                                                        <h5 className="text-[10px] font-bold text-monka-muted uppercase mb-2 flex items-center gap-1.5">
+                                                            <Zap className="w-3 h-3" style={{ color }} />
+                                                            Réponses scorantes ({scoringEntries.length})
+                                                        </h5>
+                                                        <div className="grid gap-1.5">
+                                                            {scoringEntries.map((se, i) => (
+                                                                <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-white border border-monka-border">
+                                                                    <span className="text-[11px] text-monka-text">{se.response_text}</span>
+                                                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                                                        {se.coefficient !== 1 && (
+                                                                            <span className="text-[9px] text-monka-muted">×{se.coefficient}</span>
+                                                                        )}
+                                                                        <span className="text-xs font-bold px-2 py-0.5 rounded-md text-white min-w-[32px] text-center"
+                                                                            style={{ backgroundColor: color }}>
+                                                                            {se.score} pt{se.score > 1 ? 's' : ''}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            </Fragment>
+                        )
+                    })}
                 </tbody>
             </table>
-        </div>
-    )
-}
-
-// ── ScoringTab (enriched: question_text FR + content_blocks) ──
-
-interface ScoringProps {
-    stats: VulnStats
-    color: string
-    data: MonkaData
-    vulnId: string
-}
-
-export function ScoringTab({ stats, color, data, vulnId }: ScoringProps) {
-    // Build question_id → question_text lookup for FR display
-    const questionTextMap = useMemo(() => {
-        const map = new Map<string, string>()
-        for (const q of data.questions) {
-            map.set(q.id, q.question_text)
-        }
-        return map
-    }, [data.questions])
-
-    // Get content blocks explaining "pourquoi ces questions" for this vulnerability
-    const contentBlocks = useMemo(
-        () => getContentBlocksForEntity(data, 'vulnerability', vulnId),
-        [data, vulnId],
-    )
-
-    return (
-        <div className="space-y-3">
-            {/* Content blocks — "Pourquoi ces questions" */}
-            {contentBlocks.length > 0 && (
-                <div className="glass-card p-4">
-                    <h4 className="text-xs font-bold text-monka-muted uppercase mb-3 flex items-center gap-1.5">
-                        <BookOpen className="w-3.5 h-3.5" />
-                        Explication du scoring
-                    </h4>
-                    <div className="space-y-2">
-                        {contentBlocks.map(cb => (
-                            <div key={cb.id} className="text-sm text-monka-text leading-relaxed p-3 bg-white/50 rounded-lg border border-monka-border">
-                                {cb.block_type !== 'text' && (
-                                    <span className="text-[10px] font-bold text-monka-primary uppercase mr-2">{cb.block_type}</span>
-                                )}
-                                {cb.content}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* Threshold visualization */}
-            <div className="glass-card p-4">
-                <h4 className="text-xs font-bold text-monka-muted uppercase mb-3">Seuils de score — max {stats.maxScore} pts</h4>
-                <div className="flex gap-2">
-                    {[...stats.thresholds]
-                        .sort((a, b) => a.min_score - b.min_score)
-                        .map(t => {
-                            const width = stats.maxScore > 0 ? ((t.max_score - t.min_score) / stats.maxScore * 100) : 25
-                            return (
-                                <div key={t.level} className="rounded-lg p-2 text-center text-white text-[10px] font-bold"
-                                    style={{ backgroundColor: THRESHOLD_COLORS[t.level.toLowerCase()] || '#888', width: `${width}%`, minWidth: '60px' }}>
-                                    {t.level}<br />{t.min_score}–{t.max_score}
-                                </div>
-                            )
-                        })}
-                </div>
-            </div>
-
-            {/* Scoring questions — FRENCH question_text, no raw codes */}
-            <div className="glass-card overflow-hidden">
-                <table className="w-full text-xs">
-                    <thead>
-                        <tr className="border-b border-monka-border bg-gray-50/80">
-                            <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase">Question</th>
-                            <th className="text-left px-4 py-2.5 font-bold text-monka-muted uppercase">Réponse scorante</th>
-                            <th className="text-right px-4 py-2.5 font-bold text-monka-muted uppercase w-16">Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {stats.scoring.map((s, i) => (
-                            <tr key={i} className="border-b border-monka-border/50 hover:bg-gray-50/50">
-                                <td className="px-4 py-2">
-                                    <div className="text-monka-text font-medium">
-                                        {questionTextMap.get(s.question_id) || s.question_id}
-                                    </div>
-                                    <span className="text-[9px] font-mono text-monka-muted">{s.question_id}</span>
-                                </td>
-                                <td className="px-4 py-2 text-monka-text">{s.response_text}</td>
-                                <td className="px-4 py-2 text-right font-bold" style={{ color }}>{s.score}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
         </div>
     )
 }

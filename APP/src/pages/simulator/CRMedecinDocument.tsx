@@ -13,6 +13,7 @@ import {
     getActiveQuestions, getThresholdsForVuln, getRulesForMP,
     CR_VULN_LABELS, CR_NIVEAU_DISPLAY, CR_PHR_B4_INITIAL,
     getNiveauForScore, generateConclusionPhrases, mapObjectifClinique, formatActeur,
+    getContentBlocksForEntity,
     type CRNiveau, type VulnerabilityId,
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
@@ -116,7 +117,7 @@ export function CRMedecinDocument({ data, answers, scoreByV, activatedMPs, activ
                     </div>
 
                     {/* SECTION 1 — Synthèse */}
-                    <SyntheseSection niveaux={niveaux} />
+                    <SyntheseSection niveaux={niveaux} data={data} />
 
                     {/* SECTION 2 — Alertes prioritaires */}
                     <AlertesSection data={data} activatedCats={activatedCats} mpMap={mpMap} mpVulnMap={mpVulnMap} />
@@ -171,22 +172,28 @@ function DetailMPsSection({ top5MPs, activatedMPs, data, activatedCats, mpVulnMa
             <h4 className="cr-section-title">Top {Math.min(5, activatedMPs.length)} axes d&apos;action prioritaires</h4>
             {top5MPs.length > 0 ? (
                 <div className="space-y-3">
-                    {top5MPs.map(mp => (
-                        <div key={mp.mpId} className="p-3 rounded-lg border border-gray-200 bg-white">
-                            <div className="flex items-start gap-2 mb-2">
-                                <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded flex-shrink-0" style={{ backgroundColor: vColorMap[mp.vulnId as VulnerabilityId] || '#666' }}>{mp.vulnId}</span>
-                                <span className="text-[11px] font-bold text-gray-800 leading-snug">{mp.nom}</span>
-                            </div>
-                            <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 text-[10px] ml-[30px]">
-                                <div><span className="text-gray-400">Acteur principal : </span><span className="font-bold text-gray-700">{formatActeur(mp.acteurPrincipal)}</span></div>
-                                <div><span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700">{mp.objectifClinique}</span></div>
-                                {mp.autresActeurs.length > 0 && (
-                                    <div className="col-span-2"><span className="text-gray-400">Écosystème : </span><span className="text-gray-500">{mp.autresActeurs.map(a => formatActeur(a)).join(', ')}</span></div>
+                    {top5MPs.map(mp => {
+                        const mpSensCBs = getContentBlocksForEntity(data, 'micro_parcours', mp.mpId).filter(cb => cb.block_type === 'sens_clinique')
+                        return (
+                            <div key={mp.mpId} className="p-3 rounded-lg border border-gray-200 bg-white">
+                                <div className="flex items-start gap-2 mb-2">
+                                    <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded flex-shrink-0" style={{ backgroundColor: vColorMap[mp.vulnId as VulnerabilityId] || '#666' }}>{mp.vulnId}</span>
+                                    <span className="text-[11px] font-bold text-gray-800 leading-snug">{mp.nom}</span>
+                                </div>
+                                <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 text-[10px] ml-[30px]">
+                                    <div><span className="text-gray-400">Acteur principal : </span><span className="font-bold text-gray-700">{formatActeur(mp.acteurPrincipal)}</span></div>
+                                    <div><span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700">{mp.objectifClinique}</span></div>
+                                    {mp.autresActeurs.length > 0 && (
+                                        <div className="col-span-2"><span className="text-gray-400">Écosystème : </span><span className="text-gray-500">{mp.autresActeurs.map(a => formatActeur(a)).join(', ')}</span></div>
+                                    )}
+                                    <div className="col-span-2"><span className="text-gray-400">Objectif : </span><span className="text-gray-600 italic">{mp.objectif}</span></div>
+                                </div>
+                                {mpSensCBs.length > 0 && (
+                                    <p className="text-[9.5px] text-gray-500 mt-2 ml-[30px] leading-relaxed border-l-2 border-gray-200 pl-2">{mpSensCBs[0].content}</p>
                                 )}
-                                <div className="col-span-2"><span className="text-gray-400">Objectif : </span><span className="text-gray-600 italic">{mp.objectif}</span></div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                     {activatedMPs.length > 5 && (
                         <p className="text-[9px] text-gray-400 italic text-center">
                             + {activatedMPs.length - 5} axe{activatedMPs.length - 5 > 1 ? 's' : ''} supplémentaire{activatedMPs.length - 5 > 1 ? 's' : ''} identifié{activatedMPs.length - 5 > 1 ? 's' : ''}

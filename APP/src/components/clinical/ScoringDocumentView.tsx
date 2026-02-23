@@ -1,12 +1,12 @@
-/* ScoringDocumentView — Printable official scoring document per vulnerability.
-   4 sections: Méthodologie, Questions scorantes, Seuils, Limites.
-   100% data-driven — zero hardcoded clinical text.
-   Architecture: < 250L, uses hooks barrel. */
+/* ScoringDocumentView — Fiche Scoring officielle par vulnérabilité.
+   6 sections: Sens clinique, Méthodologie, Questions scorantes, Questions non-scorantes, Seuils, Métriques.
+   100% data-driven — content_blocks DB pour justifications cliniques.
+   Architecture: < 300L, uses hooks barrel. */
 
 import { useMemo } from 'react'
 import {
     VULN_META, getThresholdsForVuln, getQuestionText,
-    getContentBlocksForEntity, CR_VULN_LABELS,
+    getContentBlocksForEntity, CR_VULN_LABELS, isScoringQuestion,
     type MonkaData, type VulnerabilityId,
 } from '../../clinical/hooks'
 import { ExportButton } from './ExportButton'
@@ -17,23 +17,50 @@ interface ScoringDocumentProps {
     onBack: () => void
 }
 
+const THRESHOLD_DISPLAY = [
+    { key: 'faible', label: 'Faible', color: '#22C55E', emoji: '🟢' },
+    { key: 'modere', label: 'Modéré', color: '#F5D245', emoji: '🟡' },
+    { key: 'eleve', label: 'Élevé', color: '#F5A623', emoji: '🟠' },
+    { key: 'critique', label: 'Critique', color: '#EF4444', emoji: '🔴' },
+]
+
 export function ScoringDocumentView({ data, vulnId, onBack }: ScoringDocumentProps) {
     const meta = VULN_META[vulnId]
     const thresholds = useMemo(() => getThresholdsForVuln(data, vulnId), [data, vulnId])
+
+    // Scoring questions for this vulnerability
     const scoringQs = useMemo(() =>
-        data.scoringQuestions.filter(sq => sq.vulnerability_id === vulnId)
-            .sort((a, b) => Math.abs(b.coefficient) - Math.abs(a.coefficient)),
+        data.scoringQuestions.filter(sq => sq.vulnerability_id === vulnId),
         [data, vulnId],
     )
-    const vulnCBs = useMemo(() => getContentBlocksForEntity(data, 'vulnerability', vulnId), [data, vulnId])
-    const totalCoef = scoringQs.reduce((s, q) => s + Math.abs(q.coefficient), 0)
 
-    const thresholdLevels = [
-        { key: 'faible', label: 'Faible', color: '#22C55E', emoji: '🟢' },
-        { key: 'modere', label: 'Modéré', color: '#F5D245', emoji: '🟡' },
-        { key: 'eleve', label: 'Élevé', color: '#F5A623', emoji: '🟠' },
-        { key: 'critique', label: 'Critique', color: '#EF4444', emoji: '🔴' },
-    ]
+    // Group scoring entries by question_id
+    const scoringByQuestion = useMemo(() => {
+        const map = new Map<string, typeof scoringQs>()
+        for (const sq of scoringQs) {
+            const list = map.get(sq.question_id) || []
+            list.push(sq)
+            map.set(sq.question_id, list)
+        }
+        return map
+    }, [scoringQs])
+
+    const scoringQuestionIds = useMemo(() => new Set(scoringByQuestion.keys()), [scoringByQuestion])
+
+    // All questions for this vulnerability
+    const vulnQuestions = useMemo(() =>
+        data.questions.filter(q => q.vulnerability_id === vulnId),
+        [data, vulnId],
+    )
+
+    const nonScoringQuestions = useMemo(() =>
+        vulnQuestions.filter(q => !scoringQuestionIds.has(q.id)),
+        [vulnQuestions, scoringQuestionIds],
+    )
+
+    // Content blocks
+    const vulnSensClinique = useMemo(() => getContentBlocksForEntity(data, 'vulnerability', vulnId), [data, vulnId])
+    const maxScore = scoringQs.length > 0 ? scoringQs[0].max_score_vulnerability : 0
 
     return (
         <div className="max-w-[900px] mx-auto">
@@ -41,12 +68,12 @@ export function ScoringDocumentView({ data, vulnId, onBack }: ScoringDocumentPro
             <div className="flex items-center gap-3 mb-4 no-print">
                 <button onClick={onBack} className="text-xs text-monka-muted hover:text-monka-text transition-colors">← Retour</button>
                 <div className="flex-1" />
-                <ExportButton label={`Exporter Scoring ${vulnId}`} />
+                <ExportButton label={`Exporter Fiche Scoring ${vulnId}`} />
             </div>
 
             <div className="cr-document bg-white border border-gray-300 rounded-lg shadow-sm overflow-hidden" style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}>
                 {/* Header */}
-                <div className="bg-gray-800 text-white px-5 py-3 flex items-center justify-between">
+                <div className="bg-gray-800 text-white px-6 py-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <img src="/assets/monka-logo-transparent.png" alt="Monka" className="h-8 w-auto" />
                         <div>
@@ -54,84 +81,139 @@ export function ScoringDocumentView({ data, vulnId, onBack }: ScoringDocumentPro
                             <p className="text-[9px] text-gray-400 font-sans">{vulnId} — Méthodologie détaillée</p>
                         </div>
                     </div>
-                    <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded font-sans" style={{ backgroundColor: meta.color }}>{meta.label}</span>
+                    <span className="text-[10px] font-bold text-white px-2.5 py-1 rounded font-sans" style={{ backgroundColor: meta.color }}>{meta.label}</span>
                 </div>
 
-                <div className="p-5 space-y-5">
+                <div className="p-6 space-y-6">
                     {/* Title */}
                     <div className="border-b border-gray-200 pb-4">
-                        <h1 className="text-lg font-bold text-gray-800 mb-1">{CR_VULN_LABELS[vulnId]}</h1>
-                        <p className="text-sm text-gray-500">Dimension {vulnId} — {scoringQs.length} questions scorantes</p>
+                        <h1 className="text-xl font-bold text-gray-800 mb-1">{CR_VULN_LABELS[vulnId]}</h1>
+                        <p className="text-sm text-gray-500">Dimension {vulnId} — {scoringQuestionIds.size} questions scorantes · Score max {maxScore} pts</p>
                     </div>
 
-                    {/* 1. Méthodologie */}
+                    {/* 1. Sens clinique */}
                     <div className="cr-bloc">
-                        <h4 className="cr-section-title">1. Méthodologie de scoring</h4>
-                        <div className="p-3 bg-gray-50 rounded-lg text-[11px] text-gray-700 leading-relaxed space-y-2">
-                            <p>Le score de la dimension <strong>{CR_VULN_LABELS[vulnId]}</strong> est calculé par somme pondérée des réponses aux {scoringQs.length} questions scorantes.</p>
-                            <p className="font-mono text-[10px] text-gray-500 bg-white p-2 rounded border border-gray-200">
-                                Score = Σ (coefficient × valeur_réponse) — Somme totale des coefficients : {totalCoef.toFixed(1)}
-                            </p>
-                            <p>Chaque question contribue au score proportionnellement à son coefficient. Les seuils déterminent le niveau de vulnérabilité.</p>
-                        </div>
-                        {vulnCBs.length > 0 && (
-                            <div className="mt-2 space-y-1.5">
-                                {vulnCBs.map(cb => (
-                                    <div key={cb.id} className="p-2.5 rounded-lg bg-blue-50/50 text-[10px] text-gray-600 leading-relaxed">
-                                        <span className="text-[8px] font-bold text-blue-500 uppercase mr-1">{cb.block_type}</span>
-                                        {cb.content}
-                                    </div>
+                        <h4 className="cr-section-title">1. Sens clinique</h4>
+                        {vulnSensClinique.length > 0 ? (
+                            <div className="space-y-2">
+                                {vulnSensClinique.map(cb => (
+                                    <p key={cb.id} className="text-[11px] text-gray-700 leading-relaxed p-3 bg-blue-50/50 rounded-lg border border-blue-100">{cb.content}</p>
                                 ))}
                             </div>
+                        ) : (
+                            <p className="text-[10px] text-gray-400 italic">Aucun sens clinique renseigné.</p>
                         )}
                     </div>
 
-                    {/* 2. Questions scorantes */}
+                    {/* 2. Méthodologie */}
                     <div className="cr-bloc">
-                        <h4 className="cr-section-title">2. Questions scorantes ({scoringQs.length})</h4>
-                        <table className="w-full text-[10px] border-collapse">
-                            <thead><tr className="bg-gray-50 text-left">
-                                <th className="px-2 py-1.5 font-bold text-gray-400 uppercase text-[8px] w-14">ID</th>
-                                <th className="px-2 py-1.5 font-bold text-gray-400 uppercase text-[8px]">Question</th>
-                                <th className="px-2 py-1.5 font-bold text-gray-400 uppercase text-[8px] w-14 text-right">Coef.</th>
-                                <th className="px-2 py-1.5 font-bold text-gray-400 uppercase text-[8px] w-16 text-right">Poids</th>
-                            </tr></thead>
-                            <tbody className="divide-y divide-gray-100">
-                                {scoringQs.map(sq => {
-                                    const qText = getQuestionText(data, sq.question_id)
-                                    const weight = totalCoef > 0 ? (Math.abs(sq.coefficient) / totalCoef * 100) : 0
-                                    return (
-                                        <tr key={sq.question_id}>
-                                            <td className="px-2 py-1.5 font-mono text-gray-400 text-[9px]">{sq.question_id}</td>
-                                            <td className="px-2 py-1.5 text-gray-700">{qText}</td>
-                                            <td className="px-2 py-1.5 text-right font-bold text-gray-600">{sq.coefficient}</td>
-                                            <td className="px-2 py-1.5 text-right">
-                                                <div className="flex items-center justify-end gap-1">
-                                                    <div className="w-12 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                                                        <div className="h-full rounded-full" style={{ width: `${weight}%`, backgroundColor: meta.color }} />
-                                                    </div>
-                                                    <span className="text-[9px] text-gray-400">{weight.toFixed(0)}%</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
+                        <h4 className="cr-section-title">2. Méthodologie de scoring</h4>
+                        <div className="p-3 bg-gray-50 rounded-lg text-[11px] text-gray-700 leading-relaxed space-y-2">
+                            <p>Le score de la dimension <strong>{CR_VULN_LABELS[vulnId]}</strong> est calculé par somme des points attribués aux réponses des {scoringQuestionIds.size} questions scorantes.</p>
+                            <p className="font-mono text-[10px] text-gray-500 bg-white p-2 rounded border border-gray-200">
+                                Score = Σ (points par réponse) — Score maximum : {maxScore} pts
+                            </p>
+                            <p>Les seuils déterminent le niveau de vulnérabilité (faible, modéré, élevé, critique) en fonction du score obtenu.</p>
+                        </div>
                     </div>
 
-                    {/* 3. Seuils */}
+                    {/* 3. Questions scorantes — détail */}
                     <div className="cr-bloc">
-                        <h4 className="cr-section-title">3. Seuils de vulnérabilité</h4>
-                        <div className="grid grid-cols-4 gap-2">
-                            {thresholdLevels.map(tl => {
+                        <h4 className="cr-section-title">3. Questions scorantes ({scoringQuestionIds.size})</h4>
+                        <div className="space-y-4">
+                            {[...scoringByQuestion.entries()].map(([qId, entries]) => {
+                                const qText = getQuestionText(data, qId)
+                                const scoringCBs = getContentBlocksForEntity(data, 'scoring', qId)
+                                const ponderationCBs = getContentBlocksForEntity(data, 'question', qId)
+                                    .filter(cb => cb.block_type === 'scoring_ponderation')
+
+                                return (
+                                    <div key={qId} className="p-3 rounded-lg border border-gray-200 bg-white">
+                                        {/* Question header */}
+                                        <div className="flex items-start gap-2 mb-2">
+                                            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 flex-shrink-0 mt-0.5">{qId}</span>
+                                            <p className="text-[11px] font-medium text-gray-800">{qText}</p>
+                                        </div>
+
+                                        {/* Scoring responses */}
+                                        <div className="ml-6 mb-2 space-y-1">
+                                            {entries.sort((a, b) => b.score - a.score).map((se, i) => (
+                                                <div key={i} className="flex items-center justify-between text-[10px]">
+                                                    <span className="text-gray-600">→ {se.response_text}</span>
+                                                    <span className="font-bold text-white px-1.5 py-0.5 rounded text-[9px] ml-2 flex-shrink-0" style={{ backgroundColor: meta.color }}>
+                                                        +{se.score} pt{se.score > 1 ? 's' : ''}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Scoring justification */}
+                                        {scoringCBs.length > 0 && (
+                                            <div className="ml-6 space-y-1">
+                                                {scoringCBs.map(cb => (
+                                                    <p key={cb.id} className="text-[10px] text-indigo-700 bg-indigo-50/50 rounded px-2.5 py-1.5 leading-relaxed border border-indigo-100">
+                                                        <span className="font-bold text-[8px] uppercase tracking-wider mr-1">Justification :</span>
+                                                        {cb.content}
+                                                    </p>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        {/* Ponderation blocks */}
+                                        {ponderationCBs.length > 0 && (
+                                            <div className="ml-6 mt-1 space-y-1">
+                                                {ponderationCBs.map(cb => (
+                                                    <p key={cb.id} className="text-[10px] text-amber-700 bg-amber-50/50 rounded px-2.5 py-1.5 leading-relaxed border border-amber-100">
+                                                        <span className="font-bold text-[8px] uppercase tracking-wider mr-1">Pondération :</span>
+                                                        {cb.content}
+                                                    </p>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+
+                    {/* 4. Questions non scorantes */}
+                    {nonScoringQuestions.length > 0 && (
+                        <div className="cr-bloc">
+                            <h4 className="cr-section-title">4. Questions non scorantes ({nonScoringQuestions.length})</h4>
+                            <div className="space-y-2">
+                                {nonScoringQuestions.map(q => {
+                                    const justifCBs = getContentBlocksForEntity(data, 'question', q.id)
+                                        .filter(cb => cb.block_type === 'scoring_justification')
+                                    return (
+                                        <div key={q.id} className="p-2.5 rounded-lg border border-gray-100 bg-gray-50/50">
+                                            <div className="flex items-start gap-2">
+                                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-400 flex-shrink-0 mt-0.5">{q.id}</span>
+                                                <div>
+                                                    <p className="text-[10.5px] text-gray-600">{q.question_text}</p>
+                                                    {justifCBs.map(cb => (
+                                                        <p key={cb.id} className="text-[9.5px] text-gray-400 italic mt-1">{cb.content}</p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* 5. Seuils */}
+                    <div className="cr-bloc">
+                        <h4 className="cr-section-title">{nonScoringQuestions.length > 0 ? '5' : '4'}. Seuils de vulnérabilité</h4>
+                        <div className="grid grid-cols-4 gap-3">
+                            {THRESHOLD_DISPLAY.map(tl => {
                                 const th = thresholds.find(t => t.niveau === tl.key)
                                 return (
-                                    <div key={tl.key} className="p-3 rounded-lg border text-center" style={{ borderColor: tl.color + '40' }}>
-                                        <span className="text-lg">{tl.emoji}</span>
-                                        <p className="text-[10px] font-bold mt-1" style={{ color: tl.color }}>{tl.label}</p>
+                                    <div key={tl.key} className="p-3 rounded-lg border text-center" style={{ borderColor: tl.color + '40', backgroundColor: tl.color + '08' }}>
+                                        <span className="text-xl">{tl.emoji}</span>
+                                        <p className="text-[11px] font-bold mt-1" style={{ color: tl.color }}>{tl.label}</p>
                                         {th ? (
-                                            <p className="text-[11px] text-gray-600 font-mono mt-1">{th.seuil_min}–{th.seuil_max}</p>
+                                            <p className="text-sm text-gray-600 font-mono mt-1">{th.seuil_min}–{th.seuil_max} pts</p>
                                         ) : (
                                             <p className="text-[9px] text-gray-400 mt-1">—</p>
                                         )}
@@ -141,37 +223,26 @@ export function ScoringDocumentView({ data, vulnId, onBack }: ScoringDocumentPro
                         </div>
                     </div>
 
-                    {/* 4. Limites et axes d'amélioration */}
+                    {/* 6. Métriques */}
                     <div className="cr-bloc">
-                        <h4 className="cr-section-title">4. Limites et axes d&apos;amélioration</h4>
-                        <div className="p-3 bg-amber-50/50 rounded-lg border border-amber-200 text-[10.5px] text-gray-700 leading-relaxed space-y-2">
-                            <p>⚠️ <strong>Limites actuelles du scoring {vulnId} :</strong></p>
-                            <ul className="list-disc pl-4 space-y-1 text-gray-600">
-                                <li>Pondération basée sur l&apos;expertise clinique — pas encore validée par étude statistique</li>
-                                <li>Score unidimensionnel — ne capture pas les interactions inter-dimensions</li>
-                                <li>{scoringQs.length} questions scorantes sur {data.questions.length} questions totales</li>
-                            </ul>
-                            <p className="text-[10px] text-gray-500 italic mt-2">Les axes d&apos;amélioration seront formalisés dans les prochaines itérations du moteur clinique.</p>
+                        <h4 className="cr-section-title">{nonScoringQuestions.length > 0 ? '6' : '5'}. Métriques</h4>
+                        <div className="grid grid-cols-4 gap-3 text-[10px]">
+                            {[
+                                { label: 'Questions scorantes', val: scoringQuestionIds.size },
+                                { label: 'Questions non-scorantes', val: nonScoringQuestions.length },
+                                { label: 'Score max', val: `${maxScore} pts` },
+                                { label: 'Seuils', val: thresholds.length },
+                            ].map(m => (
+                                <div key={m.label} className="p-3 rounded-lg bg-gray-50 text-center border border-gray-100">
+                                    <div className="text-lg font-bold text-gray-800">{m.val}</div>
+                                    <div className="text-gray-400 mt-0.5">{m.label}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Métriques résumé */}
-                    <div className="grid grid-cols-4 gap-2 text-[10px]">
-                        {[
-                            { label: 'Questions', val: scoringQs.length },
-                            { label: 'Σ coef.', val: totalCoef.toFixed(1) },
-                            { label: 'Seuils', val: thresholds.length },
-                            { label: 'Content Blocks', val: vulnCBs.length },
-                        ].map(m => (
-                            <div key={m.label} className="p-2 rounded bg-gray-50 text-center">
-                                <div className="text-lg font-bold text-gray-800">{m.val}</div>
-                                <div className="text-gray-400">{m.label}</div>
-                            </div>
-                        ))}
-                    </div>
-
                     {/* Footer */}
-                    <div className="border-t border-gray-100 pt-3 mt-4 flex items-center justify-between">
+                    <div className="border-t border-gray-100 pt-4 mt-6 flex items-center justify-between">
                         <p className="text-[8px] text-gray-300 leading-relaxed font-sans">
                             Généré par Monka v2.0 — Moteur clinique certifié<br />
                             {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}

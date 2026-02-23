@@ -29,7 +29,7 @@ export interface CRSectionProps {
 
 // ── 1. Synthèse Situationnelle ─────────────────────────
 
-export function SyntheseSection({ niveaux }: Pick<CRSectionProps, 'niveaux'>) {
+export function SyntheseSection({ niveaux, data }: Pick<CRSectionProps, 'niveaux' | 'data'>) {
     return (
         <div>
             <h4 className="cr-section-title">Synthèse situationnelle de la dyade</h4>
@@ -38,16 +38,22 @@ export function SyntheseSection({ niveaux }: Pick<CRSectionProps, 'niveaux'>) {
                     const niveau = niveaux[vId]
                     const display = CR_NIVEAU_DISPLAY[niveau]
                     const phrase = CR_PHR_B2[`${vId}_${niveau}`] || '—'
+                    const vulnCBs = getContentBlocksForEntity(data, 'vulnerability', vId).filter(cb => cb.block_type === 'sens_clinique')
                     return (
-                        <div key={vId} className="flex gap-3 items-start p-2.5 rounded-lg bg-gray-50/80">
-                            <div className="flex-shrink-0 flex items-center gap-1.5 min-w-[140px]">
-                                <span className="text-sm">{display.emoji}</span>
-                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: display.color }}>{display.label}</span>
+                        <div key={vId} className="p-2.5 rounded-lg bg-gray-50/80">
+                            <div className="flex gap-3 items-start">
+                                <div className="flex-shrink-0 flex items-center gap-1.5 min-w-[140px]">
+                                    <span className="text-sm">{display.emoji}</span>
+                                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: display.color }}>{display.label}</span>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-[10px] font-bold text-gray-700 mb-0.5 font-sans">{CR_VULN_LABELS[vId]}</p>
+                                    <p className="text-[10.5px] text-gray-600 leading-relaxed italic">{phrase}</p>
+                                </div>
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <p className="text-[10px] font-bold text-gray-700 mb-0.5 font-sans">{CR_VULN_LABELS[vId]}</p>
-                                <p className="text-[10.5px] text-gray-600 leading-relaxed italic">{phrase}</p>
-                            </div>
+                            {vulnCBs.length > 0 && (
+                                <p className="text-[9.5px] text-gray-500 mt-1.5 pl-[156px] leading-relaxed">{vulnCBs[0].content}</p>
+                            )}
                         </div>
                     )
                 })}

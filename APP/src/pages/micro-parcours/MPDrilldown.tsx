@@ -11,7 +11,6 @@ import {
     getRecosForMP, getMTsForMP, getContentBlocksForEntity,
     type MonkaData, type VulnerabilityId,
 } from '../../clinical/hooks'
-import { ExportButton } from '../../components/clinical/ExportButton'
 import { MPDocumentView } from '../../components/clinical/MPDocumentView'
 import { RuleExplainerFR } from '../../components/clinical/RuleExplainerFR'
 
@@ -76,8 +75,7 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                     </div>
                     <h2 className="text-lg font-bold text-monka-heading">{mp.nom}</h2>
                 </div>
-                <ExportButton label="Fiche MP" variant="subtle" />
-                <button onClick={() => setShowDoc(true)} className="text-[10px] text-monka-muted hover:text-monka-primary transition-colors">📄 Voir document</button>
+                <button onClick={() => setShowDoc(true)} className="flex items-center gap-1.5 text-[10px] font-medium text-monka-muted hover:text-monka-primary transition-colors px-2.5 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-50">📄 Voir la fiche</button>
             </div>
 
             {/* MP-level content blocks */}
@@ -115,13 +113,12 @@ export function MPDrilldown({ data, mpId, onBack }: MPDrilldownProps) {
                 <span className="text-[10px] font-bold text-monka-muted uppercase mr-1">Filtrer :</span>
                 {filterOptions.map(opt => (
                     <button key={opt.id} onClick={() => setCatFilter(opt.id)}
-                        className={`text-[11px] font-semibold px-3 py-2 rounded-xl transition-all border ${
-                            catFilter === opt.id
-                                ? opt.id === 'PREV'
-                                    ? 'bg-purple-100 text-purple-700 border-purple-200 shadow-sm'
-                                    : 'bg-monka-primary/10 text-monka-primary border-monka-primary/20 shadow-sm'
-                                : 'bg-white/80 text-monka-text/70 border-monka-border hover:bg-white hover:shadow-sm'
-                        }`}>
+                        className={`text-[11px] font-semibold px-3 py-2 rounded-xl transition-all border ${catFilter === opt.id
+                            ? opt.id === 'PREV'
+                                ? 'bg-purple-100 text-purple-700 border-purple-200 shadow-sm'
+                                : 'bg-monka-primary/10 text-monka-primary border-monka-primary/20 shadow-sm'
+                            : 'bg-white/80 text-monka-text/70 border-monka-border hover:bg-white hover:shadow-sm'
+                            }`}>
                         {opt.label}
                     </button>
                 ))}

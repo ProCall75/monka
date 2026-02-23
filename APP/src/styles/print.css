@@ -1,95 +1,158 @@
 /* =============================================
-   Print CSS — CR Médecin Export
+   Print CSS — Documents Monka Officiels
    
    Applied via @media print for PDF export.
-   Hides UI chrome, forces white background,
-   and optimizes layout for A4 paper.
+   Covers: CR Médecin, Fiche Scoring, Fiche MP.
+   
+   IMPORTANT: All rules MUST be inside @media print.
+   Use ONLY scoped selectors — never target .glass-card
+   or other generic classes that could leak via HMR.
    ============================================= */
 
 @media print {
-    /* Hide all UI chrome */
+    /* ── 1. HIDE UI CHROME ────────────────────── */
+    .no-print,
     nav, aside, header, footer,
-    .sidebar, .no-print,
+    .sidebar,
     button:not(.print-keep) {
         display: none !important;
     }
 
-    /* Reset page for A4 */
-    @page {
-        size: A4;
-        margin: 15mm 12mm;
+    /* Sidebar floating button + overlay */
+    [class*="glass-dark"],
+    [class*="fixed"][class*="z-50"],
+    [class*="fixed"][class*="z-40"] {
+        display: none !important;
     }
 
-    /* Force white background */
+    /* ── 2. PAGE SETUP A4 ─────────────────────── */
+    @page {
+        size: A4;
+        margin: 12mm 10mm;
+    }
+
+    /* ── 3. RESET BODY + ROOT ─────────────────── */
     body, html, #root {
         background: white !important;
         color: black !important;
-        font-size: 11pt !important;
+        font-size: 10pt !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: auto !important;
     }
 
-    /* CR document takes full width */
+    /* AppLayout outer wrapper — kill bg + spacing */
+    .min-h-screen {
+        background: white !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Main content area — kill padding */
+    main {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* ── 4. CR DOCUMENT FULL WIDTH ────────────── */
     .cr-document {
         width: 100% !important;
         max-width: none !important;
         border: none !important;
         box-shadow: none !important;
         margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    /* Max-width wrappers above the doc */
+    .max-w-\[900px\],
+    .max-w-\[1200px\] {
+        max-width: 100% !important;
+        margin: 0 !important;
         padding: 0 !important;
     }
 
-    /* Ensure page breaks work */
-    .cr-bloc {
-        page-break-inside: avoid;
-    }
-
-    /* Force colors in print */
+    /* ── 5. FORCE PRINT COLORS ────────────────── */
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* Remove animations */
+    /* ── 6. KILL ANIMATIONS ───────────────────── */
     *, *::before, *::after {
         animation: none !important;
         transition: none !important;
     }
 
-    /* Fix scoring document layout — avoid large white sheets */
+    /* ── 7. PAGE BREAK CONTROL ────────────────── */
+    .cr-bloc {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .cr-document table tbody tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .cr-section-title {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+
+    .cr-document .rounded-lg {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* ── 8. TABLE LAYOUT ──────────────────────── */
     .cr-document table {
         width: 100% !important;
         font-size: 9pt !important;
         table-layout: fixed !important;
+        border-collapse: collapse !important;
     }
 
     .cr-document table th,
     .cr-document table td {
-        padding: 4px 6px !important;
+        padding: 3px 5px !important;
         word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
     }
 
+    /* ── 9. GRID LAYOUT FIX ───────────────────── */
     .cr-document .grid {
         display: flex !important;
         flex-wrap: wrap !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
 
     .cr-document .grid > div {
         flex: 1 1 22% !important;
+        min-width: 0 !important;
     }
 
-    /* Force scoring document to fill page */
-    .max-w-\[900px\] {
-        max-width: 100% !important;
+    .cr-document .grid-cols-2 > div { flex: 1 1 45% !important; }
+    .cr-document .grid-cols-3 > div { flex: 1 1 30% !important; }
+    .cr-document .grid-cols-4 > div { flex: 1 1 22% !important; }
+    .cr-document .grid-cols-5 > div { flex: 1 1 18% !important; }
+
+    /* ── 10. TIGHTER SPACING ──────────────────── */
+    .cr-document .space-y-6 > * + * { margin-top: 10px !important; }
+    .cr-document .space-y-5 > * + * { margin-top: 8px !important; }
+    .cr-document .space-y-4 > * + * { margin-top: 6px !important; }
+    .cr-document .space-y-3 > * + * { margin-top: 4px !important; }
+
+    /* ── 11. TYPOGRAPHY ───────────────────────── */
+    .cr-document p { orphans: 2; widows: 2; }
+    .cr-document .whitespace-pre-line {
+        white-space: pre-line !important;
+        word-break: break-word !important;
     }
 
-    /* Prevent page breaks inside scoring sections */
-    .cr-document .cr-bloc,
-    .cr-document table tbody tr {
-        page-break-inside: avoid !important;
-    }
-
-    /* Reduce spacing in print to avoid wasted white space */
-    .cr-document .space-y-5 > * + * {
-        margin-top: 12px !important;
-    }
+    /* ── 12. LOGO ─────────────────────────────── */
+    .cr-document img { max-height: 30px !important; }
+    .cr-document > div:first-child { page-break-after: avoid !important; }
+    .cr-document [class*="border-l-"] { border-left-width: 1px !important; }
 }

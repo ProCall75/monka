@@ -298,27 +298,31 @@ function SimulatorContent({
     return (
         <div className="h-[calc(100vh-48px)]">
             {/* What-If Diff banner (Bloc 14) */}
-            <WhatIfDiff data={data} originalAnswers={originalAnswers} currentAnswers={answers}
-                onReset={() => setAnswers(originalAnswers)} enabled={whatIfEnabled} onToggle={() => setWhatIfEnabled(!whatIfEnabled)} />
-            <SimulatorHeader
-                activeV={activeV}
-                setActiveV={setActiveV}
-                personaId={personaId}
-                vulnerabilities={vulnerabilities}
-                displayScore={displayScore}
-                currentThreshold={currentThreshold}
-                getThresholdColor={getThresholdColor}
-                activatedMPs={activatedMPs}
-                totalMPs={data.microParcours.length}
-                answeredCount={answeredCount}
-                totalCount={totalCount}
-                answeredScoringCount={answeredScoringCount}
-                currentScoringCount={currentScoringCount}
-                triggerQuestions={triggerQuestions}
-                activeBlocks={activeBlocks}
-                vulnInfo={data.vulnerabilities.find(v => v.id === activeV) as { name: string; bloc_label: string } | undefined}
-                gapCount={gaps.length}
-            />
+            <div className="no-print">
+                <WhatIfDiff data={data} originalAnswers={originalAnswers} currentAnswers={answers}
+                    onReset={() => setAnswers(originalAnswers)} enabled={whatIfEnabled} onToggle={() => setWhatIfEnabled(!whatIfEnabled)} />
+            </div>
+            <div className="no-print">
+                <SimulatorHeader
+                    activeV={activeV}
+                    setActiveV={setActiveV}
+                    personaId={personaId}
+                    vulnerabilities={vulnerabilities}
+                    displayScore={displayScore}
+                    currentThreshold={currentThreshold}
+                    getThresholdColor={getThresholdColor}
+                    activatedMPs={activatedMPs}
+                    totalMPs={data.microParcours.length}
+                    answeredCount={answeredCount}
+                    totalCount={totalCount}
+                    answeredScoringCount={answeredScoringCount}
+                    currentScoringCount={currentScoringCount}
+                    triggerQuestions={triggerQuestions}
+                    activeBlocks={activeBlocks}
+                    vulnInfo={data.vulnerabilities.find(v => v.id === activeV) as { name: string; bloc_label: string } | undefined}
+                    gapCount={gaps.length}
+                />
+            </div>
 
             {/* Split Screen */}
             <div className="flex gap-4 h-[calc(100%-80px)]">
@@ -343,7 +347,7 @@ function SimulatorContent({
 
                 {/* RIGHT — Engine View */}
                 <div className="w-[55%] flex flex-col min-w-0">
-                    <div className="flex items-center gap-2 mb-3">
+                    <div className="flex items-center gap-2 mb-3 no-print">
                         <button
                             onClick={() => setViewMode('internal')}
                             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200
@@ -367,7 +371,7 @@ function SimulatorContent({
                             {viewMode === 'internal' && (
                                 <motion.div key="internal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col flex-1 overflow-hidden">
                                     {/* Tab bar */}
-                                    <div className="flex gap-1 px-3 py-2 border-b border-monka-border">
+                                    <div className="flex gap-1 px-3 py-2 border-b border-monka-border no-print">
                                         {internalTabs.map((tab) => {
                                             const Icon = tab.icon
                                             return (

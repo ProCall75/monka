@@ -3,18 +3,17 @@
 
 import { useState, useMemo } from 'react'
 import {
-    Activity, BarChart3, List, Layers,
+    BarChart3, List, Layers,
 } from 'lucide-react'
 import {
     VULN_META, buildMPVulnMap,
     type MonkaData, type VulnerabilityId,
 } from '../../clinical/hooks'
 import { VulnMPsTab } from './VulnDetailTabs'
-import { OverviewTab, QuestionsTab, ScoringTab } from './VulnOverviewTabs'
-import { ExportButton } from '../../components/clinical/ExportButton'
+import { OverviewTab, QuestionsTab } from './VulnOverviewTabs'
 import { ScoringDocumentView } from '../../components/clinical/ScoringDocumentView'
 
-type TabId = 'overview' | 'questions' | 'scoring' | 'mps'
+type TabId = 'overview' | 'questions' | 'mps'
 
 interface VulnDetailProps {
     vulnId: string
@@ -50,10 +49,9 @@ export function VulnDetail({ vulnId, data }: VulnDetailProps) {
         return { questions, mps, rules, scoring, thresholds, recos, mts, questionsByClassification, rulesByNiveau, maxScore }
     }, [vulnId, data, mpVulnMap])
 
-    const tabs: { id: TabId; label: string; icon: typeof Activity; count?: number }[] = [
+    const tabs: { id: TabId; label: string; icon: typeof BarChart3; count?: number }[] = [
         { id: 'overview', label: 'Vue d\'ensemble', icon: BarChart3 },
         { id: 'questions', label: 'Questions', icon: List, count: stats.questions.length },
-        { id: 'scoring', label: 'Scoring', icon: Activity, count: stats.scoring.length },
         { id: 'mps', label: 'Micro-Parcours', icon: Layers, count: stats.mps.length },
     ]
 
@@ -91,8 +89,7 @@ export function VulnDetail({ vulnId, data }: VulnDetailProps) {
                         ))}
                     </div>
                     <div className="flex items-center gap-2">
-                        <ExportButton label="Scoring" variant="subtle" />
-                        <button onClick={() => setShowDoc(true)} className="text-[10px] text-monka-muted hover:text-monka-primary transition-colors">📄 Fiche</button>
+                        <button onClick={() => setShowDoc(true)} className="flex items-center gap-1.5 text-[10px] font-medium text-monka-muted hover:text-monka-primary transition-colors px-2.5 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-50">📄 Voir la fiche</button>
                     </div>
                 </div>
             </div>
@@ -119,8 +116,7 @@ export function VulnDetail({ vulnId, data }: VulnDetailProps) {
             {/* Tab content */}
             <div className="space-y-3">
                 {activeTab === 'overview' && <OverviewTab stats={stats} meta={meta} />}
-                {activeTab === 'questions' && <QuestionsTab questions={stats.questions} />}
-                {activeTab === 'scoring' && <ScoringTab stats={stats} color={meta.color} data={data} vulnId={vulnId} />}
+                {activeTab === 'questions' && <QuestionsTab questions={stats.questions} data={data} vulnId={vulnId} color={meta.color} />}
                 {activeTab === 'mps' && <VulnMPsTab mps={stats.mps} rules={stats.rules} recos={stats.recos} mts={stats.mts} color={meta.color} />}
             </div>
         </div>

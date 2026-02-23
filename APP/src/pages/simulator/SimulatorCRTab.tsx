@@ -56,73 +56,76 @@ export function SimulatorCRTab({
 
     return (
         <div>
-            {/* Profile recap from triggers */}
-            <ProfileRecap data={data} answers={answers} />
+            {/* UI stats — hidden when printing */}
+            <div className="no-print">
+                {/* Profile recap from triggers */}
+                <ProfileRecap data={data} answers={answers} />
 
-            <h3 className="text-sm font-bold text-monka-heading mb-4 mt-4">
-                Résumé {activeV === 'ALL' ? '— Toutes vulnérabilités' : `— ${activeV}`}
-            </h3>
+                <h3 className="text-sm font-bold text-monka-heading mb-4 mt-4">
+                    Résumé {activeV === 'ALL' ? '— Toutes vulnérabilités' : `— ${activeV}`}
+                </h3>
 
-            {/* Score + stats */}
-            <div className="flex items-center gap-4 mb-4">
-                <div className="relative w-24 h-24 flex-shrink-0">
-                    <svg width="96" height="96" viewBox="0 0 96 96" className="-rotate-90">
-                        <circle cx="48" cy="48" r={radius} fill="none" stroke="#f0f0f0" strokeWidth={stroke} />
-                        <motion.circle cx="48" cy="48" r={radius} fill="none" stroke={gaugeColor} strokeWidth={stroke}
-                            strokeLinecap="round" strokeDasharray={circumference}
-                            initial={{ strokeDashoffset: circumference }}
-                            animate={{ strokeDashoffset: offset }}
-                            transition={{ duration: 0.8, ease: 'easeOut' }} />
-                    </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className="text-lg font-bold text-monka-heading">{s.score}</span>
-                        <span className="text-[9px] text-monka-muted">/ {s.max}</span>
+                {/* Score + stats */}
+                <div className="flex items-center gap-4 mb-4">
+                    <div className="relative w-24 h-24 flex-shrink-0">
+                        <svg width="96" height="96" viewBox="0 0 96 96" className="-rotate-90">
+                            <circle cx="48" cy="48" r={radius} fill="none" stroke="#f0f0f0" strokeWidth={stroke} />
+                            <motion.circle cx="48" cy="48" r={radius} fill="none" stroke={gaugeColor} strokeWidth={stroke}
+                                strokeLinecap="round" strokeDasharray={circumference}
+                                initial={{ strokeDashoffset: circumference }}
+                                animate={{ strokeDashoffset: offset }}
+                                transition={{ duration: 0.8, ease: 'easeOut' }} />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-lg font-bold text-monka-heading">{s.score}</span>
+                            <span className="text-[9px] text-monka-muted">/ {s.max}</span>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2 flex-1">
+                        <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200/50">
+                            <p className="text-[9px] text-monka-muted uppercase tracking-wider">MP Actifs</p>
+                            <p className="text-lg font-bold text-monka-heading">{activatedMPs.length}/{data.microParcours.length}</p>
+                        </div>
+                        <div className="p-2.5 rounded-lg bg-green-50 border border-green-200/50">
+                            <p className="text-[9px] text-monka-muted uppercase tracking-wider">Réponses</p>
+                            <p className="text-lg font-bold text-monka-heading">{answeredCount}/{totalCount}</p>
+                        </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 gap-2 flex-1">
-                    <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200/50">
-                        <p className="text-[9px] text-monka-muted uppercase tracking-wider">MP Actifs</p>
-                        <p className="text-lg font-bold text-monka-heading">{activatedMPs.length}/{data.microParcours.length}</p>
-                    </div>
-                    <div className="p-2.5 rounded-lg bg-green-50 border border-green-200/50">
-                        <p className="text-[9px] text-monka-muted uppercase tracking-wider">Réponses</p>
-                        <p className="text-lg font-bold text-monka-heading">{answeredCount}/{totalCount}</p>
+
+                {/* Data source info */}
+                <div className="glass p-4 rounded-xl mt-4">
+                    <h4 className="text-xs font-bold text-monka-heading mb-2">📊 Données Supabase (temps réel)</h4>
+                    <div className="grid grid-cols-3 gap-2 text-[10px]">
+                        <div><span className="text-monka-muted">Questions actives:</span> <span className="font-bold text-monka-heading">{totalActiveQuestions}/{data.questions.length}</span></div>
+                        <div><span className="text-monka-muted">MP:</span> <span className="font-bold text-monka-heading">{data.microParcours.length}</span></div>
+                        <div><span className="text-monka-muted">Règles:</span> <span className="font-bold text-monka-heading">{data.activationRules.length}</span></div>
+                        <div><span className="text-monka-muted">Recos:</span> <span className="font-bold text-monka-heading">{data.recommendations.length}</span></div>
+                        <div><span className="text-monka-muted">Micro-Tâches:</span> <span className="font-bold text-monka-heading">{data.microTaches.length}</span></div>
+                        <div><span className="text-monka-muted">Scoring Q:</span> <span className="font-bold text-monka-heading">{data.scoringQuestions.length}</span></div>
                     </div>
                 </div>
-            </div>
 
-            {/* Data source info */}
-            <div className="glass p-4 rounded-xl mt-4">
-                <h4 className="text-xs font-bold text-monka-heading mb-2">📊 Données Supabase (temps réel)</h4>
-                <div className="grid grid-cols-3 gap-2 text-[10px]">
-                    <div><span className="text-monka-muted">Questions actives:</span> <span className="font-bold text-monka-heading">{totalActiveQuestions}/{data.questions.length}</span></div>
-                    <div><span className="text-monka-muted">MP:</span> <span className="font-bold text-monka-heading">{data.microParcours.length}</span></div>
-                    <div><span className="text-monka-muted">Règles:</span> <span className="font-bold text-monka-heading">{data.activationRules.length}</span></div>
-                    <div><span className="text-monka-muted">Recos:</span> <span className="font-bold text-monka-heading">{data.recommendations.length}</span></div>
-                    <div><span className="text-monka-muted">Micro-Tâches:</span> <span className="font-bold text-monka-heading">{data.microTaches.length}</span></div>
-                    <div><span className="text-monka-muted">Scoring Q:</span> <span className="font-bold text-monka-heading">{data.scoringQuestions.length}</span></div>
-                </div>
-            </div>
-
-            {/* V-breakdown (ALL view) */}
-            {activeV === 'ALL' && (
-                <div className="space-y-2 mt-4">
-                    {vulnerabilities.map(v => {
-                        const vs = scoreByV[v.id]
-                        return (
-                            <div key={v.id} className="flex items-center gap-3 text-xs">
-                                <span className="font-bold text-white px-1.5 py-0.5 rounded" style={{ backgroundColor: v.color }}>{v.id}</span>
-                                <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                                    <div className="h-full rounded-full transition-all" style={{ width: `${vs.max > 0 ? (vs.score / vs.max) * 100 : 0}%`, backgroundColor: v.color }} />
+                {/* V-breakdown (ALL view) */}
+                {activeV === 'ALL' && (
+                    <div className="space-y-2 mt-4">
+                        {vulnerabilities.map(v => {
+                            const vs = scoreByV[v.id]
+                            return (
+                                <div key={v.id} className="flex items-center gap-3 text-xs">
+                                    <span className="font-bold text-white px-1.5 py-0.5 rounded" style={{ backgroundColor: v.color }}>{v.id}</span>
+                                    <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                        <div className="h-full rounded-full transition-all" style={{ width: `${vs.max > 0 ? (vs.score / vs.max) * 100 : 0}%`, backgroundColor: v.color }} />
+                                    </div>
+                                    <span className="text-monka-muted">{vs.score}/{vs.max}</span>
                                 </div>
-                                <span className="text-monka-muted">{vs.score}/{vs.max}</span>
-                            </div>
-                        )
-                    })}
-                </div>
-            )}
+                            )
+                        })}
+                    </div>
+                )}
+            </div>
 
-            {/* CR Médecin Traitant */}
+            {/* CR Médecin Traitant — this is the ONLY part that prints */}
             <CRMedecinDocument
                 data={data} answers={answers} scoreByV={scoreByV}
                 activatedMPs={activatedMPs} activatedCats={activatedCats}

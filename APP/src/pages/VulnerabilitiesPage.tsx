@@ -42,7 +42,7 @@ export default function VulnerabilitiesPage() {
                     Vulnérabilités
                 </h1>
                 <p className="text-sm text-monka-muted">
-                    Explorer les 5 dimensions cliniques — questions, scoring, micro-parcours et recommandations
+                    Explorer les 5 dimensions cliniques — questions, micro-parcours et recommandations
                 </p>
             </div>
 
