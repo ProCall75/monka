@@ -6,7 +6,7 @@
 import { useMemo } from 'react'
 import {
     VULN_META, getThresholdsForVuln, getQuestionText,
-    getContentBlocksForEntity, CR_VULN_LABELS, isScoringQuestion,
+    getContentBlocksForEntity, CR_VULN_LABELS,
     type MonkaData, type VulnerabilityId,
 } from '../../clinical/hooks'
 import { ExportButton } from './ExportButton'

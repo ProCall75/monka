@@ -4,7 +4,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Activity, AlertTriangle } from 'lucide-react'
-import { useMonkaData, VULN_META, type VulnerabilityId } from '../clinical/hooks'
+import { useMonkaData, VULN_META } from '../clinical/hooks'
 import { VulnDetail } from './vulnerabilities/VulnDetail'
 
 export default function VulnerabilitiesPage() {

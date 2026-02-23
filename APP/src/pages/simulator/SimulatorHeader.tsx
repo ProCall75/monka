@@ -16,7 +16,7 @@ interface SimulatorHeaderProps {
     personaId: string | null
     vulnerabilities: Array<{ id: string; label: string; color: string }>
     displayScore: { score: number; max: number }
-    currentThreshold: { level: string; description: string } | null
+    currentThreshold: { level: string; description: string | null } | null
     getThresholdColor: (level: string) => string
     activatedMPs: string[]
     totalMPs: number

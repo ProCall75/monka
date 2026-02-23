@@ -4,7 +4,7 @@
    Architecture: types only, no logic.
    ============================================= */
 
-import type { VulnerabilityId } from './types'
+
 
 // === Raw DB Types (match Supabase v2 columns) ===
 

@@ -17,12 +17,12 @@ import type { VulnerabilityId } from '../clinical/hooks'
 import {
     useMonkaData,
     VULN_META, VULN_IDS,
-    evaluateRule, getActivatedCategories,
-    getQuestionsForVuln, getAllQuestions, getActiveQuestions,
+    getActivatedCategories,
+    getActiveQuestions,
     getActiveAidanceBlocks, getTriggerQuestions,
     buildQuestionMPMap, buildMPMap, buildScoringMap,
     getThresholdsForVuln, buildMPVulnMap,
-    invalidateCache, getCategoriesForMP, getRulesForMP,
+    invalidateCache,
     type MonkaData, type DBQuestion,
 } from '../clinical/hooks'
 
@@ -275,7 +275,7 @@ function SimulatorContent({
 
     // Threshold info for current V
     const currentThreshold = useMemo(() => {
-        if (activeV === 'ALL') return null
+        if (activeV === 'ALL' || activeV === 'TRIGGERS') return null
         const thresholds = getThresholdsForVuln(data, activeV)
         const score = displayScore.score
         return thresholds.find(t => score >= t.min_score && score <= t.max_score) || null

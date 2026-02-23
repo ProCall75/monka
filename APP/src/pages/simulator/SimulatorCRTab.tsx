@@ -15,7 +15,6 @@ import { motion } from 'framer-motion'
 import {
     VULN_IDS, VULN_META,
     buildMPMap, buildMPVulnMap,
-    type VulnerabilityId,
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
 import { CRMedecinDocument } from './CRMedecinDocument'

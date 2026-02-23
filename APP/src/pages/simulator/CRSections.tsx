@@ -6,7 +6,7 @@ import {
     VULN_IDS, VULN_COLORS,
     getRulesForMP,
     CR_VULN_LABELS, CR_NIVEAU_DISPLAY, CR_PHR_B2,
-    mapObjectifClinique, formatActeur,
+    formatActeur,
     type CRNiveau, type VulnerabilityId,
     getContentBlocksForEntity,
 } from '../../clinical/hooks'
@@ -112,7 +112,6 @@ export function AlertesSection({ data, activatedCats, mpMap, mpVulnMap }: Pick<C
                     <div className="space-y-1.5">
                         {cccs.map(([catId, c]) => {
                             const cat = data.categories.find(ct => ct.id === catId)
-                            const mp = mpMap[c.mpId]
                             const vuln = mpVulnMap[c.mpId]
                             const rules = getRulesForMP(data, c.mpId).filter(r => r.category_id === catId && r.niveau === 'ccc')
                             return (
@@ -136,7 +135,7 @@ export function AlertesSection({ data, activatedCats, mpMap, mpVulnMap }: Pick<C
 
 // ── 3. Plan d'Action (Top MTs cross-V) ────────────────
 
-export function PlanActionSection({ data, activatedMPs, mpMap, mpVulnMap }: Pick<CRSectionProps, 'data' | 'activatedMPs' | 'mpMap' | 'mpVulnMap'>) {
+export function PlanActionSection({ data, activatedMPs, mpMap: _mpMap, mpVulnMap }: Pick<CRSectionProps, 'data' | 'activatedMPs' | 'mpMap' | 'mpVulnMap'>) {
     const topMTs = activatedMPs
         .flatMap(mpId => data.microTaches.filter(mt => mt.mp_id === mpId).map(mt => ({ ...mt, vulnId: mpVulnMap[mpId] })))
         .sort((a, b) => {
@@ -184,7 +183,7 @@ export function PlanActionSection({ data, activatedMPs, mpMap, mpVulnMap }: Pick
 
 // ── 4. Annexe Technique ────────────────────────────────
 
-export function AnnexeSection({ data, scoreByV, activatedMPs, answers }: Pick<CRSectionProps, 'data' | 'scoreByV' | 'activatedMPs' | 'answers'>) {
+export function AnnexeSection({ data, scoreByV: _scoreByV, activatedMPs, answers }: Pick<CRSectionProps, 'data' | 'scoreByV' | 'activatedMPs' | 'answers'>) {
     const totalRules = data.activationRules.length
     const totalQuestions = data.questions.length
     const answeredCount = Object.keys(answers).length

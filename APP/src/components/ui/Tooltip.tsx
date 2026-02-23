@@ -35,7 +35,7 @@ export function Tooltip({
     const [isVisible, setIsVisible] = useState(false)
     const triggerRef = useRef<HTMLDivElement>(null)
     const tooltipRef = useRef<HTMLDivElement>(null)
-    const timeoutRef = useRef<ReturnType<typeof setTimeout>>()
+    const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined)
 
     const showTooltip = () => {
         clearTimeout(timeoutRef.current)

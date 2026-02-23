@@ -39,7 +39,7 @@ export function WhatIfDiff({ data, originalAnswers, currentAnswers, onReset, ena
         for (const k of allKeys) {
             if (originalAnswers[k] !== currentAnswers[k]) {
                 const q = data.questions.find(q => q.id === k)
-                changed.push({ qId: k, text: q?.libelle || k, from: originalAnswers[k] || '—', to: currentAnswers[k] || '—' })
+                changed.push({ qId: k, text: q?.question_text || k, from: originalAnswers[k] || '—', to: currentAnswers[k] || '—' })
             }
         }
         return changed

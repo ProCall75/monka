@@ -6,16 +6,13 @@
    ============================================= */
 
 import {
-    VULN_IDS, VULN_META, VULN_COLORS,
+    VULN_IDS, VULN_META,
     getThresholdsForVuln, buildMPVulnMap,
-    type VulnerabilityId,
 } from '../../clinical/hooks'
 import type { SimulatorTabProps } from './types'
 import { detectScoreActionGaps } from './scoreActionGap'
 import { ScoreBreakdown } from './ScoreBreakdown'
 import { AlertTriangle } from 'lucide-react'
-
-const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
 const vulnerabilities = VULN_IDS.map(id => ({
     id,

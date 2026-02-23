@@ -5,8 +5,7 @@
    tab components. Centralizes the props contract.
    ============================================= */
 
-import type { MonkaData, DBQuestion } from '../../clinical/hooks'
-import type { VulnerabilityId } from '../../clinical/hooks'
+import type { MonkaData } from '../../clinical/hooks'
 
 /** Tabs available in the internal (audit) view */
 export type InternalTab = 'scoring' | 'mp' | 'rules' | 'summary'
@@ -58,7 +57,7 @@ export interface SimulatorTabProps {
     /** Category-level activations */
     activatedCats: Map<string, ActivatedCategory>
     /** Current threshold info */
-    currentThreshold: { level: string; description: string; min_score: number; max_score: number } | null
+    currentThreshold: { level: string; description: string | null; min_score: number; max_score: number } | null
     /** Scoring map: questionId → answer → score */
     scoringMap: Record<string, Record<string, number>>
 }

@@ -10,8 +10,7 @@ import { motion } from 'framer-motion'
 import { FileText, Printer } from 'lucide-react'
 import {
     VULN_IDS, VULN_COLORS,
-    getActiveQuestions, getThresholdsForVuln, getRulesForMP,
-    CR_VULN_LABELS, CR_NIVEAU_DISPLAY, CR_PHR_B4_INITIAL,
+    getActiveQuestions, getThresholdsForVuln,
     getNiveauForScore, generateConclusionPhrases, mapObjectifClinique, formatActeur,
     getContentBlocksForEntity,
     type CRNiveau, type VulnerabilityId,
@@ -157,7 +156,7 @@ export function CRMedecinDocument({ data, answers, scoreByV, activatedMPs, activ
 
 // ── Inline detail section (kept here to avoid circular deps) ──
 
-function DetailMPsSection({ top5MPs, activatedMPs, data, activatedCats, mpVulnMap, niveaux, scoreByV, mpMap }: {
+function DetailMPsSection({ top5MPs, activatedMPs, data, activatedCats: _activatedCats, mpVulnMap: _mpVulnMap, niveaux: _niveaux, scoreByV: _scoreByV, mpMap: _mpMap }: {
     top5MPs: { mpId: string; vulnId: string; nom: string; objectif: string; objectifClinique: string; acteurPrincipal: string; autresActeurs: string[] }[]
     activatedMPs: string[]
     data: CRDocProps['data']
