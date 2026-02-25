@@ -959,8 +959,8 @@ const HomeScreen = ({
                 {mockVulnerabilities.map(v => {
                     const activeMPs = v.microParcours.filter(mp => mp.criticality !== 'prevention').length;
                     const totalMPs = v.microParcours.length;
-                    // S = Santé de l'aidant ("Vous"), others = proche ("Votre proche")
-                    const target = v.domain === 'S' ? 'Vous' : 'Votre proche';
+                    // S = Santé de l'aidant ("Vous"), others = pour Francine (persona démo)
+                    const target = v.domain === 'S' ? 'Vous' : 'Francine';
                     return (
                         <HeroCard
                             key={v.id}

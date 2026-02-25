@@ -22,7 +22,7 @@ export const Social: Story = {
         domain: 'R',
         title: 'Retrouver du lien social',
         subtitle: 'Rompre l\'isolement et maintenir des relations de qualité.',
-        targetPerson: 'Votre proche',
+        targetPerson: 'Francine',
         taskCount: 3,
     },
 };
