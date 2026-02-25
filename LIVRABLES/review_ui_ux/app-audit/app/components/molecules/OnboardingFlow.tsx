@@ -249,7 +249,7 @@ const ProfileAnalysis = ({ active, onReady }: { active: boolean; onReady?: () =>
    RECAP RADAR — Animated progressive radar chart
 ═══════════════════════════════════════════════════════ */
 
-const RECAP_SVG = 240;
+const RECAP_SVG = 300;
 const RECAP_CX = RECAP_SVG / 2, RECAP_CY = RECAP_SVG / 2;
 const RECAP_MAX_R = 80;
 const RECAP_ANGLE_STEP = (2 * Math.PI) / SPIDER_DOMAINS.length;
@@ -286,13 +286,13 @@ function RecapRadar({ targetValues, visibleVulns, domainColor }: {
     const animatedValues = targetValues.map(v => v * progress);
     const dataPoints = animatedValues.map((v, i) => recapGetPoint(i, v));
     const dataPolygon = dataPoints.map(p => `${p.x},${p.y}`).join(' ');
-    const labelPoints = SPIDER_DOMAINS.map((_, i) => recapGetPoint(i, 130));
+    const labelPoints = SPIDER_DOMAINS.map((_, i) => recapGetPoint(i, 140));
 
     const uid = 'rcr-' + domainColor.replace('#', '');
 
     return (
         <div className="mb-4" style={{ animation: 'ob-fadeIn 0.3s ease-out 300ms both' }}>
-            <svg width="100%" height="auto" viewBox={`0 0 ${RECAP_SVG} ${RECAP_SVG}`} style={{ maxWidth: 240, aspectRatio: '1/1' }}>
+            <svg width="100%" height="auto" viewBox={`0 0 ${RECAP_SVG} ${RECAP_SVG}`} style={{ maxWidth: 280, aspectRatio: '1/1' }}>
                 <defs>
                     <radialGradient id={`${uid}-glow`}>
                         <stop offset="0%" stopColor={domainColor} stopOpacity="0.12" />
@@ -904,14 +904,13 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
 
                                 {/* Illustration */}
                                 <div
-                                    className="w-[180px] h-[180px] mb-4 flex items-center justify-center rounded-[28px] overflow-hidden bg-white"
+                                    className="w-[200px] h-[200px] mb-4 flex items-center justify-center rounded-[28px] overflow-hidden bg-white"
                                     style={{ animation: 'ob-bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', boxShadow: '0 8px 32px rgba(44,140,153,0.10)' }}
                                 >
                                     <img
                                         src={introData.image}
                                         alt={introData.title}
-                                        className="w-full h-full object-contain"
-                                        style={{ filter: 'drop-shadow(0 4px 12px rgba(44,140,153,0.08))' }}
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
 
@@ -1184,35 +1183,37 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
                                     />
                                 </div>
 
-                                {/* Domain priorities */}
+                                {/* Domain breakdown with ThemeButton icons */}
                                 <div
-                                    className="w-full space-y-2 mt-1"
-                                    style={{ animation: 'ob-fadeIn 0.4s ease-out 1000ms both' }}
+                                    className="w-full rounded-[18px] p-4 mt-1"
+                                    style={{
+                                        backgroundColor: 'rgba(255,255,255,0.8)',
+                                        border: '1.5px solid #E5E5EA',
+                                        animation: 'ob-fadeIn 0.4s ease-out 1000ms both',
+                                    }}
                                 >
-                                    <p className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-wider mb-2">Vos priorités par thème</p>
-                                    {domainSummaries.map((ds, i) => (
-                                        <div
-                                            key={ds.domain}
-                                            className="flex items-center gap-3 px-3 py-2.5 rounded-[12px] text-left"
-                                            style={{
-                                                backgroundColor: 'rgba(255,255,255,0.7)',
-                                                border: '1px solid #E5E5EA',
-                                                animation: `ob-optionIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) ${1100 + i * 80}ms both`,
-                                            }}
-                                        >
+                                    <p className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-wider mb-3">Ce que Monka a préparé pour vous</p>
+                                    <div className="space-y-3">
+                                        {domainSummaries.map((ds, i) => (
                                             <div
-                                                className="w-[6px] h-[6px] rounded-full flex-shrink-0"
-                                                style={{ backgroundColor: ds.color }}
-                                            />
-                                            <span className="text-[12px] font-semibold text-[#1A1A2E] flex-1">{ds.label}</span>
-                                            <span className="text-[11px] text-[#8E8E93]">{ds.priority}</span>
-                                        </div>
-                                    ))}
+                                                key={ds.domain}
+                                                className="flex items-center gap-3"
+                                                style={{ animation: `ob-optionIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) ${1100 + i * 80}ms both` }}
+                                            >
+                                                <ThemeButton domain={ds.domain as VulnerabilityDomain} size="sm" />
+                                                <div className="flex-1 text-left">
+                                                    <p className="text-[12.5px] font-semibold text-[#1A1A2E]">{ds.label}</p>
+                                                    <p className="text-[10.5px] text-[#8E8E93]">{ds.priority}</p>
+                                                </div>
+                                                <CheckCircle size={16} weight="fill" className="text-[#10B981] flex-shrink-0" />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 {/* Benefit callout */}
                                 <div
-                                    className="flex items-start gap-2 mt-4 px-4 py-3 rounded-[14px] text-left"
+                                    className="flex items-start gap-2 mt-3 px-4 py-3 rounded-[14px] text-left"
                                     style={{
                                         backgroundColor: '#ECFDF5',
                                         border: '1px solid #D1FAE5',
