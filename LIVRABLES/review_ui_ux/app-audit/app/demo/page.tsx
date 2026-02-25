@@ -2,11 +2,12 @@
 
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import { ArrowLeft, ArrowRight, ArrowsClockwise, PaperPlaneRight, Smiley, Heart, Users as UsersIcon, ChatCircle, BookOpen, Phone, Star, ShieldCheck, MoonStars, Translate, Info, SignOut, HandHeart, FirstAid, ClipboardText, Lock, Check, MagnifyingGlass, MapPin, CaretDown, CaretUp, FileText, Lightbulb, PhoneCall, CheckCircle, Circle, ArrowSquareOut, List, CalendarCheck, CalendarPlus, User, Bell, Question, Moon, Sun, Lightning } from '@phosphor-icons/react';
+import { ArrowLeft, ArrowRight, ArrowsClockwise, PaperPlaneRight, Smiley, Heart, Users as UsersIcon, ChatCircle, BookOpen, Phone, Star, ShieldCheck, MoonStars, Translate, Info, SignOut, HandHeart, FirstAid, ClipboardText, Lock, Check, MagnifyingGlass, MapPin, CaretDown, CaretUp, CaretRight, FileText, Lightbulb, PhoneCall, CheckCircle, Circle, ArrowSquareOut, List, CalendarCheck, CalendarPlus, User, Bell, Question, Moon, Sun, Lightning } from '@phosphor-icons/react';
 import { professionals, PRO_CATEGORIES, type Professional } from '../data/pro-finder-data';
 import { actionableAdvices, type ActionableAdvice } from '../data/actionable-advice-data';
 import { ProductTour } from '../components/molecules/ProductTour';
 import { PricingCard, MONKA_PLANS } from '../components/molecules/PricingCard';
+import { OnboardingFlow } from '../components/molecules/OnboardingFlow';
 
 // Dynamic import for Leaflet map (SSR-safe)
 const ProMap = dynamic(() => import('./ProMap'), { ssr: false, loading: () => <div className="w-full h-[280px] rounded-[20px] bg-[#F3F4F6] animate-pulse" /> });
@@ -43,6 +44,7 @@ type TabId = 'home' | 'monsuivi' | 'chat' | 'community' | 'resources';
 
 type Screen =
     | { type: 'tab'; tab: TabId }
+    | { type: 'notifications' }
     | { type: 'themeDetail'; vulnerability: Vulnerability }
     | { type: 'programDetail'; vulnerability: Vulnerability; program: MicroParcours }
     | { type: 'recoDetail'; vulnerability: Vulnerability; program: MicroParcours; recommendation: Recommendation; category: RecoCategory }
@@ -83,16 +85,16 @@ const articles: Article[] = [
     {
         id: 'art-1',
         title: "Comprendre la maladie d'Alzheimer",
-        description: "Les bases pour mieux accompagner Francine au quotidien.",
+        description: "Les bases pour mieux accompagner votre proche au quotidien.",
         category: 'Comprendre',
         domain: 'S' as VulnerabilityDomain,
         readingTime: 8,
         imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=200&fit=crop',
-        content: `La maladie d'Alzheimer touche environ 900 000 personnes en France. En tant qu'aidant, comprendre les mécanismes de cette maladie vous permet de mieux anticiper les comportements de Francine et d'adapter votre accompagnement.
+        content: `La maladie d'Alzheimer touche environ 900 000 personnes en France. En tant qu'aidant, comprendre les mécanismes de cette maladie vous permet de mieux anticiper les comportements de votre proche et d'adapter votre accompagnement.
 
     ** Les 3 stades principaux:**
 
-        1. ** Stade léger ** — Oublis fréquents, difficulté à trouver les mots.Francine reste autonome pour la plupart des activités.C'est le moment idéal pour mettre en place une routine rassurante.
+        1. ** Stade léger ** — Oublis fréquents, difficulté à trouver les mots.votre proche reste autonome pour la plupart des activités.C'est le moment idéal pour mettre en place une routine rassurante.
 
 2. ** Stade modéré ** — Besoin d'aide pour les tâches complexes (finances, cuisine). La communication devient plus difficile. Privilégiez les phrases courtes et le contact visuel.
 
@@ -118,7 +120,7 @@ const articles: Article[] = [
 
 ** Les symptômes principaux:**
 - ** Tremblements au repos ** — Souvent un seul côté au début.Ils diminuent pendant le mouvement.
-- ** Rigidité musculaire ** — Raideurs dans les bras, les jambes, le cou.Francine peut sembler « figé ».
+- ** Rigidité musculaire ** — Raideurs dans les bras, les jambes, le cou.votre proche peut sembler « figé ».
 - ** Lenteur des mouvements(bradykinésie) ** — Les gestes du quotidien deviennent plus longs: boutonner une chemise, se lever d'une chaise.
     - ** Troubles de l'équilibre** — Risque de chutes accru, surtout dans les espaces encombrés.
 
@@ -163,7 +165,7 @@ const articles: Article[] = [
 
 **Que faire si vous repérez ces signes ?**
 - Ne pas paniquer : la perte d'autonomie est progressive et des solutions existent
-- En parler avec le médecin traitant de Francine (avec son accord)
+- En parler avec le médecin traitant de votre proche (avec son accord)
 - Contacter le CLIC ou la MAIA de votre département pour un bilan
 - Demander une évaluation GIR si besoin d'aide structurée
 
@@ -196,7 +198,7 @@ Une courte marche, même autour du pâté de maisons, libère des endorphines. S
 **5. Le scan corporel**
 Allongez-vous et portez attention à chaque partie de votre corps, des pieds à la tête. Relâchez consciemment chaque tension. 5 minutes suffisent.
 
-> Prendre soin de vous n'est pas un luxe — c'est une nécessité pour bien accompagner Francine.`,
+> Prendre soin de vous n'est pas un luxe — c'est une nécessité pour bien accompagner votre proche.`,
     },
     {
         id: 'art-7',
@@ -206,12 +208,12 @@ Allongez-vous et portez attention à chaque partie de votre corps, des pieds à 
         domain: 'R' as VulnerabilityDomain,
         readingTime: 6,
         imageUrl: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=200&fit=crop',
-        content: `72% des aidants déclarent mal dormir. Les réveils nocturnes de Francine, l'anxiété et la charge mentale transforment vos nuits en épreuves. Pourtant, un mauvais sommeil empire tout : patience, humeur, santé.
+        content: `72% des aidants déclarent mal dormir. Les réveils nocturnes de votre proche, l'anxiété et la charge mentale transforment vos nuits en épreuves. Pourtant, un mauvais sommeil empire tout : patience, humeur, santé.
 
 **Pourquoi votre sommeil est perturbé :**
-- **L'hyper-vigilance** — Même endormi, votre cerveau « surveille » Francine
+- **L'hyper-vigilance** — Même endormi, votre cerveau « surveille » votre proche
 - **La charge mentale** — Votre esprit continue de planifier (rendez-vous, courses, traitements)
-- **Les réveils nocturnes** — Si Francine se lève ou vous appelle la nuit
+- **Les réveils nocturnes** — Si votre proche se lève ou vous appelle la nuit
 - **Le cortisol élevé** — Le stress chronique dérègle votre horloge biologique
 
 **7 stratégies qui fonctionnent :**
@@ -224,7 +226,7 @@ Allongez-vous et portez attention à chaque partie de votre corps, des pieds à 
 
 4. **La micro-sieste** — Si la nuit a été courte : 15-20 minutes max, avant 15h. Pas plus, sinon vous casserez le cycle.
 
-5. **Le soutien nocturne** — Si Francine se réveille souvent : organisez un roulement avec la famille ou un service d'aide de nuit (finançable par l'APA).
+5. **Le soutien nocturne** — Si votre proche se réveille souvent : organisez un roulement avec la famille ou un service d'aide de nuit (finançable par l'APA).
 
 6. **L'activité physique** — 30 min de mouvement dans la journée améliore le sommeil de 65%. Pas après 19h.
 
@@ -248,13 +250,13 @@ Les études sont formelles : 10 minutes d'activité physique modérée par jour 
 **Intégrer le mouvement à votre routine d'aidant :**
 
 - **Pendant les courses** — Garez-vous plus loin, prenez les escaliers au lieu de l'ascenseur
-- **Avec Francine** — Une marche de 10 min autour du pâté de maisons fait du bien aux deux
+- **Avec votre proche** — Une marche de 10 min autour du pâté de maisons fait du bien aux deux
 - **Pendant les temps d'attente** — Étirements dans la salle d'attente du médecin, squats pendant que le café chauffe
 - **Le matin** — 5 min d'étirements doux avant que la journée ne commence. YouTube regorge de vidéos « morning stretch 5 min »
 
 **Les 3 exercices de l'aidant :**
 
-1. **Le mur** — Appuyez votre dos contre un mur, descendez en position assise pendant 30 secondes. Renforce les jambes (utile pour les transferts de Francine).
+1. **Le mur** — Appuyez votre dos contre un mur, descendez en position assise pendant 30 secondes. Renforce les jambes (utile pour les transferts de votre proche).
 
 2. **Les épaules** — Montez vos épaules jusqu'aux oreilles, maintenez 5 secondes, relâchez d'un coup. Répétez 5 fois. Libère la tension du cou et des épaules.
 
@@ -275,10 +277,10 @@ Les études sont formelles : 10 minutes d'activité physique modérée par jour 
         content: `La loi française reconnaît le statut d'aidant depuis 2015. Voici un guide complet de vos droits et des aides disponibles.
 
 **Le congé de proche aidant**
-Vous pouvez cesser temporairement votre activité professionnelle pour accompagner Francine. Durée : jusqu'à 3 mois, renouvelable dans la limite d'1 an. Depuis 2020, ce congé est indemnisé à hauteur de ~60€/jour.
+Vous pouvez cesser temporairement votre activité professionnelle pour accompagner votre proche. Durée : jusqu'à 3 mois, renouvelable dans la limite d'1 an. Depuis 2020, ce congé est indemnisé à hauteur de ~60€/jour.
 
 **L'APA (Allocation Personnalisée d'Autonomie)**
-Francine peut bénéficier de l'APA pour financer une aide à domicile, des fournitures, ou un accueil de jour. Montant : jusqu'à 1 800€/mois selon le degré de dépendance (GIR 1 à 4).
+votre proche peut bénéficier de l'APA pour financer une aide à domicile, des fournitures, ou un accueil de jour. Montant : jusqu'à 1 800€/mois selon le degré de dépendance (GIR 1 à 4).
 
 **Le droit au répit**
 Depuis 2016, les aidants peuvent bénéficier d'une aide pouvant aller jusqu'à 509€/an pour financer un hébergement temporaire ou un accueil de jour pour leur proche, afin de prendre du temps pour eux.
@@ -298,7 +300,7 @@ Depuis 2016, les aidants peuvent bénéficier d'une aide pouvant aller jusqu'à 
     {
         id: 'art-9',
         title: "APA et MDPH : le guide complet",
-        description: 'Deux dispositifs essentiels pour financer l\'aide à Francine.',
+        description: 'Deux dispositifs essentiels pour financer l\'aide à votre proche.',
         category: 'Démarches',
         domain: 'A' as VulnerabilityDomain,
         readingTime: 10,
@@ -307,7 +309,7 @@ Depuis 2016, les aidants peuvent bénéficier d'une aide pouvant aller jusqu'à 
 
 **APA (Allocation Personnalisée d'Autonomie)**
 Pour les personnes de 60 ans et plus en perte d'autonomie.
-- **Qui la demande ?** Francine (ou vous, en son nom avec son accord)
+- **Qui la demande ?** votre proche (ou vous, en son nom avec son accord)
 - **À qui ?** Au Conseil départemental de son lieu de résidence
 - **Montant ?** De 700€ à 1 800€/mois selon le degré de dépendance (GIR)
 - **Délai ?** 2 mois en moyenne pour l'évaluation + la décision
@@ -320,9 +322,9 @@ Pour les personnes de moins de 60 ans en situation de handicap — OU pour la PC
 - **L'AAH** — Allocation adulte handicapé, sous conditions de ressources
 
 **Comment choisir ?**
-- Francine a **+ de 60 ans** → APA en priorité
-- Francine a **- de 60 ans** → MDPH obligatoire
-- Francine a **+ de 60 ans ET un handicap reconnu avant 60 ans** → Il peut choisir entre APA et PCH
+- votre proche a **+ de 60 ans** → APA en priorité
+- votre proche a **- de 60 ans** → MDPH obligatoire
+- votre proche a **+ de 60 ans ET un handicap reconnu avant 60 ans** → Il peut choisir entre APA et PCH
 
 **Astuce Monka :** Vous pouvez cumuler l'APA avec le droit au répit et le crédit d'impôt emploi à domicile. Contactez votre CCAS pour un accompagnement personnalisé.
 
@@ -354,7 +356,7 @@ Pour les personnes de moins de 60 ans en situation de handicap — OU pour la PC
 
 **Comment en faire la demande :**
 1. Informer votre employeur par courrier recommandé (1 mois avant)
-2. Joindre un justificatif de la situation de Francine (notification MDPH ou évaluation GIR)
+2. Joindre un justificatif de la situation de votre proche (notification MDPH ou évaluation GIR)
 3. Demander l'AJPA auprès de votre CAF (formulaire cerfa n°16108*01)
 
 **Vos protections :**
@@ -411,7 +413,7 @@ L'ANAH (Agence Nationale de l'Habitat) peut financer jusqu'à 50% des travaux d'
         domain: 'F' as VulnerabilityDomain,
         readingTime: 7,
         imageUrl: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=200&fit=crop',
-        content: `La dénutrition touche 1 personne âgée sur 3 vivant à domicile. Quand on est aidant, préparer des repas adaptés peut devenir un vrai casse-tête — surtout si Francine a des troubles de la déglutition ou peu d'appétit.
+        content: `La dénutrition touche 1 personne âgée sur 3 vivant à domicile. Quand on est aidant, préparer des repas adaptés peut devenir un vrai casse-tête — surtout si votre proche a des troubles de la déglutition ou peu d'appétit.
 
 **Les signaux de dénutrition à surveiller :**
 - Perte de poids ≥ 5% en 1 mois ou ≥ 10% en 6 mois
@@ -447,30 +449,30 @@ L'ANAH (Agence Nationale de l'Habitat) peut financer jusqu'à 50% des travaux d'
         domain: 'F' as VulnerabilityDomain,
         readingTime: 5,
         imageUrl: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=200&fit=crop',
-        content: `Quand Francine perd la mémoire, la communication change — mais elle ne disparaît pas. Elle demande simplement un autre langage. Voici comment maintenir le lien, même quand les mots manquent.
+        content: `Quand votre proche perd la mémoire, la communication change — mais elle ne disparaît pas. Elle demande simplement un autre langage. Voici comment maintenir le lien, même quand les mots manquent.
 
 **Ce qui ne fonctionne plus :**
 - « Tu ne te souviens pas ? On en a parlé hier. » → Crée de la frustration et de la honte
 - « Non, ce n'est pas comme ça ! » → Provoque de l'agitation
-- « Pourquoi tu fais ça ? » → Francine ne sait pas pourquoi. La question l'angoisse.
+- « Pourquoi tu fais ça ? » → votre proche ne sait pas pourquoi. La question l'angoisse.
 - Parler entre adultes devant lui/elle comme s'il/elle n'était pas là
 
 **Ce qui fonctionne :**
 
-1. **Entrer dans son monde** — Si Francine croit être chez ses parents, ne corrigez pas. Demandez plutôt : « Et comment c'est, chez tes parents ? ». C'est ce qu'on appelle la validation.
+1. **Entrer dans son monde** — Si votre proche croit être chez ses parents, ne corrigez pas. Demandez plutôt : « Et comment c'est, chez tes parents ? ». C'est ce qu'on appelle la validation.
 
 2. **Les phrases simples** — Une idée par phrase. « On va manger. » Pas : « Allez, viens, on va aller manger parce qu'après on a le médecin et il ne faut pas être en retard. »
 
-3. **Le toucher** — Avant de parler, un contact doux (main, épaule) aide Francine à se concentrer sur vous. Le toucher reste compris très tard dans la maladie.
+3. **Le toucher** — Avant de parler, un contact doux (main, épaule) aide votre proche à se concentrer sur vous. Le toucher reste compris très tard dans la maladie.
 
 4. **Les yeux** — Mettez-vous à la même hauteur. Le contact visuel rassure et capte l'attention.
 
 5. **La musique** — Les souvenirs musicaux résistent plus longtemps que les autres. Chantez ensemble, passez les musiques de sa jeunesse. C'est souvent magique.
 
-6. **Les photos** — Pas « qui est-ce ? » (trop de pression) mais « regarde cette photo, elle est belle ». Laissez Francine raconter ce qu'il voit.
+6. **Les photos** — Pas « qui est-ce ? » (trop de pression) mais « regarde cette photo, elle est belle ». Laissez votre proche raconter ce qu'il voit.
 
 **Ce qu'il faut se rappeler :**
-Francine ne « fait pas exprès ». Ses comportements sont des symptômes, pas des choix. Et même quand les mots partent, les émotions restent. Votre présence, votre voix, votre chaleur — il/elle les ressent toujours.
+votre proche ne « fait pas exprès ». Ses comportements sont des symptômes, pas des choix. Et même quand les mots partent, les émotions restent. Votre présence, votre voix, votre chaleur — il/elle les ressent toujours.
 
 > La communication n'est pas que des mots. Un regard, une main serrée, une chanson fredonnée — c'est ça, rester connecté.`,
     },
@@ -657,6 +659,142 @@ const GuideDetailScreen = ({ guide, onBack, onNavigateToProCategory }: { guide: 
 };
 
 /* ═══════════════════════════════════════════════════════
+   NOTIFICATIONS SCREEN
+═══════════════════════════════════════════════════════ */
+
+interface NotifItem {
+    id: string;
+    icon: React.ReactNode;
+    title: React.ReactNode;
+    timeAgo: string;
+    isUnread?: boolean;
+}
+
+const NOTIF_SECTIONS: { label: string; items: NotifItem[] }[] = [
+    {
+        label: "Aujourd'hui",
+        items: [
+            {
+                id: 'n1',
+                icon: <CalendarCheck size={20} weight="duotone" className="text-[#EF4444]" />,
+                title: <><strong>Rendez-vous demain à 15h</strong> avec votre infirmier·e coordinateur.</>,
+                timeAgo: '4m',
+                isUnread: true,
+            },
+            {
+                id: 'n2',
+                icon: <ClipboardText size={20} weight="duotone" className="text-[#2C8C99]" />,
+                title: <><strong>Terminez de répondre à nos questions</strong> pour obtenir des recommandations.</>,
+                timeAgo: '1h',
+                isUnread: true,
+            },
+            {
+                id: 'n3',
+                icon: <ChatCircle size={20} weight="duotone" className="text-[#7C3AED]" />,
+                title: <>Vous avez reçu un <strong>message</strong> de votre infirmier·e coordinateur.</>,
+                timeAgo: '4h',
+                isUnread: true,
+            },
+        ],
+    },
+    {
+        label: '7 derniers jours',
+        items: [
+            {
+                id: 'n4',
+                icon: <CheckCircle size={20} weight="duotone" className="text-[#10B981]" />,
+                title: <>Une <strong>tâche a été validée</strong> par votre infirmier·e coordinateur.</>,
+                timeAgo: '1j',
+            },
+            {
+                id: 'n5',
+                icon: <ShieldCheck size={20} weight="duotone" className="text-[#6B7280]" />,
+                title: <>Votre <strong>mot de passe</strong> a bien été modifié.</>,
+                timeAgo: '5j',
+            },
+        ],
+    },
+    {
+        label: '30 derniers jours',
+        items: [
+            {
+                id: 'n6',
+                icon: <CheckCircle size={20} weight="duotone" className="text-[#10B981]" />,
+                title: <>Une <strong>tâche a été validée</strong> par votre infirmier·e coordinateur.</>,
+                timeAgo: '22j',
+            },
+            {
+                id: 'n7',
+                icon: <Info size={20} weight="duotone" className="text-[#6B7280]" />,
+                title: <>Votre <strong>questionnaire de suivi</strong> est disponible.</>,
+                timeAgo: '28j',
+            },
+        ],
+    },
+];
+
+const NotificationsScreen = ({ onBack }: { onBack: () => void }) => (
+    <div className="flex flex-col h-full">
+        {/* Header */}
+        <div className="px-5 pt-2 pb-4">
+            <BackButton onBack={onBack} />
+            <h1 className="text-[24px] font-bold text-[#1A1A2E]">Notifications</h1>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto px-5 pb-6">
+            {NOTIF_SECTIONS.map((section) => (
+                <div key={section.label} className="mb-6">
+                    <p className="text-[13px] font-semibold text-[#8E8E93] uppercase tracking-wide mb-3">
+                        {section.label}
+                    </p>
+                    <div className="space-y-1">
+                        {section.items.map((notif) => (
+                            <div
+                                key={notif.id}
+                                className="flex items-start gap-3 p-3.5 rounded-[14px] transition-colors cursor-pointer active:scale-[0.98]"
+                                style={{
+                                    backgroundColor: notif.isUnread ? 'rgba(44,140,153,0.06)' : 'transparent',
+                                }}
+                            >
+                                {/* Icon */}
+                                <div
+                                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                                    style={{ backgroundColor: '#F3F4F6' }}
+                                >
+                                    {notif.icon}
+                                </div>
+
+                                {/* Content */}
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-[13.5px] text-[#1A1A2E] leading-[1.4]">
+                                        {notif.title}
+                                    </p>
+                                    <p className="text-[11px] text-[#8E8E93] mt-1">{notif.timeAgo}</p>
+                                </div>
+
+                                {/* Unread dot + chevron */}
+                                <div className="flex items-center gap-2 flex-shrink-0 mt-2">
+                                    {notif.isUnread && (
+                                        <div className="w-2 h-2 rounded-full bg-[#EF4444]" />
+                                    )}
+                                    <CaretRight size={14} weight="bold" className="text-[#C8CCD0]" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))}
+
+            {/* See more */}
+            <button className="w-full text-center text-[14px] font-semibold text-[#2C8C99] py-3">
+                Voir plus
+            </button>
+        </div>
+    </div>
+);
+
+/* ═══════════════════════════════════════════════════════
    HOME SCREEN
 ═══════════════════════════════════════════════════════ */
 
@@ -668,6 +806,7 @@ const HomeScreen = ({
     toggledTasks = {},
     onAvatarPress,
     onMenuPress,
+    onNotificationPress,
 }: {
     onSelectTheme: (v: Vulnerability) => void;
     onSelectArticle?: (article: Article) => void;
@@ -675,6 +814,7 @@ const HomeScreen = ({
     toggledTasks?: Record<string, boolean>;
     onAvatarPress?: () => void;
     onMenuPress?: () => void;
+    onNotificationPress?: () => void;
 }) => {
 
     const [showNotifToast, setShowNotifToast] = useState(false);
@@ -724,10 +864,7 @@ const HomeScreen = ({
                     avatar={mockUser.avatar}
                     variant="design2"
                     notificationCount={mockUser.notificationCount}
-                    onNotificationPress={() => {
-                        setShowNotifToast(true);
-                        setTimeout(() => setShowNotifToast(false), 2500);
-                    }}
+                    onNotificationPress={onNotificationPress}
                     onAvatarPress={onAvatarPress}
                     onMenuPress={onMenuPress}
                 />
@@ -743,7 +880,7 @@ const HomeScreen = ({
                             "Bonne journée. On avance à votre rythme.",
                             "Nouvelle semaine, nouveau souffle. On est là.",
                             "Pensez à vous aussi. Votre bien-être compte.",
-                            "Francine a de la chance de vous avoir. Voici la suite.",
+                            "votre proche a de la chance de vous avoir. Voici la suite.",
                             "Un pas après l'autre. À votre rythme, toujours.",
                         ];
                         const dayIndex = new Date().getDay();
@@ -822,8 +959,8 @@ const HomeScreen = ({
                 {mockVulnerabilities.map(v => {
                     const activeMPs = v.microParcours.filter(mp => mp.criticality !== 'prevention').length;
                     const totalMPs = v.microParcours.length;
-                    // S = Santé de l'aidant ("Vous"), others = proche ("Francine")
-                    const target = v.domain === 'S' ? 'Vous' : 'Francine';
+                    // S = Santé de l'aidant ("Vous"), others = proche ("Votre proche")
+                    const target = v.domain === 'S' ? 'Vous' : 'Votre proche';
                     return (
                         <HeroCard
                             key={v.id}
@@ -1001,7 +1138,7 @@ const completionImpacts: Record<string, {
 }> = {
     R: {
         headline: 'Vous avez retrouvé du répit',
-        narrative: "Ces actions vous ont permis de poser les bases d'un équilibre durable. Le répit n'est pas un luxe — c'est ce qui vous permet de continuer à accompagner Francine.",
+        narrative: "Ces actions vous ont permis de poser les bases d'un équilibre durable. Le répit n'est pas un luxe — c'est ce qui vous permet de continuer à accompagner votre proche.",
         unlocks: [
             'Accès au programme « Répit renforcé » avec des solutions de relais',
             'Notification à votre cercle d\'aidants pour prendre le relais',
@@ -1011,7 +1148,7 @@ const completionImpacts: Record<string, {
     },
     S: {
         headline: 'Votre santé est mieux protégée',
-        narrative: "En prenant soin de vous, vous prenez soin de Francine. Ces actions réduisent votre risque d'épuisement et renforcent votre capacité d'accompagnement.",
+        narrative: "En prenant soin de vous, vous prenez soin de votre proche. Ces actions réduisent votre risque d'épuisement et renforcent votre capacité d'accompagnement.",
         unlocks: [
             'Bilan santé aidant personnalisé à planifier',
             'Rappels automatiques pour vos propres rendez-vous médicaux',
@@ -1021,7 +1158,7 @@ const completionImpacts: Record<string, {
     },
     M: {
         headline: 'Le suivi médical est organisé',
-        narrative: "Le parcours de soins de Francine est maintenant structuré. Chaque rendez-vous, chaque traitement est suivi — vous n'avez plus besoin de tout garder en tête.",
+        narrative: "Le parcours de soins de votre proche est maintenant structuré. Chaque rendez-vous, chaque traitement est suivi — vous n'avez plus besoin de tout garder en tête.",
         unlocks: [
             'Calendrier médical synchronisé avec votre cercle d\'aidants',
             'Rappels de renouvellement d\'ordonnances',
@@ -1040,10 +1177,10 @@ const completionImpacts: Record<string, {
         nextStep: 'Le suivi de vos dossiers en cours sera automatisé.',
     },
     F: {
-        headline: 'La relation avec Francine est renforcée',
-        narrative: "Comprendre Francine, adapter la communication, aménager son quotidien — ces actions transforment votre relation et améliorent sa qualité de vie.",
+        headline: 'La relation avec votre proche est renforcée',
+        narrative: "Comprendre votre proche, adapter la communication, aménager son quotidien — ces actions transforment votre relation et améliorent sa qualité de vie.",
         unlocks: [
-            'Conseils personnalisés selon l\'évolution de Francine',
+            'Conseils personnalisés selon l\'évolution de votre proche',
             'Guide d\'aménagement du domicile adapté',
             'Mise en relation avec des familles dans la même situation',
         ],
@@ -2710,7 +2847,7 @@ const ChatIDECScreen = () => {
                             Accès Premium
                         </h2>
                         <p className="text-[14px] text-[#6B7280] leading-relaxed mb-6">
-                            Échangez directement avec un·e <strong className="text-[#2C8C99]">Infirmier·e De Coordination</strong> pour toutes vos questions sur le parcours de soins de Francine.
+                            Échangez directement avec un·e <strong className="text-[#2C8C99]">Infirmier·e De Coordination</strong> pour toutes vos questions sur le parcours de soins de votre proche.
                         </p>
 
                         {/* Benefits chips */}
@@ -3225,12 +3362,16 @@ const OnboardingOverlay = ({ onComplete }: { onComplete: () => void }) => {
 export default function DemoApp() {
     const [showOnboarding, setShowOnboarding] = useState(true);
     const [showProductTour, setShowProductTour] = useState(false);
+    const [showQuestionnaire, setShowQuestionnaire] = useState(false);
     const [isDark, setIsDark] = useState(false);
     const [activeTab, setActiveTab] = useState<TabId>('home');
     const [screenStack, setScreenStack] = useState<Screen[]>([{ type: 'tab', tab: 'home' }]);
     const [toggledTasks, setToggledTasks] = useState<Record<string, boolean>>({});
     const [pendingProCategory, setPendingProCategory] = useState<string | undefined>(undefined);
     const [showSidebar, setShowSidebar] = useState(false);
+    const [showIdecPopup, setShowIdecPopup] = useState(false);
+    const [idecStep, setIdecStep] = useState<'intro' | 'slots' | 'confirmed'>('intro');
+    const [idecDismissed, setIdecDismissed] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
     // Build lookup: micro-task ID → linked ActionableAdvice
@@ -3245,6 +3386,13 @@ export default function DemoApp() {
     }, []);
 
     const currentScreen = screenStack[screenStack.length - 1];
+
+    // ─── IDEC popup timer: 30s after onboarding is done ───
+    useEffect(() => {
+        if (showOnboarding || showProductTour || showQuestionnaire || idecDismissed) return;
+        const timer = setTimeout(() => setShowIdecPopup(true), 30000);
+        return () => clearTimeout(timer);
+    }, [showOnboarding, showProductTour, showQuestionnaire, idecDismissed]);
 
     const pushScreen = useCallback((screen: Screen) => {
         setScreenStack(prev => [...prev, screen]);
@@ -3287,7 +3435,7 @@ export default function DemoApp() {
             case 'tab':
                 switch (currentScreen.tab) {
                     case 'home':
-                        return <HomeScreen onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectArticle={openArticle} onSelectGuide={(guide) => pushScreen({ type: 'guideDetail', guide })} toggledTasks={toggledTasks} onAvatarPress={() => setActiveTab('home')} onMenuPress={() => setShowSidebar(true)} />;
+                        return <HomeScreen onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectArticle={openArticle} onSelectGuide={(guide) => pushScreen({ type: 'guideDetail', guide })} toggledTasks={toggledTasks} onAvatarPress={() => setActiveTab('home')} onMenuPress={() => setShowSidebar(true)} onNotificationPress={() => pushScreen({ type: 'notifications' })} />;
                     case 'monsuivi':
                         return <MonSuiviScreen toggledTasks={toggledTasks} onToggleTask={handleToggleTask} onSelectTheme={(v) => pushScreen({ type: 'themeDetail', vulnerability: v })} onSelectProgram={(v, mp) => pushScreen({ type: 'programDetail', vulnerability: v, program: mp })} />;
                     case 'chat':
@@ -3352,6 +3500,8 @@ export default function DemoApp() {
                         onNavigateToProCategory={resolveProCategory}
                     />
                 );
+            case 'notifications':
+                return <NotificationsScreen onBack={popScreen} />;
         }
     };
 
@@ -3400,14 +3550,25 @@ export default function DemoApp() {
                             </div>
                         </div>
 
-                        {/* Onboarding overlay */}
+                        {/* Step 1: Welcome + Signup */}
                         {showOnboarding && (
-                            <OnboardingOverlay onComplete={() => { setShowOnboarding(false); setShowProductTour(true); }} />
+                            <OnboardingFlow
+                                mode="welcome"
+                                onComplete={() => { setShowOnboarding(false); setShowProductTour(true); }}
+                            />
                         )}
 
-                        {/* Product Tour (driver.js) — launches after onboarding */}
+                        {/* Step 2: Product Tour — discover the app */}
                         {showProductTour && (
-                            <ProductTour onComplete={() => setShowProductTour(false)} switchTab={switchTab} />
+                            <ProductTour onComplete={() => { setShowProductTour(false); setShowQuestionnaire(true); }} switchTab={switchTab} />
+                        )}
+
+                        {/* Step 3: Questionnaire — personalize */}
+                        {showQuestionnaire && (
+                            <OnboardingFlow
+                                mode="questionnaire"
+                                onComplete={() => setShowQuestionnaire(false)}
+                            />
                         )}
 
                         {/* Bottom Nav — always visible */}
@@ -3494,6 +3655,116 @@ export default function DemoApp() {
                                             <p className="text-[10px] text-[#C8CCD0] text-center">Monka v2.0 — Démo</p>
                                         </div>
                                     </div>
+                                </div>
+                            </>
+                        )}
+
+                        {/* ═══ IDEC RDV Popup ═══ */}
+                        {showIdecPopup && (
+                            <>
+                                {/* Backdrop */}
+                                <div
+                                    className="absolute inset-0 z-[90] bg-black/50"
+                                    style={{ backdropFilter: 'blur(6px)', animation: 'fadeIn 0.3s ease-out' }}
+                                    onClick={() => { setShowIdecPopup(false); setIdecDismissed(true); }}
+                                />
+                                {/* Card */}
+                                <div
+                                    className="absolute left-4 right-4 z-[100] rounded-[24px] overflow-hidden"
+                                    style={{
+                                        bottom: '80px',
+                                        background: 'rgba(255,255,255,0.97)',
+                                        backdropFilter: 'blur(20px)',
+                                        boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+                                        animation: 'ob-slideUpIn 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                                    }}
+                                >
+                                    {idecStep === 'intro' && (
+                                        <div className="p-6 text-center">
+                                            <div className="w-14 h-14 rounded-full bg-[#E8F4F8] flex items-center justify-center mx-auto mb-4">
+                                                <CalendarCheck size={28} weight="duotone" className="text-[#2C8C99]" />
+                                            </div>
+                                            <h3 className="text-[18px] font-bold text-[#1A1A2E] mb-2">Réservez votre premier RDV</h3>
+                                            <p className="text-[13px] text-[#6B7280] leading-relaxed mb-5">
+                                                Un·e <strong className="text-[#2C8C99]">infirmier·e de coordination</strong> vous accompagne gratuitement pour faire le point sur votre situation.
+                                            </p>
+                                            <div className="flex items-center justify-center gap-4 mb-5 text-[12px] text-[#8E8E93]">
+                                                <span>🎯 30 min</span>
+                                                <span>📱 Visio ou tel</span>
+                                                <span>✅ Gratuit</span>
+                                            </div>
+                                            <button
+                                                onClick={() => setIdecStep('slots')}
+                                                className="w-full py-3.5 rounded-[14px] text-[15px] font-bold text-white transition-all active:scale-[0.97]"
+                                                style={{ background: 'linear-gradient(135deg, #2C8C99 0%, #1A6B75 100%)', boxShadow: '0 6px 24px rgba(44,140,153,0.3)' }}
+                                            >
+                                                Choisir un créneau
+                                            </button>
+                                            <button
+                                                onClick={() => { setShowIdecPopup(false); setIdecDismissed(true); }}
+                                                className="text-[13px] text-[#8E8E93] mt-3 block mx-auto"
+                                            >
+                                                Peut-être plus tard
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    {idecStep === 'slots' && (
+                                        <div className="p-5">
+                                            <div className="flex items-center justify-between mb-5">
+                                                <button onClick={() => setIdecStep('intro')} className="text-[#8E8E93]">
+                                                    <ArrowLeft size={20} weight="bold" />
+                                                </button>
+                                                <h3 className="text-[16px] font-bold text-[#1A1A2E]">Choisir un créneau</h3>
+                                                <div className="w-5" />
+                                            </div>
+                                            {/* Fake month header */}
+                                            <p className="text-[13px] font-semibold text-[#2C8C99] mb-3">Mars 2026</p>
+                                            {/* Fake day headers */}
+                                            <div className="grid grid-cols-5 gap-2 mb-4">
+                                                {['Lun 3', 'Mar 4', 'Mer 5', 'Jeu 6', 'Ven 7'].map((day, i) => (
+                                                    <div key={day} className={`text-center py-2 rounded-xl text-[12px] font-semibold ${i === 1 ? 'bg-[#2C8C99] text-white' : 'bg-[#F3F4F6] text-[#4A4A5A]'
+                                                        }`}>
+                                                        {day}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            {/* Time slots */}
+                                            <div className="space-y-2">
+                                                {['9:00', '10:30', '14:00', '15:30', '17:00'].map((time) => (
+                                                    <button
+                                                        key={time}
+                                                        onClick={() => setIdecStep('confirmed')}
+                                                        className="w-full py-3 rounded-[12px] text-[14px] font-semibold text-[#2C8C99] border-2 border-[#2C8C9930] hover:bg-[#E8F4F8] active:bg-[#DCF0F3] transition-colors text-center"
+                                                    >
+                                                        {time}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {idecStep === 'confirmed' && (
+                                        <div className="p-6 text-center" style={{ animation: 'ob-fadeIn 0.4s ease-out' }}>
+                                            <div className="w-16 h-16 rounded-full bg-[#ECFDF5] flex items-center justify-center mx-auto mb-4">
+                                                <CheckCircle size={36} weight="fill" className="text-[#10B981]" />
+                                            </div>
+                                            <h3 className="text-[18px] font-bold text-[#1A1A2E] mb-2">Rendez-vous confirmé</h3>
+                                            <p className="text-[13px] text-[#6B7280] leading-relaxed mb-2">
+                                                Mardi 4 mars à 10h30
+                                            </p>
+                                            <p className="text-[12px] text-[#8E8E93] mb-5">
+                                                Vous recevrez un email de confirmation avec le lien de connexion.
+                                            </p>
+                                            <button
+                                                onClick={() => { setShowIdecPopup(false); setIdecDismissed(true); setIdecStep('intro'); }}
+                                                className="w-full py-3.5 rounded-[14px] text-[15px] font-bold text-white transition-all active:scale-[0.97]"
+                                                style={{ background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)', boxShadow: '0 6px 24px rgba(16,185,129,0.3)' }}
+                                            >
+                                                Parfait, merci !
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             </>
                         )}

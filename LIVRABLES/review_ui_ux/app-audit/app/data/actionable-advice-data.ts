@@ -54,7 +54,7 @@ export const actionableAdvices: ActionableAdvice[] = [
             {
                 order: 3,
                 text: 'Préparer votre rendez-vous',
-                detail: "Apportez : pièce d'identité, justificatif de domicile, dernier avis d'imposition, et si possible un certificat médical du médecin de Francine. Notez vos questions à l'avance.",
+                detail: "Apportez : pièce d'identité, justificatif de domicile, dernier avis d'imposition, et si possible un certificat médical du médecin de votre proche. Notez vos questions à l'avance.",
             },
             {
                 order: 4,
@@ -101,7 +101,7 @@ export const actionableAdvices: ActionableAdvice[] = [
             {
                 order: 4,
                 text: "Préparer la visite d'évaluation à domicile",
-                detail: "Un professionnel viendra évaluer le degré d'autonomie (grille AGGIR). Notez les difficultés quotidiennes de Francine à l'avance. Cela prend environ 1h.",
+                detail: "Un professionnel viendra évaluer le degré d'autonomie (grille AGGIR). Notez les difficultés quotidiennes de votre proche à l'avance. Cela prend environ 1h.",
             },
             {
                 order: 5,
@@ -181,12 +181,12 @@ export const actionableAdvices: ActionableAdvice[] = [
             {
                 order: 2,
                 text: 'Visiter un accueil de jour proche de chez vous',
-                detail: "Activités thérapeutiques, art-thérapie. Francine pourrait y aller 1-2 jours/semaine. Coût souvent pris en charge par l'APA.",
+                detail: "Activités thérapeutiques, art-thérapie. votre proche pourrait y aller 1-2 jours/semaine. Coût souvent pris en charge par l'APA.",
             },
             {
                 order: 3,
                 text: 'Se renseigner sur le relais à domicile',
-                detail: "Des services comme l'ADMR proposent une garde à domicile : un intervenant reste avec Francine pendant que vous vous absentez. De 2h à une journée entière.",
+                detail: "Des services comme l'ADMR proposent une garde à domicile : un intervenant reste avec votre proche pendant que vous vous absentez. De 2h à une journée entière.",
             },
             {
                 order: 4,
@@ -202,7 +202,7 @@ export const actionableAdvices: ActionableAdvice[] = [
             "Notification APA (si déjà obtenue)",
             "Ordonnance du médecin traitant (pour l'accueil de jour)",
         ],
-        tip: "Astuce Monka : Commencez par 1 demi-journée d'accueil de jour. Francine s'y habituera progressivement, et vous constaterez vite les bénéfices pour vous deux.",
+        tip: "Astuce Monka : Commencez par 1 demi-journée d'accueil de jour. votre proche s'y habituera progressivement, et vous constaterez vite les bénéfices pour vous deux.",
         linkedMicroTaskIds: ['MT_R1_07', 'MT_R1_08', 'MT_R1_09'],
     },
     {
@@ -247,7 +247,7 @@ export const actionableAdvices: ActionableAdvice[] = [
     },
     {
         id: 'ACT_05',
-        title: "Adapter le logement de Francine",
+        title: "Adapter le logement de votre proche",
         subtitle: "Aides techniques + subventions jusqu'à 5 000€",
         domain: 'F',
         priority: 'recommended',
@@ -320,7 +320,7 @@ export const actionableAdvices: ActionableAdvice[] = [
     },
     {
         id: 'ACT_07',
-        title: "Obtenir l'aide à domicile pour Francine",
+        title: "Obtenir l'aide à domicile pour votre proche",
         subtitle: "Aide ménagère, repas, toilette — financé par l'APA",
         domain: 'F',
         priority: 'recommended',
@@ -379,7 +379,7 @@ export const actionableAdvices: ActionableAdvice[] = [
             {
                 order: 3,
                 text: 'Envisager la personne de confiance',
-                detail: "Devenez officiellement « personne de confiance » de Francine auprès de l'hôpital. Formulaire simple disponible à l'accueil de tout établissement de santé.",
+                detail: "Devenez officiellement « personne de confiance » de votre proche auprès de l'hôpital. Formulaire simple disponible à l'accueil de tout établissement de santé.",
             },
         ],
         contacts: [

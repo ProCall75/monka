@@ -31,40 +31,41 @@ interface OverviewStep {
 const OVERVIEW_STEPS: OverviewStep[] = [
     {
         tab: "home",
-        title: "Votre espace Monka",
+        title: "Bienvenue chez vous",
         description:
-            "Tout est ici : votre progression, les thématiques d'accompagnement de Francine, et des actions concrètes.",
+            "C'est votre tableau de bord. Vous y retrouverez votre avancement, les thèmes qui comptent pour vous, et des actions concrètes à faire à votre rythme.",
         label: "Accueil",
         accent: "#2C8C99",
     },
     {
         tab: "monsuivi",
-        title: "Votre plan d'action",
+        title: "Votre fil conducteur",
         description:
-            "Actions classées par priorité et agenda partagé avec votre cercle d'aidants.",
+            "Ici, tout est organisé pour vous : les prochaines étapes à suivre, classées par urgence, et un agenda partagé avec vos proches pour mieux se coordonner.",
         label: "Mon suivi",
         accent: "#059669",
     },
     {
         tab: "chat",
-        title: "Votre IDEC",
+        title: "Votre IDEC, toujours là",
         description:
-            "Un·e infirmier·e coordinateur·ice pour répondre à vos questions.",
+            "Besoin d'un conseil, d'une orientation, d'un coup de pouce ? Votre infirmier·e coordinateur·ice est disponible ici pour vous répondre et vous guider.",
         label: "Chat",
         accent: "#7C3AED",
     },
     {
         tab: "community",
-        title: "Vos professionnels",
+        title: "Les pros autour de vous",
         description:
-            "Les pros de votre territoire : répit, social, accueil de jour.",
+            "Assistantes sociales, accueil de jour, services de répit… Retrouvez tous les professionnels de votre territoire, avec leurs coordonnées et leur localisation.",
         label: "Annuaire",
         accent: "#EA580C",
     },
     {
         tab: "resources",
-        title: "Vos ressources",
-        description: "Articles et guides adaptés à votre situation.",
+        title: "Votre bibliothèque d'aide",
+        description:
+            "Des articles, des guides pratiques et des fiches réflexes pour mieux comprendre votre situation, les aides disponibles et vos droits. Tout est pensé pour vous.",
         label: "Ressources",
         accent: "#2563EB",
     },
@@ -86,54 +87,54 @@ interface GuideStep {
 const GUIDE_STEPS: GuideStep[] = [
     {
         id: "tap-theme",
-        title: "Explorons ensemble",
+        title: "On y va ensemble",
         description:
-            "Appuyez sur la première thématique pour découvrir ce que Monka a préparé pour Francine.",
+            "Appuyez sur la première thématique pour voir comment Monka organise votre accompagnement. C'est concret, promis.",
         accent: "#2C8C99",
         pulseSelector: '[data-tour="dashboard-hero-first"] > *:first-child',
         completionMarker: '[data-tour="theme-programs"]',
     },
     {
         id: "tap-program",
-        title: "Les programmes d'action",
+        title: "Des programmes faits pour vous",
         description:
-            "Chaque thème contient des programmes concrets. Appuyez sur le premier pour aller plus loin.",
+            "Chaque thème contient des programmes d'action concrets — pas de théorie, que du pratique. Appuyez sur le premier pour voir.",
         accent: "#2C8C99",
         pulseSelector: '[data-tour="theme-programs"] > *:first-child',
         completionMarker: '[data-tour="program-recos"]',
     },
     {
         id: "tap-reco",
-        title: "Les recommandations",
+        title: "Vos recommandations",
         description:
-            "Voici les actions recommandées pour cette situation. Appuyez sur la première.",
+            "Voici les actions que Monka vous suggère pour cette situation. Chacune est expliquée pas à pas. Appuyez sur la première.",
         accent: "#2C8C99",
         pulseSelector: '[data-tour="program-recos"] > *:first-child',
         completionMarker: '[data-tour="reco-tasks"]',
     },
     {
         id: "open-guide",
-        title: "Votre mode d'emploi",
+        title: "Tout est expliqué",
         description:
-            "Vous voyez le bouton « Voir le guide » ? Appuyez dessus. On vous a tout préparé, étape par étape.",
+            "Vous voyez « Voir le guide » ? Appuyez dessus. On vous a préparé chaque étape en détail — vous n'avez plus qu'à suivre.",
         accent: "#1A6B5A",
         pulseSelector: '[data-tour="guide-button"]',
         completionMarker: "__GUIDE_EXPANDED__",
     },
     {
         id: "reassure-check",
-        title: "Tout est détaillé pour vous",
+        title: "Votre premier pas",
         description:
-            "Chaque action vient avec son guide pas-à-pas. Pas besoin de chercher, on a mâché le travail. Maintenant, cochez la tâche pour valider votre premier pas.",
+            "Chaque action vient avec son mode d'emploi. Pas besoin de chercher, on a tout préparé. Cochez cette tâche pour valider votre premier pas !",
         accent: "#059669",
         pulseSelector: '[data-tour="reco-tasks"] > *:first-child > button:first-child',
         completionMarker: "__TASK_TOGGLED__",
     },
     {
         id: "tap-location",
-        title: "Localisez vos interlocuteurs",
+        title: "Trouvez de l'aide près de chez vous",
         description:
-            "Vous voyez le bouton 📍 ? Appuyez dessus pour repérer où se trouve l'assistante sociale sur la carte.",
+            "Appuyez sur le bouton de localisation pour voir où se trouve le professionnel sur la carte. Pratique pour prendre rendez-vous !",
         accent: "#EA580C",
         pulseSelector: '[data-tour="contact-location"]',
         completionMarker: "__TAB_COMMUNITY__",
@@ -391,18 +392,18 @@ export const ProductTour = ({ onComplete, switchTab }: ProductTourProps) => {
                                 className="text-[12.5px] text-[#5A5A6E] leading-relaxed mb-4"
                                 style={{ fontFamily: "'Outfit', sans-serif" }}
                             >
-                                Vous venez de compléter votre première action. Monka est là pour vous guider, un pas après l'autre.
+                                Maintenant que vous connaissez Monka, répondez à quelques questions pour adapter l'app à votre situation.
                             </p>
                             <button
                                 onClick={finish}
                                 className="w-full py-3 rounded-[14px] text-[13px] font-semibold text-white"
                                 style={{
                                     fontFamily: "'Outfit', sans-serif",
-                                    background: "linear-gradient(135deg, #059669, #047857)",
-                                    boxShadow: "0 4px 16px rgba(5,150,105,0.3)",
+                                    background: "linear-gradient(135deg, #2C8C99, #1A6B75)",
+                                    boxShadow: "0 4px 16px rgba(44,140,153,0.3)",
                                 }}
                             >
-                                Continuer l'exploration
+                                Personnaliser mon expérience
                             </button>
                         </div>
                     </CardShell>

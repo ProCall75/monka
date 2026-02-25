@@ -40,6 +40,15 @@ import type { Criticality } from '../data/kernel-types';
 import { BottomNavDark, BottomNavGlass } from '../components/nav/BottomNav';
 import { BottomNavPill } from '../components/nav/BottomNavPill';
 
+// ── Questionnaire Flow ──
+import { QuestionBubble } from '../components/atoms/QuestionBubble';
+import { AnswerBubble } from '../components/atoms/AnswerBubble';
+import { ChatQuestionCard } from '../components/molecules/ChatQuestionCard';
+import { VulnerabilityIntroCard } from '../components/molecules/VulnerabilityIntroCard';
+import { VulnerabilityRecapCard } from '../components/molecules/VulnerabilityRecapCard';
+import { SuiviPromptCard } from '../components/molecules/SuiviPromptCard';
+import { MOCK_VULNERABILITIES, MOCK_RECAP_DATA } from '../data/questionnaire-mock-data';
+
 /* ═══════════════════════════════════════════
    STORYBOOK LAYOUT COMPONENTS
 ═══════════════════════════════════════════ */
@@ -107,6 +116,18 @@ const COMPONENT_GROUPS = [
             { id: 'bottom-nav-dark', label: 'BottomNavDark' },
             { id: 'bottom-nav-glass', label: 'BottomNavGlass' },
             { id: 'bottom-nav-pill', label: 'BottomNavPill' },
+        ],
+    },
+    {
+        id: 'questionnaire-flow',
+        label: '💬 Questionnaire (Flow)',
+        items: [
+            { id: 'question-bubble', label: 'QuestionBubble' },
+            { id: 'answer-bubble', label: 'AnswerBubble' },
+            { id: 'chat-question', label: 'ChatQuestionCard' },
+            { id: 'vuln-intro', label: 'VulnerabilityIntroCard' },
+            { id: 'vuln-recap', label: 'VulnerabilityRecapCard' },
+            { id: 'suivi-prompt', label: 'SuiviPromptCard' },
         ],
     },
 ];
@@ -216,6 +237,10 @@ export default function StorybookPage() {
     const [themeSize, setThemeSize] = useState<'sm' | 'md' | 'lg'>('md');
     const [selectedDomain, setSelectedDomain] = useState<VulnerabilityDomain>('R');
     const [themeShowLabel, setThemeShowLabel] = useState(true);
+
+    // ── Questionnaire states ──
+    const [qDomain, setQDomain] = useState<VulnerabilityDomain>('R');
+    const [qBubbleAnimated, setQBubbleAnimated] = useState(true);
 
     // ── Kernel Architecture states ──
     const [kDomain, setKDomain] = useState<VulnerabilityDomain>('R');
@@ -1113,10 +1138,159 @@ export default function StorybookPage() {
                         </div>
                     </ComponentDoc>
 
+                    {/* ═══════ QUESTIONNAIRE FLOW ═══════ */}
+
+                    {/* QuestionBubble */}
+                    <ComponentDoc
+                        id="question-bubble"
+                        name="QuestionBubble"
+                        description="Bulle de question façon chat — côté gauche avec avatar ThemeButton, indicateur de saisie (typing dots), et tooltip 'Pourquoi cette question' optionnel. Utilise les 5 couleurs de domaine."
+                        props={[
+                            { name: 'text', type: 'string', description: 'Texte de la question' },
+                            { name: 'domain', type: 'VulnerabilityDomain', description: 'Couleur de l\'avatar' },
+                            { name: 'sensClinique', type: 'string?', description: 'Tooltip justification clinique' },
+                            { name: 'animDelay', type: 'number', default: '0', description: 'Délai avant apparition (ms)' },
+                            { name: 'animated', type: 'boolean', default: 'true', description: 'Activer les animations' },
+                        ]}
+                    >
+                        <div className="space-y-4">
+                            <ControlRow label="Domaine">
+                                {(['R', 'A', 'S', 'F', 'M'] as VulnerabilityDomain[]).map(d => (
+                                    <ControlButton key={d} active={qDomain === d} onClick={() => setQDomain(d)}>{d}</ControlButton>
+                                ))}
+                            </ControlRow>
+                            <ControlRow label="Animation">
+                                <ControlButton active={qBubbleAnimated} onClick={() => setQBubbleAnimated(true)}>On</ControlButton>
+                                <ControlButton active={!qBubbleAnimated} onClick={() => setQBubbleAnimated(false)}>Off</ControlButton>
+                            </ControlRow>
+                            <div className="bg-[#FAFAF8] rounded-[20px] p-6" key={`${qDomain}-${qBubbleAnimated}`}>
+                                <QuestionBubble
+                                    text="Avez-vous quelqu'un à qui parler en cas de difficulté ?"
+                                    domain={qDomain}
+                                    sensClinique="L'isolement social est le premier facteur de risque d'épuisement chez l'aidant."
+                                    animated={qBubbleAnimated}
+                                />
+                            </div>
+                        </div>
+                    </ComponentDoc>
+
+                    {/* AnswerBubble */}
+                    <ComponentDoc
+                        id="answer-bubble"
+                        name="AnswerBubble"
+                        description="Bulle de réponse côté droit — fond sombre, texte blanc, slide-in depuis la droite. Checkmark optionnel quand confirmée."
+                        props={[
+                            { name: 'text', type: 'string', description: 'Texte de la réponse' },
+                            { name: 'isConfirmed', type: 'boolean', default: 'false', description: 'Affiche le check' },
+                            { name: 'animated', type: 'boolean', default: 'true', description: 'Activer les animations' },
+                        ]}
+                    >
+                        <div className="bg-[#FAFAF8] rounded-[20px] p-6 space-y-3">
+                            <AnswerBubble text="Oui, plusieurs personnes" isConfirmed animated={false} />
+                            <AnswerBubble text="Rarement" animated={false} />
+                            <AnswerBubble text="Non, je n'ai pas le temps" isConfirmed animated={false} />
+                        </div>
+                    </ComponentDoc>
+
+                    {/* ChatQuestionCard */}
+                    <ComponentDoc
+                        id="chat-question"
+                        name="ChatQuestionCard"
+                        description="Carte conversationnelle complète = QuestionBubble + MOptionPill. Après sélection, se replie en AnswerBubble. C'est l'unité interactive du questionnaire."
+                        props={[
+                            { name: 'question', type: 'MockQuestion', description: 'Question avec ID, texte, options' },
+                            { name: 'domain', type: 'VulnerabilityDomain', description: 'Couleur du domaine' },
+                            { name: 'onAnswer', type: '(value: string) => void', description: 'Callback après sélection' },
+                        ]}
+                    >
+                        <div className="bg-[#FAFAF8] rounded-[20px] p-6 max-w-md mx-auto" key={`chat-${qDomain}`}>
+                            <ChatQuestionCard
+                                question={MOCK_VULNERABILITIES.find(v => v.domain === qDomain)!.questions[0]}
+                                domain={qDomain}
+                                onAnswer={(val) => console.log('Réponse:', val)}
+                            />
+                        </div>
+                    </ComponentDoc>
+
+                    {/* VulnerabilityIntroCard */}
+                    <ComponentDoc
+                        id="vuln-intro"
+                        name="VulnerabilityIntroCard"
+                        description="Écran d'introduction avant chaque bloc de vulnérabilité. ThemeButton en bounce, compteur de questions, durée estimée, progress dots, et CTA."
+                        props={[
+                            { name: 'domain', type: 'VulnerabilityDomain', description: 'V1-V5' },
+                            { name: 'title', type: 'string', description: 'Nom du thème' },
+                            { name: 'description', type: 'string', description: 'Texte explicatif' },
+                            { name: 'questionCount', type: 'number', description: 'Nb questions dans le bloc' },
+                            { name: 'estimatedMinutes', type: 'number', description: 'Durée estimée' },
+                            { name: 'currentStep', type: 'number', description: 'Step actuel (0-4)' },
+                        ]}
+                    >
+                        <div className="max-w-sm mx-auto" key={`intro-${qDomain}`}>
+                            {(() => {
+                                const v = MOCK_VULNERABILITIES.find(v => v.domain === qDomain)!;
+                                return (
+                                    <VulnerabilityIntroCard
+                                        domain={v.domain}
+                                        title={v.name}
+                                        description={v.description}
+                                        questionCount={v.questionCount}
+                                        estimatedMinutes={v.estimatedMinutes}
+                                        currentStep={MOCK_VULNERABILITIES.indexOf(v)}
+                                        onStart={() => console.log('Start', v.id)}
+                                    />
+                                );
+                            })()}
+                        </div>
+                    </ComponentDoc>
+
+                    {/* VulnerabilityRecapCard */}
+                    <ComponentDoc
+                        id="vuln-recap"
+                        name="VulnerabilityRecapCard"
+                        description="Récap après complétion d'un bloc V — ScoreRing animé de 0→score, MPs débloqués en stagger, CTA vers le thème suivant."
+                        props={[
+                            { name: 'domain', type: 'VulnerabilityDomain', description: 'V complétée' },
+                            { name: 'score', type: 'number', description: 'Score 0-100' },
+                            { name: 'activatedMPs', type: 'ActivatedMPItem[]', description: 'MPs activés avec level et taskCount' },
+                        ]}
+                    >
+                        <div className="max-w-sm mx-auto" key={`recap-${qDomain}`}>
+                            {(() => {
+                                const v = MOCK_VULNERABILITIES.find(v => v.domain === qDomain)!;
+                                const recap = MOCK_RECAP_DATA[v.id];
+                                return (
+                                    <VulnerabilityRecapCard
+                                        domain={v.domain}
+                                        title={v.name}
+                                        score={recap.score}
+                                        activatedMPs={recap.activatedMPs}
+                                        onContinue={() => console.log('Continue')}
+                                    />
+                                );
+                            })()}
+                        </div>
+                    </ComponentDoc>
+
+                    {/* SuiviPromptCard */}
+                    <ComponentDoc
+                        id="suivi-prompt"
+                        name="SuiviPromptCard"
+                        description="Carte de suivi 1 mois après — flux hiérarchique en 3 niveaux : racine → vulnérabilité → micro-parcours. Navigation breadcrumb, transitions slide, retour possible."
+                        props={[
+                            { name: 'questions', type: 'MockSuiviQuestion[]', description: 'Questions de suivi (mock par défaut)' },
+                            { name: 'onComplete', type: '(answers) => void', description: 'Callback avec toutes les réponses' },
+                        ]}
+                    >
+                        <div className="max-w-sm mx-auto">
+                            <SuiviPromptCard onComplete={(a) => console.log('Suivi:', a)} />
+                        </div>
+                    </ComponentDoc>
+
                     {/* ── End ── */}
                     <div className="text-center py-16">
                         <p className="text-sm text-[#8C8C8C]">Fin du storybook</p>
-                        <p className="text-[10px] text-[#D4D4D4] mt-2 uppercase tracking-[0.15em]">Monka Design System · v2.0 · 28 composants</p>
+                        <p className="text-[10px] text-[#D4D4D4] mt-2 uppercase tracking-[0.15em]">Monka Design System · v2.0 · 34 composants</p>
                     </div>
                 </div>
             </main >

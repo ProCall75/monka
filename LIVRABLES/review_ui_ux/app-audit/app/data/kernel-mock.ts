@@ -269,7 +269,7 @@ const parcoursSoins: Vulnerability = {
     domain: 'M',
     title: 'Parcours médical',
     userTitle: 'Parcours de soins',
-    description: "Organiser les soins de Francine, sans vous y perdre.",
+    description: "Organiser les soins de votre proche, sans vous y perdre.",
     score: 85,
     microParcours: [
         {
@@ -340,21 +340,21 @@ const vosDemarches: Vulnerability = {
 };
 
 // ═══════════════════════════════════════════════════════
-// THÈME : Francine (domain F)
+// THÈME : Votre proche (domain F)
 // Kernel V4 — Fragilité du proche (F1–F6)
 // ═══════════════════════════════════════════════════════
 const votreProche: Vulnerability = {
     id: 'V4',
     domain: 'F',
     title: 'Fragilité du proche',
-    userTitle: 'Francine',
-    description: "Accompagner Francine en toute sécurité au quotidien.",
+    userTitle: 'Votre proche',
+    description: "Accompagner votre proche en toute sécurité au quotidien.",
     score: 70,
     microParcours: [
         {
             id: 'F1',
             title: "Sécuriser le quotidien",
-            description: "Des actions concrètes pour adapter l'environnement de Francine.",
+            description: "Des actions concrètes pour adapter l'environnement de votre proche.",
             asrObjective: "Identifier et réduire les risques au domicile du proche",
             asrProgress: 50,
             criticality: 'ccc',
@@ -369,7 +369,7 @@ const votreProche: Vulnerability = {
                             mt('MT_F1_03', "Contacter un ergothérapeute pour un bilan à domicile", 'SEC', true, false),
                         ]),
                         reco('RECO_F1_02', "Organiser l'aide professionnelle", 'standard', [
-                            mt('MT_F1_04', "Évaluer les besoins en aide à domicile de Francine", 'STRUC', true, true),
+                            mt('MT_F1_04', "Évaluer les besoins en aide à domicile de votre proche", 'STRUC', true, true),
                             mt('MT_F1_05', "Se renseigner sur les services d'aide à domicile du territoire", 'INFO', false, false),
                         ]),
                     ],
@@ -379,7 +379,7 @@ const votreProche: Vulnerability = {
         {
             id: 'F2',
             title: "Comprendre les changements",
-            description: "Mieux comprendre l'évolution de la situation de Francine.",
+            description: "Mieux comprendre l'évolution de la situation de votre proche.",
             asrObjective: "Avoir un suivi régulier des capacités et besoins du proche",
             asrProgress: 25,
             criticality: 'standard',
@@ -400,7 +400,7 @@ const votreProche: Vulnerability = {
         {
             id: 'F3',
             title: "Préserver les liens sociaux du proche",
-            description: "Aider Francine à garder des interactions sociales.",
+            description: "Aider votre proche à garder des interactions sociales.",
             asrObjective: "Maintenir au moins une activité sociale régulière pour le proche",
             asrProgress: 100,
             criticality: 'prevention',
@@ -409,7 +409,7 @@ const votreProche: Vulnerability = {
                     id: 'CAT_F3_PREV',
                     name: 'Vie sociale du proche',
                     recommendations: [
-                        reco('RECO_F3_01', "Garder des activités sociales pour Francine", 'prevention', [
+                        reco('RECO_F3_01', "Garder des activités sociales pour votre proche", 'prevention', [
                             mt('MT_F3_01', "Identifier les activités adaptées dans votre quartier", 'INFO', false, true),
                             mt('MT_F3_02', "Organiser des visites régulières de l'entourage", 'ORGA', false, true),
                         ]),
