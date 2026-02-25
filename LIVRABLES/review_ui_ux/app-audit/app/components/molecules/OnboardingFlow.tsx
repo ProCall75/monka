@@ -692,8 +692,7 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
                                 <img
                                     src="/intro_personalize.png"
                                     alt="Personnalisation"
-                                    className="w-full h-full object-contain"
-                                    style={{ filter: 'drop-shadow(0 4px 12px rgba(44,140,153,0.08))' }}
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
 
@@ -709,7 +708,7 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
 
                             {/* Benefit */}
                             <div
-                                className="flex items-start gap-2.5 text-left px-4 py-3 rounded-[14px] mb-4 max-w-[300px]"
+                                className="flex items-start gap-2.5 text-left px-4 py-3 rounded-[14px] mb-4 w-full"
                                 style={{
                                     backgroundColor: '#ECFDF5',
                                     animation: 'ob-fadeIn 0.4s ease-out 500ms both',
