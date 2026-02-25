@@ -1271,7 +1271,7 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
                                     </div>
                                     <div className="text-left">
                                         <p className="text-[14px] font-semibold text-[#1A1A2E]">Premier bilan gratuit</p>
-                                        <p className="text-[11px] text-[#8E8E93]">30 min · Visio ou téléphone</p>
+                                        <p className="text-[11px] text-[#8E8E93]">30 min · À distance, gratuit</p>
                                     </div>
                                 </div>
 
