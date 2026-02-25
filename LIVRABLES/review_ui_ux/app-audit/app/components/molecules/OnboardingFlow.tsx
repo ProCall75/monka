@@ -563,10 +563,10 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
                                 <h1 className="text-[24px] font-bold text-[#1A1A2E] mb-1 leading-tight">{slide.title}</h1>
                                 <p className="text-[14px] font-semibold text-[#2C8C99] mb-5">{slide.subtitle}</p>
                                 {slide.description && (
-                                    <p className="text-[15px] text-[#4A4A5A] leading-relaxed max-w-[300px] mb-4">{slide.description}</p>
+                                    <p className="text-[15px] text-[#4A4A5A] leading-relaxed max-w-[280px] mb-4">{slide.description}</p>
                                 )}
                                 {slide.benefits && (
-                                    <div className="space-y-3 mb-4 w-full max-w-[300px]">
+                                    <div className="space-y-3 mb-4 w-full max-w-[280px]">
                                         {slide.benefits.map((b, i) => (
                                             <div key={i} className="flex items-start gap-3 bg-white rounded-[16px] p-4 text-left" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
                                                 <div className="mt-0.5 flex-shrink-0">{b.icon}</div>
@@ -686,7 +686,7 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
                         <div className="flex flex-col items-center text-center pt-4">
                             {/* Illustration */}
                             <div
-                                className="w-[200px] h-[200px] mb-5 flex items-center justify-center rounded-[28px] overflow-hidden bg-white"
+                                className="max-w-[200px] w-full aspect-square mb-5 flex items-center justify-center rounded-[28px] overflow-hidden bg-white"
                                 style={{ animation: 'ob-bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', boxShadow: '0 8px 32px rgba(44,140,153,0.10)' }}
                             >
                                 <img
@@ -903,7 +903,7 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
 
                                 {/* Illustration */}
                                 <div
-                                    className="w-[200px] h-[200px] mb-4 flex items-center justify-center rounded-[28px] overflow-hidden bg-white"
+                                    className="max-w-[200px] w-full aspect-square mb-4 flex items-center justify-center rounded-[28px] overflow-hidden bg-white"
                                     style={{ animation: 'ob-bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', boxShadow: '0 8px 32px rgba(44,140,153,0.10)' }}
                                 >
                                     <img
@@ -933,7 +933,7 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
 
                                 {/* Description */}
                                 <p
-                                    className="text-[14px] text-[#4A4A5A] leading-relaxed max-w-[300px] mb-4"
+                                    className="text-[14px] text-[#4A4A5A] leading-relaxed max-w-[280px] mb-4"
                                     style={{ animation: 'ob-fadeIn 0.4s ease-out 400ms both' }}
                                 >
                                     {introData.description}
@@ -941,7 +941,7 @@ export const OnboardingFlow = ({ onComplete, mode = 'welcome' }: FlowProps) => {
 
                                 {/* Benefit callout */}
                                 <div
-                                    className="flex items-start gap-2.5 text-left px-4 py-3 rounded-[14px] mb-4 mx-2"
+                                    className="flex items-start gap-2.5 text-left px-4 py-3 rounded-[14px] mb-4 w-full"
                                     style={{
                                         backgroundColor: '#ECFDF5',
                                         animation: 'ob-fadeIn 0.4s ease-out 550ms both',
