@@ -65,8 +65,14 @@ export function ProfileRecap({ data, answers }: ProfileRecapProps) {
 
             {/* Natural text summary */}
             <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100">
-                <p className="text-xs text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: profileText.replace(/\*\*(.*?)\*\*/g, '<strong class="text-emerald-700">$1</strong>') }} />
+                <p className="text-xs text-gray-700 leading-relaxed">
+                    {profileText.split(/(\*\*.*?\*\*)/g).map((part, i) => {
+                        const bold = part.match(/^\*\*(.*?)\*\*$/)
+                        return bold
+                            ? <strong key={i} className="text-emerald-700">{bold[1]}</strong>
+                            : <span key={i}>{part}</span>
+                    })}
+                </p>
             </div>
 
             {/* Detail table */}

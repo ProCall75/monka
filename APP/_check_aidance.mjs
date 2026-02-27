@@ -1,9 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
+import { config } from 'dotenv';
+config({ path: '.env.local' });
 
 const sb = createClient(
-    'https://mbxeqrvofrmhqlwlefff.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ieGVxcnZvZnJtaHFsd2xlZmZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NDAwMDUsImV4cCI6MjA4NjIxNjAwNX0.GhV05FiBjI66m6MPsx8HFEuId9POyZaYxDSSU68jCcI'
+    process.env.VITE_SUPABASE_URL,
+    process.env.VITE_SUPABASE_ANON_KEY
 );
+
 
 const { data, error } = await sb.from('questions').select('id, aidance, is_trigger, classification').order('id');
 if (error) { console.log('ERROR:', error); process.exit(1); }
