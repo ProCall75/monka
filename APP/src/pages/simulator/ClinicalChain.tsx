@@ -8,7 +8,7 @@ import type { MonkaData } from '../../clinical/hooks'
 interface ClinicalChainProps {
     rule: { id: string; mp_id: string; category_id: string; niveau: string; sens_clinique?: string | null; condition_logic: unknown }
     data: MonkaData
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     color: string
 }
 

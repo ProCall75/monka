@@ -113,7 +113,7 @@ interface CategoryGroupProps {
     rulesByNiveau: Map<NiveauGroup, MonkaData['activationRules']>
     triggeredSet: Set<string>
     data: MonkaData
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     mpMap: Record<string, { nom: string }>
 }
 

@@ -20,7 +20,7 @@ interface RuleExplainerProps {
     rule: MonkaData['activationRules'][0]
     data: MonkaData
     /** If provided, shows live answer status (simulator mode). Omit for data reference mode. */
-    answers?: Record<string, string>
+    answers?: Record<string, string | string[]>
     /** Whether this rule is currently triggered */
     isTriggered?: boolean
 }
@@ -102,8 +102,8 @@ export function RuleExplainerFR({ rule, data, answers, isTriggered }: RuleExplai
                             </div>
                         )}
                         <div className={`text-[11px] pl-3 border-l-2 rounded-r-lg py-1 pr-2 ${c.condMet ? 'border-green-400 bg-green-50/50'
-                                : c.answered ? 'border-orange-300 bg-orange-50/30'
-                                    : 'border-monka-primary/20 bg-white/30'
+                            : c.answered ? 'border-orange-300 bg-orange-50/30'
+                                : 'border-monka-primary/20 bg-white/30'
                             }`}>
                             <div className="flex items-start gap-1">
                                 {isCCC && <span className="text-amber-500 flex-shrink-0">Signal {i + 1} :</span>}
@@ -134,20 +134,18 @@ export function RuleExplainerFR({ rule, data, answers, isTriggered }: RuleExplai
                 <div className="mt-2.5">
                     <button
                         onClick={() => setShowSens(prev => !prev)}
-                        className={`flex items-center gap-1.5 text-[11px] font-semibold transition-all px-3 py-1.5 rounded-lg border ${
-                            showSens
+                        className={`flex items-center gap-1.5 text-[11px] font-semibold transition-all px-3 py-1.5 rounded-lg border ${showSens
                                 ? 'bg-indigo-50 text-indigo-700 border-indigo-200 shadow-sm'
                                 : 'bg-gray-50 text-gray-600 border-gray-200 border-dashed hover:bg-indigo-50/50 hover:text-indigo-600 hover:border-indigo-200'
-                        }`}
+                            }`}
                     >
                         <Brain className="w-3.5 h-3.5" />
                         🧠 Sens clinique
                         <span className="text-[9px] opacity-60">{showSens ? '▲' : '▼'}</span>
                     </button>
                     {showSens && (
-                        <div className={`mt-2 px-3.5 py-2.5 rounded-lg border-l-3 ${
-                            isTriggered ? 'bg-emerald-50 border-emerald-400' : 'bg-indigo-50/60 border-indigo-300'
-                        }`} style={{ borderLeftWidth: '3px' }}>
+                        <div className={`mt-2 px-3.5 py-2.5 rounded-lg border-l-3 ${isTriggered ? 'bg-emerald-50 border-emerald-400' : 'bg-indigo-50/60 border-indigo-300'
+                            }`} style={{ borderLeftWidth: '3px' }}>
                             <p className={`text-[11px] leading-relaxed ${isTriggered ? 'text-emerald-800' : 'text-indigo-900/80'}`}>
                                 {rule.sens_clinique}
                             </p>

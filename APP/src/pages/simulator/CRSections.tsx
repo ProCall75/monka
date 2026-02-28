@@ -24,7 +24,7 @@ export interface CRSectionProps {
     activatedCats: Map<string, { mpId: string; niveau: string }>
     mpMap: Record<string, { nom: string; objectif?: string | null; vulnerability_id?: string }>
     mpVulnMap: Record<string, string>
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
 }
 
 // ── 1. Synthèse Situationnelle ─────────────────────────
@@ -165,11 +165,10 @@ export function PlanActionSection({ data, activatedMPs, mpMap: _mpMap, mpVulnMap
                                 <span className="text-[9px] font-bold text-white px-1 py-0.5 rounded" style={{ backgroundColor: vColorMap[mt.vulnId as VulnerabilityId] || '#999' }}>{mt.vulnId}</span>
                             </td>
                             <td className="px-2 py-1.5">
-                                <span className={`text-[9px] font-bold px-1 py-0.5 rounded ${
-                                    mt.type === 'MED' ? 'bg-red-100 text-red-600'
-                                    : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600'
-                                    : 'bg-blue-100 text-blue-600'
-                                }`}>{mt.type}</span>
+                                <span className={`text-[9px] font-bold px-1 py-0.5 rounded ${mt.type === 'MED' ? 'bg-red-100 text-red-600'
+                                        : mt.type === 'SEC' ? 'bg-orange-100 text-orange-600'
+                                            : 'bg-blue-100 text-blue-600'
+                                    }`}>{mt.type}</span>
                             </td>
                             <td className="px-2 py-1.5 text-gray-700">{mt.libelle}</td>
                             <td className="px-2 py-1.5 text-gray-500">{mt.acteur ? formatActeur(mt.acteur.join(', ')) : '—'}</td>

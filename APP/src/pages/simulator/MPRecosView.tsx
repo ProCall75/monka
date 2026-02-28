@@ -15,7 +15,7 @@ const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 interface MPRecosProps {
     data: SimulatorTabProps['data']
     activeV: SimulatorTabProps['activeV']
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     mpMap: Record<string, { nom: string; vulnerability_id?: string }>
     mpVulnMap: Record<string, string>
     activatedMPs: string[]

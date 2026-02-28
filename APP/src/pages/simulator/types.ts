@@ -47,7 +47,7 @@ export interface SimulatorTabProps {
     /** Current vulnerability filter */
     activeV: VFilter
     /** User answers to questions */
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     /** Score by vulnerability */
     scoreByV: Record<string, VulnScore>
     /** Display score (filtered or total) */

@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting CTO — PRAGMA × Monka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #58BF94;
+            --primary-light: #7CD4AD;
+            --primary-dark: #3FA87A;
+            --accent: #86C0CF;
+            --accent-2: #CFFF92;
+            --bg: #0A1F16;
+            --bg-card: #112B1F;
+            --bg-card-hover: #1A3D2C;
+            --bg-elevated: #0E2519;
+            --text: #E8F0EC;
+            --text-muted: #9BB5A8;
+            --text-dim: #6B8578;
+            --border: #1E3D2D;
+            --success: #00DC82;
+            --warning: #F5A623;
+            --danger: #EF4444;
+            --critical: #D63031;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --slide-w: 1280px;
+            --slide-h: 720px;
+        }
+
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #1a1a2e;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 20px auto;
+            background: var(--bg);
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        .slide-body {
+            padding: 48px 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-footer {
+            padding: 12px 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .slide-footer .brand {
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        /* HERO */
+        .slide.hero-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .slide.hero-slide::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(88, 191, 148, 0.15) 0%, transparent 70%);
+            top: -150px;
+            right: -80px;
+            border-radius: 50%;
+        }
+
+        .slide.hero-slide::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(207, 255, 146, 0.1) 0%, transparent 70%);
+            bottom: -80px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(88, 191, 148, 0.15);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .hero-meta-item strong {
+            color: var(--text);
+        }
+
+        /* CARDS & GRIDS */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .card {
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .card .icon {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        /* STATS */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* PIPELINE */
+        .pipeline-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 20px;
+        }
+
+        .pipeline-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            text-align: center;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .pipeline-box.active {
+            border-color: var(--primary);
+            background: rgba(88, 191, 148, 0.08);
+        }
+
+        .pipeline-box h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .pipeline-box p {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        .pipeline-arrow {
+            font-size: 1.2rem;
+            color: var(--primary-light);
+            padding: 0 6px;
+        }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-light);
+            border-bottom: 2px solid var(--border);
+            background: rgba(88, 191, 148, 0.05);
+        }
+
+        .data-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .data-table td:first-child {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .badge.green {
+            background: rgba(0, 220, 130, 0.12);
+            color: var(--success);
+        }
+
+        .badge.yellow {
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--warning);
+        }
+
+        .badge.red {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+        }
+
+        .badge.blue {
+            background: rgba(134, 192, 207, 0.12);
+            color: var(--accent);
+        }
+
+        /* COMPARISON */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .compare-col {
+            padding: 24px;
+            border-radius: var(--radius);
+        }
+
+        .compare-col.old {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+        }
+
+        .compare-col.new {
+            background: rgba(0, 220, 130, 0.05);
+            border: 1px solid rgba(0, 220, 130, 0.15);
+        }
+
+        .compare-col h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .compare-col.old h3 {
+            color: var(--danger);
+        }
+
+        .compare-col.new h3 {
+            color: var(--success);
+        }
+
+        .compare-item {
+            padding: 8px 0;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .compare-item strong {
+            color: var(--text);
+        }
+
+        .compare-item:last-child {
+            border-bottom: none;
+        }
+
+        /* CODE BLOCK */
+        .code-block {
+            background: #0D1B14;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        .code-block .fn {
+            color: var(--primary-light);
+        }
+
+        .code-block .kw {
+            color: var(--accent);
+        }
+
+        .code-block .cm {
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .code-block .st {
+            color: var(--accent-2);
+        }
+
+        /* COLLAB TABLE */
+        .collab-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .collab-cell {
+            padding: 14px 18px;
+            background: var(--bg-card);
+            font-size: 0.8rem;
+        }
+
+        .collab-cell.header {
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.06);
+        }
+
+        .collab-cell .emoji {
+            margin-right: 6px;
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight-box {
+            padding: 18px 24px;
+            border-radius: var(--radius-sm);
+            background: rgba(88, 191, 148, 0.06);
+            border-left: 4px solid var(--primary);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: 16px;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-light);
+        }
+
+        .highlight-box.accent {
+            border-left-color: var(--accent);
+        }
+
+        /* CTA */
+        .cta-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 16px;
+        }
+
+        /* ACTION */
+        .action-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: rgba(134, 192, 207, 0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════ SLIDE 1 — HERO ════════════════════ -->
+    <div class="slide hero-slide">
+        <div class="hero-badge">🎯 Meeting CTO — 3 mars 2026</div>
+        <h1>Monka <span>Clinical Engine</span></h1>
+        <p class="hero-sub">Présentation du Kernel, architecture d'intégration MyMonka V2, et modèle de collaboration
+            PRAGMA × CTO</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">👤 <strong>Antonin Rimaud</strong></div>
+            <div class="hero-meta-item">👤 <strong>Marwane</strong></div>
+            <div class="hero-meta-item">🏢 <strong>PRAGMA Studio</strong></div>
+        </div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 2 — AGENDA ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📋 Agenda</div>
+            <h2>Ce qu'on va couvrir ensemble</h2>
+            <p class="section-desc">Répondant aux 2 objectifs du mail de Maël</p>
+            <div class="grid-3" style="gap: 14px;">
+                <div class="card">
+                    <div class="icon">🔬</div>
+                    <h4>1. Le Kernel (20 min)</h4>
+                    <p>Contexte, pipeline, concepts clés, code walkthrough, DB</p>
+                    <div class="action-label">→ On ouvre le code + la DB</div>
+                </div>
+                <div class="card">
+                    <div class="icon">🎯</div>
+                    <h4>2. Gap & QA (10 min)</h4>
+                    <p>Ce qui manque pour la prod, Greenfield vs Brownfield, nos checks qualité</p>
+                    <div class="action-label">→ Obj.1 : ready for production</div>
+                </div>
+                <div class="card">
+                    <div class="icon">🎨</div>
+                    <h4>3. Proto UI (10 min)</h4>
+                    <p>35 composants, design system, démo live Marwane</p>
+                    <div class="action-label">→ Démo Vercel</div>
+                </div>
+            </div>
+            <div class="grid-2" style="gap: 14px; flex: unset; margin-top: 14px;">
+                <div class="card">
+                    <div class="icon">🏗️</div>
+                    <h4>4. Architecture & Workflow (15 min)</h4>
+                    <p>Stack proposée, transférabilité, SOPs, estimations</p>
+                    <div class="action-label">→ Questions au CTO</div>
+                </div>
+                <div class="card">
+                    <div class="icon">🤝</div>
+                    <h4>5. Collaboration (5 min)</h4>
+                    <p>CTO cadre → PRAGMA implémente. Sprint pilote ?</p>
+                    <div class="action-label">→ Next steps</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>2 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 3 — CONTEXTE ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔍 Contexte</div>
+            <h2>Le Simulateur — ce que c'est vraiment</h2>
+            <p class="section-desc">Un outil de test visuel pour Benjamin, pas une application de production</p>
+            <div class="grid-2">
+                <div class="card" style="border-left: 3px solid var(--warning);">
+                    <h4>⚠️ Ce que c'est</h4>
+                    <p style="margin-bottom: 8px;">Un <strong style="color: var(--text);">simulateur visuel
+                            rapide</strong> pour que Benjamin et l'équipe puissent voir le moteur clinique fonctionner.
+                    </p>
+                    <p>Construit en mode prototype : pas de RLS, pas de Docker, clés en dur — le but était la <strong
+                            style="color: var(--text);">rapidité</strong> pour prouver la pertinence clinique.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--success);">
+                    <h4>✅ Ce qui a de la valeur</h4>
+                    <p style="margin-bottom: 8px;">La <strong style="color: var(--text);">logique de
+                            l'algorithme</strong> dans <code>clinical/engine/</code> — du TypeScript pur, zéro
+                        dépendance React.</p>
+                    <p>C'est cette logique qui sera <strong style="color: var(--text);">extraite et intégrée</strong>
+                        dans MyMonka V2, selon l'architecture définie par le CTO.</p>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <strong>En résumé :</strong> L'app ne va pas en production — la logique du moteur, si. Le passage en
+                prod = votre architecture + notre vélocité.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>3 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 4 — CHIFFRES ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📊 Track Record</div>
+            <h2>Le Kernel en chiffres — 4 semaines de travail</h2>
+            <p class="section-desc">Un moteur clinique complet, 100% déterministe, documenté et certifié</p>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="number">5</div>
+                    <div class="label">Vulnérabilités</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">24</div>
+                    <div class="label">Micro-Parcours</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">235</div>
+                    <div class="label">Règles d'activation</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">198</div>
+                    <div class="label">Recommandations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">369</div>
+                    <div class="label">Micro-Tâches</div>
+                </div>
+            </div>
+            <div class="grid-3" style="gap: 12px; flex: unset;">
+                <div class="card">
+                    <h4>🔒 100% déterministe</h4>
+                    <p>Pas d'IA dans la décision clinique. Chaque sortie traçable à une règle.</p>
+                </div>
+                <div class="card">
+                    <h4>✅ 195 questions structurées</h4>
+                    <p>130 socle + 20 activables + 15 triggers + 30 suivi. Données fournies par Monka, liées et
+                        structurées par PRAGMA.</p>
+                </div>
+                <div class="card">
+                    <h4>🤝 Connaissance produit profonde</h4>
+                    <p>Notre maîtrise du métier clinique facilite le travail du CTO — on traduit le besoin, il définit
+                        l'architecture.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>4 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 5 — PIPELINE ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">⚙️ Algorithme</div>
+            <h2>Le pipeline du moteur clinique</h2>
+            <p class="section-desc">De la réponse au questionnaire jusqu'aux micro-tâches personnalisées</p>
+            <div class="pipeline-flow">
+                <div class="pipeline-box active">
+                    <h4>📝 Questionnaire</h4>
+                    <p>130 socle + 20 activables<br>15 triggers</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box">
+                    <h4>🎯 Triggers</h4>
+                    <p>Adapte selon<br>profil aidant</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box active">
+                    <h4>⚡ Rules Engine</h4>
+                    <p>235 règles<br>9 opérateurs</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box">
+                    <h4>📌 Catégories</h4>
+                    <p>73 axes<br>3 niveaux</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box active">
+                    <h4>💡 Recos + MT</h4>
+                    <p>198 recos<br>369 tâches</p>
+                </div>
+            </div>
+            <div class="code-block"><span class="cm">// Point d'entrée principal — clinicalEngine.ts</span>
+                <span class="kw">function</span> <span class="fn">runEngine</span>(data: MonkaData, answers: Answers):
+                EngineOutput {
+                <span class="kw">const</span> activated = <span class="fn">getActivatedCategories</span>(data, answers)
+                <span class="cm">// 235 rules → catégories</span>
+                <span class="kw">const</span> scores = VULN_IDS.map(v => <span class="fn">computeScore</span>(data,
+                answers, v)) <span class="cm">// Score par V</span>
+                <span class="kw">return</span> { activatedCategories, activatedMPIds, scores, totalScore }
+                }
+            </div>
+            <div class="action-label" style="margin-top: 14px;">💻 → On ouvre clinicalEngine.ts et on montre
+                evaluateCondition() en live</div>
+            <div class="highlight-box" style="font-size: 0.75rem; margin-top: 8px;">
+                <strong>Le Kernel est framework-agnostic</strong> — il ne connaît ni React ni Supabase. Monolithe
+                modulaire par design. Si demain on passe sur Flutter ou Vue, le Kernel reste identique.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>5 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 6 — CONCEPTS CLÉS ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🧠 Concepts Clés</div>
+            <h2>Les règles fondamentales du Kernel</h2>
+            <p class="section-desc">Ce que le moteur fait et ne fait pas — les concepts qu'on maîtrise</p>
+            <div class="grid-2" style="gap: 16px;">
+                <div class="card" style="border-left: 3px solid #EF4444;">
+                    <h4>🔴 CCC — Condition Critique Composite</h4>
+                    <p>Combinaison de signaux faibles de vulnérabilités différentes → alerte de niveau supérieur.
+                        <strong style="color: var(--text);">Différenciateur absolu de Monka.</strong>
+                    </p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--success);">
+                    <h4>🏆 ASR — Action Seuil de Réussite</h4>
+                    <p>Objectif mesurable par MP. Validée quand <strong style="color: var(--text);">toutes</strong> les
+                        MT contributives (📍 STRUC/SEC/MED) sont complétées.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--warning);">
+                    <h4>K3 — Englobement</h4>
+                    <p>Si une catégorie est activée à plusieurs niveaux → seul le <strong
+                            style="color: var(--text);">niveau le plus haut</strong> s'affiche. 🔴 absorbe 🟠 absorbe
+                        🟢.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--accent);">
+                    <h4>K13 — Scoring indépendant</h4>
+                    <p>Le score mesure l'intensité. Il <strong style="color: var(--text);">ne déclenche jamais</strong>
+                        un MP. C'est un indicateur, pas un prescripteur.</p>
+                </div>
+            </div>
+            <div class="highlight-box accent">
+                <strong>Double wording (K6) :</strong> Chaque reco et MT existe en 2 versions — Aidant (bienveillant) et
+                IDEC (directif professionnel). Les mêmes actions, un langage adapté.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>6 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 7 — MODÈLE DE DONNÉES ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🗄️ Base de Données</div>
+            <h2>15 tables — le modèle de données complet</h2>
+            <p class="section-desc">Chaque entité typée en TypeScript, miroir exact du schéma Supabase</p>
+            <table class="data-table" style="flex: 1;">
+                <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Volume</th>
+                        <th>Rôle</th>
+                        <th>HDS ?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>vulnerabilities</td>
+                        <td>5</td>
+                        <td>Les 5 domaines de risque (V1-V5)</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>questions</td>
+                        <td>165</td>
+                        <td>Questionnaire (130 socle + 20 activables + 15 triggers)</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>suivi_questions</td>
+                        <td>30</td>
+                        <td>Questions de suivi / réactivation par MP</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>micro_parcours</td>
+                        <td>24</td>
+                        <td>Sous-thèmes cliniques avec ASR</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>categories</td>
+                        <td>73</td>
+                        <td>Axes d'action par MP</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>activation_rules</td>
+                        <td>235</td>
+                        <td>Règles SI/ALORS (logique AND, 9 opérateurs)</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>recommendations</td>
+                        <td>198</td>
+                        <td>Conseils double wording (aidant + IDEC)</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>micro_taches</td>
+                        <td>369</td>
+                        <td>Actions avec acteur, domaine, type</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>scoring_questions</td>
+                        <td>321</td>
+                        <td>Coefficients de scoring par V</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td>scoring_thresholds</td>
+                        <td>20</td>
+                        <td>Seuils faible/modéré/élevé/critique</td>
+                        <td><span class="badge blue">Non</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--warning);">user_answers *</td>
+                        <td>—</td>
+                        <td>Réponses de l'aidant</td>
+                        <td><span class="badge red">OUI</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--warning);">user_progress *</td>
+                        <td>—</td>
+                        <td>MT complétées, progression ASR</td>
+                        <td><span class="badge red">OUI</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-box" style="margin-top: 10px; font-size: 0.78rem;">
+                <strong>* Tables à créer pour MyMonka V2.</strong> La logique clinique (235 règles, 198 recos...) = pas
+                de données patient → flexible. Les données utilisateur → HDS obligatoire.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>7 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 8 — QA + APPROCHE PROACTIVE ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">✅ Qualité & Approche</div>
+            <h2>Vérification intégrée + approche proactive</h2>
+            <p class="section-desc">On ne se contente pas d'exécuter — on anticipe et on facilite</p>
+            <div class="grid-2" style="gap: 20px;">
+                <div class="card">
+                    <h4>🔍 Integrity Checks (6 vérifications auto)</h4>
+                    <p style="margin-bottom: 12px;">À chaque modification du Kernel, rapport structuré pass/warn/fail :
+                    </p>
+                    <table class="data-table">
+                        <tr>
+                            <td>C1 — Intégrité FK</td>
+                            <td><span class="badge green">PASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>C2 — Complétude MPs</td>
+                            <td><span class="badge green">PASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>C3 — Wordings Recos</td>
+                            <td><span class="badge green">PASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>C4 — Scoring Orphelins</td>
+                            <td><span class="badge green">PASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>C5 — Acteurs MTs</td>
+                            <td><span class="badge green">PASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>C6 — Content Blocks</td>
+                            <td><span class="badge green">PASS</span></td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 10px; font-size: 0.75rem;">Filet de sécurité automatique — rien ne casse sans
+                        qu'on le sache.</p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--primary);">
+                    <h4>🚀 Notre approche proactive</h4>
+                    <p style="margin-bottom: 10px;">On connaît le produit en profondeur. Ce que ça change concrètement :
+                    </p>
+                    <table class="data-table">
+                        <tr>
+                            <td>Métier clinique</td>
+                            <td>On comprend CCC, ASR, V1-V5, double wording</td>
+                        </tr>
+                        <tr>
+                            <td>Données</td>
+                            <td>On sait quelles tables contiennent quoi</td>
+                        </tr>
+                        <tr>
+                            <td>Logique</td>
+                            <td>On peut expliquer chaque règle d'activation</td>
+                        </tr>
+                        <tr>
+                            <td>Pour le CTO</td>
+                            <td>Moins de specs à rédiger — on traduit le besoin</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 10px; font-size: 0.75rem;"><strong
+                            style="color: var(--primary-light);">Résultat :</strong> Le CTO se concentre sur
+                        l'architecture, on se charge de l'implémentation.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>8 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 9 — GAP TO PRODUCTION ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🎯 Gap Analysis</div>
+            <h2>Ce qui manque pour la production — la vraie question</h2>
+            <p class="section-desc">Le simulateur actuel n'ira pas en prod. La question : Greenfield ou Brownfield ?</p>
+            <div class="grid-2" style="gap: 16px; margin-bottom: 14px;">
+                <div class="card" style="border-left: 3px solid var(--accent);">
+                    <h4>🆕 Greenfield (nouvelle app from scratch)</h4>
+                    <p style="margin-bottom: 8px;">On repart de zéro avec l'architecture CTO. Le Kernel est extrait
+                        comme module pur. Le reste est neuf.</p>
+                    <p style="font-size: 0.75rem; color: var(--text-dim);">→ Cas probable pour <strong
+                            style="color: var(--text);">MyMonka</strong> (app aidant) et potentiellement pour <strong
+                            style="color: var(--text);">CRM Lifeline</strong></p>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--warning);">
+                    <h4>🔧 Brownfield (intégrer dans l'existant)</h4>
+                    <p style="margin-bottom: 8px;">Si Monka a déjà une codebase CRM → on intègre le Kernel dans leur
+                        stack. Audit de l'existant nécessaire.</p>
+                    <p style="font-size: 0.75rem; color: var(--text-dim);">→ À préciser avec le CTO : <strong
+                            style="color: var(--text);">quelle est l'infra existante ?</strong></p>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+                <h4>📋 Prérequis production identifiés (dans les 2 cas)</h4>
+                <div class="grid-2" style="gap: 12px; flex: unset; margin-top: 10px;">
+                    <table class="data-table">
+                        <tr>
+                            <td style="color: var(--danger);">❌ Tests</td>
+                            <td>Unitaires + intégration + E2E</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ CI/CD</td>
+                            <td>Pipeline avec quality gates</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ Auth + RLS</td>
+                            <td>Gestion utilisateurs, permissions</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ Monitoring</td>
+                            <td>Sentry + alerting + logging structuré</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ Error Handling</td>
+                            <td>Error Boundaries + graceful degradation</td>
+                        </tr>
+                    </table>
+                    <table class="data-table">
+                        <tr>
+                            <td style="color: var(--danger);">❌ Docker prod</td>
+                            <td>Multi-stage build, images versionnées</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ Sécurité / HDS</td>
+                            <td>Conformité données de santé</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ Env vars</td>
+                            <td>Secrets management, 0 clé en dur</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ Environnements</td>
+                            <td>Dev / Staging / Prod isolés</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--danger);">❌ Documentation</td>
+                            <td>API docs, runbooks, ADR</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="highlight-box" style="font-size: 0.78rem; margin-top: 12px;">
+                <strong>C'est précisément pourquoi le CTO est essentiel :</strong> il définit le cadre (stack,
+                conventions, sécurité, infra) — on exécute dans ce cadre avec notre connaissance du produit.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>9 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 10 — PROTOTYPE UI ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🎨 Prototypage</div>
+            <h2>Le proto MyMonka — du Kernel aux pixels</h2>
+            <p class="section-desc">Chaque concept clinique mappé à un composant UI dédié — 35 composants, déployé sur
+                Vercel</p>
+            <div class="grid-2" style="gap: 16px; margin-bottom: 14px;">
+                <div class="card">
+                    <h4>📐 Mapping Kernel → UI (4 couches)</h4>
+                    <table class="data-table">
+                        <tr>
+                            <td>Vulnérabilité</td>
+                            <td><strong style="color: var(--text);">HeroCard</strong> — jauge MP actifs/total</td>
+                        </tr>
+                        <tr>
+                            <td>Micro-Parcours</td>
+                            <td><strong style="color: var(--text);">TaskCard + ASR Ring</strong> — progression</td>
+                        </tr>
+                        <tr>
+                            <td>Recommandation</td>
+                            <td><strong style="color: var(--text);">RecoAccordion</strong> — par criticité</td>
+                        </tr>
+                        <tr>
+                            <td>Micro-Tâche</td>
+                            <td><strong style="color: var(--text);">MicroTaskItem</strong> — cochable</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--accent);">
+                    <h4>✨ Design System Wellness Premium</h4>
+                    <p style="margin-bottom: 8px;">Inspiré des meilleures apps bien-être :</p>
+                    <table class="data-table">
+                        <tr>
+                            <td>🧘 Headspace</td>
+                            <td>Ton bienveillant, espaces blancs</td>
+                        </tr>
+                        <tr>
+                            <td>🎯 Streaks</td>
+                            <td>Progression circulaire (ASR Ring)</td>
+                        </tr>
+                        <tr>
+                            <td>📱 Fabulous</td>
+                            <td>Journey structuré = nos MP</td>
+                        </tr>
+                        <tr>
+                            <td>🎨 Apple</td>
+                            <td>Glassmorphism, transitions fluides</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="grid-3" style="gap: 12px; flex: unset;">
+                <div class="card" style="text-align: center; border-top: 3px solid var(--primary);">
+                    <h4>📱 Dashboard</h4>
+                    <p>"Bonjour Amal" — 3 cartes vulnérabilités avec scores et criticités</p>
+                </div>
+                <div class="card" style="text-align: center; border-top: 3px solid var(--warning);">
+                    <h4>📋 Parcours détaillé</h4>
+                    <p>TaskCards avec badges criticité 🔴🟠🟢⚪ + anneau ASR en temps réel</p>
+                </div>
+                <div class="card" style="text-align: center; border-top: 3px solid var(--success);">
+                    <h4>✅ Micro-tâches</h4>
+                    <p>Cochable → ASR avance en live. "Bravo ! Objectif atteint 🎉"</p>
+                </div>
+            </div>
+            <div class="action-label">📱 → Démo live du proto (Vercel) — l'audience peut tester sur mobile</div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>10 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 10 — WORKFLOW QUALITÉ ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔧 Workflow</div>
+            <h2>Comment on garantit la qualité du code livré</h2>
+            <p class="section-desc">Un processus structuré, adaptable aux standards du CTO, avec vérification à chaque
+                étape</p>
+            <div class="grid-3" style="gap: 14px; flex: unset; margin-bottom: 16px;">
+                <div class="card" style="border-top: 3px solid var(--primary);">
+                    <h4>📋 SOPs formalisés</h4>
+                    <p>Chaque tâche suit un Standard Operating Procedure : scope clair, critères d'acceptance, checklist
+                        de fin. <strong style="color: var(--text);">Adaptés aux conventions du CTO dès le jour
+                            1.</strong></p>
+                </div>
+                <div class="card" style="border-top: 3px solid var(--accent);">
+                    <h4>🤖 Maîtrise du contexte IA</h4>
+                    <p>L'IA est un outil, pas un pilote. On gère le <strong style="color: var(--text);">contexte, les
+                            prompts, la vérification</strong>. Chaque output est relu et validé avant commit.</p>
+                </div>
+                <div class="card" style="border-top: 3px solid var(--accent-2);">
+                    <h4>✅ Certification par checklist</h4>
+                    <p>Avant chaque PR : checklist complète (<strong style="color: var(--text);">lint, types, tests,
+                            build, review manuelle</strong>). Rien ne part sans validation.</p>
+                </div>
+            </div>
+            <div class="grid-2" style="gap: 14px; flex: unset;">
+                <div class="card">
+                    <h4>Le cycle pour chaque ticket</h4>
+                    <table class="data-table">
+                        <tr>
+                            <td style="color: var(--primary-light);">1.</td>
+                            <td>Lecture du ticket + contexte métier</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-light);">2.</td>
+                            <td>Implémentation (dev assisté IA + vérification systématique)</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-light);">3.</td>
+                            <td>Vérification checklist (lint, types, tests, build)</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-light);">4.</td>
+                            <td>PR claire avec description + screenshots si UI</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-light);">5.</td>
+                            <td>Review CTO → corrections → merge</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--primary);">
+                    <h4>Ce que le CTO contrôle</h4>
+                    <table class="data-table">
+                        <tr>
+                            <td>Conventions</td>
+                            <td>Nommage, structure, patterns → on suit</td>
+                        </tr>
+                        <tr>
+                            <td>CI/CD</td>
+                            <td>Pipeline, Docker, déploiement → son choix</td>
+                        </tr>
+                        <tr>
+                            <td>Tests</td>
+                            <td>Framework, couverture min → on applique</td>
+                        </tr>
+                        <tr>
+                            <td>Architecture</td>
+                            <td>Monorepo, packages, API → sa décision</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>11 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 10 — TRANSFÉRABILITÉ ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📦 Extraction</div>
+            <h2>Ce qui est transférable → MyMonka V2</h2>
+            <p class="section-desc">7 fichiers copiables tels quels, 5 à réécrire selon la stack V2</p>
+            <table class="data-table" style="flex: 1;">
+                <thead>
+                    <tr>
+                        <th>Fichier</th>
+                        <th>Lignes</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>clinicalEngine.ts</td>
+                        <td>320</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>TS pur, 0 dépendance React</td>
+                    </tr>
+                    <tr>
+                        <td>engineHealthScore.ts</td>
+                        <td>156</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Outil de QA intégré</td>
+                    </tr>
+                    <tr>
+                        <td>integrityChecks.ts</td>
+                        <td>139</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Filet de sécurité</td>
+                    </tr>
+                    <tr>
+                        <td>types.ts</td>
+                        <td>57</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Types métier</td>
+                    </tr>
+                    <tr>
+                        <td>dbTypes.ts</td>
+                        <td>125</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>15 interfaces DB</td>
+                    </tr>
+                    <tr>
+                        <td>helpers.ts</td>
+                        <td>196</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Helpers indépendants</td>
+                    </tr>
+                    <tr>
+                        <td>crMedecinPhrases.ts</td>
+                        <td>—</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Templates CR Médecin</td>
+                    </tr>
+                    <tr>
+                        <td>queries.ts</td>
+                        <td>90</td>
+                        <td><span class="badge red">❌ Réécrire</span></td>
+                        <td>Remplacer par API vers DB HDS</td>
+                    </tr>
+                    <tr>
+                        <td>constants.ts</td>
+                        <td>83</td>
+                        <td><span class="badge yellow">🟡 Adapter</span></td>
+                        <td>Retirer imports Lucide React</td>
+                    </tr>
+                    <tr>
+                        <td>hooks React</td>
+                        <td>—</td>
+                        <td><span class="badge red">❌ Réécrire</span></td>
+                        <td>Adapter selon la stack V2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>12 / 15</span></div>
+    </div>
+    <div class="highlight-box" style="font-size: 0.75rem; margin: 0 40px;">
+        <strong>Framework-agnostic :</strong> Si MyMonka V2 passe sur React Native, Flutter ou Vue — le Kernel et la
+        logique métier restent identiques. Seule la couche UI change.
+    </div>
+
+    <!-- ════════════════════ SLIDE 13 — ARCHITECTURE V2 ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🏗️ Architecture</div>
+            <h2>Proposition d'architecture — MyMonka V2</h2>
+            <p class="section-desc">Approche hybride : Brownfield backend + Greenfield frontends — Kernel comme module
+                pur</p>
+            <div class="grid-2" style="gap: 14px; margin-bottom: 12px;">
+                <div class="code-block" style="font-size: 0.72rem; flex: 1;">mymonka-v2/
+                    ├── packages/
+                    │ └── <span class="fn">clinical-engine/</span> <span class="cm">← KERNEL PUR (TS, 0
+                        dépendance)</span>
+                    │ ├── clinicalEngine.ts
+                    │ ├── types.ts + dbTypes.ts
+                    │ └── index.ts <span class="cm">← export: runEngine, computeScore</span>
+                    │
+                    ├── apps/
+                    │ ├── <span class="fn">mobile/</span> <span class="cm">← APP AIDANT (Greenfield)</span>
+                    │ ├── <span class="fn">crm/</span> <span class="cm">← CRM LIFELINE (Greenfield ou Brownfield)</span>
+                    │ └── <span class="fn">web/</span> <span class="cm">← FRONTEND WEB (Greenfield)</span>
+                    │
+                    ├── <span class="fn">api/</span> <span class="cm">← BACKEND (existant ? à auditer avec CTO)</span>
+                    │
+                    └── <span class="fn">infra/</span> <span class="cm">← Docker, CI/CD, config</span></div>
+                <div class="card" style="flex: 1;">
+                    <h4>📦 Stack pertinente (à valider CTO)</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr>
+                            <td><strong>Mobile</strong></td>
+                            <td>Expo + React Native (standard marché)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Web</strong></td>
+                            <td>React + Vite (SPA moderne)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>State</strong></td>
+                            <td>TanStack Query + Zustand</td>
+                        </tr>
+                        <tr>
+                            <td><strong>UI</strong></td>
+                            <td>Tailwind CSS + design system cohérent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backend</strong></td>
+                            <td>À auditer (existant ? stack CTO ?)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DB</strong></td>
+                            <td>PostgreSQL (version récente)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auth</strong></td>
+                            <td>À définir avec le CTO</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tests</strong></td>
+                            <td>Vitest + Testing Library</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infra</strong></td>
+                            <td>Docker + hébergement HDS certifié</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="highlight-box" style="font-size: 0.78rem;">
+                <strong>Questions au CTO :</strong> 1) Monorepo (Turborepo/Nx) ou repos séparés ? 2) Kernel = package
+                NPM, module local, ou Edge Function ? 3) Quelle stack mobile retenue ?
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>13 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 12 — ESTIMATIONS ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">⏱️ Chiffrage</div>
+            <h2>Estimations indicatives — à affiner avec le CTO</h2>
+            <p class="section-desc">Basées sur notre connaissance du produit — à valider selon l'architecture retenue
+            </p>
+            <div class="compare-grid">
+                <div class="compare-col old">
+                    <h3>Benchmark marché (dev classique)</h3>
+                    <div class="compare-item">Ramp-up produit/métier → <strong>3-4 semaines</strong></div>
+                    <div class="compare-item">Extraction Kernel → <strong>2-3 semaines</strong></div>
+                    <div class="compare-item">App MyMonka (frontend) → <strong>3-4 mois</strong></div>
+                    <div class="compare-item">CRM Lifeline (frontend pro) → <strong>2-3 mois</strong></div>
+                    <div class="compare-item">Intégration + tests → <strong>1 mois</strong></div>
+                    <div class="compare-item"
+                        style="font-size: 1rem; font-weight: 800; color: var(--danger); padding-top: 16px; border-top: 2px solid rgba(239,68,68,0.2);">
+                        TOTAL : 8-12 mois</div>
+                </div>
+                <div class="compare-col new">
+                    <h3>Notre estimation (dev assisté IA)</h3>
+                    <div class="compare-item">Ramp-up produit/métier → <strong>0 (connaissance déjà acquise)</strong>
+                    </div>
+                    <div class="compare-item">Extraction Kernel + setup → <strong>2-3 jours</strong></div>
+                    <div class="compare-item">App MyMonka (frontend) → <strong>3-4 semaines</strong></div>
+                    <div class="compare-item">CRM Lifeline (frontend pro) → <strong>2-3 semaines</strong></div>
+                    <div class="compare-item">Audit final CTO → <strong>1 semaine</strong></div>
+                    <div class="compare-item"
+                        style="font-size: 1rem; font-weight: 800; color: var(--success); padding-top: 16px; border-top: 2px solid rgba(0,220,130,0.2);">
+                        TOTAL : 6-8 semaines</div>
+                </div>
+            </div>
+            <div class="highlight-box" style="font-size: 0.78rem;">
+                <strong>QA intégrée à chaque étape</strong> — pas une phase séparée. Chaque PR passe la checklist (lint,
+                types, tests, build) + review CTO. Audit final sous sa direction avant le go-live.
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>14 / 15</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 12 — COLLABORATION ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🤝 Collaboration</div>
+            <h2>CTO définit — PRAGMA exécute</h2>
+            <p class="section-desc">Notre connaissance du produit facilite votre travail — vous cadrez, on implémente
+            </p>
+            <div class="collab-grid" style="margin-bottom: 16px;">
+                <div class="collab-cell header">Domaine</div>
+                <div class="collab-cell header">CTO</div>
+                <div class="collab-cell header">PRAGMA</div>
+                <div class="collab-cell"><strong>Architecture</strong></div>
+                <div class="collab-cell"><span class="emoji">✅</span> Définit (Docker, CI/CD, conventions)</div>
+                <div class="collab-cell">Respecte à la lettre</div>
+                <div class="collab-cell"><strong>Standards</strong></div>
+                <div class="collab-cell"><span class="emoji">✅</span> Impose (linting, tests, patterns)</div>
+                <div class="collab-cell">Applique dès le jour 1</div>
+                <div class="collab-cell"><strong>Sprint</strong></div>
+                <div class="collab-cell"><span class="emoji">✅</span> Définit le QUOI</div>
+                <div class="collab-cell"><span class="emoji">⚡</span> Exécute le COMMENT (vélocité x10)</div>
+                <div class="collab-cell"><strong>Code Review</strong></div>
+                <div class="collab-cell"><span class="emoji">✅</span> Review chaque PR</div>
+                <div class="collab-cell">Soumet des PRs claires</div>
+                <div class="collab-cell"><strong>Logique métier</strong></div>
+                <div class="collab-cell">Valide la technique</div>
+                <div class="collab-cell"><span class="emoji">✅</span> Traduit le métier clinique en code</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="cta-box">🚀 On peut commencer un sprint pilote cette semaine ?</div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>15 / 15</span></div>
+    </div>
+
+</body>
+
+</html>

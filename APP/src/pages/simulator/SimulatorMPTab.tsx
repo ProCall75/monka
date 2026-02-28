@@ -74,7 +74,7 @@ export function SimulatorMPTab({ data, activeV, answers, activatedMPs, activated
 interface MPCardProps {
     mp: { id: string; nom: string; objectif?: string | null; vulnerability_id: string; signature_a?: string | null }
     data: SimulatorTabProps['data']
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     isActive: boolean
     color: string
     onClick: () => void

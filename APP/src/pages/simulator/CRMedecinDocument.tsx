@@ -22,7 +22,7 @@ const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
 interface CRDocProps {
     data: SimulatorTabProps['data']
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     scoreByV: Record<string, { score: number; max: number }>
     activatedMPs: string[]
     activatedCats: Map<string, { mpId: string; niveau: string }>

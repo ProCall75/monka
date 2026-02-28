@@ -135,17 +135,17 @@ const ENFANT_AGE_BRACKETS = ['- 15 ans', '15-20 ans']
 const SENIOR_AGE_BRACKETS = ['60-75 ans', '+75 ans']
 const ENFANT_ELIGIBLE_AIDANCE = ['Handicap', 'Maladie Chronique', 'Psy', 'Addiction']
 
-export function getActiveAidanceBlocks(answers: Record<string, string>): Set<string> {
+export function getActiveAidanceBlocks(answers: Record<string, string | string[]>): Set<string> {
     const blocks = new Set<string>(['Tous'])
-    const n3Answer = answers['N3']
-    if (n3Answer) {
-        const n3Values = n3Answer.includes('|') ? n3Answer.split('|').map(s => s.trim()) : [n3Answer]
+    const n3Raw = answers['N3']
+    if (n3Raw) {
+        const n3Values = Array.isArray(n3Raw) ? n3Raw : (typeof n3Raw === 'string' && n3Raw.includes('|')) ? n3Raw.split('|').map(s => s.trim()) : [n3Raw]
         for (const n3Val of n3Values) {
             const tags = N3_TO_AIDANCE_BLOCKS[n3Val]
             if (tags) tags.forEach(tag => blocks.add(tag))
         }
     }
-    const o1Answer = answers['O1']
+    const o1Answer = typeof answers['O1'] === 'string' ? answers['O1'] : undefined
     if (o1Answer && ENFANT_AGE_BRACKETS.includes(o1Answer)) blocks.delete('Personne Agée')
     if (o1Answer && ENFANT_AGE_BRACKETS.includes(o1Answer) && !SENIOR_AGE_BRACKETS.includes(o1Answer)) {
         const activeNonTous = [...blocks].filter(b => b !== 'Tous')
@@ -154,7 +154,7 @@ export function getActiveAidanceBlocks(answers: Record<string, string>): Set<str
     return blocks
 }
 
-export function getActiveQuestions(data: MonkaData, answers: Record<string, string>): DBQuestion[] {
+export function getActiveQuestions(data: MonkaData, answers: Record<string, string | string[]>): DBQuestion[] {
     const activeBlocks = getActiveAidanceBlocks(answers)
     return data.questions.filter(q => {
         if (q.is_trigger) return false
@@ -165,7 +165,7 @@ export function getActiveQuestions(data: MonkaData, answers: Record<string, stri
 export function getTriggerQuestions(data: MonkaData): DBQuestion[] {
     return data.questions.filter(q => q.is_trigger)
 }
-export function getActiveQuestionCount(data: MonkaData, answers: Record<string, string>): number {
+export function getActiveQuestionCount(data: MonkaData, answers: Record<string, string | string[]>): number {
     return getActiveQuestions(data, answers).length
 }
 

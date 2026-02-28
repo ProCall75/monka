@@ -13,8 +13,8 @@ const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 interface QuestionsSidebarProps {
     activeV: VFilter
     vulnName: string | undefined
-    answers: Record<string, string>
-    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>
+    answers: Record<string, string | string[]>
+    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string | string[]>>>
     groupedQuestions: Record<string, DBQuestion[]>
     expandedCategories: Record<string, boolean>
     toggleCategory: (key: string) => void
@@ -94,8 +94,8 @@ export function QuestionsSidebar({
 function QuestionGroup({ groupKey, questions, answers, setAnswers, isExpanded, toggleCategory, scoringQIds, questionMPMap, mpMap, activeV, vulnerabilities }: {
     groupKey: string
     questions: DBQuestion[]
-    answers: Record<string, string>
-    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>
+    answers: Record<string, string | string[]>
+    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string | string[]>>>
     isExpanded: boolean
     toggleCategory: (key: string) => void
     scoringQIds: Set<string>
@@ -104,7 +104,10 @@ function QuestionGroup({ groupKey, questions, answers, setAnswers, isExpanded, t
     activeV: VFilter
     vulnerabilities: Array<{ id: string; label: string }>
 }) {
-    const groupAnswered = questions.filter(q => answers[q.id]).length
+    const groupAnswered = questions.filter(q => {
+        const a = answers[q.id]
+        return Array.isArray(a) ? a.length > 0 : !!a
+    }).length
     const isVGroup = groupKey.startsWith('V') && groupKey.length === 2
     const groupColor = isVGroup ? vColorMap[groupKey as VulnerabilityId] : '#58BF94'
     const groupLabel = isVGroup
@@ -140,14 +143,14 @@ function QuestionGroup({ groupKey, questions, answers, setAnswers, isExpanded, t
 /** Single question card with badges and answer options */
 function QuestionCard({ q, answers, setAnswers, isScoring, qMPs, mpMap, activeV }: {
     q: DBQuestion
-    answers: Record<string, string>
-    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>
+    answers: Record<string, string | string[]>
+    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string | string[]>>>
     isScoring: boolean
     qMPs: string[]
     mpMap: Record<string, { nom: string }>
     activeV: VFilter
 }) {
-    const isAnswered = !!answers[q.id]
+    const isAnswered = Array.isArray(answers[q.id]) ? (answers[q.id] as string[]).length > 0 : !!answers[q.id]
     const qVColor = q.vulnerability_id ? vColorMap[q.vulnerability_id as VulnerabilityId] || '#999' : '#999'
 
     return (
@@ -182,12 +185,23 @@ function QuestionCard({ q, answers, setAnswers, isScoring, qMPs, mpMap, activeV 
                         key={opt}
                         onClick={() => setAnswers(prev => {
                             const next = { ...prev }
-                            if (next[q.id] === opt) delete next[q.id]
-                            else next[q.id] = opt
+                            if (q.response_type === 'choix_multiple') {
+                                const current = Array.isArray(next[q.id]) ? (next[q.id] as string[]) : []
+                                if (current.includes(opt)) {
+                                    const filtered = current.filter(o => o !== opt)
+                                    if (filtered.length === 0) delete next[q.id]
+                                    else next[q.id] = filtered
+                                } else {
+                                    next[q.id] = [...current, opt]
+                                }
+                            } else {
+                                if (next[q.id] === opt) delete next[q.id]
+                                else next[q.id] = opt
+                            }
                             return next
                         })}
-                        className={`px-3 py-1 rounded-lg text-xs font-medium transition-all duration-150 ${answers[q.id] === opt ? 'text-white shadow-sm' : 'bg-white/60 text-monka-text/70 hover:bg-white hover:text-monka-text border border-transparent hover:border-monka-border'}`}
-                        style={answers[q.id] === opt ? { backgroundColor: qVColor } : {}}
+                        className={`px-3 py-1 rounded-lg text-xs font-medium transition-all duration-150 ${(q.response_type === 'choix_multiple' ? (Array.isArray(answers[q.id]) && (answers[q.id] as string[]).includes(opt)) : answers[q.id] === opt) ? 'text-white shadow-sm' : 'bg-white/60 text-monka-text/70 hover:bg-white hover:text-monka-text border border-transparent hover:border-monka-border'}`}
+                        style={(q.response_type === 'choix_multiple' ? (Array.isArray(answers[q.id]) && (answers[q.id] as string[]).includes(opt)) : answers[q.id] === opt) ? { backgroundColor: qVColor } : {}}
                     >
                         {opt}
                     </button>

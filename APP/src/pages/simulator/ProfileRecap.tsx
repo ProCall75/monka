@@ -9,7 +9,7 @@ import { getTriggerQuestions } from '../../clinical/hooks'
 
 interface ProfileRecapProps {
     data: MonkaData
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
 }
 
 /** Maps trigger question IDs to profile segments for natural text */
@@ -30,13 +30,20 @@ export function ProfileRecap({ data, answers }: ProfileRecapProps) {
 
     const answeredTriggers = useMemo(() => {
         return triggerQs
-            .filter(q => answers[q.id])
-            .map(q => ({
-                id: q.id,
-                text: q.question_text,
-                answer: answers[q.id],
-                segment: PROFILE_TEMPLATES[q.id]?.(answers[q.id]) || null,
-            }))
+            .filter(q => {
+                const a = answers[q.id]
+                return Array.isArray(a) ? a.length > 0 : !!a
+            })
+            .map(q => {
+                const rawAnswer = answers[q.id]
+                const displayAnswer = Array.isArray(rawAnswer) ? rawAnswer.join(', ') : rawAnswer
+                return {
+                    id: q.id,
+                    text: q.question_text,
+                    answer: displayAnswer,
+                    segment: PROFILE_TEMPLATES[q.id]?.(displayAnswer) || null,
+                }
+            })
     }, [triggerQs, answers])
 
     if (answeredTriggers.length === 0) {

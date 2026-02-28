@@ -63,12 +63,12 @@ const internalTabs: { id: InternalTab; label: string; icon: typeof Shield }[] = 
 export default function SimulatorPage() {
     const { data, loading, error } = useMonkaData()
     const [activeV, setActiveV] = useState<VFilter>('V1')
-    const [answers, setAnswers] = useState<Record<string, string>>({})
+    const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
     const [viewMode, setViewMode] = useState<ViewMode>('internal')
     const [activeInternalTab, setActiveInternalTab] = useState<InternalTab>('scoring')
     const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({})
     const [personaId, setPersonaId] = useState<string | null>(null)
-    const [originalAnswers, setOriginalAnswers] = useState<Record<string, string>>({})
+    const [originalAnswers, setOriginalAnswers] = useState<Record<string, string | string[]>>({})
     const [whatIfEnabled, setWhatIfEnabled] = useState(true)
 
     // Load persona answers from sessionStorage (set by PersonasPage)
@@ -77,9 +77,19 @@ export default function SimulatorPage() {
         const storedId = sessionStorage.getItem('monka_persona_id')
         if (stored) {
             try {
-                const parsed = JSON.parse(stored)
-                setAnswers(parsed)
-                setOriginalAnswers(parsed)
+                const parsed = JSON.parse(stored) as Record<string, string>
+                // Convert pipe-delimited multi-select answers to native arrays
+                const converted: Record<string, string | string[]> = {}
+                const multiSelectIds = data ? new Set(
+                    data.questions.filter(q => q.response_type === 'choix_multiple').map(q => q.id)
+                ) : new Set<string>()
+                for (const [qId, val] of Object.entries(parsed)) {
+                    converted[qId] = multiSelectIds.has(qId) && val.includes('|')
+                        ? val.split('|').map(s => s.trim())
+                        : val
+                }
+                setAnswers(converted)
+                setOriginalAnswers(converted)
                 setPersonaId(storedId)
                 // Clear after loading
                 sessionStorage.removeItem('monka_persona_answers')
@@ -134,9 +144,9 @@ function SimulatorContent({
     data: MonkaData
     activeV: VFilter
     setActiveV: (v: VFilter) => void
-    answers: Record<string, string>
-    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>
-    originalAnswers: Record<string, string>
+    answers: Record<string, string | string[]>
+    setAnswers: React.Dispatch<React.SetStateAction<Record<string, string | string[]>>>
+    originalAnswers: Record<string, string | string[]>
     viewMode: ViewMode
     setViewMode: (m: ViewMode) => void
     activeInternalTab: InternalTab
@@ -235,9 +245,16 @@ function SimulatorContent({
             vulnScoringQIds.forEach(qid => {
                 const answer = answers[qid]
                 if (answer && scoringMap[qid]) {
-                    // Look up the actual score for this answer
-                    const pts = scoringMap[qid][answer]
-                    if (pts !== undefined) score += pts
+                    // Look up the actual score for this answer (handle arrays)
+                    if (Array.isArray(answer)) {
+                        for (const a of answer) {
+                            const pts = scoringMap[qid][a]
+                            if (pts !== undefined) score += pts
+                        }
+                    } else {
+                        const pts = scoringMap[qid][answer]
+                        if (pts !== undefined) score += pts
+                    }
                 }
             })
             result[v.id] = { score: Math.min(score, maxScore), max: maxScore }

@@ -16,8 +16,8 @@ const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
 interface WhatIfDiffProps {
     data: MonkaData
-    originalAnswers: Record<string, string>
-    currentAnswers: Record<string, string>
+    originalAnswers: Record<string, string | string[]>
+    currentAnswers: Record<string, string | string[]>
     onReset: () => void
     enabled: boolean
     onToggle: () => void
@@ -36,10 +36,13 @@ export function WhatIfDiff({ data, originalAnswers, currentAnswers, onReset, ena
     const changedQuestions = useMemo(() => {
         const changed: { qId: string; text: string; from: string; to: string }[] = []
         const allKeys = new Set([...Object.keys(originalAnswers), ...Object.keys(currentAnswers)])
+        const stringify = (v: string | string[] | undefined) => Array.isArray(v) ? v.join(', ') : (v || '—')
         for (const k of allKeys) {
-            if (originalAnswers[k] !== currentAnswers[k]) {
+            const origStr = stringify(originalAnswers[k])
+            const currStr = stringify(currentAnswers[k])
+            if (origStr !== currStr) {
                 const q = data.questions.find(q => q.id === k)
-                changed.push({ qId: k, text: q?.question_text || k, from: originalAnswers[k] || '—', to: currentAnswers[k] || '—' })
+                changed.push({ qId: k, text: q?.question_text || k, from: origStr, to: currStr })
             }
         }
         return changed
@@ -59,11 +62,16 @@ export function WhatIfDiff({ data, originalAnswers, currentAnswers, onReset, ena
 
             const vulnSQIds = [...new Set(data.scoringQuestions.filter(sq => sq.vulnerability_id === vId).map(sq => sq.question_id))]
             let origScore = 0, currScore = 0
+            const lookupScore = (qId: string, answer: string | string[] | undefined): number => {
+                if (!answer || !scoringMap[qId]) return 0
+                if (Array.isArray(answer)) {
+                    return answer.reduce((sum, a) => sum + (scoringMap[qId][a] || 0), 0)
+                }
+                return scoringMap[qId][answer] || 0
+            }
             for (const qId of vulnSQIds) {
-                const oa = originalAnswers[qId]
-                const ca = currentAnswers[qId]
-                if (oa && scoringMap[qId]?.[oa] !== undefined) origScore += scoringMap[qId][oa]
-                if (ca && scoringMap[qId]?.[ca] !== undefined) currScore += scoringMap[qId][ca]
+                origScore += lookupScore(qId, originalAnswers[qId])
+                currScore += lookupScore(qId, currentAnswers[qId])
             }
 
             return {

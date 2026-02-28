@@ -14,7 +14,7 @@ const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 
 interface MPDetailProps {
     data: SimulatorTabProps['data']
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     activatedMPs: string[]
     activatedCats: Map<string, { mpId: string; niveau: string; firedRules?: unknown[] }>
     selectedMP: string

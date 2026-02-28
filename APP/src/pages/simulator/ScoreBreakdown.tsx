@@ -10,7 +10,7 @@ const vColorMap = VULN_COLORS as Record<VulnerabilityId, string>
 interface ScoreBreakdownProps {
     data: MonkaData
     vulnId: string
-    answers: Record<string, string>
+    answers: Record<string, string | string[]>
     scoringMap: Record<string, Record<string, number>>
 }
 
@@ -34,11 +34,20 @@ export function ScoreBreakdown({ data, vulnId, answers, scoringMap }: ScoreBreak
         const q = data.questions.find(qu => qu.id === qId)
         const qScores = vulnSQ.filter(sq => sq.question_id === qId)
         const maxScore = Math.max(...qScores.map(sq => sq.score), 0)
-        const answer = answers[qId] || null
-        const currentScore = answer && scoringMap[qId]?.[answer] !== undefined
-            ? scoringMap[qId][answer] : 0
+        const rawAnswer = answers[qId] || null
+        const displayAnswer = rawAnswer ? (Array.isArray(rawAnswer) ? rawAnswer.join(', ') : rawAnswer) : null
+        let currentScore = 0
+        if (rawAnswer && scoringMap[qId]) {
+            if (Array.isArray(rawAnswer)) {
+                for (const a of rawAnswer) {
+                    currentScore += scoringMap[qId][a] || 0
+                }
+            } else {
+                currentScore = scoringMap[qId][rawAnswer] || 0
+            }
+        }
         const bestAlt = qScores
-            .filter(sq => sq.response_text !== answer)
+            .filter(sq => sq.response_text !== displayAnswer)
             .sort((a, b) => b.score - a.score)[0] || null
         const justBlock = data.contentBlocks?.find(
             cb => cb.entity_type === 'question' && cb.entity_id === qId && cb.block_type === 'scoring_justification'
@@ -47,7 +56,7 @@ export function ScoreBreakdown({ data, vulnId, answers, scoringMap }: ScoreBreak
         return {
             qId,
             qText: q?.question_text || qId,
-            currentAnswer: answer,
+            currentAnswer: displayAnswer,
             currentScore,
             maxScore,
             bestAlt: bestAlt ? { answer: bestAlt.response_text, score: bestAlt.score } : null,
@@ -92,8 +101,8 @@ export function ScoreBreakdown({ data, vulnId, answers, scoringMap }: ScoreBreak
                                 {/* Classification badge */}
                                 {c.classification && c.classification !== 'aucun' && (
                                     <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block mt-0.5 mb-0.5 ${c.classification === 'facteur' ? 'bg-blue-100 text-blue-600'
-                                            : c.classification === 'etat' ? 'bg-purple-100 text-purple-600'
-                                                : 'bg-indigo-100 text-indigo-600'}`}>
+                                        : c.classification === 'etat' ? 'bg-purple-100 text-purple-600'
+                                            : 'bg-indigo-100 text-indigo-600'}`}>
                                         {c.classification === 'facteur' ? '⚡ Facteur' : c.classification === 'etat' ? '📊 État' : '⚡📊 Facteur + État'}
                                     </span>
                                 )}
