@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engine Explainer — Monka Clinical Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #58BF94;
+            --primary-light: #7CD4AD;
+            --primary-dark: #3FA87A;
+            --accent: #86C0CF;
+            --accent-2: #CFFF92;
+            --bg: #0A1F16;
+            --bg-card: #112B1F;
+            --bg-card-hover: #1A3D2C;
+            --bg-elevated: #0E2519;
+            --text: #E8F0EC;
+            --text-muted: #9BB5A8;
+            --text-dim: #6B8578;
+            --border: #1E3D2D;
+            --success: #00DC82;
+            --warning: #F5A623;
+            --danger: #EF4444;
+            --critical: #D63031;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --slide-w: 1280px;
+            --slide-h: 720px;
+        }
+
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #1a1a2e;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 20px auto;
+            background: var(--bg);
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        .slide-body {
+            padding: 48px 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-footer {
+            padding: 12px 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .slide-footer .brand {
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        /* HERO */
+        .slide.hero-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .slide.hero-slide::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(88, 191, 148, 0.15) 0%, transparent 70%);
+            top: -150px;
+            right: -80px;
+            border-radius: 50%;
+        }
+
+        .slide.hero-slide::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(207, 255, 146, 0.1) 0%, transparent 70%);
+            bottom: -80px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(88, 191, 148, 0.15);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .hero-meta-item strong {
+            color: var(--text);
+        }
+
+        /* CARDS & GRIDS */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-content: center;
+        }
+
+        .card {
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .card .icon {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        /* STATS */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* PIPELINE */
+        .pipeline-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 20px;
+        }
+
+        .pipeline-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            text-align: center;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .pipeline-box.active {
+            border-color: var(--primary);
+            background: rgba(88, 191, 148, 0.08);
+        }
+
+        .pipeline-box h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .pipeline-box p {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        .pipeline-arrow {
+            font-size: 1.2rem;
+            color: var(--primary-light);
+            padding: 0 6px;
+        }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-light);
+            border-bottom: 2px solid var(--border);
+            background: rgba(88, 191, 148, 0.05);
+        }
+
+        .data-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .data-table td:first-child {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .badge.green {
+            background: rgba(0, 220, 130, 0.12);
+            color: var(--success);
+        }
+
+        .badge.yellow {
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--warning);
+        }
+
+        .badge.red {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+        }
+
+        .badge.blue {
+            background: rgba(134, 192, 207, 0.12);
+            color: var(--accent);
+        }
+
+        /* COMPARISON */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .compare-col {
+            padding: 24px;
+            border-radius: var(--radius);
+        }
+
+        .compare-col.old {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+        }
+
+        .compare-col.new {
+            background: rgba(0, 220, 130, 0.05);
+            border: 1px solid rgba(0, 220, 130, 0.15);
+        }
+
+        .compare-col h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .compare-col.old h3 {
+            color: var(--danger);
+        }
+
+        .compare-col.new h3 {
+            color: var(--success);
+        }
+
+        .compare-item {
+            padding: 8px 0;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .compare-item strong {
+            color: var(--text);
+        }
+
+        .compare-item:last-child {
+            border-bottom: none;
+        }
+
+        /* CODE BLOCK */
+        .code-block {
+            background: #0D1B14;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        .code-block .fn {
+            color: var(--primary-light);
+        }
+
+        .code-block .kw {
+            color: var(--accent);
+        }
+
+        .code-block .cm {
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .code-block .st {
+            color: var(--accent-2);
+        }
+
+        /* COLLAB TABLE */
+        .collab-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .collab-cell {
+            padding: 14px 18px;
+            background: var(--bg-card);
+            font-size: 0.8rem;
+        }
+
+        .collab-cell.header {
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.06);
+        }
+
+        .collab-cell .emoji {
+            margin-right: 6px;
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight-box {
+            padding: 18px 24px;
+            border-radius: var(--radius-sm);
+            background: rgba(88, 191, 148, 0.06);
+            border-left: 4px solid var(--primary);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: 16px;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-light);
+        }
+
+        .highlight-box.accent {
+            border-left-color: var(--accent);
+        }
+
+        /* CTA */
+        .cta-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 16px;
+        }
+
+        /* ACTION */
+        .action-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: rgba(134, 192, 207, 0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- ════════════════════ SLIDE 1 — HERO ════════════════════ -->
+    <div class="slide hero-slide">
+        <div class="hero-badge">📖 Documentation Technique — Clinical Engine</div>
+        <h1>Engine <span>Explainer</span></h1>
+        <p class="hero-sub">Vue complète du dossier <code>engine/</code> — 15 fichiers, ~1 800 lignes de TypeScript pur.<br>
+            Chaque slide = 1 fichier, son rôle, et le code qui compte.</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">📦 <strong>15 fichiers</strong></div>
+            <div class="hero-meta-item">🧪 <strong>3 fichiers de tests</strong></div>
+            <div class="hero-meta-item">🔗 <strong>0 dépendance React dans le Kernel</strong></div>
+        </div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 2 — SOMMAIRE ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📋 Sommaire</div>
+            <h2>Les 4 couches du dossier engine/</h2>
+            <p class="section-desc">Architecture modulaire — chaque couche est indépendante</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div class="card" style="border-left: 3px solid #58BF94;">
+                    <h4>🧠 Couche 1 — Kernel (cœur algorithmique)</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td><strong>clinicalEngine.ts</strong></td><td>320 L</td><td>Scoring + activation</td></tr>
+                        <tr><td><strong>types.ts</strong></td><td>57 L</td><td>Types métier</td></tr>
+                        <tr><td><strong>constants.ts</strong></td><td>83 L</td><td>Metadata V1-V5</td></tr>
+                    </table>
+                </div>
+                <div class="card" style="border-left: 3px solid #86C0CF;">
+                    <h4>🗄️ Couche 2 — Data Layer</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td><strong>dbTypes.ts</strong></td><td>125 L</td><td>15 interfaces DB</td></tr>
+                        <tr><td><strong>queries.ts</strong></td><td>90 L</td><td>Fetch Supabase</td></tr>
+                        <tr><td><strong>supabaseData.ts</strong></td><td>40 L</td><td>Barrel re-export</td></tr>
+                        <tr><td><strong>helpers.ts</strong></td><td>196 L</td><td>30+ helpers</td></tr>
+                    </table>
+                </div>
+                <div class="card" style="border-left: 3px solid #F5A623;">
+                    <h4>🛡️ Couche 3 — QA & Intégrité</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td><strong>engineHealthScore.ts</strong></td><td>156 L</td><td>Health Score /100</td></tr>
+                        <tr><td><strong>integrityChecks.ts</strong></td><td>139 L</td><td>6 checks d'intégrité</td></tr>
+                        <tr><td><strong>buildCoverageMatrix.ts</strong></td><td>77 L</td><td>Matrice de couverture</td></tr>
+                    </table>
+                </div>
+                <div class="card" style="border-left: 3px solid #7748F6;">
+                    <h4>📄 Couche 4 — Métier & Hooks</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td><strong>crMedecinPhrases.ts</strong></td><td>165 L</td><td>Templates CR médecin</td></tr>
+                        <tr><td><strong>useMonkaData.ts</strong></td><td>~30 L</td><td>Hook React</td></tr>
+                        <tr><td><strong>hooks/useVulnStats.ts</strong></td><td>~100 L</td><td>Stats par V</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>2 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 3 — clinicalEngine.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🧠 clinicalEngine.ts — 320 lignes</div>
+            <h2>Le cerveau du moteur — scoring + activation</h2>
+            <p class="section-desc">Pure functions, zéro dépendance React. Gère les 9 opérateurs de la DB.</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div class="card" style="border-top: 3px solid #58BF94;">
+                    <h4>5 fonctions exportées</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td style="color: var(--primary-light);"><strong>evaluateCondition()</strong></td><td>Évalue 1 condition (9 opérateurs : eq, neq, in, nin, gte, contains, count_gte, has_any, ne)</td></tr>
+                        <tr><td style="color: var(--primary-light);"><strong>evaluateRule()</strong></td><td>Évalue 1 règle (logique AND — toutes les conditions doivent passer)</td></tr>
+                        <tr><td style="color: var(--primary-light);"><strong>getActivatedCategories()</strong></td><td>240 règles → catégories activées avec le niveau le plus élevé</td></tr>
+                        <tr><td style="color: var(--primary-light);"><strong>computeScore()</strong></td><td>Score par V (single + multi-choice, cap, seuils)</td></tr>
+                        <tr><td style="color: var(--primary-light);"><strong>runEngine()</strong></td><td>Point d'entrée unique — combine activation + scoring</td></tr>
+                    </table>
+                </div>
+                <div>
+                    <div class="code-block" style="font-size: 0.65rem;"><span class="cm">// Point d'entrée — retourne tout en un seul appel</span>
+<span class="kw">export function</span> <span class="fn">runEngine</span>(data, answers, vulnFilter?) {
+  <span class="kw">const</span> activated = <span class="fn">getActivatedCategories</span>(data, answers)
+  <span class="kw">const</span> scores = VULNS.map(v => <span class="fn">computeScore</span>(data, answers, v))
+  <span class="kw">const</span> weightedScore = scores.reduce((acc, s) =>
+    acc + s.percentage * vulnWeightMap.get(s.vulnId), 0)
+  <span class="kw">return</span> { activatedCategories, scores, weightedScore }
+}</div>
+                    <div class="highlight-box" style="font-size: 0.72rem; margin-top: 10px;">
+                        <strong>Concepts clés :</strong> Compétition des niveaux (standard < ccc < critique), score plafonné par question (QUESTION_SCORE_CAP), score global pondéré (V4 = 30%).
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>3 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 4 — types.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📝 types.ts — 57 lignes</div>
+            <h2>Les types métier du moteur</h2>
+            <p class="section-desc">Définitions TypeScript pures — le vocabulaire partagé par tout le Kernel</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div>
+                    <div class="code-block" style="font-size: 0.7rem;"><span class="cm">// Les 5 dimensions de vulnérabilité</span>
+<span class="kw">export type</span> VulnerabilityId = <span class="st">'V1'</span> | <span class="st">'V2'</span> | <span class="st">'V3'</span> | <span class="st">'V4'</span> | <span class="st">'V5'</span>
+
+<span class="cm">// Types de micro-tâches</span>
+<span class="kw">export type</span> TaskType = <span class="st">'STRUC'</span> | <span class="st">'SEC'</span> | <span class="st">'MED'</span> | <span class="st">'INFO'</span> | <span class="st">'ORGA'</span>
+
+<span class="cm">// Niveaux d'activation (3 niveaux de gravité)</span>
+<span class="kw">export type</span> NiveauActivation = <span class="st">'standard'</span> | <span class="st">'ccc'</span> | <span class="st">'critique'</span>
+
+<span class="cm">// Niveaux de recommandation (+ prévention)</span>
+<span class="kw">export type</span> NiveauReco = <span class="st">'standard'</span> | <span class="st">'ccc'</span> | <span class="st">'critique'</span> | <span class="st">'prevention'</span>
+
+<span class="cm">// Domaine clinique</span>
+<span class="kw">export type</span> Domaine = <span class="st">'medical'</span> | <span class="st">'medico_social'</span></div>
+                </div>
+                <div class="card">
+                    <h4>📌 En français</h4>
+                    <table class="data-table" style="font-size: 0.75rem;">
+                        <tr><td><strong>VulnerabilityId</strong></td><td>Les 5 axes du modèle clinique (Social, Admin, Santé, Fragilité, Parcours)</td></tr>
+                        <tr><td><strong>TaskType</strong></td><td>5 types d'actions : Structurante, Sécurisante, Médicale, Info, Organisationnelle</td></tr>
+                        <tr><td><strong>NiveauActivation</strong></td><td>3 niveaux de gravité : normal → complexe → urgent</td></tr>
+                        <tr><td><strong>NiveauReco</strong></td><td>Idem + prévention (proactive, hors activation)</td></tr>
+                        <tr><td><strong>Domaine</strong></td><td>Médical (soins) vs Médico-social (droits, logistique)</td></tr>
+                    </table>
+                    <div class="highlight-box" style="font-size: 0.72rem; margin-top: 10px;">
+                        <strong>Rôle :</strong> Vocabulaire unique partagé par tous les fichiers. Quand on dit "V3", tout le Kernel sait que c'est "Santé de l'aidant".
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>4 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 5 — constants.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🎨 constants.ts — 83 lignes</div>
+            <h2>Métadonnées des 5 vulnérabilités</h2>
+            <p class="section-desc">Labels, couleurs, icônes, descriptions — la config visuelle du modèle clinique</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div>
+                    <div class="code-block" style="font-size: 0.68rem;"><span class="kw">export const</span> VULN_META: Record<VulnerabilityId, VulnMeta> = {
+  V1: {
+    label: <span class="st">'V1'</span>, name: <span class="st">'Social et relationnel'</span>,
+    color: <span class="st">'#58BF94'</span>, icon: Users,
+    description: <span class="st">"Impact de l'aidance..."</span>
+  },
+  V2: { ... }, V3: { ... }, V4: { ... }, V5: { ... }
+}
+
+<span class="cm">// Quick lookups</span>
+<span class="kw">export const</span> VULN_IDS: VulnerabilityId[] = [<span class="st">'V1'</span>,<span class="st">'V2'</span>,<span class="st">'V3'</span>,<span class="st">'V4'</span>,<span class="st">'V5'</span>]
+<span class="kw">export const</span> VULN_COLORS = Object.fromEntries(
+  VULN_IDS.map(v => [v, VULN_META[v].color])
+)</div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h4>📌 En français</h4>
+                        <p style="margin-bottom: 10px;">Chaque V a un <strong style="color: var(--text);">objet de métadonnées</strong> : label affiché, nom complet, description, icône Lucide, couleur hex, gradient CSS.</p>
+                        <table class="data-table" style="font-size: 0.72rem;">
+                            <tr><td style="color: #58BF94;">● V1</td><td>Social et relationnel</td></tr>
+                            <tr><td style="color: #86C0CF;">● V2</td><td>Administrative</td></tr>
+                            <tr><td style="color: #F5A623;">● V3</td><td>Santé physique et psychologique</td></tr>
+                            <tr><td style="color: #EF4444;">● V4</td><td>Fragilité du proche</td></tr>
+                            <tr><td style="color: #7748F6;">● V5</td><td>Parcours médical du proche</td></tr>
+                        </table>
+                    </div>
+                    <div class="highlight-box" style="font-size: 0.72rem; margin-top: 10px;">
+                        <strong>⚠️ Seul fichier avec une dépendance React</strong> (lucide-react pour les icônes). À adapter si on sort du contexte React.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>5 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 6 — dbTypes.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🗄️ dbTypes.ts — 125 lignes</div>
+            <h2>15 interfaces — miroir exact du schéma Supabase</h2>
+            <p class="section-desc">Chaque interface = 1 table. Zéro logique, que des types.</p>
+            <div class="grid-2" style="gap: 12px;">
+                <div>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <thead><tr><th>Interface</th><th>Table DB</th><th>Champs clés</th></tr></thead>
+                        <tbody>
+                            <tr><td>DBVulnerability</td><td>vulnerabilities</td><td>id, name, weight</td></tr>
+                            <tr><td>DBQuestion</td><td>questions</td><td>id, question_text, is_trigger, aidance</td></tr>
+                            <tr><td>DBMicroParcours</td><td>micro_parcours</td><td>id, vulnerability_id, nom, objectif</td></tr>
+                            <tr><td>DBCategory</td><td>categories</td><td>id, mp_id, nom, ordre</td></tr>
+                            <tr><td>DBActivationRule</td><td>activation_rules</td><td>id, category_id, niveau, condition_logic</td></tr>
+                            <tr><td>DBScoringQuestion</td><td>scoring_questions</td><td>question_id, response_text, score</td></tr>
+                            <tr><td>DBScoringThreshold</td><td>scoring_thresholds</td><td>vulnerability_id, level, min/max_score</td></tr>
+                            <tr><td>DBRecommendation</td><td>recommendations</td><td>wording_utilisateur, wording_idec</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <thead><tr><th>Interface</th><th>Table DB</th><th>Champs clés</th></tr></thead>
+                        <tbody>
+                            <tr><td>DBMicroTache</td><td>micro_taches</td><td>type, acteur[], wording_std/ccc/crit</td></tr>
+                            <tr><td>DBSuiviQuestion</td><td>suivi_questions</td><td>question_text, mp_id, parent_id</td></tr>
+                            <tr><td>DBContentBlock</td><td>content_blocks</td><td>entity_type, entity_id, content</td></tr>
+                            <tr><td>DBCRTemplate</td><td>cr_templates</td><td>template_type, vulnerability_id, content</td></tr>
+                            <tr><td>DBPersona</td><td>personas</td><td>name, story, traits, aidance_types</td></tr>
+                            <tr><td>DBPersonaAnswer</td><td>persona_answers</td><td>persona_id, question_id, answer</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="code-block" style="font-size: 0.65rem; margin-top: 10px;"><span class="cm">// Agrégat de toutes les données</span>
+<span class="kw">export interface</span> MonkaData {
+  vulnerabilities: DBVulnerability[]
+  questions: DBQuestion[]
+  <span class="cm">// ... 13 autres tables</span>
+  loaded: <span class="kw">boolean</span>; error: <span class="kw">string</span> | <span class="kw">null</span>
+}</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>6 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 7 — queries.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔌 queries.ts — 90 lignes</div>
+            <h2>Le fetch Supabase — 15 tables en parallèle</h2>
+            <p class="section-desc">Une seule fonction async qui charge tout, avec cache intégré</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div>
+                    <div class="code-block" style="font-size: 0.63rem;"><span class="kw">let</span> cachedData: MonkaData | <span class="kw">null</span> = <span class="kw">null</span>
+
+<span class="kw">export async function</span> <span class="fn">fetchAllMonkaData</span>(): Promise&lt;MonkaData&gt; {
+  <span class="kw">if</span> (cachedData?.loaded) <span class="kw">return</span> cachedData  <span class="cm">// Cache hit</span>
+
+  <span class="kw">const</span> [vulnRes, questRes, mpRes, ...rest] =
+    <span class="kw">await</span> Promise.all([
+      supabase.from(<span class="st">'vulnerabilities'</span>).select(<span class="st">'*'</span>),
+      supabase.from(<span class="st">'questions'</span>).select(<span class="st">'*'</span>),
+      supabase.from(<span class="st">'micro_parcours'</span>).select(<span class="st">'*'</span>),
+      <span class="cm">// ... 12 autres tables</span>
+    ])
+
+  <span class="cm">// Error handling → return empty MonkaData with error</span>
+  <span class="cm">// Success → cachedData = { ... }, return cachedData</span>
+}
+
+<span class="kw">export function</span> <span class="fn">invalidateCache</span>() {
+  cachedData = <span class="kw">null</span>
+}</div>
+                </div>
+                <div class="card">
+                    <h4>📌 En français</h4>
+                    <p style="margin-bottom: 12px;"><strong style="color: var(--text);">fetchAllMonkaData()</strong> fait 15 requêtes Supabase en parallèle (Promise.all) et retourne un objet MonkaData complet.</p>
+                    <table class="data-table" style="font-size: 0.75rem;">
+                        <tr><td>🚀</td><td><strong>Parallélisme</strong></td><td>15 SELECT en même temps → ~200ms total</td></tr>
+                        <tr><td>💾</td><td><strong>Cache mémoire</strong></td><td>1 seul fetch par session utilisateur</td></tr>
+                        <tr><td>🔄</td><td><strong>invalidateCache()</strong></td><td>Réinitialise le cache (dev/refresh)</td></tr>
+                        <tr><td>⚠️</td><td><strong>Error handling</strong></td><td>Retourne MonkaData vide avec message d'erreur</td></tr>
+                    </table>
+                    <div class="highlight-box" style="font-size: 0.72rem; margin-top: 10px;">
+                        <strong>⚠️ Fichier à réécrire pour la prod :</strong> remplacer l'import Supabase par l'API du backend V2. Le reste du Kernel ne change pas.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>7 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 8 — helpers.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🔧 helpers.ts — 196 lignes</div>
+            <h2>30+ helpers — accès données et modèle conditionnel</h2>
+            <p class="section-desc">Fonctions utilitaires pour naviguer dans le graphe de données Monka</p>
+            <div class="grid-3" style="gap: 12px; margin-bottom: 14px;">
+                <div class="card" style="border-top: 3px solid #58BF94;">
+                    <h4>Getters basiques</h4>
+                    <p style="font-size: 0.7rem; line-height: 1.4;">
+                        getQuestionsForVuln()<br>
+                        getMPsForVuln()<br>
+                        getCategoriesForMP()<br>
+                        getRulesForCategory()<br>
+                        getRecosForMP()<br>
+                        getMTsForVuln()<br>
+                        getScoringForVuln()
+                    </p>
+                </div>
+                <div class="card" style="border-top: 3px solid #86C0CF;">
+                    <h4>Build maps</h4>
+                    <p style="font-size: 0.7rem; line-height: 1.4;">
+                        buildQuestionMPMap()<br>
+                        buildMPMap()<br>
+                        buildMPVulnMap()<br>
+                        buildScoringMap()<br>
+                        <br>
+                        → Pré-calcule des dictionnaires<br>
+                        pour accès O(1)
+                    </p>
+                </div>
+                <div class="card" style="border-top: 3px solid #F5A623;">
+                    <h4>Modèle additif</h4>
+                    <p style="font-size: 0.7rem; line-height: 1.4;">
+                        getActiveAidanceBlocks()<br>
+                        getActiveQuestions()<br>
+                        getTriggerQuestions()<br>
+                        <br>
+                        → Filtrage dynamique selon<br>
+                        le profil (N3 → blocs)
+                    </p>
+                </div>
+            </div>
+            <div class="code-block" style="font-size: 0.63rem;"><span class="cm">// Le modèle additif — adapte le questionnaire selon le profil</span>
+<span class="kw">const</span> N3_TO_AIDANCE_BLOCKS = {
+  <span class="st">"personne en perte d'autonomie"</span>: [<span class="st">'Personne Agée'</span>],
+  <span class="st">"personne en situation de handicap"</span>: [<span class="st">'Handicap'</span>],
+  <span class="st">"personne atteinte maladie chronique"</span>: [<span class="st">'Maladie Chronique'</span>],
+  <span class="cm">// ...</span>
+}
+<span class="cm">// Si l'aidant aide un enfant (< 20 ans) → retirer "Personne Agée", ajouter "Enfant"</span>
+<span class="kw">const</span> ENFANT_AGE_BRACKETS = [<span class="st">'- 15 ans'</span>, <span class="st">'15-20 ans'</span>]</div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>8 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 9 — supabaseData.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📦 supabaseData.ts — 40 lignes</div>
+            <h2>Barrel re-export — rétrocompatibilité</h2>
+            <p class="section-desc">Réexporte tout depuis dbTypes + queries + helpers pour ne rien casser</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div>
+                    <div class="code-block" style="font-size: 0.68rem;"><span class="cm">// DB Types</span>
+<span class="kw">export type</span> {
+  DBVulnerability, DBQuestion, DBMicroParcours,
+  DBCategory, DBActivationRule, DBScoringQuestion,
+  <span class="cm">// ... 9 autres types</span>
+  MonkaData,
+} <span class="kw">from</span> <span class="st">'./dbTypes'</span>
+
+<span class="cm">// Queries</span>
+<span class="kw">export</span> { fetchAllMonkaData, invalidateCache } <span class="kw">from</span> <span class="st">'./queries'</span>
+
+<span class="cm">// Helpers (30+ functions)</span>
+<span class="kw">export</span> {
+  getQuestionsForVuln, getMPsForVuln,
+  getCategoriesForMP, getRulesForCategory,
+  <span class="cm">// ... 26 autres helpers</span>
+} <span class="kw">from</span> <span class="st">'./helpers'</span></div>
+                </div>
+                <div class="card">
+                    <h4>📌 En français</h4>
+                    <p>Ce fichier ne contient <strong style="color: var(--text);">aucune logique</strong>. C'est un <strong style="color: var(--text);">barrel file</strong> — un point d'entrée unique qui réexporte tout.</p>
+                    <p style="margin-top: 10px;">Avant le split V2-08, tout était dans un seul fichier de 600+ lignes. Maintenant c'est 3 modules séparés, mais les <code>import</code> existants continuent de fonctionner.</p>
+                    <div class="highlight-box" style="font-size: 0.72rem; margin-top: 10px;">
+                        <strong>Pattern standard :</strong> très courant en TypeScript pour les refactorings — on split le code sans casser les imports.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>9 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 10 — engineHealthScore.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🏥 engineHealthScore.ts — 156 lignes</div>
+            <h2>Health Score /100 — 6 métriques pondérées</h2>
+            <p class="section-desc">Pure TS, zéro React. Mesure la robustesse du moteur, pas la santé du patient.</p>
+            <div class="grid-2" style="gap: 14px; margin-bottom: 10px;">
+                <div class="card">
+                    <h4>Les 6 métriques</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <thead><tr><th>ID</th><th>Métrique</th><th>Poids</th></tr></thead>
+                        <tbody>
+                            <tr><td>M1</td><td>Couverture questions (dans ≥1 règle)</td><td><strong>25%</strong></td></tr>
+                            <tr><td>M2</td><td>Équilibre niveaux (std+ccc+crit par MP)</td><td><strong>20%</strong></td></tr>
+                            <tr><td>M3</td><td>Complétude wording (3 niveaux par MT)</td><td><strong>20%</strong></td></tr>
+                            <tr><td>M4</td><td>Couverture scoring (questions avec score)</td><td><strong>15%</strong></td></tr>
+                            <tr><td>M5</td><td>Complétude acteurs (MT avec acteur[])</td><td><strong>10%</strong></td></tr>
+                            <tr><td>M6</td><td>Intégrité FK (liens cat→MP, rule→cat...)</td><td><strong>10%</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div class="code-block" style="font-size: 0.65rem;"><span class="cm">// Grade basé sur le score composite</span>
+<span class="kw">function</span> <span class="fn">gradeFromScore</span>(score: <span class="kw">number</span>) {
+  <span class="kw">if</span> (score >= 90) <span class="kw">return</span> <span class="st">'A'</span>
+  <span class="kw">if</span> (score >= 75) <span class="kw">return</span> <span class="st">'B'</span>
+  <span class="kw">if</span> (score >= 60) <span class="kw">return</span> <span class="st">'C'</span>
+  <span class="kw">if</span> (score >= 40) <span class="kw">return</span> <span class="st">'D'</span>
+  <span class="kw">return</span> <span class="st">'F'</span>
+}
+
+<span class="cm">// Score composite = Σ(métrique × poids)</span>
+<span class="kw">export function</span> <span class="fn">computeEngineHealth</span>(data) {
+  <span class="kw">const</span> metrics = [M1, M2, M3, M4, M5, M6]
+  <span class="kw">const</span> score = metrics.reduce(
+    (sum, m) => sum + m.value * m.weight, 0)
+  <span class="kw">return</span> { score, metrics, grade }
+}</div>
+                    <div class="highlight-box" style="font-size: 0.72rem; margin-top: 10px;">
+                        <strong>Transférable directement</strong> — c'est du QA embarqué dans le moteur. Outil de monitoring de la qualité des données cliniques.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>10 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 11 — integrityChecks.ts ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🛡️ integrityChecks.ts — 139 lignes</div>
+            <h2>6 vérifications d'intégrité sur la DB</h2>
+            <p class="section-desc">Filet de sécurité — détecte les incohérences entre tables avant l'exécution</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div class="card">
+                    <h4>Les 6 checks</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td style="color: var(--primary-light);">C1</td><td><strong>FK Integrity</strong></td><td>Tous les liens cat→MP, rule→cat, reco→cat, MT→cat existent</td></tr>
+                        <tr><td style="color: var(--primary-light);">C2</td><td><strong>MP Completeness</strong></td><td>Chaque MP a ≥1 catégorie, ≥1 règle, ≥1 reco, ≥1 MT</td></tr>
+                        <tr><td style="color: var(--primary-light);">C3</td><td><strong>Reco Wordings</strong></td><td>Chaque reco a wording_idec ET wording_utilisateur</td></tr>
+                        <tr><td style="color: var(--primary-light);">C4</td><td><strong>Scoring Orphans</strong></td><td>Pas de scoring_questions référençant une question qui n'existe pas</td></tr>
+                        <tr><td style="color: var(--primary-light);">C5</td><td><strong>MT Actors</strong></td><td>Chaque micro-tâche a au moins 1 acteur défini</td></tr>
+                        <tr><td style="color: var(--primary-light);">C6</td><td><strong>Content Blocks</strong></td><td>Couverture des 5 entity_types attendus</td></tr>
+                    </table>
+                </div>
+                <div>
+                    <div class="code-block" style="font-size: 0.65rem;"><span class="cm">// Résultat structuré</span>
+<span class="kw">interface</span> IntegrityReport {
+  checks: IntegrityCheck[]
+  passed: <span class="kw">number</span>
+  warnings: <span class="kw">number</span>
+  failures: <span class="kw">number</span>
+  overallStatus: <span class="st">'pass'</span> | <span class="st">'warn'</span> | <span class="st">'fail'</span>
+}
+
+<span class="cm">// Seuils : 0 issues = pass, ≤2 = warn, >2 = fail</span>
+<span class="kw">function</span> <span class="fn">check</span>(id, label, count, issues) {
+  <span class="kw">const</span> status = issues === 0 ? <span class="st">'pass'</span>
+    : issues <= 2 ? <span class="st">'warn'</span> : <span class="st">'fail'</span>
+  <span class="kw">return</span> { id, label, status, count, issues }
+}</div>
+                    <div class="highlight-box" style="font-size: 0.72rem; margin-top: 10px;">
+                        <strong>Différence avec engineHealthScore :</strong> Health Score = qualité globale (score /100). Integrity Checks = pass/fail binaire sur la cohérence des données.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>11 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 12 — buildCoverageMatrix & crMedecinPhrases ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📊 buildCoverageMatrix.ts + crMedecinPhrases.ts</div>
+            <h2>Matrice de couverture + Templates CR Médecin</h2>
+            <p class="section-desc">Deux fichiers métier complémentaires — analyse et restitution clinique</p>
+            <div class="grid-2" style="gap: 14px;">
+                <div class="card" style="border-top: 3px solid #86C0CF;">
+                    <h4>📊 buildCoverageMatrix.ts — 77 lignes</h4>
+                    <p style="margin-bottom: 8px;">Construit une <strong style="color: var(--text);">matrice question × MP</strong> à partir des règles d'activation.</p>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td><strong>CoverageCell</strong></td><td>questionId × mpId → combien de règles</td></tr>
+                        <tr><td><strong>CoverageStats</strong></td><td>questions couvertes, orphelines, % couverture</td></tr>
+                        <tr><td><strong>extractQuestionIds()</strong></td><td>Parse le JSONB condition_logic</td></tr>
+                        <tr><td><strong>buildCoverageMatrix()</strong></td><td>Point d'entrée → retourne la matrice complète</td></tr>
+                    </table>
+                    <p style="font-size: 0.7rem; margin-top: 8px; color: var(--text-dim);">→ Utilisé dans le Dashboard QA du simulateur pour visualiser les questions orphelines.</p>
+                </div>
+                <div class="card" style="border-top: 3px solid #F5A623;">
+                    <h4>📄 crMedecinPhrases.ts — 165 lignes</h4>
+                    <p style="margin-bottom: 8px;"><strong style="color: var(--text);">Référentiel fermé de phrases normées</strong> pour le Compte Rendu Médecin. Aucun texte libre.</p>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td><strong>CR_VULN_LABELS</strong></td><td>Labels médicaux officiels par V</td></tr>
+                        <tr><td><strong>CR_PHR_B2</strong></td><td>20 phrases (5V × 4 niveaux) de synthèse situationnelle</td></tr>
+                        <tr><td><strong>CR_OBJECTIFS</strong></td><td>3 objectifs cliniques : Sécurisation, Continuité, Soutenabilité</td></tr>
+                        <tr><td><strong>generateConclusionPhrases()</strong></td><td>3 phrases de conclusion automatiques</td></tr>
+                        <tr><td><strong>formatActeur()</strong></td><td>IDEC, APA, MDPH → labels lisibles</td></tr>
+                    </table>
+                    <p style="font-size: 0.7rem; margin-top: 8px; color: var(--text-dim);">→ Aucune valeur diagnostique ni prescriptive. Projection passive de l'état moteur.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>12 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 13 — TESTS ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🧪 Tests — 3 fichiers</div>
+            <h2>Tests unitaires embarqués</h2>
+            <p class="section-desc">Couverture des 3 fichiers critiques du Kernel</p>
+            <div class="grid-3" style="gap: 14px; margin-bottom: 14px;">
+                <div class="card" style="border-top: 3px solid #58BF94;">
+                    <h4>clinicalEngine.test.ts</h4>
+                    <p style="font-size: 0.72rem; margin-bottom: 6px;">~100 lignes</p>
+                    <table class="data-table" style="font-size: 0.68rem;">
+                        <tr><td>✅</td><td>evaluateCondition — 9 opérateurs</td></tr>
+                        <tr><td>✅</td><td>evaluateRule — logique AND</td></tr>
+                        <tr><td>✅</td><td>computeScore — single/multi</td></tr>
+                        <tr><td>✅</td><td>runEngine — intégration</td></tr>
+                    </table>
+                </div>
+                <div class="card" style="border-top: 3px solid #86C0CF;">
+                    <h4>engineHealthScore.test.ts</h4>
+                    <p style="font-size: 0.72rem; margin-bottom: 6px;">~120 lignes</p>
+                    <table class="data-table" style="font-size: 0.68rem;">
+                        <tr><td>✅</td><td>computeEngineHealth — score composite</td></tr>
+                        <tr><td>✅</td><td>gradeFromScore — A/B/C/D/F</td></tr>
+                        <tr><td>✅</td><td>Chaque métrique M1-M6</td></tr>
+                    </table>
+                </div>
+                <div class="card" style="border-top: 3px solid #F5A623;">
+                    <h4>integrityChecks.test.ts</h4>
+                    <p style="font-size: 0.72rem; margin-bottom: 6px;">~100 lignes</p>
+                    <table class="data-table" style="font-size: 0.68rem;">
+                        <tr><td>✅</td><td>runIntegrityChecks — rapport complet</td></tr>
+                        <tr><td>✅</td><td>Checks C1-C6 individuels</td></tr>
+                        <tr><td>✅</td><td>Cas pass / warn / fail</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="highlight-box" style="font-size: 0.78rem;">
+                <strong>Pour la prod :</strong> Ces tests couvrent le cœur du moteur (~60% du code critique). À compléter avec des tests d'intégration end-to-end et des tests sur les helpers. Le framework de test (Vitest) est déjà configuré.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>13 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 14 — RÉCAP ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🎯 Récapitulatif</div>
+            <h2>Ce qu'il faut retenir</h2>
+            <p class="section-desc">15 fichiers, 4 couches, un seul objectif : logique clinique transférable</p>
+            <div class="grid-2" style="gap: 14px; margin-bottom: 14px;">
+                <div class="card" style="border-left: 3px solid var(--success);">
+                    <h4>✅ Transférables directement (6 fichiers)</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td>clinicalEngine.ts</td><td>320 L</td><td>Cœur algorithmique</td></tr>
+                        <tr><td>types.ts</td><td>57 L</td><td>Types métier</td></tr>
+                        <tr><td>dbTypes.ts</td><td>125 L</td><td>Interfaces DB</td></tr>
+                        <tr><td>engineHealthScore.ts</td><td>156 L</td><td>QA embarqué</td></tr>
+                        <tr><td>integrityChecks.ts</td><td>139 L</td><td>Filet de sécurité</td></tr>
+                        <tr><td>crMedecinPhrases.ts</td><td>165 L</td><td>Templates CR</td></tr>
+                    </table>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--warning);">
+                    <h4>🟡 À adapter (4 fichiers)</h4>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr><td>helpers.ts</td><td>196 L</td><td>Garder les helpers, adapter les imports</td></tr>
+                        <tr><td>constants.ts</td><td>83 L</td><td>Retirer lucide-react</td></tr>
+                        <tr><td>queries.ts</td><td>90 L</td><td>Remplacer Supabase par API V2</td></tr>
+                        <tr><td>supabaseData.ts</td><td>40 L</td><td>Refaire le barrel selon la stack</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="stats-row" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="stat-card">
+                    <div class="number">~1800</div>
+                    <div class="label">Lignes TypeScript</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">0</div>
+                    <div class="label">Dépendance React<br>(dans le Kernel)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">6</div>
+                    <div class="label">Checks d'intégrité</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100%</div>
+                    <div class="label">Déterministe</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">Engine Explainer</span><span>14 / 14</span></div>
+    </div>
+
+</body>
+
+</html>

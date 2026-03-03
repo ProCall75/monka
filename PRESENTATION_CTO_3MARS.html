@@ -229,6 +229,13 @@
             align-content: center;
         }
 
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-content: center;
+        }
+
         .card {
             padding: 20px;
             background: var(--bg-card);
@@ -565,7 +572,7 @@
             PRAGMA × CTO</p>
         <div class="hero-meta">
             <div class="hero-meta-item">👤 <strong>Antonin Rimaud</strong></div>
-            <div class="hero-meta-item">👤 <strong>Marwane</strong></div>
+            <div class="hero-meta-item">👤 <strong>Marwane El Moutribi</strong></div>
             <div class="hero-meta-item">🏢 <strong>PRAGMA Studio</strong></div>
         </div>
     </div>
@@ -580,38 +587,38 @@
                 <div class="card">
                     <div class="icon">🔬</div>
                     <h4>1. Le Kernel (20 min)</h4>
-                    <p>Contexte, pipeline, concepts clés, code walkthrough, DB</p>
+                    <p>Contexte, concepts clés, base de données, algorithme, code transférable</p>
                     <div class="action-label">→ On ouvre le code + la DB</div>
                 </div>
                 <div class="card">
                     <div class="icon">🎯</div>
-                    <h4>2. Gap & QA (10 min)</h4>
-                    <p>Ce qui manque pour la prod, Greenfield vs Brownfield, nos checks qualité</p>
+                    <h4>2. Gap & Proto (10 min)</h4>
+                    <p>Ce qui manque pour la prod, Greenfield vs Brownfield, prototype UI</p>
                     <div class="action-label">→ Obj.1 : ready for production</div>
                 </div>
                 <div class="card">
                     <div class="icon">🎨</div>
-                    <h4>3. Proto UI (10 min)</h4>
-                    <p>35 composants, design system, démo live Marwane</p>
-                    <div class="action-label">→ Démo Vercel</div>
+                    <h4>3. Architecture (10 min)</h4>
+                    <p>Options d'architecture, stack possible, workflow qualité</p>
+                    <div class="action-label">→ Décisions techniques</div>
                 </div>
             </div>
             <div class="grid-2" style="gap: 14px; flex: unset; margin-top: 14px;">
                 <div class="card">
-                    <div class="icon">🏗️</div>
-                    <h4>4. Architecture & Workflow (15 min)</h4>
-                    <p>Stack proposée, transférabilité, SOPs, estimations</p>
-                    <div class="action-label">→ Questions au CTO</div>
+                    <div class="icon">⏱️</div>
+                    <h4>4. Chiffrage (10 min)</h4>
+                    <p>Estimations comparées, benchmark marché vs notre vélocité</p>
+                    <div class="action-label">→ Obj.2 : timeline réaliste</div>
                 </div>
                 <div class="card">
                     <div class="icon">🤝</div>
                     <h4>5. Collaboration (5 min)</h4>
-                    <p>CTO cadre → PRAGMA implémente. Sprint pilote ?</p>
+                    <p>CTO cadre → PRAGMA implémente. Modèle de collaboration</p>
                     <div class="action-label">→ Next steps</div>
                 </div>
             </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>2 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>2 / 14</span></div>
     </div>
 
     <!-- ════════════════════ SLIDE 3 — CONTEXTE ════════════════════ -->
@@ -643,7 +650,7 @@
                 prod = votre architecture + notre vélocité.
             </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>3 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>3 / 14</span></div>
     </div>
 
     <!-- ════════════════════ SLIDE 4 — CHIFFRES ════════════════════ -->
@@ -662,15 +669,15 @@
                     <div class="label">Micro-Parcours</div>
                 </div>
                 <div class="stat-card">
-                    <div class="number">235</div>
+                    <div class="number">240</div>
                     <div class="label">Règles d'activation</div>
                 </div>
                 <div class="stat-card">
-                    <div class="number">198</div>
+                    <div class="number">202</div>
                     <div class="label">Recommandations</div>
                 </div>
                 <div class="stat-card">
-                    <div class="number">369</div>
+                    <div class="number">390</div>
                     <div class="label">Micro-Tâches</div>
                 </div>
             </div>
@@ -681,7 +688,7 @@
                 </div>
                 <div class="card">
                     <h4>✅ 195 questions structurées</h4>
-                    <p>130 socle + 20 activables + 15 triggers + 30 suivi. Données fournies par Monka, liées et
+                    <p>165 questions principales + 30 questions de suivi. Données fournies par Monka, liées et
                         structurées par PRAGMA.</p>
                 </div>
                 <div class="card">
@@ -691,62 +698,10 @@
                 </div>
             </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>4 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>4 / 14</span></div>
     </div>
 
-    <!-- ════════════════════ SLIDE 5 — PIPELINE ════════════════════ -->
-    <div class="slide">
-        <div class="slide-body">
-            <div class="section-label">⚙️ Algorithme</div>
-            <h2>Le pipeline du moteur clinique</h2>
-            <p class="section-desc">De la réponse au questionnaire jusqu'aux micro-tâches personnalisées</p>
-            <div class="pipeline-flow">
-                <div class="pipeline-box active">
-                    <h4>📝 Questionnaire</h4>
-                    <p>130 socle + 20 activables<br>15 triggers</p>
-                </div>
-                <div class="pipeline-arrow">→</div>
-                <div class="pipeline-box">
-                    <h4>🎯 Triggers</h4>
-                    <p>Adapte selon<br>profil aidant</p>
-                </div>
-                <div class="pipeline-arrow">→</div>
-                <div class="pipeline-box active">
-                    <h4>⚡ Rules Engine</h4>
-                    <p>235 règles<br>9 opérateurs</p>
-                </div>
-                <div class="pipeline-arrow">→</div>
-                <div class="pipeline-box">
-                    <h4>📌 Catégories</h4>
-                    <p>73 axes<br>3 niveaux</p>
-                </div>
-                <div class="pipeline-arrow">→</div>
-                <div class="pipeline-box active">
-                    <h4>💡 Recos + MT</h4>
-                    <p>198 recos<br>369 tâches</p>
-                </div>
-            </div>
-            <div class="code-block"><span class="cm">// Point d'entrée principal — clinicalEngine.ts</span>
-                <span class="kw">function</span> <span class="fn">runEngine</span>(data: MonkaData, answers: Answers):
-                EngineOutput {
-                <span class="kw">const</span> activated = <span class="fn">getActivatedCategories</span>(data, answers)
-                <span class="cm">// 235 rules → catégories</span>
-                <span class="kw">const</span> scores = VULN_IDS.map(v => <span class="fn">computeScore</span>(data,
-                answers, v)) <span class="cm">// Score par V</span>
-                <span class="kw">return</span> { activatedCategories, activatedMPIds, scores, totalScore }
-                }
-            </div>
-            <div class="action-label" style="margin-top: 14px;">💻 → On ouvre clinicalEngine.ts et on montre
-                evaluateCondition() en live</div>
-            <div class="highlight-box" style="font-size: 0.75rem; margin-top: 8px;">
-                <strong>Le Kernel est framework-agnostic</strong> — il ne connaît ni React ni Supabase. Monolithe
-                modulaire par design. Si demain on passe sur Flutter ou Vue, le Kernel reste identique.
-            </div>
-        </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>5 / 15</span></div>
-    </div>
-
-    <!-- ════════════════════ SLIDE 6 — CONCEPTS CLÉS ════════════════════ -->
+    <!-- ════════════════════ SLIDE 5 — CONCEPTS CLÉS ════════════════════ -->
     <div class="slide">
         <div class="slide-body">
             <div class="section-label">🧠 Concepts Clés</div>
@@ -781,10 +736,10 @@
                 IDEC (directif professionnel). Les mêmes actions, un langage adapté.
             </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>6 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>5 / 14</span></div>
     </div>
 
-    <!-- ════════════════════ SLIDE 7 — MODÈLE DE DONNÉES ════════════════════ -->
+    <!-- ════════════════════ SLIDE 6 — MODÈLE DE DONNÉES ════════════════════ -->
     <div class="slide">
         <div class="slide-body">
             <div class="section-label">🗄️ Base de Données</div>
@@ -832,25 +787,25 @@
                     </tr>
                     <tr>
                         <td>activation_rules</td>
-                        <td>235</td>
-                        <td>Règles SI/ALORS (logique AND, 9 opérateurs)</td>
+                        <td>240</td>
+                        <td>Règles SI/ALORS (logique AND/OR, 9 opérateurs)</td>
                         <td><span class="badge blue">Non</span></td>
                     </tr>
                     <tr>
                         <td>recommendations</td>
-                        <td>198</td>
+                        <td>202</td>
                         <td>Conseils double wording (aidant + IDEC)</td>
                         <td><span class="badge blue">Non</span></td>
                     </tr>
                     <tr>
                         <td>micro_taches</td>
-                        <td>369</td>
+                        <td>390</td>
                         <td>Actions avec acteur, domaine, type</td>
                         <td><span class="badge blue">Non</span></td>
                     </tr>
                     <tr>
                         <td>scoring_questions</td>
-                        <td>321</td>
+                        <td>345</td>
                         <td>Coefficients de scoring par V</td>
                         <td><span class="badge blue">Non</span></td>
                     </tr>
@@ -875,82 +830,138 @@
                 </tbody>
             </table>
             <div class="highlight-box" style="margin-top: 10px; font-size: 0.78rem;">
-                <strong>* Tables à créer pour MyMonka V2.</strong> La logique clinique (235 règles, 198 recos...) = pas
+                <strong>* Tables à créer pour MyMonka V2.</strong> La logique clinique (240 règles, 202 recos...) = pas
                 de données patient → flexible. Les données utilisateur → HDS obligatoire.
             </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>7 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>6 / 14</span></div>
     </div>
 
-    <!-- ════════════════════ SLIDE 8 — QA + APPROCHE PROACTIVE ════════════════════ -->
+    <!-- ════════════════════ SLIDE 7 — PIPELINE ════════════════════ -->
     <div class="slide">
         <div class="slide-body">
-            <div class="section-label">✅ Qualité & Approche</div>
-            <h2>Vérification intégrée + approche proactive</h2>
-            <p class="section-desc">On ne se contente pas d'exécuter — on anticipe et on facilite</p>
-            <div class="grid-2" style="gap: 20px;">
-                <div class="card">
-                    <h4>🔍 Integrity Checks (6 vérifications auto)</h4>
-                    <p style="margin-bottom: 12px;">À chaque modification du Kernel, rapport structuré pass/warn/fail :
-                    </p>
-                    <table class="data-table">
-                        <tr>
-                            <td>C1 — Intégrité FK</td>
-                            <td><span class="badge green">PASS</span></td>
-                        </tr>
-                        <tr>
-                            <td>C2 — Complétude MPs</td>
-                            <td><span class="badge green">PASS</span></td>
-                        </tr>
-                        <tr>
-                            <td>C3 — Wordings Recos</td>
-                            <td><span class="badge green">PASS</span></td>
-                        </tr>
-                        <tr>
-                            <td>C4 — Scoring Orphelins</td>
-                            <td><span class="badge green">PASS</span></td>
-                        </tr>
-                        <tr>
-                            <td>C5 — Acteurs MTs</td>
-                            <td><span class="badge green">PASS</span></td>
-                        </tr>
-                        <tr>
-                            <td>C6 — Content Blocks</td>
-                            <td><span class="badge green">PASS</span></td>
-                        </tr>
-                    </table>
-                    <p style="margin-top: 10px; font-size: 0.75rem;">Filet de sécurité automatique — rien ne casse sans
-                        qu'on le sache.</p>
+            <div class="section-label">⚙️ Algorithme</div>
+            <h2>Le pipeline du moteur clinique</h2>
+            <p class="section-desc">De la réponse au questionnaire jusqu'aux micro-tâches personnalisées</p>
+            <div class="pipeline-flow">
+                <div class="pipeline-box active">
+                    <h4>📝 Questionnaire</h4>
+                    <p>130 socle + 20 activables<br>15 triggers</p>
                 </div>
-                <div class="card" style="border-left: 3px solid var(--primary);">
-                    <h4>🚀 Notre approche proactive</h4>
-                    <p style="margin-bottom: 10px;">On connaît le produit en profondeur. Ce que ça change concrètement :
-                    </p>
-                    <table class="data-table">
-                        <tr>
-                            <td>Métier clinique</td>
-                            <td>On comprend CCC, ASR, V1-V5, double wording</td>
-                        </tr>
-                        <tr>
-                            <td>Données</td>
-                            <td>On sait quelles tables contiennent quoi</td>
-                        </tr>
-                        <tr>
-                            <td>Logique</td>
-                            <td>On peut expliquer chaque règle d'activation</td>
-                        </tr>
-                        <tr>
-                            <td>Pour le CTO</td>
-                            <td>Moins de specs à rédiger — on traduit le besoin</td>
-                        </tr>
-                    </table>
-                    <p style="margin-top: 10px; font-size: 0.75rem;"><strong
-                            style="color: var(--primary-light);">Résultat :</strong> Le CTO se concentre sur
-                        l'architecture, on se charge de l'implémentation.</p>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box">
+                    <h4>🎯 Triggers</h4>
+                    <p>Adapte selon<br>profil aidant</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box active">
+                    <h4>⚡ Rules Engine</h4>
+                    <p>240 règles<br>9 opérateurs</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box">
+                    <h4>📌 Catégories</h4>
+                    <p>73 axes<br>3 niveaux</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-box active">
+                    <h4>💡 Recos + MT</h4>
+                    <p>202 recos<br>390 tâches</p>
                 </div>
             </div>
+            <div class="code-block"><span class="cm">// Point d'entrée principal — clinicalEngine.ts</span>
+                <span class="kw">function</span> <span class="fn">runEngine</span>(data: MonkaData, answers: Answers):
+                EngineOutput {
+                <span class="kw">const</span> activated = <span class="fn">getActivatedCategories</span>(data, answers)
+                <span class="cm">// 240 rules → catégories</span>
+                <span class="kw">const</span> scores = VULN_IDS.map(v => <span class="fn">computeScore</span>(data,
+                answers, v)) <span class="cm">// Score par V</span>
+                <span class="kw">return</span> { activatedCategories, activatedMPIds, scores, totalScore }
+                }
+            </div>
+            <div class="action-label" style="margin-top: 14px;">💻 → On ouvre clinicalEngine.ts et on montre
+                evaluateCondition() en live</div>
+            <div class="highlight-box" style="font-size: 0.75rem; margin-top: 8px;">
+                <strong>Le Kernel est framework-agnostic</strong> — il ne connaît ni React ni Supabase. Monolithe
+                modulaire par design. Si demain on passe sur Flutter ou Vue, le Kernel reste identique.
+            </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>8 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>7 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 8 — TRANSFÉRABILITÉ ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">📦 Extraction</div>
+            <h2>Ce qui est transférable → MyMonka V2</h2>
+            <p class="section-desc">6 fichiers copiables tels quels, 2 à adapter selon la stack V2</p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fichier</th>
+                        <th>Lignes</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>clinicalEngine.ts</td>
+                        <td>320</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>TS pur, 0 dépendance React</td>
+                    </tr>
+                    <tr>
+                        <td>engineHealthScore.ts</td>
+                        <td>156</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Outil de QA intégré</td>
+                    </tr>
+                    <tr>
+                        <td>integrityChecks.ts</td>
+                        <td>139</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Filet de sécurité</td>
+                    </tr>
+                    <tr>
+                        <td>types.ts + dbTypes.ts</td>
+                        <td>182</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Types métier + 15 interfaces DB</td>
+                    </tr>
+                    <tr>
+                        <td>helpers.ts</td>
+                        <td>196</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Helpers indépendants</td>
+                    </tr>
+                    <tr>
+                        <td>crMedecinPhrases.ts</td>
+                        <td>—</td>
+                        <td><span class="badge green">✅ Direct</span></td>
+                        <td>Templates CR Médecin</td>
+                    </tr>
+                    <tr>
+                        <td>queries.ts</td>
+                        <td>90</td>
+                        <td><span class="badge red">❌ Réécrire</span></td>
+                        <td>Remplacer par API vers DB HDS</td>
+                    </tr>
+                    <tr>
+                        <td>constants.ts + hooks</td>
+                        <td>83</td>
+                        <td><span class="badge yellow">🟡 Adapter</span></td>
+                        <td>Adapter selon la stack V2</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-box" style="font-size: 0.75rem; margin-top: 12px;">
+                <strong>Framework-agnostic :</strong> Si MyMonka V2 passe sur React Native, Flutter ou Vue — le Kernel
+                et la
+                logique métier restent identiques. Seule la couche UI change.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>8 / 14</span></div>
     </div>
 
     <!-- ════════════════════ SLIDE 9 — GAP TO PRODUCTION ════════════════════ -->
@@ -1030,81 +1041,153 @@
                 conventions, sécurité, infra) — on exécute dans ce cadre avec notre connaissance du produit.
             </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>9 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>9 / 14</span></div>
     </div>
 
     <!-- ════════════════════ SLIDE 10 — PROTOTYPE UI ════════════════════ -->
     <div class="slide">
         <div class="slide-body">
             <div class="section-label">🎨 Prototypage</div>
-            <h2>Le proto MyMonka — du Kernel aux pixels</h2>
-            <p class="section-desc">Chaque concept clinique mappé à un composant UI dédié — 35 composants, déployé sur
-                Vercel</p>
-            <div class="grid-2" style="gap: 16px; margin-bottom: 14px;">
-                <div class="card">
-                    <h4>📐 Mapping Kernel → UI (4 couches)</h4>
-                    <table class="data-table">
-                        <tr>
-                            <td>Vulnérabilité</td>
-                            <td><strong style="color: var(--text);">HeroCard</strong> — jauge MP actifs/total</td>
-                        </tr>
-                        <tr>
-                            <td>Micro-Parcours</td>
-                            <td><strong style="color: var(--text);">TaskCard + ASR Ring</strong> — progression</td>
-                        </tr>
-                        <tr>
-                            <td>Recommandation</td>
-                            <td><strong style="color: var(--text);">RecoAccordion</strong> — par criticité</td>
-                        </tr>
-                        <tr>
-                            <td>Micro-Tâche</td>
-                            <td><strong style="color: var(--text);">MicroTaskItem</strong> — cochable</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card" style="border-left: 3px solid var(--accent);">
-                    <h4>✨ Design System Wellness Premium</h4>
-                    <p style="margin-bottom: 8px;">Inspiré des meilleures apps bien-être :</p>
-                    <table class="data-table">
-                        <tr>
-                            <td>🧘 Headspace</td>
-                            <td>Ton bienveillant, espaces blancs</td>
-                        </tr>
-                        <tr>
-                            <td>🎯 Streaks</td>
-                            <td>Progression circulaire (ASR Ring)</td>
-                        </tr>
-                        <tr>
-                            <td>📱 Fabulous</td>
-                            <td>Journey structuré = nos MP</td>
-                        </tr>
-                        <tr>
-                            <td>🎨 Apple</td>
-                            <td>Glassmorphism, transitions fluides</td>
-                        </tr>
-                    </table>
-                </div>
+            <h2>Prototype UI — structuré et maintenable</h2>
+            <p class="section-desc">Un proto fonctionnel construit par Marwane pour valider l'UX avant la prod</p>
+            <div class="card" style="margin-bottom: 16px;">
+                <table class="data-table" style="font-size: 0.85rem;">
+                    <tr>
+                        <td style="width: 40px;">⚙️</td>
+                        <td><strong>Stack</strong></td>
+                        <td>App React + Next.js, entièrement typée TypeScript</td>
+                    </tr>
+                    <tr>
+                        <td>📚</td>
+                        <td><strong>Composants</strong></td>
+                        <td>Storybook avec 35 composants (atoms, molecules)</td>
+                    </tr>
+                    <tr>
+                        <td>🧩</td>
+                        <td><strong>Concepts métier</strong></td>
+                        <td>Vulnérabilités, parcours, recommandations, tâches → traduits en composants visuels avec
+                            plusieurs variantes selon la data</td>
+                    </tr>
+                    <tr>
+                        <td>🗺️</td>
+                        <td><strong>Parcours utilisateur</strong></td>
+                        <td>Prototypés et navigables de bout en bout</td>
+                    </tr>
+                </table>
             </div>
-            <div class="grid-3" style="gap: 12px; flex: unset;">
-                <div class="card" style="text-align: center; border-top: 3px solid var(--primary);">
-                    <h4>📱 Dashboard</h4>
-                    <p>"Bonjour Amal" — 3 cartes vulnérabilités avec scores et criticités</p>
-                </div>
-                <div class="card" style="text-align: center; border-top: 3px solid var(--warning);">
-                    <h4>📋 Parcours détaillé</h4>
-                    <p>TaskCards avec badges criticité 🔴🟠🟢⚪ + anneau ASR en temps réel</p>
-                </div>
-                <div class="card" style="text-align: center; border-top: 3px solid var(--success);">
-                    <h4>✅ Micro-tâches</h4>
-                    <p>Cochable → ASR avance en live. "Bravo ! Objectif atteint 🎉"</p>
-                </div>
+            <div class="highlight-box" style="font-size: 0.85rem;">
+                <strong>C'est un proto, mais structuré et maintenable.</strong> La logique de composants et le design
+                system posent une base réutilisable — à adapter selon les standards de l'équipe.
             </div>
-            <div class="action-label">📱 → Démo live du proto (Vercel) — l'audience peut tester sur mobile</div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>10 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>10 / 14</span></div>
     </div>
 
-    <!-- ════════════════════ SLIDE 10 — WORKFLOW QUALITÉ ════════════════════ -->
+    <!-- ════════════════════ SLIDE 11 — ARCHITECTURE V2 ════════════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">🏗️ Architecture</div>
+            <h2>Options d'architecture — à trancher ensemble</h2>
+            <p class="section-desc">Plusieurs approches possibles selon l'existant et la vision technique — le Kernel
+                s'adapte à toutes</p>
+            <div class="grid-3" style="gap: 14px; margin-bottom: 14px;">
+                <div class="card" style="border-top: 3px solid var(--primary);">
+                    <h4>🗂️ Monorepo</h4>
+                    <p style="margin-bottom: 6px;">Un seul repo, tout centralisé (Turborepo, Nx)</p>
+                    <table class="data-table" style="font-size: 0.7rem;">
+                        <tr>
+                            <td style="color: var(--success);">✅</td>
+                            <td>Partage de code natif</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--success);">✅</td>
+                            <td>Refacto atomique</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--warning);">⚠️</td>
+                            <td>CI/CD plus complexe</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card" style="border-top: 3px solid var(--accent);">
+                    <h4>📦 Multi-repo</h4>
+                    <p style="margin-bottom: 6px;">Repos séparés, Kernel en package NPM</p>
+                    <table class="data-table" style="font-size: 0.7rem;">
+                        <tr>
+                            <td style="color: var(--success);">✅</td>
+                            <td>Isolation forte</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--success);">✅</td>
+                            <td>Équipes autonomes</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--warning);">⚠️</td>
+                            <td>Versioning à gérer</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card" style="border-top: 3px solid var(--accent-2);">
+                    <h4>🔀 Hybride</h4>
+                    <p style="margin-bottom: 6px;">Kernel en module local, apps séparées</p>
+                    <table class="data-table" style="font-size: 0.7rem;">
+                        <tr>
+                            <td style="color: var(--success);">✅</td>
+                            <td>Flexibilité max</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--success);">✅</td>
+                            <td>Migration progressive</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--warning);">⚠️</td>
+                            <td>Conventions à formaliser</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+                <h4>🧩 Stack possible (à valider)</h4>
+                <div class="grid-2" style="gap: 12px; flex: unset; margin-top: 8px;">
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr>
+                            <td><strong>Mobile</strong></td>
+                            <td>React Native / Flutter / natif</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Web</strong></td>
+                            <td>React, Vue, ou Next.js</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backend</strong></td>
+                            <td>À auditer (existant Monka ?)</td>
+                        </tr>
+                    </table>
+                    <table class="data-table" style="font-size: 0.72rem;">
+                        <tr>
+                            <td><strong>DB</strong></td>
+                            <td>PostgreSQL sur infra HDS certifiée</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auth</strong></td>
+                            <td>À définir selon le contexte</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infra</strong></td>
+                            <td>Docker + CI/CD (conventions CTO)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="highlight-box" style="font-size: 0.78rem; margin-top: 12px;">
+                <strong>Le Kernel s'adapte à toutes ces options</strong> — c'est du TypeScript pur, zéro dépendance.
+                Quelle que soit l'architecture retenue, la logique clinique reste identique.
+            </div>
+        </div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>11 / 14</span></div>
+    </div>
+
+    <!-- ════════════════════ SLIDE 12 — WORKFLOW QUALITÉ ════════════════════ -->
     <div class="slide">
         <div class="slide-body">
             <div class="section-label">🔧 Workflow</div>
@@ -1178,170 +1261,10 @@
                 </div>
             </div>
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>11 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>12 / 14</span></div>
     </div>
 
-    <!-- ════════════════════ SLIDE 10 — TRANSFÉRABILITÉ ════════════════════ -->
-    <div class="slide">
-        <div class="slide-body">
-            <div class="section-label">📦 Extraction</div>
-            <h2>Ce qui est transférable → MyMonka V2</h2>
-            <p class="section-desc">7 fichiers copiables tels quels, 5 à réécrire selon la stack V2</p>
-            <table class="data-table" style="flex: 1;">
-                <thead>
-                    <tr>
-                        <th>Fichier</th>
-                        <th>Lignes</th>
-                        <th>Statut</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>clinicalEngine.ts</td>
-                        <td>320</td>
-                        <td><span class="badge green">✅ Direct</span></td>
-                        <td>TS pur, 0 dépendance React</td>
-                    </tr>
-                    <tr>
-                        <td>engineHealthScore.ts</td>
-                        <td>156</td>
-                        <td><span class="badge green">✅ Direct</span></td>
-                        <td>Outil de QA intégré</td>
-                    </tr>
-                    <tr>
-                        <td>integrityChecks.ts</td>
-                        <td>139</td>
-                        <td><span class="badge green">✅ Direct</span></td>
-                        <td>Filet de sécurité</td>
-                    </tr>
-                    <tr>
-                        <td>types.ts</td>
-                        <td>57</td>
-                        <td><span class="badge green">✅ Direct</span></td>
-                        <td>Types métier</td>
-                    </tr>
-                    <tr>
-                        <td>dbTypes.ts</td>
-                        <td>125</td>
-                        <td><span class="badge green">✅ Direct</span></td>
-                        <td>15 interfaces DB</td>
-                    </tr>
-                    <tr>
-                        <td>helpers.ts</td>
-                        <td>196</td>
-                        <td><span class="badge green">✅ Direct</span></td>
-                        <td>Helpers indépendants</td>
-                    </tr>
-                    <tr>
-                        <td>crMedecinPhrases.ts</td>
-                        <td>—</td>
-                        <td><span class="badge green">✅ Direct</span></td>
-                        <td>Templates CR Médecin</td>
-                    </tr>
-                    <tr>
-                        <td>queries.ts</td>
-                        <td>90</td>
-                        <td><span class="badge red">❌ Réécrire</span></td>
-                        <td>Remplacer par API vers DB HDS</td>
-                    </tr>
-                    <tr>
-                        <td>constants.ts</td>
-                        <td>83</td>
-                        <td><span class="badge yellow">🟡 Adapter</span></td>
-                        <td>Retirer imports Lucide React</td>
-                    </tr>
-                    <tr>
-                        <td>hooks React</td>
-                        <td>—</td>
-                        <td><span class="badge red">❌ Réécrire</span></td>
-                        <td>Adapter selon la stack V2</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>12 / 15</span></div>
-    </div>
-    <div class="highlight-box" style="font-size: 0.75rem; margin: 0 40px;">
-        <strong>Framework-agnostic :</strong> Si MyMonka V2 passe sur React Native, Flutter ou Vue — le Kernel et la
-        logique métier restent identiques. Seule la couche UI change.
-    </div>
-
-    <!-- ════════════════════ SLIDE 13 — ARCHITECTURE V2 ════════════════════ -->
-    <div class="slide">
-        <div class="slide-body">
-            <div class="section-label">🏗️ Architecture</div>
-            <h2>Proposition d'architecture — MyMonka V2</h2>
-            <p class="section-desc">Approche hybride : Brownfield backend + Greenfield frontends — Kernel comme module
-                pur</p>
-            <div class="grid-2" style="gap: 14px; margin-bottom: 12px;">
-                <div class="code-block" style="font-size: 0.72rem; flex: 1;">mymonka-v2/
-                    ├── packages/
-                    │ └── <span class="fn">clinical-engine/</span> <span class="cm">← KERNEL PUR (TS, 0
-                        dépendance)</span>
-                    │ ├── clinicalEngine.ts
-                    │ ├── types.ts + dbTypes.ts
-                    │ └── index.ts <span class="cm">← export: runEngine, computeScore</span>
-                    │
-                    ├── apps/
-                    │ ├── <span class="fn">mobile/</span> <span class="cm">← APP AIDANT (Greenfield)</span>
-                    │ ├── <span class="fn">crm/</span> <span class="cm">← CRM LIFELINE (Greenfield ou Brownfield)</span>
-                    │ └── <span class="fn">web/</span> <span class="cm">← FRONTEND WEB (Greenfield)</span>
-                    │
-                    ├── <span class="fn">api/</span> <span class="cm">← BACKEND (existant ? à auditer avec CTO)</span>
-                    │
-                    └── <span class="fn">infra/</span> <span class="cm">← Docker, CI/CD, config</span></div>
-                <div class="card" style="flex: 1;">
-                    <h4>📦 Stack pertinente (à valider CTO)</h4>
-                    <table class="data-table" style="font-size: 0.72rem;">
-                        <tr>
-                            <td><strong>Mobile</strong></td>
-                            <td>Expo + React Native (standard marché)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Web</strong></td>
-                            <td>React + Vite (SPA moderne)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>State</strong></td>
-                            <td>TanStack Query + Zustand</td>
-                        </tr>
-                        <tr>
-                            <td><strong>UI</strong></td>
-                            <td>Tailwind CSS + design system cohérent</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Backend</strong></td>
-                            <td>À auditer (existant ? stack CTO ?)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>DB</strong></td>
-                            <td>PostgreSQL (version récente)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Auth</strong></td>
-                            <td>À définir avec le CTO</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tests</strong></td>
-                            <td>Vitest + Testing Library</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Infra</strong></td>
-                            <td>Docker + hébergement HDS certifié</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="highlight-box" style="font-size: 0.78rem;">
-                <strong>Questions au CTO :</strong> 1) Monorepo (Turborepo/Nx) ou repos séparés ? 2) Kernel = package
-                NPM, module local, ou Edge Function ? 3) Quelle stack mobile retenue ?
-            </div>
-        </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>13 / 15</span></div>
-    </div>
-
-    <!-- ════════════════════ SLIDE 12 — ESTIMATIONS ════════════════════ -->
+    <!-- ════════════════════ SLIDE 13 — ESTIMATIONS ════════════════════ -->
     <div class="slide">
         <div class="slide-body">
             <div class="section-label">⏱️ Chiffrage</div>
@@ -1351,26 +1274,26 @@
             <div class="compare-grid">
                 <div class="compare-col old">
                     <h3>Benchmark marché (dev classique)</h3>
-                    <div class="compare-item">Ramp-up produit/métier → <strong>3-4 semaines</strong></div>
+                    <div class="compare-item">Ramp-up produit/métier → <strong>4-6 semaines</strong></div>
                     <div class="compare-item">Extraction Kernel → <strong>2-3 semaines</strong></div>
                     <div class="compare-item">App MyMonka (frontend) → <strong>3-4 mois</strong></div>
                     <div class="compare-item">CRM Lifeline (frontend pro) → <strong>2-3 mois</strong></div>
                     <div class="compare-item">Intégration + tests → <strong>1 mois</strong></div>
                     <div class="compare-item"
                         style="font-size: 1rem; font-weight: 800; color: var(--danger); padding-top: 16px; border-top: 2px solid rgba(239,68,68,0.2);">
-                        TOTAL : 8-12 mois</div>
+                        TOTAL : 10-14 mois</div>
                 </div>
                 <div class="compare-col new">
                     <h3>Notre estimation (dev assisté IA)</h3>
                     <div class="compare-item">Ramp-up produit/métier → <strong>0 (connaissance déjà acquise)</strong>
                     </div>
                     <div class="compare-item">Extraction Kernel + setup → <strong>2-3 jours</strong></div>
-                    <div class="compare-item">App MyMonka (frontend) → <strong>3-4 semaines</strong></div>
+                    <div class="compare-item">App MyMonka (frontend) → <strong>4-5 semaines</strong></div>
                     <div class="compare-item">CRM Lifeline (frontend pro) → <strong>2-3 semaines</strong></div>
                     <div class="compare-item">Audit final CTO → <strong>1 semaine</strong></div>
                     <div class="compare-item"
                         style="font-size: 1rem; font-weight: 800; color: var(--success); padding-top: 16px; border-top: 2px solid rgba(0,220,130,0.2);">
-                        TOTAL : 6-8 semaines</div>
+                        TOTAL : 8-10 semaines</div>
                 </div>
             </div>
             <div class="highlight-box" style="font-size: 0.78rem;">
@@ -1378,11 +1301,10 @@
                 types, tests, build) + review CTO. Audit final sous sa direction avant le go-live.
             </div>
         </div>
-    </div>
-    <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>14 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>13 / 14</span></div>
     </div>
 
-    <!-- ════════════════════ SLIDE 12 — COLLABORATION ════════════════════ -->
+    <!-- ════════════════════ SLIDE 14 — COLLABORATION ════════════════════ -->
     <div class="slide">
         <div class="slide-body">
             <div class="section-label">🤝 Collaboration</div>
@@ -1409,11 +1331,9 @@
                 <div class="collab-cell">Valide la technique</div>
                 <div class="collab-cell"><span class="emoji">✅</span> Traduit le métier clinique en code</div>
             </div>
-            <div style="text-align: center;">
-                <div class="cta-box">🚀 On peut commencer un sprint pilote cette semaine ?</div>
-            </div>
+
         </div>
-        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>15 / 15</span></div>
+        <div class="slide-footer"><span class="brand">PRAGMA × Monka</span><span>14 / 14</span></div>
     </div>
 
 </body>

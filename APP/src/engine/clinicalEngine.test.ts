@@ -55,6 +55,43 @@ describe('evaluateCondition', () => {
     it('has_any operator — false when not enough items', () => {
         expect(evaluateCondition({ q: 'Q1', op: 'has_any', min: 3 }, { Q1: ['A'] })).toBe(false)
     })
+
+    // === _multi composite operator (N-of-M CCC) ===
+
+    it('_multi operator — true when ≥ threshold conditions pass', () => {
+        const cond = {
+            q: '_multi' as const, op: 'gte' as const, val: 2,
+            conditions: [
+                { q: 'Q1', op: 'eq' as const, val: 'Oui' },
+                { q: 'Q2', op: 'eq' as const, val: 'Oui' },
+                { q: 'Q3', op: 'eq' as const, val: 'Oui' },
+            ],
+        }
+        expect(evaluateCondition(cond, { Q1: 'Oui', Q2: 'Oui', Q3: 'Non' })).toBe(true)
+    })
+
+    it('_multi operator — false when < threshold conditions pass', () => {
+        const cond = {
+            q: '_multi' as const, op: 'gte' as const, val: 2,
+            conditions: [
+                { q: 'Q1', op: 'eq' as const, val: 'Oui' },
+                { q: 'Q2', op: 'eq' as const, val: 'Oui' },
+                { q: 'Q3', op: 'eq' as const, val: 'Oui' },
+            ],
+        }
+        expect(evaluateCondition(cond, { Q1: 'Oui', Q2: 'Non', Q3: 'Non' })).toBe(false)
+    })
+
+    it('_multi operator — true at exact threshold', () => {
+        const cond = {
+            q: '_multi' as const, op: 'gte' as const, val: 2,
+            conditions: [
+                { q: 'Q1', op: 'eq' as const, val: 'Oui' },
+                { q: 'Q2', op: 'eq' as const, val: 'Oui' },
+            ],
+        }
+        expect(evaluateCondition(cond, { Q1: 'Oui', Q2: 'Oui' })).toBe(true)
+    })
 })
 
 // === evaluateRule ===

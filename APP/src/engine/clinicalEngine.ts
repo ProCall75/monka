@@ -28,6 +28,20 @@ export type Condition =
     | { q: string; op: 'gte'; val: string | number }
     | { q: string; op: 'count_gte'; val: number }
     | { q: string; op: 'has_any'; min: number }
+    | MultiCondition
+
+/**
+ * Composite "N-of-M" condition from DB.
+ * Fires when ≥ val sub-conditions are true.
+ * Used for true CCC composite logic.
+ * DB format: {"q": "_multi", "op": "gte", "val": 2, "conditions": [...]}
+ */
+export interface MultiCondition {
+    q: '_multi'
+    op: 'gte'
+    val: number
+    conditions: Condition[]
+}
 
 // === Answer Types ===
 
@@ -55,6 +69,13 @@ function toArray(answer: AnswerValue): string[] {
  * Returns true if the condition is satisfied.
  */
 export function evaluateCondition(cond: Condition, answers: Answers): boolean {
+    // === Multi-condition composite (N-of-M CCC) ===
+    if (cond.q === '_multi' && 'conditions' in cond) {
+        const multi = cond as MultiCondition
+        const passed = multi.conditions.filter(sub => evaluateCondition(sub, answers)).length
+        return passed >= multi.val
+    }
+
     const raw = answers[cond.q]
     if (raw === undefined || raw === null) return false
 
