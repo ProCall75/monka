@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadrage Mission — PRAGMA × Monka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #58BF94;
+            --primary-light: #7CD4AD;
+            --primary-dark: #3FA87A;
+            --accent: #86C0CF;
+            --accent-2: #CFFF92;
+            --bg: #0A1F16;
+            --bg-card: #112B1F;
+            --bg-card-hover: #1A3D2C;
+            --bg-elevated: #0E2519;
+            --text: #E8F0EC;
+            --text-muted: #9BB5A8;
+            --text-dim: #6B8578;
+            --border: #1E3D2D;
+            --success: #00DC82;
+            --warning: #F5A623;
+            --danger: #EF4444;
+            --critical: #D63031;
+            --radius: 16px;
+            --radius-sm: 10px;
+
+            --slide-w: 1280px;
+            --slide-h: 720px;
+        }
+
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #1a1a2e;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ──── SLIDE SYSTEM ──── */
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 20px auto;
+            background: var(--bg);
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        .slide-body {
+            padding: 48px 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-footer {
+            padding: 12px 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .slide-footer .brand {
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        /* ──── Section Labels ──── */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        /* ════════════════════════════════════════════
+           HERO SLIDE
+           ════════════════════════════════════════════ */
+        .slide.hero-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%);
+        }
+
+        .slide.hero-slide::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(88, 191, 148, 0.15) 0%, transparent 70%);
+            top: -150px;
+            right: -80px;
+            border-radius: 50%;
+        }
+
+        .slide.hero-slide::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(207, 255, 146, 0.1) 0%, transparent 70%);
+            bottom: -80px;
+            left: -50px;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(88, 191, 148, 0.15);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .hero-meta-item strong {
+            color: var(--text);
+        }
+
+        /* ──── Cards Grid ──── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .cards-grid.two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cards-grid.four-col {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .card.green::before {
+            background: linear-gradient(90deg, #58BF94, #7CD4AD);
+        }
+
+        .card.blue::before {
+            background: linear-gradient(90deg, #86C0CF, #A8D8E0);
+        }
+
+        .card.yellow::before {
+            background: linear-gradient(90deg, #F5A623, #F5D245);
+        }
+
+        .card.red::before {
+            background: linear-gradient(90deg, #EF4444, #D63031);
+        }
+
+        .card.lime::before {
+            background: linear-gradient(90deg, #CFFF92, #A8E06D);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ──── Stats Row ──── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .stat-card .sub-label {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* ──── Compact Table ──── */
+        .compact-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 4px;
+        }
+
+        .compact-table td {
+            padding: 8px 14px;
+            font-size: 0.78rem;
+            background: var(--bg-card);
+            color: var(--text-muted);
+        }
+
+        .compact-table tr td:first-child {
+            border-radius: 6px 0 0 6px;
+            font-weight: 700;
+            color: var(--text);
+            width: 280px;
+        }
+
+        .compact-table tr td:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* ──── Pillar Diagram ──── */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .pillar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 28px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .pillar.p1::before {
+            background: linear-gradient(90deg, #58BF94, #7CD4AD);
+        }
+
+        .pillar.p2::before {
+            background: linear-gradient(90deg, #86C0CF, #A8D8E0);
+        }
+
+        .pillar.p3::before {
+            background: linear-gradient(90deg, #CFFF92, #A8E06D);
+        }
+
+        .pillar-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+
+        .pillar h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .pillar .who {
+            font-size: 0.78rem;
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .pillar p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .arrow-down {
+            text-align: center;
+            font-size: 1.6rem;
+            color: var(--primary-light);
+            margin: 12px 0;
+        }
+
+        .presta-box {
+            background: rgba(245, 166, 35, 0.06);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 18px 28px;
+            text-align: center;
+        }
+
+        .presta-box h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--warning);
+        }
+
+        .presta-box p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* ──── Actors ──── */
+        .actors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .actor {
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .actor.monka {
+            background: rgba(0, 220, 130, 0.04);
+            border-color: rgba(0, 220, 130, 0.2);
+        }
+
+        .actor.pragma {
+            background: rgba(88, 191, 148, 0.04);
+            border-color: rgba(88, 191, 148, 0.2);
+        }
+
+        .actor.presta {
+            background: rgba(245, 166, 35, 0.04);
+            border-color: rgba(245, 166, 35, 0.2);
+        }
+
+        .actor-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+
+        .actor.monka .actor-badge {
+            background: rgba(0, 220, 130, 0.12);
+            color: var(--success);
+        }
+
+        .actor.pragma .actor-badge {
+            background: rgba(88, 191, 148, 0.12);
+            color: var(--primary-light);
+        }
+
+        .actor.presta .actor-badge {
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--warning);
+        }
+
+        .actor h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .actor .role {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 6px;
+        }
+
+        .actor p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .coord-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 20px 28px;
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 2;
+        }
+
+        .coord-box strong {
+            color: var(--text);
+        }
+
+        .coord-box .arrow {
+            color: var(--primary-light);
+        }
+
+        /* ──── Principles ──── */
+        .principles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .principle {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .principle-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #0A1F16;
+        }
+
+        .principle h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .principle p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ──── Pyramid ──── */
+        .pyramid-container {
+            display: flex;
+            gap: 32px;
+            flex: 1;
+            align-items: center;
+        }
+
+        .pyramid {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 300px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .pyramid-level {
+            padding: 14px 18px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .pyramid-level.future {
+            background: rgba(134, 192, 207, 0.08);
+            border: 1px dashed rgba(134, 192, 207, 0.25);
+            color: var(--text-dim);
+        }
+
+        .pyramid-level.next {
+            background: rgba(245, 166, 35, 0.1);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            color: var(--warning);
+        }
+
+        .pyramid-level.done {
+            background: rgba(88, 191, 148, 0.1);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            color: var(--primary-light);
+        }
+
+        .pyramid-marker {
+            display: block;
+            font-size: 0.65rem;
+            margin-top: 4px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .action-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+        }
+
+        .action-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.72rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #0A1F16;
+            margin-bottom: 8px;
+        }
+
+        .action-card h4 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .action-card p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ──── Two Columns ──── */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .column {
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .column.left {
+            background: rgba(88, 191, 148, 0.04);
+            border-color: rgba(88, 191, 148, 0.2);
+        }
+
+        .column.right {
+            background: rgba(134, 192, 207, 0.04);
+            border-color: rgba(134, 192, 207, 0.2);
+        }
+
+        .column h3 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .column.left h3 {
+            color: var(--primary-light);
+        }
+
+        .column.right h3 {
+            color: var(--accent);
+        }
+
+        .column ul {
+            list-style: none;
+        }
+
+        .column ul li {
+            position: relative;
+            padding: 6px 0 6px 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .column ul li::before {
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        .column.left ul li::before {
+            content: '✅';
+        }
+
+        .column.right ul li::before {
+            content: '❓';
+        }
+
+        /* ──── Quote ──── */
+        .quote-box {
+            margin-top: auto;
+            padding: 14px 20px;
+            background: rgba(88, 191, 148, 0.06);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .quote-box strong {
+            color: var(--primary-light);
+        }
+
+        /* ──── Footer Lock ──── */
+        .footer-lock {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            background: rgba(88, 191, 148, 0.1);
+            border: 1px solid rgba(88, 191, 148, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+        }
+
+        /* ──── Print Overrides ──── */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                background: var(--bg) !important;
+            }
+
+            .slide {
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+                background: var(--bg) !important;
+            }
+
+            .slide.hero-slide {
+                background: linear-gradient(135deg, #0A1F16 0%, #0E3325 50%, #134D35 100%) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════ SLIDE 1 — HERO ═══════════════ -->
+    <div class="slide hero-slide">
+        <div class="hero-badge">🤝 Cadrage Mission</div>
+        <h1>PRAGMA × <span>MONKA</span></h1>
+        <p class="hero-sub">Point d'avancement et cadrage de la suite.<br>Où on en est, comment on travaille,<br>et
+            comment on construit la suite ensemble.</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">📅 <strong>6 mars 2026</strong></div>
+            <div class="hero-meta-item">📐 <strong>1 mois livré</strong></div>
+            <div class="hero-meta-item">👥 <strong>2 streams</strong> Moteur + UI/UX</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 2 — POINT DE DÉPART ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§1 · D'où on est parti</div>
+            <h2>Le point de départ — février 2026</h2>
+            <p class="section-desc">L'existant avant l'intervention de PRAGMA.</p>
+
+            <div class="cards-grid">
+                <div class="card green">
+                    <div class="card-icon">📊</div>
+                    <h4>Données</h4>
+                    <p>4 fichiers Excel en vrac. 15 fichiers Word. Aucune structure relationnelle. Pas de traçabilité.
+                    </p>
+                </div>
+                <div class="card blue">
+                    <div class="card-icon">💻</div>
+                    <h4>Application</h4>
+                    <p>Chaque question → 1 seule reco. Pas de design system. Pas d'architecture de composants. Pas de
+                        moteur clinique.</p>
+                </div>
+                <div class="card yellow">
+                    <div class="card-icon">📋</div>
+                    <h4>Documentation</h4>
+                    <p>Zéro documentation normative. Aucune traçabilité. Rien pour un auditeur ou une certification.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>2 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 3 — MOTEUR (ANTONIN) ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§2 · Travail livré — Pilier Moteur</div>
+            <h2>Le moteur clinique — 1 mois de travail</h2>
+            <p class="section-desc">Antonin — Architecture, code, data, standards.</p>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="number">18</div>
+                    <div class="label">Tables DB structurées</div>
+                    <div class="sub-label">De 4 Excel → schéma relationnel complet</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">240</div>
+                    <div class="label">Règles d'activation</div>
+                    <div class="sub-label">Standard, CCC, critique, prévention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">450</div>
+                    <div class="label">Justifications cliniques</div>
+                    <div class="sub-label">Chaque choix documenté en DB</div>
+                </div>
+            </div>
+
+            <table class="compact-table">
+                <tr>
+                    <td>Moteur clinique (4 fichiers TS)</td>
+                    <td>De « 1 reco/question » → système d'aide à la décision croisant 165 data points</td>
+                </tr>
+                <tr>
+                    <td>Base de données</td>
+                    <td>18 tables, 2 700+ entrées — schéma relationnel complet avec RLS</td>
+                </tr>
+                <tr>
+                    <td>Simulateur</td>
+                    <td>App React déployée sur Vercel — démo live fonctionnelle</td>
+                </tr>
+                <tr>
+                    <td>Audit data</td>
+                    <td>240 rules auditées, anomalies identifiées et corrigées</td>
+                </tr>
+                <tr>
+                    <td>Documentation normative</td>
+                    <td>Templates IEC 62304 / ISO 14971 prêts — structuration en cours, première étape du cadrage</td>
+                </tr>
+                <tr>
+                    <td>Scripts d'automatisation</td>
+                    <td>Process reproductible et versionné (generate_json_v3.py)</td>
+                </tr>
+            </table>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>3 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 4 — UI/UX (MARWANE) ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§2 · Travail livré — Pilier UI/UX</div>
+            <h2>Le système UI/UX produit — 1 mois de travail</h2>
+            <p class="section-desc">Marwane — Design, proto, composants, co-conception avec Maël.</p>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="number">40+</div>
+                    <div class="label">Composants React/TSX</div>
+                    <div class="sub-label">Isolés, testables, prêts au handoff</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">59%</div>
+                    <div class="label">du CDC P0 couvert</div>
+                    <div class="sub-label">38/64 User Stories implémentées</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">4</div>
+                    <div class="label">couches d'architecture UI</div>
+                    <div class="sub-label">Moteur → Composant → Mot bienveillant</div>
+                </div>
+            </div>
+
+            <table class="compact-table">
+                <tr>
+                    <td>Audit approfondi de l'app actuelle</td>
+                    <td>Identification systématique des problèmes d'ergonomie et points de friction</td>
+                </tr>
+                <tr>
+                    <td>Parcours utilisateurs analysés</td>
+                    <td>Analyse complète des parcours et proposition de refonte avec maquettes modernisées</td>
+                </tr>
+                <tr>
+                    <td>Benchmark marché santé digitale</td>
+                    <td>Standards du marché étudiés — design pensé pour aidants 50-60 ans</td>
+                </tr>
+                <tr>
+                    <td>Design System complet</td>
+                    <td>Charte visuelle, 5 palettes, typographie, zéro jargon clinique visible</td>
+                </tr>
+                <tr>
+                    <td>Implémentation CDC P0</td>
+                    <td>38/64 US implémentées — 59% du cahier des charges couvert dès le mois 1</td>
+                </tr>
+                <tr>
+                    <td>Co-conception avec Maël</td>
+                    <td>Partenaire produit — propose et challenge</td>
+                </tr>
+            </table>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>4 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 5 — 3 PILIERS ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§3 · Architecture</div>
+            <h2>Les 3 piliers que les prestataires assembleront</h2>
+            <p class="section-desc">PRAGMA construit la fondation. Les prestataires construisent dessus.</p>
+
+            <div class="pillars">
+                <div class="pillar p1">
+                    <div class="pillar-label">Pilier 1</div>
+                    <h4>Moteur clinique</h4>
+                    <div class="who">Antonin</div>
+                    <p>« Comment ça calcule »</p>
+                </div>
+                <div class="pillar p2">
+                    <div class="pillar-label">Pilier 2</div>
+                    <h4>Proto UI/UX</h4>
+                    <div class="who">Marwane</div>
+                    <p>« Comment ça doit se voir »</p>
+                </div>
+                <div class="pillar p3">
+                    <div class="pillar-label">Pilier 3</div>
+                    <h4>Base de données</h4>
+                    <div class="who">Shared</div>
+                    <p>« Ce que c'est »</p>
+                </div>
+            </div>
+
+            <div class="arrow-down">▼ ▼ ▼</div>
+
+            <div class="presta-box">
+                <h4>🟠 Prestataires externes</h4>
+                <p>Assemblent les 3 piliers dans MyMonka V2 (SaMD Classe IIa)</p>
+            </div>
+
+            <div class="quote-box" style="margin-top: 16px;">
+                « Si <strong>UN</strong> des 3 piliers manque de qualité, l'investissement prestataires est gaspillé. »
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>5 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 6 — 3 ACTEURS ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§4 · Méthode de travail</div>
+            <h2>Comment on travaille — 3 acteurs, 0 overhead</h2>
+            <p class="section-desc">Chacun son rôle. Complémentaires, pas concurrents.</p>
+
+            <div class="actors">
+                <div class="actor monka">
+                    <div class="actor-badge">🟢 MONKA</div>
+                    <h4>Etienne, Maël, Dr. Rimaud, Sophie</h4>
+                    <div class="role">Décideurs + Métier</div>
+                    <p>Valide cliniquement, arbitre produit, teste terrain, décisions stratégiques.</p>
+                </div>
+                <div class="actor pragma">
+                    <div class="actor-badge">🔵 PRAGMA</div>
+                    <h4>Antonin + Marwane</h4>
+                    <div class="role">Produit + Standards</div>
+                    <p>Construit le moteur, le proto, la doc normative. Proactif, pas en attente de specs.</p>
+                </div>
+                <div class="actor presta">
+                    <div class="actor-badge">🟠 PRESTATAIRES</div>
+                    <h4>Intégrateurs certifiés</h4>
+                    <div class="role">Implémentation + Sécurité</div>
+                    <p>MyMonka V2 sur la base des 3 piliers. Garants HDS, RGPD, archi, cybersécurité.</p>
+                </div>
+            </div>
+
+            <div class="coord-box">
+                <strong>MONKA</strong> <span class="arrow">←── validation clinique + produit ──→</span>
+                <strong>PRAGMA</strong> &nbsp;·&nbsp; sync hebdo 30-45min<br>
+                <strong>PRAGMA</strong> <span class="arrow">←── 3 piliers (moteur + proto + DB) ──→</span>
+                <strong>PRESTATAIRES</strong> &nbsp;·&nbsp; handoff structuré<br>
+                <strong>MONKA</strong> <span class="arrow">←── supervision, recette ──→</span>
+                <strong>PRESTATAIRES</strong> &nbsp;·&nbsp; checkpoints CP1-CP4
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>6 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 7 — DIFFÉRENCIATION ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§4 · Méthode de travail</div>
+            <h2>Ce qui nous différencie d'un prestataire classique</h2>
+            <p class="section-desc">Pas des freelances qui attendent un brief.</p>
+
+            <div class="principles">
+                <div class="principle">
+                    <div class="principle-num">1</div>
+                    <div>
+                        <h4>On construit d'abord, on spec après</h4>
+                        <p>Pas de cycle spec→dev→QA de 3 mois. L'IA agentique + relation directe avec le médecin =
+                            itération immédiate. On livre en 1 mois ce qui prendrait 3-4 mois.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-num">2</div>
+                    <div>
+                        <h4>Standards dès le départ</h4>
+                        <p>Chaque doc, chaque décision est tracée pour un auditeur. On ne refait pas la doc après coup —
+                            elle se construit pendant le dev. Économie ×3-5 vs restructuration post-audit.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-num">3</div>
+                    <div>
+                        <h4>Partenaire, pas exécutant</h4>
+                        <p>Marwane propose des idées UX à Maël. Antonin anticipe les besoins normatifs. On ne demande
+                            pas « quoi faire » — on propose et on valide ensemble.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>7 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 8 — SOLIDIFIER LA BASE ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§5 · Prochaine étape</div>
+            <h2>Avant de monter — solidifier la base</h2>
+            <p class="section-desc">Plus vite et mieux on structure la base, plus on avance vite et bien sur la suite.
+            </p>
+
+            <div class="pyramid-container">
+                <div class="pyramid">
+                    <div class="pyramid-level future" style="margin-left: 0;">
+                        Fonctionnalités futures + Intégration prestataires
+                        <span class="pyramid-marker" style="color: var(--text-dim);">À CADRER ENSEMBLE</span>
+                    </div>
+                    <div class="pyramid-level next" style="margin-left: 20px;">
+                        ⚡ Restructuration + Validation
+                        <span class="pyramid-marker" style="color: var(--warning);">🔶 ON EST ICI</span>
+                    </div>
+                    <div class="pyramid-level done" style="margin-left: 40px;">
+                        ✅ Base (Kernel + Proto + DB)
+                        <span class="pyramid-marker" style="color: var(--primary-light);">✓ FAIT</span>
+                    </div>
+                </div>
+
+                <div class="actions-grid">
+                    <div class="action-card">
+                        <div class="action-num">1</div>
+                        <h4>Challenger les règles cliniques</h4>
+                        <p>240 règles auditées mais pas encore challengées en profondeur par Dr. Monka.</p>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-num">2</div>
+                        <h4>Challenger le CDC et les composants</h4>
+                        <p>Validation du proto, des User Stories et des choix UX avec des cas réels, pas juste des
+                            maquettes.</p>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-num">3</div>
+                        <h4>Documentation certification-ready</h4>
+                        <p>DNM, Article 51 exigent une base documentaire solide dès maintenant.</p>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-num">4</div>
+                        <h4>Préparer le handoff prestataires</h4>
+                        <p>Fondations propres, réfléchies, testées — pas un brouillon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>8 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 9 — POURQUOI C'EST CRITIQUE ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§6 · Pourquoi c'est critique</div>
+            <h2>Ce que la base solide apporte à Monka</h2>
+            <p class="section-desc">Chaque euro investi dans la fondation protège les investissements futurs.</p>
+
+            <div class="cards-grid four-col">
+                <div class="card green">
+                    <div class="card-icon">🛡️</div>
+                    <h4>Protection investissement presta</h4>
+                    <p>Les prestataires reposent sur 3 piliers. Sans fondation de qualité, cet investissement est
+                        gaspillé.</p>
+                </div>
+                <div class="card blue">
+                    <div class="card-icon">⚡</div>
+                    <h4>Vitesse de la suite</h4>
+                    <p>Mieux la base est structurée, plus les prochaines étapes avancent vite et sans dette technique.
+                    </p>
+                </div>
+                <div class="card yellow">
+                    <div class="card-icon">📋</div>
+                    <h4>Certification-ready</h4>
+                    <p>La doc normative (IEC 62304, ISO 14971) se construit PENDANT le dev. Zéro restructuration au
+                        moment du marquage CE.</p>
+                </div>
+                <div class="card lime">
+                    <div class="card-icon">💼</div>
+                    <h4>Arme commerciale</h4>
+                    <p>Démo proto + CR médecin contextualisé = des outils de vente dès maintenant pour Etienne.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>9 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 10 — CE QUE LES PRESTA REÇOIVENT ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§6 · Faciliter les prestataires</div>
+            <h2>Ce que les prestataires reçoivent — prêt à assembler</h2>
+            <p class="section-desc">Leur mission : assembler dans une stack technique globale. Pas reconstruire ce qui
+                existe.</p>
+
+            <div class="two-columns">
+                <div class="column left">
+                    <h3>🟢 Ce que PRAGMA livre</h3>
+                    <ul>
+                        <li><strong>Moteur clinique</strong> — code TypeScript importable, testé, documenté</li>
+                        <li><strong>Proto UI/UX</strong> — 40+ composants, design system, parcours utilisateur</li>
+                        <li><strong>Schéma DB complet</strong> — 18 tables, relations, seed data, RLS</li>
+                        <li><strong>Templates normatifs</strong> — IEC 62304 / ISO 14971 structurés</li>
+                        <li><strong>Documentation d'intégration</strong> — API moteur, specs visuelles, exemples</li>
+                    </ul>
+                </div>
+                <div class="column right">
+                    <h3>🟠 Ce que les prestataires apportent</h3>
+                    <ul>
+                        <li><strong>Stack technique globale</strong> — architecture, auth, infrastructure</li>
+                        <li><strong>HDS + cybersécurité</strong> — hébergement certifié, encryption, RGPD</li>
+                        <li><strong>Assemblage des 3 piliers</strong> — dans MyMonka V2 production</li>
+                        <li><strong>Tests d'intégration</strong> — le moteur fonctionne dans leur contexte</li>
+                        <li><strong>Documentation de conformité</strong> — livrables normés exigés au contrat</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quote-box" style="margin-top: 16px;">
+                « Le travail de fondation est <strong>déjà fait</strong>. Les prestataires assemblent — ils ne
+                reconstruisent pas. C'est un investissement que vous ne payez <strong>qu'une seule fois</strong>. »
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>10 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 11 — ALIGNER LES STANDARDS ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§6 · Aligner avant de démarrer</div>
+            <h2>Le bon niveau de standards — à cadrer ensemble</h2>
+            <p class="section-desc">Avant de lancer les prestataires : où met-on le curseur qualité ?</p>
+
+            <div class="cards-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom: 16px;">
+                <div class="card green">
+                    <div class="card-icon">📐</div>
+                    <h4>Notre réflexion en cours</h4>
+                    <p>Architecture finale, niveau de documentation, vision qualité à terme — on a les templates, la
+                        structure est en cours de validation.</p>
+                </div>
+                <div class="card blue">
+                    <div class="card-icon">🎯</div>
+                    <h4>Ce qu'on veut aligner</h4>
+                    <p>Quel standard qualité minimum pour les prestataires ? IEC 62304 dès le jour 1 ? Livrables
+                        documentaires au contrat ? 4 checkpoints de contrôle ?</p>
+                </div>
+                <div class="card yellow">
+                    <div class="card-icon">⚠️</div>
+                    <h4>Le risque si mal cadré</h4>
+                    <p>Sans standards dès le départ, la doc se refait au moment du marquage CE. Coût ×3 à ×5. On l'a vu
+                        avec la V1 — on ne refait pas cette erreur.</p>
+                </div>
+            </div>
+
+            <div class="two-columns" style="flex: unset;">
+                <div class="column left" style="padding: 16px 20px;">
+                    <h3 style="font-size: 0.85rem; margin-bottom: 10px;">✅ Ce que PRAGMA prépare</h3>
+                    <ul>
+                        <li style="font-size: 0.76rem;">Templates de certification sprint prêts</li>
+                        <li style="font-size: 0.76rem;">SOPs (procédures) définies et testées</li>
+                        <li style="font-size: 0.76rem;">Registre de décisions cliniques tracé</li>
+                        <li style="font-size: 0.76rem;">Kit handoff structuré pour les presta</li>
+                    </ul>
+                </div>
+                <div class="column right" style="padding: 16px 20px;">
+                    <h3 style="font-size: 0.85rem; margin-bottom: 10px;">❓ Ce qu'on attend des prestataires</h3>
+                    <ul>
+                        <li style="font-size: 0.76rem;">16 livrables normés (IEC 62304, ISO 14971)</li>
+                        <li style="font-size: 0.76rem;">Hébergeur certifié HDS obligatoire</li>
+                        <li style="font-size: 0.76rem;">SBOM + tests de cybersécurité</li>
+                        <li style="font-size: 0.76rem;">4 checkpoints qualité avant paiement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>11 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 12 — CE QU'ON VEUT ENTENDRE ═══════════════ -->
+    <div class="slide">
+        <div class="slide-body">
+            <div class="section-label">§7 · Cadrage ensemble</div>
+            <h2>On a la base — maintenant, on cadre la mission ensemble</h2>
+            <p class="section-desc">Vos besoins + notre méthode = une mission claire.</p>
+
+            <div class="two-columns">
+                <div class="column left">
+                    <h3>✅ Ce qu'on a</h3>
+                    <ul>
+                        <li>Moteur clinique fonctionnel + audité</li>
+                        <li>40+ composants UI prêts + 59% du CDC couvert</li>
+                        <li>Base de données complète (18 tables, 2 700+ entrées)</li>
+                        <li>Templates normatifs prêts (IEC 62304, ISO 14971)</li>
+                        <li>Méthode de travail éprouvée (1 mois, 2 personnes)</li>
+                    </ul>
+                </div>
+                <div class="column right">
+                    <h3>❓ Ce qu'on a besoin de vous</h3>
+                    <ul>
+                        <li>Votre TODO — quelles priorités côté business ?</li>
+                        <li>Les prestataires — timing, qui ?</li>
+                        <li>Quelle expérimentation d'abord ? (Klésia ?)</li>
+                        <li>Où on sera le plus pertinent pour vous ?</li>
+                        <li>Besoin démo commerciale — pour quand ?</li>
+                        <li>Alignement prestataires — quand commence-t-on ?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span class="brand">PRAGMA × Monka</span>
+            <span>Cadrage Mission — Mars 2026</span>
+            <span>12 / 13</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════ SLIDE 13 — CLÔTURE ═══════════════ -->
+    <div class="slide hero-slide">
+        <div class="hero-badge">🤝 Prochaine étape</div>
+        <h1>On combine et <span>on revient</span></h1>
+        <p class="hero-sub">Envoyez-nous votre TODO.<br>On allie vos besoins à notre méthode.<br>On revient avec une
+            proposition de mission claire —<br><strong
+                style="color: var(--text); -webkit-text-fill-color: var(--text);">périmètre, durée, livrables.</strong>
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">📞 <strong>Sync régulière</strong></div>
+            <div class="hero-meta-item">🔄 <strong>Méthode itérative</strong></div>
+            <div class="hero-meta-item">📋 <strong>Chaque livrable vérifiable</strong></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
