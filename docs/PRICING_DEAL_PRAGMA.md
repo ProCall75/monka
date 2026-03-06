@@ -39,17 +39,26 @@ Quand PRAGMA a démarré sur Monka, voici ce qui existait :
 | **Documentation stratégique** | PLAN_QUALITE_CEO, PREREQUIS_PRESTATAIRES, ARCHITECTURE_REFLEXION, CONTEXTE, ROADMAP, SOPs |
 | **Tooling** | Scripts d'automatisation (generate_json, audit, certification) |
 
-### Marwane — UI/UX + Proto
+### Marwane — Design produit, identité de marque & démo utilisable
 
-| Livrable | Transformation réalisée |
+**Phase 1 — Review UI/UX & construction du prototype**
+
+| Prestation | Livrable concret |
 |---|---|
-| **Audit UX de l'app existante** | 277+ fichiers analysés, 5 problèmes majeurs identifiés. Pas juste "c'est moche" — analyse structurée de ce qui ne marche pas et pourquoi. |
-| **Interviews terrain** | A interviewé sa propre mère (aidante) pour comprendre les vrais besoins utilisateur. Pas de la théorie — du vécu. |
-| **Architecture UI 4 couches** | Vulnérabilité→HeroCard, MP→TaskCard, Reco→RecoCard, MT→MicroTaskItem. Mapping complet moteur→UI→copywriting. |
-| **Design System** | 5 palettes, fond crème, formes arrondies, typographies. Cohérence visuelle de bout en bout. |
-| **35 composants Storybook** | Isolés, testables, documentés. Base pour le handoff prestataires. |
-| **Plan de présentation 3 actes** | Pour Dr. Monka/équipe. Constat → Mapping → Preuve. |
-| **Itérations avec Maël** | Propositions proactives, tests d'affordance, validations checkpoints. |
+| **Audit UX de l'application existante** | 22 écrans analysés, 19 recommandations d'amélioration priorisées |
+| **Création d'identité visuelle (charte graphique digitale)** | Palette de 5 couleurs par thème de vie, typographie, tokens de design, direction artistique cohérente |
+| **Conception et développement du Design System** | 40+ composants codés, documentés et testables dans un catalogue interactif |
+| **Architecture d'information & conception fonctionnelle** | Mapping 4 couches moteur clinique → interface → copywriting. Documentation des flux de navigation |
+| **Prototypage fonctionnel haute-fidélité** | Application démo fonctionnelle (données simulées) : onboarding complet, dashboard, parcours de soins, ressources, profil |
+| **Copywriting UX** | Traduction complète du vocabulaire clinique en langage empathique adapté aux aidants 50-60 ans |
+
+**Phase 2 — Implémentation CDC P0 (demande Maël)**
+
+| Prestation | Livrable concret |
+|---|---|
+| **Relecture & qualification du cahier des charges** | Revue des 64 user stories sur 7 modules : erreurs, incohérences, reformulations, questions produit bloquantes remontées |
+| **Matrice de couverture CDC** | Triage complet 64 US : ✅ 26 développées · ⚠️ 12 simulées · 🚫 26 hors scope proto |
+| **Prototypage fonctionnel sur CDC** | 38/64 user stories (59% du CDC) implémentées dans la démo |
 
 **Ce que ça permet** : démonstration produit crédible, itérations rapides, vitesse de décision. La démo vaut de l'or pour convaincre investisseurs, Klésia, partenaires.
 
@@ -67,7 +76,7 @@ Quand PRAGMA a démarré sur Monka, voici ce qui existait :
 | McKinsey 2024-25 | Tâches code/doc/refactoring | **+20 à 50%** |
 | Enterprises (agentic AI) | Réduction temps de dev total | **-40 à 55%** |
 
-PRAGMA utilise de l'IA agentique (Antigravity + Claude), pas du simple autocomplete. Gain réel mesuré sur notre travail : **×1.6 en heures brutes, ×3-4 en durée calendaire**.
+PRAGMA utilise de l'IA agentique (Antigravity + Claude), pas du simple autocomplete. Gain réel mesuré sur notre travail : **×1.71 en heures brutes, ×3-4 en durée calendaire**.
 
 ### Ce que le mois 1 a coûté en heures réelles
 
@@ -86,20 +95,20 @@ PRAGMA utilise de l'IA agentique (Antigravity + Claude), pas du simple autocompl
 | PM / Chef produit | ~20j | 600€ | 800€ | 12K€ | 16K€ | Malt, le-tjm.fr |
 | Dev backend senior | ~30j | 600€ | 800€ | 18K€ | 24K€ | RH Solutions 2025 (643€ moyen) |
 | Dev frontend React | ~12j | 535€ | 700€ | 6.4K€ | 8.4K€ | Malt 2025 (567€ ReactJS) |
-| UX/UI Designer | ~20j | 500€ | 700€ | 10K€ | 14K€ | Codelynx, le-tjm.fr |
+| UX/UI Designer + Product Designer | ~25j | 500€ | 700€ | 12.5K€ | 17.5K€ | Codelynx, le-tjm.fr |
 | Consultant qualité réglementaire | ~5j | 800€ | 1 200€ | 4K€ | 6K€ | Wild Code School, estimation marché |
-| **Sous-total jours-homme** | **~87j** | — | — | **50.4K€** | **68.4K€** | — |
-| + overhead coordination (+15%) | — | — | — | **+7.6K€** | **+10.3K€** | Standard PM overhead |
+| **Sous-total jours-homme** | **~92j** | — | — | **52.9K€** | **71.9K€** | — |
+| + overhead coordination (+15%) | — | — | — | **+7.9K€** | **+10.8K€** | Standard PM overhead |
 | + onboarding médical (+5j PM) | +5j | 600€ | 800€ | **+3K€** | **+4K€** | Un PM externe ≠ fils du médecin |
-| **Total marché** | **~92j** | — | — | **61K€** | **83K€** | — |
+| **Total marché** | **~97j** | — | — | **64K€** | **87K€** | — |
 
 **Durée calendaire classique** : **3-4 mois** (vs 1 mois PRAGMA)
 
-> **Valeur marché du travail livré (mois 1)** : **60-85K€** — c'est le plancher. Les scénarios agence/cabinet sont plus chers :
+> **Valeur marché du travail livré (mois 1)** : **64-87K€** — c'est le plancher. Les scénarios agence/cabinet sont plus chers :
 
 | Scénario | Équipe | Durée | Coût total |
 |---|---|---|---|
-| **Freelances coordonnés** | 4-5 freelances | 3-4 mois | **60-85K€** (calculé ci-dessus) |
+| **Freelances coordonnés** | 4-5 freelances | 3-4 mois | **64-87K€** (calculé ci-dessus) |
 | **Agence dev mid-range** | PM + 2 devs + UX + consultant | 4-5 mois | **100-150K€** (+ overhead agence 30-50%) |
 | **Cabinet conseil + agence** | Conseil (specs) + agence (build) | 5-6 mois | **150-250K€** (+ marge cabinet) |
 
@@ -138,15 +147,45 @@ C'est la suite directe du travail livré. Le moteur marche, maintenant on le met
 | Scoring adaptatif + validation | ~12 jours | ~30 jours |
 | **Total** | **~25 jours** | **~70 jours** |
 
+### P1 — Démo de référence (Marwane, ~2 mois)
+
+| Prestation | Temps PRAGMA | Temps classique |
+|---|---|---|
+| Implémentation CDC features P0 (26 US) | ~15 jours | ~35 jours |
+| Mapping complet DB → interface | ~5 jours | ~12 jours |
+| Design system définitif + onboarding | ~8 jours | ~18 jours |
+| Co-conception produit avec Maël | ~5 jours | ~5 jours (humain) |
+| **Total** | **~33 jours** | **~70 jours** |
+
+### P2 — Démos par persona + features P1 (Marwane, ~2-3 mois)
+
+| Prestation | Temps PRAGMA | Temps classique |
+|---|---|---|
+| 5 démos par persona (données simulateur) | ~15 jours | ~35 jours |
+| Implémentation CDC features P1 (19 US) | ~15 jours | ~35 jours |
+| Refonte landing page Monka | ~5 jours | ~12 jours |
+| Tests utilisateurs panel aidants | ~5 jours | ~5 jours (humain) |
+| **Total** | **~40 jours** | **~87 jours** |
+
+### P3 — Pilotage intégration presta (Marwane, continu)
+
+| Prestation | Temps PRAGMA | Temps classique |
+|---|---|---|
+| Specs fonctionnelles par écran | ~8 jours | ~20 jours |
+| Validation UX chaque livraison presta | ~3 jours/mois | ~6 jours/mois |
+| MAJ fiches stores (V2) + KPIs analytics | ~5 jours | ~10 jours |
+| **Total** | **~13 jours + continu** | **~30 jours + continu** |
+
 ### Coordination avec les prestataires (continu)
 
-> Les prestataires ne sont pas des juniors à accompagner — ce sont des CTO certifiés, garants de la sécurité et de l'architecture technique. Le rôle de PRAGMA ici c'est la **coordination produit**, pas du support technique. On leur transmet la logique métier du moteur, ils assurent l'intégration technique et la conformité.
+> Les prestataires ne sont pas des juniors à accompagner — ce sont des CTO certifiés, garants de la sécurité et de l'architecture technique. Le rôle de PRAGMA ici c'est la **coordination produit**, pas du support technique. Antonin transmet la logique métier du moteur, Marwane valide l'implémentation UI/UX.
 
 | Activité | Fréquence | Qui fait quoi |
 |---|---|---|
-| Transmission logique moteur + data | Ponctuel (début) | PRAGMA explique, prestataires intègrent |
-| Checkpoints intégration (CP1-CP4) | 1-2 jours par checkpoint | PRAGMA valide la cohérence clinique, prestataires valident la technique |
-| Évolutions moteur selon retours intégration | Au fil de l'eau | PRAGMA adapte le moteur, prestataires adaptent leur code |
+| Transmission logique moteur + data | Ponctuel (début) | Antonin explique, prestataires intègrent |
+| Validation UI/UX chaque livraison | Continue | Marwane valide chaque écran livré vs la démo de référence |
+| Checkpoints intégration (CP1-CP4) | 1-2 jours par checkpoint | PRAGMA valide la cohérence clinique + UI, prestataires valident la technique |
+| Évolutions moteur selon retours intégration | Au fil de l'eau | PRAGMA adapte le moteur et la démo, prestataires adaptent leur code |
 | Coordination PRAGMA/Monka/prestataires | 1 call/semaine | Alignement, pas de micro-management |
 
 ---
@@ -166,23 +205,23 @@ PRAGMA est embarqué sur la durée. Le travail du mois 1 alimente le mois 2 qui 
 
 | Phase | Jours PRAGMA | Durée calendaire (au rythme ~22j/mois) |
 |---|---|---|
-| Travail livré (fév-mars) | ~50 jours (deux ensemble, intensif premier mois) | ~1 mois |
-| M1 Standards | ~40 jours | ~2 mois |
-| M2 Moteur Intelligent | ~25 jours | ~1-1.5 mois |
-| M3 Moteur Personnalisé | ~25 jours | ~1-1.5 mois |
+| Travail livré (fév-mars) | ~54 jours (deux ensemble, intensif premier mois) | ~1 mois |
+| M1 Standards + P1 Démo référence | ~73 jours (40 Antonin + 33 Marwane) | ~3 mois |
+| M2 Intelligent + P2 Démos persona | ~65 jours (25 Antonin + 40 Marwane) | ~2.5-3 mois |
+| M3 Personnalisé + P3 Pilotage presta | ~38 jours (25 Antonin + 13 Marwane) | ~1.5-2 mois |
 | Coordination prestataires | ~3-4 jours/mois pendant 6-9 mois | En parallèle |
-| **Total engagement actif** | **~140 jours ≈ 6-7 mois de durée calendaire** | **+ coordination prestataires en parallèle** |
+| **Total engagement actif** | **~230 jours ≈ 9-10 mois de durée calendaire** | **+ coordination prestataires en parallèle** |
 
 ### Ce que ça coûterait au marché
 
-Une équipe classique (PM + 2 devs + UX + consultant qualité) pour ce scope complet (M1 livré + standards + M2 + M3) :
+Une équipe classique (PM + 2 devs + UX/Product Designer + consultant qualité) pour ce scope complet :
 
 | | Durée équipe classique | Coût marché |
 |---|---|---|
-| Travail livré + M1 Standards | ~8-10 mois | 150-300K€ |
-| M2 + M3 | ~5-6 mois | 80-150K€ |
+| Travail livré + M1 Standards + P1 Démo | ~10-12 mois | 180-350K€ |
+| M2 + M3 + P2 + P3 | ~6-8 mois | 100-180K€ |
 | Accompagnement prestataires | 6-12 mois | 30-80K€ |
-| **Total** | **~20-28 mois-homme** | **260-530K€** |
+| **Total** | **~22-32 mois-homme** | **310-610K€** |
 
 ### Pricing PRAGMA — Scénarios
 
@@ -237,10 +276,10 @@ Une équipe classique (PM + 2 devs + UX + consultant qualité) pour ce scope com
 | Facteur | Impact |
 |---|---|
 | **Relation père/fils avec Dr. Rimaud** | Réactivité clinique impossible à reproduire. Un PM externe mettrait 3-4 semaines juste à comprendre le contexte médical. |
-| **Marwane = aidant de seconde main** | Sa mère est aidante. Il ne conçoit pas l'UX "depuis un bureau" — il conçoit depuis l'expérience vécue. |
+| **Marwane = aidant indirect, partenaire produit** | Sa mère a le statut d'aidante pour sa grand-mère. Il conçoit l'UX depuis l'expérience vécue, pas depuis un bureau. Co-conception avec Maël, relecture critique du CDC, 38/64 US implémentées en 20h. |
 | **De 1 reco/question → moteur complet** | On n'a pas "amélioré" le produit. On l'a reconstruit de zéro avec une profondeur clinique qui n'existait pas. |
 | **Standards dès le départ** | On prépare la certification PENDANT le dev. Pas après. Ça économise des mois de restructuration post-audit. |
-| **Game changer pour Monka** | Avant PRAGMA : Word + Excel + app plate. Après PRAGMA : moteur certifiable + proto présentable + standards prêts. |
+| **Game changer pour Monka** | Avant PRAGMA : Word + Excel + app plate. Après PRAGMA : moteur certifiable + démo présentable + 59% du CDC couvert + standards prêts. |
 
 ### Premier client = ajustement, pas braderie
 

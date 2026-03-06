@@ -16,7 +16,7 @@ PRAGMA est le **partenaire produit** de Monka — pas un prestataire externe. On
 | Rôle PRAGMA | Ce que ça produit | Qui l'utilise |
 |---|---|---|
 | **Antonin** — CTO moteur clinique | Moteur de scoring, activation, contenu. Architecture DB. Documentation normative. Standards. | Prestataires (intègrent), Dr. Rimaud (valide), Auditeurs (certifient) |
-| **Marwane** — Lead UI/UX + Proto | Design system, 35 composants, architecture UI 4 couches, mapping moteur→UI→copywriting | Prestataires (implémentent), Maël (valide), Etienne (présente) |
+| **Marwane** — Lead UI/UX + Produit | Identité visuelle, design system, prototype fonctionnel HD, implémentation CDC, copywriting UX | Prestataires (répliquent), Maël (co-conçoit), Etienne (présente) |
 
 ### Ce qui a été livré — 1 mois (février → début mars 2026)
 
@@ -38,26 +38,30 @@ PRAGMA est le **partenaire produit** de Monka — pas un prestataire externe. On
 | Documentation stratégique | 7 docs fondamentaux | De 0 → base normative IEC 62304 / ISO 14971 |
 | Scripts d'automatisation | Génération JSON, tooling | Process reproductible et versionné |
 
-### PILIER 2 — UI/UX produit complet (Marwane)
+### PILIER 2 — Design produit, identité de marque & démo utilisable (Marwane)
 
-> Ce n'est PAS "un proto". C'est un **système produit complet** sur lequel les prestataires vont baser toute l'implémentation.
+#### Phase 1 — Review UI/UX & construction du prototype
 
-| Livrable Marwane | Volume | Impact |
-|---|---|---|
-| **Audit UX de l'app actuelle** | 277 fichiers d'audit, 74 screenshots annotés, 22 écrans analysés | Identification de **19 problèmes** (3 bloquants, 8 majeurs, 8 mineurs) — documentation exhaustive qu'un cabinet UX facturerait seul 15-25K€ |
-| **Architecture UI 4 couches** | Mapping complet Vulnérabilité→HeroCard, MP→TaskCard, Reco→RecoCard, MT→MicroTaskItem | Pont entre le moteur clinique et ce que l'utilisateur VOIT — chaque concept clinique a son composant UI ET son mot bienveillant |
-| **Design System** | 5 palettes par thème de vie, fond crème, formes arrondies, ombres douces | Identité visuelle cohérente — pas "un thème" mais un système de design pensé pour des aidants de 50-60 ans |
-| **Storybook — 35 composants** | 11 atoms + 8 molecules + 16 organisms identifiés | Chaque composant isolé, testable, documenté avec ses variantes — prêt pour le handoff |
-| **Mapping Moteur→UI→Copywriting** | 3 colonnes × toutes les entités du moteur | Traduction systématique du jargon clinique en mots bienveillants (jamais "CCC" ou "Score" visible) |
-| **Gap analysis composants** | Inventaire complet atoms/molecules/organisms existants vs nécessaires | 16 organisms manquants identifiés avec specs détaillées (props, composition, screenshots source) |
-| **Plan de présentation commercial** | Structure 3 actes + flow démo + QR code | Outil de vente pour Etienne — la démo qui fait signer. Pas un "prototype", une arme commerciale. |
-| **Itérations proactives avec Maël** | Propositions de solutions, tests d'affordance, validation parcours | Marwane PROPOSE des idées UX, challenge les choix produit — pas un exécutant mais un partenaire produit |
-| **Roadmap UI complète** | 8 chantiers documentés (refonte review, audit démo, UX fixes, onboarding interactif, dark mode, parcours, design system) | Vision complète du "reste à faire" côté produit visible |
-| **Interviews terrain** | Sa mère est aidante — retour d'expérience directe | L'UX n'est pas conçue "depuis un bureau" mais depuis le vécu. Impossible à reproduire avec un designer externe. |
+| Prestation | Livrable concret |
+|---|---|
+| **Audit UX de l'application existante** | 22 écrans analysés, 19 recommandations d'amélioration priorisées |
+| **Création d'identité visuelle (charte graphique digitale)** | Palette de 5 couleurs par thème de vie, typographie, tokens de design, direction artistique cohérente |
+| **Conception et développement du Design System** | 40+ composants codés, documentés et testables dans un catalogue interactif |
+| **Architecture d'information & conception fonctionnelle** | Mapping 4 couches moteur clinique → interface → copywriting. Documentation des flux de navigation |
+| **Prototypage fonctionnel haute-fidélité** | Application démo fonctionnelle (données simulées) : onboarding complet, dashboard, parcours de soins, ressources, profil |
+| **Copywriting UX** | Traduction complète du vocabulaire clinique en langage empathique adapté aux aidants 50-60 ans |
+
+#### Phase 2 — Implémentation CDC P0 (demande Maël)
+
+| Prestation | Livrable concret |
+|---|---|
+| **Relecture & qualification du cahier des charges** | Revue des 64 user stories sur 7 modules : erreurs, incohérences, reformulations, questions produit bloquantes remontées |
+| **Matrice de couverture CDC** | Triage complet 64 US : ✅ 26 développées · ⚠️ 12 simulées · 🚫 26 hors scope proto |
+| **Prototypage fonctionnel sur CDC** | 38/64 user stories (59% du CDC) implémentées dans la démo |
 
 > **Ce travail est la FONDATION de tout.** Les prestataires externes construiront MyMonka V2 (200-400K€) sur **les 3 piliers** : le moteur d'Antonin (logique), le proto de Marwane (visuel + UX), et la DB (données). Si UN des 3 manque de qualité, les 200-400K€ de prestataires sont gaspillés.
 >
-> **Le travail de Marwane = ce qui transforme un moteur clinique excellent en un PRODUIT vendable.** Sans ce pont, Monka a un "Ferrari sous le capot mais un volant de Twingo" (citation de l'audit).
+> **Le travail de Marwane = ce qui transforme un moteur clinique excellent en un PRODUIT vendable.** Sans cette traduction, le moteur reste invisible pour l'utilisateur final.
 
 ### Ce qui reste à construire — Double roadmap Moteur + UI/UX
 
@@ -73,15 +77,15 @@ PRAGMA est le **partenaire produit** de Monka — pas un prestataire externe. On
 
 #### Roadmap Marwane — UI/UX produit (P1 → P3)
 
-| Phase | Scope | Livrables clés | Impact business |
-|---|---|---|---|
-| **P1 — Refonte + démo** | Refonte page review, corrections UX démo, design system v2, badges/composants professionnels | Démo commerciale de luxe pour Etienne — son outil de vente auprès des partenaires et investisseurs | Chaque meeting Etienne = une vente potentielle |
-| **P2 — Produit visible** | 16 organisms à construire, onboarding interactif (driver.js), parcours utilisateur reconstitués, dark mode complet | Produit qui RESSEMBLE à un produit fini — pas un proto | Les prestataires ont un modèle clair à implémenter |
-| **P3 — Handoff + features** | Planification de tâches (date picker), documentation handoff composants, specs visuelles, guide d'intégration pour prestataires, logique de sauvegarde/checkpoints des itérations UI | Kit d'intégration complet pour les prestataires + features avancées | Réduit le temps et le coût d'intégration des prestataires de potentiellement 30-50% |
+| Phase | Scope | Livrables |
+|---|---|---|
+| **P1 — Démo de référence** | Implémentation CDC features **P0** (26 US) · Co-conception produit avec Maël · Design system définitif · Onboarding complet · Questionnaire connecté au moteur (mock) · **Mapping complet base de données → interface** (chaque table, chaque champ traduit en composant UI) | L'app clé en main que Etienne met dans les mains d'un investisseur, d'un partenaire ou d'un testeur aidant. Pas un proto — **la référence produit**. |
+| **P2 — Démos par persona + features P1** | 5 démos basées sur les personas du simulateur d'Antonin · Implémentation CDC features **P1** (19 US : attribution IDEC, cercle d'aidant, agenda partagé, CTA pas-à-pas, notifications) · Choix du profil → parcours complet ultra-réaliste collé au moteur · **Refonte landing page Monka** · Tests utilisateurs sur panel aidants (parcours critiques, points de friction, validation des flows) | 5 parcours fidèles au moteur. Chaque démo = une preuve concrète pour un profil réel. La landing page convertit les visiteurs en testeurs. |
+| **P3 — Pilotage intégration presta** | Specs fonctionnelles par écran · Guide d'intégration composant par composant · Validation UX de chaque livraison presta · Points de contrôle qualité produit · **Mise à jour fiches stores** (screenshots V2, description, notes de version, stratégie de rollout) · **Définition des KPIs produit et analytics** | Les prestataires n'inventent rien. Ils **répliquent** un produit qui existe déjà. Marwane valide chaque écran livré. Le coût et le temps d'intégration sont divisés. |
 
 > **Ce que Marwane fait PENDANT que les prestataires ne sont pas encore là** : il construit tout le visuel, toute l'UX, tout le système de composants pour que quand les prestataires arrivent, ils n'aient pas à "inventer" l'interface. Ils IMPLÉMENTENT ce que Marwane a conçu et validé avec Maël.
 >
-> **Si on skip ce travail** : les prestataires improvisent le front. Résultat = la V1 de MyMonka (le "volant de Twingo"). C'est exactement ce que Monka cherche à éviter.
+> **Si on skip ce travail** : les prestataires improvisent le front. Résultat = la V1 de MyMonka. C'est exactement ce que Monka cherche à éviter.
 
 ---
 
@@ -163,22 +167,32 @@ PRAGMA est le **partenaire produit** de Monka — pas un prestataire externe. On
 **Planning** :
 
 ```
-MARS          AVRIL         MAI           JUIN          JUIL          AOÛT          SEPT          OCT           NOV
-├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-│  M1 STANDARDS (normes)    │  M2 INTELLIGENT            │  M3 PERSONNALISÉ                     │ COORD. PREST│
-│  16 livrables normatifs   │  CCC + sous-scores +       │  MTs variantes + acteurs dynamiques  │ Handoff     │
-│  Validation clinique      │  CR contextualisé          │  CR personnalisé complet             │ final       │
-│  Restructuration repo     │  Score complexité          │  Scoring adaptatif                   │             │
-├─────────────┬─────────────┼─────────────┬──────────────┼─────────────┬─────────────┬──────────┼─────────────┤
-│ 13.5K€      │ 13.5K€      │ 13.5K€      │ 13.5K€       │ 13.5K€      │ 13.5K€      │ 13.5K€   │ 13.5K€      │
-└─────────────┴─────────────┴─────────────┴──────────────┴─────────────┴─────────────┴──────────┴─────────────┘
-                                                         + 13.5K€ (mois 9) = 121.5K€ total
+                  MARS          AVRIL         MAI           JUIN          JUIL          AOÛT          SEPT          OCT           NOV
+                  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+
+  ANTONIN         │  M1 STANDARDS (normes)    │  M2 INTELLIGENT            │  M3 PERSONNALISÉ                     │ COORD. PREST│
+  Moteur          │  16 livrables normatifs   │  CCC + sous-scores +       │  MTs variantes + acteurs dynamiques  │ Handoff     │
+  clinique        │  Validation clinique      │  CR contextualisé          │  CR personnalisé complet             │ final       │
+                  │  Restructuration repo     │  Score complexité          │  Scoring adaptatif                   │             │
+
+  MARWANE         │  P1 — DÉMO DE RÉFÉRENCE            │  P2 — DÉMOS PAR PERSONA + P1 CDC     │  P3 — PILOTAGE PRESTA       │
+  Produit         │  CDC features P0 (26 US)            │  5 démos par persona simulateur       │  Specs écran par écran      │
+  & UX            │  Co-conception produit avec Maël    │  CDC features P1 (19 US)              │  Validation chaque livraison│
+                  │  Design system définitif            │  Refonte landing page Monka           │  Contrôle qualité produit   │
+                  │  Mapping complet DB → interface     │  Tests utilisateurs panel aidants     │  MAJ fiches stores (V2)     │
+                  │  Copywriting UX finalisé            │  Données moteur réelles intégrées     │  KPIs produit & analytics   │
+
+                  ├─────────────┬─────────────┼─────────────┬──────────────┼─────────────┬─────────────┬──────────┼─────────────┤
+                  │ 13.5K€      │ 13.5K€      │ 13.5K€      │ 13.5K€       │ 13.5K€      │ 13.5K€      │ 13.5K€   │ 13.5K€      │
+                  └─────────────┴─────────────┴─────────────┴──────────────┴─────────────┴─────────────┴──────────┴─────────────┘
+                                                                            + 13.5K€ (mois 9) = 121.5K€ total
 ```
 
 **Pourquoi cette variante** :
 - 60% = cohérent avec le BP/GTM de PRAGMA (Monka = client principal, ~50-60% du temps)
 - 13.5K€/mois = **~587€/jour** pour 23j/mois. C'est en dessous du TJM moyen dev senior (643€) alors qu'on est 2 profils.
 - Prix marché pour ce scope : 195-280K€. **PRAGMA facture 43-62% du marché.**
+- **On casse le prix parce qu'on les connaît.** C'est un tarif partenaire, pas un tarif prestataire. Avec n'importe quel autre studio, ce scope est facturé au prix fort.
 - Deal clair et simple : 1 forfait, 1 durée, tout inclus.
 
 ---

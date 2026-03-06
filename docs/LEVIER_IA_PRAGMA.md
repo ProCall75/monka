@@ -47,7 +47,10 @@
 | **Auditer des données** | ✅ Oui (-50-70%) | L'IA parcourt, l'humain décide |
 | **Réflexion architecturale** | ⚠️ Partiellement (-10-20%) | L'IA challenge, mais c'est l'humain qui tranche |
 | **Validation clinique avec le médecin** | ❌ Non | Temps incompressible. Le Dr. doit réfléchir, pas l'IA. |
-| **Design UI/UX + tests affordance** | ⚠️ Partiellement (-15-25%) | Le design thinking reste humain. L'IA aide à documenter. |
+| **Design System + composants UI** | ✅ Oui (-40-50%) | L'IA génère composants React/TSX, stories Storybook, variantes. L'humain affine le design. |
+| **Prototypage fonctionnel** | ✅ Oui (-40-50%) | L'IA assemble les composants en pages, gère le routing, le state. |
+| **Copywriting UX** | ✅ Oui (-40-50%) | Génération + adaptation de ton. L'humain valide la justesse empathique. |
+| **Audit UX (analyse + recommandations)** | ✅ Oui (-35-45%) | L'IA structure les findings, catégorise, priorise. L'humain juge la gravité. |
 | **Interviews terrain (aidants)** | ❌ Non | Irremplaçable |
 | **Itérations UX avec le CPO** | ❌ Non | Processus social/humain |
 | **Réunions commerciales** | ❌ Non | Impossible à comprimer |
@@ -69,12 +72,16 @@
 | **Tooling** (scripts, automation) | ~10h | — | 10h | -55% |
 | **Validation clinique** (avec Dr. Rimaud) | ~30h | — | 30h | 0% (humain) |
 | **Réflexion architecture + stratégie** | ~15h | — | 15h | -15% |
-| **Audit UX app existante** | — | ~35h | 35h | -20% |
-| **Interviews + terrain** | — | ~15h | 15h | 0% (humain) |
-| **Design System + composants** | — | ~45h | 45h | -20% |
-| **Architecture UI 4 couches + mapping** | — | ~20h | 20h | -15% |
-| **Itérations avec Maël** | — | ~15h | 15h | 0% (humain) |
-| **Présentations** | — | ~10h | 10h | -30% |
+| **Audit UX de l'app existante** | — | ~20h | 20h | -40% |
+| **Identité visuelle (charte graphique)** | — | ~10h | 10h | -25% |
+| **Design System + 40+ composants** | — | ~35h | 35h | -45% |
+| **Architecture d'information + conception** | — | ~10h | 10h | -15% |
+| **Prototypage fonctionnel HD** | — | ~15h | 15h | -45% |
+| **Copywriting UX** | — | ~8h | 8h | -50% |
+| **Relecture + qualification CDC** | — | ~5h | 5h | -20% |
+| **Implémentation CDC P0 (38/64 US)** | — | ~15h | 15h | -50% |
+| **Itérations avec Maël** | — | ~12h | 12h | 0% (humain) |
+| **Interviews terrain (aidants)** | — | ~10h | 10h | 0% (humain) |
 | **Total** | **~235h** | **~140h** | **375h** | — |
 
 ### Conversion en jours
@@ -104,26 +111,31 @@ On prend chaque activité et on applique le SANS levier IA :
 | Tooling | 10h | **22h** | 10 ÷ (1 - 0.55) = 22 |
 | Validation clinique | 30h | **30h** | Pas de compression |
 | Réflexion architecture | 15h | **18h** | 15 ÷ (1 - 0.15) = 18 |
-| Audit UX | 35h | **44h** | 35 ÷ (1 - 0.20) = 44 |
-| Interviews terrain | 15h | **15h** | Pas de compression |
-| Design System + composants | 45h | **56h** | 45 ÷ (1 - 0.20) = 56 |
-| Architecture UI + mapping | 20h | **24h** | 20 ÷ (1 - 0.15) = 24 |
-| Itérations avec Maël | 15h | **15h** | Pas de compression |
-| Présentations | 10h | **14h** | 10 ÷ (1 - 0.30) = 14 |
-| **Total** | **375h** | **~588h** | — |
+| Audit UX app existante | 20h | **33h** | 20 ÷ (1 - 0.40) = 33 |
+| Identité visuelle | 10h | **13h** | 10 ÷ (1 - 0.25) = 13 |
+| Design System + 40+ composants | 35h | **64h** | 35 ÷ (1 - 0.45) = 64 |
+| Architecture d'information | 10h | **12h** | 10 ÷ (1 - 0.15) = 12 |
+| Prototypage fonctionnel HD | 15h | **27h** | 15 ÷ (1 - 0.45) = 27 |
+| Copywriting UX | 8h | **16h** | 8 ÷ (1 - 0.50) = 16 |
+| Relecture + qualification CDC | 5h | **6h** | 5 ÷ (1 - 0.20) = 6 |
+| Implémentation CDC P0 | 15h | **30h** | 15 ÷ (1 - 0.50) = 30 |
+| Itérations avec Maël | 12h | **12h** | Pas de compression |
+| Interviews terrain | 10h | **10h** | Pas de compression |
+| **Total** | **375h** | **~643h** | — |
 
 ### Résultat
 
 | Métrique | PRAGMA (avec IA) | Équipe classique (sans IA) | Ratio |
 |---|---|---|---|
-| **Heures totales** | 375h | 588h | **×1.57** |
-| **Jours-homme** | 54 jours | ~84 jours | **×1.57** |
-| **Si 1 PM + 1 dev + 1 UX** | — | ~28 jours × 3 = 84 j-h = **~4 mois** | — |
-| **Si 1 PM + 2 devs + 1 UX** | — | ~21 jours × 4 = 84 j-h = **~3 mois** | — |
+| **Heures totales** | 375h | 643h | **×1.71** |
+| **Jours-homme** | 54 jours | ~92 jours | **×1.71** |
+| **Dont Marwane seul** | 140h | 223h | **×1.59** |
+| **Si 1 PM + 1 dev + 1 UX** | — | ~31 jours × 3 = 92 j-h = **~4-5 mois** | — |
+| **Si 1 PM + 2 devs + 1 UX + 1 PM produit** | — | ~23 jours × 4 = 92 j-h = **~3-4 mois** | — |
 
-### Le ratio réel : ×1.6 sur les heures, mais ×3-4 sur la durée calendaire
+### Le ratio réel : ×1.7 sur les heures, mais ×3-4 sur la durée calendaire
 
-> **Nuance cruciale** : Le levier IA n'est pas les mêmes choses qu'un "×3 en productivité". C'est ×1.6 en heures brutes. **MAIS** la durée calendaire est ×3-4 parce que :
+> **Nuance cruciale** : Le levier IA n'est pas les mêmes choses qu'un "×3 en productivité". C'est ×1.7 en heures brutes. **MAIS** la durée calendaire est ×3-4 parce que :
 > 1. PRAGMA = 2 personnes qui font le travail de 3-4 spécialistes
 > 2. Pas de coordination entre silos (PM briefe le dev, le dev briefe l'UX = overhead de communication)
 > 3. Pas de process de spécification (l'IA itère en direct, pas besoin de spec → dev → QA)
@@ -152,9 +164,9 @@ On prend chaque activité et on applique le SANS levier IA :
 | PM / Chef produit | ~20j | 600€ | 800€ | 12K€ | 16K€ |
 | Dev backend senior | ~30j | 600€ | 800€ | 18K€ | 24K€ |
 | Dev frontend | ~12j | 535€ | 700€ | 6.4K€ | 8.4K€ |
-| UX/UI Designer | ~20j | 500€ | 700€ | 10K€ | 14K€ |
+| UX/UI Designer + Product Designer | ~25j | 500€ | 700€ | 12.5K€ | 17.5K€ |
 | Consultant qualité | ~5j | 800€ | 1200€ | 4K€ | 6K€ |
-| **Total** | **~87j** | — | — | **50.4K€** | **68.4K€** |
+| **Total** | **~92j** | — | — | **52.9K€** | **71.9K€** |
 
 **+ ajout de la durée calendaire** : 3-4 mois avec cette équipe (coordination, specs, QA, itérations) vs 1 mois PRAGMA.
 
@@ -174,9 +186,9 @@ On prend chaque activité et on applique le SANS levier IA :
 
 | Métrique | PRAGMA | Équipe classique | Écart |
 |---|---|---|---|
-| **Heures de travail** | 375h | 588h | ×1.6 |
-| **Durée calendaire** | ~1 mois | ~3-4 mois | ×3-4 |
-| **Personnes mobilisées** | 2 | 3-5 | ÷2 |
+| **Heures de travail** | 375h | 643h | **×1.71** |
+| **Durée calendaire** | ~1 mois | ~3-4 mois | **×3-4** |
+| **Personnes mobilisées** | 2 | 4-5 | ÷2 |
 | **Coût marché équivalent** | — | 60-85K€ | — |
 | **Communication overhead** | Quasiment 0 (2 personnes + père/fils) | Élevé (5 personnes + médecin externe) | — |
 | **Time-to-value** | Immédiat (moteur fonctionnel M1) | 3-4 mois avant premier résultat | — |
